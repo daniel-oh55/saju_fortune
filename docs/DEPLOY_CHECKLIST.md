@@ -28,7 +28,16 @@
 - [ ] AI상담 화면 이동
 - [ ] 궁합 입력 화면 이동
 
-## 4. 화면 테스트
+## 4. 개인정보 / localStorage 확인
+
+- [ ] 생년월일, 태어난 시간, 성별, 닉네임이 localStorage에 저장되는 점을 인지하고 배포 전 고지 필요 여부를 검토
+- [ ] localStorage에 API Key, Secret Key, DB URL 같은 민감정보가 저장되지 않는지 확인
+- [ ] 브라우저 개발자 도구에서 `aiTodayFortune.profile`, `aiTodayFortune.todayFortune`, `aiTodayFortune.rewardUnlocks` 저장 내용을 확인
+- [ ] 개인정보 처리방침 또는 앱 내 안내 문구가 필요한지 확인
+- [ ] 사용자가 저장 데이터를 초기화할 수 있는 경로가 정상 동작하는지 확인
+- [ ] 향후 서버 DB 연동 시 최소 수집 원칙과 삭제 요청 대응 방안을 검토
+
+## 5. 화면 테스트
 
 - [ ] PC 화면
 - [ ] 모바일 화면
@@ -37,7 +46,7 @@
 - [ ] 광고 모달 표시와 닫기
 - [ ] 긴 텍스트가 카드 밖으로 넘치지 않는지 확인
 
-## 5. Vercel 확인
+## 6. Vercel 확인
 
 - [ ] Environment Variables 설정
 - [ ] Build command 확인: `npm run build`
@@ -46,14 +55,14 @@
 - [ ] Preview deployment 확인
 - [ ] Production deployment 확인
 
-## 6. API / DB 연동 테스트
+## 7. API / DB 연동 테스트
 
 - [ ] 현재 실제 API 연동 없음
 - [ ] 현재 실제 DB 연동 없음
 - [ ] 향후 연동 시 Vercel Environment Variables 누락 여부 확인
 - [ ] 향후 연동 시 API route 또는 외부 API CORS 문제 확인
 
-## 7. 배포 후 확인
+## 8. 배포 후 확인
 
 - [ ] 운영 URL 접속
 - [ ] 콘솔 에러 확인
