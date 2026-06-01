@@ -1,7 +1,12 @@
 # AI 오늘운세 MVP
 
-React + Vite 기반의 사주/운세 모바일 웹앱 MVP입니다.  
-현재는 웹앱으로 개발하고, 이후 Capacitor를 이용해 Android/iOS 앱으로 패키징할 수 있는 구조를 목표로 합니다.
+React + Vite 기반의 사주/운세 모바일 웹앱 MVP입니다. 사용자가 프로필을 입력하면 KST 기준 오늘운세와 2026년 운세 화면을 확인할 수 있고, 광고 시청 시뮬레이션을 통해 상세 운세를 여는 구조를 검증합니다.
+
+## 프로젝트 목적
+
+- 웹앱 MVP를 먼저 만들고 이후 Capacitor를 통해 Android/iOS 앱 패키징 가능성을 열어둡니다.
+- 실제 만세력/사주 계산 엔진, AI 상담 API, 광고 SDK, 결제 SDK는 추후 단계로 분리합니다.
+- 현재 버전은 seed 기반 mock 운세 생성과 localStorage 임시 저장으로 제품 흐름을 검증합니다.
 
 ## 주요 기능
 
@@ -15,9 +20,19 @@ React + Vite 기반의 사주/운세 모바일 웹앱 MVP입니다.
 - 프리미엄 안내 화면
 - 마이/설정 화면
 - localStorage 기반 임시 저장
-- 추후 만세력 엔진 연결을 위한 `domain/saju` 구조
+- 추후 만세력 엔진 연결을 위한 `src/domain/saju` 구조
 
-## 실행 방법
+## 사용 기술
+
+- React
+- Vite
+- JavaScript
+- CSS
+- localStorage
+- GitHub
+- Vercel
+
+## 로컬 실행 방법
 
 ```bash
 npm install
@@ -44,9 +59,14 @@ npm run build
 
 빌드 결과물은 `dist/` 폴더에 생성됩니다.
 
-## Vercel 배포 설정
+## GitHub / Vercel 배포 구조
 
-Vercel에서 GitHub 저장소를 연결한 뒤 아래 설정을 사용합니다.
+- GitHub 저장소: `https://github.com/daniel-oh55/saju_fortune.git`
+- 기본 브랜치: `main`
+- 권장 작업 방식: 기능별 브랜치 생성 후 PR을 통해 `main`에 merge
+- Vercel은 `main` 브랜치와 연결되어 있을 수 있으므로 `main` 직접 push를 피합니다.
+
+Vercel 설정:
 
 ```text
 Framework Preset: Vite
@@ -55,10 +75,42 @@ Build Command: npm run build
 Output Directory: dist
 ```
 
-## 현재 데이터 구조 메모
+## 환경변수 안내
 
-- 사용자 프로필: `localStorage`의 `aiTodayFortune.profile`
-- 오늘 운세: `localStorage`의 `aiTodayFortune.todayFortune`
-- 광고 해금 상태: `localStorage`의 `aiTodayFortune.rewardUnlocks`
+현재 코드에서 실제로 사용하는 환경변수는 확인되지 않았습니다.
 
-향후 Firebase, Supabase, Neon 같은 외부 DB를 붙일 때 위 구조를 서버 저장 모델로 이전하면 됩니다.
+추후 AI API, DB, 광고 SDK, 결제 SDK를 연결할 경우 `.env.example`에 변수명을 먼저 추가하고, 실제 값은 로컬 `.env` 또는 Vercel Environment Variables에서 관리합니다.
+
+주의:
+- 실제 API Key, DB URL, Secret Key는 Git에 커밋하지 않습니다.
+- `.env` 파일은 `.gitignore`에 포함되어 있습니다.
+
+## 기본 폴더 구조
+
+```text
+src/
+  App.jsx
+  main.jsx
+  styles.css
+  components/
+  data/
+  domain/
+    fortune/
+    saju/
+  pages/
+  utils/
+docs/
+  WORKFLOW.md
+  DEPLOY_CHECKLIST.md
+  PR_TEMPLATE.md
+```
+
+## ChatGPT / Codex와 함께 사용하는 방법
+
+1. 사용자가 ChatGPT 프로젝트에 요구사항을 설명합니다.
+2. ChatGPT가 구현 방향, 검토 포인트, Codex 프롬프트를 정리합니다.
+3. Codex는 기능별 브랜치에서 실제 파일 수정과 테스트를 진행합니다.
+4. GitHub PR에서 변경사항을 검토합니다.
+5. `main` merge 후 Vercel 배포 상태를 확인합니다.
+
+자세한 운영 흐름은 [docs/WORKFLOW.md](docs/WORKFLOW.md)를 참고합니다.
