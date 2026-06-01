@@ -4,12 +4,11 @@ function OnboardingPage({ initialProfile, onSave }) {
   return (
     <main className="onboarding-page">
       <section className="onboarding-hero">
-        <div className="brand-mark">AI</div>
-        <p className="eyebrow">AI 오늘운세</p>
-        <h1>매일 아침, 나에게 맞춘 운세 루틴</h1>
+        <div className="brand-mark">하루</div>
+        <p className="eyebrow">하루풀이</p>
+        <h1>매일 무료로 확인하는 따뜻한 사주·운세 풀이</h1>
         <p>
-          생년월일과 태어난 시간을 저장하면 오늘의 총운, 재물운, 연애운, 직장운,
-          건강운을 간단히 확인할 수 있습니다.
+          오늘의 흐름부터 궁금한 고민까지, 현실적인 조언으로 차근차근 풀어드립니다.
         </p>
       </section>
       <ProfileForm initialProfile={initialProfile} onSave={onSave} />
