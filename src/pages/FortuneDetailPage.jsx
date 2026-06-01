@@ -9,6 +9,7 @@ function FortuneDetailPage({
 }) {
   const category = fortune.categories.find((item) => item.id === selectedCategory) || fortune.categories[0];
   const isUnlocked = Boolean(unlockedDetails[category.id]?.unlocked);
+  const detailParagraphs = category.detail.split('\n\n');
 
   return (
     <div className="page-stack">
@@ -49,12 +50,14 @@ function FortuneDetailPage({
 
         {isUnlocked ? (
           <div className="detail-copy">
-            <h3>상세 해석</h3>
-            <p>{category.detail}</p>
+            <h3>상세 풀이</h3>
+            {detailParagraphs.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
           </div>
         ) : (
           <div className="locked-copy">
-            상세 운세는 광고 시청 후 열람할 수 있습니다.
+            상세 풀이는 광고 시청 후 열람할 수 있습니다.
           </div>
         )}
       </article>

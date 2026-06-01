@@ -18,6 +18,37 @@ function scoreFromSeed(seed) {
   return 58 + (seed % 41);
 }
 
+function pickSectionPair(items, seed) {
+  const first = pickBySeed(items, seed);
+  const secondCandidates = items.filter((item) => item !== first);
+  const second = pickBySeed(secondCandidates.length ? secondCandidates : items, seed + 3);
+  return [first, second];
+}
+
+function buildDetailedFortuneText({ template, seed, sajuAnalysis, luckyColor, luckyItem }) {
+  if (!template.detailSections) {
+    return `${pickBySeed(template.detail, seed + 7)} 오늘의 키워드는 ${sajuAnalysis.luckyKeywords[0]}입니다.`;
+  }
+
+  const [flowOne, flowTwo] = pickSectionPair(template.detailSections.flow, seed + 1);
+  const [adviceOne, adviceTwo] = pickSectionPair(template.detailSections.advice, seed + 5);
+  const [cautionOne, cautionTwo] = pickSectionPair(template.detailSections.caution, seed + 9);
+  const [actionOne, actionTwo] = pickSectionPair(template.detailSections.action, seed + 13);
+  const closing = pickBySeed(template.detailSections.closing, seed + 17);
+  const keyword = pickBySeed(sajuAnalysis.luckyKeywords, seed + 19);
+  const supportiveTrait = pickBySeed(sajuAnalysis.traits, seed + 23);
+
+  const firstParagraph = [flowOne, flowTwo, adviceOne, cautionOne].join(' ');
+  const secondParagraph = [adviceTwo, cautionTwo, actionOne, actionTwo].join(' ');
+  const thirdParagraph = [
+    `오늘의 키워드는 ${keyword}이며, ${supportiveTrait} 성향을 부드럽게 살려보면 좋습니다.`,
+    `행운 색상 ${luckyColor}와 행운 아이템 ${luckyItem}은 하루의 분위기를 가볍게 환기하는 참고용으로 활용해보세요.`,
+    closing,
+  ].join(' ');
+
+  return [firstParagraph, secondParagraph, thirdParagraph].join('\n\n');
+}
+
 export function buildProfileId(profile) {
   return hashString(
     `${profile.nickname}-${profile.birthDate}-${profile.birthTime}-${profile.birthTimeUnknown}-${profile.calendarType}-${profile.isLeapMonth}-${profile.gender}`,
@@ -33,14 +64,22 @@ export function createTodayFortune(profile, dateKey) {
   const categories = categoryMeta.map((category, index) => {
     const seed = hashString(`${baseSeed}-${category.id}-${index}`);
     const template = fortuneTemplates[category.id];
+    const luckyColor = pickBySeed(['코랄', '민트', '라벤더', '하늘색', '아이보리'], seed + 11);
+    const luckyItem = pickBySeed(['메모장', '텀블러', '이어폰', '손수건', '캘린더'], seed + 17);
 
     return {
       ...category,
       score: scoreFromSeed(seed),
       summary: pickBySeed(template.summary, seed),
-      detail: `${pickBySeed(template.detail, seed + 7)} 오늘의 키워드는 ${sajuAnalysis.luckyKeywords[index % sajuAnalysis.luckyKeywords.length]}입니다.`,
-      luckyColor: pickBySeed(['코랄', '민트', '라벤더', '하늘색', '아이보리'], seed + 11),
-      luckyItem: pickBySeed(['메모장', '텀블러', '이어폰', '손수건', '캘린더'], seed + 17),
+      detail: buildDetailedFortuneText({
+        template,
+        seed,
+        sajuAnalysis,
+        luckyColor,
+        luckyItem,
+      }),
+      luckyColor,
+      luckyItem,
     };
   });
 

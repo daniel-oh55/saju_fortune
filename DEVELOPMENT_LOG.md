@@ -4,21 +4,21 @@
 
 - 배포 방식: GitHub 저장소와 Vercel 연동 구조 사용
 - 주요 기능: 프로필 입력, 오늘운세, 2026운세, 광고 보상 시뮬레이션, AI 상담 화면, 궁합 입력, 더 깊은 풀이 기능 준비 중 화면, 마이 화면
-- 현재 브랜치: `feature/brand-content-foundation`
-- 최근 수정 내용: 앱 브랜드/콘텐츠 작성 기준 정리
+- 현재 브랜치: `feature/detailed-fortune-unlock`
+- 최근 수정 내용: 광고 해금 상세풀이 길이와 구조 개선
 
 ## 현재 이슈
 
 - [ ] 확인 필요: Vercel Production URL
 - [ ] 확인 필요: Vercel Preview 배포 설정
 - [ ] 확인 필요: 모바일 실기기 화면 테스트 결과
-- [ ] 확인 필요: 향후 실제 AI API, DB, 광고 SDK, 결제 SDK 연결 범위
+- [ ] 확인 필요: 상세풀이 실제 화면 길이와 스크롤감
 
 ## 다음 작업
 
-- [ ] 우선순위 1: Vercel Preview에서 주요 화면 동작 확인
-- [ ] 우선순위 2: 운세 문구 템플릿 1차 확장
-- [ ] 우선순위 3: AI 상담 mock 답변 톤 정리
+- [ ] 우선순위 1: 광고 해금 후 상세풀이 문단 표시 모바일 확인
+- [ ] 우선순위 2: 카테고리별 문구 반복감 점검
+- [ ] 우선순위 3: AI 상담 mock 답변도 동일 톤으로 확장
 
 ## ChatGPT 검토 요청 포인트
 
@@ -28,9 +28,39 @@
 - Vercel 배포 위험
 - API / DB / 환경변수 문제
 - 운세 문구가 불안을 과도하게 자극하지 않는지
-- 결제/광고 문구가 과장되지 않았는지
+- 광고 해금 후 상세풀이가 보상 콘텐츠로 충분한지
 
 ## 작업 로그
+
+### 2026-06-01
+
+#### 작업 내용
+
+- 광고 해금 상세풀이 길이와 구조 개선
+- 카테고리별 상세풀이 템플릿 확장
+- `category.detail` 표시 방식을 문단 단위로 개선
+- 기능 로직/저장 구조 변경 없음
+- localStorage key 구조 변경 없음
+- 광고 해금 흐름 변경 없음
+
+#### 수정 파일
+
+- `src/data/fortuneTemplates.js`
+- `src/utils/fortuneEngine.js`
+- `src/pages/FortuneDetailPage.jsx`
+- `docs/CONTENT_STYLE_GUIDE.md`
+- `DEVELOPMENT_LOG.md`
+- `CHANGELOG.md`
+- `TODO.md`
+
+#### 테스트 결과
+
+- `npm run build` 실행 예정
+
+#### 남은 이슈
+
+- 브라우저에서 광고 해금 후 상세풀이 문단 표시 확인 필요
+- 총운/재물운/연애운/직장운/건강운 탭별 문구 반복감 확인 필요
 
 ### 2026-06-01
 
@@ -61,7 +91,7 @@
 
 #### 테스트 결과
 
-- `npm run build` 실행 예정
+- `npm run build` 성공
 
 #### 남은 이슈
 
