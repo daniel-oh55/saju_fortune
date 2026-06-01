@@ -16,7 +16,7 @@ function HomePage({ fortune, profile, onOpenDetail, onNavigate }) {
     <div className="page-stack home-page">
       <header className="mobile-appbar">
         <div>
-          <strong>AI 오늘운세</strong>
+          <strong>하루풀이</strong>
           <span>{fortune.dateKey}</span>
         </div>
         <button type="button" onClick={() => onNavigate('settings')}>
@@ -29,7 +29,7 @@ function HomePage({ fortune, profile, onOpenDetail, onNavigate }) {
         <div className="score-hero-main">
           <div>
             <h1>{fortune.averageScore}점</h1>
-            <p>{fortune.greeting}</p>
+            <p>오늘 하루, 어떤 흐름이 기다리고 있을까요? 하루풀이가 따뜻하게 풀어드릴게요.</p>
           </div>
           <span>{fortune.keyword}</span>
         </div>
@@ -49,9 +49,9 @@ function HomePage({ fortune, profile, onOpenDetail, onNavigate }) {
 
       <section className="recommend-card">
         <div>
-          <p className="eyebrow">추천 콘텐츠</p>
-          <h2>2026년 나의 큰 흐름을 미리 확인해보세요</h2>
-          <p>{fortune.sajuAnalysis.traits[0]} 성향을 바탕으로 올해의 방향을 정리했습니다.</p>
+          <p className="eyebrow">추천 풀이</p>
+          <h2>2026년의 큰 흐름을 부담 없이 미리 살펴보세요</h2>
+          <p>{fortune.sajuAnalysis.traits[0]} 성향을 바탕으로 한 해의 방향을 정리했어요.</p>
         </div>
         <button className="ghost-button" type="button" onClick={() => onNavigate('year')}>
           보기

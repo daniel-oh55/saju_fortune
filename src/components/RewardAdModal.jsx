@@ -26,7 +26,7 @@ function RewardAdModal({ categoryLabel, onClose, onRewardComplete }) {
       <section className="reward-modal" role="dialog" aria-modal="true" aria-label="광고 시청">
         <div className="mock-ad-screen">
           <span>광고 영역</span>
-          <strong>{categoryLabel} 보상 광고</strong>
+          <strong>{categoryLabel} 상세 풀이 보상 광고</strong>
           <p>실제 광고 SDK가 연결되면 이 영역에 보상형 광고가 표시됩니다.</p>
         </div>
 
@@ -34,7 +34,7 @@ function RewardAdModal({ categoryLabel, onClose, onRewardComplete }) {
           <div className="ad-progress-bar">
             <span style={{ width: `${((AD_SECONDS - secondsLeft) / AD_SECONDS) * 100}%` }} />
           </div>
-          <p>{isCompleted ? '광고 시청이 완료되었습니다.' : `${secondsLeft}초 후 보상이 지급됩니다.`}</p>
+          <p>{isCompleted ? '광고 시청이 완료되었습니다.' : `${secondsLeft}초 후 상세 풀이가 열립니다.`}</p>
         </div>
 
         <div className="modal-actions">
@@ -42,7 +42,7 @@ function RewardAdModal({ categoryLabel, onClose, onRewardComplete }) {
             닫기
           </button>
           <button className="primary-button" type="button" onClick={handleComplete} disabled={!isCompleted}>
-            보상 받고 상세보기
+            상세 풀이 열기
           </button>
         </div>
       </section>
