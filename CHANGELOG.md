@@ -10,6 +10,7 @@
 - Vercel 배포 체크리스트
 - 브랜드 가이드 문서
 - 콘텐츠 스타일 가이드 문서
+- 광고 해금 상세풀이 확장 템플릿
 
 ### Changed
 
@@ -17,6 +18,8 @@
 - `.gitignore` 배포/환경 파일 제외 항목 보강
 - README에 하루풀이 브랜드 컨셉 반영
 - 주요 화면 문구를 브랜드 톤에 맞게 정리
+- 오늘운세 상세풀이를 8~12문장 수준의 조언형 콘텐츠로 개선
+- 상세풀이 문단 표시 방식 개선
 
 ### Fixed
 
@@ -25,6 +28,33 @@
 ### Removed
 
 -
+
+## 2026-06-01
+
+### Added
+
+- 광고 해금 상세풀이 확장 템플릿
+- 카테고리별 상세풀이 섹션 구조
+
+### Changed
+
+- 오늘운세 상세풀이를 8~12문장 수준의 조언형 콘텐츠로 개선
+- 상세풀이 문단 표시 방식 개선
+- 콘텐츠 스타일 가이드의 광고 해금 상세풀이 기준을 8~12문장 또는 2~3문단으로 조정
+
+### Files
+
+- `src/data/fortuneTemplates.js`
+- `src/utils/fortuneEngine.js`
+- `src/pages/FortuneDetailPage.jsx`
+- `docs/CONTENT_STYLE_GUIDE.md`
+- `DEVELOPMENT_LOG.md`
+- `CHANGELOG.md`
+- `TODO.md`
+
+### Deployed
+
+- 확인 필요
 
 ## 2026-06-01
 
