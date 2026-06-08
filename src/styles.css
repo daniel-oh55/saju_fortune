@@ -1227,8 +1227,16 @@ input:disabled {
 
 .monthly-wave-card svg {
   display: block;
-  width: 100%;
+  width: 720px;
+  min-width: 720px;
   height: auto;
+}
+
+.monthly-wave-scroll {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  padding-bottom: 6px;
+  -webkit-overflow-scrolling: touch;
 }
 
 .monthly-wave-area {

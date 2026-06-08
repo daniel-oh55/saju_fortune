@@ -21,6 +21,8 @@
 - 홈 화면 오늘의 점수 도넛 그래프
 - 2026 월별 점수 물결 그래프
 - 띠별운세 오늘의 조언 광고 해금
+- 오늘운세 학업운 카테고리
+- 2026 월별운세흐름 곡선형 그래프 개선
 
 ### Changed
 
@@ -36,6 +38,8 @@
 - 2026운세 상세 콘텐츠를 광고 해금 구조로 정리
 - 2026운세 카테고리 상세풀이를 광고 박스 상시 노출에서 상세보기 클릭형 광고 해금으로 변경
 - 띠별운세에서 키워드/색상/아이템 표시 제거
+- 광고 mock 해금 시간을 2초로 단축
+- 월별운세흐름 그래프를 모바일에서 읽기 쉬운 곡선형/가로 스크롤 구조로 개선
 
 ### Fixed
 
@@ -44,6 +48,34 @@
 ### Removed
 
 -
+
+## 2026-06-08
+
+### Added
+
+- 오늘운세 학업운 카테고리
+- 2026 월별운세흐름 곡선형 그래프 개선
+
+### Changed
+
+- 광고 mock 해금 시간을 2초로 단축
+- 월별운세흐름 그래프를 모바일에서 읽기 쉬운 곡선형/가로 스크롤 구조로 개선
+
+### Files
+
+- `src/components/MonthlyWaveChart.jsx`
+- `src/components/RewardAdModal.jsx`
+- `src/data/fortuneTemplates.js`
+- `src/pages/HomePage.jsx`
+- `src/styles.css`
+- `docs/CONTENT_STYLE_GUIDE.md`
+- `DEVELOPMENT_LOG.md`
+- `CHANGELOG.md`
+- `TODO.md`
+
+### Deployed
+
+- 확인 필요
 
 ## 2026-06-08
 
