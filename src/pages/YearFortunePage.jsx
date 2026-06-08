@@ -3,11 +3,16 @@ import AdRewardBox from '../components/AdRewardBox.jsx';
 import { createYearFortune } from '../domain/fortune/yearFortuneEngine.js';
 
 function YearFortunePage({ profile, fortune, onNavigate }) {
-  const [isUnlocked, setIsUnlocked] = useState(false);
+  const [unlockedYearCategories, setUnlockedYearCategories] = useState({});
+  const [isMonthlyDetailUnlocked, setIsMonthlyDetailUnlocked] = useState(false);
   const yearFortune = useMemo(
     () => createYearFortune(profile, fortune.sajuAnalysis, 2026),
     [profile, fortune.sajuAnalysis],
   );
+
+  const unlockCategory = (categoryId) => {
+    setUnlockedYearCategories((current) => ({ ...current, [categoryId]: true }));
+  };
 
   return (
     <div className="page-stack">
@@ -16,7 +21,7 @@ function YearFortunePage({ profile, fortune, onNavigate }) {
         <h1>2026년 나의 흐름</h1>
         <p>
           {profile.nickname}님의 {fortune.sajuAnalysis.elements.dominant} 기운과
-          {yearFortune.keyword} 키워드를 바탕으로 본 2026년 흐름입니다.
+          {yearFortune.keyword} 키워드를 바탕으로 본 2026년 참고용 풀이입니다.
         </p>
       </section>
 
@@ -27,33 +32,33 @@ function YearFortunePage({ profile, fortune, onNavigate }) {
       </section>
 
       <section className="year-category-grid">
-        {yearFortune.categories.map((category) => (
-          <article key={category.id} className="year-mini-card">
-            <span>{category.icon}</span>
-            <h3>{category.label}</h3>
-            <strong>{category.score}점</strong>
-            <p>{category.summary}</p>
-          </article>
-        ))}
+        {yearFortune.categories.map((category) => {
+          const isUnlocked = Boolean(unlockedYearCategories[category.id]);
+
+          return (
+            <article key={category.id} className="year-mini-card year-unlock-card">
+              <span>{category.icon}</span>
+              <h3>{category.label}</h3>
+              <strong>{category.score}점</strong>
+              <p>{category.summary}</p>
+
+              <AdRewardBox
+                categoryLabel={category.label}
+                isUnlocked={isUnlocked}
+                buttonLabel="광고 보고 상세 풀이 열기"
+                onUnlock={() => unlockCategory(category.id)}
+              />
+
+              {isUnlocked && (
+                <div className="year-detail-copy">
+                  <h4>상세 풀이</h4>
+                  <p>{category.detail}</p>
+                </div>
+              )}
+            </article>
+          );
+        })}
       </section>
-
-      <AdRewardBox
-        categoryLabel="2026운세"
-        isUnlocked={isUnlocked}
-        buttonLabel="광고 보고 상세 2026운세 열기"
-        onUnlock={() => setIsUnlocked(true)}
-      />
-
-      {isUnlocked && (
-        <section className="detail-copy">
-          <h3>2026 상세 리포트 미리보기</h3>
-          <p>
-            상반기에는 {yearFortune.months[0].note} 흐름이 강하고, 하반기에는
-            {yearFortune.months[8].note}에 집중하면 좋습니다. 프리미엄 리포트에서는 월별
-            세부 해석과 행동 가이드를 확장할 수 있습니다.
-          </p>
-        </section>
-      )}
 
       <section className="month-preview-card">
         <div className="section-title-row">
@@ -73,10 +78,32 @@ function YearFortunePage({ profile, fortune, onNavigate }) {
         </div>
       </section>
 
+      <AdRewardBox
+        categoryLabel="2026 월별 상세 흐름"
+        isUnlocked={isMonthlyDetailUnlocked}
+        buttonLabel="광고 보고 월별 상세 흐름 전체 열기"
+        onUnlock={() => setIsMonthlyDetailUnlocked(true)}
+      />
+
+      {isMonthlyDetailUnlocked && (
+        <section className="monthly-detail-card">
+          <p className="eyebrow">Monthly Detail</p>
+          <h2>2026 월별 상세 흐름</h2>
+          <div className="monthly-detail-list">
+            {yearFortune.months.map((month) => (
+              <article key={month.month}>
+                <strong>{month.month}월 · {month.score}점</strong>
+                <p>{month.detail}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
+
       <section className="premium-nudge-card">
         <div>
-          <h2>프리미엄 2026 리포트</h2>
-          <p>월별 상세 운세, 재물/연애/직장/건강 심화 해석, AI 상담 질문을 준비 중입니다.</p>
+          <h2>더 깊은 2026 풀이를 준비하고 있어요</h2>
+          <p>현재는 무료 사용과 광고 해금 구조를 우선 검토하고 있습니다.</p>
         </div>
         <button className="primary-button" type="button" onClick={() => onNavigate('premium')}>
           안내 보기
