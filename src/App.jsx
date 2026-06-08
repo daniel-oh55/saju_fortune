@@ -9,7 +9,7 @@ import AiConsultPage from './pages/AiConsultPage.jsx';
 import CompatibilityPage from './pages/CompatibilityPage.jsx';
 import PremiumPage from './pages/PremiumPage.jsx';
 import SettingsPage from './pages/SettingsPage.jsx';
-import { createTodayFortune } from './utils/fortuneEngine.js';
+import { CURRENT_FORTUNE_SCHEMA_VERSION, createTodayFortune } from './utils/fortuneEngine.js';
 import { getKoreaDateKey } from './utils/date.js';
 import {
   clearAppData,
@@ -35,6 +35,7 @@ function isValidCachedFortune(cached, profile, dateKey) {
   return (
     cached?.dateKey === dateKey &&
     cached?.profileId === profile.id &&
+    cached?.schemaVersion === CURRENT_FORTUNE_SCHEMA_VERSION &&
     cached?.sajuAnalysis &&
     hasRequiredFortuneCategories(cached)
   );

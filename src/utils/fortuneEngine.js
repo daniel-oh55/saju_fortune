@@ -1,6 +1,8 @@
 import { categoryMeta, fortuneTemplates } from '../data/fortuneTemplates.js';
 import { createSajuAnalysis } from '../domain/saju/createSajuAnalysis.js';
 
+export const CURRENT_FORTUNE_SCHEMA_VERSION = 3;
+
 function hashString(text) {
   let hash = 0;
   for (let i = 0; i < text.length; i += 1) {
@@ -89,6 +91,7 @@ export function createTodayFortune(profile, dateKey) {
 
   return {
     id: `${profileId}-${dateKey}`,
+    schemaVersion: CURRENT_FORTUNE_SCHEMA_VERSION,
     profileId,
     dateKey,
     averageScore,
