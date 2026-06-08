@@ -43,11 +43,28 @@
 
 ### Fixed
 
--
+- 기존 localStorage 오늘운세 캐시에 학업운이 없는 경우 새 운세를 생성하도록 캐시 유효성 검사 보완
 
 ### Removed
 
 -
+
+## 2026-06-08
+
+### Fixed
+
+- 기존 localStorage 오늘운세 캐시에 학업운이 없는 경우 새 운세를 생성하도록 캐시 유효성 검사 보완
+
+### Files
+
+- `src/App.jsx`
+- `DEVELOPMENT_LOG.md`
+- `CHANGELOG.md`
+- `TODO.md`
+
+### Deployed
+
+- 확인 필요
 
 ## 2026-06-08
 
