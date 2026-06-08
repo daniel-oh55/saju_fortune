@@ -4,6 +4,7 @@ import OnboardingPage from './pages/OnboardingPage.jsx';
 import HomePage from './pages/HomePage.jsx';
 import FortuneDetailPage from './pages/FortuneDetailPage.jsx';
 import YearFortunePage from './pages/YearFortunePage.jsx';
+import ZodiacFortunePage from './pages/ZodiacFortunePage.jsx';
 import AiConsultPage from './pages/AiConsultPage.jsx';
 import CompatibilityPage from './pages/CompatibilityPage.jsx';
 import PremiumPage from './pages/PremiumPage.jsx';
@@ -105,6 +106,9 @@ function App() {
         )}
         {activePage === 'year' && (
           <YearFortunePage profile={profile} fortune={fortune} onNavigate={setActivePage} />
+        )}
+        {activePage === 'zodiac' && (
+          <ZodiacFortunePage profile={profile} fortune={fortune} />
         )}
         {activePage === 'ai' && <AiConsultPage profile={profile} fortune={fortune} />}
         {activePage === 'compatibility' && <CompatibilityPage profile={profile} />}

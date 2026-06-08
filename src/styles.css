@@ -524,10 +524,10 @@ textarea:focus {
   bottom: 0;
   left: 0;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   max-width: 480px;
   margin: 0 auto;
-  padding: 8px 10px 12px;
+  padding: 8px 6px 12px;
   border-top: 1px solid rgba(89, 120, 118, 0.14);
   background: rgba(255, 255, 255, 0.94);
   backdrop-filter: blur(16px);
@@ -542,7 +542,7 @@ textarea:focus {
   border-radius: 8px;
   color: #7b898d;
   background: transparent;
-  font-size: 0.74rem;
+  font-size: 0.68rem;
   font-weight: 800;
 }
 
@@ -868,10 +868,169 @@ input:disabled {
 
 .nav-button {
   min-height: 58px;
-  font-size: 0.7rem;
+  font-size: 0.66rem;
 }
 
 .nav-icon {
-  font-size: 0.92rem;
+  font-size: 0.84rem;
   font-weight: 900;
+}
+
+.today-summary-card,
+.fortune-flow-card,
+.time-fortune-card,
+.zodiac-link-card,
+.zodiac-selector-card,
+.zodiac-score-card,
+.zodiac-advice-card {
+  border: 1px solid rgba(89, 120, 118, 0.14);
+  border-radius: 22px;
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 16px 36px rgba(43, 57, 68, 0.08);
+}
+
+.today-summary-card h2,
+.time-fortune-card h2,
+.zodiac-link-card h2,
+.zodiac-advice-card h2 {
+  margin-bottom: 8px;
+  font-size: 1.12rem;
+}
+
+.flow-list {
+  display: grid;
+  gap: 12px;
+}
+
+.flow-item {
+  display: grid;
+  grid-template-columns: 58px 1fr 38px;
+  gap: 10px;
+  align-items: center;
+}
+
+.flow-item span,
+.flow-item strong {
+  color: #405158;
+  font-size: 0.84rem;
+  font-weight: 900;
+}
+
+.home-action-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.home-action-grid button {
+  min-height: 44px;
+  border: 1px solid rgba(89, 120, 118, 0.14);
+  border-radius: 16px;
+  color: #356b68;
+  background: #e8f5f1;
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+.zodiac-link-card {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 14px;
+  align-items: center;
+}
+
+.zodiac-link-card p {
+  margin-bottom: 0;
+}
+
+.zodiac-selector-card p {
+  margin: 10px 0 0;
+  font-size: 0.88rem;
+}
+
+.zodiac-score-card {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: start;
+}
+
+.zodiac-score-card span {
+  color: #697a80;
+  font-weight: 900;
+}
+
+.zodiac-score-card strong {
+  color: #338f8b;
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.zodiac-score-card p {
+  grid-column: 1 / -1;
+  margin-bottom: 0;
+}
+
+.zodiac-category-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.zodiac-mini-card {
+  border: 1px solid rgba(89, 120, 118, 0.14);
+  border-radius: 20px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.zodiac-mini-card div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.zodiac-mini-card span {
+  color: #607078;
+  font-size: 0.84rem;
+  font-weight: 900;
+}
+
+.zodiac-mini-card strong {
+  color: #338f8b;
+}
+
+.zodiac-mini-card p {
+  margin-bottom: 0;
+  font-size: 0.88rem;
+}
+
+.lucky-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.lucky-grid div {
+  border: 1px solid rgba(89, 120, 118, 0.14);
+  border-radius: 18px;
+  padding: 14px 10px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.lucky-grid span {
+  display: block;
+  margin-bottom: 6px;
+  color: #697a80;
+  font-size: 0.76rem;
+  font-weight: 900;
+}
+
+.lucky-grid strong {
+  color: #243039;
+  font-size: 0.92rem;
 }

@@ -11,6 +11,9 @@
 - 브랜드 가이드 문서
 - 콘텐츠 스타일 가이드 문서
 - 광고 해금 상세풀이 확장 템플릿
+- 띠별 운세 페이지
+- 1948~2019년생 띠별 운세 선택 기능
+- 홈 화면 오늘운세 요약 섹션
 
 ### Changed
 
@@ -20,6 +23,8 @@
 - 주요 화면 문구를 브랜드 톤에 맞게 정리
 - 오늘운세 상세풀이를 8~12문장 수준의 조언형 콘텐츠로 개선
 - 상세풀이 문단 표시 방식 개선
+- 홈 화면에서 2026 추천 영역 제거
+- 하단 네비게이션에 띠별 탭 추가
 
 ### Fixed
 
@@ -28,6 +33,36 @@
 ### Removed
 
 -
+
+## 2026-06-08
+
+### Added
+
+- 띠별 운세 페이지
+- 1948~2019년생 띠별 운세 선택 기능
+- 홈 화면 오늘운세 요약 섹션
+
+### Changed
+
+- 홈 화면에서 2026 추천 영역 제거
+- 홈 화면을 오늘운세 요약 중심으로 재구성
+- 하단 네비게이션에 띠별 탭 추가
+
+### Files
+
+- `src/App.jsx`
+- `src/components/BottomNav.jsx`
+- `src/domain/fortune/zodiacFortuneEngine.js`
+- `src/pages/ZodiacFortunePage.jsx`
+- `src/pages/HomePage.jsx`
+- `src/styles.css`
+- `DEVELOPMENT_LOG.md`
+- `CHANGELOG.md`
+- `TODO.md`
+
+### Deployed
+
+- 확인 필요
 
 ## 2026-06-01
 
