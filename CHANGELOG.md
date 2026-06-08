@@ -32,6 +32,7 @@
 - 만세력 검증 expected/referenceSource 입력 구조 보강
 - 입춘 전후 및 23시 전후 검증 샘플 보강
 - `solar_regular_known_time` 샘플의 sky.told.me 기준 expected 1차 입력
+- 입춘 경계 및 입춘 후 샘플의 외부 만세력 기준값 입력
 
 ### Changed
 
@@ -51,6 +52,7 @@
 - 월별운세흐름 그래프를 모바일에서 읽기 쉬운 곡선형/가로 스크롤 구조로 개선
 - `createSajuAnalysis`가 만세력 엔진 성공 시 실제 사주팔자 기반 데이터를 사용하도록 변경
 - 만세력 검증 페이지에 referenceStatus와 not_applicable 상태 표시 보강
+- 1990-02-03 23:30 샘플을 reference_conflict로 분류
 
 ### Fixed
 
