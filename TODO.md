@@ -34,6 +34,10 @@
 - [ ] 23시 이후 자시/야자시/태양시 보정 정책 결정 필요
 - [ ] reference_conflict 샘플 처리 정책 검토
 - [ ] 세 번째 기준 만세력으로 `solar_before_ipchun` 추가 확인
+- [ ] `solar_ipchun_boundary` 년주/월주 mismatch 원인 분석
+- [ ] 입춘 절입 시각 기준 적용 방식 검토
+- [ ] 태양시 보정 적용 여부 결정
+- [ ] 엔진 보정 후 `solar_after_ipchun` pass 유지 여부 확인
 
 ## P1: 중요하지만 배포 전후 선택 가능한 문제
 
