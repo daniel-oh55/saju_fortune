@@ -1,4 +1,5 @@
 import FortuneCard from '../components/FortuneCard.jsx';
+import ScoreDonut from '../components/ScoreDonut.jsx';
 
 function getTimeFortune() {
   const hour = new Date().getHours();
@@ -58,11 +59,11 @@ function HomePage({ fortune, profile, onOpenDetail, onNavigate }) {
       <section className="score-hero-card">
         <p className="eyebrow">오늘의 점수</p>
         <div className="score-hero-main">
-          <div>
-            <h1>{fortune.averageScore}점</h1>
+          <ScoreDonut score={fortune.averageScore} />
+          <div className="score-hero-copy">
+            <h1>{fortune.keyword}</h1>
             <p>{fortune.greeting}</p>
           </div>
-          <span>{fortune.keyword}</span>
         </div>
         <button className="primary-button full-width" type="button" onClick={() => onNavigate('fortune')}>
           오늘운세 자세히 보기

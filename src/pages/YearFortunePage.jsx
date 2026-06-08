@@ -1,10 +1,13 @@
 import { useMemo, useState } from 'react';
-import AdRewardBox from '../components/AdRewardBox.jsx';
+import MonthlyWaveChart from '../components/MonthlyWaveChart.jsx';
+import RewardAdModal from '../components/RewardAdModal.jsx';
 import { createYearFortune } from '../domain/fortune/yearFortuneEngine.js';
 
 function YearFortunePage({ profile, fortune, onNavigate }) {
   const [unlockedYearCategories, setUnlockedYearCategories] = useState({});
   const [isMonthlyDetailUnlocked, setIsMonthlyDetailUnlocked] = useState(false);
+  const [activeCategoryAd, setActiveCategoryAd] = useState(null);
+  const [isMonthlyAdOpen, setIsMonthlyAdOpen] = useState(false);
   const yearFortune = useMemo(
     () => createYearFortune(profile, fortune.sajuAnalysis, 2026),
     [profile, fortune.sajuAnalysis],
@@ -42,12 +45,14 @@ function YearFortunePage({ profile, fortune, onNavigate }) {
               <strong>{category.score}점</strong>
               <p>{category.summary}</p>
 
-              <AdRewardBox
-                categoryLabel={category.label}
-                isUnlocked={isUnlocked}
-                buttonLabel="광고 보고 상세 풀이 열기"
-                onUnlock={() => unlockCategory(category.id)}
-              />
+              <button
+                className={`detail-toggle-button ${isUnlocked ? 'is-unlocked' : ''}`}
+                type="button"
+                onClick={() => setActiveCategoryAd(category)}
+                disabled={isUnlocked}
+              >
+                {isUnlocked ? '상세 풀이 열림' : '상세보기'}
+              </button>
 
               {isUnlocked && (
                 <div className="year-detail-copy">
@@ -78,17 +83,24 @@ function YearFortunePage({ profile, fortune, onNavigate }) {
         </div>
       </section>
 
-      <AdRewardBox
-        categoryLabel="2026 월별 상세 흐름"
-        isUnlocked={isMonthlyDetailUnlocked}
-        buttonLabel="광고 보고 월별 상세 흐름 전체 열기"
-        onUnlock={() => setIsMonthlyDetailUnlocked(true)}
-      />
+      {!isMonthlyDetailUnlocked && (
+        <section className="monthly-unlock-card">
+          <div>
+            <p className="eyebrow">잠금 콘텐츠</p>
+            <h2>월별 상세 흐름은 광고 시청 후 열립니다</h2>
+            <p>광고 1회로 1월부터 12월까지의 상세 흐름을 한 번에 확인할 수 있어요.</p>
+          </div>
+          <button className="primary-button" type="button" onClick={() => setIsMonthlyAdOpen(true)}>
+            광고 보고 월별 상세 흐름 전체 열기
+          </button>
+        </section>
+      )}
 
       {isMonthlyDetailUnlocked && (
         <section className="monthly-detail-card">
           <p className="eyebrow">Monthly Detail</p>
           <h2>2026 월별 상세 흐름</h2>
+          <MonthlyWaveChart months={yearFortune.months} />
           <div className="monthly-detail-list">
             {yearFortune.months.map((month) => (
               <article key={month.month}>
@@ -109,6 +121,22 @@ function YearFortunePage({ profile, fortune, onNavigate }) {
           안내 보기
         </button>
       </section>
+
+      {activeCategoryAd && (
+        <RewardAdModal
+          categoryLabel={`2026 ${activeCategoryAd.label}`}
+          onClose={() => setActiveCategoryAd(null)}
+          onRewardComplete={() => unlockCategory(activeCategoryAd.id)}
+        />
+      )}
+
+      {isMonthlyAdOpen && (
+        <RewardAdModal
+          categoryLabel="2026 월별 상세 흐름"
+          onClose={() => setIsMonthlyAdOpen(false)}
+          onRewardComplete={() => setIsMonthlyDetailUnlocked(true)}
+        />
+      )}
     </div>
   );
 }

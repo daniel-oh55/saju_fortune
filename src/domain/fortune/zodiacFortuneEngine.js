@@ -107,21 +107,24 @@ export function createZodiacFortune({ profile, selectedYear, dateKey }) {
   const score = Math.round(
     categories.reduce((total, category) => total + category.score, 0) / categories.length,
   );
-  const luckyKeyword = pickBySeed(['정리', '대화', '점검', '균형', '휴식', '집중'], seed + 11);
-  const luckyColor = pickBySeed(['민트', '코랄', '하늘색', '아이보리', '라벤더'], seed + 17);
-  const luckyItem = pickBySeed(['메모장', '텀블러', '캘린더', '손수건', '이어폰'], seed + 23);
+  const summaryTone = pickBySeed(
+    [
+      '차분히 흐름을 살피면 편안합니다.',
+      '작은 일부터 정리하면 안정감이 생깁니다.',
+      '대화와 확인을 부드럽게 이어가면 좋습니다.',
+      '무리한 속도보다 균형을 챙기는 태도가 어울립니다.',
+    ],
+    seed + 11,
+  );
 
   return {
     year: zodiac.year,
     animal: zodiac.animal,
     icon: zodiac.icon,
     score,
-    summary: `${zodiac.year}년 ${zodiac.animal}띠의 오늘은 ${luckyKeyword}을 중심으로 흐름을 살피면 편안합니다.`,
+    summary: `${zodiac.year}년 ${zodiac.animal}띠의 오늘은 ${summaryTone}`,
     detail:
       '오늘의 띠별 흐름은 참고용으로 가볍게 살펴보면 좋습니다. 중요한 결정은 여러 정보를 함께 확인하고, 사람과의 대화에서는 부드러운 표현을 선택해보세요. 속도를 조금 낮추면 놓치기 쉬운 부분을 차분히 점검하는 데 도움이 됩니다.',
     categories,
-    luckyKeyword,
-    luckyColor,
-    luckyItem,
   };
 }
