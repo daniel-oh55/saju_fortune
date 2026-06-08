@@ -22,6 +22,23 @@ import {
 } from './utils/storage.js';
 
 const todayKey = getKoreaDateKey();
+const REQUIRED_FORTUNE_CATEGORY_IDS = ['overall', 'money', 'love', 'work', 'study', 'health'];
+
+function hasRequiredFortuneCategories(fortune) {
+  if (!Array.isArray(fortune?.categories)) return false;
+
+  const categoryIds = new Set(fortune.categories.map((category) => category.id));
+  return REQUIRED_FORTUNE_CATEGORY_IDS.every((categoryId) => categoryIds.has(categoryId));
+}
+
+function isValidCachedFortune(cached, profile, dateKey) {
+  return (
+    cached?.dateKey === dateKey &&
+    cached?.profileId === profile.id &&
+    cached?.sajuAnalysis &&
+    hasRequiredFortuneCategories(cached)
+  );
+}
 
 function App() {
   const [profile, setProfile] = useState(() => loadProfile());
@@ -33,7 +50,7 @@ function App() {
     if (!profile) return null;
 
     const cached = loadFortune();
-    if (cached?.dateKey === todayKey && cached?.profileId === profile.id && cached?.sajuAnalysis) {
+    if (isValidCachedFortune(cached, profile, todayKey)) {
       return cached;
     }
 
