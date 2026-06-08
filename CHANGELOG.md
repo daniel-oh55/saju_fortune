@@ -31,6 +31,7 @@
 - 외부 기준값 비교용 validation 문서
 - 만세력 검증 expected/referenceSource 입력 구조 보강
 - 입춘 전후 및 23시 전후 검증 샘플 보강
+- `solar_regular_known_time` 샘플의 sky.told.me 기준 expected 1차 입력
 
 ### Changed
 

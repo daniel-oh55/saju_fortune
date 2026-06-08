@@ -4,8 +4,8 @@
 
 - 배포 방식: GitHub 저장소와 Vercel 연동 구조 사용
 - 주요 기능: 프로필 입력, 오늘운세, 띠별 운세, 2026운세, 광고 보상 시뮬레이션, AI 상담 화면, 궁합 입력, 더 깊은 풀이 기능 준비 중 화면, 마이 화면
-- 현재 브랜치: `test/manseryeok-reference-values`
-- 최근 수정 내용: 만세력 검증 expected/referenceSource 포맷 보강 및 입춘/23시 전후 샘플 추가
+- 현재 브랜치: `test/manseryeok-reference-values-batch-1`
+- 최근 수정 내용: `solar_regular_known_time` 샘플에 sky.told.me 기준 expected 1차 입력
 
 ## 현재 이슈
 
@@ -20,6 +20,7 @@
 - [ ] 확인 필요: 음력/윤달 입력 샘플 검증
 - [ ] 확인 필요: Vercel Preview에서 `/?debug=manseryeok` 접근 가능 여부
 - [ ] 확인 필요: 외부 만세력 기준값 1차 입력 후 pass/fail 결과
+- [ ] 확인 필요: `solar_regular_known_time` 샘플의 출생도시 Seoul, South Korea 및 태양시 보정 여부
 
 ## 다음 작업
 
@@ -32,6 +33,7 @@
 - [ ] 우선순위 7: 만세력 기준 샘플 검증표 작성
 - [ ] 우선순위 8: 외부 기준값을 검증 샘플 expected에 입력
 - [ ] 우선순위 9: 입춘 전후/23시 전후 샘플 기준값 우선 확인
+- [ ] 우선순위 10: `solar_regular_known_time`을 두 번째 외부 만세력 기준으로 교차검증
 
 ## ChatGPT 검토 요청 포인트
 
@@ -52,6 +54,40 @@
 - not_applicable 샘플이 calculation_failed와 구분되어 표시되는지
 
 ## 작업 로그
+
+### 2026-06-08
+
+#### 작업 내용
+
+- sky.told.me에서 수동 확인한 `solar_regular_known_time` 사주팔자 기준값 1차 입력
+- profile gender를 sky.told.me 입력 기준에 맞춰 `male`로 변경
+- expected에는 년주, 월주, 일주, 시주, 일간, convertedSolar만 입력
+- convertedLunar는 외부 결과에서 명확히 확인되지 않아 입력하지 않음
+- referenceSource에 `sky.told.me`, 수동 확인일, 출생도시 Seoul, South Korea 입력 기준을 기록
+- 대운, 신살, 자미두수, Natal Chart 값은 검증 범위에서 제외
+- 만세력 계산 로직 변경 없음
+- localStorage key 구조 변경 없음
+- fortune schemaVersion 변경 없음
+
+#### 수정 파일
+
+- `src/domain/saju/manseryeokValidationSamples.js`
+- `DEVELOPMENT_LOG.md`
+- `CHANGELOG.md`
+- `TODO.md`
+
+#### 테스트 결과
+
+- `npm run build` 성공
+- Vite chunk size 경고 발생: `lunar-javascript` 포함으로 JS chunk가 500kB를 초과함
+- validator 실행 결과: `solar_regular_known_time` comparisonStatus `pass`
+- mismatchFields 없음
+
+#### 남은 이슈
+
+- 같은 샘플을 두 번째 외부 만세력 기준으로 교차검증 필요
+- 출생도시 입력값 재확인 필요
+- 태양시 보정 여부 확인 필요
 
 ### 2026-06-08
 
