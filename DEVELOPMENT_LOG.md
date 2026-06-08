@@ -4,8 +4,8 @@
 
 - 배포 방식: GitHub 저장소와 Vercel 연동 구조 사용
 - 주요 기능: 프로필 입력, 오늘운세, 띠별 운세, 2026운세, 광고 보상 시뮬레이션, AI 상담 화면, 궁합 입력, 더 깊은 풀이 기능 준비 중 화면, 마이 화면
-- 현재 브랜치: `fix/study-cache-validation`
-- 최근 수정 내용: 오늘운세 캐시 유효성 검사에 학업운 카테고리 포함 여부 추가
+- 현재 브랜치: `feature/manseryeok-core-engine`
+- 최근 수정 내용: 만세력 기반 사주팔자 계산 엔진 v0 추가, 오행 분포 분석 연결, fortune schemaVersion 도입
 
 ## 현재 이슈
 
@@ -16,6 +16,8 @@
 - [ ] 확인 필요: 홈 도넛 그래프와 2026 월별 물결 그래프의 모바일 가독성
 - [ ] 확인 필요: 학업운 문구가 학생/성인 학습 모두에 자연스럽게 적용되는지
 - [ ] 확인 필요: 기존 사용자의 당일 캐시에서 학업운 누락 시 새 운세가 정상 생성되는지
+- [ ] 확인 필요: 외부 만세력 기준 샘플과 `lunar-javascript` 계산 결과 비교
+- [ ] 확인 필요: 음력/윤달 입력 샘플 검증
 
 ## 다음 작업
 
@@ -25,6 +27,7 @@
 - [ ] 우선순위 4: 광고 해금 포인트가 과하지 않은지 실사용 흐름 점검
 - [ ] 우선순위 5: 월별 곡선 그래프 가로 스크롤 UX 확인
 - [ ] 우선순위 6: 오늘운세 카테고리 추가 시 캐시 버전 관리 방식 검토
+- [ ] 우선순위 7: 만세력 기준 샘플 검증표 작성
 
 ## ChatGPT 검토 요청 포인트
 
@@ -38,8 +41,63 @@
 - 홈 도넛 그래프와 2026 월별 물결 그래프가 모바일에서 자연스럽게 읽히는지
 - 학업운 카테고리 추가로 오늘운세 탭/홈 요약/광고 해금 흐름이 깨지지 않았는지
 - study 없는 기존 오늘운세 캐시가 삭제 없이 재생성되는지
+- 만세력 엔진 실패 시 mock fallback으로 앱이 깨지지 않는지
+- schemaVersion 도입으로 기존 mock 캐시가 새 fortune으로 갱신되는지
 
 ## 작업 로그
+
+### 2026-06-08
+
+#### 작업 내용
+
+- `lunar-javascript` 패키지 설치 및 실제 `Solar`, `Lunar`, `EightChar` API 확인
+- 만세력 기반 년주, 월주, 일주, 시주 계산 adapter 추가
+- 한자 천간/지지를 한글 천간/지지로 변환하는 사주 상수 추가
+- 천간/지지 겉오행 기준 오행 분포 분석기 추가
+- `createSajuAnalysis`가 만세력 계산 성공 시 실제 사주팔자/오행 분석 기반 결과를 반환하도록 연결
+- 시간 미상 사용자는 내부 계산에 12:00을 사용하되 결과의 시주는 `시주 미상`으로 처리
+- 음력/윤달 입력은 `lunar-javascript` 지원 범위에서 처리하고 실패 시 mock fallback 유지
+- fortune `schemaVersion` 도입 및 App 캐시 유효성 검사에 schemaVersion 확인 추가
+- localStorage key 구조 변경 없음
+- 기존 캐시 데이터 일괄 삭제 없음
+- 대운, 신강신약, 용신, 세운, 월운 고도화 구현 없음
+
+#### 외부 라이브러리
+
+- `lunar-javascript@1.7.7`
+- 사용 이유: 양력/음력 변환과 EightChar 기반 사주팔자 계산을 직접 임의 구현하지 않기 위함
+- 정확도 상태: 외부 만세력 기준 샘플 검증 필요
+
+#### 수정 파일
+
+- `src/domain/saju/sajuConstants.js`
+- `src/domain/saju/manseryeokEngine.js`
+- `src/domain/saju/elementAnalyzer.js`
+- `src/domain/saju/createSajuAnalysis.js`
+- `src/utils/fortuneEngine.js`
+- `src/App.jsx`
+- `docs/MANSERYEOK_ENGINE.md`
+- `package.json`
+- `package-lock.json`
+- `DEVELOPMENT_LOG.md`
+- `CHANGELOG.md`
+- `TODO.md`
+
+#### 테스트 결과
+
+- `npm run build` 성공
+- Vite chunk size 경고 발생: `lunar-javascript` 포함 후 JS chunk가 500kB를 초과함
+- 양력 샘플에서 `engineStatus: manseryeok_core_v0` 확인
+- `birthTimeUnknown=true` 샘플에서 시주가 `시주 미상`으로 처리되는지 확인
+- 지원되지 않는 음력 윤달 샘플에서 mock fallback 확인
+- 새 fortune에 `schemaVersion: 3` 포함 확인
+
+#### 남은 이슈
+
+- 외부 만세력 기준 샘플 비교 필요
+- 절기 경계 출생자 검증 필요
+- 23시 이후 자시 기준 정책 검토 필요
+- 음력/윤달 입력 샘플 추가 검증 필요
 
 ### 2026-06-08
 

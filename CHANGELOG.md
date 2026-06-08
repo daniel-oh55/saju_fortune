@@ -23,6 +23,9 @@
 - 띠별운세 오늘의 조언 광고 해금
 - 오늘운세 학업운 카테고리
 - 2026 월별운세흐름 곡선형 그래프 개선
+- 만세력 기반 사주팔자 계산 엔진 v0
+- 오행 분포 분석기
+- fortune schemaVersion 캐시 무효화 구조
 
 ### Changed
 
@@ -40,14 +43,52 @@
 - 띠별운세에서 키워드/색상/아이템 표시 제거
 - 광고 mock 해금 시간을 2초로 단축
 - 월별운세흐름 그래프를 모바일에서 읽기 쉬운 곡선형/가로 스크롤 구조로 개선
+- `createSajuAnalysis`가 만세력 엔진 성공 시 실제 사주팔자 기반 데이터를 사용하도록 변경
 
 ### Fixed
 
 - 기존 localStorage 오늘운세 캐시에 학업운이 없는 경우 새 운세를 생성하도록 캐시 유효성 검사 보완
+- 기존 mock 캐시가 만세력 엔진 적용 후에도 계속 재사용되지 않도록 schemaVersion 검사 추가
 
 ### Removed
 
 -
+
+## 2026-06-08
+
+### Added
+
+- 만세력 기반 사주팔자 계산 엔진 v0
+- 오행 분포 분석기
+- fortune schemaVersion 캐시 무효화 구조
+- 만세력 엔진 범위와 검증 필요 사항 문서
+
+### Changed
+
+- `createSajuAnalysis`가 만세력 엔진 성공 시 실제 사주팔자 기반 데이터를 사용하도록 변경
+
+### Fixed
+
+- 기존 mock 캐시가 만세력 엔진 적용 후에도 계속 재사용되지 않도록 schemaVersion 검사 추가
+
+### Files
+
+- `src/domain/saju/sajuConstants.js`
+- `src/domain/saju/manseryeokEngine.js`
+- `src/domain/saju/elementAnalyzer.js`
+- `src/domain/saju/createSajuAnalysis.js`
+- `src/utils/fortuneEngine.js`
+- `src/App.jsx`
+- `docs/MANSERYEOK_ENGINE.md`
+- `package.json`
+- `package-lock.json`
+- `DEVELOPMENT_LOG.md`
+- `CHANGELOG.md`
+- `TODO.md`
+
+### Deployed
+
+- 확인 필요
 
 ## 2026-06-08
 
