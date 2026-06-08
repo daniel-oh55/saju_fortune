@@ -2,22 +2,45 @@ export const manseryeokValidationSamples = [
   // expected/referenceSource는 외부 만세력 기준값을 수동 확인한 뒤에만 채웁니다.
   // lunar-javascript actual 결과를 expected에 복사해 정답처럼 사용하지 않습니다.
   {
-    id: 'solar_regular_known_time',
-    title: '양력 일반 생시 있음',
-    profile: {
-      nickname: '검증샘플A',
-      birthDate: '1990-05-15',
-      birthTime: '09:30',
-      birthTimeUnknown: false,
-      calendarType: 'solar',
-      isLeapMonth: false,
-      gender: 'other',
-    },
-    expected: null,
-    referenceStatus: 'reference_pending',
-    referenceSource: null,
-    notes: ['외부 만세력 기준값 입력 필요', '양력 일반 케이스의 기본 비교 샘플'],
+  id: 'solar_regular_known_time',
+  title: '양력 일반 생시 있음',
+  profile: {
+    nickname: '검증샘플A',
+    birthDate: '1990-05-15',
+    birthTime: '09:30',
+    birthTimeUnknown: false,
+    calendarType: 'solar',
+    isLeapMonth: false,
+    gender: 'male',
   },
+  expected: {
+    pillars: {
+      year: '경오',
+      month: '신사',
+      day: '경진',
+      hour: '신사',
+    },
+    dayMaster: {
+      stem: '경',
+    },
+    convertedSolar: '1990-05-15 09:30:00',
+  },
+  referenceStatus: 'reference_verified',
+  referenceSource: {
+    name: 'sky.told.me',
+    url: null,
+    checkedAt: '2026-06-08',
+    checkedBy: 'manual',
+    memo:
+  'sky.told.me 입력 기준: 남성, 양력 1990-05-15 09:30, 출생도시 Seoul, South Korea. 四柱八字 결과 기준. convertedLunar는 결과에서 명확히 확인되지 않아 미입력. 태양시 보정 여부는 추가 확인 필요.',
+  },
+  notes: [
+    '외부 만세력 기준값 1차 입력',
+    '四柱八字 결과만 expected에 반영',
+    '대운, 신살, 자미두수, Natal Chart는 현재 검증 범위에서 제외',
+    '출생도시 입력값과 태양시 보정 여부 추가 확인 필요',
+  ],
+},
   {
     id: 'solar_unknown_time',
     title: '양력 시간 미상',
