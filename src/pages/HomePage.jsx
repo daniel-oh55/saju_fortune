@@ -40,9 +40,10 @@ function HomePage({ fortune, profile, onOpenDetail, onNavigate }) {
   const money = fortune.categories.find((category) => category.id === 'money');
   const love = fortune.categories.find((category) => category.id === 'love');
   const work = fortune.categories.find((category) => category.id === 'work');
+  const study = fortune.categories.find((category) => category.id === 'study');
   const health = fortune.categories.find((category) => category.id === 'health');
   const timeFortune = getTimeFortune();
-  const quickItems = [money, love, work, health].filter(Boolean);
+  const quickItems = [money, love, work, study, health].filter(Boolean);
 
   return (
     <div className="page-stack home-page">

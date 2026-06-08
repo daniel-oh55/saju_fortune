@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
-const AD_SECONDS = 5;
+// Mock 광고 테스트용 대기 시간입니다. 실제 운영에서는 광고 SDK의 보상 완료 이벤트로 대체합니다.
+const AD_SECONDS = 2;
 
 function RewardAdModal({ categoryLabel, onClose, onRewardComplete }) {
   const [secondsLeft, setSecondsLeft] = useState(AD_SECONDS);
