@@ -56,6 +56,21 @@ function compareExpected(actual, expected) {
 
 function validateSample(sample) {
   try {
+    if (sample.referenceStatus === 'not_applicable') {
+      return {
+        id: sample.id,
+        title: sample.title,
+        referenceStatus: sample.referenceStatus,
+        referenceSource: sample.referenceSource,
+        engineStatus: 'manseryeok_core_v0',
+        comparisonStatus: 'not_applicable',
+        actual: buildActual(calculateManseryeok(sample.profile)),
+        expected: sample.expected,
+        mismatchFields: [],
+        notes: sample.notes || [],
+      };
+    }
+
     const calculation = calculateManseryeok(sample.profile);
     const actual = buildActual(calculation);
 
@@ -64,6 +79,7 @@ function validateSample(sample) {
         id: sample.id,
         title: sample.title,
         referenceStatus: sample.referenceStatus,
+        referenceSource: sample.referenceSource,
         engineStatus: calculation.engine || 'manseryeok_core_v0',
         comparisonStatus: 'calculation_failed',
         actual,
@@ -81,6 +97,7 @@ function validateSample(sample) {
       id: sample.id,
       title: sample.title,
       referenceStatus: sample.referenceStatus,
+      referenceSource: sample.referenceSource,
       engineStatus: calculation.engine,
       comparisonStatus: comparison.comparisonStatus,
       actual,
@@ -93,6 +110,7 @@ function validateSample(sample) {
       id: sample.id,
       title: sample.title,
       referenceStatus: sample.referenceStatus,
+      referenceSource: sample.referenceSource,
       engineStatus: 'manseryeok_core_v0',
       comparisonStatus: 'calculation_failed',
       actual: {
@@ -117,6 +135,7 @@ export function validateManseryeokSamples(samples) {
       (result) => result.comparisonStatus === 'fail' || result.comparisonStatus === 'calculation_failed',
     ).length,
     pending: results.filter((result) => result.comparisonStatus === 'reference_pending').length,
+    notApplicable: results.filter((result) => result.comparisonStatus === 'not_applicable').length,
     results,
   };
 }

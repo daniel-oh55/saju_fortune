@@ -1404,6 +1404,37 @@ input:disabled {
   background: #fff7d9;
 }
 
+.validation-status-badge.not_applicable {
+  color: #607078;
+  background: #edf2f0;
+}
+
+.validation-status-badge.reference_verified {
+  color: #28644a;
+  background: #e4f6ec;
+}
+
+.validation-status-badge.reference_conflict {
+  color: #9d4639;
+  background: #fff0e8;
+}
+
+.validation-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  border-radius: 16px;
+  padding: 10px 12px;
+  background: #f5fbf8;
+}
+
+.validation-meta-row > span {
+  color: #697a80;
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
 .validation-pillars-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

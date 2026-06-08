@@ -1,4 +1,6 @@
 export const manseryeokValidationSamples = [
+  // expected/referenceSource는 외부 만세력 기준값을 수동 확인한 뒤에만 채웁니다.
+  // lunar-javascript actual 결과를 expected에 복사해 정답처럼 사용하지 않습니다.
   {
     id: 'solar_regular_known_time',
     title: '양력 일반 생시 있음',
@@ -51,6 +53,23 @@ export const manseryeokValidationSamples = [
     notes: ['23시 이후 자시 기준 정책 검토 필요', '외부 만세력과 일주/시주 비교 필요'],
   },
   {
+    id: 'solar_before_ipchun',
+    title: '양력 입춘 전 샘플',
+    profile: {
+      nickname: '검증샘플D-1',
+      birthDate: '1990-02-03',
+      birthTime: '23:30',
+      birthTimeUnknown: false,
+      calendarType: 'solar',
+      isLeapMonth: false,
+      gender: 'other',
+    },
+    expected: null,
+    referenceStatus: 'reference_pending',
+    referenceSource: null,
+    notes: ['입춘 전 샘플', '년주/월주가 외부 만세력과 어떻게 달라지는지 확인 필요'],
+  },
+  {
     id: 'solar_ipchun_boundary',
     title: '양력 입춘 전후 절기 경계',
     profile: {
@@ -66,6 +85,23 @@ export const manseryeokValidationSamples = [
     referenceStatus: 'reference_pending',
     referenceSource: null,
     notes: ['입춘 경계 샘플', '절기 시간 기준에 따른 년주/월주 비교 필요'],
+  },
+  {
+    id: 'solar_after_ipchun',
+    title: '양력 입춘 후 샘플',
+    profile: {
+      nickname: '검증샘플D-2',
+      birthDate: '1990-02-05',
+      birthTime: '00:30',
+      birthTimeUnknown: false,
+      calendarType: 'solar',
+      isLeapMonth: false,
+      gender: 'other',
+    },
+    expected: null,
+    referenceStatus: 'reference_pending',
+    referenceSource: null,
+    notes: ['입춘 후 샘플', '절기 경계 이후 년주/월주 확인 필요'],
   },
   {
     id: 'lunar_regular',
@@ -102,6 +138,23 @@ export const manseryeokValidationSamples = [
     notes: ['윤달 입력 처리 확인', '외부 만세력 기준 변환일 비교 필요'],
   },
   {
+    id: 'solar_before_23',
+    title: '양력 23시 직전 출생',
+    profile: {
+      nickname: '검증샘플C-1',
+      birthDate: '1992-07-20',
+      birthTime: '22:30',
+      birthTimeUnknown: false,
+      calendarType: 'solar',
+      isLeapMonth: false,
+      gender: 'other',
+    },
+    expected: null,
+    referenceStatus: 'reference_pending',
+    referenceSource: null,
+    notes: ['23시 이전 샘플', '23시 이후 샘플과 일주/시주 비교 필요'],
+  },
+  {
     id: 'invalid_time',
     title: '잘못된 시간 입력',
     profile: {
@@ -114,9 +167,9 @@ export const manseryeokValidationSamples = [
       gender: 'other',
     },
     expected: null,
-    referenceStatus: 'reference_pending',
+    referenceStatus: 'not_applicable',
     referenceSource: null,
-    notes: ['계산 실패가 전체 검증 중단으로 이어지지 않아야 함'],
+    notes: ['입력 오류 검증용 샘플', '계산 실패가 전체 검증 중단으로 이어지지 않아야 함'],
   },
   {
     id: 'invalid_date',
@@ -131,8 +184,8 @@ export const manseryeokValidationSamples = [
       gender: 'other',
     },
     expected: null,
-    referenceStatus: 'reference_pending',
+    referenceStatus: 'not_applicable',
     referenceSource: null,
-    notes: ['날짜 파싱 실패가 calculation_failed로 표시되어야 함'],
+    notes: ['입력 오류 검증용 샘플', '날짜 파싱 실패가 calculation_failed로 표시되어야 함'],
   },
 ];

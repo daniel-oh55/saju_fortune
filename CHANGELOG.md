@@ -29,6 +29,8 @@
 - 내부용 만세력 검증 도구
 - 만세력 검증 샘플 데이터 구조
 - 외부 기준값 비교용 validation 문서
+- 만세력 검증 expected/referenceSource 입력 구조 보강
+- 입춘 전후 및 23시 전후 검증 샘플 보강
 
 ### Changed
 
@@ -47,6 +49,7 @@
 - 광고 mock 해금 시간을 2초로 단축
 - 월별운세흐름 그래프를 모바일에서 읽기 쉬운 곡선형/가로 스크롤 구조로 개선
 - `createSajuAnalysis`가 만세력 엔진 성공 시 실제 사주팔자 기반 데이터를 사용하도록 변경
+- 만세력 검증 페이지에 referenceStatus와 not_applicable 상태 표시 보강
 
 ### Fixed
 
@@ -56,6 +59,32 @@
 ### Removed
 
 -
+
+## 2026-06-08
+
+### Added
+
+- 만세력 검증 expected/referenceSource 입력 구조 보강
+- 입춘 전후 및 23시 전후 검증 샘플 보강
+
+### Changed
+
+- 만세력 검증 페이지에 referenceStatus와 not_applicable 상태 표시 보강
+
+### Files
+
+- `src/domain/saju/manseryeokValidationSamples.js`
+- `src/domain/saju/manseryeokValidator.js`
+- `src/pages/ManseryeokValidationPage.jsx`
+- `docs/MANSERYEOK_VALIDATION.md`
+- `src/styles.css`
+- `DEVELOPMENT_LOG.md`
+- `CHANGELOG.md`
+- `TODO.md`
+
+### Deployed
+
+- 확인 필요
 
 ## 2026-06-08
 
