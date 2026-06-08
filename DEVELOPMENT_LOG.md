@@ -4,8 +4,8 @@
 
 - 배포 방식: GitHub 저장소와 Vercel 연동 구조 사용
 - 주요 기능: 프로필 입력, 오늘운세, 띠별 운세, 2026운세, 광고 보상 시뮬레이션, AI 상담 화면, 궁합 입력, 더 깊은 풀이 기능 준비 중 화면, 마이 화면
-- 현재 브랜치: `test/manseryeok-ipchun-reference-values`
-- 최근 수정 내용: 입춘 전후 샘플에 sky.told.me/포스텔러 비교 결과 반영
+- 현재 브랜치: `docs/manseryeok-time-policy`
+- 최근 수정 내용: 계산 엔진 수정 전 시간/입춘/자시/태양시 정책 문서화
 
 ## 현재 이슈
 
@@ -22,6 +22,7 @@
 - [ ] 확인 필요: 외부 만세력 기준값 1차 입력 후 pass/fail 결과
 - [ ] 확인 필요: `solar_regular_known_time` 샘플의 출생도시 Seoul, South Korea 및 태양시 보정 여부
 - [ ] 확인 필요: `solar_before_ipchun` 기준 충돌 원인
+- [ ] 확인 필요: 시간 경계 정책 확정 전 사용자 표시 문구
 
 ## 다음 작업
 
@@ -36,6 +37,7 @@
 - [ ] 우선순위 9: 입춘 전후/23시 전후 샘플 기준값 우선 확인
 - [ ] 우선순위 10: `solar_regular_known_time`을 두 번째 외부 만세력 기준으로 교차검증
 - [ ] 우선순위 11: `solar_before_ipchun`을 세 번째 기준 만세력으로 추가 확인
+- [ ] 우선순위 12: 입춘 경계 엔진 보정 방식 검토
 
 ## ChatGPT 검토 요청 포인트
 
@@ -56,6 +58,43 @@
 - not_applicable 샘플이 calculation_failed와 구분되어 표시되는지
 
 ## 작업 로그
+
+### 2026-06-08
+
+#### 작업 내용
+
+- PR 목적: 계산 엔진 수정 전 시간/절기/자시/태양시 정책 문서화
+- PR #15 검증 결과를 바탕으로 `docs/MANSERYEOK_TIME_POLICY.md` 작성
+- `solar_ipchun_boundary`를 입춘/절기 기준 엔진 보정 우선 후보로 문서화
+- `solar_before_ipchun`을 reference_conflict 샘플로 문서화하고 expected를 null로 유지해야 한다는 원칙 정리
+- 23시 이후 자시/야자시/조자시 기준과 태양시 보정 여부를 미정 정책으로 명시
+- 시간 미상은 시주 미상으로 유지한다는 원칙 정리
+- `docs/MANSERYEOK_ENGINE.md`와 `docs/MANSERYEOK_VALIDATION.md`에 시간 정책 문서 참조 추가
+- 계산 로직 변경 없음
+- localStorage 변경 없음
+- schemaVersion 변경 없음
+- App.jsx 변경 없음
+- 다음 작업은 입춘 경계 엔진 보정 검토
+
+#### 수정 파일
+
+- `docs/MANSERYEOK_TIME_POLICY.md`
+- `docs/MANSERYEOK_ENGINE.md`
+- `docs/MANSERYEOK_VALIDATION.md`
+- `DEVELOPMENT_LOG.md`
+- `CHANGELOG.md`
+- `TODO.md`
+
+#### 테스트 결과
+
+- `npm run build` 성공
+- Vite chunk size 경고 발생: `lunar-javascript` 포함으로 JS chunk가 500kB를 초과함
+
+#### 남은 이슈
+
+- `solar_ipchun_boundary` 년주/월주 mismatch 원인 분석 필요
+- 23시 이후 자시/야자시/조자시 정책 결정 필요
+- 태양시 보정 적용 여부 결정 필요
 
 ### 2026-06-08
 

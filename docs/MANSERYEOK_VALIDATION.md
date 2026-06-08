@@ -72,6 +72,8 @@ referenceSource: {
 - `lunar-javascript`의 현재 계산 결과를 그대로 복사해 정답처럼 넣지 않는다.
 - 기준값 출처는 `referenceSource`에 남긴다.
 - 검증되지 않은 샘플은 반드시 `reference_pending` 상태로 둔다.
+- `reference_conflict` 샘플은 expected를 null로 유지한다.
+- 충돌 기준값은 `referenceSource.memo`와 `notes`에 기록한다.
 
 ## referenceStatus 허용값
 
@@ -107,6 +109,12 @@ referenceSource: {
 - 음력 일반
 - 윤달
 - 잘못된 날짜/시간 입력의 실패 처리
+
+## 입춘/자시/태양시 관련 샘플
+
+- 입춘, 23시 이후 자시, 태양시 보정 관련 샘플은 `docs/MANSERYEOK_TIME_POLICY.md`를 함께 참고한다.
+- 정책 확정 전에는 검증 실패를 단순 오류로 판단하지 않는다.
+- 외부 기준값끼리 충돌한 경우 `reference_conflict`로 분류하고, 3번째 기준 또는 공신력 있는 기준으로 추가 확인한다.
 
 ## 표현 원칙
 
