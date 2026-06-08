@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage.jsx';
 import FortuneDetailPage from './pages/FortuneDetailPage.jsx';
 import YearFortunePage from './pages/YearFortunePage.jsx';
 import ZodiacFortunePage from './pages/ZodiacFortunePage.jsx';
+import ManseryeokValidationPage from './pages/ManseryeokValidationPage.jsx';
 import AiConsultPage from './pages/AiConsultPage.jsx';
 import CompatibilityPage from './pages/CompatibilityPage.jsx';
 import PremiumPage from './pages/PremiumPage.jsx';
@@ -42,6 +43,14 @@ function isValidCachedFortune(cached, profile, dateKey) {
 }
 
 function App() {
+  const isManseryeokDebug =
+    typeof window !== 'undefined' &&
+    new URLSearchParams(window.location.search).get('debug') === 'manseryeok';
+
+  if (isManseryeokDebug) {
+    return <ManseryeokValidationPage />;
+  }
+
   const [profile, setProfile] = useState(() => loadProfile());
   const [activePage, setActivePage] = useState(profile ? 'home' : 'onboarding');
   const [selectedCategory, setSelectedCategory] = useState('overall');

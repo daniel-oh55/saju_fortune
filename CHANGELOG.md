@@ -26,6 +26,9 @@
 - 만세력 기반 사주팔자 계산 엔진 v0
 - 오행 분포 분석기
 - fortune schemaVersion 캐시 무효화 구조
+- 내부용 만세력 검증 도구
+- 만세력 검증 샘플 데이터 구조
+- 외부 기준값 비교용 validation 문서
 
 ### Changed
 
@@ -53,6 +56,30 @@
 ### Removed
 
 -
+
+## 2026-06-08
+
+### Added
+
+- 내부용 만세력 검증 도구
+- 만세력 검증 샘플 데이터 구조
+- 외부 기준값 비교용 validation 문서
+
+### Files
+
+- `src/domain/saju/manseryeokValidationSamples.js`
+- `src/domain/saju/manseryeokValidator.js`
+- `src/pages/ManseryeokValidationPage.jsx`
+- `docs/MANSERYEOK_VALIDATION.md`
+- `src/App.jsx`
+- `src/styles.css`
+- `DEVELOPMENT_LOG.md`
+- `CHANGELOG.md`
+- `TODO.md`
+
+### Deployed
+
+- 확인 필요
 
 ## 2026-06-08
 

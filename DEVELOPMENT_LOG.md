@@ -4,8 +4,8 @@
 
 - 배포 방식: GitHub 저장소와 Vercel 연동 구조 사용
 - 주요 기능: 프로필 입력, 오늘운세, 띠별 운세, 2026운세, 광고 보상 시뮬레이션, AI 상담 화면, 궁합 입력, 더 깊은 풀이 기능 준비 중 화면, 마이 화면
-- 현재 브랜치: `feature/manseryeok-core-engine`
-- 최근 수정 내용: 만세력 기반 사주팔자 계산 엔진 v0 추가, 오행 분포 분석 연결, fortune schemaVersion 도입
+- 현재 브랜치: `test/manseryeok-validation-suite`
+- 최근 수정 내용: 내부용 만세력 검증 샘플/validator/debug 페이지 추가
 
 ## 현재 이슈
 
@@ -18,6 +18,7 @@
 - [ ] 확인 필요: 기존 사용자의 당일 캐시에서 학업운 누락 시 새 운세가 정상 생성되는지
 - [ ] 확인 필요: 외부 만세력 기준 샘플과 `lunar-javascript` 계산 결과 비교
 - [ ] 확인 필요: 음력/윤달 입력 샘플 검증
+- [ ] 확인 필요: Vercel Preview에서 `/?debug=manseryeok` 접근 가능 여부
 
 ## 다음 작업
 
@@ -28,6 +29,7 @@
 - [ ] 우선순위 5: 월별 곡선 그래프 가로 스크롤 UX 확인
 - [ ] 우선순위 6: 오늘운세 카테고리 추가 시 캐시 버전 관리 방식 검토
 - [ ] 우선순위 7: 만세력 기준 샘플 검증표 작성
+- [ ] 우선순위 8: 외부 기준값을 검증 샘플 expected에 입력
 
 ## ChatGPT 검토 요청 포인트
 
@@ -43,8 +45,49 @@
 - study 없는 기존 오늘운세 캐시가 삭제 없이 재생성되는지
 - 만세력 엔진 실패 시 mock fallback으로 앱이 깨지지 않는지
 - schemaVersion 도입으로 기존 mock 캐시가 새 fortune으로 갱신되는지
+- 내부 debug 페이지가 일반 사용자 메뉴에 노출되지 않는지
+- expected가 없는 샘플이 reference_pending으로 표시되는지
 
 ## 작업 로그
+
+### 2026-06-08
+
+#### 작업 내용
+
+- 만세력 검증 샘플 데이터 구조 추가
+- 양력 일반, 시간 미상, 23시 이후, 입춘 전후, 음력 일반, 음력 윤달 후보, 잘못된 시간, 잘못된 날짜 샘플 추가
+- `calculateManseryeok` 결과를 샘플별로 수집하는 validator 추가
+- expected가 없는 샘플은 `reference_pending`으로 표시하도록 구성
+- 계산 실패 샘플은 전체 검증을 중단하지 않고 `calculation_failed` 결과로 표시
+- `/?debug=manseryeok` 전용 내부 검증 페이지 추가
+- 일반 하단 네비게이션에는 검증 페이지를 노출하지 않음
+- debug 페이지에서는 `saveFortune`, `saveProfile`, `saveRewardUnlock`을 호출하지 않음
+- localStorage key 구조 변경 없음
+- schemaVersion 값 변경 없음
+
+#### 수정 파일
+
+- `src/domain/saju/manseryeokValidationSamples.js`
+- `src/domain/saju/manseryeokValidator.js`
+- `src/pages/ManseryeokValidationPage.jsx`
+- `docs/MANSERYEOK_VALIDATION.md`
+- `src/App.jsx`
+- `src/styles.css`
+- `DEVELOPMENT_LOG.md`
+- `CHANGELOG.md`
+- `TODO.md`
+
+#### 테스트 결과
+
+- `npm run build` 성공
+- Vite chunk size 경고 발생: `lunar-javascript` 포함으로 JS chunk가 500kB를 초과함
+- validator 실행 결과: 전체 8개, 기준값 대기 6개, 계산 실패 2개
+
+#### 남은 이슈
+
+- 외부 만세력 기준값 입력 필요
+- Vercel Preview에서 `/?debug=manseryeok` 접근 확인 필요
+- 브라우저에서 잘못된 날짜/시간 샘플의 `calculation_failed` 표시 확인 필요
 
 ### 2026-06-08
 
