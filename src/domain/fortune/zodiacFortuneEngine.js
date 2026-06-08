@@ -1,23 +1,26 @@
 export const zodiacAnimals = [
-  '쥐',
-  '소',
-  '호랑이',
-  '토끼',
-  '용',
-  '뱀',
-  '말',
-  '양',
-  '원숭이',
-  '닭',
-  '개',
-  '돼지',
+  { animal: '쥐', icon: '🐭' },
+  { animal: '소', icon: '🐮' },
+  { animal: '호랑이', icon: '🐯' },
+  { animal: '토끼', icon: '🐰' },
+  { animal: '용', icon: '🐲' },
+  { animal: '뱀', icon: '🐍' },
+  { animal: '말', icon: '🐴' },
+  { animal: '양', icon: '🐑' },
+  { animal: '원숭이', icon: '🐵' },
+  { animal: '닭', icon: '🐔' },
+  { animal: '개', icon: '🐶' },
+  { animal: '돼지', icon: '🐷' },
 ];
 
 export const zodiacYears = Array.from({ length: 2019 - 1948 + 1 }, (_, index) => {
   const year = 1948 + index;
+  const zodiac = zodiacAnimals[index % zodiacAnimals.length];
+
   return {
     year,
-    animal: zodiacAnimals[index % zodiacAnimals.length],
+    animal: zodiac.animal,
+    icon: zodiac.icon,
   };
 });
 
@@ -53,7 +56,7 @@ const categoryMeta = [
   { id: 'overall', label: '오늘 흐름' },
   { id: 'money', label: '재물' },
   { id: 'relationship', label: '관계' },
-  { id: 'work', label: '일/학업' },
+  { id: 'work', label: '일·학업' },
   { id: 'health', label: '컨디션' },
 ];
 
@@ -77,6 +80,14 @@ function scoreFromSeed(seed) {
 export function getZodiacByYear(year) {
   const found = zodiacYears.find((item) => item.year === Number(year));
   return found || null;
+}
+
+export function getZodiacAnimalByYear(year) {
+  return getZodiacByYear(year)?.animal || null;
+}
+
+export function getYearsByAnimal(animal) {
+  return zodiacYears.filter((item) => item.animal === animal);
 }
 
 export function createZodiacFortune({ profile, selectedYear, dateKey }) {
@@ -103,9 +114,11 @@ export function createZodiacFortune({ profile, selectedYear, dateKey }) {
   return {
     year: zodiac.year,
     animal: zodiac.animal,
+    icon: zodiac.icon,
     score,
-    summary: `${zodiac.animal}띠의 오늘은 ${luckyKeyword}을 중심으로 흐름을 살피면 편안합니다.`,
-    detail: `오늘은 띠별 흐름을 참고해 일상의 속도를 조절해보면 좋습니다. 중요한 결정은 여러 정보를 함께 확인하고, 사람과의 대화에서는 부드러운 표현을 선택해보세요.`,
+    summary: `${zodiac.year}년 ${zodiac.animal}띠의 오늘은 ${luckyKeyword}을 중심으로 흐름을 살피면 편안합니다.`,
+    detail:
+      '오늘의 띠별 흐름은 참고용으로 가볍게 살펴보면 좋습니다. 중요한 결정은 여러 정보를 함께 확인하고, 사람과의 대화에서는 부드러운 표현을 선택해보세요. 속도를 조금 낮추면 놓치기 쉬운 부분을 차분히 점검하는 데 도움이 됩니다.',
     categories,
     luckyKeyword,
     luckyColor,

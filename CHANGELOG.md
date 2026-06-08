@@ -14,6 +14,10 @@
 - 띠별 운세 페이지
 - 1948~2019년생 띠별 운세 선택 기능
 - 홈 화면 오늘운세 요약 섹션
+- 띠별 운세 12지 선택 UI
+- 띠별 연도별 아코디언 해설
+- 2026운세 카테고리별 광고 해금 상세 풀이
+- 2026 월별 상세 흐름 광고 해금
 
 ### Changed
 
@@ -25,6 +29,8 @@
 - 상세풀이 문단 표시 방식 개선
 - 홈 화면에서 2026 추천 영역 제거
 - 하단 네비게이션에 띠별 탭 추가
+- 띠별운세 화면을 연도 select 중심에서 12지/연도 아코디언 구조로 개선
+- 2026운세 상세 콘텐츠를 광고 해금 구조로 정리
 
 ### Fixed
 
@@ -33,6 +39,36 @@
 ### Removed
 
 -
+
+## 2026-06-08
+
+### Added
+
+- 띠별 운세 12지 선택 UI
+- 띠별 연도별 아코디언 해설
+- 2026운세 카테고리별 광고 해금 상세 풀이
+- 2026 월별 상세 흐름 광고 해금
+
+### Changed
+
+- 띠별운세 화면을 연도 select 중심에서 12지/연도 아코디언 구조로 개선
+- 2026운세 상세 콘텐츠를 광고 해금 구조로 정리
+
+### Files
+
+- `src/domain/fortune/zodiacFortuneEngine.js`
+- `src/pages/ZodiacFortunePage.jsx`
+- `src/data/yearFortuneTemplates.js`
+- `src/domain/fortune/yearFortuneEngine.js`
+- `src/pages/YearFortunePage.jsx`
+- `src/styles.css`
+- `DEVELOPMENT_LOG.md`
+- `CHANGELOG.md`
+- `TODO.md`
+
+### Deployed
+
+- 확인 필요
 
 ## 2026-06-08
 
@@ -59,83 +95,6 @@
 - `DEVELOPMENT_LOG.md`
 - `CHANGELOG.md`
 - `TODO.md`
-
-### Deployed
-
-- 확인 필요
-
-## 2026-06-01
-
-### Added
-
-- 광고 해금 상세풀이 확장 템플릿
-- 카테고리별 상세풀이 섹션 구조
-
-### Changed
-
-- 오늘운세 상세풀이를 8~12문장 수준의 조언형 콘텐츠로 개선
-- 상세풀이 문단 표시 방식 개선
-- 콘텐츠 스타일 가이드의 광고 해금 상세풀이 기준을 8~12문장 또는 2~3문단으로 조정
-
-### Files
-
-- `src/data/fortuneTemplates.js`
-- `src/utils/fortuneEngine.js`
-- `src/pages/FortuneDetailPage.jsx`
-- `docs/CONTENT_STYLE_GUIDE.md`
-- `DEVELOPMENT_LOG.md`
-- `CHANGELOG.md`
-- `TODO.md`
-
-### Deployed
-
-- 확인 필요
-
-## 2026-06-01
-
-### Added
-
-- `docs/BRAND_GUIDE.md`
-- `docs/CONTENT_STYLE_GUIDE.md`
-
-### Changed
-
-- 하루풀이 브랜드명과 앱 소개 문구 반영
-- 광고 해금, AI 상담, 더 깊은 풀이 준비 중 문구 정리
-
-### Files
-
-- `README.md`
-- `DEVELOPMENT_LOG.md`
-- `CHANGELOG.md`
-- `TODO.md`
-- `AGENTS.md`
-- `docs/BRAND_GUIDE.md`
-- `docs/CONTENT_STYLE_GUIDE.md`
-- `src/pages/OnboardingPage.jsx`
-- `src/pages/HomePage.jsx`
-- `src/pages/AiConsultPage.jsx`
-- `src/pages/PremiumPage.jsx`
-- `src/components/AdRewardBox.jsx`
-- `src/components/RewardAdModal.jsx`
-
-### Deployed
-
-- 확인 필요
-
-## 2026-05-29
-
-### Changed
-
-- React + Vite 기반 AI 오늘운세 MVP 초기 구조 정리
-- GitHub/Vercel 배포 준비 파일 추가
-
-### Files
-
-- `src/`
-- `README.md`
-- `vercel.json`
-- `.gitignore`
 
 ### Deployed
 

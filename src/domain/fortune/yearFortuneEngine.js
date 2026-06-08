@@ -1,4 +1,9 @@
-import { yearCategories, yearFortuneTemplates } from '../../data/yearFortuneTemplates.js';
+import {
+  monthDetailTemplates,
+  yearCategories,
+  yearDetailTemplates,
+  yearFortuneTemplates,
+} from '../../data/yearFortuneTemplates.js';
 
 function hashString(text) {
   let hash = 0;
@@ -26,6 +31,7 @@ export function createYearFortune(profile, sajuAnalysis, targetYear = 2026) {
       ...category,
       score: scoreFromSeed(categorySeed),
       summary: pickBySeed(yearFortuneTemplates[category.id], categorySeed),
+      detail: pickBySeed(yearDetailTemplates[category.id], categorySeed + 7),
     };
   });
 
@@ -42,13 +48,19 @@ export function createYearFortune(profile, sajuAnalysis, targetYear = 2026) {
     categories,
     months: Array.from({ length: 12 }, (_, index) => {
       const monthSeed = hashString(`${seed}-month-${index + 1}`);
+      const note = pickBySeed(
+        ['정리와 준비', '관계 확장', '재정 점검', '휴식과 회복', '새로운 기회', '집중 실행'],
+        monthSeed,
+      );
+
       return {
         month: index + 1,
         score: scoreFromSeed(monthSeed),
-        note: pickBySeed(
-          ['정리와 준비', '관계 확장', '재정 점검', '휴식과 회복', '새로운 기회', '집중 실행'],
-          monthSeed,
-        ),
+        note,
+        detail: `${index + 1}월은 ${note}의 흐름을 가볍게 살펴보면 좋습니다. ${pickBySeed(
+          monthDetailTemplates,
+          monthSeed + 5,
+        )}`,
       };
     }),
   };
