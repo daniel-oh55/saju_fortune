@@ -4,8 +4,8 @@
 
 - 배포 방식: GitHub 저장소와 Vercel 연동 구조 사용
 - 주요 기능: 프로필 입력, 오늘운세, 띠별 운세, 2026운세, 광고 보상 시뮬레이션, AI 상담 화면, 궁합 입력, 더 깊은 풀이 기능 준비 중 화면, 마이 화면
-- 현재 브랜치: `test/manseryeok-validation-suite`
-- 최근 수정 내용: 내부용 만세력 검증 샘플/validator/debug 페이지 추가
+- 현재 브랜치: `test/manseryeok-reference-values`
+- 최근 수정 내용: 만세력 검증 expected/referenceSource 포맷 보강 및 입춘/23시 전후 샘플 추가
 
 ## 현재 이슈
 
@@ -19,6 +19,7 @@
 - [ ] 확인 필요: 외부 만세력 기준 샘플과 `lunar-javascript` 계산 결과 비교
 - [ ] 확인 필요: 음력/윤달 입력 샘플 검증
 - [ ] 확인 필요: Vercel Preview에서 `/?debug=manseryeok` 접근 가능 여부
+- [ ] 확인 필요: 외부 만세력 기준값 1차 입력 후 pass/fail 결과
 
 ## 다음 작업
 
@@ -30,6 +31,7 @@
 - [ ] 우선순위 6: 오늘운세 카테고리 추가 시 캐시 버전 관리 방식 검토
 - [ ] 우선순위 7: 만세력 기준 샘플 검증표 작성
 - [ ] 우선순위 8: 외부 기준값을 검증 샘플 expected에 입력
+- [ ] 우선순위 9: 입춘 전후/23시 전후 샘플 기준값 우선 확인
 
 ## ChatGPT 검토 요청 포인트
 
@@ -47,8 +49,51 @@
 - schemaVersion 도입으로 기존 mock 캐시가 새 fortune으로 갱신되는지
 - 내부 debug 페이지가 일반 사용자 메뉴에 노출되지 않는지
 - expected가 없는 샘플이 reference_pending으로 표시되는지
+- not_applicable 샘플이 calculation_failed와 구분되어 표시되는지
 
 ## 작업 로그
+
+### 2026-06-08
+
+#### 작업 내용
+
+- 만세력 검증 샘플의 expected/referenceSource 권장 구조를 문서화
+- referenceStatus 허용값을 `reference_pending`, `reference_verified`, `reference_conflict`, `not_applicable`로 정리
+- 입춘 전 샘플 `solar_before_ipchun` 추가
+- 입춘 후 샘플 `solar_after_ipchun` 추가
+- 23시 직전 샘플 `solar_before_23` 추가
+- 기존 23시 이후 샘플은 유지
+- 잘못된 시간/날짜 입력 샘플은 referenceStatus를 `not_applicable`로 변경
+- validator summary에 `notApplicable` 카운트 추가
+- debug 페이지에 referenceStatus와 referenceSource 표시 추가
+- expected 값은 외부 기준값 없이 임의 입력하지 않음
+- localStorage key 구조 변경 없음
+- fortune schemaVersion 변경 없음
+- 만세력 계산 로직 `calculateManseryeok` 변경 없음
+
+#### 수정 파일
+
+- `src/domain/saju/manseryeokValidationSamples.js`
+- `src/domain/saju/manseryeokValidator.js`
+- `src/pages/ManseryeokValidationPage.jsx`
+- `docs/MANSERYEOK_VALIDATION.md`
+- `src/styles.css`
+- `DEVELOPMENT_LOG.md`
+- `CHANGELOG.md`
+- `TODO.md`
+
+#### 테스트 결과
+
+- `npm run build` 성공
+- Vite chunk size 경고 발생: `lunar-javascript` 포함으로 JS chunk가 500kB를 초과함
+- validator 실행 결과: 전체 11개, 기준값 대기 9개, 비교 대상 아님 2개
+
+#### 남은 이슈
+
+- 실제 외부 만세력 기준값 1차 입력 필요
+- 입춘 전후 기준값 확인 필요
+- 23시 전후 기준값 확인 필요
+- 음력/윤달 기준값 확인 필요
 
 ### 2026-06-08
 

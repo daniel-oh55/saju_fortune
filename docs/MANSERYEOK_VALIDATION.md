@@ -29,6 +29,43 @@
 }
 ```
 
+## expected 권장 구조
+
+외부 만세력 기준값이 확인된 경우에만 아래 구조로 입력한다.
+
+```js
+expected: {
+  pillars: {
+    year: '경오',
+    month: '무인',
+    day: '갑자',
+    hour: '기사'
+  },
+  dayMaster: {
+    stem: '갑'
+  },
+  convertedSolar: '1990-05-15 09:30:00',
+  convertedLunar: {
+    year: 1990,
+    month: 4,
+    day: 21,
+    isLeapMonth: false
+  }
+}
+```
+
+## referenceSource 권장 구조
+
+```js
+referenceSource: {
+  name: '외부 만세력 서비스명 또는 앱 이름',
+  url: null,
+  checkedAt: '2026-06-08',
+  checkedBy: 'manual',
+  memo: '입춘 기준 또는 자시 기준 확인 필요'
+}
+```
+
 ## expected 작성 규칙
 
 - `expected`는 외부 만세력 기준값으로 검증한 경우에만 입력한다.
@@ -36,12 +73,30 @@
 - 기준값 출처는 `referenceSource`에 남긴다.
 - 검증되지 않은 샘플은 반드시 `reference_pending` 상태로 둔다.
 
+## referenceStatus 허용값
+
+- `reference_pending`: 외부 기준값 미입력
+- `reference_verified`: 외부 기준값 입력 완료
+- `reference_conflict`: 외부 기준끼리 결과가 다르거나 기준 차이가 확인됨
+- `not_applicable`: 잘못된 입력값처럼 기준값 비교 대상이 아닌 케이스
+
 ## comparisonStatus 의미
 
 - `pass`: 외부 기준값과 현재 계산 결과가 비교 항목에서 일치
 - `fail`: 외부 기준값과 현재 계산 결과가 일부 불일치
 - `reference_pending`: 외부 기준값 입력 전이라 비교 대기
 - `calculation_failed`: 계산 실패 또는 입력값 오류
+- `not_applicable`: 입력 오류 검증용 등 외부 기준값 비교 대상이 아님
+
+## 외부 기준값 입력 절차
+
+1. 외부 만세력 서비스 또는 앱에서 동일한 생년월일시를 입력한다.
+2. 양력/음력/윤달/시간 미상 여부가 샘플과 동일한지 확인한다.
+3. 년주, 월주, 일주, 시주를 기록한다.
+4. 23시 이후 기준과 입춘 기준을 별도 메모한다.
+5. `referenceSource`에 출처, 확인일, 확인자, 기준 메모를 기록한다.
+6. `expected`에 외부 기준값을 입력한다.
+7. `/?debug=manseryeok`에서 `pass`/`fail` 결과를 확인한다.
 
 ## 우선 검증해야 할 케이스
 

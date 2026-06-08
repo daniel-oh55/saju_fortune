@@ -9,6 +9,9 @@ function StatusBadge({ status }) {
     fail: '불일치',
     reference_pending: '기준값 대기',
     calculation_failed: '계산 실패',
+    not_applicable: '비교 대상 아님',
+    reference_verified: '기준값 확인',
+    reference_conflict: '기준 충돌',
   };
 
   return <span className={`validation-status-badge ${status}`}>{labelMap[status] || status}</span>;
@@ -58,6 +61,34 @@ function PillarGrid({ actual }) {
   );
 }
 
+function ReferenceSource({ source }) {
+  if (!source) {
+    return (
+      <div className="validation-json-box">
+        <dt>referenceSource</dt>
+        <dd>외부 기준값 미입력</dd>
+      </div>
+    );
+  }
+
+  return (
+    <div className="validation-json-box">
+      <div>
+        <dt>name</dt>
+        <dd>{source.name}</dd>
+      </div>
+      <div>
+        <dt>checkedAt</dt>
+        <dd>{source.checkedAt}</dd>
+      </div>
+      <div>
+        <dt>memo</dt>
+        <dd>{source.memo}</dd>
+      </div>
+    </div>
+  );
+}
+
 function ManseryeokValidationPage() {
   return (
     <main className="validation-page">
@@ -84,6 +115,10 @@ function ManseryeokValidationPage() {
           <span>기준값 대기</span>
           <strong>{validation.pending}</strong>
         </div>
+        <div>
+          <span>비교 대상 아님</span>
+          <strong>{validation.notApplicable}</strong>
+        </div>
       </section>
 
       <section className="validation-result-list">
@@ -100,8 +135,14 @@ function ManseryeokValidationPage() {
                 <StatusBadge status={result.comparisonStatus} />
               </div>
 
+              <div className="validation-meta-row">
+                <span>referenceStatus</span>
+                <StatusBadge status={result.referenceStatus} />
+              </div>
+
               <ProfileSummary profile={sample.profile} />
               <PillarGrid actual={result.actual} />
+              <ReferenceSource source={result.referenceSource} />
 
               {!result.actual.reason && (
                 <div className="validation-json-box">
