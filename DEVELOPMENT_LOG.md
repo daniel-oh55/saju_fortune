@@ -4,8 +4,8 @@
 
 - 배포 방식: GitHub 저장소와 Vercel 연동 구조 사용
 - 주요 기능: 프로필 입력, 오늘운세, 띠별 운세, 2026운세, 광고 보상 시뮬레이션, AI 상담 화면, 궁합 입력, 더 깊은 풀이 기능 준비 중 화면, 마이 화면
-- 현재 브랜치: `test/manseryeok-reference-values-batch-1`
-- 최근 수정 내용: `solar_regular_known_time` 샘플에 sky.told.me 기준 expected 1차 입력
+- 현재 브랜치: `test/manseryeok-ipchun-reference-values`
+- 최근 수정 내용: 입춘 전후 샘플에 sky.told.me/포스텔러 비교 결과 반영
 
 ## 현재 이슈
 
@@ -21,6 +21,7 @@
 - [ ] 확인 필요: Vercel Preview에서 `/?debug=manseryeok` 접근 가능 여부
 - [ ] 확인 필요: 외부 만세력 기준값 1차 입력 후 pass/fail 결과
 - [ ] 확인 필요: `solar_regular_known_time` 샘플의 출생도시 Seoul, South Korea 및 태양시 보정 여부
+- [ ] 확인 필요: `solar_before_ipchun` 기준 충돌 원인
 
 ## 다음 작업
 
@@ -34,6 +35,7 @@
 - [ ] 우선순위 8: 외부 기준값을 검증 샘플 expected에 입력
 - [ ] 우선순위 9: 입춘 전후/23시 전후 샘플 기준값 우선 확인
 - [ ] 우선순위 10: `solar_regular_known_time`을 두 번째 외부 만세력 기준으로 교차검증
+- [ ] 우선순위 11: `solar_before_ipchun`을 세 번째 기준 만세력으로 추가 확인
 
 ## ChatGPT 검토 요청 포인트
 
@@ -54,6 +56,42 @@
 - not_applicable 샘플이 calculation_failed와 구분되어 표시되는지
 
 ## 작업 로그
+
+### 2026-06-08
+
+#### 작업 내용
+
+- sky.told.me와 포스텔러의 입춘 전후 샘플 비교 결과 반영
+- `solar_before_ipchun`은 두 기준이 불일치해 `reference_conflict`로 분류하고 expected 미입력
+- `solar_before_ipchun` 충돌 내용 기록: sky.told.me 기사년 정축월 경자일 병자시, 포스텔러 기사년 정축월 기해일 을해시
+- `solar_ipchun_boundary`는 두 기준이 기사년 정축월 경자일 신사시로 일치해 `reference_verified` expected 입력
+- `solar_after_ipchun`은 두 기준이 경오년 무인월 신축일 무자시로 일치해 `reference_verified` expected 입력
+- convertedLunar는 외부 결과에서 명확히 확인되지 않아 입력하지 않음
+- 대운, 신살, 자미두수, Natal Chart 값은 검증 범위에서 제외
+- localStorage key 구조 변경 없음
+- fortune schemaVersion 변경 없음
+- 만세력 계산 로직 변경 없음
+
+#### 수정 파일
+
+- `src/domain/saju/manseryeokValidationSamples.js`
+- `DEVELOPMENT_LOG.md`
+- `CHANGELOG.md`
+- `TODO.md`
+
+#### 테스트 결과
+
+- `npm run build` 성공
+- Vite chunk size 경고 발생: `lunar-javascript` 포함으로 JS chunk가 500kB를 초과함
+- `solar_before_ipchun`: referenceStatus `reference_conflict`, expected 미입력
+- `solar_ipchun_boundary`: comparisonStatus `fail`, mismatchFields `pillars.year`, `pillars.month`
+- `solar_after_ipchun`: comparisonStatus `pass`, mismatchFields 없음
+
+#### 남은 이슈
+
+- 23시 이후 자시/야자시/조자시 기준 정책 결정 필요
+- 태양시 보정 여부 확인 필요
+- `solar_before_ipchun`을 세 번째 기준 만세력으로 추가 확인 필요
 
 ### 2026-06-08
 
