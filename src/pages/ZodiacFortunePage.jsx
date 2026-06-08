@@ -5,6 +5,7 @@ import {
   getZodiacByYear,
   zodiacAnimals,
 } from '../domain/fortune/zodiacFortuneEngine.js';
+import RewardAdModal from '../components/RewardAdModal.jsx';
 
 function getInitialState(profile) {
   const birthYear = Number(profile.birthDate?.slice(0, 4));
@@ -29,6 +30,8 @@ function ZodiacFortunePage({ profile, fortune }) {
   const initialState = useMemo(() => getInitialState(profile), [profile]);
   const [selectedAnimal, setSelectedAnimal] = useState(initialState.selectedAnimal);
   const [openYears, setOpenYears] = useState(initialState.openYears);
+  const [unlockedZodiacAdvice, setUnlockedZodiacAdvice] = useState({});
+  const [activeAdYear, setActiveAdYear] = useState(null);
 
   const years = getYearsByAnimal(selectedAnimal);
 
@@ -43,6 +46,10 @@ function ZodiacFortunePage({ profile, fortune }) {
     const birthYear = Number(profile.birthDate?.slice(0, 4));
     const birthZodiac = getZodiacByYear(birthYear);
     setOpenYears(birthZodiac?.animal === animal ? [birthYear] : []);
+  };
+
+  const unlockAdvice = (year) => {
+    setUnlockedZodiacAdvice((current) => ({ ...current, [year]: true }));
   };
 
   return (
@@ -122,32 +129,42 @@ function ZodiacFortunePage({ profile, fortune }) {
                     ))}
                   </div>
 
-                  <section className="zodiac-advice-card">
-                    <p className="eyebrow">오늘의 조언</p>
-                    <h2>띠별 흐름은 참고용으로 가볍게 살펴보세요</h2>
-                    <p>{zodiacFortune.detail}</p>
-                  </section>
-
-                  <section className="lucky-grid">
-                    <div>
-                      <span>키워드</span>
-                      <strong>{zodiacFortune.luckyKeyword}</strong>
-                    </div>
-                    <div>
-                      <span>색상</span>
-                      <strong>{zodiacFortune.luckyColor}</strong>
-                    </div>
-                    <div>
-                      <span>아이템</span>
-                      <strong>{zodiacFortune.luckyItem}</strong>
-                    </div>
-                  </section>
+                  {unlockedZodiacAdvice[item.year] ? (
+                    <section className="zodiac-advice-card">
+                      <p className="eyebrow">오늘의 조언</p>
+                      <h2>띠별 흐름은 참고용으로 가볍게 살펴보세요</h2>
+                      <p>{zodiacFortune.detail}</p>
+                    </section>
+                  ) : (
+                    <section className="zodiac-advice-locked">
+                      <div>
+                        <p className="eyebrow">잠금 콘텐츠</p>
+                        <h2>오늘의 조언은 광고 시청 후 열립니다</h2>
+                        <p>연도별 흐름에 맞춘 조언을 부담 없이 확인해보세요.</p>
+                      </div>
+                      <button
+                        className="primary-button"
+                        type="button"
+                        onClick={() => setActiveAdYear(item.year)}
+                      >
+                        광고 보고 오늘의 조언 열기
+                      </button>
+                    </section>
+                  )}
                 </div>
               )}
             </article>
           );
         })}
       </section>
+
+      {activeAdYear && (
+        <RewardAdModal
+          categoryLabel={`${activeAdYear}년 ${selectedAnimal}띠 오늘의 조언`}
+          onClose={() => setActiveAdYear(null)}
+          onRewardComplete={() => unlockAdvice(activeAdYear)}
+        />
+      )}
     </div>
   );
 }

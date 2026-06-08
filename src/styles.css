@@ -639,6 +639,7 @@ textarea,
 .year-hero-card,
 .year-score-card,
 .month-preview-card,
+.monthly-unlock-card,
 .premium-nudge-card {
   border: 1px solid rgba(89, 120, 118, 0.14);
   border-radius: 22px;
@@ -655,25 +656,75 @@ textarea,
 
 .score-hero-main {
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: flex-start;
   gap: 14px;
   margin-bottom: 18px;
 }
 
-.score-hero-main h1 {
-  margin-bottom: 6px;
-  color: #243039;
-  font-size: 2.55rem;
+.score-hero-copy {
+  min-width: 0;
 }
 
-.score-hero-main span {
-  flex: 0 0 auto;
-  border-radius: 999px;
-  padding: 8px 12px;
-  color: #ffffff;
-  background: #338f8b;
-  font-size: 0.84rem;
+.score-hero-copy h1 {
+  margin-bottom: 6px;
+  color: #243039;
+  font-size: 1.3rem;
+  line-height: 1.2;
+}
+
+.score-hero-copy p {
+  margin-bottom: 0;
+}
+
+.score-donut {
+  position: relative;
+  flex: 0 0 118px;
+  width: 118px;
+  height: 118px;
+}
+
+.score-donut svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.score-donut-track,
+.score-donut-value {
+  fill: none;
+  stroke-width: 11;
+}
+
+.score-donut-track {
+  stroke: rgba(51, 143, 139, 0.13);
+}
+
+.score-donut-value {
+  stroke: #338f8b;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.3s ease;
+}
+
+.score-donut-text {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  text-align: center;
+}
+
+.score-donut-text strong {
+  color: #243039;
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.score-donut-text span {
+  margin-top: 5px;
+  color: #697a80;
+  font-size: 0.72rem;
   font-weight: 900;
 }
 
@@ -1086,14 +1137,42 @@ input:disabled {
   font-size: 0.88rem;
 }
 
+.zodiac-advice-locked {
+  display: grid;
+  gap: 12px;
+  border: 1px solid rgba(89, 120, 118, 0.14);
+  border-radius: 20px;
+  padding: 16px;
+  background: #f5fbf8;
+}
+
+.zodiac-advice-locked h2 {
+  margin-bottom: 8px;
+  font-size: 1.02rem;
+}
+
+.zodiac-advice-locked p {
+  margin-bottom: 0;
+}
+
 .year-unlock-card {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.year-unlock-card .ad-box {
-  margin: 8px 0 0;
+.detail-toggle-button {
+  min-height: 42px;
+  border: 0;
+  border-radius: 16px;
+  color: #ffffff;
+  background: #338f8b;
+  font-weight: 900;
+}
+
+.detail-toggle-button.is-unlocked {
+  color: #356b68;
+  background: #e8f5f1;
 }
 
 .year-detail-copy,
@@ -1117,6 +1196,69 @@ input:disabled {
   border: 1px solid rgba(89, 120, 118, 0.14);
   background: rgba(255, 255, 255, 0.92);
   box-shadow: 0 16px 36px rgba(43, 57, 68, 0.08);
+}
+
+.monthly-unlock-card {
+  display: grid;
+  gap: 14px;
+  padding: 18px;
+}
+
+.monthly-unlock-card h2 {
+  margin-bottom: 8px;
+  font-size: 1.12rem;
+}
+
+.monthly-unlock-card p {
+  margin-bottom: 0;
+}
+
+.monthly-wave-card {
+  margin-top: 14px;
+  border-radius: 18px;
+  padding: 14px;
+  background: #f5fbf8;
+}
+
+.monthly-wave-card h3 {
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+.monthly-wave-card svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.monthly-wave-area {
+  fill: rgba(51, 143, 139, 0.1);
+}
+
+.monthly-wave-line {
+  fill: none;
+  stroke: #338f8b;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.monthly-wave-dot {
+  fill: #ffffff;
+  stroke: #338f8b;
+  stroke-width: 2.5;
+}
+
+.monthly-wave-score,
+.monthly-wave-label {
+  fill: #607078;
+  font-size: 9px;
+  font-weight: 800;
+  text-anchor: middle;
+}
+
+.monthly-wave-score {
+  fill: #338f8b;
 }
 
 .monthly-detail-list {
