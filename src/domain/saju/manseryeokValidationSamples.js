@@ -32,7 +32,7 @@ export const manseryeokValidationSamples = [
     checkedAt: '2026-06-08',
     checkedBy: 'manual',
     memo:
-      'sky.told.me 입력 기준: 남성, 양력 1990-05-15 09:30, 출생도시 입력값 확인 필요. 四柱八字 결과 기준. 태양시 보정 여부는 추가 확인 필요.',
+  'sky.told.me 입력 기준: 남성, 양력 1990-05-15 09:30, 출생도시 Seoul, South Korea. 四柱八字 결과 기준. convertedLunar는 결과에서 명확히 확인되지 않아 미입력. 태양시 보정 여부는 추가 확인 필요.',
   },
   notes: [
     '외부 만세력 기준값 1차 입력',
