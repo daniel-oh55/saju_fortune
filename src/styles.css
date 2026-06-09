@@ -156,6 +156,46 @@ p {
   line-height: 1.55;
 }
 
+.late-night-policy-options {
+  display: grid;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.late-night-policy-options > span {
+  color: #2f6f6a;
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.late-night-policy-options label {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 9px;
+  row-gap: 2px;
+  align-items: start;
+  padding: 10px 11px;
+  border: 1px solid rgba(74, 139, 132, 0.18);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.68);
+}
+
+.late-night-policy-options input {
+  grid-row: span 2;
+  margin-top: 3px;
+}
+
+.late-night-policy-options strong {
+  color: #37454d;
+  font-size: 0.88rem;
+}
+
+.late-night-policy-options small {
+  color: #607078;
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
 label {
   display: flex;
   flex-direction: column;

@@ -6,6 +6,7 @@ const defaultProfile = {
   birthDate: '',
   birthTime: '',
   birthTimeUnknown: false,
+  lateNightJasiPolicy: 'same_day',
   calendarType: 'solar',
   isLeapMonth: false,
   gender: 'other',
@@ -18,6 +19,7 @@ function normalizeInitialProfile(initialProfile) {
     gender: initialProfile?.gender || 'other',
     birthTimeUnknown: Boolean(initialProfile?.birthTimeUnknown),
     isLeapMonth: Boolean(initialProfile?.isLeapMonth),
+    lateNightJasiPolicy: initialProfile?.lateNightJasiPolicy || 'same_day',
   };
 }
 
@@ -40,6 +42,9 @@ function ProfileForm({ initialProfile, onSave }) {
       ...form,
       birthTime: form.birthTimeUnknown ? '' : form.birthTime,
       isLeapMonth: form.calendarType === 'lunar' ? form.isLeapMonth : false,
+      lateNightJasiPolicy: isLateNightBirthTime(form.birthTime, form.birthTimeUnknown)
+        ? form.lateNightJasiPolicy || 'same_day'
+        : 'same_day',
     };
 
     const profile = {
@@ -103,9 +108,34 @@ function ProfileForm({ initialProfile, onSave }) {
             일주와 시주가 달라질 수 있습니다.
           </p>
           <p>
-            현재 하루풀이는 입력한 생년월일과 시간을 기준으로 참고용 풀이를 제공하며, 23시 이후
-            기준 선택 기능은 추후 검토 중입니다.
+            현재 하루풀이는 선택한 23시 이후 기준을 바탕으로 참고용 풀이를 제공하며, 기준 정책은
+            추가 검증 후 조정될 수 있습니다.
           </p>
+          <div className="late-night-policy-options" role="radiogroup" aria-label="23시 이후 기준 선택">
+            <span>23시 이후 기준 선택</span>
+            <label>
+              <input
+                type="radio"
+                name="lateNightJasiPolicy"
+                value="same_day"
+                checked={(form.lateNightJasiPolicy || 'same_day') === 'same_day'}
+                onChange={(event) => updateField('lateNightJasiPolicy', event.target.value)}
+              />
+              <strong>입력한 날짜 기준</strong>
+              <small>입력한 생년월일을 그대로 기준으로 풀이합니다.</small>
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="lateNightJasiPolicy"
+                value="next_day"
+                checked={form.lateNightJasiPolicy === 'next_day'}
+                onChange={(event) => updateField('lateNightJasiPolicy', event.target.value)}
+              />
+              <strong>다음 날 자시 기준</strong>
+              <small>23시 이후를 다음 날 자시로 보고 풀이합니다.</small>
+            </label>
+          </div>
         </div>
       )}
 

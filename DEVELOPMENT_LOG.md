@@ -1,5 +1,32 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-09 23시 이후 자시 기준 선택 옵션 추가
+
+### 작업 내용
+- PR 목적: 23:00~23:59 출생자의 자시 기준 선택 옵션 추가
+- `ProfileForm`에 `lateNightJasiPolicy` 필드를 추가하고 기본값을 `same_day`로 설정
+- 23:00~23:59 입력 시 `입력한 날짜 기준` / `다음 날 자시 기준` 선택 UI 표시
+- `SettingsPage`에서 저장된 23시 이후 기준 표시
+- `next_day` 선택 시 production 만세력 엔진이 23시 이후 출생 시간을 다음 날 00:분 기준으로 계산
+- `same_day` 기본값에서는 기존 계산 흐름 유지
+- expected/referenceStatus 변경 없음
+- localStorage key 이름 변경 없음
+- App.jsx 변경 없음
+- fortune schemaVersion을 4에서 5로 증가
+
+### 테스트 결과
+- `npm run build`: 성공
+- 내부 validator 기준:
+  - `solar_before_ipchun`: reference_conflict 유지
+  - `solar_ipchun_boundary`: pass 유지
+  - `solar_after_ipchun`: pass 유지
+  - `solar_regular_known_time`: pass 유지
+- 엔진 샘플 확인:
+  - `same_day`: `1990-02-03 23:30:00`
+  - `next_day`: `1990-02-04 00:30:00`
+  - `same_day`와 `next_day`의 profileId가 다르게 생성됨
+- 브라우저 온보딩/설정 UI: 수동 확인 필요
+
 ## 2026-06-09 23시 이후 출생 안내 UI 추가
 
 ### 작업 내용
