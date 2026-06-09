@@ -2,9 +2,9 @@
 
 ## 2026-06-09 KST/CST 절기 경계 가설 TODO
 
-- [ ] KST→CST 절기 경계 보정 가설 검증 결과 확인
-- [ ] 검증 결과가 안정적이면 production 엔진 반영 PR 진행
-- [ ] 반영 시 schemaVersion 증가 여부 결정
+- [x] KST→CST 절기 경계 보정 가설 검증 결과 확인
+- [x] 검증 결과가 안정적이면 production 엔진 반영 PR 진행
+- [x] 반영 시 schemaVersion 증가 여부 결정
 - [ ] 23시 이후 자시/야자시/조자시 정책은 별도 유지
 - [ ] 태양시 보정은 별도 유지
 

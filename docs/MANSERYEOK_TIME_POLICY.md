@@ -1,5 +1,13 @@
 # MANSERYEOK_TIME_POLICY
 
+## 2026-06-09 KST/CST 절기 보정 반영
+
+- PR #19 검증 결과에 따라 KST→CST 1시간 보정을 production 년주/월주 계산에 반영했다.
+- 반영 범위는 년주/월주 exact 계산으로 제한한다.
+- `solar_ipchun_boundary`는 이 보정 후 pass가 되어야 한다.
+- `solar_after_ipchun`과 `solar_regular_known_time`은 회귀 검증 샘플로 유지한다.
+- 23시 이후 자시 기준과 태양시 보정은 이번 PR 범위에서 제외한다.
+
 ## 2026-06-09 KST/CST 절기 경계 가설
 
 - PR #17 결과 `lunar-javascript` exact API만으로는 `solar_ipchun_boundary` mismatch가 해소되지 않았다.
