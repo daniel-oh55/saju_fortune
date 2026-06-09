@@ -1,5 +1,32 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-09 lateNightJasiPolicy 회귀 검증 스크립트 추가
+
+### 작업 내용
+- PR 목적: `lateNightJasiPolicy` 동작 검증 스크립트 추가
+- `scripts/checkLateNightJasiPolicyRegression.mjs` 신규 추가
+- `npm run check:late-night-jasi-policy` script 추가
+- production 계산 로직 변경 없음
+- UI 변경 없음
+- expected/referenceStatus 변경 없음
+- localStorage key 변경 없음
+- schemaVersion 변경 없음
+- App.jsx 변경 없음
+
+### 테스트 결과
+- `npm run build`: 성공
+- `npm run check:late-night-jasi-policy`: 성공
+- `npm run check:manseryeok-jasi-boundary`: 성공
+- same_day / next_day convertedSolar 차이 확인:
+  - `same_day`: `1990-02-03 23:30:00`
+  - `next_day`: `1990-02-04 00:30:00`
+- profileId 차이 확인:
+  - `same_day`: `c9xk6d`
+  - `next_day`: `b3kv9b`
+- 내부 validator 기준:
+  - `solar_before_ipchun`: reference_conflict 유지
+  - `solar_ipchun_boundary`: pass 유지
+
 ## 2026-06-09 23시 이후 자시 기준 선택 옵션 추가
 
 ### 작업 내용

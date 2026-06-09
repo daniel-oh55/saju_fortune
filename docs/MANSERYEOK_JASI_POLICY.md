@@ -1,5 +1,14 @@
 # MANSERYEOK_JASI_POLICY
 
+## lateNightJasiPolicy 회귀 검증
+
+- `same_day`는 23:00~23:59 입력을 입력한 날짜 기준으로 계산한다.
+- `next_day`는 23:00~23:59 입력을 다음 날 00:분 기준으로 계산한다.
+- 22시대 이하 입력에는 `next_day`가 적용되지 않는다.
+- `birthTimeUnknown=true`인 경우 `next_day`가 적용되지 않는다.
+- `same_day`와 `next_day`는 서로 다른 profileId를 생성해야 한다.
+- 이 검증은 외부 기준값과의 pass/fail 판정이 아니라 사용자 선택 정책이 의도대로 동작하는지 확인하는 회귀 테스트다.
+
 ## 2026-06-09 사용자 선택 정책
 
 - 23:00~23:59 출생자는 프로필 입력 화면에서 자시 기준을 선택할 수 있다.

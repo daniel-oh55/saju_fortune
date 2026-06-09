@@ -4,6 +4,7 @@
 
 ### Added
 
+- `lateNightJasiPolicy` 동작 확인을 위한 회귀 검증 스크립트
 - 23시 이후 출생자용 자시 기준 선택 옵션
 
 - 23시 이후 출생 시간 입력 시 자시 기준 차이 안내 문구 추가
@@ -46,6 +47,7 @@
 
 ### Changed
 
+- 23시 이후 자시 기준 선택 정책 문서에 회귀 검증 기준 추가
 - 프로필 ID에 `lateNightJasiPolicy`를 포함하고 fortune schemaVersion을 4에서 5로 증가
 - `next_day` 선택 시 23시 이후 출생 시간을 다음 날 자시 기준으로 계산하도록 만세력 엔진 보완
 
