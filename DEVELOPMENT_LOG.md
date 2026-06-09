@@ -1,5 +1,24 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-09 23시 이후 출생 안내 UI 추가
+
+### 작업 내용
+- PR 목적: 23시 이후 출생 시간 안내 UI 추가
+- `ProfileForm`에서 23:00~23:59 입력 시 안내 표시
+- `SettingsPage`는 시간 입력 UI가 아니라 저장된 프로필 시간이 23시대일 때 안내 표시
+- production 계산 로직 변경 없음
+- expected/referenceStatus 변경 없음
+- localStorage 변경 없음
+- schemaVersion 변경 없음
+- App.jsx 변경 없음
+
+### 테스트 결과
+- `npm run build`: 성공
+- 일반 `/` 접속 테스트: 브라우저 수동 확인 필요
+- 내부 validator 기준:
+  - `solar_before_ipchun`: reference_conflict 유지
+  - `solar_ipchun_boundary`: pass 유지
+
 ## 2026-06-09 자시 후보와 외부 기준 비교 추가
 
 ### 작업 내용
