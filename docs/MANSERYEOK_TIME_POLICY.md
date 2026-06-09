@@ -1,5 +1,13 @@
 # MANSERYEOK_TIME_POLICY
 
+## 2026-06-09 KST/CST 절기 경계 가설
+
+- PR #17 결과 `lunar-javascript` exact API만으로는 `solar_ipchun_boundary` mismatch가 해소되지 않았다.
+- 다음 가설은 `lunar-javascript`의 절기 exact API가 UTC+8 기준으로 동작할 가능성이다.
+- 한국 서비스 입력값은 KST, UTC+9 기준이므로 절기 경계 비교 시 1시간 차이가 발생할 수 있다.
+- 이번 단계에서는 production 엔진을 수정하지 않고 검증 스크립트로만 확인한다.
+- 검증 결과가 안정적이면 다음 PR에서 년주/월주 절기 계산에 KST→CST 보정 적용을 검토한다.
+
 ## 2026-06-09 입춘 절입 시각 조사 상태
 
 - `solar_ipchun_boundary`는 아직 엔진 보정 확정 대상이 아니라, 입춘 절입 시각 추가 확인이 필요한 상태다.

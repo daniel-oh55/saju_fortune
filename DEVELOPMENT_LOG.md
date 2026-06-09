@@ -1,5 +1,29 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-09 KST/CST 절기 경계 보정 가설 검증
+
+### 작업 내용
+- PR 목적: KST→CST 절기 경계 보정 가설 검증
+- `scripts/checkManseryeokTermTimezoneHypothesis.mjs` 신규 추가
+- `npm run check:manseryeok-term-timezone` 스크립트 추가
+- production 계산 로직 변경 없음
+- expected/referenceStatus 변경 없음
+- localStorage 변경 없음
+- schemaVersion 변경 없음
+- App.jsx 변경 없음
+
+### 테스트 결과
+- `npm run build`: 성공
+- `npm run check:manseryeok-term-timezone`: 성공
+- `solar_ipchun_boundary`: KST→CST 보정 후 `기사 / 정축`, hypothesisResult `pass`
+- `solar_after_ipchun`: KST→CST 보정 후 `경오 / 무인`, hypothesisResult `pass`
+- `solar_regular_known_time`: KST→CST 보정 후 `경오 / 신사`, hypothesisResult `pass`
+
+### 검증 포인트
+- `solar_ipchun_boundary`의 1시간 보정 결과가 `기사 / 정축`이 되는지 확인
+- `solar_after_ipchun`의 1시간 보정 결과가 `경오 / 무인`으로 유지되는지 확인
+- `solar_regular_known_time`이 불필요하게 달라지지 않는지 확인
+
 ## 2026-06-09 입춘 절입 시각 조사 문서 추가
 
 ### 작업 내용
