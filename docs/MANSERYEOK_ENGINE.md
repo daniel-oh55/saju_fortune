@@ -1,5 +1,12 @@
 # MANSERYEOK_ENGINE
 
+## 2026-06-09 KST/CST 절기 경계 검증
+
+- 현재 production 엔진은 아직 KST→CST 절기 보정을 적용하지 않는다.
+- 검증 스크립트에서만 KST 입력을 1시간 보정해 `lunar-javascript` exact API 결과를 비교한다.
+- 검증 대상은 `solar_ipchun_boundary`, `solar_after_ipchun`, `solar_regular_known_time`이다.
+- 실행 명령은 `npm run check:manseryeok-term-timezone`이다.
+
 ## 2026-06-09 입춘 경계 보정 검토
 
 - v0 엔진의 년주/월주 계산은 `lunar-javascript`의 `getYearInGanZhiExact()`와 `getMonthInGanZhiExact()` 계열 API를 우선 사용한다.
