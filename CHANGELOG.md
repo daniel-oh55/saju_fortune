@@ -4,6 +4,8 @@
 
 ### Added
 
+- 입춘 절입 시각 기준 조사 문서 추가
+
 - 프로젝트 운영 문서 구조
 - Codex 작업 규칙 문서
 - GitHub PR 기반 개발 흐름 문서
@@ -36,6 +38,8 @@
 - 만세력 시간 경계 및 입춘/자시/태양시 정책 문서 추가
 
 ### Changed
+
+- `solar_ipchun_boundary`를 즉시 엔진 보정 대상이 아니라 추가 조사 대상으로 문서화
 
 - 만세력 엔진의 년주/월주 계산 경로를 `lunar-javascript` exact 절기 API 우선 사용 구조로 명시
 - `solar_ipchun_boundary`는 exact API만으로 외부 기준 mismatch가 해소되지 않아 추가 정책 검토 대상으로 문서화

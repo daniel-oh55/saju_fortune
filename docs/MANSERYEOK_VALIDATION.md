@@ -1,5 +1,12 @@
 # MANSERYEOK_VALIDATION
 
+## 절기 기준 충돌 조사 원칙
+
+- 외부 만세력 2곳이 일치하더라도, 라이브러리 exact API와 충돌하는 경우에는 별도 investigation 문서를 둘 수 있다.
+- 절기 기준 충돌 샘플은 즉시 엔진 오류로 단정하지 않는다.
+- 입춘 절입 시각 확인 후 expected 유지/수정/reference_conflict 변경 여부를 판단한다.
+- 현재 `solar_ipchun_boundary` 조사는 `docs/MANSERYEOK_IPCHUN_INVESTIGATION.md`에 기록한다.
+
 ## 접근 방법
 
 - 로컬 또는 Vercel Preview에서 `/?debug=manseryeok`로 접속한다.
