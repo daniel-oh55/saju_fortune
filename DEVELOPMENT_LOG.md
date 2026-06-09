@@ -1,5 +1,24 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-09 홈 화면 사주 오행 요약 카드 추가
+
+### 작업 내용
+- PR 목적: 홈 화면 사주 오행 요약 카드 추가
+- `SajuElementSummaryCard` 신규 추가
+- HomePage에 `fortune.sajuAnalysis` 기반 카드 배치
+- production 계산 로직 변경 없음
+- expected/referenceStatus 변경 없음
+- localStorage 변경 없음
+- schemaVersion 변경 없음
+- App.jsx 변경 없음
+
+### 테스트 결과
+- `npm run build`: 성공
+- 일반 `/` 접속 후 홈 카드 표시: 수동 확인 필요
+- 내부 validator 기준:
+  - `solar_before_ipchun`: reference_conflict 유지
+  - `solar_ipchun_boundary`: pass 유지
+
 ## 2026-06-09 사주 계산 기준 요약 카드 추가
 
 ### 작업 내용
