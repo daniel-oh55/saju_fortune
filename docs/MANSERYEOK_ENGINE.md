@@ -1,5 +1,15 @@
 # MANSERYEOK_ENGINE
 
+## 2026-06-09 입춘 경계 보정 검토
+
+- v0 엔진의 년주/월주 계산은 `lunar-javascript`의 `getYearInGanZhiExact()`와 `getMonthInGanZhiExact()` 계열 API를 우선 사용한다.
+- exact API 호출이 실패하면 기존 `EightChar` 계산값으로 fallback한다.
+- 조사 결과 `solar_ipchun_boundary`(1990-02-04 10:30 Seoul)는 `lunar-javascript` exact API에서도 `경오년 무인월`로 계산되어 외부 기준값 `기사년 정축월`과 불일치한다.
+- 샘플별 하드코딩, 수동 절기 테이블, 태양시 보정은 이번 단계에서 적용하지 않았다.
+- 태양시 보정은 여전히 미적용 상태다.
+- 23시 이후 자시/야자시/조자시 기준은 여전히 미정 상태다.
+- 이 엔진 변경은 계산 경로를 명시적으로 정리한 것이며, 외부 기준 충돌은 추가 정책 결정이 필요하다.
+
 ## 현재 엔진 버전
 
 - `manseryeok_core_v0`

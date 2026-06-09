@@ -1,5 +1,37 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-09 만세력 입춘 경계 년주/월주 검토
+
+### 작업 내용
+- `solar_ipchun_boundary`의 년주/월주 mismatch 원인을 확인했다.
+- `lunar-javascript`의 `getYearInGanZhiExact()`와 `getMonthInGanZhiExact()` 계열 API를 우선 사용하는 helper를 엔진에 분리했다.
+- exact API 호출 실패 시 기존 `EightChar` 계산값으로 fallback하도록 정리했다.
+- `solar_ipchun_boundary`는 exact API에서도 `경오년 무인월`로 계산되어 외부 기준값 `기사년 정축월`과 여전히 불일치한다.
+- 샘플별 하드코딩, 수동 절기 테이블, 태양시 보정은 적용하지 않았다.
+- 23시 이후 자시/야자시/조자시 정책은 변경하지 않았다.
+- localStorage key 변경 없음.
+- App.jsx 변경 없음.
+- schemaVersion 변경 없음: 실제 pillar 결과가 변경되지 않았고, 캐시 무효화가 필요한 계산 결과 변경은 발생하지 않았다.
+
+### 수정 파일
+- `src/domain/saju/manseryeokEngine.js`
+- `docs/MANSERYEOK_ENGINE.md`
+- `docs/MANSERYEOK_TIME_POLICY.md`
+- `CHANGELOG.md`
+- `TODO.md`
+
+### 테스트 결과
+- `npm run build`: 성공
+- `solar_ipchun_boundary`: fail, mismatchFields `pillars.year`, `pillars.month`
+- `solar_after_ipchun`: pass 유지, mismatchFields 없음
+- `solar_before_ipchun`: `reference_conflict` 유지, expected null 유지
+- `solar_regular_known_time`: pass 유지, mismatchFields 없음
+
+### 남은 이슈
+- `lunar-javascript` exact API와 sky.told.me / 포스텔러 외부 기준값이 다른 입춘 당일 경계 정책 결정 필요.
+- 태양시 보정 적용 여부는 별도 PR에서 검토 필요.
+- 23시 이후 자시/야자시/조자시 기준은 별도 정책 결정 필요.
+
 ## 현재 상태
 
 - 배포 방식: GitHub 저장소와 Vercel 연동 구조 사용

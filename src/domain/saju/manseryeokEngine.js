@@ -52,6 +52,59 @@ function parseGanji(ganji) {
   };
 }
 
+function tryParseGanjiFromMethod(source, methodName) {
+  if (!source || typeof source[methodName] !== 'function') return null;
+
+  try {
+    return parseGanji(source[methodName]());
+  } catch {
+    return null;
+  }
+}
+
+function tryParseGanjiFromPartMethods(source, stemMethodName, branchMethodName) {
+  if (
+    !source ||
+    typeof source[stemMethodName] !== 'function' ||
+    typeof source[branchMethodName] !== 'function'
+  ) {
+    return null;
+  }
+
+  try {
+    return parseGanji(`${source[stemMethodName]()}${source[branchMethodName]()}`);
+  } catch {
+    return null;
+  }
+}
+
+function resolveYearMonthPillars(lunar, eightChar) {
+  const fallbackYearPillar = parseGanji(eightChar.getYear());
+  const fallbackMonthPillar = parseGanji(eightChar.getMonth());
+  const exactYearPillar =
+    tryParseGanjiFromMethod(lunar, 'getYearInGanZhiExact') ||
+    tryParseGanjiFromPartMethods(lunar, 'getYearGanExact', 'getYearZhiExact');
+  const exactMonthPillar =
+    tryParseGanjiFromMethod(lunar, 'getMonthInGanZhiExact') ||
+    tryParseGanjiFromPartMethods(lunar, 'getMonthGanExact', 'getMonthZhiExact');
+
+  if (exactYearPillar && exactMonthPillar) {
+    return {
+      yearPillar: exactYearPillar,
+      monthPillar: exactMonthPillar,
+      notes: [
+        '년주/월주는 lunar-javascript의 getYearInGanZhiExact/getMonthInGanZhiExact 계열 API를 우선 사용합니다.',
+      ],
+    };
+  }
+
+  return {
+    yearPillar: exactYearPillar || fallbackYearPillar,
+    monthPillar: exactMonthPillar || fallbackMonthPillar,
+    notes: ['년주/월주 exact API 사용에 실패해 EightChar 기본 계산값으로 fallback했습니다.'],
+  };
+}
+
 function buildUnsupported(reason, detail) {
   return {
     ok: false,
@@ -115,8 +168,9 @@ export function calculateManseryeok(profile) {
     const lunar = createLunarFromProfile(birthDate, birthTime, profile);
     const solar = lunar.getSolar();
     const eightChar = lunar.getEightChar();
-    const yearPillar = parseGanji(eightChar.getYear());
-    const monthPillar = parseGanji(eightChar.getMonth());
+    const yearMonthResolution = resolveYearMonthPillars(lunar, eightChar);
+    const yearPillar = yearMonthResolution.yearPillar;
+    const monthPillar = yearMonthResolution.monthPillar;
     const dayPillar = parseGanji(eightChar.getDay());
     const hourPillar = birthTimeUnknown ? null : parseGanji(eightChar.getTime());
 
@@ -128,6 +182,11 @@ export function calculateManseryeok(profile) {
       'lunar-javascript 기반 계산 결과이며 외부 만세력 기준 샘플 검증이 필요합니다.',
       '절기 경계 및 23시 이후 자시 기준은 추가 정책 검토가 필요합니다.',
     ];
+
+    notes.unshift(
+      '태양시 보정과 23시 이후 자시 기준은 아직 적용하지 않습니다.',
+      ...yearMonthResolution.notes,
+    );
 
     if (birthTimeUnknown) {
       notes.push('시주 미상: birthTimeUnknown=true');
