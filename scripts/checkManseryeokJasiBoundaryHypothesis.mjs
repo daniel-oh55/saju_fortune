@@ -51,6 +51,31 @@ const samples = [
   },
 ];
 
+const externalReferences = {
+  solar_after_23: [
+    {
+      source: 'sky.told.me',
+      pillars: {
+        year: '기사',
+        month: '정축',
+        day: '경자',
+        hour: '병자',
+      },
+      memo: '사용자 제공 이미지 기준. Seoul, South Korea 입력.',
+    },
+    {
+      source: 'posteller',
+      pillars: {
+        year: '기사',
+        month: '정축',
+        day: '기해',
+        hour: '을해',
+      },
+      memo: '사용자 제공 이미지 기준.',
+    },
+  ],
+};
+
 function parseDateTime(value) {
   const match = /^(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2})$/.exec(value);
   if (!match) throw new Error(`Invalid date time: ${value}`);
@@ -107,6 +132,39 @@ function formatPillars(pillars) {
   return `${pillars.year} / ${pillars.month} / ${pillars.day} / ${pillars.hour}`;
 }
 
+function comparePillars(left, right) {
+  if (!left || !right) return false;
+  return (
+    left.year === right.year &&
+    left.month === right.month &&
+    left.day === right.day &&
+    left.hour === right.hour
+  );
+}
+
+function printExternalReferenceComparison(sampleId, candidates) {
+  const references = externalReferences[sampleId] || [];
+  if (references.length === 0) return;
+
+  for (const reference of references) {
+    console.log(`externalReference: ${reference.source}`);
+    console.log(`externalPillars: ${formatPillars(reference.pillars)}`);
+    console.log(`externalMemo: ${reference.memo}`);
+    console.log('matches:');
+    console.log(`- original: ${comparePillars(candidates.original, reference.pillars)}`);
+    console.log(`- sameDayJasi: ${comparePillars(candidates.sameDayJasi, reference.pillars)}`);
+    console.log(`- nextDayCandidate: ${comparePillars(candidates.nextDayCandidate, reference.pillars)}`);
+    console.log(`- midnightReference: ${comparePillars(candidates.midnightReference, reference.pillars)}`);
+    console.log('');
+  }
+
+  console.log('policyObservation:');
+  console.log('- sky.told.me는 다음 날 자시 후보와 일치합니다.');
+  console.log('- posteller는 현재 후보 중 완전 일치하는 결과가 없습니다.');
+  console.log('- 따라서 한 곳만 기준으로 production 정책을 확정하지 않고, 세 번째 기준 확인이 필요합니다.');
+  console.log('');
+}
+
 for (const sample of samples) {
   const inputParts = parseDateTime(sample.inputKst);
   const isLateNightJasi = inputParts.hour === 23;
@@ -119,24 +177,28 @@ for (const sample of samples) {
       ? inputParts
       : addDaysAtTime(inputParts, 1, 0, 30);
 
-  const originalPillars = getPillars(inputParts);
-  const sameDayJasiPillars = isLateNightJasi ? getPillars(inputParts) : null;
-  const nextDayCandidatePillars = nextDayCandidateParts ? getPillars(nextDayCandidateParts) : null;
-  const midnightReferencePillars = getPillars(midnightReferenceParts);
+  const candidates = {
+    original: getPillars(inputParts),
+    sameDayJasi: isLateNightJasi ? getPillars(inputParts) : null,
+    nextDayCandidate: nextDayCandidateParts ? getPillars(nextDayCandidateParts) : null,
+    midnightReference: getPillars(midnightReferenceParts),
+  };
 
   console.log(`sampleId: ${sample.id}`);
   console.log(`purpose: ${sample.purpose}`);
   console.log(`inputKst: ${sample.inputKst}`);
-  console.log(`originalPillars: ${formatPillars(originalPillars)}`);
-  console.log(`sameDayJasiPillars: ${formatPillars(sameDayJasiPillars)}`);
+  console.log(`originalPillars: ${formatPillars(candidates.original)}`);
+  console.log(`sameDayJasiPillars: ${formatPillars(candidates.sameDayJasi)}`);
   console.log(
     `nextDayCandidateInput: ${nextDayCandidateParts ? formatDateTime(nextDayCandidateParts) : 'not applicable'}`,
   );
-  console.log(`nextDayCandidatePillars: ${formatPillars(nextDayCandidatePillars)}`);
+  console.log(`nextDayCandidatePillars: ${formatPillars(candidates.nextDayCandidate)}`);
   console.log(`midnightReferenceInput: ${formatDateTime(midnightReferenceParts)}`);
-  console.log(`midnightReferencePillars: ${formatPillars(midnightReferencePillars)}`);
+  console.log(`midnightReferencePillars: ${formatPillars(candidates.midnightReference)}`);
   console.log(
     'policyQuestion: 23시 이후 출생을 같은 날짜의 자시로 볼지, 다음 날짜의 자시로 볼지 정책 결정 필요',
   );
   console.log('');
+
+  printExternalReferenceComparison(sample.id, candidates);
 }

@@ -1,5 +1,24 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-09 자시 후보와 외부 기준 비교 추가
+
+### 작업 내용
+- PR 목적: 자시 경계 후보와 외부 기준값 비교
+- `scripts/checkManseryeokJasiBoundaryHypothesis.mjs`에 sky.told.me / posteller 기준값 비교 출력 추가
+- production 계산 로직 변경 없음
+- expected/referenceStatus 변경 없음
+- localStorage 변경 없음
+- schemaVersion 변경 없음
+- App.jsx 변경 없음
+
+### 테스트 결과
+- `npm run build`: 성공
+- `npm run check:manseryeok-jasi-boundary`: 성공
+- 1990-02-03 23:30 비교 결과:
+  - sky.told.me는 nextDayCandidate/midnightReference와 일치
+  - posteller는 현재 후보 중 완전 일치 없음
+  - 세 번째 기준 확인 필요
+
 ## 2026-06-09 자시 경계 기준 조사 스크립트 추가
 
 ### 작업 내용
