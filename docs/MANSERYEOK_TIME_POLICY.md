@@ -1,5 +1,15 @@
 # MANSERYEOK_TIME_POLICY
 
+## 2026-06-09 입춘 경계 검증 결과
+
+- 이번 보정 검토 대상은 `solar_ipchun_boundary`(1990-02-04 10:30 Seoul)였다.
+- 보정 범위는 년주/월주에 한정했고, 일주/시주는 변경하지 않았다.
+- `lunar-javascript`의 `getYearInGanZhiExact()`와 `getMonthInGanZhiExact()`는 해당 샘플을 `경오년 무인월`로 계산한다.
+- 외부 기준값은 `기사년 정축월`이므로 exact API만으로는 mismatch를 해소하지 못했다.
+- `solar_after_ipchun`은 회귀 검증 샘플로 유지한다.
+- `solar_before_ipchun`은 `reference_conflict` 상태와 `expected: null`을 유지한다.
+- 태양시 보정과 23시 이후 자시/야자시/조자시 정책은 이번 PR에서 변경하지 않는다.
+
 ## 목적
 
 하루풀이 만세력 엔진의 시간 경계, 절기 경계, 출생지, 태양시 보정, 자시 처리 기준을 문서화한다.

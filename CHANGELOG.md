@@ -37,6 +37,9 @@
 
 ### Changed
 
+- 만세력 엔진의 년주/월주 계산 경로를 `lunar-javascript` exact 절기 API 우선 사용 구조로 명시
+- `solar_ipchun_boundary`는 exact API만으로 외부 기준 mismatch가 해소되지 않아 추가 정책 검토 대상으로 문서화
+
 - README를 프로젝트 운영 기준에 맞게 보완
 - `.gitignore` 배포/환경 파일 제외 항목 보강
 - README에 하루풀이 브랜드 컨셉 반영
@@ -57,6 +60,8 @@
 - 만세력 검증 문서에 reference_conflict 처리 원칙 보강
 
 ### Fixed
+
+- 입춘/절기 경계의 년주/월주 계산 경로에 exact API fallback 구조 추가
 
 - 기존 localStorage 오늘운세 캐시에 학업운이 없는 경우 새 운세를 생성하도록 캐시 유효성 검사 보완
 - 기존 mock 캐시가 만세력 엔진 적용 후에도 계속 재사용되지 않도록 schemaVersion 검사 추가

@@ -1,5 +1,15 @@
 # TODO
 
+## 2026-06-09 만세력 입춘 경계 후속 TODO
+
+- [x] `solar_ipchun_boundary` 년주/월주 mismatch 원인 분석
+- [x] 입춘 절기 exact API 적용 검토
+- [ ] `lunar-javascript` exact API와 외부 기준값이 다른 입춘 경계 샘플 정책 결정
+- [ ] 23시 이후 자시/야자시/조자시 정책 결정
+- [ ] 태양시 보정 적용 여부 결정
+- [ ] `solar_before_ipchun` 세 번째 기준 만세력 확인
+- [ ] 음력/윤달 샘플 외부 검증
+
 ## P0: 반드시 해결해야 하는 문제
 
 - [ ] Vercel Preview 배포가 정상 생성되는지 확인
