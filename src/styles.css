@@ -574,6 +574,88 @@ textarea:focus {
   border-bottom: 0;
 }
 
+.saju-basis-card {
+  display: grid;
+  gap: 14px;
+  border: 1px solid rgba(89, 120, 118, 0.14);
+  border-radius: 20px;
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 16px 36px rgba(43, 57, 68, 0.08);
+}
+
+.saju-basis-head span,
+.saju-basis-grid span,
+.saju-pillar-grid span {
+  color: #697a80;
+  font-size: 0.8rem;
+  font-weight: 900;
+}
+
+.saju-basis-head h2 {
+  margin-top: 4px;
+  font-size: 1.08rem;
+}
+
+.saju-basis-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.saju-basis-grid div,
+.saju-pillar-grid div {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+  border-radius: 15px;
+  padding: 11px;
+  background: #f5fbf8;
+}
+
+.saju-basis-grid strong,
+.saju-pillar-grid strong {
+  color: #33444b;
+  font-size: 0.94rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.saju-basis-wide {
+  grid-column: 1 / -1;
+}
+
+.saju-pillar-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.saju-pillar-grid div {
+  text-align: center;
+  background: #fff7f0;
+}
+
+.saju-pillar-grid strong {
+  color: #338f8b;
+  font-size: 1rem;
+}
+
+.saju-basis-note {
+  display: grid;
+  gap: 6px;
+  border-radius: 15px;
+  padding: 12px;
+  background: linear-gradient(135deg, rgba(255, 251, 240, 0.94), rgba(232, 247, 242, 0.9));
+}
+
+.saju-basis-note p {
+  margin: 0;
+  color: #607078;
+  font-size: 0.84rem;
+  line-height: 1.5;
+}
+
 .settings-actions {
   display: grid;
   gap: 10px;

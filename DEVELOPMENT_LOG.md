@@ -1,5 +1,25 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-09 사주 계산 기준 요약 카드 추가
+
+### 작업 내용
+- PR 목적: 설정 화면에 사주 계산 기준 요약 카드 추가
+- `SajuCalculationBasisCard` 신규 추가
+- SettingsPage에 `SajuCalculationBasisCard` 배치
+- App.jsx는 SettingsPage로 `fortune` prop 전달만 추가
+- production 계산 로직 변경 없음
+- expected/referenceStatus 변경 없음
+- localStorage 변경 없음
+- schemaVersion 변경 없음
+- `same_day` / `next_day` 프로필에서 계산 기준 일시 표시 확인 필요
+
+### 테스트 결과
+- `npm run build`: 성공
+- 내부 validator 기준:
+  - `solar_before_ipchun`: reference_conflict 유지
+  - `solar_ipchun_boundary`: pass 유지
+- 브라우저 SettingsPage 카드 표시: 수동 확인 필요
+
 ## 2026-06-09 lateNightJasiPolicy 회귀 검증 스크립트 추가
 
 ### 작업 내용
