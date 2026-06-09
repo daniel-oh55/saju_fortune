@@ -1176,6 +1176,125 @@ input:disabled {
   padding-top: 12px;
 }
 
+.saju-insight-page {
+  padding-bottom: 14px;
+}
+
+.saju-insight-hero,
+.saju-insight-section {
+  border: 1px solid rgba(89, 120, 118, 0.14);
+  border-radius: 22px;
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 16px 36px rgba(43, 57, 68, 0.08);
+}
+
+.saju-insight-hero {
+  display: grid;
+  gap: 10px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(238, 249, 245, 0.92)),
+    linear-gradient(135deg, #ffe0cb, #b8e4dd);
+}
+
+.saju-insight-hero .ghost-button {
+  justify-self: start;
+}
+
+.saju-insight-hero h1,
+.saju-insight-section h2 {
+  margin: 0;
+}
+
+.saju-insight-hero p,
+.saju-insight-muted {
+  margin: 0;
+  color: #607078;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.saju-insight-section {
+  display: grid;
+  gap: 14px;
+}
+
+.saju-element-bars {
+  display: grid;
+  gap: 12px;
+}
+
+.saju-element-bar {
+  display: grid;
+  gap: 7px;
+}
+
+.saju-element-bar div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.saju-element-bar span {
+  color: #607078;
+  font-size: 0.86rem;
+  font-weight: 900;
+}
+
+.saju-element-bar strong {
+  color: #338f8b;
+  font-size: 0.9rem;
+}
+
+.saju-element-bar i {
+  display: block;
+  height: 9px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #edf2ef;
+}
+
+.saju-element-bar b {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #78c8bd, #f3a77b);
+}
+
+.saju-insight-chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.saju-insight-chip-list span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  border-radius: 999px;
+  padding: 7px 12px;
+  color: #2f6f6a;
+  background: #eef8f5;
+  font-size: 0.84rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.saju-insight-note {
+  display: grid;
+  gap: 7px;
+  border-radius: 18px;
+  padding: 14px;
+  background: linear-gradient(135deg, rgba(255, 251, 240, 0.96), rgba(232, 247, 242, 0.92));
+}
+
+.saju-insight-note p {
+  margin: 0;
+  color: #607078;
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
 .flow-list {
   display: grid;
   gap: 12px;

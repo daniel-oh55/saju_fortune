@@ -2,7 +2,7 @@ function takeItems(items, count = 3) {
   return Array.isArray(items) ? items.filter(Boolean).slice(0, count) : [];
 }
 
-function SajuElementSummaryCard({ sajuAnalysis }) {
+function SajuElementSummaryCard({ sajuAnalysis, onOpenDetail }) {
   if (!sajuAnalysis?.elements) return null;
 
   const { elements } = sajuAnalysis;
@@ -55,6 +55,12 @@ function SajuElementSummaryCard({ sajuAnalysis }) {
         이 내용은 사주 원국을 바탕으로 한 참고용 흐름입니다. 하루의 선택을 가볍게 정리하는 데
         활용해보세요.
       </p>
+
+      {onOpenDetail && (
+        <button className="ghost-button full-width" type="button" onClick={onOpenDetail}>
+          사주 흐름 자세히 보기
+        </button>
+      )}
     </section>
   );
 }

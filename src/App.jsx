@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage.jsx';
 import FortuneDetailPage from './pages/FortuneDetailPage.jsx';
 import YearFortunePage from './pages/YearFortunePage.jsx';
 import ZodiacFortunePage from './pages/ZodiacFortunePage.jsx';
+import SajuInsightPage from './pages/SajuInsightPage.jsx';
 import ManseryeokValidationPage from './pages/ManseryeokValidationPage.jsx';
 import AiConsultPage from './pages/AiConsultPage.jsx';
 import CompatibilityPage from './pages/CompatibilityPage.jsx';
@@ -136,6 +137,9 @@ function App() {
         )}
         {activePage === 'zodiac' && (
           <ZodiacFortunePage profile={profile} fortune={fortune} />
+        )}
+        {activePage === 'sajuInsight' && (
+          <SajuInsightPage profile={profile} fortune={fortune} onNavigate={setActivePage} />
         )}
         {activePage === 'ai' && <AiConsultPage profile={profile} fortune={fortune} />}
         {activePage === 'compatibility' && <CompatibilityPage profile={profile} />}
