@@ -1,5 +1,28 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-09 rewarded ad service abstraction 추가
+
+### 작업 내용
+- PR 목적: rewarded ad service abstraction 추가
+- `rewardedAdService` 신규 추가
+- `RewardAdModal`이 mock provider service를 사용하도록 수정
+- 실제 광고 SDK 연동 없음
+- storage.js production 로직 변경 없음
+- 계산 로직 변경 없음
+- expected/referenceStatus 변경 없음
+- localStorage key 이름 변경 없음
+- schemaVersion 변경 없음
+- 신규 npm script: `check:rewarded-ad-service`
+
+### 테스트 결과
+- `npm run build`: 성공
+- `npm run check:rewarded-ad-service`: 성공
+- `npm run check:saju-insight-reward-unlock`: 성공
+- `npm run check:late-night-jasi-policy`: 성공
+- 내부 validator 기준:
+  - `solar_before_ipchun`: reference_conflict 유지
+  - `solar_ipchun_boundary`: pass 유지
+
 ## 2026-06-09 사주 심화 해석 광고 해금 회귀 검증 추가
 
 ### 작업 내용
