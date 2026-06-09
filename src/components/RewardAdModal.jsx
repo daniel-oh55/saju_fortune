@@ -1,25 +1,51 @@
 import { useEffect, useState } from 'react';
+import {
+  getMockRewardedAdDurationSeconds,
+  showRewardedAd,
+} from '../services/rewardedAdService.js';
 
-// Mock 광고 테스트용 대기 시간입니다. 실제 운영에서는 광고 SDK의 보상 완료 이벤트로 대체합니다.
-const AD_SECONDS = 2;
+const AD_SECONDS = getMockRewardedAdDurationSeconds();
 
 function RewardAdModal({ categoryLabel, onClose, onRewardComplete }) {
   const [secondsLeft, setSecondsLeft] = useState(AD_SECONDS);
+  const [isCompleting, setIsCompleting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const isCompleted = secondsLeft === 0;
 
   useEffect(() => {
     if (secondsLeft === 0) return undefined;
 
-    const timerId = window.setTimeout(() => {
+    const timerId = globalThis.setTimeout(() => {
       setSecondsLeft((current) => Math.max(current - 1, 0));
     }, 1000);
 
-    return () => window.clearTimeout(timerId);
+    return () => globalThis.clearTimeout(timerId);
   }, [secondsLeft]);
 
-  const handleComplete = () => {
-    onRewardComplete();
-    onClose();
+  const handleComplete = async () => {
+    if (isCompleting) return;
+
+    setIsCompleting(true);
+    setErrorMessage('');
+
+    try {
+      const result = await showRewardedAd({
+        placementId: categoryLabel,
+        categoryLabel,
+      });
+
+      if (!result.ok) {
+        setErrorMessage('광고 보상 확인에 실패했습니다. 잠시 후 다시 시도해주세요.');
+        return;
+      }
+
+      onRewardComplete();
+      onClose();
+    } catch {
+      setErrorMessage('광고 보상 확인 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+    } finally {
+      setIsCompleting(false);
+    }
   };
 
   return (
@@ -35,15 +61,25 @@ function RewardAdModal({ categoryLabel, onClose, onRewardComplete }) {
           <div className="ad-progress-bar">
             <span style={{ width: `${((AD_SECONDS - secondsLeft) / AD_SECONDS) * 100}%` }} />
           </div>
-          <p>{isCompleted ? '광고 시청이 완료되었습니다.' : `${secondsLeft}초 후 상세 풀이가 열립니다.`}</p>
+          <p>
+            {isCompleted
+              ? '광고 시청이 완료되었습니다.'
+              : `${secondsLeft}초 후 상세 풀이가 열립니다.`}
+          </p>
+          {errorMessage && <p className="ad-error-message">{errorMessage}</p>}
         </div>
 
         <div className="modal-actions">
           <button className="ghost-button" type="button" onClick={onClose}>
             닫기
           </button>
-          <button className="primary-button" type="button" onClick={handleComplete} disabled={!isCompleted}>
-            상세 풀이 열기
+          <button
+            className="primary-button"
+            type="button"
+            onClick={handleComplete}
+            disabled={!isCompleted || isCompleting}
+          >
+            {isCompleting ? '보상 확인 중...' : '상세 풀이 열기'}
           </button>
         </div>
       </section>
