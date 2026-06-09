@@ -1,5 +1,11 @@
 # MANSERYEOK_VALIDATION
 
+## 외부 기준 후보 비교 시 expected 입력 원칙
+
+- 외부 기준값이 서로 다르고 후보 계산값도 일부만 일치하는 경우 `reference_conflict`를 유지한다.
+- 후보 비교 스크립트에서 특정 후보가 한 외부 기준과 일치해도 즉시 expected를 입력하지 않는다.
+- 최소 세 번째 기준 또는 서비스 정책 결정 후 expected/referenceStatus 변경을 검토한다.
+
 ## 자시 경계 샘플 검증 원칙
 
 - 23시 이후 자시 기준이 확정되지 않은 샘플은 expected를 입력하지 않는다.

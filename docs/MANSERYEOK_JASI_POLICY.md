@@ -1,5 +1,32 @@
 # MANSERYEOK_JASI_POLICY
 
+## 외부 기준 비교 결과
+
+### 1990-02-03 23:30
+
+현재 후보 결과:
+
+- original/sameDayJasi: 기사 / 정축 / 기해 / 병자
+- nextDayCandidate/midnightReference: 기사 / 정축 / 경자 / 병자
+
+외부 기준:
+
+- sky.told.me: 기사 / 정축 / 경자 / 병자
+- 포스텔러: 기사 / 정축 / 기해 / 을해
+
+관찰:
+
+- sky.told.me는 nextDayCandidate/midnightReference와 일치한다.
+- 포스텔러는 현재 후보 중 완전 일치하는 값이 없다.
+- original/sameDayJasi는 포스텔러와 일주는 같지만 시주가 다르다.
+- 따라서 23시 정책을 확정하기 전에 세 번째 기준 만세력 확인이 필요하다.
+
+현재 결론:
+
+- 아직 production 엔진에 자시 정책을 반영하지 않는다.
+- `solar_before_ipchun`은 `reference_conflict`와 expected null을 유지한다.
+- 세 번째 기준 확인 후 다음 날 자시 기준 또는 사용자 선택 옵션을 검토한다.
+
 ## 목적
 
 23시 이후 출생 시간의 자시/야자시/조자시 기준을 정리하기 위한 조사 문서다.
