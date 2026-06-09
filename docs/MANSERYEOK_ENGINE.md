@@ -1,5 +1,15 @@
 # MANSERYEOK_ENGINE
 
+## 2026-06-09 KST/CST 절기 보정 production 반영
+
+- production 엔진의 년주/월주 exact 계산에 KST→CST 1시간 보정을 적용했다.
+- 이 보정은 절기 기준 년주/월주 계산에만 적용한다.
+- 일주/시주 계산에는 적용하지 않는다.
+- `convertedSolar`과 `convertedLunar`는 원본 입력 기준을 유지한다.
+- 태양시 보정은 여전히 미적용이다.
+- 23시 이후 자시/야자시/조자시 정책은 여전히 미정이다.
+- fortune `schemaVersion`을 3에서 4로 증가시켜 기존 캐시가 새 계산 결과로 갱신되도록 했다.
+
 ## 2026-06-09 KST/CST 절기 경계 검증
 
 - 현재 production 엔진은 아직 KST→CST 절기 보정을 적용하지 않는다.

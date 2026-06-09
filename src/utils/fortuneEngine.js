@@ -1,7 +1,7 @@
 import { categoryMeta, fortuneTemplates } from '../data/fortuneTemplates.js';
 import { createSajuAnalysis } from '../domain/saju/createSajuAnalysis.js';
 
-export const CURRENT_FORTUNE_SCHEMA_VERSION = 3;
+export const CURRENT_FORTUNE_SCHEMA_VERSION = 4;
 
 function hashString(text) {
   let hash = 0;

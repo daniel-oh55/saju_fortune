@@ -3,6 +3,7 @@ import { BRANCH_BY_HANJA, STEM_BY_HANJA } from './sajuConstants.js';
 
 const ENGINE_VERSION = 'manseryeok_core_v0';
 const TIMEZONE = 'Asia/Seoul';
+const SOLAR_TERM_TIMEZONE_ADJUSTMENT_HOURS = 1;
 
 function parseBirthDate(birthDate) {
   const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(birthDate || '');
@@ -78,9 +79,76 @@ function tryParseGanjiFromPartMethods(source, stemMethodName, branchMethodName) 
   }
 }
 
-function resolveYearMonthPillars(lunar, eightChar) {
+function parseSolarYmdHms(solar) {
+  const match = /^(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})$/.exec(
+    solar?.toYmdHms?.() || '',
+  );
+  if (!match) return null;
+
+  return {
+    year: Number(match[1]),
+    month: Number(match[2]),
+    day: Number(match[3]),
+    hour: Number(match[4]),
+    minute: Number(match[5]),
+    second: Number(match[6]),
+  };
+}
+
+function subtractHoursFromSolar(solar, hours) {
+  const parts = parseSolarYmdHms(solar);
+  if (!parts) return null;
+
+  const date = new Date(
+    Date.UTC(parts.year, parts.month - 1, parts.day, parts.hour, parts.minute, parts.second),
+  );
+  date.setUTCHours(date.getUTCHours() - hours);
+
+  return Solar.fromYmdHms(
+    date.getUTCFullYear(),
+    date.getUTCMonth() + 1,
+    date.getUTCDate(),
+    date.getUTCHours(),
+    date.getUTCMinutes(),
+    date.getUTCSeconds(),
+  );
+}
+
+function createSolarTermAdjustedLunar(solar) {
+  try {
+    return subtractHoursFromSolar(solar, SOLAR_TERM_TIMEZONE_ADJUSTMENT_HOURS)?.getLunar() || null;
+  } catch {
+    return null;
+  }
+}
+
+function resolveExactYearMonthPillars(source) {
+  const yearPillar =
+    tryParseGanjiFromMethod(source, 'getYearInGanZhiExact') ||
+    tryParseGanjiFromPartMethods(source, 'getYearGanExact', 'getYearZhiExact');
+  const monthPillar =
+    tryParseGanjiFromMethod(source, 'getMonthInGanZhiExact') ||
+    tryParseGanjiFromPartMethods(source, 'getMonthGanExact', 'getMonthZhiExact');
+
+  if (!yearPillar || !monthPillar) return null;
+  return { yearPillar, monthPillar };
+}
+
+function resolveYearMonthPillars({ lunar, eightChar, solar }) {
   const fallbackYearPillar = parseGanji(eightChar.getYear());
   const fallbackMonthPillar = parseGanji(eightChar.getMonth());
+  const termAdjustedLunar = createSolarTermAdjustedLunar(solar);
+  const termAdjustedPillars = resolveExactYearMonthPillars(termAdjustedLunar);
+
+  if (termAdjustedPillars) {
+    return {
+      ...termAdjustedPillars,
+      notes: [
+        '년주/월주는 KST 입력을 CST 기준으로 1시간 보정한 뒤 lunar-javascript exact API를 우선 사용합니다.',
+      ],
+    };
+  }
+
   const exactYearPillar =
     tryParseGanjiFromMethod(lunar, 'getYearInGanZhiExact') ||
     tryParseGanjiFromPartMethods(lunar, 'getYearGanExact', 'getYearZhiExact');
@@ -168,7 +236,7 @@ export function calculateManseryeok(profile) {
     const lunar = createLunarFromProfile(birthDate, birthTime, profile);
     const solar = lunar.getSolar();
     const eightChar = lunar.getEightChar();
-    const yearMonthResolution = resolveYearMonthPillars(lunar, eightChar);
+    const yearMonthResolution = resolveYearMonthPillars({ lunar, eightChar, solar });
     const yearPillar = yearMonthResolution.yearPillar;
     const monthPillar = yearMonthResolution.monthPillar;
     const dayPillar = parseGanji(eightChar.getDay());

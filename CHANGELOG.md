@@ -40,6 +40,9 @@
 
 ### Changed
 
+- 만세력 엔진의 년주/월주 exact 계산에 KST→CST 1시간 보정 적용
+- fortune schemaVersion을 3에서 4로 증가
+
 - 입춘 경계 mismatch 원인 후보에 시간대 기준 차이를 추가
 - `solar_ipchun_boundary`를 즉시 엔진 보정 대상이 아니라 추가 조사 대상으로 문서화
 
@@ -66,6 +69,8 @@
 - 만세력 검증 문서에 reference_conflict 처리 원칙 보강
 
 ### Fixed
+
+- KST 입력 기준의 입춘/절기 경계에서 년주/월주 계산이 외부 기준값과 맞도록 보정
 
 - 입춘/절기 경계의 년주/월주 계산 경로에 exact API fallback 구조 추가
 

@@ -1,5 +1,28 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-09 KST/CST 절기 보정 production 반영
+
+### 작업 내용
+- PR 목적: KST→CST 절기 경계 보정 production 반영
+- PR #19 검증 결과를 바탕으로 년주/월주 exact 계산에 1시간 보정 적용
+- 수정 파일: `src/domain/saju/manseryeokEngine.js`, `src/utils/fortuneEngine.js`, 문서 파일
+- 일주/시주 변경 없음
+- expected/referenceStatus 변경 없음
+- localStorage key 변경 없음
+- schemaVersion 3 → 4 증가
+- App.jsx 변경 없음
+- 태양시 보정 미적용
+- 23시 이후 자시 정책 미변경
+
+### 테스트 결과
+- `npm run build`: 성공
+- `npm run check:manseryeok-term-timezone`: 성공
+- `/?debug=manseryeok` 내부 validator 기준 확인:
+  - `solar_ipchun_boundary`: pass, mismatchFields 없음
+  - `solar_after_ipchun`: pass 유지, mismatchFields 없음
+  - `solar_regular_known_time`: pass 유지, mismatchFields 없음
+  - `solar_before_ipchun`: reference_conflict 유지, expected null 유지
+
 ## 2026-06-09 KST/CST 절기 경계 보정 가설 검증
 
 ### 작업 내용
