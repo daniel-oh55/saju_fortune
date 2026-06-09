@@ -1,5 +1,12 @@
 # MANSERYEOK_ENGINE
 
+## 2026-06-09 lateNightJasiPolicy 회귀 검증 스크립트
+
+- `lateNightJasiPolicy` 선택값은 `npm run check:late-night-jasi-policy`로 회귀 검증한다.
+- 검증 스크립트는 production `calculateManseryeok`와 `buildProfileId`를 직접 호출한다.
+- 확인 대상은 `convertedSolar`, notes, profileId 차이, 23시 이후 조건 적용 여부다.
+- 이번 PR에서는 production 엔진 정책 자체를 변경하지 않는다.
+
 ## 2026-06-09 23시 이후 자시 기준 선택 반영
 
 - production 엔진은 23:00~23:59 출생자에게 `lateNightJasiPolicy` 값을 반영한다.
