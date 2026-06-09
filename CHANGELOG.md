@@ -40,6 +40,7 @@
 
 ### Changed
 
+- 만세력 검증 도구에서 reference_conflict 샘플의 comparisonStatus 표시 개선
 - 만세력 엔진의 년주/월주 exact 계산에 KST→CST 1시간 보정 적용
 - fortune schemaVersion을 3에서 4로 증가
 
@@ -70,6 +71,7 @@
 
 ### Fixed
 
+- expected가 없는 reference_conflict 샘플이 reference_pending처럼 보일 수 있는 혼동 수정
 - KST 입력 기준의 입춘/절기 경계에서 년주/월주 계산이 외부 기준값과 맞도록 보정
 
 - 입춘/절기 경계의 년주/월주 계산 경로에 exact API fallback 구조 추가

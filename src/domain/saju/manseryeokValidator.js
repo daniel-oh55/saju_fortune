@@ -89,6 +89,21 @@ function validateSample(sample) {
       };
     }
 
+    if (sample.referenceStatus === 'reference_conflict') {
+      return {
+        id: sample.id,
+        title: sample.title,
+        referenceStatus: sample.referenceStatus,
+        referenceSource: sample.referenceSource,
+        engineStatus: calculation.engine,
+        comparisonStatus: 'reference_conflict',
+        actual,
+        expected: sample.expected,
+        mismatchFields: [],
+        notes: sample.notes || [],
+      };
+    }
+
     const comparison = sample.expected
       ? compareExpected(actual, sample.expected)
       : { comparisonStatus: 'reference_pending', mismatchFields: [] };
@@ -135,6 +150,7 @@ export function validateManseryeokSamples(samples) {
       (result) => result.comparisonStatus === 'fail' || result.comparisonStatus === 'calculation_failed',
     ).length,
     pending: results.filter((result) => result.comparisonStatus === 'reference_pending').length,
+    referenceConflict: results.filter((result) => result.comparisonStatus === 'reference_conflict').length,
     notApplicable: results.filter((result) => result.comparisonStatus === 'not_applicable').length,
     results,
   };

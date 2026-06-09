@@ -1,5 +1,13 @@
 # TODO
 
+## 2026-06-09 reference_conflict 표시 개선 TODO
+
+- [x] reference_conflict 샘플 처리 정책 검토
+- [ ] 23시 이후 자시/야자시/조자시 정책 결정
+- [ ] 태양시 보정 적용 여부 결정
+- [ ] `solar_before_ipchun` 세 번째 기준 만세력 확인
+- [ ] 음력/윤달 샘플 외부 검증
+
 ## 2026-06-09 KST/CST 절기 경계 가설 TODO
 
 - [x] KST→CST 절기 경계 보정 가설 검증 결과 확인
