@@ -1295,6 +1295,56 @@ input:disabled {
   line-height: 1.55;
 }
 
+.saju-insight-locked {
+  background:
+    linear-gradient(135deg, rgba(255, 251, 240, 0.96), rgba(232, 247, 242, 0.92)),
+    rgba(255, 255, 255, 0.94);
+}
+
+.saju-insight-locked > p {
+  margin: 0;
+  color: #607078;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.saju-insight-locked .ad-box {
+  box-shadow: none;
+}
+
+.saju-insight-deep-dive {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(245, 251, 248, 0.94)),
+    rgba(255, 255, 255, 0.94);
+}
+
+.saju-deep-dive-list {
+  display: grid;
+  gap: 12px;
+}
+
+.saju-deep-dive-item {
+  display: grid;
+  gap: 8px;
+  border: 1px solid rgba(89, 120, 118, 0.12);
+  border-radius: 18px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.86);
+}
+
+.saju-deep-dive-item h3 {
+  margin: 0;
+  color: #2f6f6a;
+  font-size: 0.98rem;
+}
+
+.saju-deep-dive-item p {
+  margin: 0;
+  color: #607078;
+  font-size: 0.88rem;
+  line-height: 1.58;
+}
+
 .flow-list {
   display: grid;
   gap: 12px;

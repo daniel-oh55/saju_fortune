@@ -139,7 +139,13 @@ function App() {
           <ZodiacFortunePage profile={profile} fortune={fortune} />
         )}
         {activePage === 'sajuInsight' && (
-          <SajuInsightPage profile={profile} fortune={fortune} onNavigate={setActivePage} />
+          <SajuInsightPage
+            profile={profile}
+            fortune={fortune}
+            unlockedDetails={unlockedDetails}
+            onUnlockDetail={handleUnlockDetail}
+            onNavigate={setActivePage}
+          />
         )}
         {activePage === 'ai' && <AiConsultPage profile={profile} fortune={fortune} />}
         {activePage === 'compatibility' && <CompatibilityPage profile={profile} />}

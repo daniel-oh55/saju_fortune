@@ -1,5 +1,24 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-09 사주 흐름 심화 해석 광고 해금 추가
+
+### 작업 내용
+- PR 목적: 사주 흐름 상세 페이지에 광고 해금 심화 해석 영역 추가
+- `SajuInsightPage`에 rewarded unlock key `sajuInsightDeepDive` 추가
+- App.jsx에서 `unlockedDetails`와 `onUnlockDetail` 전달
+- 기존 storage/saveRewardUnlock 구조 재사용
+- production 계산 로직 변경 없음
+- expected/referenceStatus 변경 없음
+- localStorage key 이름 변경 없음
+- schemaVersion 변경 없음
+
+### 테스트 결과
+- `npm run build`: 성공
+- SajuInsightPage 잠금/해금 상태 수동 확인 필요
+- 내부 validator 기준:
+  - `solar_before_ipchun`: reference_conflict 유지
+  - `solar_ipchun_boundary`: pass 유지
+
 ## 2026-06-09 사주 흐름 상세 페이지 추가
 
 ### 작업 내용
