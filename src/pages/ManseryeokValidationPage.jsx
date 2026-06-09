@@ -5,13 +5,13 @@ const validation = validateManseryeokSamples(manseryeokValidationSamples);
 
 function StatusBadge({ status }) {
   const labelMap = {
-    pass: '통과',
-    fail: '불일치',
-    reference_pending: '기준값 대기',
-    calculation_failed: '계산 실패',
-    not_applicable: '비교 대상 아님',
-    reference_verified: '기준값 확인',
-    reference_conflict: '기준 충돌',
+    pass: 'pass',
+    fail: 'mismatch',
+    reference_pending: 'reference pending',
+    reference_conflict: 'external reference conflict',
+    calculation_failed: 'calculation failed',
+    not_applicable: 'not applicable',
+    reference_verified: 'reference verified',
   };
 
   return <span className={`validation-status-badge ${status}`}>{labelMap[status] || status}</span>;
@@ -21,18 +21,18 @@ function ProfileSummary({ profile }) {
   return (
     <dl className="validation-json-box">
       <div>
-        <dt>생년월일</dt>
+        <dt>birthDate</dt>
         <dd>{profile.birthDate}</dd>
       </div>
       <div>
-        <dt>태어난 시간</dt>
-        <dd>{profile.birthTimeUnknown ? '시간 미상' : profile.birthTime}</dd>
+        <dt>birthTime</dt>
+        <dd>{profile.birthTimeUnknown ? 'unknown' : profile.birthTime}</dd>
       </div>
       <div>
-        <dt>달력</dt>
+        <dt>calendarType</dt>
         <dd>
           {profile.calendarType}
-          {profile.isLeapMonth ? ' / 윤달' : ''}
+          {profile.isLeapMonth ? ' / leap month' : ''}
         </dd>
       </div>
     </dl>
@@ -66,7 +66,7 @@ function ReferenceSource({ source }) {
     return (
       <div className="validation-json-box">
         <dt>referenceSource</dt>
-        <dd>외부 기준값 미입력</dd>
+        <dd>reference value pending</dd>
       </div>
     );
   }
@@ -89,34 +89,46 @@ function ReferenceSource({ source }) {
   );
 }
 
+function formatExpected(result) {
+  if (result.expected) return JSON.stringify(result.expected, null, 2);
+  if (result.comparisonStatus === 'reference_conflict') {
+    return 'expected is intentionally empty because external references conflict';
+  }
+  return 'reference value pending';
+}
+
 function ManseryeokValidationPage() {
   return (
     <main className="validation-page">
       <section className="section-header">
         <p className="eyebrow">Internal Debug</p>
-        <h1>만세력 검증 도구</h1>
-        <p>외부 만세력 기준값과 lunar-javascript 결과를 비교하기 위한 내부 검증 화면입니다.</p>
+        <h1>Manseryeok Validation</h1>
+        <p>Internal comparison view for external manseryeok reference samples and current engine results.</p>
       </section>
 
       <section className="validation-summary-grid">
         <div>
-          <span>전체 샘플 수</span>
+          <span>total</span>
           <strong>{validation.total}</strong>
         </div>
         <div>
-          <span>통과</span>
+          <span>pass</span>
           <strong>{validation.passed}</strong>
         </div>
         <div>
-          <span>실패</span>
+          <span>failed</span>
           <strong>{validation.failed}</strong>
         </div>
         <div>
-          <span>기준값 대기</span>
+          <span>pending</span>
           <strong>{validation.pending}</strong>
         </div>
         <div>
-          <span>비교 대상 아님</span>
+          <span>conflict</span>
+          <strong>{validation.referenceConflict}</strong>
+        </div>
+        <div>
+          <span>not applicable</span>
           <strong>{validation.notApplicable}</strong>
         </div>
       </section>
@@ -147,7 +159,7 @@ function ManseryeokValidationPage() {
               {!result.actual.reason && (
                 <div className="validation-json-box">
                   <div>
-                    <dt>일간</dt>
+                    <dt>dayMaster</dt>
                     <dd>
                       {result.actual.dayMaster?.stem} / {result.actual.dayMaster?.element}
                     </dd>
@@ -165,7 +177,7 @@ function ManseryeokValidationPage() {
 
               <div className="validation-json-box">
                 <dt>expected</dt>
-                <dd>{result.expected ? JSON.stringify(result.expected, null, 2) : '외부 기준값 입력 대기'}</dd>
+                <dd>{formatExpected(result)}</dd>
               </div>
 
               {result.mismatchFields.length > 0 && (

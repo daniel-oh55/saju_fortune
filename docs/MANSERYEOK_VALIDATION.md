@@ -1,5 +1,12 @@
 # MANSERYEOK_VALIDATION
 
+## reference_conflict 표시 정책
+
+- `reference_conflict` 샘플은 `expected`가 null이어도 `comparisonStatus`를 `reference_conflict`로 표시한다.
+- `reference_conflict`는 계산 실패가 아니라 외부 기준값 충돌 상태다.
+- `reference_conflict` 샘플은 pass/fail 판정 대상이 아니다.
+- 세 번째 외부 기준 또는 정책 확정 전까지 expected를 입력하지 않는다.
+
 ## 절기 기준 충돌 조사 원칙
 
 - 외부 만세력 2곳이 일치하더라도, 라이브러리 exact API와 충돌하는 경우에는 별도 investigation 문서를 둘 수 있다.

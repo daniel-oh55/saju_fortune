@@ -1,5 +1,26 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-09 reference_conflict 검증 표시 개선
+
+### 작업 내용
+- PR 목적: `reference_conflict` 샘플의 내부 검증 표시 개선
+- `expected`가 null인 `reference_conflict` 샘플을 `reference_pending` 대신 `reference_conflict`로 표시
+- `solar_before_ipchun`의 `comparisonStatus`가 `reference_conflict`로 표시되도록 개선
+- debug 페이지 요약에 conflict 건수 추가
+- 계산 로직 변경 없음
+- expected/referenceStatus 변경 없음
+- localStorage 변경 없음
+- schemaVersion 변경 없음
+- App.jsx 변경 없음
+
+### 테스트 결과
+- `npm run build`: 성공
+- `/?debug=manseryeok` 내부 validator 기준 확인:
+  - `solar_before_ipchun`: referenceStatus `reference_conflict`, comparisonStatus `reference_conflict`, expected null 유지
+  - `solar_ipchun_boundary`: pass 유지, mismatchFields 없음
+  - `solar_after_ipchun`: pass 유지, mismatchFields 없음
+  - `solar_regular_known_time`: pass 유지, mismatchFields 없음
+
 ## 2026-06-09 KST/CST 절기 보정 production 반영
 
 ### 작업 내용
