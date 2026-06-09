@@ -40,6 +40,7 @@
 
 ### Changed
 
+- 만세력 검증 도구의 상태/요약/입력 라벨을 한국어 기준으로 정리
 - 만세력 검증 도구에서 reference_conflict 샘플의 comparisonStatus 표시 개선
 - 만세력 엔진의 년주/월주 exact 계산에 KST→CST 1시간 보정 적용
 - fortune schemaVersion을 3에서 4로 증가
@@ -71,6 +72,7 @@
 
 ### Fixed
 
+- PR #21 이후 일부 debug 화면 문구가 영어로 표시되던 부분 복구
 - expected가 없는 reference_conflict 샘플이 reference_pending처럼 보일 수 있는 혼동 수정
 - KST 입력 기준의 입춘/절기 경계에서 년주/월주 계산이 외부 기준값과 맞도록 보정
 

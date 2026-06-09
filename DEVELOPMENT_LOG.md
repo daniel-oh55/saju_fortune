@@ -1,5 +1,24 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-09 만세력 검증 도구 한글 라벨 복구
+
+### 작업 내용
+- PR 목적: 만세력 검증 도구 한글 라벨 복구
+- PR #21의 `reference_conflict` 표시 기능은 유지
+- 상태, 요약, 입력, expected 안내 문구를 한국어 기준으로 정리
+- 계산 로직 변경 없음
+- expected/referenceStatus 변경 없음
+- localStorage 변경 없음
+- schemaVersion 변경 없음
+- App.jsx 변경 없음
+
+### 테스트 결과
+- `npm run build`: 성공
+- `/?debug=manseryeok` 한글 라벨은 코드 기준으로 제목/요약/입력/expected 안내 문구 반영 확인
+- 내부 validator 기준:
+  - `solar_before_ipchun`: referenceStatus `reference_conflict`, comparisonStatus `reference_conflict`, expected null 유지
+  - `solar_ipchun_boundary`: pass 유지, mismatchFields 없음
+
 ## 2026-06-09 reference_conflict 검증 표시 개선
 
 ### 작업 내용
