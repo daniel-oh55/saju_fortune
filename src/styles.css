@@ -135,6 +135,27 @@ p {
   background: transparent;
 }
 
+.late-night-time-notice {
+  display: grid;
+  gap: 8px;
+  padding: 14px 15px;
+  border: 1px solid rgba(74, 139, 132, 0.2);
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(255, 251, 240, 0.96), rgba(232, 247, 242, 0.92));
+}
+
+.late-night-time-notice strong {
+  color: #2f6f6a;
+  font-size: 0.94rem;
+}
+
+.late-night-time-notice p {
+  margin: 0;
+  color: #607078;
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
 label {
   display: flex;
   flex-direction: column;

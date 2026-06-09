@@ -21,6 +21,11 @@ function normalizeInitialProfile(initialProfile) {
   };
 }
 
+function isLateNightBirthTime(birthTime, birthTimeUnknown) {
+  if (birthTimeUnknown) return false;
+  return /^23:\d{2}$/.test(birthTime || '');
+}
+
 function ProfileForm({ initialProfile, onSave }) {
   const [form, setForm] = useState(() => normalizeInitialProfile(initialProfile));
 
@@ -89,6 +94,20 @@ function ProfileForm({ initialProfile, onSave }) {
           시간 모름
         </label>
       </div>
+
+      {isLateNightBirthTime(form.birthTime, form.birthTimeUnknown) && (
+        <div className="late-night-time-notice">
+          <strong>23시 이후 출생 안내</strong>
+          <p>
+            23:00~23:59 출생은 만세력 기준에 따라 같은 날짜 기준 또는 다음 날 자시 기준으로
+            일주와 시주가 달라질 수 있습니다.
+          </p>
+          <p>
+            현재 하루풀이는 입력한 생년월일과 시간을 기준으로 참고용 풀이를 제공하며, 23시 이후
+            기준 선택 기능은 추후 검토 중입니다.
+          </p>
+        </div>
+      )}
 
       <div className="segmented-control" aria-label="양력 음력 선택">
         <button
