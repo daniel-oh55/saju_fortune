@@ -1,5 +1,12 @@
 # MANSERYEOK_TIME_POLICY
 
+## 2026-06-09 입춘 절입 시각 조사 상태
+
+- `solar_ipchun_boundary`는 아직 엔진 보정 확정 대상이 아니라, 입춘 절입 시각 추가 확인이 필요한 상태다.
+- PR #17에서 `lunar-javascript` exact API를 적용했지만 외부 기준값과 mismatch가 유지되었다.
+- 입춘 절입 시각 확인 전에는 수동 보정이나 하드코딩을 하지 않는다.
+- 1990년 입춘 절입 시각 조사 결과는 `docs/MANSERYEOK_IPCHUN_INVESTIGATION.md`에 기록한다.
+
 ## 2026-06-09 입춘 경계 검증 결과
 
 - 이번 보정 검토 대상은 `solar_ipchun_boundary`(1990-02-04 10:30 Seoul)였다.

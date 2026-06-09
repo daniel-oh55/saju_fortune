@@ -1,5 +1,29 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-09 입춘 절입 시각 조사 문서 추가
+
+### 작업 내용
+- PR 목적: `solar_ipchun_boundary` 입춘 절입 시각 조사 문서 추가
+- PR #17 결과: `lunar-javascript` exact API 적용 후에도 `pillars.year`, `pillars.month` mismatch 유지
+- `docs/MANSERYEOK_IPCHUN_INVESTIGATION.md` 신규 추가
+- 입춘 절입 시각 확인 전에는 수동 보정이나 하드코딩을 하지 않는다는 원칙 기록
+
+### 변경하지 않은 항목
+- 계산 로직 변경 없음
+- localStorage 변경 없음
+- schemaVersion 변경 없음
+- App.jsx 변경 없음
+- expected/referenceStatus 변경 없음
+
+### 다음 작업
+- 1990년 입춘 절입 시각 한국 표준시 기준 확인
+- sky.told.me와 포스텔러의 태양시 보정 여부 확인
+- 세 번째 한국 만세력 기준으로 1990-02-04 10:30 추가 확인
+
+### 테스트 결과
+- `npm run build`: 성공
+- 참고: Vite chunk size warning은 표시되었으나 빌드는 정상 완료
+
 ## 2026-06-09 만세력 입춘 경계 년주/월주 검토
 
 ### 작업 내용
