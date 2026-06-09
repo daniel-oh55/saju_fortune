@@ -72,7 +72,10 @@ function HomePage({ fortune, profile, onOpenDetail, onNavigate }) {
         </button>
       </section>
 
-      <SajuElementSummaryCard sajuAnalysis={fortune.sajuAnalysis} />
+      <SajuElementSummaryCard
+        sajuAnalysis={fortune.sajuAnalysis}
+        onOpenDetail={() => onNavigate('sajuInsight')}
+      />
 
       <section className="today-summary-card">
         <p className="eyebrow">한 줄 요약</p>

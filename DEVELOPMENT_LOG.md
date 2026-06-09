@@ -1,5 +1,25 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-09 사주 흐름 상세 페이지 추가
+
+### 작업 내용
+- PR 목적: 사주 흐름 상세 페이지 추가
+- `SajuInsightPage` 신규 추가
+- `SajuElementSummaryCard`에 상세 페이지 진입 버튼 추가
+- HomePage에서 `sajuInsight` 페이지 이동 연결
+- App.jsx는 `SajuInsightPage` 라우팅만 추가
+- production 계산 로직 변경 없음
+- expected/referenceStatus 변경 없음
+- localStorage 변경 없음
+- schemaVersion 변경 없음
+
+### 테스트 결과
+- `npm run build`: 성공
+- 일반 `/` 접속 후 홈 카드 버튼 및 상세 페이지 표시: 수동 확인 필요
+- 내부 validator 기준:
+  - `solar_before_ipchun`: reference_conflict 유지
+  - `solar_ipchun_boundary`: pass 유지
+
 ## 2026-06-09 홈 화면 사주 오행 요약 카드 추가
 
 ### 작업 내용
