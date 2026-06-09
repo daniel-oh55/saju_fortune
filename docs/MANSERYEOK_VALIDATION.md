@@ -1,5 +1,11 @@
 # MANSERYEOK_VALIDATION
 
+## 내부 debug 페이지 라벨 정책
+
+- 내부 debug 페이지는 한국어 라벨을 기본으로 사용한다.
+- `reference_conflict`는 "외부 기준 충돌"로 표시한다.
+- expected가 비어 있는 `reference_conflict` 샘플은 "외부 기준값이 충돌하여 expected를 의도적으로 비워둔 샘플"로 안내한다.
+
 ## reference_conflict 표시 정책
 
 - `reference_conflict` 샘플은 `expected`가 null이어도 `comparisonStatus`를 `reference_conflict`로 표시한다.

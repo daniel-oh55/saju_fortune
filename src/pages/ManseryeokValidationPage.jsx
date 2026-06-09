@@ -5,13 +5,13 @@ const validation = validateManseryeokSamples(manseryeokValidationSamples);
 
 function StatusBadge({ status }) {
   const labelMap = {
-    pass: 'pass',
-    fail: 'mismatch',
-    reference_pending: 'reference pending',
-    reference_conflict: 'external reference conflict',
-    calculation_failed: 'calculation failed',
-    not_applicable: 'not applicable',
-    reference_verified: 'reference verified',
+    pass: '통과',
+    fail: '불일치',
+    reference_pending: '기준값 대기',
+    reference_conflict: '외부 기준 충돌',
+    calculation_failed: '계산 실패',
+    not_applicable: '비교 대상 아님',
+    reference_verified: '기준값 확인',
   };
 
   return <span className={`validation-status-badge ${status}`}>{labelMap[status] || status}</span>;
@@ -21,18 +21,18 @@ function ProfileSummary({ profile }) {
   return (
     <dl className="validation-json-box">
       <div>
-        <dt>birthDate</dt>
+        <dt>생년월일</dt>
         <dd>{profile.birthDate}</dd>
       </div>
       <div>
-        <dt>birthTime</dt>
-        <dd>{profile.birthTimeUnknown ? 'unknown' : profile.birthTime}</dd>
+        <dt>태어난 시간</dt>
+        <dd>{profile.birthTimeUnknown ? '시간 미상' : profile.birthTime}</dd>
       </div>
       <div>
-        <dt>calendarType</dt>
+        <dt>달력</dt>
         <dd>
           {profile.calendarType}
-          {profile.isLeapMonth ? ' / leap month' : ''}
+          {profile.isLeapMonth ? ' / 윤달' : ''}
         </dd>
       </div>
     </dl>
@@ -66,7 +66,7 @@ function ReferenceSource({ source }) {
     return (
       <div className="validation-json-box">
         <dt>referenceSource</dt>
-        <dd>reference value pending</dd>
+        <dd>외부 기준값 미입력</dd>
       </div>
     );
   }
@@ -92,9 +92,9 @@ function ReferenceSource({ source }) {
 function formatExpected(result) {
   if (result.expected) return JSON.stringify(result.expected, null, 2);
   if (result.comparisonStatus === 'reference_conflict') {
-    return 'expected is intentionally empty because external references conflict';
+    return '외부 기준값이 충돌하여 expected를 의도적으로 비워둔 샘플입니다.';
   }
-  return 'reference value pending';
+  return '외부 기준값 입력 대기';
 }
 
 function ManseryeokValidationPage() {
@@ -102,33 +102,33 @@ function ManseryeokValidationPage() {
     <main className="validation-page">
       <section className="section-header">
         <p className="eyebrow">Internal Debug</p>
-        <h1>Manseryeok Validation</h1>
-        <p>Internal comparison view for external manseryeok reference samples and current engine results.</p>
+        <h1>만세력 검증 도구</h1>
+        <p>외부 만세력 기준값과 현재 엔진 결과를 비교하기 위한 내부 검증 화면입니다.</p>
       </section>
 
       <section className="validation-summary-grid">
         <div>
-          <span>total</span>
+          <span>전체 샘플 수</span>
           <strong>{validation.total}</strong>
         </div>
         <div>
-          <span>pass</span>
+          <span>통과</span>
           <strong>{validation.passed}</strong>
         </div>
         <div>
-          <span>failed</span>
+          <span>실패</span>
           <strong>{validation.failed}</strong>
         </div>
         <div>
-          <span>pending</span>
+          <span>기준값 대기</span>
           <strong>{validation.pending}</strong>
         </div>
         <div>
-          <span>conflict</span>
+          <span>기준 충돌</span>
           <strong>{validation.referenceConflict}</strong>
         </div>
         <div>
-          <span>not applicable</span>
+          <span>비교 대상 아님</span>
           <strong>{validation.notApplicable}</strong>
         </div>
       </section>
@@ -159,7 +159,7 @@ function ManseryeokValidationPage() {
               {!result.actual.reason && (
                 <div className="validation-json-box">
                   <div>
-                    <dt>dayMaster</dt>
+                    <dt>일간</dt>
                     <dd>
                       {result.actual.dayMaster?.stem} / {result.actual.dayMaster?.element}
                     </dd>
