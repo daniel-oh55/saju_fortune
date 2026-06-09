@@ -1,5 +1,28 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-09 자시 경계 기준 조사 스크립트 추가
+
+### 작업 내용
+- PR 목적: 23시 이후 자시/야자시/조자시 기준 조사
+- `scripts/checkManseryeokJasiBoundaryHypothesis.mjs` 신규 추가
+- `npm run check:manseryeok-jasi-boundary` 스크립트 추가
+- `docs/MANSERYEOK_JASI_POLICY.md` 신규 추가
+- production 계산 로직 변경 없음
+- expected/referenceStatus 변경 없음
+- localStorage 변경 없음
+- schemaVersion 변경 없음
+- App.jsx 변경 없음
+
+### 테스트 결과
+- `npm run build`: 성공
+- `npm run check:manseryeok-jasi-boundary`: 성공
+- `solar_after_23` 1990-02-03 23:30:
+  - original/sameDayJasi: 기사 / 정축 / 기해 / 병자
+  - nextDayCandidate/midnightReference: 기사 / 정축 / 경자 / 병자
+- 내부 validator 기준:
+  - `solar_before_ipchun`: referenceStatus `reference_conflict`, comparisonStatus `reference_conflict`, expected null 유지
+  - `solar_ipchun_boundary`: pass 유지
+
 ## 2026-06-09 만세력 검증 도구 한글 라벨 복구
 
 ### 작업 내용

@@ -1,5 +1,11 @@
 # MANSERYEOK_VALIDATION
 
+## 자시 경계 샘플 검증 원칙
+
+- 23시 이후 자시 기준이 확정되지 않은 샘플은 expected를 입력하지 않는다.
+- 외부 기준값이 충돌하는 경우 `reference_conflict`로 유지한다.
+- ja-si boundary investigation 스크립트는 pass/fail 판정이 아니라 후보 비교용이다.
+
 ## 내부 debug 페이지 라벨 정책
 
 - 내부 debug 페이지는 한국어 라벨을 기본으로 사용한다.

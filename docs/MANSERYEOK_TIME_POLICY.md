@@ -1,5 +1,13 @@
 # MANSERYEOK_TIME_POLICY
 
+## 2026-06-09 자시 경계 조사 상태
+
+- 23시 이후 자시/야자시/조자시 기준은 아직 미정이다.
+- PR #23에서는 production 엔진을 변경하지 않고 후보 기준만 비교한다.
+- `reference_conflict` 샘플인 `solar_before_ipchun`은 expected null을 유지한다.
+- 향후 정책 후보는 같은 날짜 기준, 다음 날 자시 기준, 사용자 선택 기준이다.
+- 자세한 조사 내용은 `docs/MANSERYEOK_JASI_POLICY.md`에 기록한다.
+
 ## 2026-06-09 KST/CST 절기 보정 반영
 
 - PR #19 검증 결과에 따라 KST→CST 1시간 보정을 production 년주/월주 계산에 반영했다.
