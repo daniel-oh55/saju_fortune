@@ -31,6 +31,17 @@ function parseBirthTime(birthTime, birthTimeUnknown) {
   return { hour, minute, usedFallbackNoon: false };
 }
 
+function isLateNightBirthTimeParts(timeParts, birthTimeUnknown) {
+  return !birthTimeUnknown && timeParts.hour === 23;
+}
+
+function shouldUseNextDayJasi(profile, timeParts, birthTimeUnknown) {
+  return (
+    profile.lateNightJasiPolicy === 'next_day' &&
+    isLateNightBirthTimeParts(timeParts, birthTimeUnknown)
+  );
+}
+
 function parseGanji(ganji) {
   if (!ganji || ganji.length < 2) return null;
 
@@ -114,6 +125,23 @@ function subtractHoursFromSolar(solar, hours) {
   );
 }
 
+function createNextDayJasiSolar(solar, minute) {
+  const parts = parseSolarYmdHms(solar);
+  if (!parts) return solar;
+
+  const date = new Date(Date.UTC(parts.year, parts.month - 1, parts.day, 0, minute, 0));
+  date.setUTCDate(date.getUTCDate() + 1);
+
+  return Solar.fromYmdHms(
+    date.getUTCFullYear(),
+    date.getUTCMonth() + 1,
+    date.getUTCDate(),
+    0,
+    minute,
+    0,
+  );
+}
+
 function createSolarTermAdjustedLunar(solar) {
   try {
     return subtractHoursFromSolar(solar, SOLAR_TERM_TIMEZONE_ADJUSTMENT_HOURS)?.getLunar() || null;
@@ -183,7 +211,7 @@ function buildUnsupported(reason, detail) {
   };
 }
 
-function createLunarFromProfile(dateParts, timeParts, profile) {
+function createLunarFromProfile(dateParts, timeParts, profile, useNextDayJasi) {
   const calendarType = profile.calendarType || 'solar';
 
   if (calendarType === 'solar') {
@@ -195,7 +223,7 @@ function createLunarFromProfile(dateParts, timeParts, profile) {
       timeParts.minute,
       0,
     );
-    return solar.getLunar();
+    return (useNextDayJasi ? createNextDayJasiSolar(solar, timeParts.minute) : solar).getLunar();
   }
 
   if (calendarType === 'lunar') {
@@ -212,6 +240,10 @@ function createLunarFromProfile(dateParts, timeParts, profile) {
 
     if (Boolean(profile.isLeapMonth) !== convertedMonth < 0) {
       throw new Error('lunar_leap_month_mismatch');
+    }
+
+    if (useNextDayJasi) {
+      return createNextDayJasiSolar(lunar.getSolar(), timeParts.minute).getLunar();
     }
 
     return lunar;
@@ -233,7 +265,8 @@ export function calculateManseryeok(profile) {
   }
 
   try {
-    const lunar = createLunarFromProfile(birthDate, birthTime, profile);
+    const useNextDayJasi = shouldUseNextDayJasi(profile, birthTime, birthTimeUnknown);
+    const lunar = createLunarFromProfile(birthDate, birthTime, profile, useNextDayJasi);
     const solar = lunar.getSolar();
     const eightChar = lunar.getEightChar();
     const yearMonthResolution = resolveYearMonthPillars({ lunar, eightChar, solar });
@@ -252,12 +285,20 @@ export function calculateManseryeok(profile) {
     ];
 
     notes.unshift(
-      '태양시 보정과 23시 이후 자시 기준은 아직 적용하지 않습니다.',
+      '태양시 보정은 아직 적용하지 않으며, 23시 이후 자시 기준은 사용자가 다음 날 자시 기준을 선택한 경우에만 적용합니다.',
       ...yearMonthResolution.notes,
     );
 
     if (birthTimeUnknown) {
       notes.push('시주 미상: birthTimeUnknown=true');
+    }
+
+    if (isLateNightBirthTimeParts(birthTime, birthTimeUnknown)) {
+      notes.push(
+        useNextDayJasi
+          ? '사용자가 선택한 다음 날 자시 기준에 따라 23시 이후 출생 시간을 다음 날 00시로 보정해 계산했습니다.'
+          : '23시 이후 자시 기준은 입력한 날짜 기준으로 계산했습니다.',
+      );
     }
 
     return {
@@ -271,6 +312,7 @@ export function calculateManseryeok(profile) {
         birthDate: profile.birthDate,
         birthTime: birthTimeUnknown ? null : profile.birthTime,
         birthTimeUnknown,
+        lateNightJasiPolicy: profile.lateNightJasiPolicy || 'same_day',
       },
       convertedSolar: solar.toYmdHms(),
       convertedLunar: {

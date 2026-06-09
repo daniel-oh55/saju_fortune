@@ -1,5 +1,15 @@
 # MANSERYEOK_ENGINE
 
+## 2026-06-09 23시 이후 자시 기준 선택 반영
+
+- production 엔진은 23:00~23:59 출생자에게 `lateNightJasiPolicy` 값을 반영한다.
+- 기본값 `same_day`는 입력한 생년월일과 시간을 그대로 계산 기준으로 사용한다.
+- `next_day`는 사용자가 명시적으로 선택한 경우에만 계산 기준을 다음 날 00:분으로 보정한다.
+- 보정 범위는 23:00~23:59 입력에 한정하며, 22시대 이하와 시간 미상 입력에는 적용하지 않는다.
+- 태양시 보정은 여전히 적용하지 않는다.
+- `next_day` 선택 시 `convertedSolar`는 보정된 계산 기준을 표시할 수 있으며, notes에 선택 기준을 기록한다.
+- fortune schemaVersion은 4에서 5로 올려 기존 캐시가 새 계산 기준을 반영하도록 한다.
+
 ## 2026-06-09 KST/CST 절기 보정 production 반영
 
 - production 엔진의 년주/월주 exact 계산에 KST→CST 1시간 보정을 적용했다.

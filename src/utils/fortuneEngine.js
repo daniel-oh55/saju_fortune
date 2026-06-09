@@ -1,7 +1,7 @@
 import { categoryMeta, fortuneTemplates } from '../data/fortuneTemplates.js';
 import { createSajuAnalysis } from '../domain/saju/createSajuAnalysis.js';
 
-export const CURRENT_FORTUNE_SCHEMA_VERSION = 4;
+export const CURRENT_FORTUNE_SCHEMA_VERSION = 5;
 
 function hashString(text) {
   let hash = 0;
@@ -53,7 +53,7 @@ function buildDetailedFortuneText({ template, seed, sajuAnalysis, luckyColor, lu
 
 export function buildProfileId(profile) {
   return hashString(
-    `${profile.nickname}-${profile.birthDate}-${profile.birthTime}-${profile.birthTimeUnknown}-${profile.calendarType}-${profile.isLeapMonth}-${profile.gender}`,
+    `${profile.nickname}-${profile.birthDate}-${profile.birthTime}-${profile.birthTimeUnknown}-${profile.lateNightJasiPolicy || 'same_day'}-${profile.calendarType}-${profile.isLeapMonth}-${profile.gender}`,
   ).toString(36);
 }
 
