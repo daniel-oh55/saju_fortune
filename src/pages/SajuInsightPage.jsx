@@ -1,4 +1,7 @@
+import AdRewardBox from '../components/AdRewardBox.jsx';
 import SajuCalculationBasisCard from '../components/SajuCalculationBasisCard.jsx';
+
+const SAJU_INSIGHT_DEEP_UNLOCK_KEY = 'sajuInsightDeepDive';
 
 const ELEMENT_LABELS = {
   wood: '목',
@@ -29,7 +32,44 @@ function buildElementRows(elements) {
   }));
 }
 
-function SajuInsightPage({ profile, fortune, onNavigate }) {
+function buildDeepDiveSections(sajuAnalysis) {
+  const elements = sajuAnalysis?.elements || {};
+  const traits = toItems(sajuAnalysis?.traits, 2);
+  const weakPoints = toItems(sajuAnalysis?.weakPoints, 2);
+  const luckyKeywords = toItems(sajuAnalysis?.luckyKeywords, 3);
+  const dominant = elements.dominant || '중심 기운';
+  const weak = elements.weak || '보완 기운';
+  const keywordText = luckyKeywords.length > 0 ? luckyKeywords.join(', ') : '정리와 균형';
+  const traitText = traits.length > 0 ? traits.join(', ') : '차분한 관찰';
+  const weakPointText = weakPoints.length > 0 ? weakPoints.join(', ') : '작은 루틴';
+
+  return [
+    {
+      title: '중심 기운 활용법',
+      text: `중심에 놓인 ${dominant} 흐름은 오늘의 선택을 정리하는 기준으로 살펴볼 수 있습니다. ${traitText}의 장점을 가볍게 떠올리면 일정이나 관계의 우선순위를 잡는 데 도움이 될 수 있습니다.`,
+    },
+    {
+      title: '보완 기운 관리법',
+      text: `보완하면 좋은 ${weak} 기운은 무리하게 채우기보다 작은 루틴으로 다뤄보면 좋습니다. ${weakPointText}을 한 번 더 살피면 하루의 균형을 부드럽게 맞추는 데 도움이 될 수 있습니다.`,
+    },
+    {
+      title: '오늘의 실행 루틴',
+      text: `오늘은 ${keywordText}를 중심으로 일정을 정리해보세요. 해야 할 일을 작게 나누고, 마무리할 수 있는 것부터 차분히 정리하는 흐름이 잘 맞을 수 있습니다.`,
+    },
+    {
+      title: '관계와 일상 힌트',
+      text: `${traitText}의 흐름을 살리되 표현은 조금 부드럽게 조절해보세요. 대화의 온도를 낮추고 확인하는 시간을 두면 관계나 일상에서 부담을 줄이는 데 도움이 될 수 있습니다.`,
+    },
+  ];
+}
+
+function SajuInsightPage({
+  profile,
+  fortune,
+  unlockedDetails = {},
+  onUnlockDetail,
+  onNavigate,
+}) {
   const sajuAnalysis = fortune?.sajuAnalysis;
 
   if (!sajuAnalysis) {
@@ -51,6 +91,8 @@ function SajuInsightPage({ profile, fortune, onNavigate }) {
   const traits = toItems(sajuAnalysis.traits, 3);
   const weakPoints = toItems(sajuAnalysis.weakPoints, 3);
   const luckyKeywords = toItems(sajuAnalysis.luckyKeywords, 4);
+  const isDeepDiveUnlocked = Boolean(unlockedDetails[SAJU_INSIGHT_DEEP_UNLOCK_KEY]?.unlocked);
+  const deepDiveSections = buildDeepDiveSections(sajuAnalysis);
 
   return (
     <div className="page-stack saju-insight-page">
@@ -138,6 +180,36 @@ function SajuInsightPage({ profile, fortune, onNavigate }) {
           <p className="saju-insight-muted">
             하루의 행동 힌트처럼 가볍게 참고해보세요.
           </p>
+        </section>
+      )}
+
+      {isDeepDiveUnlocked ? (
+        <section className="saju-insight-section saju-insight-deep-dive">
+          <h2>심화 해석</h2>
+          <div className="saju-deep-dive-list">
+            {deepDiveSections.map((section) => (
+              <article className="saju-deep-dive-item" key={section.title}>
+                <h3>{section.title}</h3>
+                <p>{section.text}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+      ) : (
+        <section className="saju-insight-section saju-insight-locked">
+          <h2>심화 해석</h2>
+          <p>
+            오행 균형과 오늘의 활용 키워드를 조금 더 자세히 풀어볼 수 있습니다. 광고 시청 후
+            심화 해석을 열람할 수 있어요.
+          </p>
+          {onUnlockDetail && (
+            <AdRewardBox
+              categoryLabel="사주 심화 해석"
+              isUnlocked={false}
+              onUnlock={() => onUnlockDetail(SAJU_INSIGHT_DEEP_UNLOCK_KEY)}
+              buttonLabel="광고 보고 심화 해석 보기"
+            />
+          )}
         </section>
       )}
 
