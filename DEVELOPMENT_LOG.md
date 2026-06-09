@@ -1,5 +1,27 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-09 사주 심화 해석 광고 해금 회귀 검증 추가
+
+### 작업 내용
+- PR 목적: 사주 심화 해석 광고 해금 상태 회귀 검증 스크립트 추가
+- 신규 스크립트: `scripts/checkSajuInsightRewardUnlockRegression.mjs`
+- 신규 npm script: `check:saju-insight-reward-unlock`
+- production UI 변경 없음
+- production 계산 로직 변경 없음
+- storage.js production 로직 변경 없음
+- expected/referenceStatus 변경 없음
+- localStorage key 이름 변경 없음
+- schemaVersion 변경 없음
+
+### 테스트 결과
+- `npm run build`: 성공
+- `npm run check:saju-insight-reward-unlock`: 성공
+- `npm run check:late-night-jasi-policy`: 성공
+- `npm run check:manseryeok-jasi-boundary`: 성공
+- 내부 validator 기준:
+  - `solar_before_ipchun`: reference_conflict 유지
+  - `solar_ipchun_boundary`: pass 유지
+
 ## 2026-06-09 사주 흐름 심화 해석 광고 해금 추가
 
 ### 작업 내용
