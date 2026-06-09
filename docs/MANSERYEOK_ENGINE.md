@@ -1,5 +1,12 @@
 # MANSERYEOK_ENGINE
 
+## 2026-06-09 사주 계산 기준 요약 표시
+
+- SettingsPage에서 `fortune.sajuAnalysis.manseryeok` 및 `pillars`를 기반으로 계산 기준 요약을 표시한다.
+- 이 변경은 계산 로직 변경이 아니라 사용자 투명성 개선이다.
+- 23시 이후 `next_day` 선택 시 `convertedSolar`가 보정된 계산 기준 일시로 보일 수 있다.
+- schemaVersion 변경은 없다.
+
 ## 2026-06-09 lateNightJasiPolicy 회귀 검증 스크립트
 
 - `lateNightJasiPolicy` 선택값은 `npm run check:late-night-jasi-policy`로 회귀 검증한다.

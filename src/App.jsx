@@ -143,6 +143,7 @@ function App() {
         {activePage === 'settings' && (
           <SettingsPage
             profile={profile}
+            fortune={fortune}
             onEditProfile={() => setActivePage('onboarding')}
             onReset={handleReset}
           />

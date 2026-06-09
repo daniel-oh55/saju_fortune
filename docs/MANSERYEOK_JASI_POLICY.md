@@ -1,5 +1,12 @@
 # MANSERYEOK_JASI_POLICY
 
+## 사용자 계산 기준 표시
+
+- 23시 이후 사용자는 선택한 기준이 실제 계산에 어떻게 반영되었는지 확인할 수 있어야 한다.
+- SettingsPage에 사주 계산 기준 요약을 표시한다.
+- `same_day` / `next_day` 선택값과 `convertedSolar`를 함께 보여주어 혼동을 줄인다.
+- 이 표시는 정책 확정이 아니라 사용자 투명성 개선이다.
+
 ## lateNightJasiPolicy 회귀 검증
 
 - `same_day`는 23:00~23:59 입력을 입력한 날짜 기준으로 계산한다.

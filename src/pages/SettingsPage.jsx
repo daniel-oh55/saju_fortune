@@ -1,3 +1,5 @@
+import SajuCalculationBasisCard from '../components/SajuCalculationBasisCard.jsx';
+
 function genderLabel(value) {
   if (value === 'female') return '여성';
   if (value === 'male') return '남성';
@@ -13,7 +15,7 @@ function lateNightJasiPolicyLabel(value) {
   return value === 'next_day' ? '다음 날 자시 기준' : '입력한 날짜 기준';
 }
 
-function SettingsPage({ profile, onEditProfile, onReset }) {
+function SettingsPage({ profile, fortune, onEditProfile, onReset }) {
   return (
     <div className="page-stack">
       <section className="section-header">
@@ -62,6 +64,8 @@ function SettingsPage({ profile, onEditProfile, onReset }) {
           </p>
         </section>
       )}
+
+      <SajuCalculationBasisCard profile={profile} fortune={fortune} />
 
       <section className="settings-actions">
         <button className="ghost-button full-width" type="button" onClick={onEditProfile}>
