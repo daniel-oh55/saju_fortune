@@ -1,4 +1,5 @@
 import FortuneCard from '../components/FortuneCard.jsx';
+import SajuElementSummaryCard from '../components/SajuElementSummaryCard.jsx';
 import ScoreDonut from '../components/ScoreDonut.jsx';
 
 function getTimeFortune() {
@@ -70,6 +71,8 @@ function HomePage({ fortune, profile, onOpenDetail, onNavigate }) {
           오늘운세 자세히 보기
         </button>
       </section>
+
+      <SajuElementSummaryCard sajuAnalysis={fortune.sajuAnalysis} />
 
       <section className="today-summary-card">
         <p className="eyebrow">한 줄 요약</p>

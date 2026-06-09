@@ -1071,6 +1071,7 @@ input:disabled {
 }
 
 .today-summary-card,
+.saju-element-summary-card,
 .fortune-flow-card,
 .time-fortune-card,
 .zodiac-link-card,
@@ -1085,11 +1086,94 @@ input:disabled {
 }
 
 .today-summary-card h2,
+.saju-element-summary-card h2,
 .time-fortune-card h2,
 .zodiac-link-card h2,
 .zodiac-advice-card h2 {
   margin-bottom: 8px;
   font-size: 1.12rem;
+}
+
+.saju-element-summary-card {
+  display: grid;
+  gap: 14px;
+}
+
+.saju-element-head h2 {
+  margin-bottom: 0;
+}
+
+.saju-element-pair-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.saju-element-pair-grid div {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+  border-radius: 16px;
+  padding: 13px;
+  background: #f5fbf8;
+}
+
+.saju-element-pair-grid span,
+.saju-keyword-section > span {
+  color: #697a80;
+  font-size: 0.8rem;
+  font-weight: 900;
+}
+
+.saju-element-pair-grid strong {
+  color: #338f8b;
+  font-size: 1.15rem;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.saju-balance-hint,
+.saju-element-guide {
+  margin: 0;
+  color: #607078;
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.saju-balance-hint {
+  border-radius: 16px;
+  padding: 12px;
+  background: linear-gradient(135deg, rgba(255, 251, 240, 0.95), rgba(232, 247, 242, 0.9));
+}
+
+.saju-keyword-section {
+  display: grid;
+  gap: 8px;
+}
+
+.saju-keyword-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.saju-keyword-chips em {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  border-radius: 999px;
+  padding: 6px 11px;
+  color: #2f6f6a;
+  background: #eef8f5;
+  font-size: 0.83rem;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.saju-element-guide {
+  border-top: 1px solid #edf2ef;
+  padding-top: 12px;
 }
 
 .flow-list {
