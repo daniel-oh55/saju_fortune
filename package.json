@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "check:late-night-jasi-policy": "node scripts/checkLateNightJasiPolicyRegression.mjs",
+    "check:content-safety": "node scripts/checkContentSafetyCopyRegression.mjs",
     "check:manseryeok-jasi-boundary": "node scripts/checkManseryeokJasiBoundaryHypothesis.mjs",
     "check:manseryeok-term-timezone": "node scripts/checkManseryeokTermTimezoneHypothesis.mjs",
     "check:rewarded-ad-service": "node scripts/checkRewardedAdServiceRegression.mjs",
