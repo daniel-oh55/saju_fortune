@@ -1,5 +1,28 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-10 개인정보 처리방침 초안 문서 추가
+
+### 작업 내용
+- PR 목적: 개인정보 처리방침 초안 문서 추가
+- `docs/PRIVACY_POLICY_DRAFT.md` 신규 추가
+- `docs/PRIVACY_DATA_MAP.md` 신규 추가
+- SAVED_READINGS / VISIT_STREAK / REWARDED_AD_SDK_READINESS 문서에 개인정보 관련 원칙 추가
+- production 코드 변경 없음
+- production 계산 로직 변경 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+- rewarded ad 구조 변경 없음
+- 저장/공유/streak 기능 동작 변경 없음
+- 실제 광고 SDK 추가 없음
+- 외부 광고 라이브러리 설치 없음
+
+### 테스트 결과
+- `npm run build`: 성공
+- `npm run check:content-safety`: 성공
+- `npm run check:share-text`: 성공
+- `npm run check:saved-readings`: 성공
+- `npm run check:visit-streak`: 성공
+
 ## 2026-06-10 위험 표현 검증 스크립트 추가
 
 ### 작업 내용
