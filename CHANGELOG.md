@@ -4,6 +4,9 @@
 
 ### Added
 
+- rewarded ad provider adapter 구조
+- mock rewarded ad provider adapter
+- rewarded ad provider adapter 회귀 검증 스크립트
 - 환경변수 기반 rewarded ad placement resolver
 - rewarded ad placement resolver 회귀 검증 스크립트
 - `.env.example`의 rewarded ad placement 환경변수 예시
@@ -63,6 +66,7 @@
 
 ### Changed
 
+- `rewardedAdService`가 provider adapter를 호출하는 facade 구조로 정리
 - 실제 광고 SDK 연동 시 placementId를 환경변수로 주입할 수 있도록 구조 보완
 - 오늘운세 상세 풀이와 사주 심화 해석 광고 영역이 명시적 placementId를 사용하도록 보완
 - `RewardAdModal`이 광고 로딩 실패, 사용자 중단, 보상 미지급 상태를 구분해 안내하도록 보완
