@@ -4,6 +4,8 @@
 
 ### Added
 
+- 보상형 광고 placementId 설정 파일
+- rewarded ad placement 설정 회귀 검증 스크립트
 - 보상형 광고 mock outcome 상태 처리
 - rewarded ad outcome 회귀 검증 스크립트
 - 보상형 광고 provider 추상화 서비스
@@ -58,6 +60,7 @@
 
 ### Changed
 
+- 오늘운세 상세 풀이와 사주 심화 해석 광고 영역이 명시적 placementId를 사용하도록 보완
 - `RewardAdModal`이 광고 로딩 실패, 사용자 중단, 보상 미지급 상태를 구분해 안내하도록 보완
 - mock 광고 완료 후 중복 대기 시간을 줄이도록 보상 확인 흐름 보완
 - `RewardAdModal`이 mock rewarded ad provider를 통해 보상 완료를 처리하도록 구조 보완

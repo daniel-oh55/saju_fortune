@@ -1,7 +1,13 @@
 import { useState } from 'react';
 import RewardAdModal from './RewardAdModal.jsx';
 
-function AdRewardBox({ categoryLabel, isUnlocked, onUnlock, buttonLabel = '광고 보고 상세 풀이 열기' }) {
+function AdRewardBox({
+  categoryLabel,
+  placementId,
+  isUnlocked,
+  onUnlock,
+  buttonLabel = '광고 보고 상세 풀이 열기',
+}) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   if (isUnlocked) {
@@ -27,6 +33,7 @@ function AdRewardBox({ categoryLabel, isUnlocked, onUnlock, buttonLabel = '광�
       {isModalOpen && (
         <RewardAdModal
           categoryLabel={categoryLabel}
+          placementId={placementId}
           onClose={() => setIsModalOpen(false)}
           onRewardComplete={onUnlock}
         />
