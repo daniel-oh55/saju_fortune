@@ -1,5 +1,27 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-10 홈 오늘의 루틴 카드 추가
+
+### 작업 내용
+- PR 목적: 홈 화면 오늘의 루틴 카드 추가
+- `DailyRoutineCard` 컴포넌트 신규 추가
+- HomePage에 오늘의 루틴 카드 표시
+- 기존 sajuAnalysis 데이터만 사용
+- production 계산 로직 변경 없음
+- sajuAnalysis 데이터 구조 변경 없음
+- schemaVersion 변경 없음
+- expected/referenceStatus 변경 없음
+- localStorage key 이름 변경 없음
+- rewarded ad 구조 변경 없음
+- storage.js 변경 없음
+
+### 테스트 결과
+- `npm run build`: 성공
+- 로컬 dev 서버 `http://127.0.0.1:5174`: 200 응답 확인
+- 내부 validator 기준:
+  - `solar_before_ipchun`: reference_conflict 유지
+  - `solar_ipchun_boundary`: pass 유지
+
 ## 2026-06-10 무료/광고 해금 콘텐츠 안내 추가
 
 ### 작업 내용
