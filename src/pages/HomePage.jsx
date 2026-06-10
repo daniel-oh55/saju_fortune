@@ -1,3 +1,4 @@
+import DailyRoutineCard from '../components/DailyRoutineCard.jsx';
 import FortuneCard from '../components/FortuneCard.jsx';
 import SajuElementSummaryCard from '../components/SajuElementSummaryCard.jsx';
 import ScoreDonut from '../components/ScoreDonut.jsx';
@@ -73,6 +74,11 @@ function HomePage({ fortune, profile, onOpenDetail, onNavigate }) {
       </section>
 
       <SajuElementSummaryCard
+        sajuAnalysis={fortune.sajuAnalysis}
+        onOpenDetail={() => onNavigate('sajuInsight')}
+      />
+
+      <DailyRoutineCard
         sajuAnalysis={fortune.sajuAnalysis}
         onOpenDetail={() => onNavigate('sajuInsight')}
       />
