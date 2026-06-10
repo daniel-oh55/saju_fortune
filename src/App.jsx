@@ -11,6 +11,7 @@ import ManseryeokValidationPage from './pages/ManseryeokValidationPage.jsx';
 import AiConsultPage from './pages/AiConsultPage.jsx';
 import CompatibilityPage from './pages/CompatibilityPage.jsx';
 import PremiumPage from './pages/PremiumPage.jsx';
+import PrivacyInfoPage from './pages/PrivacyInfoPage.jsx';
 import SettingsPage from './pages/SettingsPage.jsx';
 import { CURRENT_FORTUNE_SCHEMA_VERSION, createTodayFortune } from './utils/fortuneEngine.js';
 import { getKoreaDateKey } from './utils/date.js';
@@ -188,10 +189,12 @@ function App() {
         {activePage === 'ai' && <AiConsultPage profile={profile} fortune={fortune} />}
         {activePage === 'compatibility' && <CompatibilityPage profile={profile} />}
         {activePage === 'premium' && <PremiumPage />}
+        {activePage === 'privacyInfo' && <PrivacyInfoPage onNavigate={setActivePage} />}
         {activePage === 'settings' && (
           <SettingsPage
             profile={profile}
             fortune={fortune}
+            onNavigate={setActivePage}
             onEditProfile={() => setActivePage('onboarding')}
             onReset={handleReset}
           />

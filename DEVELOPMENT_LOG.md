@@ -1,5 +1,33 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-10 앱 안 개인정보 안내 페이지 추가
+
+### 작업 내용
+- PR 목적: 개인정보 안내 앱 안 페이지 추가
+- `PrivacyInfoPage` 신규 추가
+- `PrivacyInfoLinkCard` 신규 추가
+- HomePage에서 개인정보 안내 페이지 진입 추가
+- SettingsPage에서 개인정보 안내 페이지 진입 추가
+- production 계산 로직 변경 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+- consent localStorage key 실제 구현 없음
+- rewarded ad 구조 변경 없음
+- 저장/공유/streak 기능 동작 변경 없음
+- 실제 광고 SDK 추가 없음
+- 외부 광고/분석 라이브러리 설치 없음
+
+### 테스트 결과
+- `npm run build`: 성공
+- `npm run check:content-safety`: 성공
+- `npm run check:share-text`: 성공
+- `npm run check:saved-readings`: 성공
+- `npm run check:visit-streak`: 성공
+- 로컬 dev 서버 `http://127.0.0.1:5174`: 200 응답 확인
+- 내부 validator 기준:
+  - `solar_before_ipchun`: reference_conflict 유지
+  - `solar_ipchun_boundary`: pass 유지
+
 ## 2026-06-10 쿠키/광고 동의 UX 검토 문서 추가
 
 ### 작업 내용
