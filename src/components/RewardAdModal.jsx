@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import {
   getMockRewardedAdDurationSeconds,
+  getRewardedAdOutcomeMessage,
   showRewardedAd,
 } from '../services/rewardedAdService.js';
 
@@ -32,10 +33,11 @@ function RewardAdModal({ categoryLabel, onClose, onRewardComplete }) {
       const result = await showRewardedAd({
         placementId: categoryLabel,
         categoryLabel,
+        delayMs: 0,
       });
 
       if (!result.ok) {
-        setErrorMessage('광고 보상 확인에 실패했습니다. 잠시 후 다시 시도해주세요.');
+        setErrorMessage(getRewardedAdOutcomeMessage(result.reason));
         return;
       }
 
@@ -70,7 +72,7 @@ function RewardAdModal({ categoryLabel, onClose, onRewardComplete }) {
         </div>
 
         <div className="modal-actions">
-          <button className="ghost-button" type="button" onClick={onClose}>
+          <button className="ghost-button" type="button" onClick={onClose} disabled={isCompleting}>
             닫기
           </button>
           <button
