@@ -13,6 +13,7 @@
     "check:rewarded-ad-outcomes": "node scripts/checkRewardedAdOutcomeRegression.mjs",
     "check:rewarded-ad-placements": "node scripts/checkRewardedAdPlacementConfig.mjs",
     "check:rewarded-ad-placement-resolver": "node scripts/checkRewardedAdPlacementResolver.mjs",
+    "check:rewarded-ad-provider-adapter": "node scripts/checkRewardedAdProviderAdapterRegression.mjs",
     "check:saju-insight-reward-unlock": "node scripts/checkSajuInsightRewardUnlockRegression.mjs",
     "preview": "vite preview"
   },

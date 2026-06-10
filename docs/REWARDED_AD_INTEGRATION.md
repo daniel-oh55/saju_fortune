@@ -79,6 +79,24 @@
 - placement resolver가 내부 key를 실제 provider placementId로 변환한다.
 - unlock key와 placementId는 계속 분리한다.
 
+## Provider Adapter 구조
+
+현재 provider는 `mock_rewarded_ad` 하나만 사용한다.
+
+구조:
+
+- `rewardedAdService.js`: UI에서 호출하는 service facade
+- `rewardedAdProvider.mock.js`: mock provider 구현
+- `rewardedAdProvider.types.js`: provider/outcome 공통 상수
+- `rewardedAdPlacements.js`: placementId와 환경변수 resolver
+
+원칙:
+
+- UI 컴포넌트는 실제 provider 구현을 직접 import하지 않는다.
+- `RewardAdModal`은 `showRewardedAd`만 호출한다.
+- 실제 SDK 연동 시 provider adapter를 추가하고 service에서 선택한다.
+- 기존 unlock 저장 구조는 변경하지 않는다.
+
 ## 향후 실제 SDK 연동 원칙
 
 - `RewardAdModal` UI는 최대한 유지한다.
