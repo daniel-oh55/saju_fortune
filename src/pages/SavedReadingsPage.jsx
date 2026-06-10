@@ -1,3 +1,4 @@
+import ContentSafetyNotice from '../components/ContentSafetyNotice.jsx';
 import CopyShareButton from '../components/CopyShareButton.jsx';
 import { buildSavedReadingShareText } from '../utils/shareTextBuilder.js';
 
@@ -27,6 +28,8 @@ function SavedReadingsPage({ savedReadings, onRemoveSavedReading, onNavigate }) 
         <h1>저장한 풀이</h1>
         <p>마음에 남는 풀이를 다시 확인할 수 있는 공간입니다.</p>
       </section>
+
+      <ContentSafetyNotice variant="saved" compact />
 
       {items.length === 0 ? (
         <section className="saved-reading-empty">

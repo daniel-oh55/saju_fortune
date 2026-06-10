@@ -1,5 +1,6 @@
 import AdRewardBox from '../components/AdRewardBox.jsx';
 import ContentAccessNotice from '../components/ContentAccessNotice.jsx';
+import ContentSafetyNotice from '../components/ContentSafetyNotice.jsx';
 import CopyShareButton from '../components/CopyShareButton.jsx';
 import SaveReadingButton from '../components/SaveReadingButton.jsx';
 import { REWARDED_AD_PLACEMENTS } from '../config/rewardedAdPlacements.js';
@@ -71,6 +72,8 @@ function FortuneDetailPage({
         <CopyShareButton
           getText={() => buildFortuneCategoryShareText({ fortune, category, isUnlocked })}
         />
+
+        <ContentSafetyNotice variant="fortune" compact />
 
         <ContentAccessNotice
           variant="rewarded"

@@ -1,4 +1,5 @@
 import DailyRoutineCard from '../components/DailyRoutineCard.jsx';
+import ContentSafetyNotice from '../components/ContentSafetyNotice.jsx';
 import FortuneCard from '../components/FortuneCard.jsx';
 import SajuElementSummaryCard from '../components/SajuElementSummaryCard.jsx';
 import SavedReadingsSummaryCard from '../components/SavedReadingsSummaryCard.jsx';
@@ -173,6 +174,7 @@ function HomePage({ fortune, profile, savedReadings, visitStreak, onOpenDetail, 
           띠별 보기
         </button>
       </section>
+      <ContentSafetyNotice variant="general" compact />
     </div>
   );
 }

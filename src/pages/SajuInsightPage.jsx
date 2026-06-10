@@ -1,5 +1,6 @@
 import AdRewardBox from '../components/AdRewardBox.jsx';
 import ContentAccessNotice from '../components/ContentAccessNotice.jsx';
+import ContentSafetyNotice from '../components/ContentSafetyNotice.jsx';
 import CopyShareButton from '../components/CopyShareButton.jsx';
 import SaveReadingButton from '../components/SaveReadingButton.jsx';
 import SajuCalculationBasisCard from '../components/SajuCalculationBasisCard.jsx';
@@ -329,6 +330,8 @@ function SajuInsightPage({
           )}
         </section>
       )}
+
+      <ContentSafetyNotice variant="saju" />
 
       <section className="saju-insight-note">
         <p>
