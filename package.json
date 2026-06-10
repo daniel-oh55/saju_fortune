@@ -16,6 +16,7 @@
     "check:rewarded-ad-provider-adapter": "node scripts/checkRewardedAdProviderAdapterRegression.mjs",
     "check:saved-readings": "node scripts/checkSavedReadingsRegression.mjs",
     "check:saju-insight-reward-unlock": "node scripts/checkSajuInsightRewardUnlockRegression.mjs",
+    "check:share-text": "node scripts/checkShareTextBuilderRegression.mjs",
     "check:visit-streak": "node scripts/checkVisitStreakRegression.mjs",
     "preview": "vite preview"
   },

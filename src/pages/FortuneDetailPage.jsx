@@ -1,7 +1,9 @@
 import AdRewardBox from '../components/AdRewardBox.jsx';
 import ContentAccessNotice from '../components/ContentAccessNotice.jsx';
+import CopyShareButton from '../components/CopyShareButton.jsx';
 import SaveReadingButton from '../components/SaveReadingButton.jsx';
 import { REWARDED_AD_PLACEMENTS } from '../config/rewardedAdPlacements.js';
+import { buildFortuneCategoryShareText } from '../utils/shareTextBuilder.js';
 
 function FortuneDetailPage({
   fortune,
@@ -65,6 +67,9 @@ function FortuneDetailPage({
             })
           }
           onRemove={() => onRemoveSavedReading(savedItemId)}
+        />
+        <CopyShareButton
+          getText={() => buildFortuneCategoryShareText({ fortune, category, isUnlocked })}
         />
 
         <ContentAccessNotice
