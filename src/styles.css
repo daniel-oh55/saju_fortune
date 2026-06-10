@@ -713,6 +713,10 @@ textarea:focus {
   .fortune-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .saju-life-guide-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 .onboarding-hero,
@@ -1283,6 +1287,58 @@ input:disabled {
   font-size: 0.84rem;
   font-weight: 800;
   line-height: 1.25;
+}
+
+.saju-life-guide {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(241, 249, 246, 0.94)),
+    rgba(255, 255, 255, 0.94);
+}
+
+.saju-life-guide-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.saju-life-guide-card {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  border: 1px solid rgba(89, 120, 118, 0.12);
+  border-radius: 18px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.saju-life-guide-card h3 {
+  margin: 0;
+  color: #2f6f6a;
+  font-size: 0.98rem;
+}
+
+.saju-life-guide-card p {
+  margin: 0;
+  color: #607078;
+  font-size: 0.88rem;
+  line-height: 1.58;
+}
+
+.saju-life-guide-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.saju-life-guide-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  border-radius: 999px;
+  padding: 6px 10px;
+  background: rgba(120, 200, 189, 0.14);
+  color: #338f8b;
+  font-size: 0.78rem;
+  font-weight: 800;
 }
 
 .saju-insight-note {

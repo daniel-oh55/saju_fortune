@@ -1,5 +1,26 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-10 사주 상세 콘텐츠 품질 개선
+
+### 작업 내용
+- PR 목적: 사주 상세 페이지 콘텐츠 품질 개선
+- SajuInsightPage에 생활 흐름 가이드 섹션 추가
+- 관계 흐름, 일/공부 흐름, 돈 관리 흐름, 오늘의 루틴 카드 추가
+- 기존 sajuAnalysis 데이터만 사용
+- production 계산 로직 변경 없음
+- sajuAnalysis 데이터 구조 변경 없음
+- schemaVersion 변경 없음
+- expected/referenceStatus 변경 없음
+- localStorage key 이름 변경 없음
+- rewarded ad 구조 변경 없음
+
+### 테스트 결과
+- `npm run build`: 성공
+- 로컬 dev 서버 `http://127.0.0.1:5174`: 200 응답 확인
+- 내부 validator 기준:
+  - `solar_before_ipchun`: reference_conflict 유지
+  - `solar_ipchun_boundary`: pass 유지
+
 ## 2026-06-10 rewarded ad SDK readiness 체크리스트 추가
 
 ### 작업 내용
