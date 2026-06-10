@@ -64,6 +64,51 @@ function buildDeepDiveSections(sajuAnalysis) {
   ];
 }
 
+function buildSajuLifeSections(sajuAnalysis) {
+  const elements = sajuAnalysis?.elements || {};
+  const traits = toItems(sajuAnalysis?.traits, 3);
+  const weakPoints = toItems(sajuAnalysis?.weakPoints, 3);
+  const luckyKeywords = toItems(sajuAnalysis?.luckyKeywords, 4);
+  const dominant = elements.dominant || '중심 기운';
+  const weak = elements.weak || '보완 기운';
+  const balanceHint = elements.balanceHint || '오늘의 흐름을 천천히 살펴보세요.';
+  const primaryTrait = traits[0] || '차분한 관찰';
+  const secondaryTrait = traits[1] || '부드러운 표현';
+  const primaryKeyword = luckyKeywords[0] || '정리';
+  const secondaryKeyword = luckyKeywords[1] || '균형';
+  const thirdKeyword = luckyKeywords[2] || traits[0] || '휴식';
+  const weakPoint = weakPoints[0] || '작은 습관';
+  const convertedSolar = sajuAnalysis?.manseryeok?.convertedSolar;
+  const basisText = convertedSolar ? ` 계산 기준은 ${convertedSolar}입니다.` : '';
+
+  return [
+    {
+      id: 'relationship',
+      title: '관계 흐름',
+      description: `오늘은 ${primaryTrait}의 흐름을 살리되 대화의 속도를 조금 늦춰보면 좋습니다. ${dominant} 기운을 기준 삼아 상대의 입장을 한 번 더 확인하면 관계의 온도를 부드럽게 맞추는 데 도움이 될 수 있습니다.`,
+      chips: [primaryTrait, secondaryTrait, primaryKeyword],
+    },
+    {
+      id: 'workStudy',
+      title: '일/공부 흐름',
+      description: `중심 기운인 ${dominant} 흐름은 해야 할 일을 정리하고 우선순위를 세우는 데 활용해볼 수 있습니다. 새 내용을 많이 늘리기보다 ${secondaryKeyword}을 기준으로 메모, 복습, 일정 확인을 차분히 이어가보세요.`,
+      chips: [dominant, primaryKeyword, secondaryKeyword],
+    },
+    {
+      id: 'money',
+      title: '돈 관리 흐름',
+      description: `오늘은 큰 결정보다는 지출 내역을 정리하고 ${weakPoint}을 점검하는 쪽이 안정적입니다. 보완하면 좋은 ${weak} 기운을 떠올리며 작은 소비 습관과 약속을 한 번 더 살펴보세요.`,
+      chips: [weakPoint, secondaryKeyword, weak],
+    },
+    {
+      id: 'routine',
+      title: '오늘의 루틴',
+      description: `오전에는 ${primaryKeyword}, 오후에는 ${secondaryKeyword}, 저녁에는 ${thirdKeyword}를 중심으로 하루를 가볍게 조율해보세요. ${balanceHint}${basisText}`,
+      chips: [primaryKeyword, secondaryKeyword, thirdKeyword],
+    },
+  ];
+}
+
 function SajuInsightPage({
   profile,
   fortune,
@@ -94,6 +139,7 @@ function SajuInsightPage({
   const luckyKeywords = toItems(sajuAnalysis.luckyKeywords, 4);
   const isDeepDiveUnlocked = Boolean(unlockedDetails[SAJU_INSIGHT_DEEP_UNLOCK_KEY]?.unlocked);
   const deepDiveSections = buildDeepDiveSections(sajuAnalysis);
+  const lifeSections = buildSajuLifeSections(sajuAnalysis);
 
   return (
     <div className="page-stack saju-insight-page">
@@ -183,6 +229,28 @@ function SajuInsightPage({
           </p>
         </section>
       )}
+
+      <section className="saju-insight-section saju-life-guide">
+        <h2>생활 흐름 가이드</h2>
+        <p className="saju-insight-muted">
+          오늘의 사주 흐름을 일상에 적용해볼 수 있는 참고용 가이드입니다.
+        </p>
+        <div className="saju-life-guide-grid">
+          {lifeSections.map((section) => (
+            <article className="saju-life-guide-card" key={section.id}>
+              <h3>{section.title}</h3>
+              <p>{section.description}</p>
+              <div className="saju-life-guide-chips">
+                {section.chips.filter(Boolean).map((chip, index) => (
+                  <span className="saju-life-guide-chip" key={`${section.id}-${chip}-${index}`}>
+                    {chip}
+                  </span>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
 
       {isDeepDiveUnlocked ? (
         <section className="saju-insight-section saju-insight-deep-dive">

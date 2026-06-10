@@ -4,6 +4,8 @@
 
 ### Added
 
+- 사주 흐름 상세 페이지의 생활 흐름 가이드 섹션
+- 관계 흐름, 일/공부 흐름, 돈 관리 흐름, 오늘의 루틴 카드
 - 실제 광고 SDK 연동 전 체크리스트 문서
 - rewarded ad provider adapter 구조
 - mock rewarded ad provider adapter
@@ -67,6 +69,7 @@
 
 ### Changed
 
+- 사주 상세 페이지의 무료 기본 해석을 일상 적용 중심으로 보완
 - 보상형 광고 연동 문서에 SDK readiness 문서 링크 추가
 - `rewardedAdService`가 provider adapter를 호출하는 facade 구조로 정리
 - 실제 광고 SDK 연동 시 placementId를 환경변수로 주입할 수 있도록 구조 보완
