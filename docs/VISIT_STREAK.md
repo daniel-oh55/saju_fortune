@@ -9,6 +9,12 @@
 
 - `harupuli_visit_streak_v1`
 
+## 개인정보 관련 원칙
+
+- visit streak는 방문 날짜와 연속 방문 숫자만 저장합니다.
+- 운세 내용, 생년월일, 출생시간, 성별, 사주 정보는 저장하지 않습니다.
+- 개인정보 처리방침 초안은 `docs/PRIVACY_POLICY_DRAFT.md`를 참고합니다.
+
 ## 저장 구조
 
 ```json
