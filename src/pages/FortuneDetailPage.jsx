@@ -1,4 +1,5 @@
 import AdRewardBox from '../components/AdRewardBox.jsx';
+import ContentAccessNotice from '../components/ContentAccessNotice.jsx';
 import { REWARDED_AD_PLACEMENTS } from '../config/rewardedAdPlacements.js';
 
 function FortuneDetailPage({
@@ -42,6 +43,12 @@ function FortuneDetailPage({
         <p className="muted">
           행운 색상은 {category.luckyColor}, 행운 아이템은 {category.luckyItem}입니다.
         </p>
+
+        <ContentAccessNotice
+          variant="rewarded"
+          title="광고 해금 상세 풀이"
+          description="기본 운세 요약은 무료로 제공되며, 더 자세한 풀이만 광고 시청 후 열람할 수 있습니다."
+        />
 
         <AdRewardBox
           categoryLabel={category.label}

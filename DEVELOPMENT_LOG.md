@@ -1,5 +1,30 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-10 무료/광고 해금 콘텐츠 안내 추가
+
+### 작업 내용
+- PR 목적: 무료/광고 해금 콘텐츠 구분 안내 추가
+- `ContentAccessNotice` 컴포넌트 신규 추가
+- SajuInsightPage에 무료 기본 해석 안내 추가
+- SajuInsightPage에 광고 해금 심화 해석 안내 추가
+- FortuneDetailPage에 광고 해금 상세 풀이 안내 추가
+- 기존 unlock key 유지
+- 기존 placementId 유지
+- rewarded ad 구조 변경 없음
+- storage.js 변경 없음
+- 계산 로직 변경 없음
+- sajuAnalysis 데이터 구조 변경 없음
+- schemaVersion 변경 없음
+- expected/referenceStatus 변경 없음
+- localStorage key 이름 변경 없음
+
+### 테스트 결과
+- `npm run build`: 성공
+- 로컬 dev 서버 `http://127.0.0.1:5174`: 200 응답 확인
+- 내부 validator 기준:
+  - `solar_before_ipchun`: reference_conflict 유지
+  - `solar_ipchun_boundary`: pass 유지
+
 ## 2026-06-10 사주 상세 콘텐츠 품질 개선
 
 ### 작업 내용

@@ -1,4 +1,5 @@
 import AdRewardBox from '../components/AdRewardBox.jsx';
+import ContentAccessNotice from '../components/ContentAccessNotice.jsx';
 import SajuCalculationBasisCard from '../components/SajuCalculationBasisCard.jsx';
 import { REWARDED_AD_PLACEMENTS } from '../config/rewardedAdPlacements.js';
 
@@ -154,6 +155,12 @@ function SajuInsightPage({
 
       <SajuCalculationBasisCard profile={profile} fortune={fortune} />
 
+      <ContentAccessNotice
+        variant="free"
+        title="무료 기본 해석"
+        description="사주 계산 기준, 오행 균형, 성향 키워드와 생활 흐름 가이드는 무료로 확인할 수 있습니다."
+      />
+
       <section className="saju-insight-section">
         <h2>오행 균형</h2>
         <div className="saju-element-pair-grid">
@@ -254,6 +261,11 @@ function SajuInsightPage({
 
       {isDeepDiveUnlocked ? (
         <section className="saju-insight-section saju-insight-deep-dive">
+          <ContentAccessNotice
+            variant="rewarded"
+            title="광고 해금 심화 해석"
+            description="광고 시청으로 열린 심화 해석입니다. 무료 기본 해석은 계속 이용할 수 있습니다."
+          />
           <h2>심화 해석</h2>
           <div className="saju-deep-dive-list">
             {deepDiveSections.map((section) => (
@@ -266,6 +278,11 @@ function SajuInsightPage({
         </section>
       ) : (
         <section className="saju-insight-section saju-insight-locked">
+          <ContentAccessNotice
+            variant="rewarded"
+            title="광고 해금 심화 해석"
+            description="심화 해석은 광고 시청 후 열람할 수 있습니다. 무료 기본 해석은 그대로 이용할 수 있습니다."
+          />
           <h2>심화 해석</h2>
           <p>
             오행 균형과 오늘의 활용 키워드를 조금 더 자세히 풀어볼 수 있습니다. 광고 시청 후
