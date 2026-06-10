@@ -1083,6 +1083,7 @@ input:disabled {
 .saju-element-summary-card,
 .daily-routine-card,
 .visit-streak-card,
+.saved-readings-summary-card,
 .fortune-flow-card,
 .time-fortune-card,
 .zodiac-link-card,
@@ -1100,6 +1101,7 @@ input:disabled {
 .saju-element-summary-card h2,
 .daily-routine-card h2,
 .visit-streak-card h2,
+.saved-readings-summary-card h2,
 .time-fortune-card h2,
 .zodiac-link-card h2,
 .zodiac-advice-card h2 {
@@ -1330,6 +1332,128 @@ input:disabled {
   color: #607078;
   font-size: 0.88rem;
   line-height: 1.55;
+}
+
+.save-reading-button {
+  justify-self: start;
+  min-height: 38px;
+  border: 1px solid rgba(89, 120, 118, 0.18);
+  border-radius: 999px;
+  padding: 9px 14px;
+  color: #2f6f6a;
+  background: rgba(255, 255, 255, 0.9);
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.save-reading-button.is-saved {
+  color: #b66f44;
+  background: rgba(255, 246, 234, 0.95);
+  border-color: rgba(243, 167, 123, 0.3);
+}
+
+.saved-readings-summary-card {
+  display: grid;
+  gap: 14px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(244, 248, 255, 0.92)),
+    rgba(255, 255, 255, 0.92);
+}
+
+.saved-readings-summary-card p {
+  margin: 0;
+  color: #607078;
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.saved-readings-page .section-header .ghost-button {
+  justify-self: start;
+}
+
+.saved-reading-list {
+  display: grid;
+  gap: 12px;
+}
+
+.saved-reading-item,
+.saved-reading-empty {
+  display: grid;
+  gap: 12px;
+  border: 1px solid rgba(89, 120, 118, 0.14);
+  border-radius: 22px;
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 16px 36px rgba(43, 57, 68, 0.08);
+}
+
+.saved-reading-item h2,
+.saved-reading-empty h2 {
+  margin: 0;
+  color: #2f4f4d;
+  font-size: 1.05rem;
+}
+
+.saved-reading-item span,
+.saved-reading-actions span {
+  color: #7d8b91;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.saved-reading-item p,
+.saved-reading-empty p,
+.saved-reading-body {
+  margin: 0;
+  color: #607078;
+  font-size: 0.88rem;
+  line-height: 1.58;
+}
+
+.saved-reading-body {
+  border-radius: 16px;
+  padding: 12px;
+  background: #f7fbf9;
+  white-space: pre-line;
+}
+
+.saved-reading-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.saved-reading-tags em {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  border-radius: 999px;
+  padding: 6px 10px;
+  background: rgba(120, 200, 189, 0.14);
+  color: #338f8b;
+  font-size: 0.78rem;
+  font-style: normal;
+  font-weight: 800;
+}
+
+.saved-reading-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  border-top: 1px solid #edf2ef;
+  padding-top: 10px;
+}
+
+.saved-reading-actions button {
+  min-height: 34px;
+  border: 1px solid rgba(89, 120, 118, 0.16);
+  border-radius: 999px;
+  padding: 8px 12px;
+  color: #607078;
+  background: #fff;
+  font-weight: 900;
+  cursor: pointer;
 }
 
 .saju-insight-page {

@@ -1,5 +1,32 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-10 풀이 저장 기능 추가
+
+### 작업 내용
+- PR 목적: 풀이 저장 기능 추가
+- `savedReadingsStorage` 신규 추가
+- `SaveReadingButton` 신규 추가
+- `SavedReadingsSummaryCard` 신규 추가
+- `SavedReadingsPage` 신규 추가
+- HomePage에 저장한 풀이 카드 표시
+- FortuneDetailPage에 풀이 저장 버튼 추가
+- SajuInsightPage에 사주 흐름 저장 버튼 추가
+- 신규 localStorage key: `harupuli_saved_readings_v1`
+- 기존 localStorage key 변경 없음
+- profile 원본 정보 저장 없음
+- production 계산 로직 변경 없음
+- schemaVersion 변경 없음
+- expected/referenceStatus 변경 없음
+- rewarded ad 구조 변경 없음
+
+### 테스트 결과
+- `npm run build`: 성공
+- `npm run check:saved-readings`: 성공
+- 로컬 dev 서버 `http://127.0.0.1:5174`: 200 응답 확인
+- 내부 validator 기준:
+  - `solar_before_ipchun`: reference_conflict 유지
+  - `solar_ipchun_boundary`: pass 유지
+
 ## 2026-06-10 연속 방문 streak 기능 추가
 
 ### 작업 내용

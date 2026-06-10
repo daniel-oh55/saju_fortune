@@ -6,6 +6,7 @@ import FortuneDetailPage from './pages/FortuneDetailPage.jsx';
 import YearFortunePage from './pages/YearFortunePage.jsx';
 import ZodiacFortunePage from './pages/ZodiacFortunePage.jsx';
 import SajuInsightPage from './pages/SajuInsightPage.jsx';
+import SavedReadingsPage from './pages/SavedReadingsPage.jsx';
 import ManseryeokValidationPage from './pages/ManseryeokValidationPage.jsx';
 import AiConsultPage from './pages/AiConsultPage.jsx';
 import CompatibilityPage from './pages/CompatibilityPage.jsx';
@@ -13,6 +14,11 @@ import PremiumPage from './pages/PremiumPage.jsx';
 import SettingsPage from './pages/SettingsPage.jsx';
 import { CURRENT_FORTUNE_SCHEMA_VERSION, createTodayFortune } from './utils/fortuneEngine.js';
 import { getKoreaDateKey } from './utils/date.js';
+import {
+  loadSavedReadings,
+  removeSavedReading,
+  saveReadingItem,
+} from './utils/savedReadingsStorage.js';
 import { createEmptyVisitStreak, recordDailyVisit } from './utils/visitStreakStorage.js';
 import {
   clearAppData,
@@ -57,6 +63,7 @@ function App() {
   const [activePage, setActivePage] = useState(profile ? 'home' : 'onboarding');
   const [selectedCategory, setSelectedCategory] = useState('overall');
   const [unlockedDetails, setUnlockedDetails] = useState({});
+  const [savedReadings, setSavedReadings] = useState(() => loadSavedReadings());
   const [visitStreak, setVisitStreak] = useState(() => createEmptyVisitStreak());
 
   const fortune = useMemo(() => {
@@ -109,6 +116,14 @@ function App() {
     setUnlockedDetails(nextUnlocks);
   };
 
+  const handleSaveReading = (item) => {
+    setSavedReadings(saveReadingItem(item));
+  };
+
+  const handleRemoveSavedReading = (itemId) => {
+    setSavedReadings(removeSavedReading(itemId));
+  };
+
   const handleReset = () => {
     clearAppData();
     setProfile(null);
@@ -127,6 +142,7 @@ function App() {
           <HomePage
             fortune={fortune}
             profile={profile}
+            savedReadings={savedReadings}
             visitStreak={visitStreak}
             onOpenDetail={handleOpenDetail}
             onNavigate={setActivePage}
@@ -137,8 +153,11 @@ function App() {
             fortune={fortune}
             selectedCategory={selectedCategory}
             unlockedDetails={unlockedDetails}
+            savedReadings={savedReadings}
             onSelectCategory={setSelectedCategory}
             onUnlockDetail={handleUnlockDetail}
+            onSaveReading={handleSaveReading}
+            onRemoveSavedReading={handleRemoveSavedReading}
           />
         )}
         {activePage === 'year' && (
@@ -153,6 +172,16 @@ function App() {
             fortune={fortune}
             unlockedDetails={unlockedDetails}
             onUnlockDetail={handleUnlockDetail}
+            savedReadings={savedReadings}
+            onSaveReading={handleSaveReading}
+            onRemoveSavedReading={handleRemoveSavedReading}
+            onNavigate={setActivePage}
+          />
+        )}
+        {activePage === 'savedReadings' && (
+          <SavedReadingsPage
+            savedReadings={savedReadings}
+            onRemoveSavedReading={handleRemoveSavedReading}
             onNavigate={setActivePage}
           />
         )}
