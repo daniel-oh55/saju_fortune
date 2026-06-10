@@ -1,5 +1,6 @@
 import AdRewardBox from '../components/AdRewardBox.jsx';
 import ContentAccessNotice from '../components/ContentAccessNotice.jsx';
+import SaveReadingButton from '../components/SaveReadingButton.jsx';
 import SajuCalculationBasisCard from '../components/SajuCalculationBasisCard.jsx';
 import { REWARDED_AD_PLACEMENTS } from '../config/rewardedAdPlacements.js';
 
@@ -114,7 +115,10 @@ function SajuInsightPage({
   profile,
   fortune,
   unlockedDetails = {},
+  savedReadings,
   onUnlockDetail,
+  onSaveReading,
+  onRemoveSavedReading,
   onNavigate,
 }) {
   const sajuAnalysis = fortune?.sajuAnalysis;
@@ -141,6 +145,11 @@ function SajuInsightPage({
   const isDeepDiveUnlocked = Boolean(unlockedDetails[SAJU_INSIGHT_DEEP_UNLOCK_KEY]?.unlocked);
   const deepDiveSections = buildDeepDiveSections(sajuAnalysis);
   const lifeSections = buildSajuLifeSections(sajuAnalysis);
+  const savedItemId = `saju:${fortune.dateKey}:insight`;
+  const isSaved = Boolean(savedReadings?.items?.some((item) => item.id === savedItemId));
+  const insightSummary = elements.balanceHint || '오늘의 사주 흐름을 일상에 적용해볼 수 있는 참고용 가이드입니다.';
+  const insightBody = lifeSections.map((section) => `${section.title}: ${section.description}`).join('\n\n');
+  const insightTags = [...toItems(sajuAnalysis.luckyKeywords, 3), ...toItems(sajuAnalysis.traits, 2)].slice(0, 5);
 
   return (
     <div className="page-stack saju-insight-page">
@@ -159,6 +168,22 @@ function SajuInsightPage({
         variant="free"
         title="무료 기본 해석"
         description="사주 계산 기준, 오행 균형, 성향 키워드와 생활 흐름 가이드는 무료로 확인할 수 있습니다."
+      />
+
+      <SaveReadingButton
+        isSaved={isSaved}
+        onSave={() =>
+          onSaveReading({
+            id: savedItemId,
+            type: 'sajuInsight',
+            title: '사주 흐름',
+            summary: insightSummary,
+            body: insightBody,
+            tags: insightTags,
+            dateKey: fortune.dateKey,
+          })
+        }
+        onRemove={() => onRemoveSavedReading(savedItemId)}
       />
 
       <section className="saju-insight-section">

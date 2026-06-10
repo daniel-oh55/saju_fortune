@@ -1,6 +1,7 @@
 import DailyRoutineCard from '../components/DailyRoutineCard.jsx';
 import FortuneCard from '../components/FortuneCard.jsx';
 import SajuElementSummaryCard from '../components/SajuElementSummaryCard.jsx';
+import SavedReadingsSummaryCard from '../components/SavedReadingsSummaryCard.jsx';
 import ScoreDonut from '../components/ScoreDonut.jsx';
 import VisitStreakCard from '../components/VisitStreakCard.jsx';
 
@@ -38,7 +39,7 @@ function getTimeFortune() {
   };
 }
 
-function HomePage({ fortune, profile, visitStreak, onOpenDetail, onNavigate }) {
+function HomePage({ fortune, profile, savedReadings, visitStreak, onOpenDetail, onNavigate }) {
   const overall = fortune.categories.find((category) => category.id === 'overall') || fortune.categories[0];
   const money = fortune.categories.find((category) => category.id === 'money');
   const love = fortune.categories.find((category) => category.id === 'love');
@@ -85,6 +86,11 @@ function HomePage({ fortune, profile, visitStreak, onOpenDetail, onNavigate }) {
       />
 
       <VisitStreakCard streak={visitStreak} />
+
+      <SavedReadingsSummaryCard
+        savedReadings={savedReadings}
+        onOpenSavedReadings={() => onNavigate('savedReadings')}
+      />
 
       <section className="today-summary-card">
         <p className="eyebrow">한 줄 요약</p>

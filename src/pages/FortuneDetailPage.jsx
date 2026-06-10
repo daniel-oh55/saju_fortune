@@ -1,17 +1,24 @@
 import AdRewardBox from '../components/AdRewardBox.jsx';
 import ContentAccessNotice from '../components/ContentAccessNotice.jsx';
+import SaveReadingButton from '../components/SaveReadingButton.jsx';
 import { REWARDED_AD_PLACEMENTS } from '../config/rewardedAdPlacements.js';
 
 function FortuneDetailPage({
   fortune,
   selectedCategory,
   unlockedDetails,
+  savedReadings,
   onSelectCategory,
   onUnlockDetail,
+  onSaveReading,
+  onRemoveSavedReading,
 }) {
   const category = fortune.categories.find((item) => item.id === selectedCategory) || fortune.categories[0];
   const isUnlocked = Boolean(unlockedDetails[category.id]?.unlocked);
   const detailParagraphs = category.detail.split('\n\n');
+  const savedItemId = `fortune:${fortune.dateKey}:${category.id}`;
+  const isSaved = Boolean(savedReadings?.items?.some((item) => item.id === savedItemId));
+  const visibleBody = isUnlocked ? category.detail : `${category.summary}\n\n행운 색상은 ${category.luckyColor}, 행운 아이템은 ${category.luckyItem}입니다.`;
 
   return (
     <div className="page-stack">
@@ -43,6 +50,22 @@ function FortuneDetailPage({
         <p className="muted">
           행운 색상은 {category.luckyColor}, 행운 아이템은 {category.luckyItem}입니다.
         </p>
+
+        <SaveReadingButton
+          isSaved={isSaved}
+          onSave={() =>
+            onSaveReading({
+              id: savedItemId,
+              type: 'fortuneCategory',
+              title: category.label,
+              summary: category.summary,
+              body: visibleBody,
+              tags: [category.luckyColor, category.luckyItem].filter(Boolean),
+              dateKey: fortune.dateKey,
+            })
+          }
+          onRemove={() => onRemoveSavedReading(savedItemId)}
+        />
 
         <ContentAccessNotice
           variant="rewarded"
