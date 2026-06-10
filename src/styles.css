@@ -1082,6 +1082,7 @@ input:disabled {
 .today-summary-card,
 .saju-element-summary-card,
 .daily-routine-card,
+.visit-streak-card,
 .fortune-flow-card,
 .time-fortune-card,
 .zodiac-link-card,
@@ -1098,6 +1099,7 @@ input:disabled {
 .today-summary-card h2,
 .saju-element-summary-card h2,
 .daily-routine-card h2,
+.visit-streak-card h2,
 .time-fortune-card h2,
 .zodiac-link-card h2,
 .zodiac-advice-card h2 {
@@ -1270,6 +1272,64 @@ input:disabled {
   color: #b66f44;
   font-size: 0.78rem;
   font-weight: 800;
+}
+
+.visit-streak-card {
+  display: grid;
+  gap: 14px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(239, 249, 245, 0.92)),
+    rgba(255, 255, 255, 0.92);
+}
+
+.visit-streak-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.visit-streak-header h2 {
+  margin-bottom: 0;
+}
+
+.visit-streak-count {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  min-width: 54px;
+  height: 54px;
+  border-radius: 18px;
+  color: #2f6f6a;
+  background: rgba(120, 200, 189, 0.16);
+  font-size: 1.55rem;
+  line-height: 1;
+}
+
+.visit-streak-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.visit-streak-meta span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  border-radius: 999px;
+  padding: 7px 12px;
+  color: #2f6f6a;
+  background: #eef8f5;
+  font-size: 0.83rem;
+  font-weight: 800;
+}
+
+.visit-streak-note {
+  margin: 0;
+  color: #607078;
+  font-size: 0.88rem;
+  line-height: 1.55;
 }
 
 .saju-insight-page {
