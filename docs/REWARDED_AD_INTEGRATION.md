@@ -39,6 +39,46 @@
 - 실패 안내 문구는 짧고 불안감을 주지 않는 표현으로 제공한다.
 - mock 광고 카운트다운이 끝난 뒤 보상 확인 단계에서는 중복 대기 시간을 만들지 않는다.
 
+## Placement ID 정책
+
+현재 광고 위치는 내부 placementId로 구분한다.
+
+- `today_fortune_detail`: 오늘운세 상세 풀이
+- `saju_insight_deep_dive`: 사주 흐름 심화 해석
+- `year_fortune_detail`: 연간운 상세 풀이
+- `zodiac_fortune_detail`: 띠별 운세 상세 풀이
+
+주의:
+
+- placementId는 광고 SDK 위치 식별자다.
+- unlock key는 localStorage 해금 상태 저장 키다.
+- 두 값은 반드시 구분한다.
+- 예: unlock key는 `sajuInsightDeepDive`, placementId는 `saju_insight_deep_dive`
+
+향후 실제 SDK 연동 시:
+
+- `rewardedAdPlacements.js`에서 provider별 실제 placementId로 확장한다.
+- UI 컴포넌트에서는 직접 SDK ID를 쓰지 않는다.
+
+## 환경변수 기반 placementId
+
+현재는 내부 mock placementId를 사용한다.
+향후 실제 광고 SDK 연동 시에는 Vite 환경변수로 실제 placementId를 주입한다.
+
+사용 예정 환경변수:
+
+- `VITE_REWARDED_AD_PLACEMENT_TODAY_FORTUNE_DETAIL`
+- `VITE_REWARDED_AD_PLACEMENT_SAJU_INSIGHT_DEEP_DIVE`
+- `VITE_REWARDED_AD_PLACEMENT_YEAR_FORTUNE_DETAIL`
+- `VITE_REWARDED_AD_PLACEMENT_ZODIAC_FORTUNE_DETAIL`
+
+동작 원칙:
+
+- 환경변수가 비어 있으면 내부 mock placementId를 사용한다.
+- UI 컴포넌트는 실제 SDK ID를 직접 알지 않는다.
+- placement resolver가 내부 key를 실제 provider placementId로 변환한다.
+- unlock key와 placementId는 계속 분리한다.
+
 ## 향후 실제 SDK 연동 원칙
 
 - `RewardAdModal` UI는 최대한 유지한다.

@@ -7,7 +7,7 @@ import {
 
 const AD_SECONDS = getMockRewardedAdDurationSeconds();
 
-function RewardAdModal({ categoryLabel, onClose, onRewardComplete }) {
+function RewardAdModal({ categoryLabel, placementId, onClose, onRewardComplete }) {
   const [secondsLeft, setSecondsLeft] = useState(AD_SECONDS);
   const [isCompleting, setIsCompleting] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -31,7 +31,7 @@ function RewardAdModal({ categoryLabel, onClose, onRewardComplete }) {
 
     try {
       const result = await showRewardedAd({
-        placementId: categoryLabel,
+        placementId: placementId || categoryLabel,
         categoryLabel,
         delayMs: 0,
       });

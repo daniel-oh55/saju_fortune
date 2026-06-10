@@ -1,5 +1,6 @@
 import AdRewardBox from '../components/AdRewardBox.jsx';
 import SajuCalculationBasisCard from '../components/SajuCalculationBasisCard.jsx';
+import { REWARDED_AD_PLACEMENTS } from '../config/rewardedAdPlacements.js';
 
 const SAJU_INSIGHT_DEEP_UNLOCK_KEY = 'sajuInsightDeepDive';
 
@@ -205,6 +206,7 @@ function SajuInsightPage({
           {onUnlockDetail && (
             <AdRewardBox
               categoryLabel="사주 심화 해석"
+              placementId={REWARDED_AD_PLACEMENTS.SAJU_INSIGHT_DEEP_DIVE}
               isUnlocked={false}
               onUnlock={() => onUnlockDetail(SAJU_INSIGHT_DEEP_UNLOCK_KEY)}
               buttonLabel="광고 보고 심화 해석 보기"

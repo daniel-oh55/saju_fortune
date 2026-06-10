@@ -1,5 +1,58 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-10 rewarded ad placement resolver 추가
+
+### 작업 내용
+- PR 목적: 환경변수 기반 rewarded ad placement resolver 추가
+- `rewardedAdPlacements.js`에 resolver 추가
+- `.env.example`에 rewarded ad placement 환경변수 추가
+- 실제 광고 SDK 연동 없음
+- 외부 광고 라이브러리 설치 없음
+- storage.js 변경 없음
+- 계산 로직 변경 없음
+- expected/referenceStatus 변경 없음
+- localStorage key 이름 변경 없음
+- schemaVersion 변경 없음
+- 신규 npm script: `check:rewarded-ad-placement-resolver`
+
+### 테스트 결과
+- `npm run build`: 성공
+- `npm run check:rewarded-ad-placements`: 성공
+- `npm run check:rewarded-ad-placement-resolver`: 성공
+- `npm run check:rewarded-ad-service`: 성공
+- `npm run check:rewarded-ad-outcomes`: 성공
+- 내부 validator 기준:
+  - `solar_before_ipchun`: reference_conflict 유지
+  - `solar_ipchun_boundary`: pass 유지
+
+## 2026-06-10 rewarded ad placement 설정 구조 추가
+
+### 작업 내용
+- PR 목적: rewarded ad placement 설정 구조 추가
+- `rewardedAdPlacements.js` 신규 추가
+- `AdRewardBox`에 `placementId` prop 추가
+- `RewardAdModal`이 `placementId`를 `showRewardedAd`로 전달하도록 보완
+- FortuneDetailPage에 `today_fortune_detail` placement 적용
+- SajuInsightPage에 `saju_insight_deep_dive` placement 적용
+- unlock key와 placementId는 분리 유지
+- 실제 광고 SDK 연동 없음
+- storage.js 변경 없음
+- 계산 로직 변경 없음
+- expected/referenceStatus 변경 없음
+- localStorage key 이름 변경 없음
+- schemaVersion 변경 없음
+- 신규 npm script: `check:rewarded-ad-placements`
+
+### 테스트 결과
+- `npm run build`: 성공
+- `npm run check:rewarded-ad-placements`: 성공
+- `npm run check:rewarded-ad-service`: 성공
+- `npm run check:rewarded-ad-outcomes`: 성공
+- `npm run check:saju-insight-reward-unlock`: 성공
+- 내부 validator 기준:
+  - `solar_before_ipchun`: reference_conflict 유지
+  - `solar_ipchun_boundary`: pass 유지
+
 ## 2026-06-10 rewarded ad outcome 상태 처리 추가
 
 ### 작업 내용

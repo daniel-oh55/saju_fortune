@@ -1,4 +1,5 @@
 import AdRewardBox from '../components/AdRewardBox.jsx';
+import { REWARDED_AD_PLACEMENTS } from '../config/rewardedAdPlacements.js';
 
 function FortuneDetailPage({
   fortune,
@@ -44,6 +45,7 @@ function FortuneDetailPage({
 
         <AdRewardBox
           categoryLabel={category.label}
+          placementId={REWARDED_AD_PLACEMENTS.TODAY_FORTUNE_DETAIL}
           isUnlocked={isUnlocked}
           onUnlock={() => onUnlockDetail(category.id)}
         />
