@@ -1,5 +1,12 @@
 # REWARDED_AD_SDK_READINESS
 
+## 쿠키/광고 동의 UX 연계
+
+- 실제 광고 SDK를 도입하기 전 `docs/COOKIE_AD_CONSENT_UX.md`를 검토합니다.
+- 광고 provider가 쿠키, 광고 식별자, 맞춤형 광고를 사용하는 경우 동의 UX가 필요할 수 있습니다.
+- 광고 동의 여부와 광고 해금 UX를 어떻게 연결할지는 별도 PR에서 결정합니다.
+- 광고 provider에 생년월일, 출생시간, 성별, 사주 정보 등을 직접 전달하지 않는 원칙은 유지합니다.
+
 ## 개인정보 처리방침 연계
 
 - 실제 광고 SDK를 도입하기 전 `docs/PRIVACY_POLICY_DRAFT.md`를 검토합니다.
