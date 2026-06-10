@@ -4,6 +4,7 @@
 
 ### Added
 
+- 실제 광고 SDK 연동 전 체크리스트 문서
 - rewarded ad provider adapter 구조
 - mock rewarded ad provider adapter
 - rewarded ad provider adapter 회귀 검증 스크립트
@@ -66,6 +67,7 @@
 
 ### Changed
 
+- 보상형 광고 연동 문서에 SDK readiness 문서 링크 추가
 - `rewardedAdService`가 provider adapter를 호출하는 facade 구조로 정리
 - 실제 광고 SDK 연동 시 placementId를 환경변수로 주입할 수 있도록 구조 보완
 - 오늘운세 상세 풀이와 사주 심화 해석 광고 영역이 명시적 placementId를 사용하도록 보완

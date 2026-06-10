@@ -1,5 +1,10 @@
 # REWARDED_AD_INTEGRATION
 
+## 관련 문서
+
+- `REWARDED_AD_SDK_READINESS.md`: 실제 광고 SDK 연동 전 체크리스트
+- `REWARDED_AD_INTEGRATION.md`: 현재 광고 구조와 provider adapter 설명
+
 ## 목적
 
 보상형 광고 연동 구조를 정리한다.

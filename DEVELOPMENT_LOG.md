@@ -1,5 +1,23 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-10 rewarded ad SDK readiness 체크리스트 추가
+
+### 작업 내용
+- PR 목적: rewarded ad SDK 연동 전 체크리스트 문서 추가
+- 신규 문서: `docs/REWARDED_AD_SDK_READINESS.md`
+- 실제 광고 SDK 연동 없음
+- 외부 광고 라이브러리 설치 없음
+- production 코드 변경 없음
+- storage.js 변경 없음
+- 계산 로직 변경 없음
+- expected/referenceStatus 변경 없음
+- localStorage key 이름 변경 없음
+- schemaVersion 변경 없음
+
+### 테스트 결과
+- `npm run build`: 성공
+- `npm run check:rewarded-ad-provider-adapter`: 성공
+
 ## 2026-06-10 rewarded ad provider adapter 구조 추가
 
 ### 작업 내용
