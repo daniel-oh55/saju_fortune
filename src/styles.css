@@ -1616,6 +1616,88 @@ input:disabled {
   line-height: 1.55;
 }
 
+.privacy-info-link-card,
+.privacy-info-section,
+.privacy-info-note {
+  display: grid;
+  gap: 12px;
+  border: 1px solid rgba(89, 120, 118, 0.13);
+  border-radius: 18px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 12px 28px rgba(43, 57, 68, 0.06);
+}
+
+.privacy-info-link-card {
+  grid-template-columns: 1fr;
+}
+
+.privacy-info-link-card h2,
+.privacy-info-section h2 {
+  margin: 0;
+  color: #2f4f4d;
+  font-size: 1.05rem;
+  line-height: 1.35;
+}
+
+.privacy-info-link-card p,
+.privacy-info-section p,
+.privacy-info-note p {
+  margin: 0;
+  color: #607078;
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.privacy-info-page .section-header .ghost-button {
+  justify-self: start;
+}
+
+.privacy-info-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.privacy-info-list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding-left: 18px;
+  color: #52636a;
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.privacy-info-list li::marker {
+  color: #78c8bd;
+}
+
+.privacy-info-note {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(239, 249, 245, 0.94)),
+    rgba(255, 255, 255, 0.92);
+}
+
+.privacy-info-note strong {
+  color: #2f4f4d;
+  font-size: 0.95rem;
+}
+
+.privacy-info-card-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.privacy-info-card-list code {
+  border-radius: 999px;
+  padding: 7px 10px;
+  background: rgba(120, 200, 189, 0.14);
+  color: #2f4f4d;
+  font-size: 0.76rem;
+  white-space: normal;
+}
+
 .saju-element-bars {
   display: grid;
   gap: 12px;

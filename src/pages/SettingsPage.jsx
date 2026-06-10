@@ -15,7 +15,7 @@ function lateNightJasiPolicyLabel(value) {
   return value === 'next_day' ? '다음 날 자시 기준' : '입력한 날짜 기준';
 }
 
-function SettingsPage({ profile, fortune, onEditProfile, onReset }) {
+function SettingsPage({ profile, fortune, onNavigate, onEditProfile, onReset }) {
   return (
     <div className="page-stack">
       <section className="section-header">
@@ -68,6 +68,9 @@ function SettingsPage({ profile, fortune, onEditProfile, onReset }) {
       <SajuCalculationBasisCard profile={profile} fortune={fortune} />
 
       <section className="settings-actions">
+        <button className="ghost-button full-width" type="button" onClick={() => onNavigate('privacyInfo')}>
+          개인정보 안내 보기
+        </button>
         <button className="ghost-button full-width" type="button" onClick={onEditProfile}>
           프로필 수정
         </button>

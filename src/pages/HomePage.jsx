@@ -1,6 +1,7 @@
 import DailyRoutineCard from '../components/DailyRoutineCard.jsx';
 import ContentSafetyNotice from '../components/ContentSafetyNotice.jsx';
 import FortuneCard from '../components/FortuneCard.jsx';
+import PrivacyInfoLinkCard from '../components/PrivacyInfoLinkCard.jsx';
 import SajuElementSummaryCard from '../components/SajuElementSummaryCard.jsx';
 import SavedReadingsSummaryCard from '../components/SavedReadingsSummaryCard.jsx';
 import ScoreDonut from '../components/ScoreDonut.jsx';
@@ -175,6 +176,7 @@ function HomePage({ fortune, profile, savedReadings, visitStreak, onOpenDetail, 
         </button>
       </section>
       <ContentSafetyNotice variant="general" compact />
+      <PrivacyInfoLinkCard onOpen={() => onNavigate('privacyInfo')} />
     </div>
   );
 }
