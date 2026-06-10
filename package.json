@@ -10,6 +10,7 @@
     "check:manseryeok-jasi-boundary": "node scripts/checkManseryeokJasiBoundaryHypothesis.mjs",
     "check:manseryeok-term-timezone": "node scripts/checkManseryeokTermTimezoneHypothesis.mjs",
     "check:rewarded-ad-service": "node scripts/checkRewardedAdServiceRegression.mjs",
+    "check:rewarded-ad-outcomes": "node scripts/checkRewardedAdOutcomeRegression.mjs",
     "check:saju-insight-reward-unlock": "node scripts/checkSajuInsightRewardUnlockRegression.mjs",
     "preview": "vite preview"
   },

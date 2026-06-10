@@ -1,5 +1,30 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-10 rewarded ad outcome 상태 처리 추가
+
+### 작업 내용
+- PR 목적: rewarded ad outcome 상태 처리 추가
+- `rewardedAdService`에 `completed`, `load_failed`, `canceled`, `no_reward` 상태 추가
+- `RewardAdModal`이 광고 결과 상태별 안내 문구를 표시하도록 보완
+- 기본 mock provider 결과는 기존처럼 `completed` 유지
+- mock 광고 카운트다운 이후 보상 확인 단계는 `delayMs: 0`으로 처리해 중복 대기 시간 제거
+- 실제 광고 SDK 연동 없음
+- storage.js production 로직 변경 없음
+- 계산 로직 변경 없음
+- expected/referenceStatus 변경 없음
+- localStorage key 이름 변경 없음
+- schemaVersion 변경 없음
+- 신규 npm script: `check:rewarded-ad-outcomes`
+
+### 테스트 결과
+- `npm run build`: 성공
+- `npm run check:rewarded-ad-service`: 성공
+- `npm run check:rewarded-ad-outcomes`: 성공
+- `npm run check:saju-insight-reward-unlock`: 성공
+- 내부 validator 기준:
+  - `solar_before_ipchun`: reference_conflict 유지
+  - `solar_ipchun_boundary`: pass 유지
+
 ## 2026-06-09 rewarded ad service abstraction 추가
 
 ### 작업 내용

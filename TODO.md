@@ -1,5 +1,16 @@
 # TODO
 
+## 2026-06-10 rewarded ad outcome 상태 처리 TODO
+
+- [x] 광고 로딩 실패/중단/보상 미지급 상태 UX 설계
+- [x] 보상형 광고 outcome 회귀 검증 추가
+- [ ] 실제 광고 SDK 연동 검토
+- [ ] 실제 SDK별 placementId 설계
+- [ ] 세 번째 외부 만세력 기준 확인 후 기본값 재검토
+- [ ] 23시 이후 선택 옵션 문구의 사용자 이해도 확인
+- [ ] 태양시 보정 적용 여부 별도 검토
+- [ ] 음력/윤달 샘플 외부 검증
+
 ## 2026-06-09 rewarded ad service abstraction TODO
 
 - [x] 보상형 광고 SDK 연동 준비용 service abstraction 추가

@@ -19,6 +19,26 @@
 - duration: 2초
 - 실제 광고 SDK 없음
 
+## 광고 결과 상태
+
+현재 mock provider는 실제 광고 SDK 없이 아래 결과 상태를 반환할 수 있다.
+기본 결과는 `completed`이며, 테스트에서는 `mockOutcome` 또는 `globalThis.__HARUPULI_REWARDED_AD_MOCK_OUTCOME__` 값으로 실패 상태를 검증한다.
+
+- `completed`: 보상 조건이 충족된 상태
+- `load_failed`: 광고를 불러오지 못한 상태
+- `canceled`: 사용자가 광고 시청을 완료하지 않은 상태
+- `no_reward`: 광고는 종료되었지만 보상 완료 이벤트를 받지 못한 상태
+
+실제 SDK 연동 전에는 `npm run check:rewarded-ad-outcomes`로 상태별 회귀 검증을 먼저 확인한다.
+
+## RewardAdModal 처리 원칙
+
+- `completed`일 때만 `onRewardComplete`를 호출한다.
+- `load_failed`, `canceled`, `no_reward` 상태에서는 상세 콘텐츠를 해금하지 않는다.
+- 실패 상태에서는 사용자가 다시 시도할 수 있도록 모달을 유지한다.
+- 실패 안내 문구는 짧고 불안감을 주지 않는 표현으로 제공한다.
+- mock 광고 카운트다운이 끝난 뒤 보상 확인 단계에서는 중복 대기 시간을 만들지 않는다.
+
 ## 향후 실제 SDK 연동 원칙
 
 - `RewardAdModal` UI는 최대한 유지한다.

@@ -4,6 +4,8 @@
 
 ### Added
 
+- 보상형 광고 mock outcome 상태 처리
+- rewarded ad outcome 회귀 검증 스크립트
 - 보상형 광고 provider 추상화 서비스
 - rewarded ad service 회귀 검증 스크립트
 - 보상형 광고 SDK 연동 준비 문서
@@ -56,6 +58,8 @@
 
 ### Changed
 
+- `RewardAdModal`이 광고 로딩 실패, 사용자 중단, 보상 미지급 상태를 구분해 안내하도록 보완
+- mock 광고 완료 후 중복 대기 시간을 줄이도록 보상 확인 흐름 보완
 - `RewardAdModal`이 mock rewarded ad provider를 통해 보상 완료를 처리하도록 구조 보완
 - rewarded unlock 저장 구조가 사주 심화 해석 key에도 적용되는지 회귀 검증 기준 추가
 - 사주 상세 콘텐츠를 무료 기본 해석과 광고 해금 심화 해석으로 구분
