@@ -60,6 +60,25 @@
 - `rewardedAdPlacements.js`에서 provider별 실제 placementId로 확장한다.
 - UI 컴포넌트에서는 직접 SDK ID를 쓰지 않는다.
 
+## 환경변수 기반 placementId
+
+현재는 내부 mock placementId를 사용한다.
+향후 실제 광고 SDK 연동 시에는 Vite 환경변수로 실제 placementId를 주입한다.
+
+사용 예정 환경변수:
+
+- `VITE_REWARDED_AD_PLACEMENT_TODAY_FORTUNE_DETAIL`
+- `VITE_REWARDED_AD_PLACEMENT_SAJU_INSIGHT_DEEP_DIVE`
+- `VITE_REWARDED_AD_PLACEMENT_YEAR_FORTUNE_DETAIL`
+- `VITE_REWARDED_AD_PLACEMENT_ZODIAC_FORTUNE_DETAIL`
+
+동작 원칙:
+
+- 환경변수가 비어 있으면 내부 mock placementId를 사용한다.
+- UI 컴포넌트는 실제 SDK ID를 직접 알지 않는다.
+- placement resolver가 내부 key를 실제 provider placementId로 변환한다.
+- unlock key와 placementId는 계속 분리한다.
+
 ## 향후 실제 SDK 연동 원칙
 
 - `RewardAdModal` UI는 최대한 유지한다.
