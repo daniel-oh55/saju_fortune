@@ -13,6 +13,7 @@ import PremiumPage from './pages/PremiumPage.jsx';
 import SettingsPage from './pages/SettingsPage.jsx';
 import { CURRENT_FORTUNE_SCHEMA_VERSION, createTodayFortune } from './utils/fortuneEngine.js';
 import { getKoreaDateKey } from './utils/date.js';
+import { createEmptyVisitStreak, recordDailyVisit } from './utils/visitStreakStorage.js';
 import {
   clearAppData,
   loadFortune,
@@ -56,6 +57,7 @@ function App() {
   const [activePage, setActivePage] = useState(profile ? 'home' : 'onboarding');
   const [selectedCategory, setSelectedCategory] = useState('overall');
   const [unlockedDetails, setUnlockedDetails] = useState({});
+  const [visitStreak, setVisitStreak] = useState(() => createEmptyVisitStreak());
 
   const fortune = useMemo(() => {
     if (!profile) return null;
@@ -79,6 +81,12 @@ function App() {
   useEffect(() => {
     if (fortune?.id) {
       setUnlockedDetails(loadRewardUnlocks(fortune.id));
+    }
+  }, [fortune?.id]);
+
+  useEffect(() => {
+    if (fortune?.id) {
+      setVisitStreak(recordDailyVisit(todayKey));
     }
   }, [fortune?.id]);
 
@@ -119,6 +127,7 @@ function App() {
           <HomePage
             fortune={fortune}
             profile={profile}
+            visitStreak={visitStreak}
             onOpenDetail={handleOpenDetail}
             onNavigate={setActivePage}
           />

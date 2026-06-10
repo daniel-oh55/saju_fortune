@@ -1,5 +1,28 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-10 연속 방문 streak 기능 추가
+
+### 작업 내용
+- PR 목적: 연속 방문 streak 기능 추가
+- `visitStreakStorage` 신규 추가
+- `VisitStreakCard` 신규 추가
+- App에서 오늘 방문 기록
+- HomePage에 streak 카드 표시
+- 신규 localStorage key: `harupuli_visit_streak_v1`
+- 기존 localStorage key 변경 없음
+- production 계산 로직 변경 없음
+- schemaVersion 변경 없음
+- expected/referenceStatus 변경 없음
+- rewarded ad 구조 변경 없음
+
+### 테스트 결과
+- `npm run build`: 성공
+- `npm run check:visit-streak`: 성공
+- 로컬 dev 서버 `http://127.0.0.1:5174`: 200 응답 확인
+- 내부 validator 기준:
+  - `solar_before_ipchun`: reference_conflict 유지
+  - `solar_ipchun_boundary`: pass 유지
+
 ## 2026-06-10 홈 오늘의 루틴 카드 추가
 
 ### 작업 내용
