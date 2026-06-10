@@ -1,5 +1,29 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-10 위험 표현 검증 스크립트 추가
+
+### 작업 내용
+- PR 목적: 위험 표현 검증 스크립트 추가
+- 신규 스크립트: `scripts/checkContentSafetyCopyRegression.mjs`
+- 신규 npm script: `check:content-safety`
+- `docs/CONTENT_SAFETY.md` 자동 검증 항목 추가
+- production UI 변경 없음
+- production 계산 로직 변경 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+- rewarded ad 구조 변경 없음
+- 저장/공유 기능 동작 변경 없음
+
+### 테스트 결과
+- `npm run build`: 성공
+- `npm run check:content-safety`: 성공
+- `npm run check:share-text`: 성공
+- `npm run check:saved-readings`: 성공
+- 로컬 dev 서버 `http://127.0.0.1:5174`: 200 응답 확인
+- 내부 validator 기준:
+  - `solar_before_ipchun`: reference_conflict 유지
+  - `solar_ipchun_boundary`: pass 유지
+
 ## 2026-06-10 운세 콘텐츠 안전 문구 통합
 
 ### 작업 내용
