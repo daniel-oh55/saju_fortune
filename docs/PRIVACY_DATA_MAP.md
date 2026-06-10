@@ -14,6 +14,7 @@
 | share text | 공유 버튼 클릭 시 생성되는 텍스트 | 저장하지 않음 | 해당 없음 | 오늘운세 상세, 사주 흐름, 저장한 풀이 | 사용자가 직접 공유 앱에 붙여넣는 경우만 외부 전달 | 생년월일/출생시간/성별 등 원본 profile 필드는 포함하지 않음 |
 | content safety copy | 참고용 해석 안내 문구 | 코드 파일 | 해당 없음 | 홈, 오늘운세 상세, 사주 흐름, 저장한 풀이 | 없음 | 개인정보가 아님 |
 | mock rewarded ad outcome | 광고 완료/취소/실패 mock 결과 | 기본 저장하지 않음. 완료 시 unlock 상태만 저장 | `aiTodayFortune.rewardUnlocks` | 광고 해금 UI | 현재 MVP 기준 없음 | 실제 SDK 도입 시 provider 전송 범위 재검토 필요 |
+| consent preferences | analytics, ads, personalizedAds | 향후 localStorage 후보 | `harupuli_consent_preferences_v1` 후보 | 향후 동의 배너, 설정 | 현재 MVP 기준 없음 | 아직 구현하지 않음. 실제 SDK 도입 시 검토 |
 
 ## 현재 MVP 원칙
 
