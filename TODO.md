@@ -1,5 +1,18 @@
 # TODO
 
+## 2026-06-10 rewarded ad SDK readiness TODO
+
+- [x] 실제 SDK 선택 전 개인정보/광고 정책 검토 체크리스트 추가
+- [ ] 실제 광고 SDK 연동 검토
+- [ ] 실제 SDK provider adapter 추가
+- [ ] 광고 provider별 placementId 환경변수 운영 정책 정리
+- [ ] 개인정보 처리방침 초안 작성
+- [ ] 쿠키/광고 동의 UX 검토
+- [ ] 세 번째 외부 만세력 기준 확인 후 기본값 재검토
+- [ ] 23시 이후 선택 옵션 문구의 사용자 이해도 확인
+- [ ] 태양시 보정 적용 여부 별도 검토
+- [ ] 음력/윤달 샘플 외부 검증
+
 ## 2026-06-10 rewarded ad provider adapter TODO
 
 - [x] rewarded ad provider adapter 구조 추가
