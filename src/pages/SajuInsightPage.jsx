@@ -1,8 +1,10 @@
 import AdRewardBox from '../components/AdRewardBox.jsx';
 import ContentAccessNotice from '../components/ContentAccessNotice.jsx';
+import CopyShareButton from '../components/CopyShareButton.jsx';
 import SaveReadingButton from '../components/SaveReadingButton.jsx';
 import SajuCalculationBasisCard from '../components/SajuCalculationBasisCard.jsx';
 import { REWARDED_AD_PLACEMENTS } from '../config/rewardedAdPlacements.js';
+import { buildSajuInsightShareText } from '../utils/shareTextBuilder.js';
 
 const SAJU_INSIGHT_DEEP_UNLOCK_KEY = 'sajuInsightDeepDive';
 
@@ -184,6 +186,9 @@ function SajuInsightPage({
           })
         }
         onRemove={() => onRemoveSavedReading(savedItemId)}
+      />
+      <CopyShareButton
+        getText={() => buildSajuInsightShareText({ fortune, sajuAnalysis, lifeSections })}
       />
 
       <section className="saju-insight-section">

@@ -1,3 +1,6 @@
+import CopyShareButton from '../components/CopyShareButton.jsx';
+import { buildSavedReadingShareText } from '../utils/shareTextBuilder.js';
+
 function formatSavedAt(value) {
   if (!value) return '저장일 확인 중';
 
@@ -52,6 +55,11 @@ function SavedReadingsPage({ savedReadings, onRemoveSavedReading, onNavigate }) 
 
               <div className="saved-reading-actions">
                 <span>{formatSavedAt(item.savedAt)} 저장</span>
+                <CopyShareButton
+                  getText={() => buildSavedReadingShareText(item)}
+                  label="복사"
+                  copiedLabel="복사됨"
+                />
                 <button type="button" onClick={() => onRemoveSavedReading(item.id)}>
                   삭제
                 </button>
