@@ -16,6 +16,7 @@
     "check:rewarded-ad-consent-gate": "node scripts/checkRewardedAdConsentGateRegression.mjs",
     "check:rewarded-ad-outcomes": "node scripts/checkRewardedAdOutcomeRegression.mjs",
     "check:rewarded-ad-placements": "node scripts/checkRewardedAdPlacementConfig.mjs",
+    "check:rewarded-ad-placement-readiness": "node scripts/checkRewardedAdPlacementReadiness.mjs",
     "check:rewarded-ad-placement-resolver": "node scripts/checkRewardedAdPlacementResolver.mjs",
     "check:rewarded-ad-provider-adapter": "node scripts/checkRewardedAdProviderAdapterRegression.mjs",
     "check:rewarded-ad-sdk-adapter": "node scripts/checkRewardedAdSdkAdapterScaffold.mjs",

@@ -1,5 +1,12 @@
 # REWARDED_AD_SDK_READINESS
 
+## placement readiness
+
+- 실제 SDK 도입 전 placement 환경변수 설정 기준을 확인합니다.
+- provider placement ID는 Vercel 환경변수로 관리합니다.
+- 실제 provider placement ID는 코드에 하드코딩하지 않습니다.
+- 자세한 내용은 `docs/REWARDED_AD_PLACEMENT_READINESS.md`를 참고합니다.
+
 ## ads consent gate 상태
 
 - 실제 SDK 도입 전 ads consent gate가 먼저 연결되었습니다.
