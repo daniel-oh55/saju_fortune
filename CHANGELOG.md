@@ -4,6 +4,9 @@
 
 ### Added
 
+- consent preferences 저장 유틸 추가
+- consent storage 회귀 검증 스크립트 추가
+- `check:consent-storage` npm script 추가
 - 동의 배너 UI 구현 전 설계 문서 추가
 
 - 앱 안 개인정보 안내 페이지 추가
@@ -100,6 +103,7 @@
 
 ### Changed
 
+- 동의 배너 UI 계획, 쿠키/광고 동의 UX, 개인정보 데이터 맵, 개인정보 처리방침 초안에 consent storage 준비 상태 반영
 - 쿠키/광고 동의 UX 문서, 개인정보 처리방침 초안, 개인정보 데이터 맵에 동의 배너 UI 계획 문서 연결
 
 - 사용자가 현재 MVP의 브라우저 저장 정보와 외부 전송 여부를 앱 안에서 확인할 수 있도록 보완

@@ -1,5 +1,13 @@
 # PRIVACY_DATA_MAP
 
+## consent preferences 구현 상태
+
+- consent preferences 저장 위치는 브라우저 localStorage입니다.
+- localStorage key는 `harupuli_consent_preferences_v1`입니다.
+- storage 유틸은 준비되었지만 production UI에는 아직 연결하지 않습니다.
+- 현재 MVP 기준 외부 전송은 없습니다.
+- 실제 광고/분석 SDK 도입 시 동의 배너와 함께 사용할 예정입니다.
+
 ## consent preferences 보완 메모
 
 - consent preferences 항목은 향후 구현 후보입니다.

@@ -1,5 +1,11 @@
 # COOKIE_AD_CONSENT_UX
 
+## consent storage 유틸
+
+- 동의 상태 저장 후보 구조는 `src/utils/consentPreferencesStorage.js` 유틸로 준비합니다.
+- 현재 MVP에서는 실제 광고/분석 SDK가 없으므로 동의 배너 UI를 표시하지 않습니다.
+- 실제 SDK 도입 전까지는 동의 상태 저장 유틸을 production UI에 연결하지 않습니다.
+
 ## 동의 배너 UI 구현 계획 문서
 
 - 실제 동의 배너 UI를 구현하기 전 `docs/CONSENT_BANNER_UI_PLAN.md`를 참고합니다.

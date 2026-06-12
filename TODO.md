@@ -1,5 +1,18 @@
 # TODO
 
+## 2026-06-12 consent preferences storage TODO
+
+- [x] consent storage 유틸 추가
+- [x] consent preferences 저장 회귀 검증 추가
+- [ ] 동의 배너 UI 실제 구현
+- [ ] SettingsPage 동의 관리 섹션 추가
+- [ ] 실제 광고 SDK 연동 검토
+- [ ] 공유 이미지 생성 기능 검토
+- [ ] 세 번째 외부 만세력 기준 확인 후 기본값 재검토
+- [ ] 23시 이후 선택 옵션 문구의 사용자 이해도 확인
+- [ ] 태양시 보정 적용 여부 별도 검토
+- [ ] 음력/윤달 샘플 외부 검증
+
 ## 2026-06-12 동의 배너 UI 계획 TODO
 
 - [x] 동의 배너 UI 구현 검토

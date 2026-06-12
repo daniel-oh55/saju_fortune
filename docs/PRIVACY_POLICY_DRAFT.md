@@ -1,5 +1,12 @@
 # PRIVACY_POLICY_DRAFT
 
+## 15. 동의 상태 저장 유틸
+
+- MVP에서는 향후 광고/분석 SDK 도입에 대비해 consent preferences 저장 유틸을 준비합니다.
+- localStorage key는 `harupuli_consent_preferences_v1`입니다.
+- 현재는 실제 동의 배너 UI와 광고/분석 SDK가 없으므로 production 화면에서 사용하지 않습니다.
+- 실제 SDK 도입 시 동의 배너 UX와 함께 재검토합니다.
+
 ## 동의 배너 UI 계획
 
 - 실제 광고 SDK 또는 분석 SDK가 도입되기 전 동의 배너 UI 구현 계획을 검토합니다.
