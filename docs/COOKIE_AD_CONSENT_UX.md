@@ -1,5 +1,11 @@
 # COOKIE_AD_CONSENT_UX
 
+## 동의 배너 UI 구현 계획 문서
+
+- 실제 동의 배너 UI를 구현하기 전 `docs/CONSENT_BANNER_UI_PLAN.md`를 참고합니다.
+- 해당 문서는 배너 문구, 버튼 구성, 동의 상태 후보 구조, 광고 해금 UX와의 관계를 정리합니다.
+- 현재 MVP에서는 실제 동의 배너 UI와 consent localStorage key를 구현하지 않습니다.
+
 이 문서는 하루풀이 MVP 기준의 쿠키/광고 동의 UX 검토 문서입니다.
 법률 검토를 완료한 최종 정책이 아니며, 실제 광고 SDK, 분석 SDK, 로그인, 결제 기능 도입 시 최신 법령과 각 SDK provider 정책을 기준으로 별도 검토가 필요합니다.
 
