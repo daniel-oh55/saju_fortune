@@ -1,5 +1,12 @@
 # PWA_READINESS
 
+## 앱화 방식 결정 연계
+
+- PWA는 현재 기본 준비가 완료된 상태입니다.
+- 네이티브 앱 전환 방식은 `docs/APP_PACKAGING_STRATEGY.md`를 기준으로 검토합니다.
+- 현재 추천 흐름은 PWA 유지 후 Capacitor 도입 준비입니다.
+- service worker와 오프라인 캐싱은 앱화 방식 결정 후 별도 검토합니다.
+
 ## 앱 아이콘/스플래시 리소스 연계
 
 - 앱 아이콘과 스플래시 원본 리소스 기준은 `docs/APP_ASSET_READINESS.md`를 참고합니다.
