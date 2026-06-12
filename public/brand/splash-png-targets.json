@@ -1,0 +1,68 @@
+{
+  "source": "public/brand/harupuli-splash-master.svg",
+  "outputs": [
+    {
+      "platform": "android",
+      "width": 1080,
+      "height": 1920,
+      "path": "public/generated-splash/android/splash-1080x1920.png",
+      "requiredFor": "Android portrait splash candidate"
+    },
+    {
+      "platform": "android",
+      "width": 1080,
+      "height": 2160,
+      "path": "public/generated-splash/android/splash-1080x2160.png",
+      "requiredFor": "Android tall portrait splash candidate"
+    },
+    {
+      "platform": "android",
+      "width": 1440,
+      "height": 2560,
+      "path": "public/generated-splash/android/splash-1440x2560.png",
+      "requiredFor": "Android high density splash candidate"
+    },
+    {
+      "platform": "android",
+      "width": 432,
+      "height": 432,
+      "path": "public/generated-splash/android/splash-icon-432.png",
+      "requiredFor": "Android 12 splash icon candidate"
+    },
+    {
+      "platform": "android",
+      "width": 960,
+      "height": 960,
+      "path": "public/generated-splash/android/splash-icon-960.png",
+      "requiredFor": "Android 12 high resolution splash icon candidate"
+    },
+    {
+      "platform": "ios",
+      "width": 1170,
+      "height": 2532,
+      "path": "public/generated-splash/ios/splash-1170x2532.png",
+      "requiredFor": "iPhone portrait launch candidate"
+    },
+    {
+      "platform": "ios",
+      "width": 1242,
+      "height": 2688,
+      "path": "public/generated-splash/ios/splash-1242x2688.png",
+      "requiredFor": "iPhone portrait launch candidate"
+    },
+    {
+      "platform": "ios",
+      "width": 1290,
+      "height": 2796,
+      "path": "public/generated-splash/ios/splash-1290x2796.png",
+      "requiredFor": "iPhone portrait launch candidate"
+    },
+    {
+      "platform": "store",
+      "width": 1290,
+      "height": 2796,
+      "path": "public/generated-splash/store/splash-1290x2796.png",
+      "requiredFor": "Store preview or marketing source candidate"
+    }
+  ]
+}

@@ -1,5 +1,12 @@
 # APP_ASSET_READINESS
 
+## splash PNG export 준비
+
+- splash PNG 세트 생성 전 기준은 `docs/SPLASH_PNG_EXPORT_READINESS.md`를 참고합니다.
+- PNG 출력 target manifest는 `public/brand/splash-png-targets.json`입니다.
+- 이번 단계에서는 실제 splash PNG 바이너리를 생성하지 않습니다.
+- 실제 splash PNG 생성은 별도 PR에서 진행합니다.
+
 ## 앱 아이콘 PNG export 준비
 
 - 앱 아이콘 PNG 세트 생성 전 기준은 `docs/APP_ICON_PNG_EXPORT_READINESS.md`를 참고합니다.

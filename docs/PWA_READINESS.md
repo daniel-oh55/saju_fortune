@@ -1,5 +1,11 @@
 # PWA_READINESS
 
+## splash 리소스와 PWA 관계
+
+- PWA 자체의 네이티브 splash 리소스 적용 방식과 앱 패키징 splash 리소스는 다를 수 있습니다.
+- 앱 패키징 단계의 splash PNG 기준은 `docs/SPLASH_PNG_EXPORT_READINESS.md`를 참고합니다.
+- 현재 PWA manifest에는 splash PNG를 직접 연결하지 않습니다.
+
 ## PWA PNG 아이콘 준비 연계
 
 - 현재 manifest는 SVG 아이콘을 사용합니다.
