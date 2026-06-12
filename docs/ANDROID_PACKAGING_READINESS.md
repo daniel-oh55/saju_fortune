@@ -1,5 +1,11 @@
 # ANDROID_PACKAGING_READINESS
 
+## Android 앱 아이콘 PNG 준비 연계
+
+- Android 패키징 전 앱 아이콘 PNG 세트가 필요합니다.
+- PNG 출력 기준은 `docs/APP_ICON_PNG_EXPORT_READINESS.md`를 참고합니다.
+- 이번 단계에서는 PNG를 생성하지 않고 출력 규격만 확정합니다.
+
 이 문서는 하루풀이 웹앱을 Android 앱으로 우선 패키징하기 전 준비 기준을 정리한 문서입니다.
 이번 PR은 Android 패키징 준비 문서와 검증 스크립트 추가가 목적이며, Capacitor 설치, android 프로젝트 생성, 네이티브 앱 빌드는 아직 진행하지 않습니다.
 

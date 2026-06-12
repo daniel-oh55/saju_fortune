@@ -1,0 +1,83 @@
+{
+  "source": "public/brand/harupuli-app-icon-master.svg",
+  "outputs": [
+    {
+      "platform": "pwa",
+      "size": 192,
+      "path": "public/generated-icons/pwa/icon-192.png",
+      "requiredFor": "PWA install icon"
+    },
+    {
+      "platform": "pwa",
+      "size": 512,
+      "path": "public/generated-icons/pwa/icon-512.png",
+      "requiredFor": "PWA install icon"
+    },
+    {
+      "platform": "android",
+      "size": 48,
+      "path": "public/generated-icons/android/icon-48.png",
+      "requiredFor": "Android mdpi launcher icon candidate"
+    },
+    {
+      "platform": "android",
+      "size": 72,
+      "path": "public/generated-icons/android/icon-72.png",
+      "requiredFor": "Android hdpi launcher icon candidate"
+    },
+    {
+      "platform": "android",
+      "size": 96,
+      "path": "public/generated-icons/android/icon-96.png",
+      "requiredFor": "Android xhdpi launcher icon candidate"
+    },
+    {
+      "platform": "android",
+      "size": 144,
+      "path": "public/generated-icons/android/icon-144.png",
+      "requiredFor": "Android xxhdpi launcher icon candidate"
+    },
+    {
+      "platform": "android",
+      "size": 192,
+      "path": "public/generated-icons/android/icon-192.png",
+      "requiredFor": "Android xxxhdpi launcher icon candidate"
+    },
+    {
+      "platform": "android",
+      "size": 512,
+      "path": "public/generated-icons/android/icon-512.png",
+      "requiredFor": "Google Play listing candidate"
+    },
+    {
+      "platform": "ios",
+      "size": 120,
+      "path": "public/generated-icons/ios/icon-120.png",
+      "requiredFor": "iPhone app icon candidate"
+    },
+    {
+      "platform": "ios",
+      "size": 152,
+      "path": "public/generated-icons/ios/icon-152.png",
+      "requiredFor": "iPad app icon candidate"
+    },
+    {
+      "platform": "ios",
+      "size": 167,
+      "path": "public/generated-icons/ios/icon-167.png",
+      "requiredFor": "iPad Pro app icon candidate"
+    },
+    {
+      "platform": "ios",
+      "size": 180,
+      "path": "public/generated-icons/ios/icon-180.png",
+      "requiredFor": "iPhone app icon candidate"
+    },
+    {
+      "platform": "store",
+      "size": 1024,
+      "path": "public/generated-icons/store/icon-1024.png",
+      "requiredFor": "App Store / Play Store source candidate"
+    }
+  ]
+}

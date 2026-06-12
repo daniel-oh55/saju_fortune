@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 2026-06-12 App Icon PNG Export Readiness
+
+### Added
+- 앱 아이콘 PNG export 준비 문서 추가
+- 앱 아이콘 PNG target manifest 추가
+- 앱 아이콘 PNG export readiness 검증 스크립트 추가
+
+### Changed
+- 앱 리소스, Android 패키징, PWA 문서에 앱 아이콘 PNG 출력 기준 연결
+
 ## 2026-06-12 Android Packaging Readiness
 
 ### Added
