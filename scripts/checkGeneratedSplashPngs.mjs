@@ -41,25 +41,25 @@ function readPngMetadata(relativePath) {
   };
 }
 
-const targetManifestExists = fileExists('public/brand/app-icon-png-targets.json');
+const targetManifestExists = fileExists('public/brand/splash-png-targets.json');
 logResult('target_manifest_exists', targetManifestExists);
-assertCondition(targetManifestExists, 'public/brand/app-icon-png-targets.json should exist');
+assertCondition(targetManifestExists, 'public/brand/splash-png-targets.json should exist');
 
 let targetManifest = null;
 let targetManifestValidJson = false;
 try {
-  targetManifest = JSON.parse(readText('public/brand/app-icon-png-targets.json'));
+  targetManifest = JSON.parse(readText('public/brand/splash-png-targets.json'));
   targetManifestValidJson = true;
 } catch {
   targetManifestValidJson = false;
 }
 logResult('target_manifest_valid_json', targetManifestValidJson);
-assertCondition(targetManifestValidJson, 'app icon PNG target manifest should be valid JSON');
+assertCondition(targetManifestValidJson, 'splash PNG target manifest should be valid JSON');
 
 const outputs = Array.isArray(targetManifest?.outputs) ? targetManifest.outputs : [];
 const allTargetPngsExist = outputs.length > 0 && outputs.every((output) => fileExists(output.path));
 logResult('all_target_pngs_exist', allTargetPngsExist);
-assertCondition(allTargetPngsExist, 'all target PNG files should exist');
+assertCondition(allTargetPngsExist, 'all target splash PNG files should exist');
 
 const pngMetadatas = outputs.map((output) => ({
   output,
@@ -68,34 +68,55 @@ const pngMetadatas = outputs.map((output) => ({
 
 const allTargetPngsHavePngSignature = pngMetadatas.every((item) => item.metadata?.hasSignature);
 logResult('all_target_pngs_have_png_signature', allTargetPngsHavePngSignature);
-assertCondition(allTargetPngsHavePngSignature, 'all generated icon files should have PNG signature');
+assertCondition(allTargetPngsHavePngSignature, 'all generated splash files should have PNG signature');
 
 const allTargetPngDimensionsMatch = pngMetadatas.every(({ output, metadata }) => {
-  const size = Number(output.size);
-  return metadata?.width === size && metadata?.height === size;
+  return metadata?.width === Number(output.width) && metadata?.height === Number(output.height);
 });
 logResult('all_target_png_dimensions_match', allTargetPngDimensionsMatch);
-assertCondition(allTargetPngDimensionsMatch, 'all generated icon PNG dimensions should match target sizes');
+assertCondition(allTargetPngDimensionsMatch, 'all generated splash PNG dimensions should match target dimensions');
 
 const generatedPlatforms = new Set(outputs.filter((output) => fileExists(output.path)).map((output) => output.platform));
-const requiredPlatforms = ['pwa', 'android', 'ios', 'store'];
+const requiredPlatforms = ['android', 'ios', 'store'];
 const requiredPlatformsGenerated = requiredPlatforms.every((platform) => generatedPlatforms.has(platform));
 logResult('required_platforms_generated', requiredPlatformsGenerated);
-assertCondition(requiredPlatformsGenerated, 'pwa, android, ios, and store icon PNGs should be generated');
+assertCondition(requiredPlatformsGenerated, 'android, ios, and store splash PNGs should be generated');
 
-const generatedSizes = new Set(outputs.filter((output) => fileExists(output.path)).map((output) => output.size));
-const requiredSizes = [48, 72, 96, 120, 144, 152, 167, 180, 192, 512, 1024];
-const requiredSizesGenerated = requiredSizes.every((size) => generatedSizes.has(size));
-logResult('required_sizes_generated', requiredSizesGenerated);
-assertCondition(requiredSizesGenerated, 'all required icon sizes should be generated');
+const generatedDimensions = new Set(
+  outputs.filter((output) => fileExists(output.path)).map((output) => `${output.width}x${output.height}`),
+);
+const requiredDimensions = [
+  '1080x1920',
+  '1080x2160',
+  '1440x2560',
+  '432x432',
+  '960x960',
+  '1170x2532',
+  '1242x2688',
+  '1290x2796',
+];
+const requiredDimensionsGenerated = requiredDimensions.every((dimension) => generatedDimensions.has(dimension));
+logResult('required_dimensions_generated', requiredDimensionsGenerated);
+assertCondition(requiredDimensionsGenerated, 'all required splash dimensions should be generated');
 
-const manifest = JSON.parse(readText('public/manifest.webmanifest'));
-const manifestIcons = Array.isArray(manifest.icons) ? manifest.icons : [];
-const pwaManifestReferencesPngIcons =
-  manifestIcons.some((icon) => icon.src === '/generated-icons/pwa/icon-192.png') &&
-  manifestIcons.some((icon) => icon.src === '/generated-icons/pwa/icon-512.png');
-logResult('pwa_manifest_references_png_icons', pwaManifestReferencesPngIcons);
-assertCondition(pwaManifestReferencesPngIcons, 'PWA manifest should reference generated 192 and 512 PNG icons');
+const appIconPaths = [
+  'public/generated-icons/pwa/icon-192.png',
+  'public/generated-icons/pwa/icon-512.png',
+  'public/generated-icons/android/icon-48.png',
+  'public/generated-icons/android/icon-72.png',
+  'public/generated-icons/android/icon-96.png',
+  'public/generated-icons/android/icon-144.png',
+  'public/generated-icons/android/icon-192.png',
+  'public/generated-icons/android/icon-512.png',
+  'public/generated-icons/ios/icon-120.png',
+  'public/generated-icons/ios/icon-152.png',
+  'public/generated-icons/ios/icon-167.png',
+  'public/generated-icons/ios/icon-180.png',
+  'public/generated-icons/store/icon-1024.png',
+];
+const appIconPngsStillExist = appIconPaths.every((relativePath) => fileExists(relativePath));
+logResult('app_icon_pngs_still_exist', appIconPngsStillExist);
+assertCondition(appIconPngsStillExist, 'previously generated app icon PNG files should still exist');
 
 const packageJson = JSON.parse(readText('package.json'));
 const allDependencies = {
@@ -115,11 +136,11 @@ logResult('no_capacitor_added', noCapacitorAdded);
 assertCondition(noCapacitorAdded, 'Capacitor dependencies should not be added in this PR');
 
 if (failures.length > 0) {
-  console.error('Generated app icon PNG check failed');
+  console.error('Generated splash PNG check failed');
   for (const failure of failures) {
     console.error(`- ${failure}`);
   }
   process.exitCode = 1;
 } else {
-  console.log('Generated app icon PNG check passed');
+  console.log('Generated splash PNG check passed');
 }

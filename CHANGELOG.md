@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 2026-06-12 Generated Splash PNGs
+
+### Added
+- splash PNG 세트 생성
+- splash PNG 생성 스크립트 추가
+- splash PNG 검증 스크립트 추가
+
+### Changed
+- 앱 리소스, Android 패키징, Capacitor readiness 문서에 splash PNG 생성 상태 반영
+
 ## 2026-06-12 Generated App Icon PNGs
 
 ### Added

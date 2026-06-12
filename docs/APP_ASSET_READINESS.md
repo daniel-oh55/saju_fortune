@@ -1,5 +1,12 @@
 # APP_ASSET_READINESS
 
+## splash PNG 실제 생성
+
+- splash PNG 세트가 생성되었습니다.
+- 생성된 파일은 `public/generated-splash` 아래에 있습니다.
+- Android/iOS/store 후보 splash PNG가 준비되었습니다.
+- 실제 Capacitor 프로젝트 적용은 별도 PR에서 진행합니다.
+
 ## 앱 아이콘 PNG 실제 생성
 
 - 앱 아이콘 PNG 세트가 생성되었습니다.

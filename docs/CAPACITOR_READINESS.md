@@ -1,5 +1,10 @@
 # CAPACITOR_READINESS
 
+## Capacitor splash PNG 생성 상태
+
+- Capacitor 적용 전 사용할 splash PNG 후보 리소스가 생성되었습니다.
+- 실제 Android/iOS 프로젝트에 적용하는 작업은 Capacitor 프로젝트 생성 이후 별도 PR에서 진행합니다.
+
 ## Capacitor splash 리소스 준비 연계
 
 - Capacitor Android/iOS 프로젝트 생성 전 splash PNG 리소스 기준을 확정합니다.
