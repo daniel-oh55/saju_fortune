@@ -4,6 +4,10 @@
 
 ### Added
 
+- 앱 아이콘 master SVG 추가
+- 스플래시 master SVG 추가
+- 앱 리소스 준비 문서 및 검증 스크립트 추가
+
 - PWA manifest 추가
 - 기본 앱 아이콘 SVG 추가
 - maskable 앱 아이콘 SVG 추가
@@ -121,6 +125,8 @@
 - 만세력 시간 경계 및 입춘/자시/태양시 정책 문서 추가
 
 ### Changed
+
+- PWA readiness 문서와 모바일 UX QA 문서에 앱 아이콘/스플래시 준비 기준 연결
 
 - `index.html`에 manifest와 theme-color 메타데이터 연결
 

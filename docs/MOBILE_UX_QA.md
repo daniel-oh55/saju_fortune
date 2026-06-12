@@ -1,5 +1,11 @@
 # MOBILE_UX_QA
 
+## 앱 리소스 준비 연계
+
+- 모바일 UX 보정 이후 앱 아이콘과 스플래시 리소스를 준비합니다.
+- 자세한 기준은 `docs/APP_ASSET_READINESS.md`를 참고합니다.
+- 실제 기기 테스트와 splash 화면 확인은 앱 패키징 단계에서 진행합니다.
+
 ## PWA 기본 준비 연계
 
 - 모바일 UX 보정 이후 PWA manifest를 준비합니다.

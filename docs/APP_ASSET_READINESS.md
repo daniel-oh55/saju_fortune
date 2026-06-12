@@ -1,0 +1,91 @@
+# APP_ASSET_READINESS
+
+이 문서는 하루풀이 앱을 모바일 앱으로 패키징하기 위한 앱 아이콘과 스플래시 리소스 준비 기준입니다.
+이번 PR은 원본 SVG 리소스와 체크리스트 준비가 목적이며, 실제 네이티브 앱 패키징과 PNG 변환은 아직 진행하지 않습니다.
+
+## 1. 목적
+
+- 앱 패키징용 아이콘과 스플래시 리소스 기준을 정리합니다.
+- PWA 아이콘과 네이티브 앱 아이콘의 관계를 정리합니다.
+- 앱스토어/플레이스토어 제출 시 필요한 추가 리소스를 목록화합니다.
+
+## 2. 이번 PR 범위
+
+포함:
+
+- app icon master SVG
+- splash master SVG
+- asset readiness 검증 스크립트
+- PWA 문서와 모바일 UX 문서 업데이트
+
+제외:
+
+- PNG 아이콘 세트 생성
+- iOS asset catalog 생성
+- Android mipmap 리소스 생성
+- Capacitor 설치
+- 네이티브 앱 빌드
+- service worker
+- 실제 광고 SDK
+
+## 3. 현재 준비된 리소스
+
+- `public/icons/harupuli-icon.svg`
+- `public/icons/harupuli-maskable-icon.svg`
+- `public/brand/harupuli-app-icon-master.svg`
+- `public/brand/harupuli-splash-master.svg`
+- `public/manifest.webmanifest`
+
+## 4. 앱 아이콘 제작 기준
+
+- master SVG는 1024x1024 기준입니다.
+- 주요 도형은 중앙 safe area 안에 배치합니다.
+- 작은 크기에서도 식별 가능하도록 단순한 형태를 유지합니다.
+- 텍스트는 최소화합니다.
+- 외부 폰트나 이미지를 사용하지 않습니다.
+- 최종 제출 전 PNG 세트가 필요합니다.
+
+추후 필요한 PNG 후보:
+
+- 1024x1024
+- 512x512
+- 192x192
+- 180x180
+- 167x167
+- 152x152
+- 144x144
+- 120x120
+- 96x96
+- 72x72
+- 48x48
+
+## 5. 스플래시 리소스 제작 기준
+
+- portrait 기준입니다.
+- safe-area를 고려합니다.
+- 중앙 로고/도형 중심으로 구성합니다.
+- 배경색은 앱 theme와 어울리게 유지합니다.
+- 과도한 텍스트는 피합니다.
+- 실제 iOS/Android 빌드 전 PNG 세트가 필요합니다.
+
+## 6. 스토어 제출 전 추가 준비 항목
+
+- 앱 아이콘 PNG 세트
+- splash PNG 세트
+- 앱 스크린샷
+- 앱 이름
+- 짧은 설명
+- 긴 설명
+- 개인정보 처리방침 URL
+- 광고 포함 여부
+- 카테고리
+- 콘텐츠 등급
+- 지원 이메일 또는 문의 채널
+
+## 7. 향후 PR 후보
+
+- PNG 아이콘 세트 생성
+- splash PNG 세트 생성
+- 앱스토어 등록 정보 초안
+- Capacitor 도입 준비
+- 실제 기기 테스트 체크리스트
