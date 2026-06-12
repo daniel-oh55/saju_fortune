@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "check:consent-banner-state": "node scripts/checkConsentBannerStateRegression.mjs",
     "check:consent-storage": "node scripts/checkConsentPreferencesStorageRegression.mjs",
     "check:late-night-jasi-policy": "node scripts/checkLateNightJasiPolicyRegression.mjs",
     "check:content-safety": "node scripts/checkContentSafetyCopyRegression.mjs",

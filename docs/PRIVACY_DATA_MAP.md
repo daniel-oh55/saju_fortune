@@ -4,7 +4,7 @@
 
 - consent preferences 저장 위치는 브라우저 localStorage입니다.
 - localStorage key는 `harupuli_consent_preferences_v1`입니다.
-- storage 유틸은 준비되었지만 production UI에는 아직 연결하지 않습니다.
+- storage 유틸과 동의 배너 UI가 연결되었습니다.
 - 현재 MVP 기준 외부 전송은 없습니다.
 - 실제 광고/분석 SDK 도입 시 동의 배너와 함께 사용할 예정입니다.
 

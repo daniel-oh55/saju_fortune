@@ -3,8 +3,9 @@
 ## consent storage 유틸
 
 - 동의 상태 저장 후보 구조는 `src/utils/consentPreferencesStorage.js` 유틸로 준비합니다.
-- 현재 MVP에서는 실제 광고/분석 SDK가 없으므로 동의 배너 UI를 표시하지 않습니다.
-- 실제 SDK 도입 전까지는 동의 상태 저장 유틸을 production UI에 연결하지 않습니다.
+- 현재 MVP에서는 동의 배너 UI를 표시하고, 선택 상태를 localStorage에 저장합니다.
+- 이 배너는 실제 SDK 동의가 아니라 향후 기능 대비 동의 상태 관리입니다.
+- 실제 광고/분석 SDK 도입 시 문구와 동의 항목을 다시 검토해야 합니다.
 
 ## 동의 배너 UI 구현 계획 문서
 

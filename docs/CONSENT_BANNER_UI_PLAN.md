@@ -4,9 +4,16 @@
 
 - `src/utils/consentPreferencesStorage.js`에서 consent preferences 저장 유틸을 제공합니다.
 - localStorage key는 `harupuli_consent_preferences_v1`입니다.
-- 현재 PR에서는 storage 유틸만 준비하며, 실제 동의 배너 UI에는 아직 연결하지 않습니다.
-- 실제 동의 배너 UI 구현 PR에서 이 유틸을 사용해 동의 상태를 저장하고 조회할 수 있습니다.
-- consent storage 유틸은 준비되었지만 production UI에는 아직 연결하지 않습니다.
+- `ConsentBanner`와 `ConsentSettingsPanel`이 storage 유틸과 연결되었습니다.
+- 실제 광고/분석 SDK는 아직 연결하지 않았습니다.
+- 실제 SDK 도입 전에는 동의 항목과 안내 문구를 다시 검토해야 합니다.
+
+## 실제 동의 배너 UI 구현 상태
+
+- 첫 방문 또는 정책 버전 불일치 시 동의 배너를 표시합니다.
+- 사용자는 동의, 나중에, 설정, 개인정보 안내를 선택할 수 있습니다.
+- 설정 패널에서 분석 데이터, 광고 데이터, 맞춤형 광고 항목을 저장할 수 있습니다.
+- 현재 배너는 실제 SDK 동의가 아니라 향후 기능 대비 동의 상태 관리 UI입니다.
 
 이 문서는 하루풀이 MVP 기준의 동의 배너 UI 구현 전 설계 문서입니다.
 실제 광고 SDK, 분석 SDK, 로그인, 결제 기능 도입 시 최신 법령과 각 SDK provider 정책을 기준으로 별도 검토가 필요합니다.

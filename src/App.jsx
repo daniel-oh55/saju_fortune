@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import BottomNav from './components/BottomNav.jsx';
+import ConsentBanner from './components/ConsentBanner.jsx';
+import ConsentSettingsPanel from './components/ConsentSettingsPanel.jsx';
 import OnboardingPage from './pages/OnboardingPage.jsx';
 import HomePage from './pages/HomePage.jsx';
 import FortuneDetailPage from './pages/FortuneDetailPage.jsx';
@@ -21,6 +23,12 @@ import {
   saveReadingItem,
 } from './utils/savedReadingsStorage.js';
 import { createEmptyVisitStreak, recordDailyVisit } from './utils/visitStreakStorage.js';
+import {
+  loadConsentPreferences,
+  saveConsentPreferences,
+  shouldShowConsentBanner,
+  updateConsentPreferences,
+} from './utils/consentPreferencesStorage.js';
 import {
   clearAppData,
   loadFortune,
@@ -66,6 +74,9 @@ function App() {
   const [unlockedDetails, setUnlockedDetails] = useState({});
   const [savedReadings, setSavedReadings] = useState(() => loadSavedReadings());
   const [visitStreak, setVisitStreak] = useState(() => createEmptyVisitStreak());
+  const [consentPreferences, setConsentPreferences] = useState(() => loadConsentPreferences());
+  const [isConsentBannerVisible, setIsConsentBannerVisible] = useState(() => shouldShowConsentBanner());
+  const [isConsentSettingsOpen, setIsConsentSettingsOpen] = useState(false);
 
   const fortune = useMemo(() => {
     if (!profile) return null;
@@ -132,8 +143,74 @@ function App() {
     setActivePage('onboarding');
   };
 
+  const handleAcceptAllConsent = () => {
+    const nextPreferences = saveConsentPreferences({
+      analytics: true,
+      ads: true,
+      personalizedAds: true,
+    });
+    setConsentPreferences(nextPreferences);
+    setIsConsentBannerVisible(false);
+  };
+
+  const handleRejectOptionalConsent = () => {
+    const nextPreferences = saveConsentPreferences({
+      analytics: false,
+      ads: false,
+      personalizedAds: false,
+    });
+    setConsentPreferences(nextPreferences);
+    setIsConsentBannerVisible(false);
+  };
+
+  const handleOpenConsentSettings = () => {
+    setIsConsentSettingsOpen(true);
+  };
+
+  const handleCloseConsentSettings = () => {
+    setIsConsentSettingsOpen(false);
+  };
+
+  const handleSaveConsentSettings = (nextPreferences) => {
+    const savedPreferences = updateConsentPreferences(nextPreferences);
+    setConsentPreferences(savedPreferences);
+    setIsConsentSettingsOpen(false);
+    setIsConsentBannerVisible(false);
+  };
+
+  const handleOpenPrivacyInfoFromConsent = () => {
+    setActivePage('privacyInfo');
+    setIsConsentSettingsOpen(false);
+  };
+
+  const consentUi = (
+    <>
+      {isConsentBannerVisible && (
+        <ConsentBanner
+          onAcceptAll={handleAcceptAllConsent}
+          onRejectOptional={handleRejectOptionalConsent}
+          onOpenSettings={handleOpenConsentSettings}
+          onOpenPrivacyInfo={handleOpenPrivacyInfoFromConsent}
+        />
+      )}
+      {isConsentSettingsOpen && (
+        <ConsentSettingsPanel
+          preferences={consentPreferences}
+          onSave={handleSaveConsentSettings}
+          onClose={handleCloseConsentSettings}
+          onOpenPrivacyInfo={handleOpenPrivacyInfoFromConsent}
+        />
+      )}
+    </>
+  );
+
   if (!profile || activePage === 'onboarding') {
-    return <OnboardingPage initialProfile={profile} onSave={handleSaveProfile} />;
+    return (
+      <>
+        <OnboardingPage initialProfile={profile} onSave={handleSaveProfile} />
+        {consentUi}
+      </>
+    );
   }
 
   return (
@@ -189,18 +266,23 @@ function App() {
         {activePage === 'ai' && <AiConsultPage profile={profile} fortune={fortune} />}
         {activePage === 'compatibility' && <CompatibilityPage profile={profile} />}
         {activePage === 'premium' && <PremiumPage />}
-        {activePage === 'privacyInfo' && <PrivacyInfoPage onNavigate={setActivePage} />}
+        {activePage === 'privacyInfo' && (
+          <PrivacyInfoPage onNavigate={setActivePage} consentPreferences={consentPreferences} />
+        )}
         {activePage === 'settings' && (
           <SettingsPage
             profile={profile}
             fortune={fortune}
+            consentPreferences={consentPreferences}
             onNavigate={setActivePage}
+            onOpenConsentSettings={handleOpenConsentSettings}
             onEditProfile={() => setActivePage('onboarding')}
             onReset={handleReset}
           />
         )}
       </main>
       <BottomNav activePage={activePage} onNavigate={setActivePage} />
+      {consentUi}
     </div>
   );
 }

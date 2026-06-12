@@ -15,7 +15,7 @@ function lateNightJasiPolicyLabel(value) {
   return value === 'next_day' ? '다음 날 자시 기준' : '입력한 날짜 기준';
 }
 
-function SettingsPage({ profile, fortune, onNavigate, onEditProfile, onReset }) {
+function SettingsPage({ profile, fortune, consentPreferences, onNavigate, onOpenConsentSettings, onEditProfile, onReset }) {
   return (
     <div className="page-stack">
       <section className="section-header">
@@ -71,6 +71,16 @@ function SettingsPage({ profile, fortune, onNavigate, onEditProfile, onReset }) 
         <button className="ghost-button full-width" type="button" onClick={() => onNavigate('privacyInfo')}>
           개인정보 안내 보기
         </button>
+        <button className="ghost-button full-width" type="button" onClick={onOpenConsentSettings}>
+          데이터 사용 설정
+        </button>
+        {consentPreferences && (
+          <p className="settings-consent-summary">
+            분석 {consentPreferences.analytics ? '동의' : '미동의'} · 광고{' '}
+            {consentPreferences.ads ? '동의' : '미동의'} · 맞춤형 광고{' '}
+            {consentPreferences.personalizedAds ? '동의' : '미동의'}
+          </p>
+        )}
         <button className="ghost-button full-width" type="button" onClick={onEditProfile}>
           프로필 수정
         </button>
