@@ -1,5 +1,11 @@
 # ANDROID_PACKAGING_READINESS
 
+## Android 앱 아이콘 PNG 생성 상태
+
+- Android 후보 앱 아이콘 PNG가 `public/generated-icons/android` 아래에 생성되었습니다.
+- Android 프로젝트 생성 후 실제 mipmap/adaptive icon 적용 단계에서 이 파일들을 기준으로 사용할 수 있습니다.
+- Android adaptive icon foreground/background는 별도 PR에서 검토합니다.
+
 ## Android splash PNG 준비 연계
 
 - Android 패키징 전 splash PNG 세트와 Android 12 splash icon 후보가 필요합니다.

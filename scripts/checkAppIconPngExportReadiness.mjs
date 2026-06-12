@@ -15,18 +15,6 @@ function fileExists(relativePath) {
   return fs.existsSync(path.join(projectRoot, relativePath));
 }
 
-function listFilesRecursive(relativePath) {
-  const targetPath = path.join(projectRoot, relativePath);
-  if (!fs.existsSync(targetPath)) return [];
-
-  const entries = fs.readdirSync(targetPath, { withFileTypes: true });
-  return entries.flatMap((entry) => {
-    const childRelativePath = path.join(relativePath, entry.name);
-    if (entry.isDirectory()) return listFilesRecursive(childRelativePath);
-    return childRelativePath;
-  });
-}
-
 function assertCondition(condition, message) {
   if (!condition) failures.push(message);
 }
@@ -76,11 +64,6 @@ assertCondition(requiredSizesExist, 'target manifest should include all required
 const outputPathsArePng = outputs.every((output) => typeof output.path === 'string' && output.path.endsWith('.png'));
 logResult('output_paths_are_png', outputPathsArePng);
 assertCondition(outputPathsArePng, 'all output paths should end with .png');
-
-const generatedIconFiles = listFilesRecursive('public/generated-icons');
-const noPngFilesGeneratedYet = generatedIconFiles.every((filePath) => !filePath.toLowerCase().endsWith('.png'));
-logResult('no_png_files_generated_yet', noPngFilesGeneratedYet);
-assertCondition(noPngFilesGeneratedYet, 'PNG files should not be generated in this readiness PR');
 
 const packageJson = JSON.parse(readText('package.json'));
 const allDependencies = {

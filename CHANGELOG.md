@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## 2026-06-12 Generated App Icon PNGs
+
+### Added
+- 앱 아이콘 PNG 세트 생성
+- 앱 아이콘 PNG 생성 스크립트 추가
+- 앱 아이콘 PNG 검증 스크립트 추가
+
+### Changed
+- PWA manifest에 192x192, 512x512 PNG 아이콘 추가
+- 앱 리소스, Android 패키징, PWA 문서에 앱 아이콘 PNG 생성 상태 반영
+
 ## 2026-06-12 Splash PNG Export Readiness
 
 ### Added

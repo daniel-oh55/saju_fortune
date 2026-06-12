@@ -80,8 +80,8 @@ const manifestHasMaskableIcon = icons.some((icon) => String(icon.purpose || '').
 logResult('manifest_has_maskable_icon', manifestHasMaskableIcon);
 assertCondition(manifestHasMaskableIcon, 'manifest should include a maskable icon');
 
-const iconSvgValidBasic = icons.every((icon) => {
-  if (!String(icon.type || '').includes('svg')) return false;
+const svgIcons = icons.filter((icon) => String(icon.type || '').includes('svg'));
+const iconSvgValidBasic = svgIcons.length > 0 && svgIcons.every((icon) => {
   const iconPath = path.join('public', icon.src.replace(/^\//, ''));
   if (!fileExists(iconPath)) return false;
   const svg = readText(iconPath).trim();

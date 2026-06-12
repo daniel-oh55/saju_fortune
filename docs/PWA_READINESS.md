@@ -1,5 +1,11 @@
 # PWA_READINESS
 
+## PWA PNG 아이콘 적용 상태
+
+- PWA manifest에 192x192, 512x512 PNG 아이콘이 추가되었습니다.
+- SVG 아이콘은 기존대로 유지합니다.
+- PNG 아이콘은 PWA 설치 호환성을 높이기 위한 보조 리소스입니다.
+
 ## splash 리소스와 PWA 관계
 
 - PWA 자체의 네이티브 splash 리소스 적용 방식과 앱 패키징 splash 리소스는 다를 수 있습니다.

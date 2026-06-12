@@ -1,5 +1,12 @@
 # APP_ASSET_READINESS
 
+## 앱 아이콘 PNG 실제 생성
+
+- 앱 아이콘 PNG 세트가 생성되었습니다.
+- 생성된 파일은 `public/generated-icons` 아래에 있습니다.
+- PWA manifest에는 192x192, 512x512 PNG 아이콘이 추가되었습니다.
+- splash PNG는 별도 PR에서 생성합니다.
+
 ## splash PNG export 준비
 
 - splash PNG 세트 생성 전 기준은 `docs/SPLASH_PNG_EXPORT_READINESS.md`를 참고합니다.
