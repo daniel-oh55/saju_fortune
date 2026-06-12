@@ -1,5 +1,11 @@
 # PRIVACY_DATA_MAP
 
+## consent preferences 보완 메모
+
+- consent preferences 항목은 향후 구현 후보입니다.
+- 구현 전 `docs/CONSENT_BANNER_UI_PLAN.md`를 참고합니다.
+- 현재 MVP에서는 `harupuli_consent_preferences_v1` localStorage key를 실제로 생성하지 않습니다.
+
 ## 목적
 
 앱에서 어떤 데이터가 어디에 저장되고 어떤 화면에서 사용되는지 개발자가 빠르게 확인할 수 있도록 정리합니다.
