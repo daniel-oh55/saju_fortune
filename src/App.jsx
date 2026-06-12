@@ -232,6 +232,8 @@ function App() {
             selectedCategory={selectedCategory}
             unlockedDetails={unlockedDetails}
             savedReadings={savedReadings}
+            consentPreferences={consentPreferences}
+            onOpenConsentSettings={handleOpenConsentSettings}
             onSelectCategory={setSelectedCategory}
             onUnlockDetail={handleUnlockDetail}
             onSaveReading={handleSaveReading}
@@ -251,6 +253,8 @@ function App() {
             unlockedDetails={unlockedDetails}
             onUnlockDetail={handleUnlockDetail}
             savedReadings={savedReadings}
+            consentPreferences={consentPreferences}
+            onOpenConsentSettings={handleOpenConsentSettings}
             onSaveReading={handleSaveReading}
             onRemoveSavedReading={handleRemoveSavedReading}
             onNavigate={setActivePage}

@@ -1,5 +1,11 @@
 # CONSENT_BANNER_UI_PLAN
 
+## rewarded ad ads consent gate
+
+- ConsentBanner에서 저장한 ads 동의 값은 SDK provider 광고 호출 조건으로 사용할 수 있습니다.
+- mock provider는 개발/테스트용 예외로 기존 동작을 유지합니다.
+- 실제 SDK provider는 ads 동의가 없으면 광고 호출 대신 데이터 사용 설정 안내를 반환합니다.
+
 ## rewarded ad SDK와의 연결 계획
 
 - 실제 광고 SDK 도입 시 ConsentBanner에서 저장한 ads consent를 광고 호출 조건에 연결할 수 있다.

@@ -15,6 +15,8 @@ function FortuneDetailPage({
   onUnlockDetail,
   onSaveReading,
   onRemoveSavedReading,
+  consentPreferences,
+  onOpenConsentSettings,
 }) {
   const category = fortune.categories.find((item) => item.id === selectedCategory) || fortune.categories[0];
   const isUnlocked = Boolean(unlockedDetails[category.id]?.unlocked);
@@ -85,6 +87,8 @@ function FortuneDetailPage({
           categoryLabel={category.label}
           placementId={REWARDED_AD_PLACEMENTS.TODAY_FORTUNE_DETAIL}
           isUnlocked={isUnlocked}
+          consentPreferences={consentPreferences}
+          onOpenConsentSettings={onOpenConsentSettings}
           onUnlock={() => onUnlockDetail(category.id)}
         />
 

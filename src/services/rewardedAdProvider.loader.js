@@ -17,18 +17,31 @@ export async function showRewardedAdWithResolvedProvider(options = {}, envOverri
   const config = resolveRewardedAdProvider(envOverride);
 
   if (config.provider === REWARDED_AD_PROVIDER_KEY.SDK) {
+    if (!config.sdkEnabled) {
+      return {
+        ok: false,
+        provider: REWARDED_AD_PROVIDER_TYPE.SDK,
+        placementId: options.placementId,
+        categoryLabel: options.categoryLabel,
+        reason: REWARDED_AD_OUTCOME.SDK_UNAVAILABLE,
+        rewardedAt: null,
+      };
+    }
+
+    if (options.consentPreferences?.ads !== true) {
+      return {
+        ok: false,
+        provider: REWARDED_AD_PROVIDER_TYPE.SDK,
+        placementId: options.placementId,
+        categoryLabel: options.categoryLabel,
+        reason: REWARDED_AD_OUTCOME.ADS_CONSENT_REQUIRED,
+        rewardedAt: null,
+      };
+    }
+
     if (config.sdkEnabled) {
       return showSdkRewardedAd(options);
     }
-
-    return {
-      ok: false,
-      provider: REWARDED_AD_PROVIDER_TYPE.SDK,
-      placementId: options.placementId,
-      categoryLabel: options.categoryLabel,
-      reason: REWARDED_AD_OUTCOME.SDK_UNAVAILABLE,
-      rewardedAt: null,
-    };
   }
 
   return showMockRewardedAd(options);

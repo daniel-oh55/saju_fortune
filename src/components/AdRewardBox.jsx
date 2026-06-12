@@ -5,6 +5,8 @@ function AdRewardBox({
   categoryLabel,
   placementId,
   isUnlocked,
+  consentPreferences,
+  onOpenConsentSettings,
   onUnlock,
   buttonLabel = '광고 보고 상세 풀이 열기',
 }) {
@@ -34,6 +36,8 @@ function AdRewardBox({
         <RewardAdModal
           categoryLabel={categoryLabel}
           placementId={placementId}
+          consentPreferences={consentPreferences}
+          onOpenConsentSettings={onOpenConsentSettings}
           onClose={() => setIsModalOpen(false)}
           onRewardComplete={onUnlock}
         />

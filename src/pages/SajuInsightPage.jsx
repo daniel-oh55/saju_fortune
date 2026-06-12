@@ -123,6 +123,8 @@ function SajuInsightPage({
   onSaveReading,
   onRemoveSavedReading,
   onNavigate,
+  consentPreferences,
+  onOpenConsentSettings,
 }) {
   const sajuAnalysis = fortune?.sajuAnalysis;
 
@@ -324,6 +326,8 @@ function SajuInsightPage({
               categoryLabel="사주 심화 해석"
               placementId={REWARDED_AD_PLACEMENTS.SAJU_INSIGHT_DEEP_DIVE}
               isUnlocked={false}
+              consentPreferences={consentPreferences}
+              onOpenConsentSettings={onOpenConsentSettings}
               onUnlock={() => onUnlockDetail(SAJU_INSIGHT_DEEP_UNLOCK_KEY)}
               buttonLabel="광고 보고 심화 해석 보기"
             />
