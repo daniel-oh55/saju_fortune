@@ -50,7 +50,11 @@ function InfoSection({ title, description, items }) {
   );
 }
 
-function PrivacyInfoPage({ onNavigate }) {
+function consentLabel(value) {
+  return value ? '동의' : '미동의';
+}
+
+function PrivacyInfoPage({ onNavigate, consentPreferences }) {
   return (
     <div className="page-stack privacy-info-page">
       <section className="section-header">
@@ -71,6 +75,32 @@ function PrivacyInfoPage({ onNavigate }) {
           현재 저장되는 정보는 서버가 아니라 사용자의 브라우저 localStorage에 보관됩니다.
           실제 광고, 분석, 결제 SDK는 아직 연결되어 있지 않습니다.
         </p>
+      </section>
+
+      <section className="privacy-info-section">
+        <h2>데이터 사용 동의 상태</h2>
+        <p>
+          현재 MVP에서는 실제 광고/분석 SDK가 연결되어 있지 않습니다. 동의 상태는 향후 SDK 도입에
+          대비해 브라우저에 저장됩니다.
+        </p>
+        {consentPreferences ? (
+          <div className="consent-status-list">
+            <div>
+              <span>분석 데이터 사용</span>
+              <strong>{consentLabel(consentPreferences.analytics)}</strong>
+            </div>
+            <div>
+              <span>광고 데이터 사용</span>
+              <strong>{consentLabel(consentPreferences.ads)}</strong>
+            </div>
+            <div>
+              <span>맞춤형 광고</span>
+              <strong>{consentLabel(consentPreferences.personalizedAds)}</strong>
+            </div>
+          </div>
+        ) : (
+          <p>저장된 동의 상태가 아직 없습니다.</p>
+        )}
       </section>
 
       <div className="privacy-info-grid">

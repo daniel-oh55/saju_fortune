@@ -4,6 +4,9 @@
 
 ### Added
 
+- 동의 배너 UI 추가
+- 데이터 사용 설정 패널 추가
+- consent banner state 회귀 검증 스크립트 추가
 - consent preferences 저장 유틸 추가
 - consent storage 회귀 검증 스크립트 추가
 - `check:consent-storage` npm script 추가
@@ -103,6 +106,7 @@
 
 ### Changed
 
+- SettingsPage와 PrivacyInfoPage에서 동의 상태를 확인하고 관리할 수 있도록 보완
 - 동의 배너 UI 계획, 쿠키/광고 동의 UX, 개인정보 데이터 맵, 개인정보 처리방침 초안에 consent storage 준비 상태 반영
 - 쿠키/광고 동의 UX 문서, 개인정보 처리방침 초안, 개인정보 데이터 맵에 동의 배너 UI 계획 문서 연결
 

@@ -1,5 +1,35 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-12 동의 배너 UI 실제 구현
+
+### 작업 내용
+- PR 목적: 동의 배너 UI 실제 구현
+- `ConsentBanner` 신규 추가
+- `ConsentSettingsPanel` 신규 추가
+- App.jsx에 consent preferences 상태 연결
+- SettingsPage에 데이터 사용 설정 버튼 추가
+- PrivacyInfoPage에 동의 상태 표시 추가
+- 신규 npm script: `check:consent-banner-state`
+- consent localStorage key: `harupuli_consent_preferences_v1`
+- production 계산 로직 변경 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+- rewarded ad 구조 변경 없음
+- 저장/공유/streak 기능 동작 변경 없음
+- 실제 광고 SDK 추가 없음
+- 외부 광고/분석 라이브러리 설치 없음
+
+### 테스트 결과
+- `npm run build`: 성공
+- `npm run check:consent-storage`: 성공
+- `npm run check:consent-banner-state`: 성공
+- `npm run check:content-safety`: 성공
+- `npm run check:share-text`: 성공
+- `npm run check:saved-readings`: 성공
+- `npm run check:visit-streak`: 성공
+- 로컬 dev 서버 `/`: 200 응답 확인
+- 로컬 dev 서버 `/?debug=manseryeok`: 200 응답 확인
+
 ## 2026-06-12 consent preferences 저장 유틸 추가
 
 ### 작업 내용

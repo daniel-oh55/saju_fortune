@@ -88,7 +88,14 @@ export function isConsentPolicyVersionCurrent(preferences) {
 }
 
 export function shouldShowConsentBanner() {
-  if (!hasConsentPreferences()) return true;
+  const storage = getStorage();
+  if (!storage) return false;
 
-  return !isConsentPolicyVersionCurrent(loadConsentPreferences());
+  const storedValue = storage.getItem(CONSENT_PREFERENCES_STORAGE_KEY);
+  if (!storedValue) return true;
+
+  const parsed = safeParse(storedValue);
+  if (!parsed || typeof parsed !== 'object') return true;
+
+  return !isConsentPolicyVersionCurrent(normalizeConsentPreferences(parsed));
 }
