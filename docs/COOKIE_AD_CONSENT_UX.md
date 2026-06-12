@@ -1,5 +1,11 @@
 # COOKIE_AD_CONSENT_UX
 
+## SDK adapter와 동의 상태
+
+- SDK adapter scaffold는 준비되었지만 실제 광고 SDK는 아직 호출하지 않습니다.
+- 실제 SDK 호출 전 ads consent 확인 로직은 별도 PR에서 연결합니다.
+- 현재 MVP에서는 consent 상태 저장과 광고 SDK 호출이 직접 연결되어 있지 않습니다.
+
 ## rewarded ad SDK 연동과 동의 상태
 
 - 실제 rewarded ad SDK를 호출하기 전 ads consent 상태를 확인하는 방향을 검토한다.

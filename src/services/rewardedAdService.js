@@ -4,8 +4,8 @@ import {
 } from './rewardedAdProvider.types.js';
 import {
   getMockRewardedAdDurationSeconds,
-  showMockRewardedAd,
 } from './rewardedAdProvider.mock.js';
+import { showRewardedAdWithResolvedProvider } from './rewardedAdProvider.loader.js';
 
 export {
   getMockRewardedAdDurationSeconds,
@@ -14,6 +14,10 @@ export {
 };
 
 export function getRewardedAdOutcomeMessage(reason) {
+  if (reason === REWARDED_AD_OUTCOME.SDK_UNAVAILABLE) {
+    return '광고 기능은 준비 중입니다. 지금은 기본 운세와 무료 해석을 계속 이용할 수 있습니다.';
+  }
+
   if (reason === REWARDED_AD_OUTCOME.LOAD_FAILED) {
     return '광고를 불러오지 못했습니다. 잠시 후 다시 시도해주세요.';
   }
@@ -30,5 +34,5 @@ export function getRewardedAdOutcomeMessage(reason) {
 }
 
 export async function showRewardedAd(options = {}) {
-  return showMockRewardedAd(options);
+  return showRewardedAdWithResolvedProvider(options, options.envOverride);
 }

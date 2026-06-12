@@ -1,5 +1,36 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-12 rewarded ad SDK provider adapter scaffold 추가
+
+### 작업 내용
+- PR 목적: rewarded ad SDK provider adapter scaffold 추가
+- `rewardedAdSdkConfig` 신규 추가
+- `rewardedAdProvider.sdk` 신규 추가
+- `rewardedAdProvider.loader` 신규 추가
+- `rewardedAdService` provider loader 연결
+- `sdk_unavailable` outcome/message 추가
+- 신규 npm script: `check:rewarded-ad-sdk-adapter`
+- 실제 광고 SDK 추가 없음
+- 외부 광고/분석 라이브러리 설치 없음
+- 실제 광고 네트워크 호출 없음
+- 기본 provider는 mock 유지
+- production 계산 로직 변경 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+- consent storage 기존 동작 변경 없음
+- 저장/공유/streak 기능 동작 변경 없음
+
+### 테스트 결과
+- `npm run build`: 성공
+- `npm run check:rewarded-ad-sdk-adapter`: 성공
+- `npm run check:rewarded-ad-service`: 성공
+- `npm run check:rewarded-ad-outcomes`: 성공
+- `npm run check:rewarded-ad-placements`: 성공
+- `npm run check:consent-storage`: 성공
+- `npm run check:consent-banner-state`: 성공
+- 로컬 dev 서버 `/`: 200 응답 확인
+- 로컬 dev 서버 `/?debug=manseryeok`: 200 응답 확인
+
 ## 2026-06-12 실제 rewarded ad SDK 연동 전 검토 문서 추가
 
 ### 작업 내용
