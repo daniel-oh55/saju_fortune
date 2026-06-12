@@ -1,5 +1,11 @@
 # CAPACITOR_READINESS
 
+## Capacitor splash 리소스 준비 연계
+
+- Capacitor Android/iOS 프로젝트 생성 전 splash PNG 리소스 기준을 확정합니다.
+- splash PNG 출력 기준은 `docs/SPLASH_PNG_EXPORT_READINESS.md`를 참고합니다.
+- 실제 적용은 Capacitor 프로젝트 생성 이후 별도 PR에서 진행합니다.
+
 ## Android 우선 패키징 준비 연계
 
 - Android 우선 패키징 준비 기준은 `docs/ANDROID_PACKAGING_READINESS.md`를 참고합니다.

@@ -1,5 +1,11 @@
 # ANDROID_PACKAGING_READINESS
 
+## Android splash PNG 준비 연계
+
+- Android 패키징 전 splash PNG 세트와 Android 12 splash icon 후보가 필요합니다.
+- splash PNG 출력 기준은 `docs/SPLASH_PNG_EXPORT_READINESS.md`를 참고합니다.
+- 이번 단계에서는 PNG를 생성하지 않고 출력 규격만 확정합니다.
+
 ## Android 앱 아이콘 PNG 준비 연계
 
 - Android 패키징 전 앱 아이콘 PNG 세트가 필요합니다.

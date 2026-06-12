@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 2026-06-12 Splash PNG Export Readiness
+
+### Added
+- splash PNG export 준비 문서 추가
+- splash PNG target manifest 추가
+- splash PNG export readiness 검증 스크립트 추가
+
+### Changed
+- 앱 리소스, Android 패키징, Capacitor readiness, PWA 문서에 splash PNG 출력 기준 연결
+
 ## 2026-06-12 App Icon PNG Export Readiness
 
 ### Added
