@@ -4,6 +4,11 @@
 
 ### Added
 
+- PWA manifest 추가
+- 기본 앱 아이콘 SVG 추가
+- maskable 앱 아이콘 SVG 추가
+- PWA readiness 문서 및 검증 스크립트 추가
+
 - 모바일 UX QA 문서 추가
 - rewarded ad placement readiness 문서 추가
 - rewarded ad placement readiness 회귀 검증 스크립트 추가
@@ -116,6 +121,8 @@
 - 만세력 시간 경계 및 입춘/자시/태양시 정책 문서 추가
 
 ### Changed
+
+- `index.html`에 manifest와 theme-color 메타데이터 연결
 
 - 앱 패키징 전 모바일 화면에서 동의 배너, 설정 패널, 광고 모달, 저장한 풀이, 개인정보 안내 페이지의 가독성과 터치 사용성을 보완
 - 광고 SDK readiness 문서에 provider placement ID 환경변수 적용 기준 보완

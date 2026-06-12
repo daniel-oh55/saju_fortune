@@ -12,6 +12,7 @@
     "check:content-safety": "node scripts/checkContentSafetyCopyRegression.mjs",
     "check:manseryeok-jasi-boundary": "node scripts/checkManseryeokJasiBoundaryHypothesis.mjs",
     "check:manseryeok-term-timezone": "node scripts/checkManseryeokTermTimezoneHypothesis.mjs",
+    "check:pwa-readiness": "node scripts/checkPwaManifestReadiness.mjs",
     "check:rewarded-ad-service": "node scripts/checkRewardedAdServiceRegression.mjs",
     "check:rewarded-ad-consent-gate": "node scripts/checkRewardedAdConsentGateRegression.mjs",
     "check:rewarded-ad-outcomes": "node scripts/checkRewardedAdOutcomeRegression.mjs",
