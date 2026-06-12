@@ -1,5 +1,14 @@
 # APP_ICON_PNG_EXPORT_READINESS
 
+## 실제 PNG 생성 상태
+
+- 앱 아이콘 PNG 세트가 `public/generated-icons` 아래에 생성되었습니다.
+- 생성 대상은 `public/brand/app-icon-png-targets.json`을 기준으로 합니다.
+- 생성 스크립트는 `npm run generate:app-icons`입니다.
+- 검증 스크립트는 `npm run check:generated-app-icons`입니다.
+- 이번 단계에서는 외부 이미지 변환 라이브러리를 설치하지 않았습니다.
+- splash PNG는 아직 생성하지 않았습니다.
+
 이 문서는 하루풀이 앱 아이콘 PNG 세트를 생성하기 전 필요한 출력 규격과 검증 기준을 정리한 문서입니다.
 이번 PR은 PNG 생성 준비가 목적이며, 실제 PNG 바이너리 생성과 이미지 변환 라이브러리 설치는 아직 진행하지 않습니다.
 
