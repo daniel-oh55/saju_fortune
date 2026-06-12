@@ -54,6 +54,7 @@ assertCondition(sdkDisabledPass, 'sdk disabled should return sdk_unavailable');
 const sdkEnabled = await showRewardedAd({
   placementId: 'test',
   categoryLabel: '테스트 광고',
+  consentPreferences: { ads: true },
   envOverride: {
     VITE_REWARDED_AD_PROVIDER: 'sdk',
     VITE_REWARDED_AD_SDK_ENABLED: 'true',

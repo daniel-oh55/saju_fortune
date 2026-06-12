@@ -1,5 +1,11 @@
 # REWARDED_AD_SDK_READINESS
 
+## ads consent gate 상태
+
+- 실제 SDK 도입 전 ads consent gate가 먼저 연결되었습니다.
+- 실제 provider 도입 후 ads consent가 false인 상태에서 광고 호출이 차단되는지 QA가 필요합니다.
+- mock provider는 개발/테스트용 기본 동작을 유지합니다.
+
 ## adapter scaffold 상태
 
 - SDK adapter scaffold가 추가되었지만 실제 광고 SDK는 아직 없습니다.

@@ -1,5 +1,11 @@
 # COOKIE_AD_CONSENT_UX
 
+## ads consent gate 적용 상태
+
+- ads consent가 실제 SDK 호출 조건으로 연결되는 scaffold가 추가되었습니다.
+- ads 미동의 상태에서도 기본 운세와 무료 해석은 계속 이용할 수 있습니다.
+- 현재 MVP에서는 mock provider가 기본값이며 실제 광고 SDK 호출은 없습니다.
+
 ## SDK adapter와 동의 상태
 
 - SDK adapter scaffold는 준비되었지만 실제 광고 SDK는 아직 호출하지 않습니다.

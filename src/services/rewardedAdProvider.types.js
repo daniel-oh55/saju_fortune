@@ -11,4 +11,5 @@ export const REWARDED_AD_OUTCOME = {
   CANCELED: 'canceled',
   NO_REWARD: 'no_reward',
   SDK_UNAVAILABLE: 'sdk_unavailable',
+  ADS_CONSENT_REQUIRED: 'ads_consent_required',
 };

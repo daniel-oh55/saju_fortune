@@ -1,5 +1,12 @@
 # REWARDED_AD_SDK_INTEGRATION_PLAN
 
+## ads consent gate 연결 상태
+
+- rewarded ad provider layer에서 SDK provider 호출 전 ads consent를 확인합니다.
+- provider가 mock이면 개발/테스트용으로 기존 동작을 유지합니다.
+- `provider=sdk`, `sdkEnabled=true`, `ads=false`이면 `ads_consent_required`를 반환합니다.
+- 현재 실제 SDK는 아직 없으므로 `ads=true`여도 SDK scaffold는 `sdk_unavailable`을 반환합니다.
+
 ## SDK adapter scaffold 상태
 
 - `src/services/rewardedAdProvider.sdk.js`가 추가되어 실제 SDK adapter 후보 구조를 제공합니다.

@@ -1,5 +1,35 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-12 consent ads 상태와 rewarded ad 호출 조건 연결
+
+### 작업 내용
+- PR 목적: consent ads 상태와 rewarded ad 호출 조건 연결
+- `ads_consent_required` outcome 추가
+- `rewardedAdProvider.loader`에 ads consent gate 추가
+- `RewardAdModal`에 consentPreferences 전달 추가
+- `ads_consent_required` 상태에서 데이터 사용 설정 버튼 추가
+- FortuneDetailPage / SajuInsightPage에 consentPreferences 전달 추가
+- 신규 npm script: `check:rewarded-ad-consent-gate`
+- 실제 광고 SDK 추가 없음
+- 외부 광고/분석 라이브러리 설치 없음
+- 실제 광고 네트워크 호출 없음
+- mock provider 기본 동작 유지
+- production 계산 로직 변경 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+- 저장/공유/streak 기능 동작 변경 없음
+
+### 테스트 결과
+- `npm run build`: 성공
+- `npm run check:rewarded-ad-consent-gate`: 성공
+- `npm run check:rewarded-ad-sdk-adapter`: 성공
+- `npm run check:rewarded-ad-service`: 성공
+- `npm run check:rewarded-ad-outcomes`: 성공
+- `npm run check:consent-storage`: 성공
+- `npm run check:consent-banner-state`: 성공
+- 로컬 dev 서버 `/`: 200 응답 확인
+- 로컬 dev 서버 `/?debug=manseryeok`: 200 응답 확인
+
 ## 2026-06-12 rewarded ad SDK provider adapter scaffold 추가
 
 ### 작업 내용

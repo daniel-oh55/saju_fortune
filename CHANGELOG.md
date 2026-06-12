@@ -4,6 +4,9 @@
 
 ### Added
 
+- rewarded ad 호출 전 ads consent gate 추가
+- `ads_consent_required` outcome/message 추가
+- rewarded ad consent gate 회귀 검증 스크립트 추가
 - rewarded ad SDK provider adapter scaffold 추가
 - rewarded ad provider 선택 config 추가
 - rewarded ad SDK adapter 회귀 검증 스크립트 추가
@@ -110,6 +113,7 @@
 
 ### Changed
 
+- SDK provider scaffold 호출 시 ads consent가 없으면 실제 광고 호출 대신 데이터 사용 설정 안내를 반환하도록 준비
 - rewarded ad service가 provider loader를 통해 mock/sdk scaffold를 선택할 수 있도록 준비
 - 광고 SDK readiness, 쿠키/광고 동의 UX, 동의 배너 UI 계획, 개인정보 데이터 맵에 rewarded ad SDK 연동 검토 기준 보완
 - SettingsPage와 PrivacyInfoPage에서 동의 상태를 확인하고 관리할 수 있도록 보완

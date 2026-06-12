@@ -7,10 +7,18 @@ import {
 
 const AD_SECONDS = getMockRewardedAdDurationSeconds();
 
-function RewardAdModal({ categoryLabel, placementId, onClose, onRewardComplete }) {
+function RewardAdModal({
+  categoryLabel,
+  placementId,
+  consentPreferences,
+  onOpenConsentSettings,
+  onClose,
+  onRewardComplete,
+}) {
   const [secondsLeft, setSecondsLeft] = useState(AD_SECONDS);
   const [isCompleting, setIsCompleting] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [errorReason, setErrorReason] = useState('');
   const isCompleted = secondsLeft === 0;
 
   useEffect(() => {
@@ -28,15 +36,18 @@ function RewardAdModal({ categoryLabel, placementId, onClose, onRewardComplete }
 
     setIsCompleting(true);
     setErrorMessage('');
+    setErrorReason('');
 
     try {
       const result = await showRewardedAd({
         placementId: placementId || categoryLabel,
         categoryLabel,
+        consentPreferences,
         delayMs: 0,
       });
 
       if (!result.ok) {
+        setErrorReason(result.reason || '');
         setErrorMessage(getRewardedAdOutcomeMessage(result.reason));
         return;
       }
@@ -69,6 +80,11 @@ function RewardAdModal({ categoryLabel, placementId, onClose, onRewardComplete }
               : `${secondsLeft}초 후 상세 풀이가 열립니다.`}
           </p>
           {errorMessage && <p className="ad-error-message">{errorMessage}</p>}
+          {errorReason === 'ads_consent_required' && onOpenConsentSettings && (
+            <button className="ghost-button full-width" type="button" onClick={onOpenConsentSettings}>
+              데이터 사용 설정 열기
+            </button>
+          )}
         </div>
 
         <div className="modal-actions">

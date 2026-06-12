@@ -13,6 +13,7 @@
     "check:manseryeok-jasi-boundary": "node scripts/checkManseryeokJasiBoundaryHypothesis.mjs",
     "check:manseryeok-term-timezone": "node scripts/checkManseryeokTermTimezoneHypothesis.mjs",
     "check:rewarded-ad-service": "node scripts/checkRewardedAdServiceRegression.mjs",
+    "check:rewarded-ad-consent-gate": "node scripts/checkRewardedAdConsentGateRegression.mjs",
     "check:rewarded-ad-outcomes": "node scripts/checkRewardedAdOutcomeRegression.mjs",
     "check:rewarded-ad-placements": "node scripts/checkRewardedAdPlacementConfig.mjs",
     "check:rewarded-ad-placement-resolver": "node scripts/checkRewardedAdPlacementResolver.mjs",
