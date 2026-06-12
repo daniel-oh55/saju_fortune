@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 2026-06-12 Android Packaging Readiness
+
+### Added
+- Android 우선 패키징 준비 문서 추가
+- Android packaging readiness 검증 스크립트 추가
+
+### Changed
+- Capacitor readiness, 앱화 방식, 앱 리소스, 모바일 UX 문서에 Android 패키징 전 확인 기준 연결
+
 ## 2026-06-12 Capacitor Readiness
 
 ### Added

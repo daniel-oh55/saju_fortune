@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "check:android-packaging-readiness": "node scripts/checkAndroidPackagingReadiness.mjs",
     "check:app-assets": "node scripts/checkAppAssetReadiness.mjs",
     "check:capacitor-readiness": "node scripts/checkCapacitorReadiness.mjs",
     "check:consent-banner-state": "node scripts/checkConsentBannerStateRegression.mjs",

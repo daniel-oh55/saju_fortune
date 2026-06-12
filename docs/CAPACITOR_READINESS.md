@@ -1,5 +1,12 @@
 # CAPACITOR_READINESS
 
+## Android 우선 패키징 준비 연계
+
+- Android 우선 패키징 준비 기준은 `docs/ANDROID_PACKAGING_READINESS.md`를 참고합니다.
+- 현재 단계에서는 Android 프로젝트를 생성하지 않습니다.
+- Capacitor 설치와 Android 프로젝트 생성은 별도 PR에서 진행합니다.
+- Android 패키징 전 앱 리소스, localStorage, back button, 개인정보 처리방침 URL을 확인해야 합니다.
+
 이 문서는 하루풀이 웹앱을 Capacitor 기반 모바일 앱으로 패키징하기 전 준비 기준을 정리한 문서입니다.
 이번 PR은 준비 문서와 검증 스크립트 추가가 목적이며, Capacitor 설치, Android/iOS 프로젝트 생성, 네이티브 앱 빌드는 아직 진행하지 않습니다.
 

@@ -1,5 +1,11 @@
 # PRIVACY_POLICY_DRAFT
 
+## Android 앱 배포 전 확인 메모
+
+- Android 앱 배포 전 개인정보 처리방침 URL이 필요합니다.
+- 앱 삭제/재설치 시 localStorage 기반 데이터가 삭제될 수 있음을 안내해야 합니다.
+- 광고 SDK 도입 시 광고/분석 동의 문구를 재검토해야 합니다.
+
 ## 15. 동의 상태 저장 유틸
 
 - MVP에서는 향후 광고/분석 SDK 도입에 대비해 consent preferences 저장 유틸을 준비합니다.

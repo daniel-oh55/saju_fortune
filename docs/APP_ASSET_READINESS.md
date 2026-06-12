@@ -1,5 +1,11 @@
 # APP_ASSET_READINESS
 
+## Android 리소스 준비 연계
+
+- Android 패키징 전 앱 아이콘 PNG 세트와 splash PNG 세트가 필요합니다.
+- 현재 SVG master 리소스는 Android 리소스 생성 시 기준으로 사용합니다.
+- Android 패키징 준비 기준은 `docs/ANDROID_PACKAGING_READINESS.md`를 참고합니다.
+
 ## Capacitor 리소스 준비 연계
 
 - Capacitor로 Android/iOS 프로젝트를 생성하기 전 PNG 아이콘과 splash 리소스가 필요합니다.
