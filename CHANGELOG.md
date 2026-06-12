@@ -4,6 +4,9 @@
 
 ### Added
 
+- rewarded ad placement readiness 문서 추가
+- rewarded ad placement readiness 회귀 검증 스크립트 추가
+
 - rewarded ad 호출 전 ads consent gate 추가
 - `ads_consent_required` outcome/message 추가
 - rewarded ad consent gate 회귀 검증 스크립트 추가
@@ -112,6 +115,8 @@
 - 만세력 시간 경계 및 입춘/자시/태양시 정책 문서 추가
 
 ### Changed
+
+- 광고 SDK readiness 문서에 provider placement ID 환경변수 적용 기준 보완
 
 - SDK provider scaffold 호출 시 ads consent가 없으면 실제 광고 호출 대신 데이터 사용 설정 안내를 반환하도록 준비
 - rewarded ad service가 provider loader를 통해 mock/sdk scaffold를 선택할 수 있도록 준비

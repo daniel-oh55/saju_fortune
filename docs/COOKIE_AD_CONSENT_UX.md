@@ -1,5 +1,12 @@
 # COOKIE_AD_CONSENT_UX
 
+## placement와 consent의 관계
+
+- placement ID는 광고 위치 식별자이고 ads consent는 실제 SDK 호출 허용 조건입니다.
+- ads consent가 false이면 실제 SDK provider 호출을 하지 않습니다.
+- placement ID가 설정되어 있어도 consent 조건을 먼저 확인합니다.
+- 현재 MVP에서는 mock provider를 유지하며 실제 광고 SDK 호출은 없습니다.
+
 ## ads consent gate 적용 상태
 
 - ads consent가 실제 SDK 호출 조건으로 연결되는 scaffold가 추가되었습니다.

@@ -1,5 +1,12 @@
 # REWARDED_AD_SDK_INTEGRATION_PLAN
 
+## placement readiness
+
+- 실제 provider placement ID 적용 전 `docs/REWARDED_AD_PLACEMENT_READINESS.md`를 참고합니다.
+- 내부 placement ID와 provider placement ID를 구분합니다.
+- 실제 provider placement ID는 코드에 하드코딩하지 않고 환경변수로 관리합니다.
+- placement readiness 검증은 `npm run check:rewarded-ad-placement-readiness`로 수행합니다.
+
 ## ads consent gate 연결 상태
 
 - rewarded ad provider layer에서 SDK provider 호출 전 ads consent를 확인합니다.

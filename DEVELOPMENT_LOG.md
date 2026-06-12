@@ -1,5 +1,35 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-12 rewarded ad placement readiness 검증 추가
+
+### 작업 내용
+- PR 목적: rewarded ad placement readiness 검증 추가
+- `docs/REWARDED_AD_PLACEMENT_READINESS.md` 신규 추가
+- `checkRewardedAdPlacementReadiness` 신규 추가
+- 신규 npm script: `check:rewarded-ad-placement-readiness`
+- `REWARDED_AD_SDK_INTEGRATION_PLAN`, `REWARDED_AD_SDK_READINESS`, `COOKIE_AD_CONSENT_UX` 문서 업데이트
+- 실제 광고 SDK 추가 없음
+- 외부 광고/분석 라이브러리 설치 없음
+- 실제 광고 네트워크 호출 없음
+- 실제 provider placement ID 하드코딩 없음
+- rewarded ad provider 코드 변경 없음
+- consent storage 기존 동작 변경 없음
+- production 계산 로직 변경 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+
+### 테스트 결과
+- `npm run build`: 성공
+- `npm run check:rewarded-ad-placement-readiness`: 성공
+- `npm run check:rewarded-ad-placement-resolver`: 성공
+- `npm run check:rewarded-ad-sdk-adapter`: 성공
+- `npm run check:rewarded-ad-consent-gate`: 성공
+- `npm run check:rewarded-ad-service`: 성공
+- `npm run check:consent-storage`: 성공
+- `npm run check:consent-banner-state`: 성공
+- 로컬 dev 서버 `/`: 200 응답 확인
+- 로컬 dev 서버 `/?debug=manseryeok`: 200 응답 확인
+
 ## 2026-06-12 consent ads 상태와 rewarded ad 호출 조건 연결
 
 ### 작업 내용
