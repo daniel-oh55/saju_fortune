@@ -1,5 +1,11 @@
 # REWARDED_AD_SDK_READINESS
 
+## 실제 SDK 연동 계획 문서
+
+- 실제 rewarded ad SDK를 붙이기 전 `docs/REWARDED_AD_SDK_INTEGRATION_PLAN.md`를 검토한다.
+- 해당 문서는 provider 결정 전 검토 항목, adapter 구조, consent 연결 방식, 실패/취소/보상 없음 처리 원칙을 정리한다.
+- 현재 MVP에서는 실제 광고 SDK를 추가하지 않는다.
+
 ## 쿠키/광고 동의 UX 연계
 
 - 실제 광고 SDK를 도입하기 전 `docs/COOKIE_AD_CONSENT_UX.md`를 검토합니다.

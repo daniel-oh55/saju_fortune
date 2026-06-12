@@ -1,5 +1,10 @@
 # PRIVACY_DATA_MAP
 
+## rewarded ad SDK 검토 메모
+
+- 실제 rewarded ad SDK 도입 전 `docs/REWARDED_AD_SDK_INTEGRATION_PLAN.md`를 참고한다.
+- 실제 광고 provider로 profile 원본 정보, 생년월일, 출생시간, 성별, 사주 정보를 직접 전달하지 않는 원칙을 유지한다.
+
 ## consent preferences 구현 상태
 
 - consent preferences 저장 위치는 브라우저 localStorage입니다.

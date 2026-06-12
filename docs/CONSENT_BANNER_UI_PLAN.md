@@ -1,5 +1,12 @@
 # CONSENT_BANNER_UI_PLAN
 
+## rewarded ad SDK와의 연결 계획
+
+- 실제 광고 SDK 도입 시 ConsentBanner에서 저장한 ads consent를 광고 호출 조건에 연결할 수 있다.
+- personalizedAds는 맞춤형 광고 여부에만 사용하고, ads consent와 구분한다.
+- 광고 해금 UX와 개인정보 동의 UX의 문구와 동작은 분리한다.
+- 자세한 실제 SDK 연동 계획은 `docs/REWARDED_AD_SDK_INTEGRATION_PLAN.md`를 참고한다.
+
 ## consent storage 유틸 준비 상태
 
 - `src/utils/consentPreferencesStorage.js`에서 consent preferences 저장 유틸을 제공합니다.
