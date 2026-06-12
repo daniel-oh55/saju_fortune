@@ -1,5 +1,18 @@
 # TODO
 
+## 2026-06-12 rewarded ad SDK adapter scaffold TODO
+
+- [x] rewarded ad SDK provider adapter 추가
+- [x] rewarded ad SDK env flag 추가
+- [ ] consent ads 상태와 광고 호출 조건 연결
+- [ ] 실제 provider placement ID 적용
+- [ ] 실제 광고 SDK 연동
+- [ ] 공유 이미지 생성 기능 검토
+- [ ] 세 번째 외부 만세력 기준 확인 후 기본값 재검토
+- [ ] 23시 이후 선택 옵션 문구의 사용자 이해도 확인
+- [ ] 태양시 보정 적용 여부 별도 검토
+- [ ] 음력/윤달 샘플 외부 검증
+
 ## 2026-06-12 rewarded ad SDK integration plan TODO
 
 - [x] 실제 광고 SDK 연동 검토

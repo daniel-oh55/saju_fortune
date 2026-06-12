@@ -1,5 +1,11 @@
 # REWARDED_AD_SDK_READINESS
 
+## adapter scaffold 상태
+
+- SDK adapter scaffold가 추가되었지만 실제 광고 SDK는 아직 없습니다.
+- mock provider는 기본값으로 유지됩니다.
+- 실제 SDK provider 전환 전 provider 정책, consent ads 상태, placement ID, 환경변수 설정을 다시 확인해야 합니다.
+
 ## 실제 SDK 연동 계획 문서
 
 - 실제 rewarded ad SDK를 붙이기 전 `docs/REWARDED_AD_SDK_INTEGRATION_PLAN.md`를 검토한다.
