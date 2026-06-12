@@ -1,5 +1,12 @@
 # COOKIE_AD_CONSENT_UX
 
+## rewarded ad SDK 연동과 동의 상태
+
+- 실제 rewarded ad SDK를 호출하기 전 ads consent 상태를 확인하는 방향을 검토한다.
+- ads consent가 false인 경우 실제 광고 호출 대신 데이터 사용 설정으로 안내할 수 있다.
+- 실제 구현 전 `docs/REWARDED_AD_SDK_INTEGRATION_PLAN.md`를 참고한다.
+- 현재 MVP에서는 mock provider만 사용한다.
+
 ## consent storage 유틸
 
 - 동의 상태 저장 후보 구조는 `src/utils/consentPreferencesStorage.js` 유틸로 준비합니다.

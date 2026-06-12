@@ -1,5 +1,30 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-12 실제 rewarded ad SDK 연동 전 검토 문서 추가
+
+### 작업 내용
+- PR 목적: 실제 rewarded ad SDK 연동 전 검토 문서 추가
+- `docs/REWARDED_AD_SDK_INTEGRATION_PLAN.md` 신규 추가
+- `docs/REWARDED_AD_SDK_READINESS.md`, `docs/COOKIE_AD_CONSENT_UX.md`, `docs/CONSENT_BANNER_UI_PLAN.md`, `docs/PRIVACY_DATA_MAP.md` 문서 업데이트
+- production 코드 변경 없음
+- 실제 광고 SDK 추가 없음
+- 외부 광고/분석 라이브러리 설치 없음
+- rewarded ad provider 코드 변경 없음
+- consent storage 코드 변경 없음
+- 계산 로직 변경 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+- 저장/공유/streak 기능 동작 변경 없음
+
+### 테스트 결과
+- `npm run build`: 성공
+- `npm run check:consent-storage`: 성공
+- `npm run check:consent-banner-state`: 성공
+- `npm run check:content-safety`: 성공
+- `npm run check:share-text`: 성공
+- `npm run check:saved-readings`: 성공
+- `npm run check:visit-streak`: 성공
+
 ## 2026-06-12 동의 배너 UI 실제 구현
 
 ### 작업 내용
