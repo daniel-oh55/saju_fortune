@@ -1,5 +1,12 @@
 # APP_ASSET_READINESS
 
+## 앱 아이콘 PNG export 준비
+
+- 앱 아이콘 PNG 세트 생성 전 기준은 `docs/APP_ICON_PNG_EXPORT_READINESS.md`를 참고합니다.
+- PNG 출력 target manifest는 `public/brand/app-icon-png-targets.json`입니다.
+- 이번 단계에서는 실제 PNG 바이너리를 생성하지 않습니다.
+- 실제 PNG 생성은 별도 PR에서 진행합니다.
+
 ## Android 리소스 준비 연계
 
 - Android 패키징 전 앱 아이콘 PNG 세트와 splash PNG 세트가 필요합니다.

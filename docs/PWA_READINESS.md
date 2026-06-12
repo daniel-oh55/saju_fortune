@@ -1,5 +1,11 @@
 # PWA_READINESS
 
+## PWA PNG 아이콘 준비 연계
+
+- 현재 manifest는 SVG 아이콘을 사용합니다.
+- 향후 PWA 설치 호환성을 높이기 위해 192x192, 512x512 PNG 아이콘 추가를 검토합니다.
+- PNG 출력 기준은 `docs/APP_ICON_PNG_EXPORT_READINESS.md`를 참고합니다.
+
 ## Capacitor 도입 준비 연계
 
 - PWA 기본 준비 이후 Capacitor 도입 준비 문서를 확인합니다.
