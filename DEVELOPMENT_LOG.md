@@ -1,5 +1,35 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-12 앱 패키징 전 모바일 UX QA 보정
+
+### 작업 내용
+- PR 목적: 앱 패키징 전 모바일 UX QA 및 레이아웃 보정
+- `docs/MOBILE_UX_QA.md` 신규 추가
+- 하단 네비게이션, 동의 배너, 설정 패널, 광고 모달, 저장한 풀이, 개인정보 안내 페이지 모바일 보정
+- production 계산 로직 변경 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+- rewarded ad provider/service 로직 변경 없음
+- consent storage 로직 변경 없음
+- 저장/공유/streak 기능 동작 변경 없음
+- 실제 광고 SDK 추가 없음
+- 외부 광고/분석 라이브러리 설치 없음
+
+### 테스트 결과
+- `npm run build`: 성공
+- `npm run check:rewarded-ad-placement-readiness`: 성공
+- `npm run check:rewarded-ad-consent-gate`: 성공
+- `npm run check:rewarded-ad-sdk-adapter`: 성공
+- `npm run check:consent-storage`: 성공
+- `npm run check:consent-banner-state`: 성공
+- `npm run check:content-safety`: 성공
+- `npm run check:share-text`: 성공
+- `npm run check:saved-readings`: 성공
+- `npm run check:visit-streak`: 성공
+- 로컬 dev 서버 `/`: 200 응답 확인
+- 로컬 dev 서버 `/?debug=manseryeok`: 200 응답 확인
+- 모바일 폭별 시각 QA는 `docs/MOBILE_UX_QA.md` 기준으로 브라우저 DevTools에서 추가 확인 필요
+
 ## 2026-06-12 rewarded ad placement readiness 검증 추가
 
 ### 작업 내용

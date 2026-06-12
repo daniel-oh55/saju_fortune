@@ -4,6 +4,7 @@
 
 ### Added
 
+- 모바일 UX QA 문서 추가
 - rewarded ad placement readiness 문서 추가
 - rewarded ad placement readiness 회귀 검증 스크립트 추가
 
@@ -116,6 +117,7 @@
 
 ### Changed
 
+- 앱 패키징 전 모바일 화면에서 동의 배너, 설정 패널, 광고 모달, 저장한 풀이, 개인정보 안내 페이지의 가독성과 터치 사용성을 보완
 - 광고 SDK readiness 문서에 provider placement ID 환경변수 적용 기준 보완
 
 - SDK provider scaffold 호출 시 ads consent가 없으면 실제 광고 호출 대신 데이터 사용 설정 안내를 반환하도록 준비
