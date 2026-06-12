@@ -1,5 +1,48 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-12 splash PNG 세트 실제 생성
+
+### 작업 내용
+- PR 목적: splash PNG 세트 실제 생성
+- `scripts/generateSplashPngs.mjs` 신규 추가
+- `scripts/checkGeneratedSplashPngs.mjs` 신규 추가
+- 신규 npm script: `generate:splash-pngs`
+- 신규 npm script: `check:generated-splash-pngs`
+- `public/generated-splash` 아래 splash PNG 생성
+- `scripts/checkSplashPngExportReadiness.mjs` 수정
+- `SPLASH_PNG_EXPORT_READINESS`, `APP_ASSET_READINESS`, `ANDROID_PACKAGING_READINESS`, `CAPACITOR_READINESS` 문서 업데이트
+- 앱 아이콘 PNG 기존 파일 유지
+- 이미지 변환 라이브러리 설치 없음
+- Capacitor 설치 없음
+- Android/iOS 프로젝트 생성 없음
+- 네이티브 앱 빌드 없음
+- service worker 구현 없음
+- 실제 광고 SDK 추가 없음
+- production 코드 변경 없음
+- production 계산 로직 변경 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+
+### 테스트 결과
+- `npm run generate:splash-pngs`: 성공
+- `npm run build`: 성공
+- `npm run check:generated-splash-pngs`: 성공
+- `npm run check:splash-png-export`: 성공
+- `npm run check:generated-app-icons`: 성공
+- `npm run check:app-icon-png-export`: 성공
+- `npm run check:app-assets`: 성공
+- `npm run check:android-packaging-readiness`: 성공
+- `npm run check:pwa-readiness`: 성공
+- `npm run check:content-safety`: 성공
+- `npm run check:share-text`: 성공
+- 앱 아이콘 PNG 기존 파일 유지 확인
+- 이미지 변환 라이브러리 설치 없음 확인
+- Capacitor 설치 없음 확인
+- `android/ios` 디렉터리 없음 확인
+- `capacitor.config.*` 파일 없음 확인
+- service worker 파일 없음 확인
+- `src` production 코드 변경 없음 확인
+
 ## 2026-06-12 앱 아이콘 PNG 세트 실제 생성
 
 ### 작업 내용

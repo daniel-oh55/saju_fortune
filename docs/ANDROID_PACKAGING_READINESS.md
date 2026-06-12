@@ -1,5 +1,11 @@
 # ANDROID_PACKAGING_READINESS
 
+## Android splash PNG 생성 상태
+
+- Android 후보 splash PNG가 `public/generated-splash/android` 아래에 생성되었습니다.
+- Android 12 splash icon 후보도 함께 생성되었습니다.
+- Android 프로젝트 생성 후 실제 splash 적용 단계에서 이 파일들을 기준으로 사용할 수 있습니다.
+
 ## Android 앱 아이콘 PNG 생성 상태
 
 - Android 후보 앱 아이콘 PNG가 `public/generated-icons/android` 아래에 생성되었습니다.
