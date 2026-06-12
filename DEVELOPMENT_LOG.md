@@ -1,5 +1,42 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-12 PWA 기본 준비
+
+### 작업 내용
+- PR 목적: PWA 기본 준비
+- `public/manifest.webmanifest` 신규 추가
+- 기본 SVG 아이콘 추가
+- maskable SVG 아이콘 추가
+- `index.html` manifest/theme-color 연결
+- `docs/PWA_READINESS.md` 신규 추가
+- `checkPwaManifestReadiness` 신규 추가
+- 신규 npm script: `check:pwa-readiness`
+- service worker 구현 없음
+- Capacitor 설치 없음
+- 실제 네이티브 앱 패키징 없음
+- 실제 광고 SDK 추가 없음
+- 외부 광고/분석 라이브러리 설치 없음
+- production 계산 로직 변경 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+- rewarded ad provider/service 로직 변경 없음
+- consent storage 로직 변경 없음
+
+### 테스트 결과
+- `npm run build`: 성공
+- `npm run check:pwa-readiness`: 성공
+- `npm run check:rewarded-ad-placement-readiness`: 성공
+- `npm run check:rewarded-ad-consent-gate`: 성공
+- `npm run check:consent-storage`: 성공
+- `npm run check:consent-banner-state`: 성공
+- `npm run check:content-safety`: 성공
+- `npm run check:share-text`: 성공
+- 로컬 dev 서버 `/`: 200 응답 확인
+- 로컬 dev 서버 `/manifest.webmanifest`: 200 응답 확인
+- 로컬 dev 서버 `/icons/harupuli-icon.svg`: 200 응답 확인
+- 로컬 dev 서버 `/icons/harupuli-maskable-icon.svg`: 200 응답 확인
+- 로컬 dev 서버 `/?debug=manseryeok`: 200 응답 확인
+
 ## 2026-06-12 앱 패키징 전 모바일 UX QA 보정
 
 ### 작업 내용

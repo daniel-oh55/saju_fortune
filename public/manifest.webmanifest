@@ -1,0 +1,26 @@
+{
+  "name": "하루풀이",
+  "short_name": "하루풀이",
+  "description": "오늘의 운세와 사주 흐름을 차분하게 풀어보는 하루 운세 앱",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f7fbf8",
+  "theme_color": "#338f8b",
+  "lang": "ko-KR",
+  "icons": [
+    {
+      "src": "/icons/harupuli-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/harupuli-maskable-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

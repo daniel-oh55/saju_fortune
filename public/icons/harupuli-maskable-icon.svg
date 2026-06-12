@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="하루풀이 maskable 앱 아이콘">
+  <defs>
+    <linearGradient id="maskBg" x1="74" y1="64" x2="438" y2="448" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff8ef" />
+      <stop offset="0.58" stop-color="#e8f7f2" />
+      <stop offset="1" stop-color="#338f8b" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="url(#maskBg)" />
+  <circle cx="380" cy="142" r="38" fill="#f3a77b" opacity="0.86" />
+  <rect x="156" y="132" width="200" height="248" rx="46" fill="#ffffff" opacity="0.96" />
+  <rect x="190" y="190" width="132" height="18" rx="9" fill="#338f8b" />
+  <rect x="190" y="244" width="90" height="18" rx="9" fill="#78c8bd" />
+  <rect x="190" y="298" width="118" height="18" rx="9" fill="#f3a77b" />
+  <path d="M365 350c-28-5-44-21-50-49-6 28-22 44-50 49 28 6 44 22 50 50 6-28 22-44 50-50Z" fill="#338f8b" />
+</svg>
