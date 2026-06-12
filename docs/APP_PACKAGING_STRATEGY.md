@@ -1,5 +1,11 @@
 # APP_PACKAGING_STRATEGY
 
+## Android 우선 패키징 준비 연계
+
+- 현재 추천 흐름은 Android 우선 패키징 준비 후 Capacitor 설치 검토입니다.
+- Android 패키징 준비 기준은 `docs/ANDROID_PACKAGING_READINESS.md`를 참고합니다.
+- iOS는 Android 빌드와 QA 후 검토합니다.
+
 ## Capacitor readiness 문서 연계
 
 - Capacitor 도입 전 준비 기준은 `docs/CAPACITOR_READINESS.md`를 참고합니다.

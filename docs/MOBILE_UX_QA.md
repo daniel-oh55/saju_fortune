@@ -1,5 +1,11 @@
 # MOBILE_UX_QA
 
+## Android WebView QA 연계
+
+- Android 앱에서는 현재 모바일 웹 화면이 WebView 안에서 표시됩니다.
+- Android back button, safe-area, 하단 네비게이션, 모달, 동의 배너는 실제 기기에서 다시 확인해야 합니다.
+- Android 패키징 준비 기준은 `docs/ANDROID_PACKAGING_READINESS.md`를 참고합니다.
+
 ## Capacitor WebView QA 연계
 
 - Capacitor 앱에서는 현재 모바일 웹 화면이 WebView 안에서 표시됩니다.
