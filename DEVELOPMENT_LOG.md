@@ -1,5 +1,37 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-12 Capacitor 도입 준비 문서 추가
+
+### 작업 내용
+- PR 목적: Capacitor 도입 준비 문서 추가
+- `docs/CAPACITOR_READINESS.md` 신규 추가
+- `scripts/checkCapacitorReadiness.mjs` 신규 추가
+- 신규 npm script: `check:capacitor-readiness`
+- `APP_PACKAGING_STRATEGY`, `PWA_READINESS`, `APP_ASSET_READINESS`, `MOBILE_UX_QA` 문서 업데이트
+- `REWARDED_AD_SDK_INTEGRATION_PLAN`, `PRIVACY_DATA_MAP` 문서 업데이트
+- Capacitor 설치 없음
+- Android/iOS 프로젝트 생성 없음
+- `capacitor.config.*` 파일 생성 없음
+- 네이티브 앱 빌드 없음
+- service worker 구현 없음
+- 실제 광고 SDK 추가 없음
+- 외부 광고/분석 라이브러리 설치 없음
+- production 코드 변경 없음
+- production 계산 로직 변경 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+
+### 테스트 결과
+- `npm run build`: 성공
+- `npm run check:capacitor-readiness`: 성공
+- `npm run check:pwa-readiness`: 성공
+- `npm run check:app-assets`: 성공
+- `npm run check:content-safety`: 성공
+- `npm run check:share-text`: 성공
+- `android/ios` 디렉터리 없음 확인
+- `capacitor.config.*` 파일 없음 확인
+- `src`/`public` production 코드 변경 없음 확인
+
 ## 2026-06-12 앱화 방식 결정 문서 추가
 
 ### 작업 내용

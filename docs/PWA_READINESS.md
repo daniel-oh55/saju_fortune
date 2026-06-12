@@ -1,5 +1,11 @@
 # PWA_READINESS
 
+## Capacitor 도입 준비 연계
+
+- PWA 기본 준비 이후 Capacitor 도입 준비 문서를 확인합니다.
+- 자세한 기준은 `docs/CAPACITOR_READINESS.md`를 참고합니다.
+- service worker는 Capacitor 도입과 별개로 추후 검토합니다.
+
 ## 앱화 방식 결정 연계
 
 - PWA는 현재 기본 준비가 완료된 상태입니다.

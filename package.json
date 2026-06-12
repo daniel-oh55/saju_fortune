@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "check:app-assets": "node scripts/checkAppAssetReadiness.mjs",
+    "check:capacitor-readiness": "node scripts/checkCapacitorReadiness.mjs",
     "check:consent-banner-state": "node scripts/checkConsentBannerStateRegression.mjs",
     "check:consent-storage": "node scripts/checkConsentPreferencesStorageRegression.mjs",
     "check:late-night-jasi-policy": "node scripts/checkLateNightJasiPolicyRegression.mjs",

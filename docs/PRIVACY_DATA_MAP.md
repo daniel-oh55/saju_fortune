@@ -1,5 +1,11 @@
 # PRIVACY_DATA_MAP
 
+## Capacitor와 localStorage
+
+- Capacitor/WebView 환경에서는 현재 localStorage 기반 저장 항목을 실제 기기에서 확인해야 합니다.
+- 앱 삭제/재설치 시 localStorage 데이터가 삭제될 수 있음을 개인정보 안내에 반영해야 합니다.
+- 로그인/서버 DB 도입 전까지 기기 단위 저장이라는 원칙을 유지합니다.
+
 ## rewarded ad SDK 검토 메모
 
 - 실제 rewarded ad SDK 도입 전 `docs/REWARDED_AD_SDK_INTEGRATION_PLAN.md`를 참고한다.

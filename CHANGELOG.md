@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 2026-06-12 Capacitor Readiness
+
+### Added
+- Capacitor 도입 준비 문서 추가
+- Capacitor readiness 검증 스크립트 추가
+
+### Changed
+- 앱화 방식, PWA, 앱 리소스, 모바일 UX 문서에 Capacitor 도입 전 확인 기준 연결
+
 ## [Unreleased]
 
 ### Added

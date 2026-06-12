@@ -1,5 +1,12 @@
 # REWARDED_AD_SDK_INTEGRATION_PLAN
 
+## Capacitor와 광고 SDK
+
+- 실제 광고 SDK 도입은 Capacitor 도입 여부와 함께 검토해야 합니다.
+- Android/iOS별 광고 SDK adapter가 필요할 수 있습니다.
+- 현재 PR에서는 실제 광고 SDK를 추가하지 않습니다.
+- ads consent gate와 placement readiness는 유지합니다.
+
 ## 앱화 방식과 광고 SDK 관계
 
 - 실제 광고 SDK 도입은 앱화 방식과 함께 검토해야 합니다.

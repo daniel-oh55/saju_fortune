@@ -1,5 +1,11 @@
 # MOBILE_UX_QA
 
+## Capacitor WebView QA 연계
+
+- Capacitor 앱에서는 현재 모바일 웹 화면이 WebView 안에서 표시됩니다.
+- 하단 네비게이션, safe-area, 모달, consent banner는 실제 기기에서 다시 확인해야 합니다.
+- Capacitor 도입 준비 기준은 `docs/CAPACITOR_READINESS.md`를 참고합니다.
+
 ## 앱화 방식 결정 연계
 
 - 모바일 UX QA 결과는 앱화 방식 결정에 영향을 줍니다.
