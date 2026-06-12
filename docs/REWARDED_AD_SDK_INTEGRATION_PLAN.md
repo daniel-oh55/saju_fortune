@@ -1,5 +1,11 @@
 # REWARDED_AD_SDK_INTEGRATION_PLAN
 
+## 앱화 방식과 광고 SDK 관계
+
+- 실제 광고 SDK 도입은 앱화 방식과 함께 검토해야 합니다.
+- PWA, Capacitor, WebView, React Native 방식에 따라 광고 SDK 연동 난이도가 달라질 수 있습니다.
+- 앱화 방식 결정 기준은 `docs/APP_PACKAGING_STRATEGY.md`를 참고합니다.
+
 ## placement readiness
 
 - 실제 provider placement ID 적용 전 `docs/REWARDED_AD_PLACEMENT_READINESS.md`를 참고합니다.

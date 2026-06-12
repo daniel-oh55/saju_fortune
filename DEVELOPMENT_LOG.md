@@ -1,5 +1,30 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-12 앱화 방식 결정 문서 추가
+
+### 작업 내용
+- PR 목적: 앱화 방식 결정 문서 추가
+- `docs/APP_PACKAGING_STRATEGY.md` 신규 추가
+- `PWA_READINESS`, `APP_ASSET_READINESS`, `MOBILE_UX_QA` 문서 업데이트
+- `REWARDED_AD_SDK_INTEGRATION_PLAN` 문서 업데이트
+- Capacitor 설치 없음
+- Android/iOS 프로젝트 생성 없음
+- 네이티브 앱 패키징 없음
+- service worker 구현 없음
+- 실제 광고 SDK 추가 없음
+- 외부 광고/분석 라이브러리 설치 없음
+- production 코드 변경 없음
+- production 계산 로직 변경 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+
+### 테스트 결과
+- `npm run build`: 성공
+- `npm run check:pwa-readiness`: 성공
+- `npm run check:app-assets`: 성공
+- `npm run check:content-safety`: 성공
+- `npm run check:share-text`: 성공
+
 ## 2026-06-12 앱 아이콘/스플래시 리소스 준비
 
 ### 작업 내용
