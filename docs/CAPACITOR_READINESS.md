@@ -1,0 +1,139 @@
+# CAPACITOR_READINESS
+
+이 문서는 하루풀이 웹앱을 Capacitor 기반 모바일 앱으로 패키징하기 전 준비 기준을 정리한 문서입니다.
+이번 PR은 준비 문서와 검증 스크립트 추가가 목적이며, Capacitor 설치, Android/iOS 프로젝트 생성, 네이티브 앱 빌드는 아직 진행하지 않습니다.
+
+## 1. 목적
+
+- 현재 React/Vite 웹앱을 Capacitor로 감싸기 위한 준비 상태를 확인합니다.
+- Android/iOS 패키징 전에 필요한 리소스, 설정, 저장소, 광고, 개인정보, QA 항목을 정리합니다.
+- 기존 웹앱 기능을 최대한 유지하면서 앱 패키징 리스크를 줄입니다.
+
+## 2. 현재 준비 완료 항목
+
+- PWA manifest 준비 완료
+- 앱 아이콘 SVG 준비 완료
+- maskable icon 준비 완료
+- app icon master SVG 준비 완료
+- splash master SVG 준비 완료
+- 모바일 UX 1차 보정 완료
+- 개인정보 안내 페이지 준비
+- ConsentBanner / ConsentSettingsPanel 준비
+- rewarded ad mock provider 준비
+- rewarded ad SDK adapter scaffold 준비
+- ads consent gate 준비
+- placement readiness 문서 준비
+
+## 3. Capacitor 도입 전 확인 사항
+
+- [ ] Node/Vite build가 안정적으로 성공하는지 확인
+- [ ] `npm run build` 결과물이 `dist`에 생성되는지 확인
+- [ ] manifest와 icons가 dist에 포함되는지 확인
+- [ ] localStorage 기반 데이터가 WebView에서 유지되는지 실제 기기 확인
+- [ ] Android back button 동작 검토
+- [ ] iOS safe-area 확인
+- [ ] 하단 네비게이션과 WebView safe-area 겹침 확인
+- [ ] 앱 삭제/재설치 시 localStorage 데이터 삭제 가능성 안내
+- [ ] 개인정보 처리방침 URL 준비
+- [ ] 앱스토어/플레이스토어 등록 정보 준비
+
+## 4. Capacitor 도입 전 예상 설정
+
+- appId 후보:
+  - `com.harupuli.app`
+  - 실제 배포 전 최종 확정 필요
+- appName:
+  - `하루풀이`
+- webDir:
+  - `dist`
+- bundledWebRuntime:
+  - `false` 후보
+- Android 우선 검토
+- iOS는 Android 빌드와 QA 후 검토
+
+이번 PR에서는 실제 `capacitor.config` 파일을 만들지 않습니다.
+실제 appId는 최종 배포 전 확정해야 합니다.
+
+## 5. localStorage 고려사항
+
+현재 localStorage 기반 저장 항목:
+
+- 프로필 저장 정보
+- 오늘운세/사주 캐시
+- 광고 해금 상태
+- 저장한 풀이
+- 방문 streak
+- consent preferences
+
+확인할 점:
+
+- Capacitor WebView에서 localStorage가 유지되는지 실제 기기에서 확인해야 합니다.
+- 앱 삭제/재설치 시 데이터가 삭제될 수 있습니다.
+- 로그인/서버 DB 도입 전까지는 기기 단위 저장임을 개인정보 안내에 반영합니다.
+- 민감 정보가 외부 SDK로 직접 전달되지 않도록 유지합니다.
+
+## 6. 광고 SDK 고려사항
+
+- 현재 실제 광고 SDK는 없습니다.
+- mock provider가 기본값입니다.
+- SDK adapter scaffold만 있습니다.
+- 실제 SDK 도입 전 provider 선택이 필요합니다.
+- ads consent gate를 유지해야 합니다.
+- provider placement ID는 환경변수 또는 네이티브 설정으로 관리해야 합니다.
+- 생년월일, 출생시간, 성별, 사주 원본 정보를 광고 provider에 직접 전달하지 않는 원칙을 유지합니다.
+- Android/iOS별 SDK 지원 여부는 별도 검토가 필요합니다.
+
+## 7. 개인정보/동의 고려사항
+
+- ConsentBanner와 ConsentSettingsPanel이 이미 있습니다.
+- consent preferences는 localStorage에 저장됩니다.
+- 실제 광고/분석 SDK 도입 전 동의 문구 재검토가 필요합니다.
+- 앱스토어/플레이스토어 제출 전 개인정보 처리방침 URL이 필요합니다.
+- 개인정보 처리방침 초안과 PrivacyInfoPage 문구를 앱 배포 기준으로 업데이트해야 합니다.
+- 앱 삭제 시 데이터 삭제 가능성 안내가 필요합니다.
+
+## 8. 앱 리소스 고려사항
+
+- 현재 SVG master 리소스만 있습니다.
+- 실제 Android/iOS 빌드 전 PNG 아이콘 세트가 필요합니다.
+- splash PNG 세트가 필요합니다.
+- Android mipmap 리소스 생성이 필요합니다.
+- iOS asset catalog 생성이 필요합니다.
+- 이번 PR에서는 생성하지 않습니다.
+
+## 9. Android 우선 패키징 준비 항목
+
+- [ ] Android Studio 설치 여부
+- [ ] JDK 환경 확인
+- [ ] Gradle 빌드 가능 여부
+- [ ] Android package name 확정
+- [ ] 앱 아이콘 PNG 세트 준비
+- [ ] splash PNG 세트 준비
+- [ ] WebView localStorage QA
+- [ ] Android back button QA
+- [ ] 광고 SDK 도입 여부 결정
+- [ ] 개인정보 처리방침 URL 준비
+
+## 10. iOS 패키징 준비 항목
+
+- [ ] macOS/Xcode 필요
+- [ ] iOS bundle identifier 확정
+- [ ] Apple Developer 계정 필요
+- [ ] iOS safe-area QA
+- [ ] iOS storage QA
+- [ ] splash screen QA
+- [ ] 앱 심사 문구 확인
+- [ ] 개인정보 처리방침 URL 준비
+
+## 11. 실제 도입 PR 후보
+
+1. Capacitor 설치 및 config 추가
+2. Android 프로젝트 생성
+3. Android 빌드 확인
+4. Android WebView localStorage QA
+5. Android 아이콘/splash 적용
+6. Android 스토어 등록 정보 초안
+7. iOS 프로젝트 생성
+8. iOS safe-area/storage QA
+9. 실제 광고 SDK provider 선택
+10. 실제 광고 SDK adapter 구현

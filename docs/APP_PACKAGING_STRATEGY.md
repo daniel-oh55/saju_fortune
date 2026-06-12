@@ -1,5 +1,12 @@
 # APP_PACKAGING_STRATEGY
 
+## Capacitor readiness 문서 연계
+
+- Capacitor 도입 전 준비 기준은 `docs/CAPACITOR_READINESS.md`를 참고합니다.
+- 현재 단계에서는 Capacitor를 설치하지 않습니다.
+- Android/iOS 프로젝트 생성은 별도 PR에서 진행합니다.
+- 앱 패키징 전 localStorage, consent, 광고 SDK, 앱 리소스 QA가 필요합니다.
+
 이 문서는 하루풀이 앱을 모바일 앱으로 전환하기 위한 앱 패키징 방식 선택 기준을 정리한 문서입니다.
 이번 PR은 의사결정 문서 작성이 목적이며, Capacitor 설치, Android/iOS 프로젝트 생성, 네이티브 앱 패키징은 아직 진행하지 않습니다.
 

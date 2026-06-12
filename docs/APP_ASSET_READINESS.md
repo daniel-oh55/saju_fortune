@@ -1,5 +1,11 @@
 # APP_ASSET_READINESS
 
+## Capacitor 리소스 준비 연계
+
+- Capacitor로 Android/iOS 프로젝트를 생성하기 전 PNG 아이콘과 splash 리소스가 필요합니다.
+- 현재 SVG master 리소스는 PNG 세트 생성 시 기준으로 사용합니다.
+- Capacitor 도입 준비 기준은 `docs/CAPACITOR_READINESS.md`를 참고합니다.
+
 ## 앱화 방식과 리소스 관계
 
 - Capacitor 또는 WebView 앱 패키징 시 현재 master SVG를 기준으로 PNG 세트를 생성할 수 있습니다.
