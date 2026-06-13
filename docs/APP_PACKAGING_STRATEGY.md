@@ -1,5 +1,13 @@
 # APP_PACKAGING_STRATEGY
 
+## Android debug build CI 전략
+
+- Android 앱 패키징 검증은 우선 debug APK를 GitHub Actions artifact로 생성하는 흐름으로 진행합니다.
+- 로컬 JDK/JAVA_HOME이 없어도 PR에서 CI 결과를 확인할 수 있도록 `.github/workflows/android-debug-build.yml`을 사용합니다.
+- 현재 CI 범위는 `npm run build`, `npx cap sync android`, `./gradlew assembleDebug`, debug APK artifact 업로드입니다.
+- release build, signing, keystore 관리, 스토어 제출용 bundle 생성은 아직 범위에 포함하지 않습니다.
+- iOS 패키징은 Android debug build와 WebView QA 이후 별도 단계로 검토합니다.
+
 ## Android build 확인 진행 상태
 
 - Capacitor Android scaffold 이후 debug build 확인을 진행했습니다.

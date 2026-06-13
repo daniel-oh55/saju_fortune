@@ -1,5 +1,13 @@
 # CAPACITOR_READINESS
 
+## Android debug build CI 연결
+
+- Capacitor Android scaffold 이후 GitHub Actions에서 Android debug APK를 빌드하는 workflow를 추가했습니다.
+- CI는 Node 빌드 후 `npx cap sync android`를 실행하고, JDK 21 환경에서 `./gradlew assembleDebug`를 수행합니다.
+- upload artifact 경로는 `android/app/build/outputs/apk/debug/app-debug.apk`입니다.
+- production 앱 코드, localStorage key, schemaVersion, rewarded ad 구조는 변경하지 않습니다.
+- release build, signing, iOS 프로젝트 생성은 아직 진행하지 않습니다.
+
 ## Android debug build 재시도 결과
 
 - Java/JDK 환경 확인 후 Android debug build를 재시도했습니다.

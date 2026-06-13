@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 2026-06-13 Android Debug Build CI
+
+### Added
+- GitHub Actions Android debug build workflow 추가
+- Android debug build workflow 검증 스크립트 추가
+- debug APK artifact 업로드 설정 추가
+
+### Changed
+- Android packaging, Capacitor readiness, 앱 패키징 전략 문서에 debug build CI 확인 흐름 반영
+
 ## 2026-06-13 Android Debug Build Retry
 
 ### Added

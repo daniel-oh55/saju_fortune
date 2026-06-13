@@ -1,5 +1,47 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-13 GitHub Actions Android debug build workflow 추가
+
+### 작업 내용
+- PR 목적: 로컬 JDK/JAVA_HOME 부재를 보완하기 위한 Android debug build CI workflow 추가
+- `.github/workflows/android-debug-build.yml` 신규 추가
+- `scripts/checkAndroidDebugBuildWorkflow.mjs` 신규 추가
+- 신규 npm script: `check:android-debug-build-workflow`
+- GitHub Actions에서 Node 22와 JDK 21을 설정하도록 구성
+- CI에서 `npm ci`, `npm run build`, `npx cap sync android`, `./gradlew assembleDebug` 실행
+- debug APK artifact 이름: `harupuli-debug-apk`
+- debug APK artifact 경로: `android/app/build/outputs/apk/debug/app-debug.apk`
+- production `src` 코드 변경 없음
+- Android 리소스 수동 교체 없음
+- release build 미진행
+- signing/keystore 설정 없음
+- iOS 프로젝트 생성 없음
+- service worker 구현 없음
+- 실제 광고 SDK 추가 없음
+- storage.js 변경 없음
+- localStorage key 이름 변경 없음
+- schemaVersion 변경 없음
+
+### 테스트 결과
+- `npm install`: 성공, npm audit high severity 3건 보고
+- `npm run build`: 성공, Vite chunk size warning 보고
+- `npm run check:android-debug-build-workflow`: 성공
+- `npm run check:android-debug-build-readiness`: 성공
+- `npm run check:android-platform-scaffold`: 성공
+- `npm run check:capacitor-base-config`: 성공
+- `npm run check:capacitor-readiness`: 성공
+- `npm run check:android-packaging-readiness`: 성공
+- `npm run check:android-adaptive-icon-readiness`: 성공
+- `npm run check:generated-android-adaptive-icons`: 성공
+- `npm run check:generated-app-icons`: 성공
+- `npm run check:generated-splash-pngs`: 성공
+- `npm run check:app-assets`: 성공
+- `npm run check:pwa-readiness`: 성공
+- `npm run check:content-safety`: 성공
+- `npm run check:share-text`: 성공
+- GitHub Actions 실제 APK artifact 생성 여부는 PR push 후 확인 필요
+- 로컬 Android debug build는 JDK/JAVA_HOME 설정 전까지 계속 제한될 수 있음
+
 ## 2026-06-13 JDK/JAVA_HOME 확인 후 Android debug build 재시도
 
 ### 작업 내용

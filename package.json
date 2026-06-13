@@ -9,6 +9,7 @@
     "generate:app-icons": "node scripts/generateAppIconPngs.mjs",
     "generate:splash-pngs": "node scripts/generateSplashPngs.mjs",
     "build": "vite build",
+    "check:android-debug-build-workflow": "node scripts/checkAndroidDebugBuildWorkflow.mjs",
     "check:android-debug-build-readiness": "node scripts/checkAndroidDebugBuildReadiness.mjs",
     "check:android-debug-build-success": "node scripts/checkAndroidDebugBuildSuccess.mjs",
     "check:android-java-env": "node scripts/checkAndroidJavaEnvironment.mjs",
