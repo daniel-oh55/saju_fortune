@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 2026-06-13 Android Debug Build Check
+
+### Added
+- Android debug build 확인 문서 추가
+- Android debug build readiness 검증 스크립트 추가
+
+### Changed
+- Android packaging, Capacitor readiness, 앱 패키징 전략 문서에 Android debug build 확인 상태 반영
+
 ## 2026-06-13 Android Platform Scaffold
 
 ### Added

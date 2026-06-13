@@ -1,5 +1,11 @@
 # ANDROID_PACKAGING_READINESS
 
+## Android debug build 확인 상태
+
+- Android debug build 확인 결과는 `docs/ANDROID_BUILD_CHECK.md`를 참고합니다.
+- 이번 단계에서는 release build와 signing은 진행하지 않았습니다.
+- Android 리소스 적용과 실제 기기 QA는 별도 PR에서 진행합니다.
+
 ## Android 플랫폼 scaffold 생성 상태
 
 - `@capacitor/android`가 추가되었습니다.
