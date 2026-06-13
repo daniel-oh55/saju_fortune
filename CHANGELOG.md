@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## 2026-06-13 Android Platform Scaffold
+
+### Added
+- `@capacitor/android` 추가
+- Capacitor Android 프로젝트 scaffold 추가
+- Android platform scaffold 검증 스크립트 추가
+
+### Changed
+- 기존 readiness/check 스크립트를 Android 플랫폼 및 android 폴더 허용 기준으로 조정
+- Capacitor readiness, Android packaging, 앱 패키징 전략, 앱 리소스 문서에 Android 플랫폼 scaffold 상태 반영
+
 ## 2026-06-13 Capacitor Base Config
 
 ### Added

@@ -42,9 +42,13 @@ const packageHasCapacitorCli = Boolean(
 logResult('package_has_capacitor_cli', packageHasCapacitorCli);
 assertCondition(packageHasCapacitorCli, 'package.json should include @capacitor/cli');
 
-const noCapacitorPlatformPackages = !dependencyNames.includes('@capacitor/android') && !dependencyNames.includes('@capacitor/ios');
-logResult('no_capacitor_platform_packages', noCapacitorPlatformPackages);
-assertCondition(noCapacitorPlatformPackages, '@capacitor/android and @capacitor/ios should not be installed yet');
+const packageHasCapacitorAndroid = dependencyNames.includes('@capacitor/android');
+logResult('package_has_capacitor_android', packageHasCapacitorAndroid);
+assertCondition(packageHasCapacitorAndroid, 'package.json should include @capacitor/android');
+
+const noCapacitorIos = !dependencyNames.includes('@capacitor/ios');
+logResult('no_capacitor_ios', noCapacitorIos);
+assertCondition(noCapacitorIos, '@capacitor/ios should not be installed yet');
 
 const capacitorConfigExists = fileExists('capacitor.config.json');
 logResult('capacitor_config_exists', capacitorConfigExists);
@@ -74,9 +78,9 @@ const capacitorConfigExpectedValues =
 logResult('capacitor_config_expected_values', capacitorConfigExpectedValues);
 assertCondition(capacitorConfigExpectedValues, 'capacitor.config.json should match the expected base values');
 
-const noAndroidProjectCreated = !fileExists('android');
-logResult('no_android_project_created', noAndroidProjectCreated);
-assertCondition(noAndroidProjectCreated, 'android project folder should not exist in this PR');
+const androidProjectExists = fileExists('android');
+logResult('android_project_exists', androidProjectExists);
+assertCondition(androidProjectExists, 'android project folder should exist after adding the Android platform');
 
 const noIosProjectCreated = !fileExists('ios');
 logResult('no_ios_project_created', noIosProjectCreated);

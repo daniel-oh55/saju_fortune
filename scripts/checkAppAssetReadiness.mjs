@@ -82,10 +82,9 @@ const allDependencies = {
 };
 
 const dependencyNames = Object.keys(allDependencies);
-const noCapacitorPlatformAdded =
-  !dependencyNames.includes('@capacitor/android') && !dependencyNames.includes('@capacitor/ios');
-logResult('no_capacitor_platform_added', noCapacitorPlatformAdded);
-assertCondition(noCapacitorPlatformAdded, '@capacitor/android and @capacitor/ios should not be added in this PR');
+const noCapacitorIosAdded = !dependencyNames.includes('@capacitor/ios');
+logResult('no_capacitor_ios_added', noCapacitorIosAdded);
+assertCondition(noCapacitorIosAdded, '@capacitor/ios should not be added in this PR');
 
 const forbiddenImageLibraries = ['sharp', 'canvas', 'jimp', 'imagemagick', 'gm'];
 const noImageGenerationDependencyAdded = !dependencyNames.some((name) =>

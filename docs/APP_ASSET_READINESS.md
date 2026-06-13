@@ -1,5 +1,11 @@
 # APP_ASSET_READINESS
 
+## Android 프로젝트 생성 후 리소스 적용 예정
+
+- Android 프로젝트가 생성되었지만 앱 아이콘, splash, adaptive icon의 실제 Android res 적용은 아직 진행하지 않았습니다.
+- `public/generated-icons`, `public/generated-splash` 리소스는 Android 리소스 적용 단계에서 사용할 기준 파일입니다.
+- Android res 적용은 별도 PR에서 진행합니다.
+
 ## Capacitor base config와 앱 리소스 관계
 
 - Capacitor 기본 config가 추가되었지만 Android 프로젝트는 아직 없습니다.
