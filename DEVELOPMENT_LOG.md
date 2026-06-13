@@ -1,5 +1,55 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-13 Android adaptive icon foreground/background 실제 생성
+
+### 작업 내용
+- PR 목적: Android adaptive icon foreground/background 실제 생성
+- `scripts/generateAndroidAdaptiveIcons.mjs` 신규 추가
+- `scripts/checkGeneratedAndroidAdaptiveIcons.mjs` 신규 추가
+- 신규 npm script: `generate:android-adaptive-icons`
+- 신규 npm script: `check:generated-android-adaptive-icons`
+- `public/generated-icons/android-adaptive` 아래 foreground/background PNG 생성
+- `scripts/checkAndroidAdaptiveIconReadiness.mjs` 수정
+- `ANDROID_ADAPTIVE_ICON_READINESS`, `ANDROID_PACKAGING_READINESS`, `APP_ASSET_READINESS`, `APP_ICON_PNG_EXPORT_READINESS`, `CAPACITOR_READINESS` 문서 업데이트
+- 기존 앱 아이콘 PNG 유지
+- 기존 splash PNG 유지
+- Android 프로젝트 생성 없음
+- adaptive icon XML 생성 없음
+- 이미지 변환 라이브러리 설치 없음
+- Capacitor 설치 없음
+- Android/iOS 프로젝트 생성 없음
+- 네이티브 앱 빌드 없음
+- service worker 구현 없음
+- 실제 광고 SDK 추가 없음
+- production 코드 변경 없음
+- production 계산 로직 변경 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+
+### 테스트 결과
+- `npm run generate:android-adaptive-icons`: 성공
+- `npm run build`: 성공
+- `npm run check:generated-android-adaptive-icons`: 성공
+- `npm run check:android-adaptive-icon-readiness`: 성공
+- `npm run check:generated-app-icons`: 성공
+- `npm run check:generated-splash-pngs`: 성공
+- `npm run check:app-assets`: 성공
+- `npm run check:android-packaging-readiness`: 성공
+- `npm run check:pwa-readiness`: 성공
+- `npm run check:content-safety`: 성공
+- `npm run check:share-text`: 성공
+- foreground PNG 투명 영역 확인
+- background PNG opaque 확인
+- 기존 앱 아이콘 PNG 유지 확인
+- 기존 splash PNG 유지 확인
+- 이미지 변환 라이브러리 설치 없음 확인
+- Capacitor 설치 없음 확인
+- `android/ios` 디렉터리 없음 확인
+- `capacitor.config.*` 파일 없음 확인
+- adaptive icon XML 생성 없음 확인
+- service worker 파일 없음 확인
+- `src` production 코드 변경 없음 확인
+
 ## 2026-06-13 Android adaptive icon foreground/background 준비
 
 ### 작업 내용

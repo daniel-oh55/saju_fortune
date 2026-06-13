@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 2026-06-13 Generated Android Adaptive Icons
+
+### Added
+- Android adaptive icon foreground/background PNG 생성
+- Android adaptive icon PNG 생성 스크립트 추가
+- Android adaptive icon PNG 검증 스크립트 추가
+
+### Changed
+- Android 패키징, 앱 리소스, 앱 아이콘 PNG, Capacitor readiness 문서에 adaptive icon PNG 생성 상태 반영
+
 ## 2026-06-13 Android Adaptive Icon Readiness
 
 ### Added

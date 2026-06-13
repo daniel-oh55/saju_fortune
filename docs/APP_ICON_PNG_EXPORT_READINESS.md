@@ -1,5 +1,11 @@
 # APP_ICON_PNG_EXPORT_READINESS
 
+## Android adaptive icon PNG 생성 상태
+
+- Android adaptive icon foreground/background PNG가 별도 생성되었습니다.
+- 기존 앱 아이콘 PNG 세트는 launcher/store 후보로 유지합니다.
+- adaptive icon PNG는 Android 프로젝트 적용 단계에서 별도로 사용합니다.
+
 ## Android adaptive icon과 앱 아이콘 PNG 관계
 
 - 기존 앱 아이콘 PNG 세트는 launcher/store 후보로 유지합니다.

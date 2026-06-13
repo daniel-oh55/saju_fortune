@@ -1,5 +1,12 @@
 # ANDROID_PACKAGING_READINESS
 
+## Android adaptive icon PNG 생성 상태
+
+- Android adaptive icon foreground/background 후보 PNG가 생성되었습니다.
+- 생성된 파일은 `public/generated-icons/android-adaptive` 아래에 있습니다.
+- Android 프로젝트 생성 후 실제 `mipmap-anydpi-v26` XML과 리소스 적용 단계에서 사용할 수 있습니다.
+- XML 적용은 별도 PR에서 진행합니다.
+
 ## Android adaptive icon 준비 연계
 
 - Android adaptive icon foreground/background 준비 기준은 `docs/ANDROID_ADAPTIVE_ICON_READINESS.md`를 참고합니다.

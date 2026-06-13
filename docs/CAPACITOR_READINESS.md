@@ -1,5 +1,10 @@
 # CAPACITOR_READINESS
 
+## Capacitor Android adaptive icon PNG 생성 상태
+
+- Capacitor Android 프로젝트 적용 전 사용할 adaptive icon PNG 후보가 생성되었습니다.
+- 실제 Android 프로젝트에 적용하는 작업은 Capacitor/Android 프로젝트 생성 이후 별도 PR에서 진행합니다.
+
 ## Capacitor Android adaptive icon 준비 연계
 
 - Capacitor Android 프로젝트 생성 후 adaptive icon 리소스 적용이 필요합니다.
