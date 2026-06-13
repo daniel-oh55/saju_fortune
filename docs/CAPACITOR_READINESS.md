@@ -1,5 +1,11 @@
 # CAPACITOR_READINESS
 
+## Android debug build 확인 단계
+
+- Android 프로젝트 scaffold 이후 debug build 확인 단계가 진행되었습니다.
+- 자세한 결과는 `docs/ANDROID_BUILD_CHECK.md`를 참고합니다.
+- release build, signing, 실제 기기 QA는 아직 진행하지 않았습니다.
+
 ## Android 플랫폼 추가 상태
 
 - `@capacitor/android`가 추가되었습니다.

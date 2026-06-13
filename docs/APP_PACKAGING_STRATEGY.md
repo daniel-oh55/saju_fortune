@@ -1,5 +1,11 @@
 # APP_PACKAGING_STRATEGY
 
+## Android build 확인 진행 상태
+
+- Capacitor Android scaffold 이후 debug build 확인을 진행했습니다.
+- 다음 단계는 Android WebView localStorage QA와 back button QA입니다.
+- iOS는 아직 보류 상태입니다.
+
 ## Android 플랫폼 scaffold 진행 상태
 
 - Capacitor 기반 Android 우선 패키지 흐름으로 Android 플랫폼 scaffold가 추가되었습니다.

@@ -9,6 +9,7 @@
     "generate:app-icons": "node scripts/generateAppIconPngs.mjs",
     "generate:splash-pngs": "node scripts/generateSplashPngs.mjs",
     "build": "vite build",
+    "check:android-debug-build-readiness": "node scripts/checkAndroidDebugBuildReadiness.mjs",
     "check:android-platform-scaffold": "node scripts/checkAndroidPlatformScaffold.mjs",
     "check:android-packaging-readiness": "node scripts/checkAndroidPackagingReadiness.mjs",
     "check:android-adaptive-icon-readiness": "node scripts/checkAndroidAdaptiveIconReadiness.mjs",

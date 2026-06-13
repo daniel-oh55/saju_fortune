@@ -1,5 +1,59 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-13 Android debug build 확인
+
+### 작업 내용
+- PR 목적: Android debug build 확인
+- `docs/ANDROID_BUILD_CHECK.md` 신규 추가
+- `scripts/checkAndroidDebugBuildReadiness.mjs` 신규 추가
+- 신규 npm script: `check:android-debug-build-readiness`
+- Android debug build 시도
+- APK 생성 경로 후보 확인: `android/app/build/outputs/apk/debug/app-debug.apk`
+- release build 미진행
+- signing 미진행
+- 실제 기기 QA 미진행
+- Android 리소스 수동 적용 없음
+- `@capacitor/ios` 설치 없음
+- iOS 프로젝트 생성 없음
+- service worker 구현 없음
+- 실제 광고 SDK 추가 없음
+- production 코드 변경 없음
+- production 계산 로직 변경 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+- 기존 앱 아이콘 PNG 유지
+- 기존 splash PNG 유지
+- 기존 Android adaptive icon PNG 유지
+
+### 테스트 결과
+- `npm install`: 성공, npm audit high severity 3건 보고
+- `npm run build`: 성공
+- `npx cap sync android`: 성공
+- `./gradlew assembleDebug`: 실패
+- 실패 원인: `JAVA_HOME` 미설정 및 PATH에서 `java` 명령을 찾을 수 없음
+- APK 생성 여부: 미생성
+- `npm run check:android-debug-build-readiness`: 성공
+- `npm run check:android-platform-scaffold`: 성공
+- `npm run check:capacitor-base-config`: 성공
+- `npm run check:capacitor-readiness`: 성공
+- `npm run check:android-packaging-readiness`: 성공
+- `npm run check:android-adaptive-icon-readiness`: 성공
+- `npm run check:generated-android-adaptive-icons`: 성공
+- `npm run check:generated-app-icons`: 성공
+- `npm run check:generated-splash-pngs`: 성공
+- `npm run check:app-assets`: 성공
+- `npm run check:pwa-readiness`: 성공
+- `npm run check:content-safety`: 성공
+- `npm run check:share-text`: 성공
+- `@capacitor/ios` 미설치 확인
+- iOS 프로젝트 미생성 확인
+- release build 미실행 확인
+- signing 설정 미추가 확인
+- service worker 미추가 확인
+- 실제 광고 SDK 미추가 확인
+- `src` production 코드 변경 없음 확인
+- 기존 localStorage key 변경 없음 확인
+
 ## 2026-06-13 Android 플랫폼 패키지와 scaffold 추가
 
 ### 작업 내용
