@@ -1,5 +1,13 @@
 # ANDROID_PACKAGING_READINESS
 
+## Android debug build CI 확인 단계
+
+- 로컬 JDK/JAVA_HOME 미설정으로 debug APK가 생성되지 않아 GitHub Actions 기반 debug build 확인을 추가했습니다.
+- `.github/workflows/android-debug-build.yml`에서 JDK 21을 설정하고 `./gradlew assembleDebug`를 실행합니다.
+- 생성 대상 artifact는 `harupuli-debug-apk`이며 경로는 `android/app/build/outputs/apk/debug/app-debug.apk`입니다.
+- 이번 단계는 debug build 확인용이며 release build, signing, 실제 기기 QA는 포함하지 않습니다.
+- Android 리소스 수동 적용, iOS 프로젝트 생성, 실제 광고 SDK 연동은 별도 PR에서 검토합니다.
+
 ## Android debug build 재시도 상태
 
 - JDK/JAVA_HOME 환경 확인 후 Android debug build를 재시도했습니다.

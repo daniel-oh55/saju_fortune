@@ -1,5 +1,18 @@
 # ANDROID_BUILD_CHECK
 
+## 2026-06-13 GitHub Actions Android debug build
+
+- 로컬 Windows 환경에서는 JDK/JAVA_HOME 미설정으로 Android debug APK를 생성하지 못했습니다.
+- GitHub Actions에서 JDK 21을 설정한 뒤 Android debug build를 실행하는 workflow를 추가했습니다.
+- workflow 파일: `.github/workflows/android-debug-build.yml`
+- 실행 흐름: `npm ci` → `npm run build` → `npx cap sync android` → `cd android && ./gradlew assembleDebug`
+- debug APK artifact 이름: `harupuli-debug-apk`
+- debug APK artifact 경로: `android/app/build/outputs/apk/debug/app-debug.apk`
+- release build는 진행하지 않습니다.
+- signing, keystore, store password 설정은 추가하지 않습니다.
+- iOS 프로젝트 생성, Android 리소스 수동 교체, 실제 광고 SDK 연동은 진행하지 않습니다.
+- GitHub Actions 실행 결과는 PR 생성 후 Actions 또는 PR checks에서 확인합니다.
+
 ## 2026-06-13 Android debug build 재시도 결과
 
 - JDK 설치 여부: 미확인, 현재 `java` 명령 사용 불가
