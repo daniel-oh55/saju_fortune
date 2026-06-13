@@ -9,6 +9,7 @@
     "generate:app-icons": "node scripts/generateAppIconPngs.mjs",
     "generate:splash-pngs": "node scripts/generateSplashPngs.mjs",
     "build": "vite build",
+    "check:android-platform-scaffold": "node scripts/checkAndroidPlatformScaffold.mjs",
     "check:android-packaging-readiness": "node scripts/checkAndroidPackagingReadiness.mjs",
     "check:android-adaptive-icon-readiness": "node scripts/checkAndroidAdaptiveIconReadiness.mjs",
     "check:app-assets": "node scripts/checkAppAssetReadiness.mjs",
@@ -41,6 +42,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@capacitor/android": "^8.4.0",
     "@capacitor/core": "^8.4.0",
     "@vitejs/plugin-react": "^4.3.4",
     "lunar-javascript": "^1.7.7",

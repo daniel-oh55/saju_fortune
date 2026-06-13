@@ -1,5 +1,11 @@
 # APP_PACKAGING_STRATEGY
 
+## Android 플랫폼 scaffold 진행 상태
+
+- Capacitor 기반 Android 우선 패키지 흐름으로 Android 플랫폼 scaffold가 추가되었습니다.
+- iOS는 아직 보류 상태입니다.
+- 다음 단계는 Android build 확인과 WebView QA입니다.
+
 ## Capacitor base config 적용
 
 - 현재 앱 패키징 방식은 Capacitor 기반 Android 우선 패키지 준비로 진행합니다.

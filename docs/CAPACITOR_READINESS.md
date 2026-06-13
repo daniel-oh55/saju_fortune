@@ -1,5 +1,14 @@
 # CAPACITOR_READINESS
 
+## Android 플랫폼 추가 상태
+
+- `@capacitor/android`가 추가되었습니다.
+- Android 프로젝트가 생성되었습니다.
+- 아직 `@capacitor/ios`는 설치하지 않았습니다.
+- 아직 iOS 프로젝트는 생성하지 않았습니다.
+- Android native build는 아직 실행하지 않았습니다.
+- Android 리소스 적용과 빌드 확인은 별도 PR에서 진행합니다.
+
 ## Capacitor base config 추가 상태
 
 - `@capacitor/core`와 `@capacitor/cli`가 추가되었습니다.

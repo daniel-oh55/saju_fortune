@@ -106,14 +106,13 @@ const noImageGenerationDependencyAdded = blockedImageDependencies.every(
 logResult('no_image_generation_dependency_added', noImageGenerationDependencyAdded);
 assertCondition(noImageGenerationDependencyAdded, 'image generation dependencies should not be added in this PR');
 
-const noCapacitorPlatformAdded =
-  !dependencyNames.includes('@capacitor/android') && !dependencyNames.includes('@capacitor/ios');
-logResult('no_capacitor_platform_added', noCapacitorPlatformAdded);
-assertCondition(noCapacitorPlatformAdded, '@capacitor/android and @capacitor/ios should not be added in this PR');
+const noCapacitorIosAdded = !dependencyNames.includes('@capacitor/ios');
+logResult('no_capacitor_ios_added', noCapacitorIosAdded);
+assertCondition(noCapacitorIosAdded, '@capacitor/ios should not be added in this PR');
 
-const noAndroidProjectCreated = !fileExists('android');
-logResult('no_android_project_created', noAndroidProjectCreated);
-assertCondition(noAndroidProjectCreated, 'android project folder should not exist in this PR');
+const androidProjectExists = fileExists('android');
+logResult('android_project_exists', androidProjectExists);
+assertCondition(androidProjectExists, 'android project folder should exist after the Android scaffold stage');
 
 if (failures.length > 0) {
   console.error('Android adaptive icon readiness check failed');

@@ -31,22 +31,30 @@ const allDependencies = {
   ...(packageJson.devDependencies || {}),
 };
 const dependencyNames = Object.keys(allDependencies);
+
 const capacitorCoreInstalled = dependencyNames.includes('@capacitor/core');
 logResult('capacitor_core_installed', capacitorCoreInstalled);
-assertCondition(capacitorCoreInstalled, '@capacitor/core should be installed for the base config stage');
+assertCondition(capacitorCoreInstalled, '@capacitor/core should be installed');
 
 const capacitorCliInstalled = dependencyNames.includes('@capacitor/cli');
 logResult('capacitor_cli_installed', capacitorCliInstalled);
-assertCondition(capacitorCliInstalled, '@capacitor/cli should be installed for the base config stage');
+assertCondition(capacitorCliInstalled, '@capacitor/cli should be installed');
 
-const noCapacitorPlatformPackages =
-  !dependencyNames.includes('@capacitor/android') && !dependencyNames.includes('@capacitor/ios');
-logResult('no_capacitor_platform_packages', noCapacitorPlatformPackages);
-assertCondition(noCapacitorPlatformPackages, '@capacitor/android and @capacitor/ios should not be installed yet');
+const capacitorAndroidInstalled = dependencyNames.includes('@capacitor/android');
+logResult('capacitor_android_installed', capacitorAndroidInstalled);
+assertCondition(capacitorAndroidInstalled, '@capacitor/android should be installed after the Android scaffold stage');
 
-const noNativeProjectsCreated = !fileExists('android') && !fileExists('ios');
-logResult('no_native_projects_created', noNativeProjectsCreated);
-assertCondition(noNativeProjectsCreated, 'android/ios native project folders should not exist in this PR');
+const noCapacitorIos = !dependencyNames.includes('@capacitor/ios');
+logResult('no_capacitor_ios', noCapacitorIos);
+assertCondition(noCapacitorIos, '@capacitor/ios should not be installed yet');
+
+const androidProjectExists = fileExists('android');
+logResult('android_project_exists', androidProjectExists);
+assertCondition(androidProjectExists, 'android native project folder should exist after the Android scaffold stage');
+
+const noIosProjectCreated = !fileExists('ios');
+logResult('no_ios_project_created', noIosProjectCreated);
+assertCondition(noIosProjectCreated, 'ios native project folder should not exist in this PR');
 
 const pwaManifestExists = fileExists('public/manifest.webmanifest');
 logResult('pwa_manifest_exists', pwaManifestExists);
@@ -75,7 +83,7 @@ assertCondition(pwaDocMentionsCapacitor, 'PWA_READINESS should mention Capacitor
 
 const capacitorConfigJsonAdded = fileExists('capacitor.config.json');
 logResult('capacitor_config_json_added', capacitorConfigJsonAdded);
-assertCondition(capacitorConfigJsonAdded, 'capacitor.config.json should exist for the base config stage');
+assertCondition(capacitorConfigJsonAdded, 'capacitor.config.json should exist');
 
 const noCapacitorTsOrJsConfigAdded = !fileExists('capacitor.config.ts') && !fileExists('capacitor.config.js');
 logResult('no_capacitor_ts_or_js_config_added', noCapacitorTsOrJsConfigAdded);

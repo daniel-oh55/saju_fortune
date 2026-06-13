@@ -1,5 +1,14 @@
 # ANDROID_PACKAGING_READINESS
 
+## Android 플랫폼 scaffold 생성 상태
+
+- `@capacitor/android`가 추가되었습니다.
+- Android 프로젝트 폴더가 생성되었습니다.
+- `npx cap sync android` 기준으로 웹 리소스가 Android 프로젝트에 반영되었습니다.
+- 아직 Android native build는 실행하지 않았습니다.
+- 아직 Android 리소스 수동 적용은 하지 않았습니다.
+- 실제 Android 빌드 확인은 별도 PR에서 진행합니다.
+
 ## Capacitor base config 상태
 
 - Capacitor core/cli와 기본 config가 추가되었습니다.

@@ -38,20 +38,23 @@ assertCondition(androidReadinessDocExists, 'docs/ANDROID_PACKAGING_READINESS.md 
 
 const capacitorCoreInstalled = dependencyNames.includes('@capacitor/core');
 logResult('capacitor_core_installed', capacitorCoreInstalled);
-assertCondition(capacitorCoreInstalled, '@capacitor/core should be installed for the base config stage');
+assertCondition(capacitorCoreInstalled, '@capacitor/core should be installed');
 
 const capacitorCliInstalled = dependencyNames.includes('@capacitor/cli');
 logResult('capacitor_cli_installed', capacitorCliInstalled);
-assertCondition(capacitorCliInstalled, '@capacitor/cli should be installed for the base config stage');
+assertCondition(capacitorCliInstalled, '@capacitor/cli should be installed');
 
-const noCapacitorPlatformPackages =
-  !dependencyNames.includes('@capacitor/android') && !dependencyNames.includes('@capacitor/ios');
-logResult('no_capacitor_platform_packages', noCapacitorPlatformPackages);
-assertCondition(noCapacitorPlatformPackages, '@capacitor/android and @capacitor/ios should not be installed yet');
+const capacitorAndroidInstalled = dependencyNames.includes('@capacitor/android');
+logResult('capacitor_android_installed', capacitorAndroidInstalled);
+assertCondition(capacitorAndroidInstalled, '@capacitor/android should be installed after the Android scaffold stage');
 
-const noAndroidProjectCreated = !fileExists('android');
-logResult('no_android_project_created', noAndroidProjectCreated);
-assertCondition(noAndroidProjectCreated, 'android project folder should not exist in this PR');
+const noCapacitorIos = !dependencyNames.includes('@capacitor/ios');
+logResult('no_capacitor_ios', noCapacitorIos);
+assertCondition(noCapacitorIos, '@capacitor/ios should not be installed yet');
+
+const androidProjectExists = fileExists('android');
+logResult('android_project_exists', androidProjectExists);
+assertCondition(androidProjectExists, 'android project folder should exist after the Android scaffold stage');
 
 const noIosProjectCreated = !fileExists('ios');
 logResult('no_ios_project_created', noIosProjectCreated);
@@ -59,7 +62,7 @@ assertCondition(noIosProjectCreated, 'ios project folder should not exist in thi
 
 const capacitorConfigJsonAdded = fileExists('capacitor.config.json');
 logResult('capacitor_config_json_added', capacitorConfigJsonAdded);
-assertCondition(capacitorConfigJsonAdded, 'capacitor.config.json should exist for the base config stage');
+assertCondition(capacitorConfigJsonAdded, 'capacitor.config.json should exist');
 
 const noCapacitorTsOrJsConfigAdded = !fileExists('capacitor.config.ts') && !fileExists('capacitor.config.js');
 logResult('no_capacitor_ts_or_js_config_added', noCapacitorTsOrJsConfigAdded);
@@ -77,9 +80,7 @@ assertCondition(appAssetMastersExist, 'app icon and splash master SVG files shou
 
 const capacitorReadinessDoc = readText('docs/CAPACITOR_READINESS.md');
 const capacitorReadinessDocMentionsAndroid =
-  capacitorReadinessDoc.includes('Android 우선') ||
-  capacitorReadinessDoc.includes('Android 패키징') ||
-  capacitorReadinessDoc.includes('ANDROID_PACKAGING_READINESS');
+  capacitorReadinessDoc.includes('Android') || capacitorReadinessDoc.includes('ANDROID_PACKAGING_READINESS');
 logResult('capacitor_readiness_doc_mentions_android', capacitorReadinessDocMentionsAndroid);
 assertCondition(
   capacitorReadinessDocMentionsAndroid,
@@ -96,10 +97,10 @@ const noServiceWorkerAdded = serviceWorkerPaths.every((relativePath) => !fileExi
 logResult('no_service_worker_added', noServiceWorkerAdded);
 assertCondition(noServiceWorkerAdded, 'service worker files should not be added in this PR');
 
-const forbiddenNativeDependencies = ['@capacitor/android', '@capacitor/ios', 'react-native', 'expo'];
+const forbiddenNativeDependencies = ['@capacitor/ios', 'react-native', 'expo'];
 const noNativeDependencyAdded = forbiddenNativeDependencies.every((packageName) => !dependencyNames.includes(packageName));
 logResult('no_native_dependency_added', noNativeDependencyAdded);
-assertCondition(noNativeDependencyAdded, 'native platform dependencies should not be added in this PR');
+assertCondition(noNativeDependencyAdded, 'forbidden native platform dependencies should not be added in this PR');
 
 if (failures.length > 0) {
   console.error('Android packaging readiness check failed');

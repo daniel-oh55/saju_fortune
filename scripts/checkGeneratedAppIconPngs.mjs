@@ -110,10 +110,9 @@ const noImageGenerationDependencyAdded = blockedImageDependencies.every(
 logResult('no_image_generation_dependency_added', noImageGenerationDependencyAdded);
 assertCondition(noImageGenerationDependencyAdded, 'image generation dependencies should not be added in this PR');
 
-const noCapacitorPlatformAdded =
-  !dependencyNames.includes('@capacitor/android') && !dependencyNames.includes('@capacitor/ios');
-logResult('no_capacitor_platform_added', noCapacitorPlatformAdded);
-assertCondition(noCapacitorPlatformAdded, '@capacitor/android and @capacitor/ios should not be added in this PR');
+const noCapacitorIosAdded = !dependencyNames.includes('@capacitor/ios');
+logResult('no_capacitor_ios_added', noCapacitorIosAdded);
+assertCondition(noCapacitorIosAdded, '@capacitor/ios should not be added in this PR');
 
 if (failures.length > 0) {
   console.error('Generated app icon PNG check failed');
