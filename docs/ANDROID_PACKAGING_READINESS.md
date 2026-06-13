@@ -1,5 +1,11 @@
 # ANDROID_PACKAGING_READINESS
 
+## Android adaptive icon 준비 연계
+
+- Android adaptive icon foreground/background 준비 기준은 `docs/ANDROID_ADAPTIVE_ICON_READINESS.md`를 참고합니다.
+- 이번 단계에서는 adaptive icon PNG를 생성하지 않습니다.
+- Android 프로젝트 생성 후 실제 adaptive icon XML과 mipmap 리소스 적용은 별도 PR에서 진행합니다.
+
 ## Android splash PNG 생성 상태
 
 - Android 후보 splash PNG가 `public/generated-splash/android` 아래에 생성되었습니다.

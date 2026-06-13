@@ -1,0 +1,33 @@
+{
+  "source": "public/brand/harupuli-app-icon-master.svg",
+  "outputs": [
+    {
+      "type": "foreground",
+      "platform": "android-adaptive",
+      "size": 432,
+      "path": "public/generated-icons/android-adaptive/foreground-432.png",
+      "requiredFor": "Android adaptive icon foreground candidate"
+    },
+    {
+      "type": "foreground",
+      "platform": "android-adaptive",
+      "size": 108,
+      "path": "public/generated-icons/android-adaptive/foreground-108.png",
+      "requiredFor": "Android adaptive icon foreground preview candidate"
+    },
+    {
+      "type": "background",
+      "platform": "android-adaptive",
+      "size": 432,
+      "path": "public/generated-icons/android-adaptive/background-432.png",
+      "requiredFor": "Android adaptive icon background candidate"
+    },
+    {
+      "type": "background",
+      "platform": "android-adaptive",
+      "size": 108,
+      "path": "public/generated-icons/android-adaptive/background-108.png",
+      "requiredFor": "Android adaptive icon background preview candidate"
+    }
+  ]
+}
