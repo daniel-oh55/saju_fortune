@@ -1,5 +1,11 @@
 # ANDROID_PACKAGING_READINESS
 
+## Capacitor base config 상태
+
+- Capacitor core/cli와 기본 config가 추가되었습니다.
+- Android 플랫폼 패키지와 Android 프로젝트는 아직 추가하지 않았습니다.
+- Android 프로젝트 생성 전 `npm run build`와 `npm run check:capacitor-base-config`를 확인합니다.
+
 ## Android adaptive icon PNG 생성 상태
 
 - Android adaptive icon foreground/background 후보 PNG가 생성되었습니다.

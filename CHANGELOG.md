@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## 2026-06-13 Capacitor Base Config
+
+### Added
+- Capacitor core/cli 기본 의존성 추가
+- `capacitor.config.json` 기본 설정 추가
+- Capacitor base config 검증 스크립트 추가
+
+### Changed
+- 기존 readiness/check 스크립트를 Capacitor core/cli 허용, Android/iOS 플랫폼 미추가 기준으로 조정
+- Capacitor readiness, Android packaging, 앱 패키징 전략, 앱 리소스 문서에 Capacitor base config 상태 반영
+
 ## 2026-06-13 Generated Android Adaptive Icons
 
 ### Added

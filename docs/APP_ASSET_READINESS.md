@@ -1,5 +1,11 @@
 # APP_ASSET_READINESS
 
+## Capacitor base config와 앱 리소스 관계
+
+- Capacitor 기본 config가 추가되었지만 Android 프로젝트는 아직 없습니다.
+- 생성된 앱 아이콘, splash, adaptive icon PNG는 Android 프로젝트 생성 후 실제 리소스 적용 단계에서 사용합니다.
+- 현재 단계에서는 public 리소스 기준으로만 유지합니다.
+
 ## Android adaptive icon PNG 실제 생성
 
 - Android adaptive icon foreground/background PNG가 생성되었습니다.

@@ -1,5 +1,53 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-13 Capacitor 기본 의존성과 config 추가
+
+### 작업 내용
+- PR 목적: Capacitor 기본 의존성과 config 추가
+- `@capacitor/core` 추가
+- `@capacitor/cli` 추가
+- `capacitor.config.json` 신규 추가
+- `scripts/checkCapacitorBaseConfig.mjs` 신규 추가
+- 신규 npm script: `check:capacitor-base-config`
+- 기존 readiness/check 스크립트에서 Capacitor core/cli 허용으로 기준 조정
+- `@capacitor/android` 설치 없음
+- `@capacitor/ios` 설치 없음
+- Android 프로젝트 생성 없음
+- iOS 프로젝트 생성 없음
+- native build 없음
+- service worker 구현 없음
+- 실제 광고 SDK 추가 없음
+- production 코드 변경 없음
+- production 계산 로직 변경 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+- 기존 앱 아이콘 PNG 유지
+- 기존 splash PNG 유지
+- 기존 Android adaptive icon PNG 유지
+
+### 테스트 결과
+- `npm install`: 성공, npm audit high severity 3건 보고
+- `npm run build`: 성공
+- `npm run check:capacitor-base-config`: 성공
+- `npm run check:capacitor-readiness`: 성공
+- `npm run check:android-packaging-readiness`: 성공
+- `npm run check:android-adaptive-icon-readiness`: 성공
+- `npm run check:generated-android-adaptive-icons`: 성공
+- `npm run check:generated-app-icons`: 성공
+- `npm run check:generated-splash-pngs`: 성공
+- `npm run check:app-assets`: 성공
+- `npm run check:pwa-readiness`: 성공
+- `npm run check:content-safety`: 성공
+- `npm run check:share-text`: 성공
+- `@capacitor/android` 미설치 확인
+- `@capacitor/ios` 미설치 확인
+- Android/iOS 프로젝트 미생성 확인
+- service worker 미추가 확인
+- 실제 광고 SDK 미추가 확인
+- `src` production 코드 변경 없음 확인
+- 기존 localStorage key 변경 없음 확인
+- 기존 app icon/splash/adaptive PNG 유지 확인
+
 ## 2026-06-13 Android adaptive icon foreground/background 실제 생성
 
 ### 작업 내용
