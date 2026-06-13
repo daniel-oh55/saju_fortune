@@ -1,5 +1,11 @@
 # CAPACITOR_READINESS
 
+## Capacitor Android adaptive icon 준비 연계
+
+- Capacitor Android 프로젝트 생성 후 adaptive icon 리소스 적용이 필요합니다.
+- 적용 전 기준은 `docs/ANDROID_ADAPTIVE_ICON_READINESS.md`를 참고합니다.
+- 이번 단계에서는 Android 프로젝트를 생성하지 않습니다.
+
 ## Capacitor splash PNG 생성 상태
 
 - Capacitor 적용 전 사용할 splash PNG 후보 리소스가 생성되었습니다.

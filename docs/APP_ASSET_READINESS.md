@@ -1,5 +1,12 @@
 # APP_ASSET_READINESS
 
+## Android adaptive icon 준비
+
+- Android adaptive icon foreground/background 리소스 기준을 추가했습니다.
+- 기준 문서는 `docs/ANDROID_ADAPTIVE_ICON_READINESS.md`입니다.
+- target manifest는 `public/brand/android-adaptive-icon-targets.json`입니다.
+- 실제 adaptive icon PNG 생성은 별도 PR에서 진행합니다.
+
 ## splash PNG 실제 생성
 
 - splash PNG 세트가 생성되었습니다.

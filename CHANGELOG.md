@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 2026-06-13 Android Adaptive Icon Readiness
+
+### Added
+- Android adaptive icon 준비 문서 추가
+- Android adaptive icon target manifest 추가
+- Android adaptive icon readiness 검증 스크립트 추가
+
+### Changed
+- Android 패키징, 앱 리소스, 앱 아이콘 PNG, Capacitor readiness 문서에 adaptive icon 준비 기준 연결
+
 ## 2026-06-12 Generated Splash PNGs
 
 ### Added
