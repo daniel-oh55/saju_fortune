@@ -1,5 +1,12 @@
 # APP_ASSET_READINESS
 
+## Android adaptive icon PNG 실제 생성
+
+- Android adaptive icon foreground/background PNG가 생성되었습니다.
+- 생성된 파일은 `public/generated-icons/android-adaptive` 아래에 있습니다.
+- 기존 앱 아이콘 PNG와 splash PNG는 유지합니다.
+- 실제 Android 프로젝트 적용은 별도 PR에서 진행합니다.
+
 ## Android adaptive icon 준비
 
 - Android adaptive icon foreground/background 리소스 기준을 추가했습니다.

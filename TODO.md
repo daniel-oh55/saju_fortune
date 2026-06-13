@@ -1,5 +1,23 @@
 # TODO
 
+## 2026-06-13 Android adaptive icon 생성 TODO
+
+- [x] Android adaptive icon foreground/background 실제 생성
+- [ ] Capacitor 설치 및 config 추가
+- [ ] Android 프로젝트 생성
+- [ ] Android 빌드 확인
+- [ ] Android WebView localStorage QA
+- [ ] Android back button QA
+- [ ] 앱스토어 등록 정보 초안
+- [ ] 개인정보 처리방침 URL 준비
+- [ ] 실제 provider placement ID 적용
+- [ ] 실제 광고 SDK 연동
+- [ ] 공유 이미지 생성 기능 검토
+- [ ] 세 번째 외부 만세력 기준 확인 후 기본값 재검토
+- [ ] 23시 이후 선택 옵션 문구의 사용자 이해도 확인
+- [ ] 태양시 보정 적용 여부 별도 검토
+- [ ] 음력/윤달 샘플 외부 검증
+
 ## 2026-06-13 Android adaptive icon 준비 TODO
 
 - [x] Android adaptive icon foreground/background 준비

@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "generate:android-adaptive-icons": "node scripts/generateAndroidAdaptiveIcons.mjs",
     "generate:app-icons": "node scripts/generateAppIconPngs.mjs",
     "generate:splash-pngs": "node scripts/generateSplashPngs.mjs",
     "build": "vite build",
@@ -14,6 +15,7 @@
     "check:app-icon-png-export": "node scripts/checkAppIconPngExportReadiness.mjs",
     "check:capacitor-readiness": "node scripts/checkCapacitorReadiness.mjs",
     "check:generated-app-icons": "node scripts/checkGeneratedAppIconPngs.mjs",
+    "check:generated-android-adaptive-icons": "node scripts/checkGeneratedAndroidAdaptiveIcons.mjs",
     "check:generated-splash-pngs": "node scripts/checkGeneratedSplashPngs.mjs",
     "check:consent-banner-state": "node scripts/checkConsentBannerStateRegression.mjs",
     "check:consent-storage": "node scripts/checkConsentPreferencesStorageRegression.mjs",
