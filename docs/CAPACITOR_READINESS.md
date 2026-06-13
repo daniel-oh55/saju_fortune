@@ -1,5 +1,12 @@
 # CAPACITOR_READINESS
 
+## Android debug build 재시도 결과
+
+- Java/JDK 환경 확인 후 Android debug build를 재시도했습니다.
+- 결과는 `docs/ANDROID_BUILD_CHECK.md`에 기록합니다.
+- 현재 환경에서는 JDK/JAVA_HOME 미설정으로 debug build가 완료되지 않았습니다.
+- release build, signing, 실제 기기 QA는 아직 진행하지 않았습니다.
+
 ## Android debug build 확인 단계
 
 - Android 프로젝트 scaffold 이후 debug build 확인 단계가 진행되었습니다.

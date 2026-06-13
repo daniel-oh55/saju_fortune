@@ -1,5 +1,51 @@
 # ANDROID_BUILD_CHECK
 
+## 2026-06-13 Android debug build 재시도 결과
+
+- JDK 설치 여부: 미확인, 현재 `java` 명령 사용 불가
+- `JAVA_HOME` 설정 여부: 미설정
+- `java -version`: 실패, `spawnSync java ENOENT`
+- `javac -version`: 실패, `spawnSync javac ENOENT`
+- `npm install`: 성공
+- `npm run build`: 성공
+- `npx cap sync android`: 성공
+- `./gradlew assembleDebug`: 실패
+- APK 생성 경로: `android/app/build/outputs/apk/debug/app-debug.apk`
+- APK 생성 여부: 미생성
+- release build: 미진행
+- signing: 미진행
+- 실제 기기 QA: 미진행
+- Android 리소스 교체: 미진행
+- iOS 프로젝트: 미생성
+
+### 재시도 실패 원인
+
+현재 로컬 환경에서 `JAVA_HOME`이 설정되어 있지 않고 `java` 및 `javac` 명령을 PATH에서 찾을 수 없습니다.
+따라서 Gradle wrapper가 Android debug build를 시작하지 못했습니다.
+
+```text
+ERROR: JAVA_HOME is not set and no 'java' command could be found in your PATH.
+Please set the JAVA_HOME variable in your environment to match the location of your Java installation.
+```
+
+### 다음 재시도 조건
+
+- JDK 21 설치
+- `JAVA_HOME`을 JDK 설치 경로로 설정
+- `java`와 `javac`를 PATH에서 실행 가능하게 설정
+- 이후 `npm run check:android-java-env` 통과 확인
+- 이후 `cd android && gradlew.bat assembleDebug` 재실행
+
+### 이번 PR에서 수정하지 않은 범위
+
+- Android 리소스 교체 없음
+- release build 없음
+- signing 설정 없음
+- 실제 기기 QA 없음
+- iOS 프로젝트 생성 없음
+- 실제 광고 SDK 추가 없음
+- production `src` 코드 변경 없음
+
 이 문서는 하루풀이 Capacitor Android 프로젝트의 debug build 확인 결과와 후속 확인 항목을 정리한 문서입니다.
 이번 PR은 Android debug build 가능 여부 확인이 목적이며, Android 리소스 교체, 실제 기기 QA, 광고 SDK 연동은 아직 진행하지 않았습니다.
 
