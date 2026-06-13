@@ -1,5 +1,11 @@
 # APP_PACKAGING_STRATEGY
 
+## Capacitor base config 적용
+
+- 현재 앱 패키징 방식은 Capacitor 기반 Android 우선 패키지 준비로 진행합니다.
+- Capacitor core/cli와 기본 config가 추가되었습니다.
+- Android/iOS 플랫폼 추가는 별도 PR에서 진행합니다.
+
 ## Android 우선 패키징 준비 연계
 
 - 현재 추천 흐름은 Android 우선 패키징 준비 후 Capacitor 설치 검토입니다.

@@ -13,6 +13,7 @@
     "check:android-adaptive-icon-readiness": "node scripts/checkAndroidAdaptiveIconReadiness.mjs",
     "check:app-assets": "node scripts/checkAppAssetReadiness.mjs",
     "check:app-icon-png-export": "node scripts/checkAppIconPngExportReadiness.mjs",
+    "check:capacitor-base-config": "node scripts/checkCapacitorBaseConfig.mjs",
     "check:capacitor-readiness": "node scripts/checkCapacitorReadiness.mjs",
     "check:generated-app-icons": "node scripts/checkGeneratedAppIconPngs.mjs",
     "check:generated-android-adaptive-icons": "node scripts/checkGeneratedAndroidAdaptiveIcons.mjs",
@@ -40,11 +41,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@capacitor/core": "^8.4.0",
     "@vitejs/plugin-react": "^4.3.4",
     "lunar-javascript": "^1.7.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "vite": "^6.0.5"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@capacitor/cli": "^8.4.0"
+  }
 }

@@ -31,11 +31,18 @@ const allDependencies = {
   ...(packageJson.devDependencies || {}),
 };
 const dependencyNames = Object.keys(allDependencies);
-const capacitorPackages = ['@capacitor/core', '@capacitor/cli', '@capacitor/android', '@capacitor/ios'];
+const capacitorCoreInstalled = dependencyNames.includes('@capacitor/core');
+logResult('capacitor_core_installed', capacitorCoreInstalled);
+assertCondition(capacitorCoreInstalled, '@capacitor/core should be installed for the base config stage');
 
-const capacitorNotInstalled = capacitorPackages.every((packageName) => !dependencyNames.includes(packageName));
-logResult('capacitor_not_installed', capacitorNotInstalled);
-assertCondition(capacitorNotInstalled, 'Capacitor packages should not be installed in this PR');
+const capacitorCliInstalled = dependencyNames.includes('@capacitor/cli');
+logResult('capacitor_cli_installed', capacitorCliInstalled);
+assertCondition(capacitorCliInstalled, '@capacitor/cli should be installed for the base config stage');
+
+const noCapacitorPlatformPackages =
+  !dependencyNames.includes('@capacitor/android') && !dependencyNames.includes('@capacitor/ios');
+logResult('no_capacitor_platform_packages', noCapacitorPlatformPackages);
+assertCondition(noCapacitorPlatformPackages, '@capacitor/android and @capacitor/ios should not be installed yet');
 
 const noNativeProjectsCreated = !fileExists('android') && !fileExists('ios');
 logResult('no_native_projects_created', noNativeProjectsCreated);
@@ -66,10 +73,13 @@ const pwaDocMentionsCapacitor =
 logResult('pwa_doc_mentions_capacitor', pwaDocMentionsCapacitor);
 assertCondition(pwaDocMentionsCapacitor, 'PWA_READINESS should mention Capacitor readiness');
 
-const capacitorConfigPaths = ['capacitor.config.ts', 'capacitor.config.js', 'capacitor.config.json'];
-const noCapacitorConfigAdded = capacitorConfigPaths.every((relativePath) => !fileExists(relativePath));
-logResult('no_capacitor_config_added', noCapacitorConfigAdded);
-assertCondition(noCapacitorConfigAdded, 'Capacitor config should not be added in this PR');
+const capacitorConfigJsonAdded = fileExists('capacitor.config.json');
+logResult('capacitor_config_json_added', capacitorConfigJsonAdded);
+assertCondition(capacitorConfigJsonAdded, 'capacitor.config.json should exist for the base config stage');
+
+const noCapacitorTsOrJsConfigAdded = !fileExists('capacitor.config.ts') && !fileExists('capacitor.config.js');
+logResult('no_capacitor_ts_or_js_config_added', noCapacitorTsOrJsConfigAdded);
+assertCondition(noCapacitorTsOrJsConfigAdded, 'capacitor.config.ts/js should not be added in this PR');
 
 const serviceWorkerPaths = ['public/service-worker.js', 'public/sw.js', 'src/service-worker.js', 'src/sw.js'];
 const noServiceWorkerAdded = serviceWorkerPaths.every((relativePath) => !fileExists(relativePath));

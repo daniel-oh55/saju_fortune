@@ -118,9 +118,11 @@ const noServiceWorkerAdded =
 logResult('no_service_worker_added', noServiceWorkerAdded);
 assertCondition(noServiceWorkerAdded, 'this PR should not add service worker or Workbox dependency');
 
-const noCapacitorAdded = !Object.keys(allDependencies).some((name) => name.startsWith('@capacitor'));
-logResult('no_capacitor_added', noCapacitorAdded);
-assertCondition(noCapacitorAdded, 'this PR should not add Capacitor dependency');
+const dependencyNames = Object.keys(allDependencies);
+const noCapacitorPlatformAdded =
+  !dependencyNames.includes('@capacitor/android') && !dependencyNames.includes('@capacitor/ios');
+logResult('no_capacitor_platform_added', noCapacitorPlatformAdded);
+assertCondition(noCapacitorPlatformAdded, '@capacitor/android and @capacitor/ios should not be added in this PR');
 
 if (failures.length > 0) {
   console.error('PWA manifest readiness check failed');

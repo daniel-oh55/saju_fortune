@@ -1,5 +1,16 @@
 # CAPACITOR_READINESS
 
+## Capacitor base config 추가 상태
+
+- `@capacitor/core`와 `@capacitor/cli`가 추가되었습니다.
+- 기본 `capacitor.config.json`이 추가되었습니다.
+- appId 후보는 `com.harupuli.app`입니다.
+- appName은 `하루풀이`입니다.
+- webDir은 `dist`입니다.
+- 아직 `@capacitor/android`와 `@capacitor/ios`는 설치하지 않았습니다.
+- 아직 Android/iOS 프로젝트는 생성하지 않았습니다.
+- 실제 Android 프로젝트 생성은 별도 PR에서 진행합니다.
+
 ## Capacitor Android adaptive icon PNG 생성 상태
 
 - Capacitor Android 프로젝트 적용 전 사용할 adaptive icon PNG 후보가 생성되었습니다.
