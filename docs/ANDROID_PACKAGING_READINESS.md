@@ -1,5 +1,13 @@
 # ANDROID_PACKAGING_READINESS
 
+## Android debug build 재시도 상태
+
+- JDK/JAVA_HOME 환경 확인 후 Android debug build를 재시도했습니다.
+- 자세한 결과는 `docs/ANDROID_BUILD_CHECK.md`를 참고합니다.
+- 현재 환경에서는 `JAVA_HOME`, `java`, `javac`가 없어 debug APK가 생성되지 않았습니다.
+- release build와 signing은 아직 진행하지 않았습니다.
+- 실제 기기 QA와 Android 리소스 적용은 별도 PR에서 진행합니다.
+
 ## Android debug build 확인 상태
 
 - Android debug build 확인 결과는 `docs/ANDROID_BUILD_CHECK.md`를 참고합니다.

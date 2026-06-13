@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 2026-06-13 Android Debug Build Retry
+
+### Added
+- Android Java/JDK 환경 확인 스크립트 추가
+- Android debug build 성공 검증 스크립트 추가
+
+### Changed
+- Android build 확인 문서에 JDK/JAVA_HOME 확인 및 debug build 재시도 결과 반영
+- Android packaging, Capacitor readiness 문서에 debug build 재시도 상태 반영
+
 ## 2026-06-13 Android Debug Build Check
 
 ### Added
