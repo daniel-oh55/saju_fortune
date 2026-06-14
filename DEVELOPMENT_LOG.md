@@ -1,5 +1,42 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-14 Android back button QA 기준 추가
+
+### 작업 내용
+- PR 목적: Android back button QA 기준 추가
+- `docs/ANDROID_BACK_BUTTON_QA.md` 신규 추가
+- `scripts/checkAndroidBackButtonQaReadiness.mjs` 신규 추가
+- 신규 npm script: `check:android-back-button-qa`
+- 실제 back button QA 수행 전
+- `@capacitor/app` 추가 없음
+- backButton handler 구현 없음
+- production 코드 변경 없음
+- production 계산 로직 변경 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+- Android 리소스 수동 적용 없음
+- release build 미진행
+- signing 미진행
+- `@capacitor/ios` 설치 없음
+- iOS 프로젝트 생성 없음
+- service worker 구현 없음
+- 실제 광고 SDK 추가 없음
+
+### 테스트 결과
+- `npm install`: 성공, npm audit high severity 3건 보고
+- `npm run build`: 성공, Vite chunk size warning 보고
+- `npm run check:android-back-button-qa`: 성공
+- `npm run check:android-device-qa-runbook`: 성공
+- `npm run check:android-webview-localstorage-qa-result`: 성공
+- `npm run check:android-webview-localstorage-qa`: 성공
+- `npm run check:android-debug-build-workflow`: 성공
+- `npm run check:android-platform-scaffold`: 성공
+- `npm run check:capacitor-base-config`: 성공
+- `npm run check:capacitor-readiness`: 성공
+- `npm run check:android-packaging-readiness`: 성공
+- `npm run check:content-safety`: 성공
+- `npm run check:share-text`: 성공
+
 ## 2026-06-14 Android WebView localStorage QA 재시도 결과 기록
 
 ### 작업 내용
