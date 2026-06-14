@@ -1,5 +1,49 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-14 Android WebView localStorage 실제 QA 결과 기록
+
+### 작업 내용
+- PR 목적: Android WebView localStorage 실제 QA 결과 기록
+- `docs/ANDROID_WEBVIEW_LOCALSTORAGE_QA_RESULT.md` 신규 추가
+- `scripts/checkAndroidWebViewLocalStorageQaResult.mjs` 신규 추가
+- 신규 npm script: `check:android-webview-localstorage-qa-result`
+- 실제 QA 수행 여부: 미수행
+- QA 상태: Blocked
+- 테스트 기기 또는 에뮬레이터 정보: 현재 Codex 실행 환경에서 접근 불가
+- Android 버전: 확인 불가
+- `harupuli-debug-apk` artifact 기준 확인 여부: 문서상 artifact 이름과 경로 확인, 실제 설치 미수행
+- production localStorage key 변경 없음
+- production 코드 변경 없음
+- production 계산 로직 변경 없음
+- schemaVersion 변경 없음
+- Android 리소스 수동 적용 없음
+- release build 미진행
+- signing 미진행
+- `@capacitor/ios` 설치 없음
+- iOS 프로젝트 생성 없음
+- service worker 구현 없음
+- 실제 광고 SDK 추가 없음
+
+### 테스트 결과
+- `npm install`: 성공, npm audit high severity 3건 보고
+- `npm run build`: 성공, Vite chunk size warning 보고
+- `npm run check:android-webview-localstorage-qa-result`: 성공
+- `npm run check:android-webview-localstorage-qa`: 성공
+- `npm run check:android-debug-build-workflow`: 성공
+- `npm run check:android-debug-build-readiness`: 성공
+- `npm run check:android-platform-scaffold`: 성공
+- `npm run check:capacitor-base-config`: 성공
+- `npm run check:capacitor-readiness`: 성공
+- `npm run check:android-packaging-readiness`: 성공
+- `npm run check:android-adaptive-icon-readiness`: 성공
+- `npm run check:generated-android-adaptive-icons`: 성공
+- `npm run check:generated-app-icons`: 성공
+- `npm run check:generated-splash-pngs`: 성공
+- `npm run check:app-assets`: 성공
+- `npm run check:pwa-readiness`: 성공
+- `npm run check:content-safety`: 성공
+- `npm run check:share-text`: 성공
+
 ## 2026-06-14 Android WebView localStorage QA 기준 추가
 
 ### 작업 내용

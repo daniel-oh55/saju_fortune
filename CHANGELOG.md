@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 2026-06-14 Android WebView localStorage QA Result
+
+### Added
+- Android WebView localStorage QA 결과 문서 추가
+- Android WebView localStorage QA result 검증 스크립트 추가
+
+### Changed
+- Android WebView localStorage QA 문서에 실제 결과 문서 연결
+- Android build, Android packaging, Capacitor readiness 문서에 QA 결과 문서 경로 반영
+
 ## 2026-06-14 Android WebView localStorage QA
 
 ### Added

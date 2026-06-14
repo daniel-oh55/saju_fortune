@@ -1,5 +1,11 @@
 # ANDROID_BUILD_CHECK
 
+## Android WebView localStorage QA 결과 연계
+
+- debug APK artifact를 기준으로 Android WebView localStorage QA 결과를 기록합니다.
+- 결과 문서는 `docs/ANDROID_WEBVIEW_LOCALSTORAGE_QA_RESULT.md`입니다.
+- release build와 signing은 아직 진행하지 않습니다.
+
 ## Android debug build CI 성공 확인
 
 - GitHub Actions Android Debug Build workflow가 성공했습니다.

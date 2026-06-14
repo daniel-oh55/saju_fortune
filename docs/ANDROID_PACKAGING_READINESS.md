@@ -1,5 +1,11 @@
 # ANDROID_PACKAGING_READINESS
 
+## Android WebView localStorage QA 결과 기록
+
+- Android WebView localStorage QA 결과 문서를 추가했습니다.
+- 결과 문서는 `docs/ANDROID_WEBVIEW_LOCALSTORAGE_QA_RESULT.md`입니다.
+- 이 단계에서는 Android 리소스 적용, release build, signing은 진행하지 않습니다.
+
 ## Android WebView localStorage QA 준비
 
 - Android debug APK 생성 기반이 확인되었습니다.
