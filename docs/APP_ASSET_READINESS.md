@@ -1,5 +1,10 @@
 # APP_ASSET_READINESS
 
+## Android icon/splash QA 결과 연결
+
+- Android icon/splash 표시 QA 결과는 `docs/ANDROID_ICON_SPLASH_QA_RESULT.md`에 기록합니다.
+- 실제 표시 문제가 확인되면 app asset 조정 또는 Android resource 수정 PR로 분리합니다.
+
 ## 2026-06-14 Android icon/splash 표시 QA 준비
 
 - Android resource 적용 후 실제 표시 QA 기준을 추가했습니다.

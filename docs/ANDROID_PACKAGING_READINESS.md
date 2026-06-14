@@ -1,5 +1,11 @@
 # ANDROID_PACKAGING_READINESS
 
+## Android icon/splash QA 결과 기록
+
+- Android icon/splash 표시 QA 결과 문서를 추가했습니다.
+- 결과 문서는 `docs/ANDROID_ICON_SPLASH_QA_RESULT.md`입니다.
+- 실제 표시 문제가 있으면 Android 리소스 수정 PR로 분리합니다.
+
 ## 2026-06-14 Android icon/splash 표시 QA 준비
 
 - Android 리소스 적용과 debug build 성공 이후 실제 표시 QA 기준을 추가했습니다.

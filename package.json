@@ -16,6 +16,7 @@
     "check:android-debug-build-success": "node scripts/checkAndroidDebugBuildSuccess.mjs",
     "check:android-device-qa-runbook": "node scripts/checkAndroidDeviceQaRunbookReadiness.mjs",
     "check:android-icon-splash-qa": "node scripts/checkAndroidIconSplashQaReadiness.mjs",
+    "check:android-icon-splash-qa-result": "node scripts/checkAndroidIconSplashQaResult.mjs",
     "check:android-java-env": "node scripts/checkAndroidJavaEnvironment.mjs",
     "check:android-webview-localstorage-qa": "node scripts/checkAndroidWebViewLocalStorageQaReadiness.mjs",
     "check:android-webview-localstorage-qa-result": "node scripts/checkAndroidWebViewLocalStorageQaResult.mjs",

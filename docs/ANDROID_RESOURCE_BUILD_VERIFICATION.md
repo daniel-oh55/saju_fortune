@@ -1,5 +1,11 @@
 # ANDROID_RESOURCE_BUILD_VERIFICATION
 
+## Android icon/splash QA 결과 연결
+
+- Android resource 적용 후 build 성공 상태에서 실제 icon/splash 표시 QA 결과를 기록합니다.
+- 결과 문서는 `docs/ANDROID_ICON_SPLASH_QA_RESULT.md`입니다.
+- 실제 표시 문제가 확인되면 별도 수정 PR에서 다룹니다.
+
 ## 실제 표시 QA 연결
 
 - Android 리소스 적용 후 debug build는 성공했습니다.
