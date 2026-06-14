@@ -1,5 +1,11 @@
 # CAPACITOR_READINESS
 
+## Android WebView localStorage QA 연계
+
+- Capacitor Android WebView에서 localStorage 데이터가 유지되는지 확인할 QA 기준을 추가했습니다.
+- QA 기준은 `docs/ANDROID_WEBVIEW_LOCALSTORAGE_QA.md`를 참고합니다.
+- production localStorage key는 변경하지 않습니다.
+
 ## Android debug build workflow 보완
 
 - Capacitor Android debug build CI에서 Gradle wrapper 실행 권한과 Java 환경을 확인하도록 workflow를 보완했습니다.
