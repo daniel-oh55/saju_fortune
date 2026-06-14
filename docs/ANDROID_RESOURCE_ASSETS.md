@@ -1,5 +1,11 @@
 # ANDROID_RESOURCE_ASSETS
 
+## Android icon/splash QA 결과 연결
+
+- 실제 표시 QA 결과 문서는 `docs/ANDROID_ICON_SPLASH_QA_RESULT.md`입니다.
+- 표시 문제가 확인되면 관련 Android resource 파일은 별도 PR에서 수정합니다.
+- 이번 단계에서는 리소스 파일을 변경하지 않았습니다.
+
 ## 2026-06-14 Android icon/splash 표시 QA 기준
 
 - 실제 표시 QA 기준은 `docs/ANDROID_ICON_SPLASH_QA.md`에 정리합니다.

@@ -1,5 +1,59 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-14 Android icon/splash 실제 표시 QA 결과 기록
+
+### 작업 내용
+- PR 목적: Android icon/splash 실제 표시 QA 결과 기록
+- `docs/ANDROID_ICON_SPLASH_QA_RESULT.md` 신규 추가
+- `scripts/checkAndroidIconSplashQaResult.mjs` 신규 추가
+- 신규 npm script: `check:android-icon-splash-qa-result`
+- 실제 QA 수행 여부: 미수행
+- QA 상태: Blocked
+- 테스트 기기 또는 에뮬레이터 정보: 미확인
+- Android 버전: 미확인
+- launcher 종류: 미확인
+- workflow run number 10 기준 artifact 확인 필요
+- launcher icon 표시 결과: Blocked
+- round icon 표시 결과: Blocked
+- adaptive icon 표시 결과: Blocked
+- Android 12 splash 표시 결과: Blocked
+- recent apps/app info icon 표시 결과: Blocked
+- 발견 이슈: 현재 기록된 표시 이슈 없음, 실제 QA 미수행으로 검증 전
+- Android 리소스 변경 없음
+- production 코드 변경 없음
+- production 계산 로직 변경 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+- Android back button 구현 없음
+- `@capacitor/app` 추가 없음
+- release build 미진행
+- signing 미진행
+- `@capacitor/ios` 설치 없음
+- iOS 프로젝트 생성 없음
+- service worker 구현 없음
+- 실제 광고 SDK 추가 없음
+
+### 테스트 결과
+- `adb version`: 실패, 현재 환경에서 `adb` 명령을 찾을 수 없음
+- `adb devices`: 실패, 현재 환경에서 `adb` 명령을 찾을 수 없음
+- `npm install`: 성공, npm audit high severity 3건 보고
+- `npm run build`: 성공, Vite chunk size warning 보고
+- `npm run check:android-icon-splash-qa-result`: 성공
+- `npm run check:android-icon-splash-qa`: 성공
+- `npm run check:android-resource-build-verification`: 성공
+- `npm run check:android-resources`: 성공
+- `npm run check:android-back-button-qa`: 성공
+- `npm run check:android-device-qa-runbook`: 성공
+- `npm run check:android-webview-localstorage-qa-result`: 성공
+- `npm run check:android-webview-localstorage-qa`: 성공
+- `npm run check:android-debug-build-workflow`: 성공
+- `npm run check:android-platform-scaffold`: 성공
+- `npm run check:capacitor-base-config`: 성공
+- `npm run check:capacitor-readiness`: 성공
+- `npm run check:android-packaging-readiness`: 성공
+- `npm run check:content-safety`: 성공
+- `npm run check:share-text`: 성공
+
 ## 2026-06-14 Android icon/splash 표시 QA 기준 추가
 
 ### 작업 내용

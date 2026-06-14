@@ -1,5 +1,11 @@
 # ANDROID_DEVICE_QA_RUNBOOK
 
+## 2026-06-14 Android icon/splash QA 결과 연결
+
+- Android icon/splash 표시 QA 결과는 `docs/ANDROID_ICON_SPLASH_QA_RESULT.md`에 기록합니다.
+- 현재 결과가 Blocked이면 실제 기기 또는 에뮬레이터와 adb 환경 준비 후 재시도합니다.
+- APK 설치 후 launcher icon, round icon, adaptive icon, Android 12 splash 표시를 다시 확인합니다.
+
 ## 2026-06-14 Android icon/splash 표시 QA 연결
 
 - Android 앱 아이콘과 splash 표시 QA 기준은 `docs/ANDROID_ICON_SPLASH_QA.md`를 참고합니다.

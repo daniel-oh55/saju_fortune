@@ -1,5 +1,12 @@
 # ANDROID_ICON_SPLASH_QA
 
+## 실제 QA 결과 문서
+
+- 실제 icon/splash 표시 QA 결과는 `docs/ANDROID_ICON_SPLASH_QA_RESULT.md`에 기록합니다.
+- QA 결과는 Pass, Partial Pass, Fail, Blocked 중 하나로 분류합니다.
+- 문제가 발견되면 관련 리소스 경로와 재현 단계를 기록합니다.
+- 이번 단계에서는 Android 리소스 파일을 변경하지 않았습니다.
+
 이 문서는 하루풀이 Android 앱의 launcher icon, round icon, adaptive icon, splash 표시를 실제 Android 기기 또는 에뮬레이터에서 확인하기 위한 QA 기준을 정리한 문서입니다.
 
 이번 PR은 QA 기준 정리가 목적이며, Android 리소스와 production 앱 로직은 변경하지 않습니다.

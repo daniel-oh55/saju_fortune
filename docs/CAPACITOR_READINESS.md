@@ -1,5 +1,11 @@
 # CAPACITOR_READINESS
 
+## Android icon/splash QA 결과 연결
+
+- Capacitor Android 앱의 icon/splash 표시 QA 결과를 별도 문서로 기록합니다.
+- 결과 문서는 `docs/ANDROID_ICON_SPLASH_QA_RESULT.md`입니다.
+- production 코드 변경은 없습니다.
+
 ## 2026-06-14 Android icon/splash 표시 QA 준비
 
 - Capacitor Android 앱의 icon/splash 표시 QA 기준을 추가했습니다.
