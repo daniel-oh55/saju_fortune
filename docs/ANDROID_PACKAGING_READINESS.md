@@ -1,5 +1,13 @@
 # ANDROID_PACKAGING_READINESS
 
+## Google Play store listing 준비
+
+- Google Play Store 등록 정보 초안 문서: `docs/GOOGLE_PLAY_STORE_LISTING_DRAFT.md`
+- 현재는 앱 이름, 짧은 설명, 긴 설명, 주요 기능, 참고용 고지, 개인정보/localStorage 고지, 광고 포함 여부 초안만 준비했습니다.
+- 실제 Google Play 제출은 진행하지 않았습니다.
+- release build, signing, AAB 생성, 개인정보 처리방침 URL, Google Play Data safety 작성은 추후 별도 단계에서 진행합니다.
+- 실제 제출 전 Android QA 상태 문서(`docs/ANDROID_QA_STATUS_SUMMARY.md`)의 Blocked 항목을 해소해야 합니다.
+
 ## Android QA 상태 요약
 
 - Android 실제 QA 상태 요약 문서를 추가했습니다.

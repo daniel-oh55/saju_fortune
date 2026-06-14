@@ -1,5 +1,12 @@
 # CAPACITOR_READINESS
 
+## Google Play 등록 정보 연결
+
+- Google Play Store 등록 정보 초안 문서: `docs/GOOGLE_PLAY_STORE_LISTING_DRAFT.md`
+- Capacitor Android 앱 제출 전 앱 소개 문구, 참고용 고지, 개인정보/localStorage 고지, 광고 포함 여부 초안을 확인합니다.
+- 실제 Google Play 제출에는 Android QA 완료, release build/signing, AAB 생성, 개인정보 처리방침 URL, Data safety 작성이 필요합니다.
+- 이번 단계에서는 iOS 프로젝트 생성, release/signing, 실제 광고 SDK 연동을 진행하지 않았습니다.
+
 ## Android QA 상태 요약
 
 - Capacitor Android 실제 QA 상태를 `docs/ANDROID_QA_STATUS_SUMMARY.md`에서 관리합니다.

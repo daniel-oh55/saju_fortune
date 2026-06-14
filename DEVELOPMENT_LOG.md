@@ -1,5 +1,59 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-15 Google Play Store Listing Draft
+
+### 작업 목적
+- Google Play Store 등록 정보 초안을 문서로 준비
+- 앱 이름, 짧은 설명, 긴 설명, 주요 기능, 참고용 고지, 개인정보/localStorage 고지, 광고 포함 여부, 스크린샷 후보, 제출 전 체크리스트 정리
+
+### 작업 내용
+- `docs/GOOGLE_PLAY_STORE_LISTING_DRAFT.md` 신규 추가
+- `scripts/checkGooglePlayStoreListingDraft.mjs` 신규 추가
+- `package.json`에 `check:google-play-store-listing` script 추가
+- Android QA, Android packaging, Capacitor readiness 문서에 Google Play 등록 정보 초안 링크 추가
+- TODO, DEVELOPMENT_LOG, CHANGELOG 업데이트
+
+### 변경하지 않은 항목
+- production `src` 코드 변경 없음
+- production 계산 로직 변경 없음
+- Android native code/resource 변경 없음
+- Android manifest 변경 없음
+- launcher icon, round icon, adaptive icon, splash resource 변경 없음
+- schemaVersion 변경 없음
+- localStorage key 이름 변경 없음
+- storage logic 변경 없음
+- rewarded ad service/provider/config 변경 없음
+- service worker 변경 없음
+- iOS 프로젝트 생성 없음
+- release build, signing, AAB 생성 없음
+- 실제 광고 SDK 또는 결제 SDK 추가 없음
+- Google Play 실제 제출 없음
+
+### 테스트 결과
+- `npm install`: `npm.cmd install` 성공, npm audit high severity 3건 보고
+- `npm run build`: 성공, Vite chunk size warning 보고
+- `npm run check:google-play-store-listing`: 성공
+- `npm run check:android-qa-status-summary`: 성공
+- `npm run check:android-back-button-qa-result`: 성공
+- `npm run check:android-back-button-qa`: 성공
+- `npm run check:android-qa-env-setup`: 성공
+- `npm run check:android-device-qa-runbook`: 성공
+- `npm run check:android-icon-splash-qa-result`: 성공
+- `npm run check:android-icon-splash-qa`: 성공
+- `npm run check:android-webview-localstorage-qa-result`: 성공
+- `npm run check:android-webview-localstorage-qa`: 성공
+- `npm run check:android-resource-build-verification`: 성공
+- `npm run check:android-resources`: 성공
+- `npm run check:android-debug-build-workflow`: 성공
+- `npm run check:android-platform-scaffold`: 성공
+- `npm run check:capacitor-base-config`: 성공
+- `npm run check:capacitor-readiness`: 성공
+- `npm run check:android-packaging-readiness`: 성공
+- `npm run check:content-safety`: 성공
+- `npm run check:share-text`: 성공
+- `git diff -- src`: 변경 없음
+- `git diff -- android/app/src/main/res android/app/src/main/AndroidManifest.xml android/app/src/main/java android/app/src/main/kotlin`: 변경 없음
+
 ## 2026-06-15 Android QA Status Summary
 
 ### 작업 목적

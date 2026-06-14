@@ -1,5 +1,13 @@
 # ANDROID_QA_STATUS_SUMMARY
 
+## Google Play 등록 정보 준비
+
+- Google Play Store 등록 정보 초안 문서: `docs/GOOGLE_PLAY_STORE_LISTING_DRAFT.md`
+- 이번 단계는 스토어 문구와 제출 전 확인 항목을 정리하는 문서 작업입니다.
+- 실제 Google Play 제출, release build, signing, AAB 생성, 실제 광고 SDK 연동은 진행하지 않았습니다.
+- Android QA는 여전히 실제 기기 또는 에뮬레이터 환경 부재로 Blocked 상태입니다.
+- 실제 제출 전에는 icon/splash 표시 QA, WebView localStorage QA, Android back button QA를 완료해야 합니다.
+
 이 문서는 하루풀이 Android 앱 패키지 이후 실제 기기 또는 에뮬레이터 QA의 현재 상태를 한곳에서 관리하기 위한 요약 문서입니다.
 
 이번 PR은 QA 상태 요약 문서화가 목적이며, production 로직과 Android 리소스는 변경하지 않습니다.
