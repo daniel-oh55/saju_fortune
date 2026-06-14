@@ -1,5 +1,11 @@
 # ANDROID_DEVICE_QA_RUNBOOK
 
+## 2026-06-15 Android back button QA 결과 문서
+
+- Android back button 실제 QA 결과는 `docs/ANDROID_BACK_BUTTON_QA_RESULT.md`에 기록합니다.
+- 현재 결과는 adb/device 준비 전이므로 Blocked이며, 실제 기기 또는 에뮬레이터 연결 후 재시도해야 합니다.
+- 이 결과 문서는 back button handler 구현 여부를 결정하기 전 참고 자료로 사용합니다.
+
 ## Android QA 환경 준비 문서
 
 - 실제 기기 또는 에뮬레이터 QA 환경 준비 절차는 `docs/ANDROID_QA_ENVIRONMENT_SETUP.md`를 참고합니다.

@@ -11,6 +11,7 @@
     "generate:splash-pngs": "node scripts/generateSplashPngs.mjs",
     "build": "vite build",
     "check:android-back-button-qa": "node scripts/checkAndroidBackButtonQaReadiness.mjs",
+    "check:android-back-button-qa-result": "node scripts/checkAndroidBackButtonQaResult.mjs",
     "check:android-debug-build-workflow": "node scripts/checkAndroidDebugBuildWorkflow.mjs",
     "check:android-debug-build-readiness": "node scripts/checkAndroidDebugBuildReadiness.mjs",
     "check:android-debug-build-success": "node scripts/checkAndroidDebugBuildSuccess.mjs",

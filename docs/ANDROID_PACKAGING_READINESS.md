@@ -1,5 +1,11 @@
 # ANDROID_PACKAGING_READINESS
 
+## 2026-06-15 Android back button QA 결과 연결
+
+- Android back button 실제 QA 결과 문서는 `docs/ANDROID_BACK_BUTTON_QA_RESULT.md`입니다.
+- 현재 결과는 adb/device 미준비로 Blocked입니다.
+- 이번 PR은 QA 결과 기록만 다루며 Android native code, resource, production src 코드를 변경하지 않습니다.
+
 ## Android QA 환경 준비
 
 - icon/splash, localStorage, back button QA가 실제 환경 부재로 Blocked 또는 Pending 상태입니다.

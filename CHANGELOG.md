@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 2026-06-15 Android Back Button QA Result
+
+### Added
+- Android back button 실제 QA 결과 문서 추가
+- Android back button QA result 검증 스크립트 추가
+- `check:android-back-button-qa-result` npm script 추가
+
+### Changed
+- Android QA 문서에 back button 실제 결과 문서 경로와 현재 Blocked 상태 반영
+
 ## 2026-06-14 Android QA Environment Setup
 
 ### Added

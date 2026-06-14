@@ -1,5 +1,12 @@
 # CAPACITOR_READINESS
 
+## 2026-06-15 Android back button QA 결과 연결
+
+- Android back button 실제 QA 결과 문서는 `docs/ANDROID_BACK_BUTTON_QA_RESULT.md`입니다.
+- 현재 결과는 adb/device 미준비로 Blocked입니다.
+- 이번 단계에서는 `@capacitor/app`을 추가하지 않고 backButton listener도 구현하지 않습니다.
+- 실제 QA 결과에서 필요성이 확인되면 별도 PR에서 Capacitor back button handling을 검토합니다.
+
 ## Android QA 환경 준비
 
 - Capacitor Android 앱을 실제 기기 또는 에뮬레이터에서 확인하기 위한 QA 환경 준비 문서를 추가했습니다.

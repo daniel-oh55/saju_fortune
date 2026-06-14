@@ -1,5 +1,58 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-15 Android Back Button QA Result
+
+### 작업 목적
+- Android back button 실제 QA 결과 문서 추가
+- 실제 기기 또는 에뮬레이터 QA를 수행할 수 없는 상태를 Pass로 기록하지 않고 Blocked로 기록
+
+### 작업 내용
+- `docs/ANDROID_BACK_BUTTON_QA_RESULT.md` 신규 작성
+- `scripts/checkAndroidBackButtonQaResult.mjs` 신규 추가
+- `package.json`에 `check:android-back-button-qa-result` script 추가
+- Android QA 관련 문서에 back button QA 결과 문서 링크 추가
+
+### 변경하지 않은 항목
+- production `src` 코드 변경 없음
+- Android native code/resource 변경 없음
+- launcher icon, round icon, adaptive icon, splash resource 변경 없음
+- service worker 변경 없음
+- rewarded ad 구조 변경 없음
+- `@capacitor/app` 추가 없음
+- localStorage key 변경 없음
+- schemaVersion 변경 없음
+
+### QA 상태
+- `adb version`: 실패, 현재 로컬 환경에서 `adb` 명령을 찾을 수 없음
+- `adb devices`: 실패, 현재 로컬 환경에서 `adb` 명령을 찾을 수 없음
+- Android back button 실제 QA: Blocked
+
+### 테스트 결과
+- `npm install`: PowerShell 실행 정책으로 `npm` 별칭은 실패, `npm.cmd install` 성공
+- `npm run build`: 성공
+- `npm run check:android-back-button-qa-result`: 성공
+- `npm run check:android-back-button-qa`: 성공
+- `npm run check:android-qa-env-setup`: 성공
+- `npm run check:android-device-qa-runbook`: 성공
+- `npm run check:android-icon-splash-qa-result`: 성공
+- `npm run check:android-icon-splash-qa`: 성공
+- `npm run check:android-webview-localstorage-qa-result`: 성공
+- `npm run check:android-webview-localstorage-qa`: 성공
+- `npm run check:android-debug-build-workflow`: 성공
+- `npm run check:android-platform-scaffold`: 성공
+- `npm run check:capacitor-base-config`: 성공
+- `npm run check:capacitor-readiness`: 성공
+- `npm run check:android-packaging-readiness`: 성공
+- `npm run check:content-safety`: 성공
+- `npm run check:share-text`: 성공
+- `Test-Path ios`: False
+- `git diff -- src`: 변경 없음
+
+### 다음 작업
+- Android SDK Platform Tools 설치 또는 adb PATH 설정
+- 실제 Android 기기 USB debugging 허용 또는 Android Emulator 실행
+- `harupuli-debug-apk` artifact 다운로드 후 실제 back button QA 수행
+
 ## 2026-06-14 Android 실제 QA Blocked 해소를 위한 QA 환경 준비 문서 추가
 
 ### 작업 내용

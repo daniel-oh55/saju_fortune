@@ -1,5 +1,13 @@
 # ANDROID_BACK_BUTTON_QA
 
+## 2026-06-15 실제 QA 결과 문서
+
+- Android back button 실제 QA 결과는 `docs/ANDROID_BACK_BUTTON_QA_RESULT.md`에 기록합니다.
+- 결과 상태는 Pass, Partial Pass, Fail, Blocked 중 하나로 관리합니다.
+- 현재 결과는 adb/device 준비가 되지 않아 Blocked입니다.
+- 이번 PR에서는 back button handler를 구현하지 않고, `@capacitor/app` 또는 listener를 추가하지 않습니다.
+- 실제 QA 후 필요성이 확인되면 별도 PR에서 back button handling 구현 여부를 검토합니다.
+
 ## QA 환경 준비 연결
 
 - Android back button 실제 QA에는 실제 기기 또는 에뮬레이터가 필요합니다.
