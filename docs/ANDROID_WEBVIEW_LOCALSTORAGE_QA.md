@@ -120,3 +120,10 @@
 - Android back button QA
 - Android 리소스 적용
 - release build/signing 준비
+
+## 실제 QA 결과 문서
+
+- 실제 QA 수행 결과는 `docs/ANDROID_WEBVIEW_LOCALSTORAGE_QA_RESULT.md`에 기록합니다.
+- QA 결과는 Pass, Partial Pass, Blocked, Fail 중 하나로 분류합니다.
+- 문제가 발견되면 관련 localStorage key와 재현 단계를 기록합니다.
+- production localStorage key는 변경하지 않습니다.

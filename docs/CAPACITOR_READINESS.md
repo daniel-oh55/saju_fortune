@@ -1,5 +1,11 @@
 # CAPACITOR_READINESS
 
+## Android WebView localStorage QA 결과 연계
+
+- Capacitor Android WebView에서 localStorage 유지 여부를 확인하는 결과 문서를 추가했습니다.
+- 결과 문서는 `docs/ANDROID_WEBVIEW_LOCALSTORAGE_QA_RESULT.md`입니다.
+- 문제가 확인되면 별도 수정 PR에서 다룹니다.
+
 ## Android WebView localStorage QA 연계
 
 - Capacitor Android WebView에서 localStorage 데이터가 유지되는지 확인할 QA 기준을 추가했습니다.
