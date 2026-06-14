@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 2026-06-14 Android Icon Splash QA Guide
+
+### Added
+- Android icon/splash 표시 QA 기준 문서 추가
+- Android icon/splash QA readiness 검증 스크립트 추가
+
+### Changed
+- Android resource assets, resource build verification, device QA runbook, packaging readiness, app asset readiness, Capacitor readiness 문서에 icon/splash 표시 QA 기준 연결
+
 ## 2026-06-14 Android Resource Build Verification
 
 ### Added

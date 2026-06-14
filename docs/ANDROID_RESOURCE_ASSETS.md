@@ -1,5 +1,11 @@
 # ANDROID_RESOURCE_ASSETS
 
+## 2026-06-14 Android icon/splash 표시 QA 기준
+
+- 실제 표시 QA 기준은 `docs/ANDROID_ICON_SPLASH_QA.md`에 정리합니다.
+- launcher icon, round icon, adaptive icon, Android 12 이상 splash를 실제 기기 또는 에뮬레이터에서 확인해야 합니다.
+- 이번 단계에서는 리소스 파일 자체를 변경하지 않았습니다.
+
 ## 2026-06-14 Android 리소스 적용 후 build verification
 
 - Android 리소스 적용 후 GitHub Actions Android Debug Build가 성공했습니다.

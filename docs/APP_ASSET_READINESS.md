@@ -1,5 +1,11 @@
 # APP_ASSET_READINESS
 
+## 2026-06-14 Android icon/splash 표시 QA 준비
+
+- Android resource 적용 후 실제 표시 QA 기준을 추가했습니다.
+- launcher icon, round icon, adaptive icon, Android 12 이상 splash를 확인합니다.
+- QA 결과는 후속 PR에서 기록합니다.
+
 ## 2026-06-14 Android resource build verification
 
 - Android `res` 리소스 적용 후 debug build가 성공했습니다.

@@ -1,5 +1,11 @@
 # ANDROID_RESOURCE_BUILD_VERIFICATION
 
+## 실제 표시 QA 연결
+
+- Android 리소스 적용 후 debug build는 성공했습니다.
+- 다음 확인 단계는 실제 Android 기기 또는 에뮬레이터에서 icon/splash 표시 QA입니다.
+- QA 기준은 `docs/ANDROID_ICON_SPLASH_QA.md`를 참고합니다.
+
 이 문서는 Android 리소스 적용 후 Android Debug Build가 성공했는지 확인한 결과를 기록하는 문서입니다. 이번 PR은 build verification 문서화가 목적이며, Android 리소스와 production 앱 로직은 변경하지 않습니다.
 
 ## 1. 목적
