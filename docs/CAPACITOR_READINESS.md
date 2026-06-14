@@ -1,5 +1,11 @@
 # CAPACITOR_READINESS
 
+## Android device QA runbook 연계
+
+- Capacitor Android 앱을 실제 기기 또는 에뮬레이터에서 확인하기 위한 runbook을 추가했습니다.
+- adb 연결, APK 설치, 앱 실행, logcat 확인 절차를 문서화했습니다.
+- production localStorage key는 변경하지 않습니다.
+
 ## Android WebView localStorage QA 결과 연계
 
 - Capacitor Android WebView에서 localStorage 유지 여부를 확인하는 결과 문서를 추가했습니다.

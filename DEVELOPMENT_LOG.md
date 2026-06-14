@@ -1,5 +1,47 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-14 Android device/emulator QA runbook 추가
+
+### 작업 내용
+- PR 목적: Android WebView localStorage QA Blocked 해소를 위한 device/emulator runbook 추가
+- `docs/ANDROID_DEVICE_QA_RUNBOOK.md` 신규 추가
+- `scripts/checkAndroidDeviceQaRunbookReadiness.mjs` 신규 추가
+- 신규 npm script: `check:android-device-qa-runbook`
+- PR #76 QA 상태 Blocked 유지
+- 실제 기기 또는 에뮬레이터 준비 필요
+- `harupuli-debug-apk` artifact 다운로드 절차 문서화
+- `adb devices` 확인 절차 문서화
+- `adb install` 절차 문서화
+- `pm clear` 절차 문서화
+- `logcat` 확인 절차 문서화
+- production localStorage key 변경 없음
+- production 코드 변경 없음
+- production 계산 로직 변경 없음
+- schemaVersion 변경 없음
+- Android 리소스 수동 적용 없음
+- release build 미진행
+- signing 미진행
+- `@capacitor/ios` 설치 없음
+- iOS 프로젝트 생성 없음
+- service worker 구현 없음
+- 실제 광고 SDK 추가 없음
+
+### 테스트 결과
+- `npm install`: 성공, npm audit high severity 3건 보고
+- `npm run build`: 성공, Vite chunk size warning 보고
+- `npm run check:android-device-qa-runbook`: 성공
+- `npm run check:android-webview-localstorage-qa-result`: 성공
+- `npm run check:android-webview-localstorage-qa`: 성공
+- `npm run check:android-debug-build-workflow`: 성공
+- `npm run check:android-debug-build-readiness`: 성공
+- `npm run check:android-platform-scaffold`: 성공
+- `npm run check:capacitor-base-config`: 성공
+- `npm run check:capacitor-readiness`: 성공
+- `npm run check:android-packaging-readiness`: 성공
+- `npm run check:pwa-readiness`: 성공
+- `npm run check:content-safety`: 성공
+- `npm run check:share-text`: 성공
+
 ## 2026-06-14 Android WebView localStorage 실제 QA 결과 기록
 
 ### 작업 내용

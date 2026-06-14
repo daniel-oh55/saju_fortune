@@ -127,3 +127,8 @@
 - QA 결과는 Pass, Partial Pass, Blocked, Fail 중 하나로 분류합니다.
 - 문제가 발견되면 관련 localStorage key와 재현 단계를 기록합니다.
 - production localStorage key는 변경하지 않습니다.
+
+## 실제 기기/에뮬레이터 실행 절차
+
+- 실제 Android 기기 또는 에뮬레이터에서 QA를 수행하기 위한 실행 절차는 `docs/ANDROID_DEVICE_QA_RUNBOOK.md`를 참고합니다.
+- APK 설치, adb 연결, 앱 데이터 삭제, logcat 확인 절차를 해당 문서에서 관리합니다.

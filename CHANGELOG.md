@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 2026-06-14 Android Device QA Runbook
+
+### Added
+- Android device/emulator QA runbook 추가
+- Android device QA runbook readiness 검증 스크립트 추가
+
+### Changed
+- Android WebView localStorage QA 결과 문서에 실제 QA 재시도 준비 절차 연결
+- Android packaging, Capacitor readiness 문서에 device QA runbook 경로 반영
+
 ## 2026-06-14 Android WebView localStorage QA Result
 
 ### Added

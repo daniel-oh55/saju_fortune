@@ -173,3 +173,11 @@ Blocked: 실제 기기/에뮬레이터 환경 또는 APK 설치 조건이 준비
 - `harupuli-debug-apk` artifact 다운로드
 - `app-debug.apk` 설치 재시도
 - Android WebView localStorage QA 재실행
+
+## 실제 QA 재시도 준비
+
+- PR #76의 QA 상태는 Blocked입니다.
+- 실제 기기 또는 에뮬레이터에서 QA를 수행하기 위한 runbook을 추가했습니다.
+- runbook 문서는 `docs/ANDROID_DEVICE_QA_RUNBOOK.md`입니다.
+- 다음 재시도 시 artifact `harupuli-debug-apk`를 다운로드해 `app-debug.apk`를 설치합니다.
+- 실제 QA 수행 후 이 문서의 QA 상태를 Pass, Partial Pass, Fail, Blocked 중 하나로 갱신합니다.

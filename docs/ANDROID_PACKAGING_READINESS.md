@@ -1,5 +1,11 @@
 # ANDROID_PACKAGING_READINESS
 
+## Android device QA runbook 준비
+
+- Android WebView localStorage QA가 실제 기기/에뮬레이터 부재로 Blocked 상태입니다.
+- 이를 해소하기 위한 Android device QA runbook을 추가했습니다.
+- 문서 경로는 `docs/ANDROID_DEVICE_QA_RUNBOOK.md`입니다.
+
 ## Android WebView localStorage QA 결과 기록
 
 - Android WebView localStorage QA 결과 문서를 추가했습니다.
