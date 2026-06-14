@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 2026-06-14 Android Back Button QA
+
+### Added
+- Android back button QA 기준 문서 추가
+- Android back button QA readiness 검증 스크립트 추가
+
+### Changed
+- Android device QA runbook, Android packaging readiness, Capacitor readiness 문서에 back button QA 기준 연결
+
 ## 2026-06-14 Android WebView localStorage QA Rerun
 
 ### Changed

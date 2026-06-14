@@ -138,3 +138,9 @@ PR #76에서는 실제 기기/에뮬레이터 접근 불가로 Blocked 상태였
 - QA 결과 문서 갱신
 - Android back button QA
 - Android 리소스 적용
+
+## Android back button QA 연계
+
+- Android 시스템 뒤로가기 버튼 QA 기준은 `docs/ANDROID_BACK_BUTTON_QA.md`를 참고합니다.
+- localStorage QA와 별도로 화면 이동, 모달 닫힘, 앱 종료 후보 동작을 확인합니다.
+- 실제 QA 결과에 따라 별도 back button handler 구현 PR을 검토합니다.

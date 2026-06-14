@@ -1,5 +1,11 @@
 # ANDROID_PACKAGING_READINESS
 
+## Android back button QA 준비
+
+- Android WebView 환경에서 시스템 뒤로가기 버튼 동작을 확인하기 위한 QA 기준 문서를 추가했습니다.
+- 문서 경로는 `docs/ANDROID_BACK_BUTTON_QA.md`입니다.
+- 이번 단계에서는 back button handler 구현은 하지 않습니다.
+
 ## Android device QA runbook 준비
 
 - Android WebView localStorage QA가 실제 기기/에뮬레이터 부재로 Blocked 상태입니다.

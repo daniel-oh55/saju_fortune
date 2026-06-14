@@ -1,5 +1,11 @@
 # CAPACITOR_READINESS
 
+## Android back button QA 준비
+
+- Capacitor Android WebView에서 시스템 뒤로가기 버튼 동작을 확인하기 위한 QA 기준을 추가했습니다.
+- 실제 QA 결과에 따라 `@capacitor/app` 기반 backButton listener 도입 여부를 검토합니다.
+- 이번 PR에서는 production 코드와 Capacitor plugin 추가는 하지 않습니다.
+
 ## Android device QA runbook 연계
 
 - Capacitor Android 앱을 실제 기기 또는 에뮬레이터에서 확인하기 위한 runbook을 추가했습니다.
