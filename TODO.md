@@ -1,5 +1,19 @@
 # TODO
 
+## 2026-06-14 Android resource assets TODO
+
+- [x] Android 앱 아이콘 리소스 적용
+- [x] Android 라운드 아이콘 리소스 적용
+- [x] Android adaptive icon foreground/background 리소스 적용
+- [x] Android splash 후보 PNG 리소스 적용
+- [x] Android resource assets 적용/검증 스크립트 추가
+- [ ] Android 리소스 적용 후 debug build 재확인
+- [ ] Android 실제 기기 또는 에뮬레이터에서 launcher icon 표시 확인
+- [ ] Android 실제 기기 또는 에뮬레이터에서 round icon 표시 확인
+- [ ] Android 12 이상 splash 표시 확인
+- [ ] release build/signing 별도 진행
+- [ ] 스토어 등록 정보 최종 점검
+
 ## 2026-06-14 Android back button QA TODO
 
 - [x] Android back button QA 기준 작성

@@ -1,5 +1,52 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-14 Android app icon/splash/adaptive icon 리소스 적용
+
+### 작업 내용
+- PR 목적: Android 앱 아이콘, 라운드 아이콘, adaptive icon, splash 후보 PNG를 Android `res` 경로에 적용
+- `scripts/applyAndroidResourceAssets.mjs` 신규 추가
+- `scripts/checkAndroidResourceAssets.mjs` 신규 추가
+- `npm run apply:android-resources` 스크립트 추가
+- `npm run check:android-resources` 스크립트 추가
+- `public/generated-icons/android`의 기존 PNG를 `mipmap-*` launcher icon과 round icon에 복사
+- `public/generated-icons/android-adaptive`의 기존 PNG를 adaptive icon foreground/background에 복사
+- `mipmap-anydpi-v26` adaptive icon XML 적용
+- `public/generated-splash/android`의 기존 PNG를 `drawable-nodpi` splash 후보 리소스로 복사
+- `public/generated-*` 원본 PNG 유지
+- production `src` 코드 변경 없음
+- 계산 로직 변경 없음
+- 라우팅 변경 없음
+- localStorage key 이름 변경 없음
+- schemaVersion 변경 없음
+- rewarded ad 구조 변경 없음
+- 실제 광고 SDK 추가 없음
+- iOS 프로젝트 생성 없음
+- release build/signing 진행 없음
+
+### 테스트 결과
+- `npm install`: 성공, npm audit high severity 3건 보고
+- `npm run apply:android-resources`: 성공
+- `npm run build`: 성공, Vite chunk size warning 보고
+- `npx cap sync android`: 성공
+- `npm run check:android-resources`: 성공
+- `npm run check:android-back-button-qa`: 성공
+- `npm run check:android-device-qa-runbook`: 성공
+- `npm run check:android-webview-localstorage-qa-result`: 성공
+- `npm run check:android-webview-localstorage-qa`: 성공
+- `npm run check:android-debug-build-workflow`: 성공
+- `npm run check:android-platform-scaffold`: 성공
+- `npm run check:capacitor-base-config`: 성공
+- `npm run check:capacitor-readiness`: 성공
+- `npm run check:android-packaging-readiness`: 성공
+- `npm run check:android-adaptive-icon-readiness`: 성공
+- `npm run check:generated-android-adaptive-icons`: 성공
+- `npm run check:generated-app-icons`: 성공
+- `npm run check:generated-splash-pngs`: 성공
+- `npm run check:app-assets`: 성공
+- `npm run check:pwa-readiness`: 성공
+- `npm run check:content-safety`: 성공
+- `npm run check:share-text`: 성공
+
 ## 2026-06-14 Android back button QA 기준 추가
 
 ### 작업 내용

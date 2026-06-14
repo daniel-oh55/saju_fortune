@@ -1,5 +1,14 @@
 # CAPACITOR_READINESS
 
+## 2026-06-14 Android 리소스 적용 상태
+
+- Capacitor Android 프로젝트에 하루풀이 앱 아이콘, 라운드 아이콘, adaptive icon, splash 후보 PNG를 적용했습니다.
+- `public/generated-*` 원본 PNG는 유지하고, Android `res` 경로에 복사본을 배치했습니다.
+- Android 아이콘 참조는 기존 `@mipmap/ic_launcher`, `@mipmap/ic_launcher_round` 구조를 유지합니다.
+- Android splash 후보 리소스는 추가했지만, Android 12 이상 splash 실제 표시 여부는 후속 device QA가 필요합니다.
+- iOS 프로젝트와 iOS 리소스는 이번 작업 범위에 포함하지 않았습니다.
+- production React/Vite 코드, localStorage key, schemaVersion, rewarded ad 구조는 변경하지 않았습니다.
+
 ## Android back button QA 준비
 
 - Capacitor Android WebView에서 시스템 뒤로가기 버튼 동작을 확인하기 위한 QA 기준을 추가했습니다.

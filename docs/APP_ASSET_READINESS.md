@@ -1,5 +1,16 @@
 # APP_ASSET_READINESS
 
+## 2026-06-14 Android 리소스 적용 상태
+
+- Android 앱 아이콘, 라운드 아이콘, adaptive icon, splash 후보 PNG를 Android 프로젝트 `res` 경로에 반영했습니다.
+- 앱 아이콘은 `android/app/src/main/res/mipmap-*/ic_launcher.png`에 적용했습니다.
+- 라운드 아이콘은 `android/app/src/main/res/mipmap-*/ic_launcher_round.png`에 적용했습니다.
+- adaptive icon foreground/background는 `android/app/src/main/res/drawable-nodpi/ic_launcher_foreground.png`, `android/app/src/main/res/drawable-nodpi/ic_launcher_background.png`에 적용했습니다.
+- adaptive icon XML은 `android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml`, `android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml`에 적용했습니다.
+- splash 후보 PNG는 `android/app/src/main/res/drawable-nodpi/harupuli_splash.png`, `android/app/src/main/res/drawable-nodpi/harupuli_splash_icon.png`에 추가했습니다.
+- `public/generated-*` 원본 PNG는 유지했습니다.
+- 실제 Android 기기에서 아이콘, round icon, Android 12 이상 splash 표시 확인은 후속 QA가 필요합니다.
+
 ## Android 프로젝트 생성 후 리소스 적용 예정
 
 - Android 프로젝트가 생성되었지만 앱 아이콘, splash, adaptive icon의 실제 Android res 적용은 아직 진행하지 않았습니다.

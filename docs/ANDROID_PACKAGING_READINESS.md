@@ -1,5 +1,16 @@
 # ANDROID_PACKAGING_READINESS
 
+## 2026-06-14 Android 리소스 적용 상태
+
+- Android 앱 아이콘, 라운드 아이콘, adaptive icon, splash 후보 PNG가 Android `res` 경로에 반영되었습니다.
+- 적용 기준 문서는 `docs/ANDROID_RESOURCE_ASSETS.md`입니다.
+- 적용 스크립트는 `npm run apply:android-resources`입니다.
+- 검증 스크립트는 `npm run check:android-resources`입니다.
+- `AndroidManifest.xml`의 `@mipmap/ic_launcher`, `@mipmap/ic_launcher_round` 참조는 기존 값을 유지합니다.
+- 기존 launch theme의 `@drawable/splash` 참조는 변경하지 않았으며, `harupuli_splash`와 `harupuli_splash_icon`은 실제 기기 QA용 후보 리소스로 추가했습니다.
+- release build와 signing은 아직 진행하지 않았습니다.
+- Android debug build에서 아이콘과 splash 표시를 다시 확인해야 합니다.
+
 ## Android back button QA 준비
 
 - Android WebView 환경에서 시스템 뒤로가기 버튼 동작을 확인하기 위한 QA 기준 문서를 추가했습니다.

@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## 2026-06-14 Android Resource Assets
+
+### Added
+- Android 앱 아이콘과 라운드 아이콘 리소스 적용 스크립트 추가
+- Android adaptive icon foreground/background 리소스 적용 스크립트 추가
+- Android splash 후보 PNG 리소스 적용 스크립트 추가
+- Android 리소스 적용 검증 스크립트 추가
+- Android resource assets 문서 추가
+
+### Changed
+- 기존 생성 PNG를 Android `res` 경로에 반영할 수 있도록 npm script 추가
+- Android packaging, Capacitor, app asset readiness 문서에 Android 리소스 적용 상태 반영
+
 ## 2026-06-14 Android Back Button QA
 
 ### Added

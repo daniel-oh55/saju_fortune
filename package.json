@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "apply:android-resources": "node scripts/applyAndroidResourceAssets.mjs",
     "generate:android-adaptive-icons": "node scripts/generateAndroidAdaptiveIcons.mjs",
     "generate:app-icons": "node scripts/generateAppIconPngs.mjs",
     "generate:splash-pngs": "node scripts/generateSplashPngs.mjs",
@@ -19,6 +20,7 @@
     "check:android-webview-localstorage-qa-result": "node scripts/checkAndroidWebViewLocalStorageQaResult.mjs",
     "check:android-platform-scaffold": "node scripts/checkAndroidPlatformScaffold.mjs",
     "check:android-packaging-readiness": "node scripts/checkAndroidPackagingReadiness.mjs",
+    "check:android-resources": "node scripts/checkAndroidResourceAssets.mjs",
     "check:android-adaptive-icon-readiness": "node scripts/checkAndroidAdaptiveIconReadiness.mjs",
     "check:app-assets": "node scripts/checkAppAssetReadiness.mjs",
     "check:app-icon-png-export": "node scripts/checkAppIconPngExportReadiness.mjs",
