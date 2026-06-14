@@ -1,5 +1,62 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-15 Privacy Policy URL Readiness
+
+### 작업 목적
+- Google Play 제출 전 개인정보 처리방침 URL 준비 문서 추가
+- 현재 MVP의 데이터 저장 방식, localStorage 저장 항목, 외부 전송 여부, 실제 SDK 미연동 상태 정리
+
+### 작업 내용
+- `docs/PRIVACY_POLICY_URL_READINESS.md` 신규 추가
+- `scripts/checkPrivacyPolicyUrlReadiness.mjs` 신규 추가
+- 신규 npm script: `check:privacy-policy-url-readiness`
+- 현재 MVP 데이터 저장 방식 정리
+- localStorage 저장 항목 정리
+- 서버 DB 없음, 로그인 없음, 실제 광고 SDK 없음, 실제 결제 SDK 없음, 외부 분석 SDK 없음 기록
+- Vercel, GitHub Pages, 회사 또는 개인 도메인 후보 정리
+- PrivacyInfoPage와 외부 개인정보 처리방침 URL 내용 일치 필요성 기록
+- Google Play 데이터 보안 양식과 일치 필요성 기록
+- Google Play Store listing draft, privacy policy draft, privacy data map, cookie/ad consent UX, Android packaging readiness, Capacitor readiness 문서에 URL 준비 문서 경로 반영
+
+### 변경하지 않은 항목
+- 실제 URL 배포 미진행
+- Google Play Console 입력 미진행
+- production 코드 변경 없음
+- production 계산 로직 변경 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+- Android resource/native 변경 없음
+- AndroidManifest.xml 변경 없음
+- release build 미진행
+- signing 미진행
+- AAB 생성 미진행
+- iOS 프로젝트 생성 없음
+- service worker 구현 없음
+- 실제 광고 SDK 추가 없음
+- 실제 결제 SDK 추가 없음
+- 로그인 기능 추가 없음
+- 서버 DB 연결 없음
+- `@capacitor/app` 추가 없음
+- rewarded ad provider/service/config 변경 없음
+- consentPreferencesStorage, savedReadingsStorage, visitStreakStorage, shareTextBuilder 로직 변경 없음
+
+### 테스트 결과
+- `npm install`: `npm.cmd install` 성공, npm audit high severity 3건 보고
+- `npm run build`: 성공, Vite chunk size warning 보고
+- `npm run check:privacy-policy-url-readiness`: 성공
+- `npm run check:google-play-store-listing`: 성공
+- `npm run check:android-qa-status-summary`: 성공
+- `npm run check:android-back-button-qa-result`: 성공
+- `npm run check:android-icon-splash-qa-result`: 성공
+- `npm run check:android-webview-localstorage-qa-result`: 성공
+- `npm run check:android-debug-build-workflow`: 성공
+- `npm run check:capacitor-readiness`: 성공
+- `npm run check:android-packaging-readiness`: 성공
+- `npm run check:content-safety`: 성공
+- `npm run check:share-text`: 성공
+- `git diff -- src`: 변경 없음
+- `git diff -- android/app/src/main/res android/app/src/main/AndroidManifest.xml android/app/src/main/java android/app/src/main/kotlin`: 변경 없음
+
 ## 2026-06-15 Google Play Store Listing Draft
 
 ### 작업 목적

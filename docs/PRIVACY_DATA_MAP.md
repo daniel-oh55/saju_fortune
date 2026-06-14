@@ -1,5 +1,11 @@
 # PRIVACY_DATA_MAP
 
+## 개인정보 처리방침 URL 연계
+
+- 데이터 저장 항목과 외부 전송 여부는 개인정보 처리방침 URL 문서와 일치해야 합니다.
+- 현재 MVP는 localStorage 중심이며 서버 DB, 로그인, 실제 광고 SDK, 실제 결제 SDK는 아직 사용하지 않습니다.
+- 실제 SDK 연동 시 본 문서와 개인정보 처리방침을 함께 갱신해야 합니다.
+
 ## Android WebView localStorage 확인 항목
 
 - Android WebView에서도 브라우저 localStorage 기반 저장 항목이 동일하게 관리되는지 확인합니다.

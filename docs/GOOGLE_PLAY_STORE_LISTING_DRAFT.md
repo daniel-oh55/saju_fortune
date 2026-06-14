@@ -4,6 +4,13 @@
 
 이번 PR은 스토어 등록 문구 준비가 목적이며, production 로직, Android native code, release build, signing, 실제 광고 SDK는 변경하지 않습니다.
 
+## 개인정보 처리방침 URL 준비
+
+- Google Play 제출 전 개인정보 처리방침 URL 준비 문서를 추가합니다.
+- 문서 경로는 `docs/PRIVACY_POLICY_URL_READINESS.md`입니다.
+- 실제 제출 전 외부에서 접근 가능한 HTTPS URL이 필요합니다.
+- 실제 광고 SDK, 결제 SDK, 로그인, 서버 DB 기능이 추가되면 개인정보 처리방침과 데이터 보안 양식을 갱신해야 합니다.
+
 ## 1. 목적
 
 - Google Play 등록에 필요한 앱 설명과 고지 문구를 사전에 준비합니다.

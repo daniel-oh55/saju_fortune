@@ -1,5 +1,11 @@
 # COOKIE_AD_CONSENT_UX
 
+## 개인정보 처리방침 URL 연계
+
+- 광고/분석/개인화 동의 UX는 개인정보 처리방침 URL과 함께 안내되어야 합니다.
+- 현재 실제 광고 SDK는 미연동 상태입니다.
+- 실제 광고 SDK 연결 전 개인정보 처리방침과 동의 UX를 함께 갱신해야 합니다.
+
 ## placement와 consent의 관계
 
 - placement ID는 광고 위치 식별자이고 ads consent는 실제 SDK 호출 허용 조건입니다.
