@@ -1,5 +1,65 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-15 Android QA Status Summary
+
+### 작업 목적
+- Android 실제 QA Blocked 현황 통합 관리 문서 추가
+- icon/splash, WebView localStorage, back button QA 상태와 공통 차단 원인을 한곳에서 확인하도록 정리
+
+### 작업 내용
+- `docs/ANDROID_QA_STATUS_SUMMARY.md` 신규 추가
+- `scripts/checkAndroidQaStatusSummary.mjs` 신규 추가
+- 신규 npm script: `check:android-qa-status-summary`
+- Android Debug Build run #13 success 기준 기록
+- `harupuli-debug-apk` artifact 기준 기록
+- icon/splash QA 상태: Blocked
+- WebView localStorage QA 상태: Blocked
+- back button QA 상태: Blocked
+- 공통 Blocked 원인: adb 및 실제 기기/에뮬레이터 환경 부족
+- QA 환경 준비 문서 연결
+- device QA runbook 연결
+- 실제 QA 완료 표시 없음
+
+### 변경하지 않은 항목
+- Android 리소스 변경 없음
+- production 코드 변경 없음
+- production 계산 로직 변경 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+- Android back button handler 구현 없음
+- `@capacitor/app` 추가 없음
+- release build 미진행
+- signing 미진행
+- `@capacitor/ios` 설치 없음
+- iOS 프로젝트 생성 없음
+- service worker 구현 없음
+- 실제 광고 SDK 추가 없음
+
+### 테스트 결과
+- `npm install`: `npm.cmd install` 성공, npm audit high severity 3건 보고
+- `npm run build`: 성공, Vite chunk size warning 보고
+- `npm run check:android-qa-status-summary`: 성공
+- `npm run check:android-back-button-qa-result`: 성공
+- `npm run check:android-back-button-qa`: 성공
+- `npm run check:android-qa-env-setup`: 성공
+- `npm run check:android-device-qa-runbook`: 성공
+- `npm run check:android-icon-splash-qa-result`: 성공
+- `npm run check:android-icon-splash-qa`: 성공
+- `npm run check:android-webview-localstorage-qa-result`: 성공
+- `npm run check:android-webview-localstorage-qa`: 성공
+- `npm run check:android-resource-build-verification`: 성공
+- `npm run check:android-resources`: 성공
+- `npm run check:android-debug-build-workflow`: 성공
+- `npm run check:android-platform-scaffold`: 성공
+- `npm run check:capacitor-base-config`: 성공
+- `npm run check:capacitor-readiness`: 성공
+- `npm run check:android-packaging-readiness`: 성공
+- `npm run check:content-safety`: 성공
+- `npm run check:share-text`: 성공
+- `git diff -- src`: 변경 없음
+- `git diff -- android/app/src/main/res android/app/src/main/AndroidManifest.xml android/app/src/main/java android/app/src/main/kotlin`: 변경 없음
+- `Test-Path ios`: False
+
 ## 2026-06-15 Android Back Button QA Result
 
 ### 작업 목적

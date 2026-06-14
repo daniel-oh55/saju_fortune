@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 2026-06-15 Android QA Status Summary
+
+### Added
+- Android QA status summary 문서 추가
+- Android QA status summary 검증 스크립트 추가
+
+### Changed
+- icon/splash QA result, WebView localStorage QA result, back button QA result, QA environment setup, device QA runbook, packaging readiness, Capacitor readiness 문서에 QA status summary 문서 경로 반영
+
 ## 2026-06-15 Android Back Button QA Result
 
 ### Added

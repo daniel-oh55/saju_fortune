@@ -1,5 +1,10 @@
 # ANDROID_DEVICE_QA_RUNBOOK
 
+## Android QA 상태 요약 문서 연결
+
+- Android 실제 QA 상태 요약은 `docs/ANDROID_QA_STATUS_SUMMARY.md`를 참고합니다.
+- QA 재시도 전 summary 문서에서 현재 Blocked 항목을 확인합니다.
+
 ## 2026-06-15 Android back button QA 결과 문서
 
 - Android back button 실제 QA 결과는 `docs/ANDROID_BACK_BUTTON_QA_RESULT.md`에 기록합니다.

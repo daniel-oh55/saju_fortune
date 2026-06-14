@@ -1,5 +1,11 @@
 # CAPACITOR_READINESS
 
+## Android QA 상태 요약
+
+- Capacitor Android 실제 QA 상태를 `docs/ANDROID_QA_STATUS_SUMMARY.md`에서 관리합니다.
+- 실제 기기 또는 에뮬레이터 준비 후 icon/splash, localStorage, back button QA를 재시도합니다.
+- production 코드 변경은 없습니다.
+
 ## 2026-06-15 Android back button QA 결과 연결
 
 - Android back button 실제 QA 결과 문서는 `docs/ANDROID_BACK_BUTTON_QA_RESULT.md`입니다.
