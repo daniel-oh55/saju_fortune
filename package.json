@@ -18,6 +18,7 @@
     "check:android-icon-splash-qa": "node scripts/checkAndroidIconSplashQaReadiness.mjs",
     "check:android-icon-splash-qa-result": "node scripts/checkAndroidIconSplashQaResult.mjs",
     "check:android-java-env": "node scripts/checkAndroidJavaEnvironment.mjs",
+    "check:android-qa-env-setup": "node scripts/checkAndroidQaEnvironmentSetupReadiness.mjs",
     "check:android-webview-localstorage-qa": "node scripts/checkAndroidWebViewLocalStorageQaReadiness.mjs",
     "check:android-webview-localstorage-qa-result": "node scripts/checkAndroidWebViewLocalStorageQaResult.mjs",
     "check:android-platform-scaffold": "node scripts/checkAndroidPlatformScaffold.mjs",

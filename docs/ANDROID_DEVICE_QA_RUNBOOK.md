@@ -1,5 +1,10 @@
 # ANDROID_DEVICE_QA_RUNBOOK
 
+## Android QA 환경 준비 문서
+
+- 실제 기기 또는 에뮬레이터 QA 환경 준비 절차는 `docs/ANDROID_QA_ENVIRONMENT_SETUP.md`를 참고합니다.
+- adb 설치, `adb devices` 확인, APK 설치, 앱 데이터 삭제, logcat 확인 절차를 해당 문서에서 관리합니다.
+
 ## 2026-06-14 Android icon/splash QA 결과 연결
 
 - Android icon/splash 표시 QA 결과는 `docs/ANDROID_ICON_SPLASH_QA_RESULT.md`에 기록합니다.
