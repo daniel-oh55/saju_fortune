@@ -6,10 +6,10 @@
 ## 1. QA 대상 빌드
 
 - GitHub Actions workflow: Android Debug Build
-- workflow run 번호: 확인 필요
+- workflow run 번호: 미기록, 현재 Codex 세션에서 GitHub Actions run 번호 조회 및 artifact 다운로드를 수행하지 못했습니다.
 - artifact 이름: `harupuli-debug-apk`
 - artifact 경로: `android/app/build/outputs/apk/debug/app-debug.apk`
-- APK 설치 방식: Blocked, 현재 Codex 실행 환경에서 Android 기기 또는 에뮬레이터 접근 불가
+- APK 설치 방식: Blocked, 현재 Codex 실행 환경에서 `adb` 명령을 찾을 수 없고 Android 기기 또는 에뮬레이터 접근도 불가
 - 테스트 기기 또는 에뮬레이터: Blocked, 준비 필요
 - Android 버전: Blocked, 확인 필요
 - 테스트 일자: 2026-06-14
@@ -17,9 +17,9 @@
 - release build 미진행
 - signing 미진행
 - QA 상태: Blocked
-- 사유: 현재 작업 환경에는 Android 기기, Android Emulator, APK 설치 및 실행 환경이 연결되어 있지 않아 실제 WebView localStorage 동작을 확인할 수 없습니다.
-- 필요한 준비: `harupuli-debug-apk` artifact 다운로드, Android 기기 또는 에뮬레이터 준비, APK 설치 권한 확인
-- 다음 재시도 조건: 실제 기기 또는 에뮬레이터에서 `app-debug.apk` 설치 후 앱 실행 가능 상태 확보
+- 사유: 현재 작업 환경에는 `adb`가 설치되어 있지 않고 Android 기기, Android Emulator, APK 설치 및 실행 환경이 연결되어 있지 않아 실제 WebView localStorage 동작을 확인할 수 없습니다.
+- 필요한 준비: Android Platform Tools 설치, `adb version` 실행 가능 상태 확보, `harupuli-debug-apk` artifact 다운로드, Android 기기 또는 에뮬레이터 준비, APK 설치 권한 확인
+- 다음 재시도 조건: `adb devices`에서 실제 기기 또는 에뮬레이터가 표시되고, `app-debug.apk` 설치 후 앱 실행 가능 상태 확보
 
 ## 2. 확인 대상 localStorage key
 
