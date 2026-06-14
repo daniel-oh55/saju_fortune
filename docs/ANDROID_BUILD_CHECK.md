@@ -1,5 +1,18 @@
 # ANDROID_BUILD_CHECK
 
+## 2026-06-14 GitHub Actions Android debug build workflow 수정
+
+- PR #73에서 Android Debug Build workflow를 추가했지만, CI의 `Build Android debug APK` 단계에서 실패했습니다.
+- Set up JDK, npm build, `npx cap sync android` 단계는 성공했습니다.
+- 이번 단계에서는 Linux runner에서 Gradle wrapper 실행 권한 문제를 방지하기 위해 `chmod +x android/gradlew` 단계를 추가했습니다.
+- Java 환경 확인을 위해 `java -version`, `javac -version`, `JAVA_HOME` 출력 단계를 추가했습니다.
+- Gradle wrapper 확인을 위해 `./gradlew --version` 단계를 추가했습니다.
+- Android build 명령은 `./gradlew assembleDebug --stacktrace`로 보강했습니다.
+- debug APK artifact 경로는 기존과 동일하게 유지합니다.
+  - `android/app/build/outputs/apk/debug/app-debug.apk`
+- release build와 signing은 아직 진행하지 않습니다.
+- 실제 기기 QA와 Android 리소스 적용은 아직 진행하지 않습니다.
+
 ## 2026-06-13 GitHub Actions Android debug build
 
 - 로컬 Windows 환경에서는 JDK/JAVA_HOME 미설정으로 Android debug APK를 생성하지 못했습니다.

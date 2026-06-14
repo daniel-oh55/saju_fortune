@@ -64,9 +64,34 @@ const capacitorSyncExists = normalizedWorkflow.includes('npx cap sync android');
 logResult('capacitor_sync_android_exists', capacitorSyncExists);
 assertCondition(capacitorSyncExists, 'workflow should run npx cap sync android');
 
+const workflowVerifiesJavaEnvironment =
+  workflow.includes('java -version') &&
+  workflow.includes('javac -version') &&
+  workflow.includes('JAVA_HOME');
+logResult('workflow_verifies_java_environment', workflowVerifiesJavaEnvironment);
+assertCondition(
+  workflowVerifiesJavaEnvironment,
+  'workflow should print java -version, javac -version, and JAVA_HOME',
+);
+
+const workflowChmodsGradlew = workflow.includes('chmod +x android/gradlew');
+logResult('workflow_chmods_gradlew', workflowChmodsGradlew);
+assertCondition(workflowChmodsGradlew, 'workflow should chmod +x android/gradlew');
+
+const workflowVerifiesGradleWrapper = workflow.includes('./gradlew --version');
+logResult('workflow_verifies_gradle_wrapper', workflowVerifiesGradleWrapper);
+assertCondition(workflowVerifiesGradleWrapper, 'workflow should verify the Gradle wrapper version');
+
 const assembleDebugExists = normalizedWorkflow.includes('assembledebug');
 logResult('assemble_debug_exists', assembleDebugExists);
 assertCondition(assembleDebugExists, 'workflow should run assembleDebug');
+
+const workflowRunsAssembleDebugWithStacktrace = workflow.includes('assembleDebug --stacktrace');
+logResult('workflow_runs_assemble_debug_with_stacktrace', workflowRunsAssembleDebugWithStacktrace);
+assertCondition(
+  workflowRunsAssembleDebugWithStacktrace,
+  'workflow should run assembleDebug with --stacktrace',
+);
 
 const uploadArtifactExists =
   normalizedWorkflow.includes('actions/upload-artifact') &&

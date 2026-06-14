@@ -1,5 +1,11 @@
 # CAPACITOR_READINESS
 
+## Android debug build workflow 보완
+
+- Capacitor Android debug build CI에서 Gradle wrapper 실행 권한과 Java 환경을 확인하도록 workflow를 보완했습니다.
+- CI build 결과는 GitHub Actions에서 확인합니다.
+- release build, signing, 실제 기기 QA는 아직 진행하지 않았습니다.
+
 ## Android debug build CI 연결
 
 - Capacitor Android scaffold 이후 GitHub Actions에서 Android debug APK를 빌드하는 workflow를 추가했습니다.

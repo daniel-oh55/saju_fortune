@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2026-06-14 Android Debug Build Workflow Fix
+
+### Changed
+- GitHub Actions Android debug build workflow에 Java 환경 확인, Gradle wrapper 실행 권한 설정, Gradle wrapper 버전 확인 단계를 추가
+- Android debug build 명령을 `assembleDebug --stacktrace`로 보강
+- Android build 확인 문서와 Capacitor readiness 문서에 workflow 수정 상태 반영
+
 ## 2026-06-13 Android Debug Build CI
 
 ### Added
