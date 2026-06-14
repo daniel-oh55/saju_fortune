@@ -1,5 +1,22 @@
 # TODO
 
+## 2026-06-14 Android WebView localStorage QA rerun TODO
+
+- [ ] Android WebView localStorage 실제 QA 수행
+- [ ] 실제 기기 또는 에뮬레이터 준비 후 QA 재시도
+- [ ] JDK 설치 및 JAVA_HOME 설정 후 로컬 debug build 재시도
+- [ ] Android back button QA
+- [ ] Android 리소스 적용
+- [ ] 앱스토어 등록 정보 초안
+- [ ] 개인정보 처리방침 URL 준비
+- [ ] 실제 provider placement ID 적용
+- [ ] 실제 광고 SDK 연동
+- [ ] 공유 이미지 생성 기능 검토
+- [ ] 새 버전 내부 만세력 기준 확인 및 기본값 재검토
+- [ ] 23시 이후 선택 옵션 문구의 사용자 이해도 확인
+- [ ] 태양시 보정 적용 여부 별도 검토
+- [ ] 음력/윤달 샘플 외부 검증
+
 ## 2026-06-14 Android device QA runbook TODO
 
 - [x] Android device/emulator QA runbook 작성

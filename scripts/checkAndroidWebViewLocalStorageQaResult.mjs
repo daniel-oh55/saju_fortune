@@ -52,6 +52,58 @@ const qaResultDocMentionsResultStatus = /Pass|Fail|Blocked|Partial Pass/.test(qa
 logResult('qa_result_doc_mentions_result_status', qaResultDocMentionsResultStatus);
 assertCondition(qaResultDocMentionsResultStatus, 'QA result doc should mention Pass, Fail, Blocked, or Partial Pass');
 
+const qaResultDocDoesNotLeaveWorkflowRunPending = !qaResultDoc.includes('workflow run 번호: 확인 필요');
+logResult('qa_result_doc_does_not_leave_workflow_run_pending', qaResultDocDoesNotLeaveWorkflowRunPending);
+assertCondition(
+  qaResultDocDoesNotLeaveWorkflowRunPending,
+  'QA result doc should not leave workflow run number as 확인 필요',
+);
+
+const qaStatus = qaResultDoc.includes('QA 상태: Partial Pass')
+  ? 'Partial Pass'
+  : qaResultDoc.includes('QA 상태: Pass')
+    ? 'Pass'
+    : qaResultDoc.includes('QA 상태: Fail')
+      ? 'Fail'
+      : qaResultDoc.includes('QA 상태: Blocked')
+        ? 'Blocked'
+        : '';
+const qaResultDocHasExplicitQaStatus = Boolean(qaStatus);
+logResult('qa_result_doc_has_explicit_qa_status', qaResultDocHasExplicitQaStatus);
+assertCondition(qaResultDocHasExplicitQaStatus, 'QA result doc should include explicit QA status');
+
+const hasUsableDeviceInfo =
+  !qaResultDoc.includes('테스트 기기 또는 에뮬레이터: Blocked') &&
+  !qaResultDoc.includes('테스트 기기 또는 에뮬레이터: 확인 필요');
+const hasUsableAndroidVersion =
+  !qaResultDoc.includes('Android 버전: Blocked') && !qaResultDoc.includes('Android 버전: 확인 필요');
+const passStatusHasDeviceDetails =
+  !['Pass', 'Partial Pass'].includes(qaStatus) || (hasUsableDeviceInfo && hasUsableAndroidVersion);
+logResult('pass_status_has_device_details', passStatusHasDeviceDetails);
+assertCondition(
+  passStatusHasDeviceDetails,
+  'Pass or Partial Pass QA should include actual device/emulator info and Android version',
+);
+
+const blockedStatusHasReasonAndRetry =
+  qaStatus !== 'Blocked' || (qaResultDoc.includes('사유:') && qaResultDoc.includes('다음 재시도 조건:'));
+logResult('blocked_status_has_reason_and_retry', blockedStatusHasReasonAndRetry);
+assertCondition(
+  blockedStatusHasReasonAndRetry,
+  'Blocked QA should include a reason and next retry condition',
+);
+
+const failStatusHasIssueDetails =
+  qaStatus !== 'Fail' ||
+  (qaResultDoc.includes('재현 단계') &&
+    qaResultDoc.includes('관련 localStorage key') &&
+    !qaResultDoc.includes('현재 기록된 앱 이슈 없음'));
+logResult('fail_status_has_issue_details', failStatusHasIssueDetails);
+assertCondition(
+  failStatusHasIssueDetails,
+  'Fail QA should include reproduction steps and related localStorage key',
+);
+
 const requiredKeys = [
   'aiTodayFortune.profile',
   'aiTodayFortune.todayFortune',

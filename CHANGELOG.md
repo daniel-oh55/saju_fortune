@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2026-06-14 Android WebView localStorage QA Rerun
+
+### Changed
+- Android WebView localStorage QA 재시도 결과 기록
+- QA 결과 검증 기준 보강
+- QA 상태에 따른 Pass / Partial Pass / Fail / Blocked 기록 기준 반영
+
 ## 2026-06-14 Android Device QA Runbook
 
 ### Added
