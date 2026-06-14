@@ -1,5 +1,12 @@
 # ANDROID_PACKAGING_READINESS
 
+## Android debug build workflow 수정 상태
+
+- GitHub Actions Android Debug Build 실패를 보완하기 위해 workflow를 수정했습니다.
+- Java/JDK 환경 출력, Gradle wrapper 실행 권한 설정, Gradle wrapper 버전 확인 단계를 추가했습니다.
+- build 명령은 `./gradlew assembleDebug --stacktrace`로 보강했습니다.
+- 자세한 내용은 `docs/ANDROID_BUILD_CHECK.md`를 참고합니다.
+
 ## Android debug build CI 확인 단계
 
 - 로컬 JDK/JAVA_HOME 미설정으로 debug APK가 생성되지 않아 GitHub Actions 기반 debug build 확인을 추가했습니다.
