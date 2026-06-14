@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 2026-06-14 Android WebView localStorage QA
+
+### Added
+- Android WebView localStorage QA 기준 문서 추가
+- Android WebView localStorage QA readiness 검증 스크립트 추가
+
+### Changed
+- Android build 확인 문서에 GitHub Actions debug APK artifact 생성 성공 상태 반영
+- Android packaging, Capacitor readiness, 앱 패키징 전략, privacy data map 문서에 Android WebView localStorage QA 기준 연결
+
 ## 2026-06-14 Android Debug Build Workflow Fix
 
 ### Changed

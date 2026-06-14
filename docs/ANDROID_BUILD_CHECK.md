@@ -1,5 +1,15 @@
 # ANDROID_BUILD_CHECK
 
+## Android debug build CI 성공 확인
+
+- GitHub Actions Android Debug Build workflow가 성공했습니다.
+- debug APK artifact가 생성되었습니다.
+- artifact 이름: `harupuli-debug-apk`
+- artifact 경로: `android/app/build/outputs/apk/debug/app-debug.apk`
+- 이 결과를 바탕으로 Android WebView localStorage QA 단계로 넘어갑니다.
+- release build와 signing은 아직 진행하지 않습니다.
+- 실제 기기 QA는 별도 PR에서 진행합니다.
+
 ## 2026-06-14 GitHub Actions Android debug build workflow 수정
 
 - PR #73에서 Android Debug Build workflow를 추가했지만, CI의 `Build Android debug APK` 단계에서 실패했습니다.

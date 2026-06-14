@@ -1,5 +1,12 @@
 # PRIVACY_DATA_MAP
 
+## Android WebView localStorage 확인 항목
+
+- Android WebView에서도 브라우저 localStorage 기반 저장 항목이 동일하게 관리되는지 확인합니다.
+- 저장 대상은 기존 privacy data map에 정의된 범위를 넘지 않습니다.
+- 저장 key 이름은 변경하지 않습니다.
+- 앱 데이터 삭제 시 localStorage가 초기화되는지 QA에서 확인합니다.
+
 ## Android WebView 저장소 확인
 
 - Android WebView 환경에서 localStorage 기반 저장 항목이 실제 기기에서 유지되는지 확인해야 합니다.

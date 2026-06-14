@@ -1,5 +1,46 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-14 Android WebView localStorage QA 기준 추가
+
+### 작업 내용
+- PR 목적: Android WebView localStorage QA 기준 추가
+- `docs/ANDROID_WEBVIEW_LOCALSTORAGE_QA.md` 신규 추가
+- `scripts/checkAndroidWebViewLocalStorageQaReadiness.mjs` 신규 추가
+- 신규 npm script: `check:android-webview-localstorage-qa`
+- GitHub Actions Android Debug Build 성공 확인 반영
+- debug APK artifact 생성 확인 반영
+- production localStorage key 변경 없음
+- production 코드 변경 없음
+- production 계산 로직 변경 없음
+- schemaVersion 변경 없음
+- Android 리소스 수동 적용 없음
+- release build 미진행
+- signing 미진행
+- 실제 기기 QA 미진행
+- `@capacitor/ios` 설치 없음
+- iOS 프로젝트 생성 없음
+- service worker 구현 없음
+- 실제 광고 SDK 추가 없음
+
+### 테스트 결과
+- `npm install`: 성공, npm audit high severity 3건 보고
+- `npm run build`: 성공, Vite chunk size warning 보고
+- `npm run check:android-webview-localstorage-qa`: 성공
+- `npm run check:android-debug-build-workflow`: 성공
+- `npm run check:android-debug-build-readiness`: 성공
+- `npm run check:android-platform-scaffold`: 성공
+- `npm run check:capacitor-base-config`: 성공
+- `npm run check:capacitor-readiness`: 성공
+- `npm run check:android-packaging-readiness`: 성공
+- `npm run check:android-adaptive-icon-readiness`: 성공
+- `npm run check:generated-android-adaptive-icons`: 성공
+- `npm run check:generated-app-icons`: 성공
+- `npm run check:generated-splash-pngs`: 성공
+- `npm run check:app-assets`: 성공
+- `npm run check:pwa-readiness`: 성공
+- `npm run check:content-safety`: 성공
+- `npm run check:share-text`: 성공
+
 ## 2026-06-14 GitHub Actions Android Debug Build 실패 보완
 
 ### 작업 내용

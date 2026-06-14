@@ -1,5 +1,10 @@
 # APP_PACKAGING_STRATEGY
 
+## Android WebView QA 준비 단계
+
+- Android debug build CI가 성공했으므로 WebView localStorage QA 기준을 추가했습니다.
+- 이후 실제 기기 또는 에뮬레이터에서 localStorage 유지, 앱 재실행, 앱 데이터 삭제, 업데이트 시나리오를 확인합니다.
+
 ## Android debug build CI 전략
 
 - Android 앱 패키징 검증은 우선 debug APK를 GitHub Actions artifact로 생성하는 흐름으로 진행합니다.

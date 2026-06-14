@@ -1,5 +1,24 @@
 # TODO
 
+## 2026-06-14 Android WebView localStorage QA TODO
+
+- [x] GitHub Actions Android debug build 결과 확인
+- [x] Android debug APK artifact 생성 확인
+- [x] Android WebView localStorage QA 기준 작성
+- [ ] Android WebView localStorage 실제 QA 수행
+- [ ] JDK 설치 및 JAVA_HOME 설정 후 로컬 debug build 재시도
+- [ ] Android back button QA
+- [ ] Android 리소스 적용
+- [ ] 앱스토어 등록 정보 초안
+- [ ] 개인정보 처리방침 URL 준비
+- [ ] 실제 provider placement ID 적용
+- [ ] 실제 광고 SDK 연동
+- [ ] 공유 이미지 생성 기능 검토
+- [ ] 새 버전 내부 만세력 기준 확인 및 기본값 재검토
+- [ ] 23시 이후 선택 옵션 문구의 사용자 이해도 확인
+- [ ] 태양시 보정 적용 여부 별도 검토
+- [ ] 음력/윤달 샘플 외부 검증
+
 ## 2026-06-14 Android debug build workflow fix TODO
 
 - [x] GitHub Actions Android debug build workflow 실행 권한 보완
