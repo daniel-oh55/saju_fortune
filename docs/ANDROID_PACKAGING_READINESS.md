@@ -1,5 +1,12 @@
 # ANDROID_PACKAGING_READINESS
 
+## 2026-06-14 Android resource 적용 후 build 확인
+
+- Android 리소스 적용 후 debug build 성공을 확인했습니다.
+- debug APK artifact 생성도 확인했습니다.
+- 실제 기기 icon/splash 표시 QA는 별도 단계로 남아 있습니다.
+- release build/signing은 아직 미진행입니다.
+
 ## 2026-06-14 Android 리소스 적용 상태
 
 - Android 앱 아이콘, 라운드 아이콘, adaptive icon, splash 후보 PNG가 Android `res` 경로에 반영되었습니다.

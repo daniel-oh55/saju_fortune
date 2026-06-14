@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 2026-06-14 Android Resource Build Verification
+
+### Added
+- Android resource build verification 문서 추가
+- Android resource build verification 검증 스크립트 추가
+
+### Changed
+- Android resource assets, Android build check, packaging readiness, Capacitor readiness, app asset readiness 문서에 resource 적용 후 debug build 성공 상태 반영
+
 ## 2026-06-14 Android Resource Assets
 
 ### Added

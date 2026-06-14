@@ -1,5 +1,11 @@
 # APP_ASSET_READINESS
 
+## 2026-06-14 Android resource build verification
+
+- Android `res` 리소스 적용 후 debug build가 성공했습니다.
+- debug APK artifact가 생성되었습니다.
+- 실제 launcher icon, round icon, adaptive icon, splash 표시 확인은 후속 device QA가 필요합니다.
+
 ## 2026-06-14 Android 리소스 적용 상태
 
 - Android 앱 아이콘, 라운드 아이콘, adaptive icon, splash 후보 PNG를 Android 프로젝트 `res` 경로에 반영했습니다.
