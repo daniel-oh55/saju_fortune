@@ -1,5 +1,11 @@
 # ANDROID_WEBVIEW_LOCALSTORAGE_QA_RESULT
 
+## QA 환경 준비 연결
+
+- 현재 localStorage QA 결과는 Blocked입니다.
+- Blocked 해소를 위해 `docs/ANDROID_QA_ENVIRONMENT_SETUP.md`를 참고합니다.
+- adb, 실제 기기 또는 에뮬레이터 준비 후 QA를 재시도합니다.
+
 이 문서는 하루풀이 Android debug APK를 실제 기기 또는 에뮬레이터에서 실행하여 WebView localStorage 유지 동작을 확인한 결과를 기록하는 문서입니다.
 이번 PR은 QA 결과 기록이 목적이며, production 앱 로직과 localStorage key는 변경하지 않습니다.
 

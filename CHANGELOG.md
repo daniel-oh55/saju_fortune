@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 2026-06-14 Android QA Environment Setup
+
+### Added
+- Android QA environment setup 문서 추가
+- Android QA environment setup readiness 검증 스크립트 추가
+
+### Changed
+- Android device QA runbook, icon/splash QA result, localStorage QA result, back button QA, packaging readiness, Capacitor readiness 문서에 QA 환경 준비 문서 경로 반영
+
 ## 2026-06-14 Android Icon Splash QA Result
 
 ### Added

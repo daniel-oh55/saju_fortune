@@ -1,5 +1,11 @@
 # CAPACITOR_READINESS
 
+## Android QA 환경 준비
+
+- Capacitor Android 앱을 실제 기기 또는 에뮬레이터에서 확인하기 위한 QA 환경 준비 문서를 추가했습니다.
+- adb, emulator, APK 설치, logcat 확인 절차를 문서화했습니다.
+- production 코드 변경은 없습니다.
+
 ## Android icon/splash QA 결과 연결
 
 - Capacitor Android 앱의 icon/splash 표시 QA 결과를 별도 문서로 기록합니다.

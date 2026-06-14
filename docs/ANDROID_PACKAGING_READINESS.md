@@ -1,5 +1,11 @@
 # ANDROID_PACKAGING_READINESS
 
+## Android QA 환경 준비
+
+- icon/splash, localStorage, back button QA가 실제 환경 부재로 Blocked 또는 Pending 상태입니다.
+- Android QA 환경 준비 문서를 추가했습니다.
+- 문서 경로는 `docs/ANDROID_QA_ENVIRONMENT_SETUP.md`입니다.
+
 ## Android icon/splash QA 결과 기록
 
 - Android icon/splash 표시 QA 결과 문서를 추가했습니다.
