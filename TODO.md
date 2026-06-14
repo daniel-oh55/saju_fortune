@@ -1,5 +1,22 @@
 # TODO
 
+## 2026-06-15 Google Play Store listing draft TODO
+
+- [x] 스토어 등록 정보 초안 작성
+- [x] Google Play Store listing draft 검증 스크립트 추가
+- [ ] 개인정보 처리방침 URL 준비
+- [ ] Google Play Data safety 초안 작성
+- [ ] Google Play 스크린샷 후보 촬영 및 선별
+- [ ] Android 실제 기기 또는 에뮬레이터 QA 완료
+- [ ] icon/splash 실제 표시 QA 완료
+- [ ] WebView localStorage QA 완료
+- [ ] Android back button QA 완료
+- [ ] release build/signing/AAB 생성 준비
+- [ ] 실제 광고 SDK 연동 여부 결정
+- [ ] 실제 광고 SDK 연동 시 Contains ads 및 동의 UX 재검토
+- [ ] 공유용 이미지 생성 기능 검토
+- [ ] 스토어 제출 전 최종 문구와 정책 고지 재검토
+
 ## 2026-06-15 Android QA status summary TODO
 
 - [x] Android QA Blocked 현황 통합 문서 작성

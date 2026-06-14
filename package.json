@@ -10,6 +10,7 @@
     "generate:app-icons": "node scripts/generateAppIconPngs.mjs",
     "generate:splash-pngs": "node scripts/generateSplashPngs.mjs",
     "build": "vite build",
+    "check:google-play-store-listing": "node scripts/checkGooglePlayStoreListingDraft.mjs",
     "check:android-back-button-qa": "node scripts/checkAndroidBackButtonQaReadiness.mjs",
     "check:android-back-button-qa-result": "node scripts/checkAndroidBackButtonQaResult.mjs",
     "check:android-debug-build-workflow": "node scripts/checkAndroidDebugBuildWorkflow.mjs",

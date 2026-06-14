@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## 2026-06-15 Google Play Store Listing Draft
+
+### Added
+- Google Play Store 등록 정보 초안 문서 추가
+- Google Play Store 등록 정보 초안 검증 스크립트 추가
+- `check:google-play-store-listing` npm script 추가
+
+### Changed
+- Android QA, Android packaging, Capacitor readiness 문서에 Google Play 등록 정보 초안 경로 반영
+- TODO에 스토어 제출 전 준비 항목 추가
+
 ## 2026-06-15 Android QA Status Summary
 
 ### Added
