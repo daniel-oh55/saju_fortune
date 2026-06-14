@@ -1,5 +1,16 @@
 # TODO
 
+## 2026-06-15 Android back button QA result TODO
+
+- [x] Android back button 실제 QA 결과 문서 추가
+- [x] Android back button QA result 검증 스크립트 추가
+- [ ] adb PATH 설정 후 `adb version` 확인
+- [ ] 실제 Android 기기 또는 에뮬레이터 준비 후 `adb devices` 확인
+- [ ] `harupuli-debug-apk` artifact 다운로드 후 `app-debug.apk` 설치
+- [ ] Android back button 실제 QA 재시도
+- [ ] 실제 QA 결과에 따라 Pass, Partial Pass, Fail, Blocked 중 하나로 결과 문서 갱신
+- [ ] 필요 시 별도 PR에서 back button handler 구현 여부 검토
+
 ## 2026-06-14 Android QA environment setup TODO
 
 - [x] Android QA 환경 준비 문서 작성
