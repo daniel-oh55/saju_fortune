@@ -1,5 +1,10 @@
 # ANDROID_WEBVIEW_LOCALSTORAGE_QA_RESULT
 
+## QA 상태 요약 연결
+
+- 현재 WebView localStorage QA 상태는 `docs/ANDROID_QA_STATUS_SUMMARY.md`에서도 관리합니다.
+- Blocked 해소 후 실제 QA 결과를 본 문서와 summary 문서에 함께 반영합니다.
+
 ## QA 환경 준비 연결
 
 - 현재 localStorage QA 결과는 Blocked입니다.

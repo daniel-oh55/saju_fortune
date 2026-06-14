@@ -1,5 +1,10 @@
 # ANDROID_BACK_BUTTON_QA_RESULT
 
+## QA 상태 요약 연결
+
+- 현재 Android back button QA 상태는 `docs/ANDROID_QA_STATUS_SUMMARY.md`에서도 관리합니다.
+- Blocked 해소 후 실제 QA 결과를 본 문서와 summary 문서에 함께 반영합니다.
+
 이 문서는 Android debug APK를 실제 Android 기기 또는 에뮬레이터에 설치한 뒤, Android 시스템 back button 동작을 확인한 결과를 기록하기 위한 문서입니다.
 
 이번 PR은 QA 결과 기록과 검증 스크립트 추가가 목적이며, back button handler 변경 없음, `@capacitor/app` 추가 없음, production logic unchanged 상태를 유지합니다.

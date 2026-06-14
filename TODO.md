@@ -1,5 +1,23 @@
 # TODO
 
+## 2026-06-15 Android QA status summary TODO
+
+- [x] Android QA Blocked 현황 통합 문서 작성
+- [x] Android QA status summary 검증 스크립트 추가
+- [ ] Android 실제 기기 또는 에뮬레이터 준비 후 QA 재시도
+- [ ] Android 실제 기기 또는 에뮬레이터에서 launcher icon 표시 확인
+- [ ] Android 실제 기기 또는 에뮬레이터에서 round icon 표시 확인
+- [ ] Android 12 이상 adaptive icon 표시 확인
+- [ ] Android 12 이상 splash 표시 확인
+- [ ] Android back button 실제 QA 수행
+- [ ] Android WebView localStorage 실제 QA 수행
+- [ ] JDK 설치 및 JAVA_HOME 설정 후 로컬 debug build 재시도
+- [ ] 스토어 등록 정보 초안
+- [ ] 개인정보 처리방침 URL 준비
+- [ ] 실제 provider placement ID 적용
+- [ ] 실제 광고 SDK 연동
+- [ ] 공유 이미지 생성 기능 검토
+
 ## 2026-06-15 Android back button QA result TODO
 
 - [x] Android back button 실제 QA 결과 문서 추가

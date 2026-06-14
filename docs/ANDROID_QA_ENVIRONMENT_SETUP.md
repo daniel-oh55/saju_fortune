@@ -1,5 +1,11 @@
 # ANDROID_QA_ENVIRONMENT_SETUP
 
+## Android QA 상태 요약 문서
+
+- Android 실제 QA의 통합 상태는 `docs/ANDROID_QA_STATUS_SUMMARY.md`에서 관리합니다.
+- 현재 icon/splash, localStorage, back button QA가 실제 환경 부족으로 Blocked 상태입니다.
+- 본 문서는 Blocked 해소를 위한 환경 준비 절차를 제공합니다.
+
 ## 2026-06-15 Android back button QA 결과 연결
 
 - Android back button 실제 QA 결과 문서는 `docs/ANDROID_BACK_BUTTON_QA_RESULT.md`입니다.
