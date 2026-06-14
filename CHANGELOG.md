@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 2026-06-15 Privacy Policy URL Readiness
+
+### Added
+- Privacy policy URL readiness 문서 추가
+- Privacy policy URL readiness 검증 스크립트 추가
+- `check:privacy-policy-url-readiness` npm script 추가
+
+### Changed
+- Google Play store listing draft, privacy policy draft, privacy data map, cookie/ad consent UX, Android packaging readiness, Capacitor readiness 문서에 개인정보 처리방침 URL 준비 문서 경로 반영
+
 ## 2026-06-15 Google Play Store Listing Draft
 
 ### Added

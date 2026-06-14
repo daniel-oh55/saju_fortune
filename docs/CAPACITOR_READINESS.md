@@ -1,5 +1,11 @@
 # CAPACITOR_READINESS
 
+## 개인정보 처리방침 URL 준비
+
+- Capacitor Android 앱 제출 전 개인정보 처리방침 URL 준비 문서를 추가했습니다.
+- 앱 내부 PrivacyInfoPage와 외부 개인정보 처리방침 URL 내용 일치가 필요합니다.
+- production 코드 변경은 없습니다.
+
 ## Google Play 등록 정보 연결
 
 - Google Play Store 등록 정보 초안 문서: `docs/GOOGLE_PLAY_STORE_LISTING_DRAFT.md`

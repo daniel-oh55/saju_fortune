@@ -1,5 +1,11 @@
 # ANDROID_PACKAGING_READINESS
 
+## 개인정보 처리방침 URL 준비
+
+- Google Play 제출 전 개인정보 처리방침 URL 준비 문서를 추가했습니다.
+- 문서 경로는 `docs/PRIVACY_POLICY_URL_READINESS.md`입니다.
+- 실제 URL 배포와 Google Play Console 입력은 아직 진행하지 않습니다.
+
 ## Google Play store listing 준비
 
 - Google Play Store 등록 정보 초안 문서: `docs/GOOGLE_PLAY_STORE_LISTING_DRAFT.md`

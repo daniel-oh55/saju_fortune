@@ -1,5 +1,11 @@
 # PRIVACY_POLICY_DRAFT
 
+## URL 공개 준비 상태
+
+- 개인정보 처리방침 URL 준비 문서는 `docs/PRIVACY_POLICY_URL_READINESS.md`입니다.
+- 현재 문서는 초안이며, 실제 외부 공개 URL은 아직 확정되지 않았습니다.
+- Google Play 제출 전 공개 URL과 앱 내부 PrivacyInfoPage 내용 일치 여부를 확인해야 합니다.
+
 ## Android 앱 배포 전 확인 메모
 
 - Android 앱 배포 전 개인정보 처리방침 URL이 필요합니다.
