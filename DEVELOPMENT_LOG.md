@@ -1,5 +1,51 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-14 Android 리소스 적용 후 debug build 성공 결과 문서화
+
+### 작업 내용
+- PR 목적: Android 리소스 적용 후 debug build 성공 결과 문서화
+- `docs/ANDROID_RESOURCE_BUILD_VERIFICATION.md` 신규 추가
+- `scripts/checkAndroidResourceBuildVerification.mjs` 신규 추가
+- 신규 npm script: `check:android-resource-build-verification`
+- PR #80 Android Debug Build run number 8 success 확인
+- workflow run id 27488348184 기록
+- `harupuli-debug-apk` artifact 생성 확인
+- debug APK path `android/app/build/outputs/apk/debug/app-debug.apk` 기록
+- Android resource files 변경 없음
+- launcher icon 존재 확인
+- round icon 존재 확인
+- adaptive icon foreground/background 존재 확인
+- adaptive icon XML drawable 참조 확인
+- splash 후보 PNG 존재 확인
+- 실제 device/emulator icon/splash 표시 QA 미진행
+- release build 미진행
+- signing 미진행
+- `@capacitor/ios` 설치 없음
+- iOS 프로젝트 생성 없음
+- service worker 구현 없음
+- 실제 광고 SDK 추가 없음
+- production 코드 변경 없음
+- production 계산 로직 변경 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+
+### 테스트 결과
+- `npm install`: 성공, npm audit high severity 3건 보고
+- `npm run build`: 성공, Vite chunk size warning 보고
+- `npm run check:android-resource-build-verification`: 성공
+- `npm run check:android-resources`: 성공
+- `npm run check:android-back-button-qa`: 성공
+- `npm run check:android-device-qa-runbook`: 성공
+- `npm run check:android-webview-localstorage-qa-result`: 성공
+- `npm run check:android-webview-localstorage-qa`: 성공
+- `npm run check:android-debug-build-workflow`: 성공
+- `npm run check:android-platform-scaffold`: 성공
+- `npm run check:capacitor-base-config`: 성공
+- `npm run check:capacitor-readiness`: 성공
+- `npm run check:android-packaging-readiness`: 성공
+- `npm run check:content-safety`: 성공
+- `npm run check:share-text`: 성공
+
 ## 2026-06-14 Android app icon/splash/adaptive icon 리소스 적용
 
 ### 작업 내용

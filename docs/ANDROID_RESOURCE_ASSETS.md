@@ -1,5 +1,12 @@
 # ANDROID_RESOURCE_ASSETS
 
+## 2026-06-14 Android 리소스 적용 후 build verification
+
+- Android 리소스 적용 후 GitHub Actions Android Debug Build가 성공했습니다.
+- 결과 문서는 `docs/ANDROID_RESOURCE_BUILD_VERIFICATION.md`입니다.
+- debug APK artifact `harupuli-debug-apk`가 생성되었습니다.
+- 실제 Android 기기에서 icon/splash 표시 확인은 아직 후속 QA가 필요합니다.
+
 ## 목적
 
 하루풀이 Android 앱에서 사용할 앱 아이콘, 라운드 아이콘, adaptive icon, splash 후보 PNG를 Capacitor Android 프로젝트의 `res` 경로에 적용한 내용을 기록합니다.

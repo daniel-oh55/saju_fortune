@@ -1,5 +1,12 @@
 # ANDROID_BUILD_CHECK
 
+## 2026-06-14 Android 리소스 적용 후 debug build 확인
+
+- PR #80에서 Android icon/splash/adaptive icon 리소스를 적용한 후 Android Debug Build workflow가 성공했습니다.
+- debug APK artifact가 생성되었습니다.
+- 자세한 결과는 `docs/ANDROID_RESOURCE_BUILD_VERIFICATION.md`를 참고합니다.
+- release build와 signing은 아직 진행하지 않았습니다.
+
 ## Android WebView localStorage QA 결과 연계
 
 - debug APK artifact를 기준으로 Android WebView localStorage QA 결과를 기록합니다.

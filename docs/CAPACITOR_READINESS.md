@@ -1,5 +1,11 @@
 # CAPACITOR_READINESS
 
+## 2026-06-14 Android resource build verification
+
+- Capacitor Android 프로젝트에서 icon/splash/adaptive icon 적용 후 debug build가 성공했습니다.
+- 실제 표시 확인은 Android device/emulator QA에서 진행합니다.
+- iOS는 아직 보류 상태입니다.
+
 ## 2026-06-14 Android 리소스 적용 상태
 
 - Capacitor Android 프로젝트에 하루풀이 앱 아이콘, 라운드 아이콘, adaptive icon, splash 후보 PNG를 적용했습니다.
