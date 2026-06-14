@@ -1,5 +1,11 @@
 # CAPACITOR_READINESS
 
+## 2026-06-14 Android icon/splash 표시 QA 준비
+
+- Capacitor Android 앱의 icon/splash 표시 QA 기준을 추가했습니다.
+- 실제 기기 또는 에뮬레이터에서 표시 상태를 확인해야 합니다.
+- production 코드 변경은 없습니다.
+
 ## 2026-06-14 Android resource build verification
 
 - Capacitor Android 프로젝트에서 icon/splash/adaptive icon 적용 후 debug build가 성공했습니다.

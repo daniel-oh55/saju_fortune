@@ -1,5 +1,26 @@
 # TODO
 
+## 2026-06-14 Android icon/splash QA TODO
+
+- [x] Android icon/splash 표시 QA 기준 작성
+- [ ] Android 실제 기기 또는 에뮬레이터에서 launcher icon 표시 확인
+- [ ] Android 실제 기기 또는 에뮬레이터에서 round icon 표시 확인
+- [ ] Android 12 이상 adaptive icon 표시 확인
+- [ ] Android 12 이상 splash 표시 확인
+- [ ] Android back button 실제 QA 수행
+- [ ] Android WebView localStorage 실제 QA 수행
+- [ ] 실제 기기 또는 에뮬레이터 준비 후 QA 재시도
+- [ ] JDK 설치 및 JAVA_HOME 설정 후 로컬 debug build 재시도
+- [ ] 스토어 등록 정보 초안
+- [ ] 개인정보 처리방침 URL 준비
+- [ ] 실제 provider placement ID 적용
+- [ ] 실제 광고 SDK 연동
+- [ ] 공유 이미지 생성 기능 검토
+- [ ] 앱 버전 이름 만세력 기준 확인 및 기본값 추가
+- [ ] 23시 이후 선택 옵션 문구의 사용자 이해도 확인
+- [ ] 태양시 보정 적용 여부 별도 검토
+- [ ] 음력/윤달 샘플 외부 검증
+
 ## 2026-06-14 Android resource build verification TODO
 
 - [x] Android 리소스 적용 후 debug build 재확인

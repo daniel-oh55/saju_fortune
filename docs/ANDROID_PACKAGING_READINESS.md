@@ -1,5 +1,11 @@
 # ANDROID_PACKAGING_READINESS
 
+## 2026-06-14 Android icon/splash 표시 QA 준비
+
+- Android 리소스 적용과 debug build 성공 이후 실제 표시 QA 기준을 추가했습니다.
+- 문서 경로는 `docs/ANDROID_ICON_SPLASH_QA.md`입니다.
+- 실제 기기 또는 에뮬레이터 QA는 아직 수행 전입니다.
+
 ## 2026-06-14 Android resource 적용 후 build 확인
 
 - Android 리소스 적용 후 debug build 성공을 확인했습니다.
