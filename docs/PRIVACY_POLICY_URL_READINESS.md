@@ -3,6 +3,13 @@
 이 문서는 하루풀이 앱을 Google Play에 제출하기 전 개인정보 처리방침 URL을 준비하기 위한 체크리스트입니다.
 이번 PR은 개인정보 처리방침 URL 준비 문서화가 목적이며, 실제 URL 배포, Google Play Console 입력, production 앱 로직 변경은 진행하지 않습니다.
 
+## Google Play 데이터 보안 양식 초안
+
+- Google Play 데이터 보안 양식 초안 문서를 추가합니다.
+- 문서 경로는 `docs/GOOGLE_PLAY_DATA_SAFETY_DRAFT.md`입니다.
+- 현재 MVP는 localStorage 중심이며 서버 DB, 로그인, 실제 광고 SDK, 실제 결제 SDK, 외부 분석 SDK는 아직 사용하지 않습니다.
+- 실제 SDK 연동 전후로 개인정보 처리방침 URL과 데이터 보안 양식을 함께 갱신해야 합니다.
+
 ## 1. 목적
 
 - Google Play 제출 전 개인정보 처리방침 URL 준비 항목을 정리합니다.

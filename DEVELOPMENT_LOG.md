@@ -1,5 +1,63 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-15 Google Play Data Safety Draft
+
+### 작업 목적
+- Google Play 데이터 보안 양식 초안 추가
+- 현재 MVP의 localStorage 저장 항목, 외부 전송 여부, 제3자 공유 여부, 데이터 삭제 방식 정리
+
+### 작업 내용
+- `docs/GOOGLE_PLAY_DATA_SAFETY_DRAFT.md` 신규 추가
+- `scripts/checkGooglePlayDataSafetyDraft.mjs` 신규 추가
+- 신규 npm script: `check:google-play-data-safety`
+- 현재 MVP 구현 상태 정리
+- localStorage 저장 항목 정리
+- 데이터 유형 후보 매핑 작성
+- 제3자 공유 없음 초안 작성
+- 서버 전송 없음 초안 작성
+- 데이터 삭제 방식 초안 작성
+- 개인정보 처리방침 URL과 일치 필요성 기록
+- Privacy policy URL readiness, Google Play store listing draft, privacy data map, privacy policy draft, cookie/ad consent UX, Android packaging readiness, Capacitor readiness 문서에 데이터 보안 양식 초안 경로 반영
+
+### 변경하지 않은 항목
+- 실제 Google Play Console 데이터 보안 양식 입력 미진행
+- 개인정보 처리방침 외부 공개 URL 미배포
+- 실제 광고 SDK 미연동
+- 실제 결제 SDK 미연동
+- 로그인 미구현
+- 서버 DB 미연동
+- 외부 분석 SDK 미연동
+- production 코드 변경 없음
+- production 계산 로직 변경 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+- Android resource/native 변경 없음
+- AndroidManifest.xml 변경 없음
+- release build 미진행
+- signing 미진행
+- AAB 생성 미진행
+- iOS 프로젝트 생성 없음
+- service worker 구현 없음
+- `@capacitor/app` 추가 없음
+
+### 테스트 결과
+- `npm install`: `npm.cmd install` 성공, npm audit high severity 3건 보고
+- `npm run build`: 성공, Vite chunk size warning 보고
+- `npm run check:google-play-data-safety`: 성공
+- `npm run check:privacy-policy-url-readiness`: 성공
+- `npm run check:google-play-store-listing`: 성공
+- `npm run check:android-qa-status-summary`: 성공
+- `npm run check:android-back-button-qa-result`: 성공
+- `npm run check:android-icon-splash-qa-result`: 성공
+- `npm run check:android-webview-localstorage-qa-result`: 성공
+- `npm run check:android-debug-build-workflow`: 성공
+- `npm run check:capacitor-readiness`: 성공
+- `npm run check:android-packaging-readiness`: 성공
+- `npm run check:content-safety`: 성공
+- `npm run check:share-text`: 성공
+- `git diff -- src`: 변경 없음
+- `git diff -- android/app/src/main/res android/app/src/main/AndroidManifest.xml android/app/src/main/java android/app/src/main/kotlin`: 변경 없음
+
 ## 2026-06-15 Privacy Policy URL Readiness
 
 ### 작업 목적

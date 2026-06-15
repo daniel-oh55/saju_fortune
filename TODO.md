@@ -1,5 +1,31 @@
 # TODO
 
+## 2026-06-15 Google Play data safety draft TODO
+
+- [x] Google Play 데이터 보안 양식 초안
+- [x] Google Play 데이터 보안 양식 검증 스크립트 추가
+- [ ] 개인정보 처리방침 외부 공개 URL 배포
+- [ ] Google Play 데이터 보안 양식 최종 입력
+- [ ] 스토어 스크린샷 준비
+- [ ] Android 실제 기기 또는 에뮬레이터 준비 후 QA 재시도
+- [ ] Android 실제 기기 또는 에뮬레이터에서 launcher icon 표시 확인
+- [ ] Android 실제 기기 또는 에뮬레이터에서 round icon 표시 확인
+- [ ] Android 12 이상 adaptive icon 표시 확인
+- [ ] Android 12 이상 splash 표시 확인
+- [ ] Android back button 실제 QA 수행
+- [ ] Android WebView localStorage 실제 QA 수행
+- [ ] JDK 설치 및 JAVA_HOME 설정 후 로컬 debug build 재시도
+- [ ] release build 준비
+- [ ] signing 설정 준비
+- [ ] AAB 생성
+- [ ] 실제 provider placement ID 적용
+- [ ] 실제 광고 SDK 연동
+- [ ] 공유 이미지 생성 기능 검토
+- [ ] 앱 버전 이름 만세력 기준 확인 및 기본값 추가
+- [ ] 23시 이후 선택 옵션 문구의 사용자 이해도 확인
+- [ ] 태양시 보정 적용 여부 별도 검토
+- [ ] 음력/윤달 샘플 외부 검증
+
 ## 2026-06-15 Privacy policy URL readiness TODO
 
 - [x] 개인정보 처리방침 URL 준비 문서 작성

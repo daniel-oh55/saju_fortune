@@ -1,5 +1,11 @@
 # ANDROID_PACKAGING_READINESS
 
+## Google Play 데이터 보안 양식 초안
+
+- Google Play 데이터 보안 양식 초안 문서를 추가했습니다.
+- 문서 경로는 `docs/GOOGLE_PLAY_DATA_SAFETY_DRAFT.md`입니다.
+- 실제 Google Play Console 입력은 아직 진행하지 않습니다.
+
 ## 개인정보 처리방침 URL 준비
 
 - Google Play 제출 전 개인정보 처리방침 URL 준비 문서를 추가했습니다.

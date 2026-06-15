@@ -11,6 +11,7 @@
     "generate:splash-pngs": "node scripts/generateSplashPngs.mjs",
     "build": "vite build",
     "check:google-play-store-listing": "node scripts/checkGooglePlayStoreListingDraft.mjs",
+    "check:google-play-data-safety": "node scripts/checkGooglePlayDataSafetyDraft.mjs",
     "check:privacy-policy-url-readiness": "node scripts/checkPrivacyPolicyUrlReadiness.mjs",
     "check:android-back-button-qa": "node scripts/checkAndroidBackButtonQaReadiness.mjs",
     "check:android-back-button-qa-result": "node scripts/checkAndroidBackButtonQaResult.mjs",

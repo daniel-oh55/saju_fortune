@@ -1,5 +1,11 @@
 # PRIVACY_POLICY_DRAFT
 
+## Google Play 데이터 보안 양식 연계
+
+- Google Play 데이터 보안 양식 초안 문서는 `docs/GOOGLE_PLAY_DATA_SAFETY_DRAFT.md`입니다.
+- 개인정보 처리방침 문구와 데이터 보안 양식 입력 내용이 충돌하지 않아야 합니다.
+- 실제 Google Play 제출 전 공개 URL과 데이터 보안 양식을 다시 대조해야 합니다.
+
 ## URL 공개 준비 상태
 
 - 개인정보 처리방침 URL 준비 문서는 `docs/PRIVACY_POLICY_URL_READINESS.md`입니다.
