@@ -1,5 +1,11 @@
 # PRIVACY_DATA_MAP
 
+## Google Play 데이터 보안 양식 연계
+
+- 현재 MVP의 데이터 저장 항목은 `docs/GOOGLE_PLAY_DATA_SAFETY_DRAFT.md`와 일치해야 합니다.
+- localStorage 저장 항목, 외부 전송 여부, 제3자 공유 여부를 함께 관리합니다.
+- 실제 SDK 연동 시 본 문서와 데이터 보안 양식 초안을 함께 갱신해야 합니다.
+
 ## 개인정보 처리방침 URL 연계
 
 - 데이터 저장 항목과 외부 전송 여부는 개인정보 처리방침 URL 문서와 일치해야 합니다.

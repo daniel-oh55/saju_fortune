@@ -1,5 +1,11 @@
 # CAPACITOR_READINESS
 
+## Google Play 데이터 보안 양식 초안
+
+- Capacitor Android 앱 제출 전 데이터 보안 양식 초안을 추가했습니다.
+- 앱 내부 PrivacyInfoPage, 개인정보 처리방침 URL, 데이터 보안 양식 내용의 일치가 필요합니다.
+- production 코드 변경은 없습니다.
+
 ## 개인정보 처리방침 URL 준비
 
 - Capacitor Android 앱 제출 전 개인정보 처리방침 URL 준비 문서를 추가했습니다.

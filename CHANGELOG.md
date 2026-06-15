@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 2026-06-15 Google Play Data Safety Draft
+
+### Added
+- Google Play data safety draft 문서 추가
+- Google Play data safety draft 검증 스크립트 추가
+- `check:google-play-data-safety` npm script 추가
+
+### Changed
+- Privacy policy URL readiness, Google Play store listing draft, privacy data map, privacy policy draft, cookie/ad consent UX, Android packaging readiness, Capacitor readiness 문서에 데이터 보안 양식 초안 경로 반영
+
 ## 2026-06-15 Privacy Policy URL Readiness
 
 ### Added
