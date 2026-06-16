@@ -1,5 +1,12 @@
 # PRIVACY_POLICY_LIVE_URL_RESULT
 
+## Google Play Console 입력 준비 문서 연계
+
+- 개인정보 처리방침 URL 입력 준비 문서를 추가했습니다.
+- 문서 경로는 `docs/GOOGLE_PLAY_PRIVACY_URL_INPUT_READINESS.md`입니다.
+- 현재 실제 URL 확인 상태는 Pending입니다.
+- Google Play Console 입력은 아직 진행하지 않습니다.
+
 이 문서는 하루풀이 공개 개인정보 처리방침 페이지의 실제 Vercel 배포 URL 확인 결과를 기록하기 위한 문서입니다.
 이번 PR은 live URL 확인 결과 기록 양식 준비가 목적이며, 실제 Google Play Console 입력, release build, signing, AAB 생성, production 앱 로직 변경은 진행하지 않습니다.
 
