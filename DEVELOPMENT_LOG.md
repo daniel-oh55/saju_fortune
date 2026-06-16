@@ -1,5 +1,65 @@
 # DEVELOPMENT_LOG
 
+# 2026-06-16 Privacy Policy URL Verification
+
+## 작업 내용
+
+- PR 목적: 공개 개인정보 처리방침 URL 확인 문서 추가
+- `PRIVACY_POLICY_URL_VERIFICATION.md` 신규 추가
+- `checkPrivacyPolicyUrlVerification` 신규 추가
+- 신규 npm script: `check:privacy-policy-url-verification`
+- `public/privacy/index.html` 확인 대상 기록
+- 예상 경로 `/privacy/` 기록
+- 실제 최종 URL 미확정 기록
+- Google Play Console 입력 미진행 기록
+- HTTPS 접근 필요성 기록
+- 로그인 없이 접근 가능해야 함 기록
+- 모바일 브라우저 표시 확인 필요성 기록
+- 하루풀이 브랜드명 표시 확인 필요성 기록
+- localStorage 안내 확인 필요성 기록
+- 서버 DB 없음 안내 확인 필요성 기록
+- 실제 광고 SDK 없음 안내 확인 필요성 기록
+- 실제 결제 SDK 없음 안내 확인 필요성 기록
+- 외부 분석 SDK 없음 안내 확인 필요성 기록
+- 데이터 삭제 방법 확인 필요성 기록
+- 참고용 콘텐츠 고지 확인 필요성 기록
+- production 코드 로직 변경 없음
+- production 계산 로직 변경 없음
+- routing 변경 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+- Android resource/native 변경 없음
+- release build 미진행
+- signing 미진행
+- AAB 생성 미진행
+- iOS 프로젝트 생성 없음
+- service worker 구현 없음
+- 실제 광고 SDK 추가 없음
+- 실제 결제 SDK 추가 없음
+- `@capacitor/app` 추가 없음
+
+## 테스트 결과
+
+- `npm install`: 성공, 기존 high severity audit 경고 2건 표시
+- `npm run build`: 성공, 기존 500 kB chunk size 경고 표시
+- `npm run check:privacy-policy-url-verification`: 성공
+- `npm run check:store-screenshot-sample-profile`: 성공
+- `npm run check:brand-copy-consistency`: 성공
+- `npm run check:public-privacy-policy-page`: 성공
+- `npm run check:google-play-screenshot-readiness`: 성공
+- `npm run check:google-play-data-safety`: 성공
+- `npm run check:google-play-store-listing`: 성공
+- `npm run check:privacy-policy-url-readiness`: 성공
+- `npm run check:android-qa-status-summary`: 성공
+- `npm run check:android-back-button-qa-result`: 성공
+- `npm run check:android-icon-splash-qa-result`: 성공
+- `npm run check:android-webview-localstorage-qa-result`: 성공
+- `npm run check:android-debug-build-workflow`: 성공
+- `npm run check:capacitor-readiness`: 성공
+- `npm run check:android-packaging-readiness`: 성공
+- `npm run check:content-safety`: 성공
+- `npm run check:share-text`: 성공
+
 # 2026-06-16 Store Screenshot Sample Copy
 
 ## 작업 내용

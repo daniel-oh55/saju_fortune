@@ -1,5 +1,11 @@
 # ANDROID_QA_STATUS_SUMMARY
 
+## 개인정보 처리방침 URL 확인 상태
+
+- 공개 개인정보 처리방침 URL 확인 문서를 추가했습니다.
+- 문서 경로는 `docs/PRIVACY_POLICY_URL_VERIFICATION.md`입니다.
+- 실제 URL 확인은 Vercel 배포 후 진행합니다.
+
 ## 스크린샷 샘플 프로필 준비 상태
 
 - 스토어 스크린샷 촬영 때 사용할 테스트용 샘플 프로필 기준이 추가되었습니다.

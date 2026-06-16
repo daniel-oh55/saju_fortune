@@ -1,5 +1,43 @@
 # CHANGELOG
 
+## 2026-06-16 Privacy Policy URL Verification
+
+### Added
+- Privacy policy URL verification 문서 추가
+- Privacy policy URL verification 검증 스크립트 추가
+
+### Changed
+- Privacy policy URL readiness, privacy policy draft, Google Play store listing draft, Google Play data safety draft, Android packaging readiness, Capacitor readiness, Android QA status summary 문서에 공개 URL 확인 문서 경로 반영
+
+### Tests
+- `npm install`
+- `npm run build`
+- `npm run check:privacy-policy-url-verification`
+- `npm run check:store-screenshot-sample-profile`
+- `npm run check:brand-copy-consistency`
+- `npm run check:public-privacy-policy-page`
+- `npm run check:google-play-screenshot-readiness`
+- `npm run check:google-play-data-safety`
+- `npm run check:google-play-store-listing`
+- `npm run check:privacy-policy-url-readiness`
+- `npm run check:android-qa-status-summary`
+- `npm run check:android-back-button-qa-result`
+- `npm run check:android-icon-splash-qa-result`
+- `npm run check:android-webview-localstorage-qa-result`
+- `npm run check:android-debug-build-workflow`
+- `npm run check:capacitor-readiness`
+- `npm run check:android-packaging-readiness`
+- `npm run check:content-safety`
+- `npm run check:share-text`
+
+### Additional Checks
+- `docs/PRIVACY_POLICY_URL_VERIFICATION.md` 존재 확인
+- `public/privacy/index.html`, `/privacy/`, HTTPS 필요성, Pending 또는 미진행 상태 기록 확인
+- Google Play Console 입력 미진행, 실제 URL 배포 확인 없음 기록 확인
+- `하루풀이`, localStorage, 서버 DB 없음, 실제 광고 SDK 없음, 실제 결제 SDK 없음, 외부 분석 SDK 없음, 데이터 삭제 방법, 참고용 콘텐츠 고지 확인 기준 기록
+- public privacy page의 브랜드명, 외부 script 없음, form 없음 확인
+- release build, signing, AAB 생성, 실제 광고 SDK, 실제 결제 SDK, production 코드 로직, 계산 로직, routing, schemaVersion, 기존 localStorage key, Android resource/native 변경 없음
+
 ## 2026-06-16 Store Screenshot Sample Copy
 
 ### Changed
