@@ -1,5 +1,61 @@
 # DEVELOPMENT_LOG
 
+# 2026-06-16 Android Debug Build Install Deps
+
+## 작업 내용
+
+- PR 목적: Android Debug Build Install dependencies 실패 보정
+- PR #100 Android Debug Build run #28 failure 기록
+- 실패 단계: Install dependencies
+- Build web app, Sync Android project, Build Android debug APK, Upload debug APK skipped 기록
+- `harupuli-debug-apk` artifact 미생성 기록
+- package.json 문법 확인 결과: 정상
+- package-lock.json 동기화 확인 결과: 정상
+- PR #100 추가 script는 install 단계에서 실행되지 않는 구조임을 확인
+- 로컬 작업 폴더 `npm ci`는 Windows node_modules 파일 잠금으로 `EPERM unlink` 발생
+- clean temp package check에서 `npm ci` 성공
+- package-lock 변경 필요 없음
+- production 코드 로직 변경 없음
+- production 계산 로직 변경 없음
+- routing 변경 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+- Android resource/native 변경 없음
+- release build 미진행
+- signing 미진행
+- AAB 생성 미진행
+- 실제 광고 SDK 추가 없음
+- 실제 결제 SDK 추가 없음
+- iOS 프로젝트 생성 없음
+- service worker 구현 없음
+- `@capacitor/app` 추가 없음
+
+## 테스트 결과
+
+- `npm ci` clean temp package check: 성공
+- `npm install`: 성공, 기존 high severity audit 경고 2건 및 Windows cleanup EPERM 경고 표시
+- `npm run build`: 성공, 기존 500 kB chunk size 경고 표시
+- `npm run check:google-play-privacy-url-input-readiness`: 성공
+- `npm run check:privacy-policy-live-url-result`: 성공
+- `npm run check:privacy-policy-build-output`: 성공
+- `npm run check:privacy-policy-url-verification`: 성공
+- `npm run check:store-screenshot-sample-profile`: 성공
+- `npm run check:brand-copy-consistency`: 성공
+- `npm run check:public-privacy-policy-page`: 성공
+- `npm run check:google-play-screenshot-readiness`: 성공
+- `npm run check:google-play-data-safety`: 성공
+- `npm run check:google-play-store-listing`: 성공
+- `npm run check:privacy-policy-url-readiness`: 성공
+- `npm run check:android-qa-status-summary`: 성공
+- `npm run check:android-back-button-qa-result`: 성공
+- `npm run check:android-icon-splash-qa-result`: 성공
+- `npm run check:android-webview-localstorage-qa-result`: 성공
+- `npm run check:android-debug-build-workflow`: 성공
+- `npm run check:capacitor-readiness`: 성공
+- `npm run check:android-packaging-readiness`: 성공
+- `npm run check:content-safety`: 성공
+- `npm run check:share-text`: 성공
+
 # 2026-06-16 Google Play Privacy URL Input Readiness
 
 ## 작업 내용

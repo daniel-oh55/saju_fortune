@@ -1,5 +1,12 @@
 # ANDROID_QA_STATUS_SUMMARY
 
+## Android Debug Build install dependencies 보정
+
+- PR #100 head 기준 Android Debug Build run #28에서 Install dependencies 단계가 실패했습니다.
+- APK build와 artifact upload 단계는 skipped 처리되었습니다.
+- 이번 PR에서 package.json/package-lock 동기화와 install 단계 정상화를 확인합니다.
+- 실제 Android 기기 QA는 여전히 Blocked 상태입니다.
+
 ## 개인정보 처리방침 live URL 확인 결과
 
 - 공개 개인정보 처리방침 live URL 확인 결과 문서를 추가했습니다.
