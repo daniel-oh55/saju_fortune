@@ -1,5 +1,10 @@
 # ANDROID_PACKAGING_READINESS
 
+## 공개 개인정보 처리방침 페이지 브랜드명 보정
+
+- `public/privacy/index.html`의 브랜드명 오타를 `하루풀리` 기준으로 확인했습니다.
+- Google Play 제출 전 `/privacy/` 페이지에서 `하루풀리` 표기가 정상 표시되는지 확인해야 합니다.
+
 ## 공개 개인정보 처리방침 페이지 준비
 
 - Android 앱 제출 전 공개 개인정보 처리방침 후보 페이지를 추가했습니다.

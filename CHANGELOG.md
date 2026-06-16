@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2026-06-16 Public Privacy Policy Brand Copy
+
+### Changed
+- 공개 개인정보 처리방침 페이지의 브랜드명 표기 정합성 확인
+- Public privacy policy page 검증 스크립트에 브랜드명 오타 잔존 여부 검증 추가
+- Privacy policy URL readiness, privacy policy draft, Google Play store listing draft, Android packaging readiness, Capacitor readiness 문서에 브랜드명 정합성 확인 내용 반영
+
 ## 2026-06-16 Public Privacy Policy Page
 
 ### Added

@@ -1,5 +1,11 @@
 # CAPACITOR_READINESS
 
+## 공개 개인정보 처리방침 페이지 브랜드명 보정
+
+- Capacitor Android 앱 제출 전 공개 개인정보 처리방침 페이지의 서비스명 표기를 `하루풀리`로 맞췄습니다.
+- Vercel 배포 후 `/privacy/` 경로에서 브랜드명이 정상 표시되는지 확인해야 합니다.
+- production 코드 변경은 없습니다.
+
 ## 공개 개인정보 처리방침 페이지 준비
 
 - Capacitor Android 앱 제출 전 공개 개인정보 처리방침 후보 페이지를 추가했습니다.
