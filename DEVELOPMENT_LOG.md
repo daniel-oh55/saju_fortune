@@ -1,5 +1,55 @@
 # DEVELOPMENT_LOG
 
+# 2026-06-16 Store Screenshot Sample Copy
+
+## 작업 내용
+
+- PR 목적: 스토어 스크린샷 샘플 문구 정합성 보정
+- `STORE_SCREENSHOT_SAMPLE_PROFILE.md` 기능명 `저장한 풀이`로 통일
+- 피해야 할 문구 예시를 `투자하면 성공합니다.` 기준으로 보정
+- `checkStoreScreenshotSampleProfile` 검증 기준 수정
+- 이전 기능명 잔존 여부 검증 추가
+- 잘못된 피해야 할 문구 예시 잔존 여부 검증 추가
+- 정상 브랜드명 `하루풀이` 유지
+- 이전 브랜드 오탈자 미존재 확인
+- 실제 스크린샷 이미지 생성 없음
+- Google Play Console 입력 없음
+- production 코드 로직 변경 없음
+- production 계산 로직 변경 없음
+- routing 변경 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+- Android resource/native 변경 없음
+- release build 미진행
+- signing 미진행
+- AAB 생성 미진행
+- iOS 프로젝트 생성 없음
+- service worker 구현 없음
+- 실제 광고 SDK 추가 없음
+- 실제 결제 SDK 추가 없음
+- `@capacitor/app` 추가 없음
+
+## 테스트 결과
+
+- `npm install`: 성공, 기존 high severity audit 경고 2건 표시
+- `npm run build`: 성공, 기존 500 kB chunk size 경고 표시
+- `npm run check:store-screenshot-sample-profile`: 성공
+- `npm run check:brand-copy-consistency`: 성공
+- `npm run check:public-privacy-policy-page`: 성공
+- `npm run check:google-play-screenshot-readiness`: 성공
+- `npm run check:google-play-data-safety`: 성공
+- `npm run check:google-play-store-listing`: 성공
+- `npm run check:privacy-policy-url-readiness`: 성공
+- `npm run check:android-qa-status-summary`: 성공
+- `npm run check:android-back-button-qa-result`: 성공
+- `npm run check:android-icon-splash-qa-result`: 성공
+- `npm run check:android-webview-localstorage-qa-result`: 성공
+- `npm run check:android-debug-build-workflow`: 성공
+- `npm run check:capacitor-readiness`: 성공
+- `npm run check:android-packaging-readiness`: 성공
+- `npm run check:content-safety`: 성공
+- `npm run check:share-text`: 성공
+
 # 2026-06-16 Brand Copy Consistency
 
 ## 작업 내용
@@ -12,7 +62,7 @@
 - `checkBrandCopyConsistency` 신규 추가
 - 신규 npm script: `check:brand-copy-consistency`
 - 관련 문서의 브랜드명 기준 설명 보정
-- `STORE_SCREENSHOT_SAMPLE_PROFILE.md`의 브랜드명과 `저장한 운세` 표기 확인
+- `STORE_SCREENSHOT_SAMPLE_PROFILE.md`의 브랜드명과 `저장한 풀이` 표기 확인
 - 실제 URL 배포 확인 미진행
 - Google Play Console 입력 미진행
 - production 코드 로직 변경 없음
@@ -3160,7 +3210,7 @@
 - 샘플 운세 문구 기준 정리
 - 피해야 할 문구 정리
 - 개인정보 안내 화면 촬영 기준 정리
-- 저장한 운세 화면 촬영 기준 정리
+- 저장한 풀이 화면 촬영 기준 정리
 - 실제 스크린샷 이미지 생성 미진행
 - 테스트용 샘플 프로필을 앱에 내장하지 않음
 - Google Play Console 업로드 미진행

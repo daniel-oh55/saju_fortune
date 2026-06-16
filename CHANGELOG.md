@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 2026-06-16 Store Screenshot Sample Copy
+
+### Changed
+- Store screenshot sample profile 문서의 기능명 표기를 `저장한 풀이`로 통일
+- Store screenshot sample profile 검증 스크립트에 이전 기능명 잔존 여부 검증 추가
+- 피해야 할 문구 예시를 `투자하면 성공합니다.` 기준으로 보정
+- Google Play screenshot readiness, store listing draft, data safety draft 문서에 샘플 문구 정합성 내용 반영
+
 ## 2026-06-16 Brand Copy Consistency
 
 ### Added
@@ -10,7 +18,7 @@
 - 공개 개인정보 처리방침 페이지의 브랜드명을 `하루풀이`로 정리
 - public privacy policy page 검증 스크립트의 정상 브랜드명 기준 보정
 - 관련 문서의 브랜드명 정합성 설명 보정
-- Store screenshot sample profile 문서의 기능명 표기를 `저장한 운세`로 유지
+- Store screenshot sample profile 문서의 기능명 표기를 `저장한 풀이`로 유지
 
 ## 2026-06-16 Public Privacy Policy Brand Copy
 
