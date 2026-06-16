@@ -1,5 +1,11 @@
 # ANDROID_QA_STATUS_SUMMARY
 
+## 개인정보 처리방침 live URL 확인 결과
+
+- 공개 개인정보 처리방침 live URL 확인 결과 문서를 추가했습니다.
+- 문서 경로는 `docs/PRIVACY_POLICY_LIVE_URL_RESULT.md`입니다.
+- 현재 실제 URL 확인은 Pending 상태입니다.
+
 ## 개인정보 처리방침 URL 확인 상태
 
 - 공개 개인정보 처리방침 URL 확인 문서를 추가했습니다.

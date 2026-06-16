@@ -1,5 +1,11 @@
 # GOOGLE_PLAY_DATA_SAFETY_DRAFT
 
+## 개인정보 처리방침 live URL 확인 결과
+
+- 데이터 보안 양식 최종 입력 전 실제 개인정보 처리방침 URL 확인 결과를 확인해야 합니다.
+- 결과 문서는 `docs/PRIVACY_POLICY_LIVE_URL_RESULT.md`입니다.
+- 현재 실제 URL 확인은 Pending 상태입니다.
+
 ## 개인정보 처리방침 build output 확인
 
 - 데이터 보안 양식 최종 입력 전 공개 개인정보 처리방침 페이지가 build output에 포함되는지 확인해야 합니다.
