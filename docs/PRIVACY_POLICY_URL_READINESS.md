@@ -1,5 +1,13 @@
 # PRIVACY_POLICY_URL_READINESS
 
+## 공개 개인정보 처리방침 페이지 scaffold
+
+- 공개 개인정보 처리방침 후보 페이지를 추가했습니다.
+- 정적 페이지 경로는 `public/privacy/index.html`입니다.
+- Vercel 배포 후 예상 접근 경로는 `/privacy/`입니다.
+- 실제 최종 URL은 배포 후 확인해야 합니다.
+- Google Play Console 입력은 아직 진행하지 않았습니다.
+
 ## 스크린샷 샘플 프로필 주의사항
 
 - 스토어 스크린샷에는 실제 사용자 개인정보가 노출되지 않아야 합니다.

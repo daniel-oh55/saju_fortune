@@ -1,5 +1,11 @@
 # ANDROID_PACKAGING_READINESS
 
+## 공개 개인정보 처리방침 페이지 준비
+
+- Android 앱 제출 전 공개 개인정보 처리방침 후보 페이지를 추가했습니다.
+- 정적 페이지 경로는 `public/privacy/index.html`입니다.
+- 실제 URL 배포 확인과 Google Play Console 입력은 후속 단계입니다.
+
 ## 스토어 스크린샷 샘플 프로필 준비
 
 - Google Play 스크린샷 촬영용 테스트 샘플 프로필 기준이 추가되었습니다.
