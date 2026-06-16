@@ -36,7 +36,7 @@
 - `VITE_REWARDED_AD_PROVIDER=sdk`와 `VITE_REWARDED_AD_SDK_ENABLED=true`를 사용하면 향후 SDK provider로 전환할 수 있는 구조가 있습니다.
 - 현재 MVP에서는 실제 광고 SDK가 없으므로 SDK provider는 보상 지급을 하지 않습니다.
 
-이 문서는 하루풀리 MVP 기준의 실제 rewarded ad SDK 연동 전 검토 문서입니다.
+이 문서는 하루풀이 MVP 기준의 실제 rewarded ad SDK 연동 전 검토 문서입니다.
 이번 문서는 구현 계획이며, 실제 광고 SDK와 외부 광고 라이브러리는 아직 추가하지 않습니다.
 실제 SDK 도입 전에는 provider 정책, 개인정보 처리방침, 쿠키/광고 동의 UX, 앱스토어/플랫폼 정책을 별도로 검토해야 합니다.
 

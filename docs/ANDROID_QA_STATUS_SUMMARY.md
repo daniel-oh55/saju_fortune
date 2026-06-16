@@ -20,7 +20,7 @@
 - Android QA는 여전히 실제 기기 또는 에뮬레이터 환경 부재로 Blocked 상태입니다.
 - 실제 제출 전에는 icon/splash 표시 QA, WebView localStorage QA, Android back button QA를 완료해야 합니다.
 
-이 문서는 하루풀리 Android 앱 패키지 이후 실제 기기 또는 에뮬레이터 QA의 현재 상태를 한곳에서 관리하기 위한 요약 문서입니다.
+이 문서는 하루풀이 Android 앱 패키지 이후 실제 기기 또는 에뮬레이터 QA의 현재 상태를 한곳에서 관리하기 위한 요약 문서입니다.
 
 이번 PR은 QA 상태 요약 문서화가 목적이며, production 로직과 Android 리소스는 변경하지 않습니다.
 

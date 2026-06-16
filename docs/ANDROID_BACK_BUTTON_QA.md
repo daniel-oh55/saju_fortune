@@ -13,7 +13,7 @@
 - Android back button 실제 QA에는 실제 기기 또는 에뮬레이터가 필요합니다.
 - QA 환경 준비 절차는 `docs/ANDROID_QA_ENVIRONMENT_SETUP.md`를 참고합니다.
 
-이 문서는 하루풀리 Android WebView 환경에서 시스템 뒤로가기 버튼 동작을 확인하기 위한 QA 기준을 정리한 문서입니다.
+이 문서는 하루풀이 Android WebView 환경에서 시스템 뒤로가기 버튼 동작을 확인하기 위한 QA 기준을 정리한 문서입니다.
 이번 PR은 QA 기준 정리가 목적이며, production 앱 로직과 Android native 코드는 변경하지 않습니다.
 
 ## 1. 목적

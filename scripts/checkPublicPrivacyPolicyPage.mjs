@@ -39,8 +39,8 @@ logResult('public_privacy_page_exists', publicPrivacyPageExists);
 assertCondition(publicPrivacyPageExists, 'public/privacy/index.html should exist');
 
 const page = publicPrivacyPageExists ? readText(pagePath) : '';
-const correctBrand = '하루풀리';
-const typoBrand = '하루풀' + '이';
+const correctBrand = '하루풀이';
+const typoBrand = '하루풀' + '리';
 
 const pageChecks = [
   ['page_mentions_service_name', page.includes(correctBrand), 'public privacy page should mention service name'],

@@ -3,9 +3,9 @@ function ConsentBanner({ onAcceptAll, onRejectOptional, onOpenSettings, onOpenPr
     <section className="consent-banner" aria-label="데이터 사용 안내">
       <div className="consent-banner-content">
         <p className="eyebrow">데이터 사용 안내</p>
-        <h2>하루풀리의 데이터 사용 안내</h2>
+        <h2>하루풀이의 데이터 사용 안내</h2>
         <p>
-          하루풀리는 기본 운세 제공을 위해 브라우저 저장소를 사용합니다. 광고와 분석 기능은 아직
+          하루풀이는 기본 운세 제공을 위해 브라우저 저장소를 사용합니다. 광고와 분석 기능은 아직
           연결되어 있지 않지만, 향후 선택 동의가 필요한 기능을 준비하고 있습니다.
         </p>
       </div>

@@ -7,8 +7,8 @@ const __dirname = path.dirname(__filename);
 const projectRoot = path.resolve(__dirname, '..');
 const failures = [];
 
-const correctBrand = '하루풀리';
-const typoBrand = '하루풀' + '이';
+const correctBrand = '하루풀이';
+const typoBrand = '하루풀' + '리';
 
 function readText(relativePath) {
   return fs.readFileSync(path.join(projectRoot, relativePath), 'utf8');
@@ -79,6 +79,7 @@ checkNoTypo('docs_have_no_typo_brand', walkFiles('docs'));
 checkNoTypo('public_has_no_typo_brand', walkFiles('public'));
 checkNoTypo('src_has_no_typo_brand', walkFiles('src'));
 checkNoTypo('root_docs_have_no_typo_brand', ['CHANGELOG.md', 'DEVELOPMENT_LOG.md', 'TODO.md']);
+checkNoTypo('scripts_have_no_direct_typo_brand', walkFiles('scripts'));
 checkNoTypo('package_has_no_unexpected_brand_typo', ['package.json']);
 
 const noIosProjectCreated = !fileExists('ios');

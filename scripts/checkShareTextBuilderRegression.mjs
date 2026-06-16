@@ -31,7 +31,7 @@ const category = {
 
 const fortuneText = buildFortuneCategoryShareText({ fortune, category, isUnlocked: true });
 const fortuneBasicPass =
-  fortuneText.includes('하루풀리') &&
+  fortuneText.includes('하루풀이') &&
   fortuneText.includes(category.summary) &&
   fortuneText.includes(category.luckyColor) &&
   fortuneText.includes(category.luckyItem) &&
@@ -56,7 +56,7 @@ const sajuText = buildSajuInsightShareText({
   ],
 });
 const sajuPass =
-  sajuText.includes('하루풀리') &&
+  sajuText.includes('하루풀이') &&
   sajuText.includes('사주 흐름') &&
   sajuText.includes('정리') &&
   sajuText.includes('참고용');
@@ -69,7 +69,7 @@ const savedText = buildSavedReadingShareText({
   body: '저장 본문',
 });
 const savedPass =
-  savedText.includes('하루풀리') &&
+  savedText.includes('하루풀이') &&
   savedText.includes('저장 제목') &&
   savedText.includes('저장 요약') &&
   savedText.includes('저장 본문') &&

@@ -7,7 +7,7 @@
 - `check:brand-copy-consistency` npm script 추가
 
 ### Changed
-- 공개 개인정보 처리방침 페이지의 브랜드명을 `하루풀리`로 정리
+- 공개 개인정보 처리방침 페이지의 브랜드명을 `하루풀이`로 정리
 - public privacy policy page 검증 스크립트의 정상 브랜드명 기준 보정
 - 관련 문서의 브랜드명 정합성 설명 보정
 - Store screenshot sample profile 문서의 기능명 표기를 `저장한 운세`로 유지
@@ -521,7 +521,7 @@
 
 - README를 프로젝트 운영 기준에 맞게 보완
 - `.gitignore` 배포/환경 파일 제외 항목 보강
-- README에 하루풀리 브랜드 컨셉 반영
+- README에 하루풀이 브랜드 컨셉 반영
 - 주요 화면 문구를 브랜드 톤에 맞게 정리
 - 오늘운세 상세풀이를 8~12문장 수준의 조언형 콘텐츠로 개선
 - 상세풀이 문단 표시 방식 개선

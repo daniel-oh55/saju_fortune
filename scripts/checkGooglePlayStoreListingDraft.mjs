@@ -37,7 +37,7 @@ assertCondition(storeListingDocExists, 'docs/GOOGLE_PLAY_STORE_LISTING_DRAFT.md 
 const doc = storeListingDocExists ? readText(storeListingDocPath) : '';
 
 const docChecks = [
-  ['doc_mentions_app_name', doc.includes('하루풀리'), 'store listing draft should mention 하루풀리'],
+  ['doc_mentions_app_name', doc.includes('하루풀이'), 'store listing draft should mention 하루풀이'],
   [
     'doc_mentions_short_description',
     includesAny(doc, ['짧은 설명', '오늘의 운세와 사주 흐름']),
