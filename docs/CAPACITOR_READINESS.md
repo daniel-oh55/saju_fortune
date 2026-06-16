@@ -1,5 +1,11 @@
 # CAPACITOR_READINESS
 
+## 공개 개인정보 처리방침 페이지 준비
+
+- Capacitor Android 앱 제출 전 공개 개인정보 처리방침 후보 페이지를 추가했습니다.
+- Vercel 배포 후 `/privacy/` 경로 접근 여부를 확인해야 합니다.
+- production 앱 로직 변경은 없습니다.
+
 ## 스토어 스크린샷 샘플 프로필 준비
 
 - Capacitor Android 앱의 Google Play 스크린샷 촬영 전 샘플 프로필 기준이 추가되었습니다.

@@ -1,5 +1,11 @@
 # PRIVACY_POLICY_DRAFT
 
+## 공개 페이지 scaffold 연결
+
+- 공개 개인정보 처리방침 후보 페이지는 `public/privacy/index.html`입니다.
+- Google Play 제출 전 실제 배포 URL과 본 문서의 내용이 일치하는지 확인해야 합니다.
+- 실제 광고 SDK, 결제 SDK, 로그인, 서버 DB가 추가되면 공개 페이지도 함께 갱신해야 합니다.
+
 ## Google Play 데이터 보안 양식 연계
 
 - Google Play 데이터 보안 양식 초안 문서는 `docs/GOOGLE_PLAY_DATA_SAFETY_DRAFT.md`입니다.

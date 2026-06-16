@@ -1,5 +1,10 @@
 # PRIVACY_DATA_MAP
 
+## 공개 개인정보 처리방침 페이지 연결
+
+- 공개 페이지 `public/privacy/index.html`의 저장 항목 설명은 본 데이터 맵과 일치해야 합니다.
+- 현재 MVP는 localStorage 중심이며 서버 DB, 로그인, 실제 광고 SDK, 실제 결제 SDK, 외부 분석 SDK를 아직 사용하지 않습니다.
+
 ## Google Play 데이터 보안 양식 연계
 
 - 현재 MVP의 데이터 저장 항목은 `docs/GOOGLE_PLAY_DATA_SAFETY_DRAFT.md`와 일치해야 합니다.

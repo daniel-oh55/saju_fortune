@@ -2995,6 +2995,61 @@
 #### 남은 이슈
 
 - 브라우저에서 광고 해금 후 상세풀이 문단 표시 확인 필요
+# 2026-06-16 Public Privacy Policy Page
+
+## 작업 내용
+
+- PR 목적: 공개 개인정보 처리방침 페이지 scaffold 추가
+- `public/privacy/index.html` 신규 추가
+- `checkPublicPrivacyPolicyPage` 신규 추가
+- 신규 npm script: `check:public-privacy-policy-page`
+- 공개 페이지 예상 경로 `/privacy/` 기록
+- localStorage 저장 항목 공개 페이지에 반영
+- 서버 DB 없음 기록
+- 로그인 없음 기록
+- 실제 광고 SDK 없음 기록
+- 실제 결제 SDK 없음 기록
+- 외부 분석 SDK 없음 기록
+- 데이터 삭제 방법 기록
+- 참고용 콘텐츠 고지 기록
+- 문의처 미확정 상태 기록
+- 실제 URL 배포 확인 미진행
+- Google Play Console 입력 미진행
+- `STORE_SCREENSHOT_SAMPLE_PROFILE.md` 표기 상태 확인
+- production 코드 변경 없음
+- production 계산 로직 변경 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+- Android resource/native 변경 없음
+- release build 미진행
+- signing 미진행
+- AAB 생성 미진행
+- iOS 프로젝트 생성 없음
+- service worker 구현 없음
+- 실제 광고 SDK 추가 없음
+- 실제 결제 SDK 추가 없음
+- `@capacitor/app` 추가 없음
+
+## 테스트 결과
+
+- `npm install`: 성공, 의존성 변경 없음, 기존 high severity audit 경고 2건 표시
+- `npm run build`: 성공, 기존 500 kB chunk size 경고 표시
+- `npm run check:public-privacy-policy-page`: 성공
+- `npm run check:privacy-policy-url-readiness`: 성공
+- `npm run check:google-play-data-safety`: 성공
+- `npm run check:google-play-store-listing`: 성공
+- `npm run check:store-screenshot-sample-profile`: 성공
+- `npm run check:google-play-screenshot-readiness`: 성공
+- `npm run check:android-qa-status-summary`: 성공
+- `npm run check:android-back-button-qa-result`: 성공
+- `npm run check:android-icon-splash-qa-result`: 성공
+- `npm run check:android-webview-localstorage-qa-result`: 성공
+- `npm run check:android-debug-build-workflow`: 성공
+- `npm run check:capacitor-readiness`: 성공
+- `npm run check:android-packaging-readiness`: 성공
+- `npm run check:content-safety`: 성공
+- `npm run check:share-text`: 성공
+
 # 2026-06-16 Store Screenshot Sample Profile
 
 ## 작업 내용

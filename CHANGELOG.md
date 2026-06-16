@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## 2026-06-16 Public Privacy Policy Page
+
+### Added
+- Public privacy policy page scaffold 추가
+- Public privacy policy page 검증 스크립트 추가
+- `check:public-privacy-policy-page` npm script 추가
+
+### Changed
+- Privacy policy URL readiness, privacy policy draft, privacy data map, Google Play data safety draft, Google Play store listing draft, Android packaging readiness, Capacitor readiness 문서에 공개 개인정보 처리방침 페이지 경로 반영
+- Store screenshot sample profile 문서 표기 상태 확인
+
 ## 2026-06-16 Store Screenshot Sample Profile
 
 ### Added

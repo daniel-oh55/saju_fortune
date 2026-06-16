@@ -1,5 +1,11 @@
 # GOOGLE_PLAY_STORE_LISTING_DRAFT
 
+## 공개 개인정보 처리방침 페이지 연결
+
+- Google Play 제출 때 사용할 공개 개인정보 처리방침 후보 페이지를 추가했습니다.
+- 정적 페이지 경로는 `public/privacy/index.html`입니다.
+- 실제 Google Play Console 입력 전 Vercel 배포 URL을 확인해야 합니다.
+
 ## 스크린샷 샘플 프로필 기준
 
 - Google Play 스크린샷에는 테스트용 샘플 프로필만 사용합니다.
