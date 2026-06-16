@@ -1,5 +1,11 @@
 # PRIVACY_POLICY_URL_READINESS
 
+## live URL 결과 문서 연계
+
+- 개인정보 처리방침 공개 URL 확인 결과 문서는 `docs/PRIVACY_POLICY_LIVE_URL_RESULT.md`입니다.
+- 현재 실제 URL은 미확정이며, Google Play Console 입력은 아직 진행하지 않습니다.
+- 제출 전 실제 HTTPS URL 접근 확인이 필요합니다.
+
 ## build output 확인 연계
 
 - 공개 개인정보 처리방침 URL을 사용하기 전 build output에 페이지가 포함되는지 확인해야 합니다.

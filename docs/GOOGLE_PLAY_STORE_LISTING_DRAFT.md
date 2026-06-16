@@ -1,5 +1,11 @@
 # GOOGLE_PLAY_STORE_LISTING_DRAFT
 
+## 개인정보 처리방침 live URL 확인 결과
+
+- Google Play Console 입력 전 실제 `/privacy/` URL 확인 결과를 기록해야 합니다.
+- 결과 문서는 `docs/PRIVACY_POLICY_LIVE_URL_RESULT.md`입니다.
+- 현재 입력은 미진행 상태입니다.
+
 ## 개인정보 처리방침 build output 확인
 
 - Google Play Console 입력 전 `dist/privacy/index.html` 생성 여부를 확인해야 합니다.

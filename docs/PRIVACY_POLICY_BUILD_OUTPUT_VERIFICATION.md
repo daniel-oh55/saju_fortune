@@ -1,5 +1,11 @@
 # PRIVACY_POLICY_BUILD_OUTPUT_VERIFICATION
 
+## live URL 결과 문서 연계
+
+- build output 확인 이후 실제 Vercel 배포 URL 확인 결과를 별도 문서에 기록합니다.
+- 문서 경로는 `docs/PRIVACY_POLICY_LIVE_URL_RESULT.md`입니다.
+- 실제 URL 확인은 후속 수동 확인 단계입니다.
+
 이 문서는 하루풀이 공개 개인정보 처리방침 페이지가 Vite build 산출물에 포함되는지 확인하기 위한 문서입니다.
 이번 PR은 build output 검증 문서화가 목적이며, 실제 Vercel URL 접속 확인, Google Play Console 입력, release build, signing, AAB 생성, production 앱 로직 변경은 진행하지 않습니다.
 

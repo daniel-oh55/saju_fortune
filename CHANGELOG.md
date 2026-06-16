@@ -1,5 +1,44 @@
 # CHANGELOG
 
+## 2026-06-16 Privacy Policy Live URL Result
+
+### Added
+- Privacy policy live URL result 문서 추가
+- Privacy policy live URL result 검증 스크립트 추가
+
+### Changed
+- Privacy policy URL verification, privacy policy build output verification, privacy policy URL readiness, Google Play store listing draft, Google Play data safety draft, Android packaging readiness, Capacitor readiness, Android QA status summary 문서에 live URL 결과 문서 경로 반영
+
+### Tests
+- `npm install`
+- `npm run build`
+- `npm run check:privacy-policy-live-url-result`
+- `npm run check:privacy-policy-build-output`
+- `npm run check:privacy-policy-url-verification`
+- `npm run check:store-screenshot-sample-profile`
+- `npm run check:brand-copy-consistency`
+- `npm run check:public-privacy-policy-page`
+- `npm run check:google-play-screenshot-readiness`
+- `npm run check:google-play-data-safety`
+- `npm run check:google-play-store-listing`
+- `npm run check:privacy-policy-url-readiness`
+- `npm run check:android-qa-status-summary`
+- `npm run check:android-back-button-qa-result`
+- `npm run check:android-icon-splash-qa-result`
+- `npm run check:android-webview-localstorage-qa-result`
+- `npm run check:android-debug-build-workflow`
+- `npm run check:capacitor-readiness`
+- `npm run check:android-packaging-readiness`
+- `npm run check:content-safety`
+- `npm run check:share-text`
+
+### Additional Checks
+- `docs/PRIVACY_POLICY_LIVE_URL_RESULT.md`, `scripts/checkPrivacyPolicyLiveUrlResult.mjs`, `check:privacy-policy-live-url-result` 존재 확인
+- live URL 결과 문서의 `/privacy/`, Vercel, 예상 URL 형식, 실제 URL 미확정 또는 Pending, Google Play Console 입력 미진행, 하루풀이, localStorage, 서버 DB 없음, 실제 광고 SDK 없음, 실제 결제 SDK 없음, 외부 분석 SDK 없음, 데이터 삭제 방법, 참고용 콘텐츠 고지 확인
+- live URL 결과 문서가 현재 상태를 Completed로 단정하지 않음
+- public privacy page 존재와 하루풀이 브랜드명 확인
+- 실제 Vercel URL 확인, Google Play Console 입력, release build, signing, AAB 생성, 실제 광고 SDK, 실제 결제 SDK, production 코드 로직, 계산 로직, routing, schemaVersion, 기존 localStorage key, Android resource/native 변경 없음
+
 ## 2026-06-16 Privacy Policy Build Output Verification
 
 ### Added

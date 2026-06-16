@@ -1,5 +1,11 @@
 # CAPACITOR_READINESS
 
+## 개인정보 처리방침 live URL 확인 결과
+
+- Capacitor Android 앱 제출 전 실제 `/privacy/` URL 확인 결과를 기록해야 합니다.
+- 결과 문서는 `docs/PRIVACY_POLICY_LIVE_URL_RESULT.md`입니다.
+- production 코드 변경은 없습니다.
+
 ## 개인정보 처리방침 build output 확인
 
 - Capacitor Android 앱 제출 전 공개 개인정보 처리방침 페이지가 build output에 포함되는지 확인해야 합니다.

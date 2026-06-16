@@ -1,5 +1,12 @@
 # PRIVACY_POLICY_URL_VERIFICATION
 
+## 실제 URL 확인 결과 문서
+
+- 실제 Vercel 배포 URL 확인 결과를 기록하기 위한 문서를 추가했습니다.
+- 문서 경로는 `docs/PRIVACY_POLICY_LIVE_URL_RESULT.md`입니다.
+- 현재 실제 URL 확인 상태는 Pending입니다.
+- Google Play Console 입력은 아직 진행하지 않습니다.
+
 ## build output 확인
 
 - 개인정보 처리방침 페이지의 build output 확인 문서를 추가했습니다.

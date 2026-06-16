@@ -18,6 +18,7 @@
     "check:google-play-screenshot-readiness": "node scripts/checkGooglePlayScreenshotReadiness.mjs",
     "check:privacy-policy-url-readiness": "node scripts/checkPrivacyPolicyUrlReadiness.mjs",
     "check:privacy-policy-build-output": "node scripts/checkPrivacyPolicyBuildOutput.mjs",
+    "check:privacy-policy-live-url-result": "node scripts/checkPrivacyPolicyLiveUrlResult.mjs",
     "check:privacy-policy-url-verification": "node scripts/checkPrivacyPolicyUrlVerification.mjs",
     "check:android-back-button-qa": "node scripts/checkAndroidBackButtonQaReadiness.mjs",
     "check:android-back-button-qa-result": "node scripts/checkAndroidBackButtonQaResult.mjs",
