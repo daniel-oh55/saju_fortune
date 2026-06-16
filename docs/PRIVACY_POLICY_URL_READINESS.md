@@ -1,5 +1,11 @@
 # PRIVACY_POLICY_URL_READINESS
 
+## live URL 결과 상태
+
+- 개인정보 처리방침 공개 URL readiness는 build output 확인과 live URL 확인 결과를 함께 봅니다.
+- live URL 결과 문서는 `docs/PRIVACY_POLICY_LIVE_URL_RESULT.md`입니다.
+- Google Play Console 입력은 live URL 확인 완료 후 별도 단계로 진행합니다.
+
 ## Google Play Console 입력 준비 연계
 
 - 개인정보 처리방침 URL 입력 준비 문서는 `docs/GOOGLE_PLAY_PRIVACY_URL_INPUT_READINESS.md`입니다.

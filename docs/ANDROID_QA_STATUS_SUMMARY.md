@@ -1,5 +1,11 @@
 # ANDROID_QA_STATUS_SUMMARY
 
+## 개인정보 처리방침 live URL 확인 단계
+
+- Android Debug Build 복구 후 다음 확인 대상은 Vercel `/privacy/` 실제 접근입니다.
+- 결과 문서는 `docs/PRIVACY_POLICY_LIVE_URL_RESULT.md`입니다.
+- Android 실제 기기 QA는 여전히 Blocked 상태입니다.
+
 ## Android Debug Build 복구 결과
 
 - PR #100 Android Debug Build run #28은 Install dependencies 단계에서 실패했습니다.

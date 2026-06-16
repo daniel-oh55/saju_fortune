@@ -1,5 +1,46 @@
 # CHANGELOG
 
+## 2026-06-16 Privacy Policy Live URL Check Result
+
+### Changed
+- Privacy policy live URL result 문서에 실제 Vercel `/privacy/` 확인 결과 기록 기준 반영
+- checkPrivacyPolicyLiveUrlResult에 Pending/Completed 상태 검증 개선
+- Android debug build recovery result, privacy policy URL verification, privacy policy build output verification, privacy policy URL readiness, Android QA status summary 문서에 live URL 확인 단계 연결 반영
+
+### Tests
+- `npm install`
+- `npm run build`
+- `npm run check:privacy-policy-live-url-result`
+- `npm run check:android-debug-build-recovery-result`
+- `npm run check:google-play-privacy-url-input-readiness`
+- `npm run check:privacy-policy-build-output`
+- `npm run check:privacy-policy-url-verification`
+- `npm run check:store-screenshot-sample-profile`
+- `npm run check:brand-copy-consistency`
+- `npm run check:public-privacy-policy-page`
+- `npm run check:google-play-screenshot-readiness`
+- `npm run check:google-play-data-safety`
+- `npm run check:google-play-store-listing`
+- `npm run check:privacy-policy-url-readiness`
+- `npm run check:android-back-button-qa-result`
+- `npm run check:android-icon-splash-qa-result`
+- `npm run check:android-webview-localstorage-qa-result`
+- `npm run check:android-qa-status-summary`
+- `npm run check:android-debug-build-workflow`
+- `npm run check:capacitor-readiness`
+- `npm run check:android-packaging-readiness`
+- `npm run check:content-safety`
+- `npm run check:share-text`
+
+### Additional Checks
+- `docs/PRIVACY_POLICY_LIVE_URL_RESULT.md` 업데이트 확인
+- 실제 URL이 제공되지 않아 Pending 유지 확인
+- Google Play Console 입력 Not started 유지 확인
+- checkPrivacyPolicyLiveUrlResult Pending/Completed 상태 검증 확인
+- `public/privacy/index.html` 존재 및 하루풀이 브랜드명 확인
+- 실제 Google Play Console 입력, release build, signing, AAB 생성, 실제 광고 SDK, 실제 결제 SDK 없음
+- production 코드 로직, 계산 로직, routing, schemaVersion, 기존 localStorage key, Android resource/native 변경 없음
+
 ## 2026-06-16 Android Debug Build Recovery Result
 
 ### Added

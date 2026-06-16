@@ -7,6 +7,16 @@
 - 현재 실제 URL 확인 상태는 Pending입니다.
 - Google Play Console 입력은 아직 진행하지 않습니다.
 
+## 실제 URL 확인 결과
+
+- 실제 Vercel URL 제공 여부: 미제공
+- 실제 Vercel URL: 미확정
+- 실제 URL 확인 상태: Pending
+- Pending 유지 또는 Completed 전환 여부: Pending 유지
+- 이번 PR에서는 실제 URL이 명확히 제공되지 않았으므로 완료 처리하지 않습니다.
+- Google Play Console 입력 상태: Not started
+- 실제 URL이 확인되어 Completed 또는 Pass로 변경되더라도 Google Play Console 입력은 별도 후속 단계에서 기록합니다.
+
 이 문서는 하루풀이 공개 개인정보 처리방침 페이지의 실제 Vercel 배포 URL 확인 결과를 기록하기 위한 문서입니다.
 이번 PR은 live URL 확인 결과 기록 양식 준비가 목적이며, 실제 Google Play Console 입력, release build, signing, AAB 생성, production 앱 로직 변경은 진행하지 않습니다.
 
