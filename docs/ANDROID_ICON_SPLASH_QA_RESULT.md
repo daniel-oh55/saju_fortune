@@ -11,7 +11,7 @@
 - Blocked 해소를 위해 `docs/ANDROID_QA_ENVIRONMENT_SETUP.md`를 추가했습니다.
 - adb 사용 가능 환경과 실제 기기 또는 에뮬레이터 준비 후 QA를 재시도합니다.
 
-이 문서는 하루풀리 Android debug APK를 실제 Android 기기 또는 에뮬레이터에서 실행하여 launcher icon, round icon, adaptive icon, splash 표시 상태를 확인한 결과를 기록하는 문서입니다.
+이 문서는 하루풀이 Android debug APK를 실제 Android 기기 또는 에뮬레이터에서 실행하여 launcher icon, round icon, adaptive icon, splash 표시 상태를 확인한 결과를 기록하는 문서입니다.
 
 이번 PR은 QA 결과 기록이 목적이며, Android 리소스와 production 앱 로직은 변경하지 않습니다.
 
@@ -86,7 +86,7 @@
 
 기대 결과:
 
-- 앱 설치 후 홈 화면에 하루풀리 아이콘이 표시됩니다.
+- 앱 설치 후 홈 화면에 하루풀이 아이콘이 표시됩니다.
 - 기본 Capacitor 아이콘으로 보이지 않습니다.
 - 아이콘이 깨지거나 잘리지 않습니다.
 

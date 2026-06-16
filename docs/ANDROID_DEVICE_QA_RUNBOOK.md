@@ -27,7 +27,7 @@
 - Android 앱 아이콘과 splash 표시 QA 기준은 `docs/ANDROID_ICON_SPLASH_QA.md`를 참고합니다.
 - APK 설치 후 홈 화면, 최근 앱, 앱 정보 화면, Android 12 이상 splash 표시를 확인합니다.
 
-이 문서는 하루풀리 Android debug APK를 실제 Android 기기 또는 에뮬레이터에 설치하고 WebView localStorage QA를 수행하기 위한 실행 절차를 정리한 문서입니다.
+이 문서는 하루풀이 Android debug APK를 실제 Android 기기 또는 에뮬레이터에 설치하고 WebView localStorage QA를 수행하기 위한 실행 절차를 정리한 문서입니다.
 이번 PR은 QA 실행 준비 문서화가 목적이며, production 앱 로직과 localStorage key는 변경하지 않습니다.
 
 ## 1. 목적

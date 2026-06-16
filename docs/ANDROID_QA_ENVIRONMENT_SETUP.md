@@ -12,7 +12,7 @@
 - 현재 로컬 환경에서는 `adb` 명령이 인식되지 않아 실제 기기 또는 에뮬레이터 QA가 Blocked 상태입니다.
 - `adb version`, `adb devices`, `adb install -r app-debug.apk`가 가능한 환경을 준비한 뒤 결과 문서를 갱신합니다.
 
-이 문서는 하루풀리 Android debug APK를 실제 기기 또는 에뮬레이터에서 QA하기 위해 필요한 로컬 Android QA 환경 준비 절차를 정리한 문서입니다.
+이 문서는 하루풀이 Android debug APK를 실제 기기 또는 에뮬레이터에서 QA하기 위해 필요한 로컬 Android QA 환경 준비 절차를 정리한 문서입니다.
 
 이번 PR은 QA 환경 준비 문서화가 목적이며, production 앱 로직과 Android 리소스는 변경하지 않습니다.
 

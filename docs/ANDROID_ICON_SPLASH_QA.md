@@ -7,7 +7,7 @@
 - 문제가 발견되면 관련 리소스 경로와 재현 단계를 기록합니다.
 - 이번 단계에서는 Android 리소스 파일을 변경하지 않았습니다.
 
-이 문서는 하루풀리 Android 앱의 launcher icon, round icon, adaptive icon, splash 표시를 실제 Android 기기 또는 에뮬레이터에서 확인하기 위한 QA 기준을 정리한 문서입니다.
+이 문서는 하루풀이 Android 앱의 launcher icon, round icon, adaptive icon, splash 표시를 실제 Android 기기 또는 에뮬레이터에서 확인하기 위한 QA 기준을 정리한 문서입니다.
 
 이번 PR은 QA 기준 정리가 목적이며, Android 리소스와 production 앱 로직은 변경하지 않습니다.
 
@@ -77,7 +77,7 @@
 
 | 항목 | 조작 | 기대 결과 | 실제 결과 | 상태 |
 | --- | --- | --- | --- | --- |
-| Launcher icon | 앱 설치 후 홈 화면 확인 | 하루풀리 아이콘 표시 | 미확인 | Pending |
+| Launcher icon | 앱 설치 후 홈 화면 확인 | 하루풀이 아이콘 표시 | 미확인 | Pending |
 | Round icon | round icon 지원 launcher에서 확인 | 둥근 아이콘 표시 | 미확인 | Pending |
 | Adaptive icon | Android 8 이상 launcher에서 확인 | foreground/background 조합 표시 | 미확인 | Pending |
 | Android 12 splash | Android 12 이상에서 앱 실행 | splash 또는 기본 launch 화면 확인 | 미확인 | Pending |
@@ -88,7 +88,7 @@
 
 ## 6. 통과 기준
 
-- launcher icon이 기본 Capacitor 아이콘이 아니라 하루풀리 아이콘으로 표시됩니다.
+- launcher icon이 기본 Capacitor 아이콘이 아니라 하루풀이 아이콘으로 표시됩니다.
 - round icon 지원 launcher에서 둥근 아이콘이 깨지지 않습니다.
 - adaptive icon foreground/background가 과하게 잘리거나 깨지지 않습니다.
 - Android 12 이상 splash 화면에서 앱 브랜드가 어색하게 보이지 않습니다.

@@ -12,7 +12,7 @@
 - 테스트용 샘플 프로필 기준은 `docs/STORE_SCREENSHOT_SAMPLE_PROFILE.md`를 참고합니다.
 - 스크린샷 문구는 데이터 보안 양식 초안과 충돌하지 않아야 합니다.
 
-이 문서는 하루풀리 Android 앱을 Google Play에 제출하기 전 데이터 보안 양식 입력을 준비하기 위한 초안 문서입니다.
+이 문서는 하루풀이 Android 앱을 Google Play에 제출하기 전 데이터 보안 양식 입력을 준비하기 위한 초안 문서입니다.
 이번 PR은 데이터 보안 양식 초안 문서화가 목적이며, 실제 Google Play Console 입력, 실제 SDK 연동, production 앱 로직 변경은 진행하지 않습니다.
 
 ## 스크린샷 준비 시 개인정보 주의사항

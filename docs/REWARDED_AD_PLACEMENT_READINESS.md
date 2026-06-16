@@ -1,6 +1,6 @@
 # REWARDED_AD_PLACEMENT_READINESS
 
-이 문서는 하루풀리 MVP 기준의 rewarded ad placement ID 적용 준비 문서입니다.
+이 문서는 하루풀이 MVP 기준의 rewarded ad placement ID 적용 준비 문서입니다.
 이번 문서는 운영 준비 기준이며, 실제 광고 SDK와 실제 provider placement ID는 아직 추가하지 않습니다.
 실제 SDK 도입 후 provider 콘솔에서 발급한 placement ID를 Vercel 환경변수로 별도 설정해야 합니다.
 

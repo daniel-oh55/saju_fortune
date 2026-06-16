@@ -22,7 +22,7 @@ export function buildFortuneCategoryShareText({ fortune, category, isUnlocked })
   const detailText = isUnlocked && category?.detail ? `\n상세 풀이: ${category.detail}` : '';
 
   return normalizeShareText(`
-[하루풀리] 오늘운세 - ${category?.label || '오늘운세'}
+[하루풀이] 오늘운세 - ${category?.label || '오늘운세'}
 한 줄 요약: ${category?.summary || '오늘의 흐름을 차분히 살펴보세요.'}
 오늘의 키워드: ${fortune?.keyword || '정리와 균형'}
 행운 색상: ${category?.luckyColor || '확인 중'}
@@ -40,7 +40,7 @@ export function buildSajuInsightShareText({ fortune, sajuAnalysis, lifeSections 
     .join('\n');
 
   return normalizeShareText(`
-[하루풀리] 사주 흐름
+[하루풀이] 사주 흐름
 오늘의 흐름: ${sajuAnalysis?.elements?.balanceHint || '오늘의 흐름을 가볍게 정리해보세요.'}
 활용 키워드: ${keywords.length > 0 ? keywords.join(', ') : fortune?.keyword || '정리와 균형'}
 생활 가이드: ${guideText || '작은 루틴을 중심으로 하루를 차분히 조율해보세요.'}
@@ -51,7 +51,7 @@ export function buildSajuInsightShareText({ fortune, sajuAnalysis, lifeSections 
 
 export function buildSavedReadingShareText(item) {
   return normalizeShareText(`
-[하루풀리] 저장한 풀이
+[하루풀이] 저장한 풀이
 제목: ${item?.title || '저장한 풀이'}
 요약: ${item?.summary || '저장한 풀이를 다시 확인해보세요.'}
 내용: ${item?.body || ''}

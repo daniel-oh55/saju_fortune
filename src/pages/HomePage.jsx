@@ -55,7 +55,7 @@ function HomePage({ fortune, profile, savedReadings, visitStreak, onOpenDetail, 
     <div className="page-stack home-page">
       <header className="mobile-appbar">
         <div>
-          <strong>하루풀리</strong>
+          <strong>하루풀이</strong>
           <span>{fortune.dateKey}</span>
         </div>
         <button type="button" onClick={() => onNavigate('settings')}>

@@ -5,9 +5,9 @@
 ## 작업 내용
 
 - PR 목적: 브랜드명 정합성 최종 보정
-- 정상 브랜드명은 `하루풀리`
+- 정상 브랜드명은 `하루풀이`
 - `public/privacy/index.html`의 서비스명 표기 보정
-- `checkPublicPrivacyPolicyPage` 검증 기준을 `하루풀리`로 보정
+- `checkPublicPrivacyPolicyPage` 검증 기준을 `하루풀이`로 보정
 - 이전 브랜드 오타가 남아 있지 않도록 검증 추가
 - `checkBrandCopyConsistency` 신규 추가
 - 신규 npm script: `check:brand-copy-consistency`
@@ -3050,9 +3050,9 @@
 ## 작업 내용
 
 - PR 목적: 공개 개인정보 처리방침 페이지 브랜드명 오타 정정
-- `public/privacy/index.html` 내 `하루풀리` 표기 확인
-- `하루풀리` 문자열이 남아 있지 않도록 검증 추가
-- `checkPublicPrivacyPolicyPage` 검증 기준을 `하루풀리` 기준으로 보강
+- `public/privacy/index.html` 내 `하루풀이` 표기 확인
+- 이전 브랜드 오타 문자열이 남아 있지 않도록 검증 추가
+- `checkPublicPrivacyPolicyPage` 검증 기준을 `하루풀이` 기준으로 보강
 - 개인정보 처리방침 URL 준비 문서에 브랜드명 정합성 기록
 - Google Play Store listing draft에 공개 개인정보 처리방침 페이지 서비스명 일치 필요성 기록
 - 실제 URL 배포 확인 미진행

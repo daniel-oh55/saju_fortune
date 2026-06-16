@@ -64,7 +64,7 @@ function PrivacyInfoPage({ onNavigate, consentPreferences }) {
         <p className="eyebrow">Privacy Guide</p>
         <h1>개인정보 안내</h1>
         <p>
-          이 페이지는 하루풀리 MVP 기준의 개인정보 처리 안내입니다. 법률 검토를 완료한 최종
+          이 페이지는 하루풀이 MVP 기준의 개인정보 처리 안내입니다. 법률 검토를 완료한 최종
           개인정보 처리방침은 실제 서비스 공개 전 별도로 확정될 예정입니다.
         </p>
       </section>

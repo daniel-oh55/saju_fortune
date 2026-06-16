@@ -9,7 +9,7 @@
 - 이번 단계에서는 Android 프로젝트와 adaptive icon XML을 생성하지 않았습니다.
 - 외부 이미지 변환 라이브러리는 설치하지 않았습니다.
 
-이 문서는 하루풀리 Android adaptive icon foreground/background 리소스를 준비하기 위한 기준을 정리한 문서입니다.
+이 문서는 하루풀이 Android adaptive icon foreground/background 리소스를 준비하기 위한 기준을 정리한 문서입니다.
 이번 PR은 adaptive icon 준비 기준과 target manifest, 검증 스크립트 추가가 목적이며, 실제 Android 프로젝트 생성과 PNG 바이너리 생성은 아직 진행하지 않습니다.
 
 ## 1. 목적
@@ -44,7 +44,7 @@
 - 텍스트 사용 금지
 - 투명 배경 가능
 - safe zone 안에 주요 문양 배치
-- 기존 하루풀리 앱 아이콘과 시각 일관성 유지
+- 기존 하루풀이 앱 아이콘과 시각 일관성 유지
 - 작은 크기에서도 식별 가능해야 함
 
 ## 5. background 리소스 기준
