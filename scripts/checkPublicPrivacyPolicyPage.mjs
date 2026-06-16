@@ -43,6 +43,12 @@ const page = publicPrivacyPageExists ? readText(pagePath) : '';
 const pageChecks = [
   ['page_mentions_service_name', page.includes('하루풀리'), 'public privacy page should mention service name'],
   [
+    'page_mentions_correct_service_name',
+    page.includes('하루풀리'),
+    'public privacy page should mention the correct service name',
+  ],
+  ['page_has_no_brand_typo', !page.includes('하루풀이'), 'public privacy page should not contain brand typo'],
+  [
     'page_mentions_privacy_policy',
     page.includes('개인정보 처리방침'),
     'public privacy page should mention privacy policy',
