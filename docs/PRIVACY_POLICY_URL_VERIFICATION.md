@@ -1,5 +1,11 @@
 # PRIVACY_POLICY_URL_VERIFICATION
 
+## 실제 URL 결과 반영 기준
+
+- 실제 Vercel `/privacy/` URL 확인 결과는 `docs/PRIVACY_POLICY_LIVE_URL_RESULT.md`에 기록합니다.
+- 실제 URL 확인이 완료되면 Pending 항목을 Completed 또는 Pass로 변경할 수 있습니다.
+- Google Play Console 입력은 여전히 별도 단계입니다.
+
 ## Google Play Console 입력 준비 연계
 
 - Google Play Console 개인정보 처리방침 URL 입력 준비 문서를 추가했습니다.

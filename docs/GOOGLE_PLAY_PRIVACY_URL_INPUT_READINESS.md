@@ -1,5 +1,11 @@
 # GOOGLE_PLAY_PRIVACY_URL_INPUT_READINESS
 
+## 실제 URL 확인 결과 연계
+
+- 개인정보 처리방침 실제 live URL 확인 결과는 `docs/PRIVACY_POLICY_LIVE_URL_RESULT.md`에서 관리합니다.
+- 실제 URL 확인이 Completed로 바뀌기 전에는 Google Play Console 입력을 진행하지 않습니다.
+- 실제 URL이 확인되어도 Console 입력은 별도 후속 단계에서 기록합니다.
+
 ## CI 복구 결과
 
 - PR #101 이후 Android Debug Build run #29가 success로 확인되었습니다.

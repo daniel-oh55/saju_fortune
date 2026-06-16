@@ -1,5 +1,11 @@
 # PRIVACY_POLICY_BUILD_OUTPUT_VERIFICATION
 
+## build output 이후 live URL 확인
+
+- `dist/privacy/index.html` 확인 이후 Vercel `/privacy/` 실제 접근 확인을 진행합니다.
+- 결과는 `docs/PRIVACY_POLICY_LIVE_URL_RESULT.md`에 기록합니다.
+- 실제 URL 확인 후에도 Google Play Console 입력은 별도 단계입니다.
+
 ## Google Play Console 입력 준비 연계
 
 - build output 확인 후 실제 URL 확인과 Google Play Console 입력 준비를 진행합니다.

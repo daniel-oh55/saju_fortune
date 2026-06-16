@@ -1,5 +1,11 @@
 # ANDROID_DEBUG_BUILD_RECOVERY_RESULT
 
+## 이후 단계 연결
+
+- Android Debug Build run #30 success와 artifact 생성이 확인된 후 다음 단계는 Vercel `/privacy/` 실제 접근 확인입니다.
+- 실제 URL 확인 결과는 `docs/PRIVACY_POLICY_LIVE_URL_RESULT.md`에 기록합니다.
+- release build, signing, AAB 생성은 아직 진행하지 않습니다.
+
 이 문서는 PR #100에서 발생한 Android Debug Build install dependencies 실패와 PR #101 이후 복구 결과를 기록하기 위한 문서입니다.
 이번 PR은 CI 복구 결과 문서화가 목적이며, production 앱 로직, Android native/resource, release build, signing, AAB 생성, Google Play Console 입력은 진행하지 않습니다.
 

@@ -29,6 +29,18 @@ function includesAny(text, patterns) {
   return patterns.some((pattern) => text.includes(pattern));
 }
 
+function includesAll(text, patterns) {
+  return patterns.every((pattern) => text.includes(pattern));
+}
+
+function extractLineValue(text, label) {
+  const line = text
+    .split(/\r?\n/)
+    .find((entry) => entry.trim().startsWith(`- ${label}:`) || entry.trim().startsWith(`${label}:`));
+  if (!line) return '';
+  return line.slice(line.indexOf(':') + 1).trim();
+}
+
 const liveUrlResultDocPath = 'docs/PRIVACY_POLICY_LIVE_URL_RESULT.md';
 const liveUrlResultDocExists = fileExists(liveUrlResultDocPath);
 logResult('live_url_result_doc_exists', liveUrlResultDocExists);
@@ -36,23 +48,49 @@ assertCondition(liveUrlResultDocExists, 'docs/PRIVACY_POLICY_LIVE_URL_RESULT.md 
 
 const doc = liveUrlResultDocExists ? readText(liveUrlResultDocPath) : '';
 const currentResultSection = doc.split('## 4. 수동 확인 절차')[0] || doc;
+const actualUrlValue = extractLineValue(doc, '실제 Vercel URL');
+const actualStatusValue = extractLineValue(doc, '실제 URL 확인 상태');
+const actualUrlIsPending = !actualUrlValue || includesAny(actualUrlValue, ['미확정', 'Pending', '<vercel-domain>']);
+const actualUrlMatchesPrivacyPath =
+  actualUrlValue.startsWith('https://') && actualUrlValue.includes('/privacy/') && !actualUrlValue.includes('<');
+const statusIsPending = includesAny(actualStatusValue, ['Pending', '미확정', '미진행']);
+const statusIsCompleted = includesAny(actualStatusValue, ['Completed', 'Pass']);
+const pendingModeIsConsistent =
+  actualUrlIsPending &&
+  statusIsPending &&
+  !currentResultSection.includes('Completed |') &&
+  !currentResultSection.includes('| Completed') &&
+  !currentResultSection.includes('| Pass');
+const completedModeIsConsistent =
+  !actualUrlIsPending &&
+  actualUrlMatchesPrivacyPath &&
+  statusIsCompleted &&
+  includesAny(currentResultSection, ['Completed', 'Pass']) &&
+  includesAll(doc, ['하루풀이', 'localStorage', '서버 DB 없음']);
+const statusIsConsistent = pendingModeIsConsistent || completedModeIsConsistent;
+const googlePlayConsoleInputNotDone = includesAny(doc, [
+  'Google Play Console 입력 상태: 미진행',
+  'Google Play Console 입력 상태: Not started',
+  'Google Play Console 입력 | Not started',
+  'Google Play Console 입력은 아직 진행하지 않습니다',
+]);
 
 const docChecks = [
   ['doc_mentions_privacy_route', doc.includes('/privacy/'), 'live URL result doc should mention /privacy/'],
   ['doc_mentions_vercel', doc.includes('Vercel'), 'live URL result doc should mention Vercel'],
   [
-    'doc_mentions_expected_url_format',
-    doc.includes('https://<vercel-domain>/privacy/'),
-    'live URL result doc should mention expected Vercel URL format',
+    'doc_mentions_expected_url_format_or_actual_url',
+    doc.includes('https://<vercel-domain>/privacy/') || actualUrlMatchesPrivacyPath,
+    'live URL result doc should mention expected Vercel URL format or an actual privacy URL',
   ],
   [
-    'doc_mentions_actual_url_pending',
-    includesAny(doc, ['실제 Vercel URL: 미확정', '실제 URL 확인 상태: Pending']),
-    'live URL result doc should keep actual URL as pending or undecided',
+    'doc_mentions_actual_url_status',
+    includesAny(doc, ['실제 URL 확인 상태', '실제 URL 확인은 Pending', 'Completed', 'Pass']),
+    'live URL result doc should mention actual URL check status',
   ],
   [
     'doc_mentions_google_play_not_started',
-    includesAny(doc, ['Google Play Console 입력 상태: 미진행', 'Google Play Console 입력 | Not started']),
+    googlePlayConsoleInputNotDone,
     'live URL result doc should mention Google Play Console input is not started',
   ],
   ['doc_mentions_service_name', doc.includes('하루풀이'), 'live URL result doc should mention service name'],
@@ -93,9 +131,14 @@ const docChecks = [
     'live URL result doc should mention completion criteria',
   ],
   [
-    'doc_does_not_claim_completed',
-    !currentResultSection.includes('Completed'),
-    'current live URL result section should not claim Completed',
+    'pending_or_completed_status_is_consistent',
+    statusIsConsistent,
+    'live URL result should be consistently Pending without an actual URL, or Completed/Pass with a real https /privacy/ URL',
+  ],
+  [
+    'google_play_console_input_not_done',
+    googlePlayConsoleInputNotDone,
+    'Google Play Console input should remain Not started or not done',
   ],
 ];
 
