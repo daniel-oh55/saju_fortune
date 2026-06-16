@@ -1,5 +1,11 @@
 # GOOGLE_PLAY_STORE_LISTING_DRAFT
 
+## 개인정보 처리방침 build output 확인
+
+- Google Play Console 입력 전 `dist/privacy/index.html` 생성 여부를 확인해야 합니다.
+- 확인 문서는 `docs/PRIVACY_POLICY_BUILD_OUTPUT_VERIFICATION.md`입니다.
+- 실제 Vercel URL 확인은 후속 단계입니다.
+
 ## 개인정보 처리방침 URL 확인 연계
 
 - Google Play Console 입력 전 `/privacy/` 공개 URL 접근 여부를 확인해야 합니다.

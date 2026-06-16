@@ -1,5 +1,11 @@
 # CAPACITOR_READINESS
 
+## 개인정보 처리방침 build output 확인
+
+- Capacitor Android 앱 제출 전 공개 개인정보 처리방침 페이지가 build output에 포함되는지 확인해야 합니다.
+- `npm run build` 후 `dist/privacy/index.html`을 확인합니다.
+- production 코드 변경은 없습니다.
+
 ## 개인정보 처리방침 URL 확인 상태
 
 - Capacitor Android 앱 제출 전 공개 개인정보 처리방침 URL 확인 문서를 추가했습니다.

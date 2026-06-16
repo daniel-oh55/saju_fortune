@@ -1,5 +1,11 @@
 # PRIVACY_POLICY_DRAFT
 
+## build output 확인 연계
+
+- 공개 개인정보 처리방침 페이지가 build output에 포함되는지 확인해야 합니다.
+- 확인 문서는 `docs/PRIVACY_POLICY_BUILD_OUTPUT_VERIFICATION.md`입니다.
+- build output과 초안 문서 내용이 충돌하지 않아야 합니다.
+
 ## 공개 URL 확인 연계
 
 - 공개 개인정보 처리방침 URL 확인 문서는 `docs/PRIVACY_POLICY_URL_VERIFICATION.md`입니다.
