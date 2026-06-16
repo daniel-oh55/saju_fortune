@@ -1,5 +1,11 @@
 # ANDROID_QA_STATUS_SUMMARY
 
+## 스크린샷 준비 상태
+
+- Google Play 스크린샷 준비 문서를 추가했습니다.
+- 문서 경로는 `docs/GOOGLE_PLAY_SCREENSHOT_READINESS.md`입니다.
+- 실제 스크린샷 촬영은 Android 실제 기기 또는 에뮬레이터 QA 환경 준비 후 진행합니다.
+
 ## Google Play 등록 정보 준비
 
 - Google Play Store 등록 정보 초안 문서: `docs/GOOGLE_PLAY_STORE_LISTING_DRAFT.md`

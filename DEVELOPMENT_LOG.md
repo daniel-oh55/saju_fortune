@@ -1,5 +1,61 @@
 # DEVELOPMENT_LOG
 
+## 2026-06-16 Google Play Screenshot Readiness
+
+### 작업 목적
+- Google Play 스크린샷 준비 문서 추가
+- 스크린샷 후보 화면, 권장 세트, 참고용 콘텐츠 고지 기준, 피해야 할 문구, 개인정보 노출 주의사항 정리
+
+### 작업 내용
+- `docs/GOOGLE_PLAY_SCREENSHOT_READINESS.md` 신규 추가
+- `scripts/checkGooglePlayScreenshotReadiness.mjs` 신규 추가
+- 신규 npm script: `check:google-play-screenshot-readiness`
+- 홈 화면, 오늘의 운세 상세, 사주 인사이트, 저장한 풀이, 개인정보 안내, 동의 설정, 방문 streak/루틴 후보 정리
+- 최소/확장 권장 스크린샷 세트 정리
+- 참고용 콘텐츠 고지 기준 정리
+- 피해야 할 문구 정리
+- 개인정보 노출 주의사항 정리
+- Google Play store listing draft, Google Play data safety draft, Android QA status summary, Android packaging readiness, Capacitor readiness 문서에 스크린샷 준비 문서 경로 반영
+
+### 변경하지 않은 항목
+- 실제 스크린샷 이미지 생성 미진행
+- 스크린샷 이미지 파일 추가 없음
+- Google Play Console 업로드 미진행
+- Android 실제 기기 QA Blocked 상태 유지
+- production 코드 변경 없음
+- production 계산 로직 변경 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+- Android resource/native 변경 없음
+- AndroidManifest.xml 변경 없음
+- release build 미진행
+- signing 미진행
+- AAB 생성 미진행
+- iOS 프로젝트 생성 없음
+- service worker 구현 없음
+- 실제 광고 SDK 추가 없음
+- 실제 결제 SDK 추가 없음
+- `@capacitor/app` 추가 없음
+
+### 테스트 결과
+- `npm install`: `npm.cmd install` 성공, npm audit high severity 2건 보고
+- `npm run build`: 성공, Vite chunk size warning 보고
+- `npm run check:google-play-screenshot-readiness`: 성공
+- `npm run check:google-play-data-safety`: 성공
+- `npm run check:privacy-policy-url-readiness`: 성공
+- `npm run check:google-play-store-listing`: 성공
+- `npm run check:android-qa-status-summary`: 성공
+- `npm run check:android-back-button-qa-result`: 성공
+- `npm run check:android-icon-splash-qa-result`: 성공
+- `npm run check:android-webview-localstorage-qa-result`: 성공
+- `npm run check:android-debug-build-workflow`: 성공
+- `npm run check:capacitor-readiness`: 성공
+- `npm run check:android-packaging-readiness`: 성공
+- `npm run check:content-safety`: 성공
+- `npm run check:share-text`: 성공
+- `git diff -- src`: 변경 없음
+- `git diff -- android/app/src/main/res android/app/src/main/AndroidManifest.xml android/app/src/main/java android/app/src/main/kotlin`: 변경 없음
+
 ## 2026-06-15 Google Play Data Safety Draft
 
 ### 작업 목적
