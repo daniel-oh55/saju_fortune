@@ -1,5 +1,11 @@
 # ANDROID_PACKAGING_READINESS
 
+## Google Play 데이터 보안 양식 입력 준비
+
+- Android 앱 제출 전 Google Play 데이터 보안 양식 입력 준비 상태를 확인해야 합니다.
+- 문서 경로는 `docs/GOOGLE_PLAY_DATA_SAFETY_INPUT_READINESS.md`입니다.
+- release build, signing, AAB 생성 전 제출 문서 상태를 점검합니다.
+
 ## 개인정보 처리방침 문의처 준비
 
 - Android 앱 제출 전 개인정보 처리방침 문의처 상태를 확인해야 합니다.

@@ -1,5 +1,49 @@
 # CHANGELOG
 
+## 2026-06-16 Google Play Data Safety Input Readiness
+
+### Added
+- Google Play data safety input readiness 문서 추가
+- Google Play data safety input readiness 검증 스크립트 추가
+
+### Changed
+- Google Play data safety draft, Google Play privacy URL input readiness, privacy policy contact readiness, privacy policy live URL result, privacy policy URL readiness, Google Play store listing draft, Android packaging readiness 문서에 데이터 보안 양식 입력 준비 문서 경로 반영
+- TODO에 Google Play 데이터 보안 양식 입력 준비 문서 및 검증 스크립트 완료 항목 추가
+
+### Tests
+- `npm install`
+- `npm run build`
+- `npm run check:google-play-data-safety-input-readiness`
+- `npm run check:privacy-policy-contact-readiness`
+- `npm run check:privacy-policy-live-url-result`
+- `npm run check:android-debug-build-recovery-result`
+- `npm run check:google-play-privacy-url-input-readiness`
+- `npm run check:privacy-policy-build-output`
+- `npm run check:privacy-policy-url-verification`
+- `npm run check:store-screenshot-sample-profile`
+- `npm run check:brand-copy-consistency`
+- `npm run check:public-privacy-policy-page`
+- `npm run check:google-play-screenshot-readiness`
+- `npm run check:google-play-data-safety`
+- `npm run check:google-play-store-listing`
+- `npm run check:privacy-policy-url-readiness`
+- `npm run check:android-back-button-qa-result`
+- `npm run check:android-icon-splash-qa-result`
+- `npm run check:android-webview-localstorage-qa-result`
+- `npm run check:android-qa-status-summary`
+- `npm run check:android-debug-build-workflow`
+- `npm run check:capacitor-readiness`
+- `npm run check:android-packaging-readiness`
+- `npm run check:content-safety`
+- `npm run check:share-text`
+
+### Additional Checks
+- `docs/GOOGLE_PLAY_DATA_SAFETY_INPUT_READINESS.md`, `scripts/checkGooglePlayDataSafetyInputReadiness.mjs`, `check:google-play-data-safety-input-readiness` 존재 확인
+- localStorage, 서버 DB 없음, 로그인 기능 없음, 실제 광고 SDK 없음, 실제 결제 SDK 없음, 외부 분석 SDK 없음, 제3자 공유 없음, 데이터 삭제 방법 기록 확인
+- 개인정보 처리방침 URL Pending, 문의처 Pending, 입력 차단 조건, PrivacyInfoPage, `public/privacy/index.html` 연계 확인
+- 실제 Console 입력, 실제 Vercel URL 확인, 실제 문의처 확정, release build, signing, AAB 생성, 실제 광고 SDK, 실제 결제 SDK 없음
+- production 코드 로직, 계산 로직, routing, schemaVersion, 기존 localStorage key, Android resource/native 변경 없음
+
 ## 2026-06-16 Privacy Policy Contact Readiness
 
 ### Added
