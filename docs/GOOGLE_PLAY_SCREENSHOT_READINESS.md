@@ -1,5 +1,12 @@
 # GOOGLE_PLAY_SCREENSHOT_READINESS
 
+## 실제 캡처 QA 결과 문서
+
+- 스토어 스크린샷 실제 캡처 QA 결과 문서를 추가했습니다.
+- 문서 경로는 `docs/STORE_SCREENSHOT_CAPTURE_QA_RESULT.md`입니다.
+- 실제 스크린샷 이미지는 아직 생성하지 않습니다.
+- 실제 Google Play Console 업로드는 후속 단계입니다.
+
 ## 테스트용 샘플 프로필 기준
 
 - 스토어 스크린샷 촬영 전 테스트용 샘플 프로필 기준을 확인합니다.

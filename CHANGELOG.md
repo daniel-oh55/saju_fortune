@@ -1,5 +1,51 @@
 # CHANGELOG
 
+## 2026-06-16 Store Screenshot Capture QA Result
+
+### Added
+- Store screenshot capture QA result 문서 추가
+- Store screenshot capture QA result 검증 스크립트 추가
+
+### Changed
+- Google Play screenshot readiness, Store screenshot sample profile, Google Play store listing draft, Google Play data safety input readiness, Android packaging readiness 문서에 스토어 스크린샷 캡처 QA 결과 문서 경로 반영
+- TODO에 스토어 스크린샷 실제 캡처 QA 결과 문서 및 검증 스크립트 완료 항목 추가
+
+### Tests
+- `npm install`
+- `npm run build`
+- `npm run check:store-screenshot-capture-qa-result`
+- `npm run check:google-play-data-safety-input-readiness`
+- `npm run check:privacy-policy-contact-readiness`
+- `npm run check:privacy-policy-live-url-result`
+- `npm run check:android-debug-build-recovery-result`
+- `npm run check:google-play-privacy-url-input-readiness`
+- `npm run check:privacy-policy-build-output`
+- `npm run check:privacy-policy-url-verification`
+- `npm run check:store-screenshot-sample-profile`
+- `npm run check:brand-copy-consistency`
+- `npm run check:public-privacy-policy-page`
+- `npm run check:google-play-screenshot-readiness`
+- `npm run check:google-play-data-safety`
+- `npm run check:google-play-store-listing`
+- `npm run check:privacy-policy-url-readiness`
+- `npm run check:android-back-button-qa-result`
+- `npm run check:android-icon-splash-qa-result`
+- `npm run check:android-webview-localstorage-qa-result`
+- `npm run check:android-qa-status-summary`
+- `npm run check:android-debug-build-workflow`
+- `npm run check:capacitor-readiness`
+- `npm run check:android-packaging-readiness`
+- `npm run check:content-safety`
+- `npm run check:share-text`
+
+### Additional Checks
+- `docs/STORE_SCREENSHOT_CAPTURE_QA_RESULT.md`, `scripts/checkStoreScreenshotCaptureQaResult.mjs`, `check:store-screenshot-capture-qa-result` 존재 확인
+- 하루풀이, 스크린샷 실제 이미지 생성 상태 Pending, 기준 문서, 캡처 대상 화면, 저장한 풀이, 투자하면 성공합니다, 민감정보 점검 기준 확인
+- 저장한 운세 및 사자라면 성공합니다 미사용 확인
+- 실제 캡처 완료 또는 스크린샷 제작 완료라고 단정하지 않음
+- 실제 스크린샷 이미지 파일, Google Play Console 스크린샷 업로드, 실제 Vercel URL 확인, 실제 문의처 확정 없음
+- production 코드 로직, 계산 로직, routing, schemaVersion, 기존 localStorage key, Android resource/native 변경 없음
+
 ## 2026-06-16 Google Play Data Safety Input Readiness
 
 ### Added

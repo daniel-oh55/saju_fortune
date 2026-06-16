@@ -1,5 +1,11 @@
 # GOOGLE_PLAY_STORE_LISTING_DRAFT
 
+## 스토어 스크린샷 캡처 QA
+
+- Google Play 스토어 등록 전 스크린샷 캡처 QA 결과를 확인해야 합니다.
+- 문서 경로는 `docs/STORE_SCREENSHOT_CAPTURE_QA_RESULT.md`입니다.
+- 실제 스크린샷 업로드는 후속 단계입니다.
+
 ## 데이터 보안 양식 입력 준비
 
 - 스토어 등록 정보와 데이터 보안 양식 응답이 충돌하지 않아야 합니다.

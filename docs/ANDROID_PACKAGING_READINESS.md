@@ -1,5 +1,11 @@
 # ANDROID_PACKAGING_READINESS
 
+## 스토어 스크린샷 캡처 QA
+
+- Android 앱 제출 전 스토어 스크린샷 캡처 QA 결과를 확인해야 합니다.
+- 문서 경로는 `docs/STORE_SCREENSHOT_CAPTURE_QA_RESULT.md`입니다.
+- release build, signing, AAB 생성은 아직 진행하지 않습니다.
+
 ## Google Play 데이터 보안 양식 입력 준비
 
 - Android 앱 제출 전 Google Play 데이터 보안 양식 입력 준비 상태를 확인해야 합니다.

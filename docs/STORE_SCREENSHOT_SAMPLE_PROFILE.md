@@ -1,5 +1,12 @@
 # STORE_SCREENSHOT_SAMPLE_PROFILE
 
+## 실제 캡처 QA 결과 연계
+
+- 샘플 프로필을 실제 화면에 입력하기 전 캡처 QA 결과 문서를 확인합니다.
+- 문서 경로는 `docs/STORE_SCREENSHOT_CAPTURE_QA_RESULT.md`입니다.
+- 기능명은 `저장한 풀이`로 유지합니다.
+- 피해야 할 문구 예시는 `투자하면 성공합니다.` 기준으로 점검합니다.
+
 이 문서는 하루풀이 Google Play 스토어 스크린샷과 Android QA에 사용할 테스트용 샘플 프로필 기준을 정리한 문서입니다.
 이번 PR은 샘플 프로필 기준 문서화가 목적이며, 실제 사용자 데이터, production 코드, Android native/resource, 스크린샷 이미지는 변경하지 않습니다.
 
