@@ -1,5 +1,11 @@
 # GOOGLE_PLAY_DATA_SAFETY_INPUT_READINESS
 
+## 스토어 스크린샷 캡처 QA 연계
+
+- 스토어 스크린샷에 개인정보 처리방침, 데이터 보안 양식, 앱 내부 안내와 충돌하는 문구가 없어야 합니다.
+- 캡처 QA 결과 문서는 `docs/STORE_SCREENSHOT_CAPTURE_QA_RESULT.md`입니다.
+- 실제 캡처 이미지는 아직 생성하지 않습니다.
+
 이 문서는 하루풀이 Android 앱의 Google Play 데이터 보안 양식 최종 입력 전 준비 상태를 정리하기 위한 문서입니다.
 이번 PR은 입력 준비 문서화가 목적이며, 실제 Google Play Console 입력, 실제 데이터 보안 양식 제출, release build, signing, AAB 생성, production 앱 로직 변경은 진행하지 않습니다.
 

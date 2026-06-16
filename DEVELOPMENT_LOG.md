@@ -1,5 +1,69 @@
 # DEVELOPMENT_LOG
 
+# 2026-06-16 Store Screenshot Capture QA Result
+
+## 작업 내용
+
+- PR 목적: 스토어 스크린샷 실제 캡처 QA 결과 문서 및 검증 스크립트 추가
+- `STORE_SCREENSHOT_CAPTURE_QA_RESULT.md` 신규 추가
+- `checkStoreScreenshotCaptureQaResult` 신규 추가
+- 신규 npm script: `check:store-screenshot-capture-qa-result`
+- 실제 스크린샷 이미지 생성 상태 Pending 기록
+- 테스트용 샘플 프로필 실제 입력 상태 Pending 기록
+- Android 실제 기기 또는 에뮬레이터 캡처 상태 Pending 기록
+- Google Play Console 스크린샷 업로드 Not started 기록
+- 저장한 풀이 기능명 유지 기록
+- 저장한 운세 이전 명칭 미사용 기록
+- 투자하면 성공합니다 금지 문구 기준 기록
+- 사자라면 성공합니다 이전 오기 미사용 기록
+- 민감정보 점검 기준 기록
+- 실제 사용자 개인정보 사용 금지 기록
+- 실제 이미지 파일 추가 없음 기록
+- 실제 Console 업로드 없음 기록
+- production 코드 로직 변경 없음
+- production 계산 로직 변경 없음
+- routing 변경 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+- Android resource/native 변경 없음
+- release build 미진행
+- signing 미진행
+- AAB 생성 미진행
+- 실제 광고 SDK 추가 없음
+- 실제 결제 SDK 추가 없음
+- iOS 프로젝트 생성 없음
+- service worker 구현 없음
+- `@capacitor/app` 추가 없음
+
+## 테스트 결과
+
+- `npm install`: 성공, 기존 high severity audit 경고 2건 표시
+- `npm run build`: 성공, 기존 500 kB chunk size 경고 표시
+- `npm run check:store-screenshot-capture-qa-result`: 성공
+- `npm run check:google-play-data-safety-input-readiness`: 성공
+- `npm run check:privacy-policy-contact-readiness`: 성공
+- `npm run check:privacy-policy-live-url-result`: 성공
+- `npm run check:android-debug-build-recovery-result`: 성공
+- `npm run check:google-play-privacy-url-input-readiness`: 성공
+- `npm run check:privacy-policy-build-output`: 성공
+- `npm run check:privacy-policy-url-verification`: 성공
+- `npm run check:store-screenshot-sample-profile`: 성공
+- `npm run check:brand-copy-consistency`: 성공
+- `npm run check:public-privacy-policy-page`: 성공
+- `npm run check:google-play-screenshot-readiness`: 성공
+- `npm run check:google-play-data-safety`: 성공
+- `npm run check:google-play-store-listing`: 성공
+- `npm run check:privacy-policy-url-readiness`: 성공
+- `npm run check:android-qa-status-summary`: 성공
+- `npm run check:android-back-button-qa-result`: 성공
+- `npm run check:android-icon-splash-qa-result`: 성공
+- `npm run check:android-webview-localstorage-qa-result`: 성공
+- `npm run check:android-debug-build-workflow`: 성공
+- `npm run check:capacitor-readiness`: 성공
+- `npm run check:android-packaging-readiness`: 성공
+- `npm run check:content-safety`: 성공
+- `npm run check:share-text`: 성공
+
 # 2026-06-16 Google Play Data Safety Input Readiness
 
 ## 작업 내용
