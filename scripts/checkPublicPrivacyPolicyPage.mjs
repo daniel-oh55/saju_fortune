@@ -39,15 +39,17 @@ logResult('public_privacy_page_exists', publicPrivacyPageExists);
 assertCondition(publicPrivacyPageExists, 'public/privacy/index.html should exist');
 
 const page = publicPrivacyPageExists ? readText(pagePath) : '';
+const correctBrand = '하루풀리';
+const typoBrand = '하루풀' + '이';
 
 const pageChecks = [
-  ['page_mentions_service_name', page.includes('하루풀리'), 'public privacy page should mention service name'],
+  ['page_mentions_service_name', page.includes(correctBrand), 'public privacy page should mention service name'],
   [
     'page_mentions_correct_service_name',
-    page.includes('하루풀리'),
+    page.includes(correctBrand),
     'public privacy page should mention the correct service name',
   ],
-  ['page_has_no_brand_typo', !page.includes('하루풀이'), 'public privacy page should not contain brand typo'],
+  ['page_has_no_brand_typo', !page.includes(typoBrand), 'public privacy page should not contain brand typo'],
   [
     'page_mentions_privacy_policy',
     page.includes('개인정보 처리방침'),

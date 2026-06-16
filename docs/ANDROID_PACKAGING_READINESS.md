@@ -2,7 +2,7 @@
 
 ## 공개 개인정보 처리방침 페이지 브랜드명 보정
 
-- `public/privacy/index.html`의 브랜드명 오타를 `하루풀리` 기준으로 확인했습니다.
+- `public/privacy/index.html`의 브랜드명을 `하루풀리` 기준으로 확인했습니다.
 - Google Play 제출 전 `/privacy/` 페이지에서 `하루풀리` 표기가 정상 표시되는지 확인해야 합니다.
 
 ## 공개 개인정보 처리방침 페이지 준비
@@ -197,7 +197,7 @@
 - PNG 출력 기준은 `docs/APP_ICON_PNG_EXPORT_READINESS.md`를 참고합니다.
 - 이번 단계에서는 PNG를 생성하지 않고 출력 규격만 확정합니다.
 
-이 문서는 하루풀이 웹앱을 Android 앱으로 우선 패키징하기 전 준비 기준을 정리한 문서입니다.
+이 문서는 하루풀리 웹앱을 Android 앱으로 우선 패키징하기 전 준비 기준을 정리한 문서입니다.
 이번 PR은 Android 패키징 준비 문서와 검증 스크립트 추가가 목적이며, Capacitor 설치, android 프로젝트 생성, 네이티브 앱 빌드는 아직 진행하지 않습니다.
 
 ## 1. 목적
@@ -238,7 +238,7 @@
 ## 4. Android 앱 식별 정보 후보
 
 - package name 후보: `com.harupuli.app`
-- app name 후보: `하루풀이`
+- app name 후보: `하루풀리`
 - 실제 배포 전 최종 확정 필요
 
 주의:

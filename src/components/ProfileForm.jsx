@@ -108,7 +108,7 @@ function ProfileForm({ initialProfile, onSave }) {
             일주와 시주가 달라질 수 있습니다.
           </p>
           <p>
-            현재 하루풀이는 선택한 23시 이후 기준을 바탕으로 참고용 풀이를 제공하며, 기준 정책은
+            현재 하루풀리는 선택한 23시 이후 기준을 바탕으로 참고용 풀이를 제공하며, 기준 정책은
             추가 검증 후 조정될 수 있습니다.
           </p>
           <div className="late-night-policy-options" role="radiogroup" aria-label="23시 이후 기준 선택">

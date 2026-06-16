@@ -95,7 +95,7 @@ Please set the JAVA_HOME variable in your environment to match the location of y
 - 실제 광고 SDK 추가 없음
 - production `src` 코드 변경 없음
 
-이 문서는 하루풀이 Capacitor Android 프로젝트의 debug build 확인 결과와 후속 확인 항목을 정리한 문서입니다.
+이 문서는 하루풀리 Capacitor Android 프로젝트의 debug build 확인 결과와 후속 확인 항목을 정리한 문서입니다.
 이번 PR은 Android debug build 가능 여부 확인이 목적이며, Android 리소스 교체, 실제 기기 QA, 광고 SDK 연동은 아직 진행하지 않았습니다.
 
 ## 1. 목적
@@ -174,7 +174,7 @@ Please set the JAVA_HOME variable in your environment to match the location of y
 - `android/gradle/wrapper` 존재
 - `android/app/src/main/assets/public` 리소스 sync 확인
 - package name 후보 `com.harupuli.app` 확인
-- app label `하루풀이` 확인
+- app label `하루풀리` 확인
 
 ## 6. 주의사항
 

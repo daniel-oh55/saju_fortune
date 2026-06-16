@@ -82,7 +82,7 @@
 
 ## 2026-06-14 Android 리소스 적용 상태
 
-- Capacitor Android 프로젝트에 하루풀이 앱 아이콘, 라운드 아이콘, adaptive icon, splash 후보 PNG를 적용했습니다.
+- Capacitor Android 프로젝트에 하루풀리 앱 아이콘, 라운드 아이콘, adaptive icon, splash 후보 PNG를 적용했습니다.
 - `public/generated-*` 원본 PNG는 유지하고, Android `res` 경로에 복사본을 배치했습니다.
 - Android 아이콘 참조는 기존 `@mipmap/ic_launcher`, `@mipmap/ic_launcher_round` 구조를 유지합니다.
 - Android splash 후보 리소스는 추가했지만, Android 12 이상 splash 실제 표시 여부는 후속 device QA가 필요합니다.
@@ -154,7 +154,7 @@
 - `@capacitor/core`와 `@capacitor/cli`가 추가되었습니다.
 - 기본 `capacitor.config.json`이 추가되었습니다.
 - appId 후보는 `com.harupuli.app`입니다.
-- appName은 `하루풀이`입니다.
+- appName은 `하루풀리`입니다.
 - webDir은 `dist`입니다.
 - 아직 `@capacitor/android`와 `@capacitor/ios`는 설치하지 않았습니다.
 - 아직 Android/iOS 프로젝트는 생성하지 않았습니다.
@@ -189,7 +189,7 @@
 - Capacitor 설치와 Android 프로젝트 생성은 별도 PR에서 진행합니다.
 - Android 패키징 전 앱 리소스, localStorage, back button, 개인정보 처리방침 URL을 확인해야 합니다.
 
-이 문서는 하루풀이 웹앱을 Capacitor 기반 모바일 앱으로 패키징하기 전 준비 기준을 정리한 문서입니다.
+이 문서는 하루풀리 웹앱을 Capacitor 기반 모바일 앱으로 패키징하기 전 준비 기준을 정리한 문서입니다.
 이번 PR은 준비 문서와 검증 스크립트 추가가 목적이며, Capacitor 설치, Android/iOS 프로젝트 생성, 네이티브 앱 빌드는 아직 진행하지 않습니다.
 
 ## 1. 목적
@@ -232,7 +232,7 @@
   - `com.harupuli.app`
   - 실제 배포 전 최종 확정 필요
 - appName:
-  - `하루풀이`
+  - `하루풀리`
 - webDir:
   - `dist`
 - bundledWebRuntime:

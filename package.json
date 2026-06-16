@@ -10,6 +10,7 @@
     "generate:app-icons": "node scripts/generateAppIconPngs.mjs",
     "generate:splash-pngs": "node scripts/generateSplashPngs.mjs",
     "build": "vite build",
+    "check:brand-copy-consistency": "node scripts/checkBrandCopyConsistency.mjs",
     "check:public-privacy-policy-page": "node scripts/checkPublicPrivacyPolicyPage.mjs",
     "check:store-screenshot-sample-profile": "node scripts/checkStoreScreenshotSampleProfile.mjs",
     "check:google-play-store-listing": "node scripts/checkGooglePlayStoreListingDraft.mjs",
