@@ -1,5 +1,12 @@
 # CAPACITOR_READINESS
 
+## Android Debug Build 복구 결과
+
+- Capacitor Android sync/build 전 npm dependency install 단계가 run #29에서 정상화되었습니다.
+- Build web app, Sync Android project, Build Android debug APK 단계가 success로 확인되었습니다.
+- production 코드 변경은 없습니다.
+- 복구 결과 문서는 `docs/ANDROID_DEBUG_BUILD_RECOVERY_RESULT.md`입니다.
+
 ## Android Debug Build install dependencies 보정
 
 - Capacitor Android sync/build 전 npm dependency install 단계가 정상이어야 합니다.

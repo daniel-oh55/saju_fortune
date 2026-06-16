@@ -25,6 +25,7 @@
     "check:android-back-button-qa-result": "node scripts/checkAndroidBackButtonQaResult.mjs",
     "check:android-debug-build-workflow": "node scripts/checkAndroidDebugBuildWorkflow.mjs",
     "check:android-debug-build-readiness": "node scripts/checkAndroidDebugBuildReadiness.mjs",
+    "check:android-debug-build-recovery-result": "node scripts/checkAndroidDebugBuildRecoveryResult.mjs",
     "check:android-debug-build-success": "node scripts/checkAndroidDebugBuildSuccess.mjs",
     "check:android-device-qa-runbook": "node scripts/checkAndroidDeviceQaRunbookReadiness.mjs",
     "check:android-icon-splash-qa": "node scripts/checkAndroidIconSplashQaReadiness.mjs",
