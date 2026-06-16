@@ -1,5 +1,47 @@
 # CHANGELOG
 
+## 2026-06-16 Android Debug Build Recovery Result
+
+### Added
+- Android debug build recovery result 문서 추가
+- Android debug build recovery result 검증 스크립트 추가
+
+### Changed
+- Android QA status summary, Android packaging readiness, Capacitor readiness, Google Play privacy URL input readiness 문서에 run #29 success 및 artifact 재생성 결과 반영
+- TODO에서 Android Debug Build 재실행 성공 확인과 harupuli-debug-apk artifact 재생성 확인을 완료 처리
+
+### Tests
+- `npm install`
+- `npm run build`
+- `npm run check:android-debug-build-recovery-result`
+- `npm run check:google-play-privacy-url-input-readiness`
+- `npm run check:privacy-policy-live-url-result`
+- `npm run check:privacy-policy-build-output`
+- `npm run check:privacy-policy-url-verification`
+- `npm run check:store-screenshot-sample-profile`
+- `npm run check:brand-copy-consistency`
+- `npm run check:public-privacy-policy-page`
+- `npm run check:google-play-screenshot-readiness`
+- `npm run check:google-play-data-safety`
+- `npm run check:google-play-store-listing`
+- `npm run check:privacy-policy-url-readiness`
+- `npm run check:android-qa-status-summary`
+- `npm run check:android-back-button-qa-result`
+- `npm run check:android-icon-splash-qa-result`
+- `npm run check:android-webview-localstorage-qa-result`
+- `npm run check:android-debug-build-workflow`
+- `npm run check:capacitor-readiness`
+- `npm run check:android-packaging-readiness`
+- `npm run check:content-safety`
+- `npm run check:share-text`
+
+### Additional Checks
+- `docs/ANDROID_DEBUG_BUILD_RECOVERY_RESULT.md`, `scripts/checkAndroidDebugBuildRecoveryResult.mjs`, `check:android-debug-build-recovery-result` 존재 확인
+- PR #100 run #28 failure, PR #101 run #29 success, Install dependencies success, Build Android debug APK success 기록 확인
+- harupuli-debug-apk artifact 재생성, artifact id 7659463327, artifact digest 기록 확인
+- Android 실제 기기 QA는 Blocked 유지
+- 실제 Vercel URL 확인, Google Play Console 입력, release build, signing, AAB 생성, 실제 광고 SDK, 실제 결제 SDK, production 코드 로직, 계산 로직, routing, schemaVersion, 기존 localStorage key, Android resource/native 변경 없음
+
 ## 2026-06-16 Android Debug Build Install Deps
 
 ### Fixed

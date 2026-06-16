@@ -1,5 +1,12 @@
 # ANDROID_PACKAGING_READINESS
 
+## Android Debug Build 복구 결과
+
+- Android Debug Build run #29가 success로 확인되었습니다.
+- debug APK artifact harupuli-debug-apk가 다시 생성되었습니다.
+- release build, signing, AAB 생성은 아직 진행하지 않았습니다.
+- 복구 결과 문서는 `docs/ANDROID_DEBUG_BUILD_RECOVERY_RESULT.md`입니다.
+
 ## Android Debug Build install dependencies 보정
 
 - Android Debug Build run #28에서 Install dependencies 단계가 실패했습니다.

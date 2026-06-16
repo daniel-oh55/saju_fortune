@@ -1,5 +1,14 @@
 # ANDROID_QA_STATUS_SUMMARY
 
+## Android Debug Build 복구 결과
+
+- PR #100 Android Debug Build run #28은 Install dependencies 단계에서 실패했습니다.
+- PR #101 Android Debug Build run #29는 success로 복구되었습니다.
+- run #29에서 Install dependencies, Build web app, Sync Android project, Build Android debug APK, Upload debug APK 단계가 모두 success입니다.
+- harupuli-debug-apk artifact가 다시 생성되었습니다.
+- 복구 결과 문서는 `docs/ANDROID_DEBUG_BUILD_RECOVERY_RESULT.md`입니다.
+- Android 실제 기기 QA는 여전히 Blocked 상태입니다.
+
 ## Android Debug Build install dependencies 보정
 
 - PR #100 head 기준 Android Debug Build run #28에서 Install dependencies 단계가 실패했습니다.

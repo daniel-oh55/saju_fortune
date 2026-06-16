@@ -1,5 +1,13 @@
 # GOOGLE_PLAY_PRIVACY_URL_INPUT_READINESS
 
+## CI 복구 결과
+
+- PR #101 이후 Android Debug Build run #29가 success로 확인되었습니다.
+- harupuli-debug-apk artifact가 다시 생성되었습니다.
+- Google Play Console 입력 전 CI debug build 상태가 정상화되었습니다.
+- 실제 Console 입력은 아직 진행하지 않습니다.
+- 복구 결과 문서는 `docs/ANDROID_DEBUG_BUILD_RECOVERY_RESULT.md`입니다.
+
 ## CI 상태 메모
 
 - PR #100에서 개인정보 처리방침 URL 입력 준비 문서는 추가되었지만 Android Debug Build run #28은 Install dependencies 단계에서 실패했습니다.
