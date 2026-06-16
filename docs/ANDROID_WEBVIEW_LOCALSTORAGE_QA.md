@@ -1,6 +1,6 @@
 # ANDROID_WEBVIEW_LOCALSTORAGE_QA
 
-이 문서는 하루풀이 Android WebView 환경에서 localStorage 기반 데이터가 정상적으로 저장, 유지, 초기화되는지 확인하기 위한 QA 기준을 정리한 문서입니다.
+이 문서는 하루풀리 Android WebView 환경에서 localStorage 기반 데이터가 정상적으로 저장, 유지, 초기화되는지 확인하기 위한 QA 기준을 정리한 문서입니다.
 이번 PR은 QA 기준 정리가 목적이며, production 앱 로직과 localStorage key는 변경하지 않습니다.
 
 ## 1. 목적

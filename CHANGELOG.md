@@ -1,10 +1,22 @@
 # CHANGELOG
 
+## 2026-06-16 Brand Copy Consistency
+
+### Added
+- Brand copy consistency 검증 스크립트 추가
+- `check:brand-copy-consistency` npm script 추가
+
+### Changed
+- 공개 개인정보 처리방침 페이지의 브랜드명을 `하루풀리`로 정리
+- public privacy policy page 검증 스크립트의 정상 브랜드명 기준 보정
+- 관련 문서의 브랜드명 정합성 설명 보정
+- Store screenshot sample profile 문서의 기능명 표기를 `저장한 운세`로 유지
+
 ## 2026-06-16 Public Privacy Policy Brand Copy
 
 ### Changed
 - 공개 개인정보 처리방침 페이지의 브랜드명 표기 정합성 확인
-- Public privacy policy page 검증 스크립트에 브랜드명 오타 잔존 여부 검증 추가
+- Public privacy policy page 검증 스크립트에 이전 브랜드 오타 잔존 여부 검증 추가
 - Privacy policy URL readiness, privacy policy draft, Google Play store listing draft, Android packaging readiness, Capacitor readiness 문서에 브랜드명 정합성 확인 내용 반영
 
 ## 2026-06-16 Public Privacy Policy Page
@@ -509,7 +521,7 @@
 
 - README를 프로젝트 운영 기준에 맞게 보완
 - `.gitignore` 배포/환경 파일 제외 항목 보강
-- README에 하루풀이 브랜드 컨셉 반영
+- README에 하루풀리 브랜드 컨셉 반영
 - 주요 화면 문구를 브랜드 톤에 맞게 정리
 - 오늘운세 상세풀이를 8~12문장 수준의 조언형 콘텐츠로 개선
 - 상세풀이 문단 표시 방식 개선

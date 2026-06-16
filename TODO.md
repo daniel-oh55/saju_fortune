@@ -1,8 +1,36 @@
 # TODO
 
+## 2026-06-16 Brand copy consistency TODO
+
+- [x] 공개 개인정보 처리방침 페이지 브랜드명 정합성 재보정
+- [x] 브랜드명 오타 전역 검증 스크립트 추가
+- [ ] 개인정보 처리방침 외부 공개 URL 배포 확인
+- [ ] Google Play Console 개인정보 처리방침 URL 입력
+- [ ] Google Play 데이터 보안 양식 최종 입력
+- [ ] 테스트용 샘플 프로필 실제 입력 및 화면 확인
+- [ ] 실제 스토어 스크린샷 이미지 시작
+- [ ] Android 실제 기기 또는 에뮬레이터 준비 후 QA 재시도
+- [ ] Android 실제 기기 또는 에뮬레이터에서 launcher icon 표시 확인
+- [ ] Android 실제 기기 또는 에뮬레이터에서 round icon 표시 확인
+- [ ] Android 12 이상 adaptive icon 표시 확인
+- [ ] Android 12 이상 splash 표시 확인
+- [ ] Android back button 실제 QA 수행
+- [ ] Android WebView localStorage 실제 QA 수행
+- [ ] JDK 설치 및 JAVA_HOME 설정 후 로컬 debug build 재시도
+- [ ] release build 준비
+- [ ] signing 설정 준비
+- [ ] AAB 생성
+- [ ] 실제 provider placement ID 적용
+- [ ] 실제 광고 SDK 연동
+- [ ] 공유 이미지 생성 기능 검토
+- [ ] 앱 버전 이름 만세력 기준 확인 및 기본값 추가
+- [ ] 23시 이후 선택 옵션 문구와 사용자 이해도 확인
+- [ ] 절기 보정 적용 여부 별도 검토
+- [ ] 음력/윤달 샘플 내부 검증
+
 ## 2026-06-16 Public privacy policy brand copy TODO
 
-- [x] 공개 개인정보 처리방침 페이지 브랜드명 오타 정정 확인
+- [x] 공개 개인정보 처리방침 페이지 브랜드명 정합성 확인
 - [ ] 개인정보 처리방침 외부 공개 URL 배포 확인
 - [ ] Google Play Console 개인정보 처리방침 URL 입력
 - [ ] Google Play 데이터 보안 양식 최종 입력

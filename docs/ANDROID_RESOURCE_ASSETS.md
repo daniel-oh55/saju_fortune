@@ -21,7 +21,7 @@
 
 ## 목적
 
-하루풀이 Android 앱에서 사용할 앱 아이콘, 라운드 아이콘, adaptive icon, splash 후보 PNG를 Capacitor Android 프로젝트의 `res` 경로에 적용한 내용을 기록합니다.
+하루풀리 Android 앱에서 사용할 앱 아이콘, 라운드 아이콘, adaptive icon, splash 후보 PNG를 Capacitor Android 프로젝트의 `res` 경로에 적용한 내용을 기록합니다.
 
 이번 작업은 기존에 생성된 `public/generated-*` PNG를 Android 리소스 폴더로 복사하는 단계입니다. 새 이미지를 생성하지 않았고, production 계산 로직이나 웹앱 기능은 변경하지 않았습니다.
 

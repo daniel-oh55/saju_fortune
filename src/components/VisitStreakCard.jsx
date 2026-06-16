@@ -14,7 +14,7 @@ function VisitStreakCard({ streak }) {
       <div className="visit-streak-header">
         <div>
           <p className="eyebrow">Visit Streak</p>
-          <h2>오늘도 하루풀이 확인 완료</h2>
+          <h2>오늘도 하루풀리 확인 완료</h2>
         </div>
         <strong className="visit-streak-count">{currentStreak}</strong>
       </div>
