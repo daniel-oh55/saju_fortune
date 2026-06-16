@@ -1,5 +1,11 @@
 # CAPACITOR_READINESS
 
+## Google Play 스크린샷 준비
+
+- Capacitor Android 앱의 Google Play 스크린샷 준비 문서를 추가했습니다.
+- 실제 기기 또는 에뮬레이터에서 화면을 확인한 뒤 스크린샷을 제작합니다.
+- production 코드 변경은 없습니다.
+
 ## Google Play 데이터 보안 양식 초안
 
 - Capacitor Android 앱 제출 전 데이터 보안 양식 초안을 추가했습니다.

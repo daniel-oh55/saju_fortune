@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 2026-06-16 Google Play Screenshot Readiness
+
+### Added
+- Google Play screenshot readiness 문서 추가
+- Google Play screenshot readiness 검증 스크립트 추가
+- `check:google-play-screenshot-readiness` npm script 추가
+
+### Changed
+- Google Play store listing draft, Google Play data safety draft, Android QA status summary, Android packaging readiness, Capacitor readiness 문서에 스크린샷 준비 문서 경로 반영
+
 ## 2026-06-15 Google Play Data Safety Draft
 
 ### Added
