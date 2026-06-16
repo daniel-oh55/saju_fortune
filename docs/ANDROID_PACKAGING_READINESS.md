@@ -1,5 +1,11 @@
 # ANDROID_PACKAGING_READINESS
 
+## 개인정보 처리방침 URL 확인 상태
+
+- Android 앱 제출 전 공개 개인정보 처리방침 URL 확인 문서를 추가했습니다.
+- 문서 경로는 `docs/PRIVACY_POLICY_URL_VERIFICATION.md`입니다.
+- Vercel 배포 후 `/privacy/` 경로를 확인해야 합니다.
+
 ## 공개 개인정보 처리방침 페이지 브랜드명 보정
 
 - `public/privacy/index.html`의 브랜드명을 `하루풀이` 기준으로 확인했습니다.

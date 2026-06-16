@@ -1,5 +1,11 @@
 # GOOGLE_PLAY_STORE_LISTING_DRAFT
 
+## 개인정보 처리방침 URL 확인 연계
+
+- Google Play Console 입력 전 `/privacy/` 공개 URL 접근 여부를 확인해야 합니다.
+- 확인 문서는 `docs/PRIVACY_POLICY_URL_VERIFICATION.md`입니다.
+- 실제 Google Play Console 입력은 후속 단계입니다.
+
 ## 개인정보 처리방침 페이지 브랜드명 확인
 
 - Google Play 스토어 등록 정보의 앱 이름은 `하루풀이`입니다.

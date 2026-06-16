@@ -1,5 +1,12 @@
 # PRIVACY_POLICY_URL_READINESS
 
+## 공개 URL 확인 절차
+
+- 개인정보 처리방침 공개 URL 확인 문서를 추가했습니다.
+- 문서 경로는 `docs/PRIVACY_POLICY_URL_VERIFICATION.md`입니다.
+- Vercel 배포 후 `/privacy/` 경로 접근 여부를 확인해야 합니다.
+- 실제 Google Play Console 입력은 아직 진행하지 않습니다.
+
 ## 공개 개인정보 처리방침 페이지 브랜드명 정합성
 
 - `public/privacy/index.html`의 서비스명 표기를 `하루풀이` 기준으로 확인했습니다.

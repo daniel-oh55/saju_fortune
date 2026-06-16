@@ -1,5 +1,11 @@
 # PRIVACY_POLICY_DRAFT
 
+## 공개 URL 확인 연계
+
+- 공개 개인정보 처리방침 URL 확인 문서는 `docs/PRIVACY_POLICY_URL_VERIFICATION.md`입니다.
+- 실제 배포 URL이 확정되면 본 문서와 공개 페이지의 내용 일치 여부를 확인해야 합니다.
+- 문의처는 Google Play 제출 전 확정해야 합니다.
+
 ## 브랜드명 정합성 확인
 
 - 공개 개인정보 처리방침 후보 페이지의 서비스명 표기는 `하루풀이` 기준으로 맞췄습니다.
