@@ -1,5 +1,46 @@
 # CHANGELOG
 
+## 2026-06-16 Android Debug Build Install Deps
+
+### Fixed
+- Android Debug Build install dependencies 단계 실패 원인 확인 및 보정
+- package.json/package-lock install 상태 정합성 보정
+
+### Changed
+- Android QA status summary, Android packaging readiness, Capacitor readiness, Google Play privacy URL input readiness 문서에 CI install dependencies 보정 내용 반영
+
+### Tests
+- `npm ci` clean temp package check
+- `npm install`
+- `npm run build`
+- `npm run check:google-play-privacy-url-input-readiness`
+- `npm run check:privacy-policy-live-url-result`
+- `npm run check:privacy-policy-build-output`
+- `npm run check:privacy-policy-url-verification`
+- `npm run check:store-screenshot-sample-profile`
+- `npm run check:brand-copy-consistency`
+- `npm run check:public-privacy-policy-page`
+- `npm run check:google-play-screenshot-readiness`
+- `npm run check:google-play-data-safety`
+- `npm run check:google-play-store-listing`
+- `npm run check:privacy-policy-url-readiness`
+- `npm run check:android-qa-status-summary`
+- `npm run check:android-back-button-qa-result`
+- `npm run check:android-icon-splash-qa-result`
+- `npm run check:android-webview-localstorage-qa-result`
+- `npm run check:android-debug-build-workflow`
+- `npm run check:capacitor-readiness`
+- `npm run check:android-packaging-readiness`
+- `npm run check:content-safety`
+- `npm run check:share-text`
+
+### Additional Checks
+- package.json 유효한 JSON 확인
+- package-lock.json 유효한 JSON 및 package.json 동기화 확인
+- PR #100 추가 script가 install 단계에서 실행되지 않는 구조 확인
+- GitHub Actions Android Debug Build 재실행, Build web app, Sync Android project, Build Android debug APK, Upload debug APK, harupuli-debug-apk artifact 생성은 후속 확인 필요
+- 실제 Vercel URL 확인, Google Play Console 입력, release build, signing, AAB 생성, 실제 광고 SDK, 실제 결제 SDK, production 코드 로직, 계산 로직, routing, schemaVersion, 기존 localStorage key, Android resource/native 변경 없음
+
 ## 2026-06-16 Google Play Privacy URL Input Readiness
 
 ### Added

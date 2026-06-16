@@ -1,5 +1,11 @@
 # CAPACITOR_READINESS
 
+## Android Debug Build install dependencies 보정
+
+- Capacitor Android sync/build 전 npm dependency install 단계가 정상이어야 합니다.
+- PR #100에서 Android Debug Build가 Install dependencies 단계에서 실패했으므로 이번 PR에서 보정합니다.
+- production 코드 변경은 없습니다.
+
 ## Google Play 개인정보 처리방침 URL 입력 준비
 
 - Capacitor Android 앱 제출 전 Google Play Console 개인정보 처리방침 URL 입력 준비 문서를 추가했습니다.

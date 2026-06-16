@@ -1,5 +1,11 @@
 # GOOGLE_PLAY_PRIVACY_URL_INPUT_READINESS
 
+## CI 상태 메모
+
+- PR #100에서 개인정보 처리방침 URL 입력 준비 문서는 추가되었지만 Android Debug Build run #28은 Install dependencies 단계에서 실패했습니다.
+- Google Play Console 입력 전 CI debug build 상태가 정상화되어야 합니다.
+- 실제 Console 입력은 아직 진행하지 않습니다.
+
 이 문서는 하루풀이 Android 앱을 Google Play Console에 제출하기 전 개인정보 처리방침 URL 입력 준비 상태를 정리한 문서입니다.
 이번 PR은 입력 준비 문서화가 목적이며, 실제 Google Play Console 입력, 실제 Vercel URL 확정, release build, signing, AAB 생성, production 앱 로직 변경은 진행하지 않습니다.
 

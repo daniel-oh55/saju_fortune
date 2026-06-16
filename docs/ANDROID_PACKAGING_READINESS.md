@@ -1,5 +1,11 @@
 # ANDROID_PACKAGING_READINESS
 
+## Android Debug Build install dependencies 보정
+
+- Android Debug Build run #28에서 Install dependencies 단계가 실패했습니다.
+- release build, signing, AAB 생성 전 debug build install 단계가 정상화되어야 합니다.
+- 이번 PR은 install 단계 보정이 목적이며 Android native/resource는 변경하지 않습니다.
+
 ## Google Play 개인정보 처리방침 URL 입력 준비
 
 - Android 앱 제출 전 Google Play Console 개인정보 처리방침 URL 입력 준비 문서를 추가했습니다.
