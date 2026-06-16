@@ -1,5 +1,11 @@
 # CAPACITOR_READINESS
 
+## 스토어 스크린샷 샘플 프로필 준비
+
+- Capacitor Android 앱의 Google Play 스크린샷 촬영 전 샘플 프로필 기준이 추가되었습니다.
+- 실제 기기 또는 에뮬레이터에서 샘플 프로필로 화면을 확인한 뒤 스크린샷을 시작합니다.
+- production 코드 변경은 없습니다.
+
 ## Google Play 스크린샷 준비
 
 - Capacitor Android 앱의 Google Play 스크린샷 준비 문서를 추가했습니다.

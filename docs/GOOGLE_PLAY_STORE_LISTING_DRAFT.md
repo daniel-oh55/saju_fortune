@@ -1,5 +1,11 @@
 # GOOGLE_PLAY_STORE_LISTING_DRAFT
 
+## 스크린샷 샘플 프로필 기준
+
+- Google Play 스크린샷에는 테스트용 샘플 프로필만 사용합니다.
+- 기준 문서는 `docs/STORE_SCREENSHOT_SAMPLE_PROFILE.md`입니다.
+- 실제 사용자 개인정보가 노출되지 않도록 주의합니다.
+
 이 문서는 하루풀이 Android 앱의 Google Play 스토어 등록 정보 초안을 정리한 문서입니다.
 
 이번 PR은 스토어 등록 문구 준비가 목적이며, production 로직, Android native code, release build, signing, 실제 광고 SDK는 변경하지 않습니다.

@@ -1,5 +1,12 @@
 # GOOGLE_PLAY_SCREENSHOT_READINESS
 
+## 테스트용 샘플 프로필 기준
+
+- 스토어 스크린샷 촬영 전 테스트용 샘플 프로필 기준을 확인합니다.
+- 문서 경로는 `docs/STORE_SCREENSHOT_SAMPLE_PROFILE.md`입니다.
+- 실제 사용자의 생년월일, 출생시간, 성별은 스크린샷에 노출되지 않아야 합니다.
+- 실제 스크린샷 이미지는 아직 생성하지 않았습니다.
+
 이 문서는 하루풀이 Android 앱을 Google Play에 제출하기 전 스토어 스크린샷 준비 항목을 정리한 문서입니다.
 이번 PR은 스크린샷 준비 문서화가 목적이며, 실제 스크린샷 이미지 생성, Google Play Console 입력, production 앱 로직 변경은 진행하지 않습니다.
 
