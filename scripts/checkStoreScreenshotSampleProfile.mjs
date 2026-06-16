@@ -56,6 +56,8 @@ logResult('sample_profile_doc_exists', sampleProfileDocExists);
 assertCondition(sampleProfileDocExists, 'docs/STORE_SCREENSHOT_SAMPLE_PROFILE.md should exist');
 
 const doc = sampleProfileDocExists ? readText(sampleProfileDocPath) : '';
+const correctBrand = '하루풀이';
+const typoBrand = '하루' + '풀리';
 
 const docChecks = [
   [
@@ -83,7 +85,12 @@ const docChecks = [
     'sample profile doc should mention fortune detail',
   ],
   ['doc_mentions_saju_insight', doc.includes('사주 인사이트'), 'sample profile doc should mention saju insight'],
-  ['doc_mentions_saved_readings', doc.includes('저장한 운세'), 'sample profile doc should mention saved readings'],
+  ['doc_mentions_saved_readings', doc.includes('저장한 풀이'), 'sample profile doc should mention saved readings'],
+  [
+    'doc_has_no_saved_readings_old_label',
+    !doc.includes('저장한 운세'),
+    'sample profile doc should not contain the previous saved readings label',
+  ],
   [
     'doc_mentions_privacy_screen',
     includesAny(doc, ['개인정보 안내', '동의 설정']),
@@ -91,9 +98,16 @@ const docChecks = [
   ],
   [
     'doc_mentions_avoid_claims',
-    includesAny(doc, ['반드시 성공합니다', '사자라면 성공합니다', '병이 낫습니다']),
+    doc.includes('투자하면 성공합니다'),
     'sample profile doc should include avoided claims examples',
   ],
+  [
+    'doc_has_no_wrong_avoid_claim',
+    !doc.includes('사자라면 성공합니다'),
+    'sample profile doc should not contain the previous avoided claim example',
+  ],
+  ['doc_mentions_correct_brand', doc.includes(correctBrand), 'sample profile doc should mention correct brand'],
+  ['doc_has_no_brand_typo', !doc.includes(typoBrand), 'sample profile doc should not contain brand typo'],
   [
     'doc_mentions_pm_clear',
     doc.includes('adb shell pm clear com.harupuli.app'),
