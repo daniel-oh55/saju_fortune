@@ -1,5 +1,11 @@
 # GOOGLE_PLAY_STORE_LISTING_DRAFT
 
+## 데이터 보안 양식 입력 준비
+
+- 스토어 등록 정보와 데이터 보안 양식 응답이 충돌하지 않아야 합니다.
+- 데이터 보안 양식 입력 준비 문서는 `docs/GOOGLE_PLAY_DATA_SAFETY_INPUT_READINESS.md`입니다.
+- 실제 Console 입력은 후속 단계입니다.
+
 ## 개인정보 처리방침 문의처
 
 - 개인정보 처리방침 문의처 확정 준비 문서는 `docs/PRIVACY_POLICY_CONTACT_READINESS.md`입니다.

@@ -1,5 +1,11 @@
 # PRIVACY_POLICY_URL_READINESS
 
+## 데이터 보안 양식 입력 준비 연계
+
+- 개인정보 처리방침 URL readiness는 Google Play 데이터 보안 양식 입력 준비와 함께 확인해야 합니다.
+- 데이터 보안 양식 입력 준비 문서는 `docs/GOOGLE_PLAY_DATA_SAFETY_INPUT_READINESS.md`입니다.
+- 실제 URL과 문의처가 확정되기 전에는 최종 Console 입력을 진행하지 않습니다.
+
 ## 문의처 확정 준비
 
 - 공개 URL 사용 전 개인정보 처리방침 문의처 상태를 확인해야 합니다.

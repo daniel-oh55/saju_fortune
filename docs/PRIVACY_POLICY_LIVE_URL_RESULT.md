@@ -1,5 +1,11 @@
 # PRIVACY_POLICY_LIVE_URL_RESULT
 
+## 데이터 보안 양식 입력 전 URL 확인
+
+- Google Play 데이터 보안 양식 최종 입력 전 실제 개인정보 처리방침 URL 상태를 확인해야 합니다.
+- 데이터 보안 양식 입력 준비 문서는 `docs/GOOGLE_PLAY_DATA_SAFETY_INPUT_READINESS.md`입니다.
+- 실제 URL이 Pending이면 최종 입력은 보류합니다.
+
 ## 문의처 확인 상태
 
 - 실제 Vercel URL 확인과 별도로 개인정보 처리방침 문의처 확정 상태를 확인해야 합니다.

@@ -15,6 +15,7 @@
     "check:store-screenshot-sample-profile": "node scripts/checkStoreScreenshotSampleProfile.mjs",
     "check:google-play-store-listing": "node scripts/checkGooglePlayStoreListingDraft.mjs",
     "check:google-play-data-safety": "node scripts/checkGooglePlayDataSafetyDraft.mjs",
+    "check:google-play-data-safety-input-readiness": "node scripts/checkGooglePlayDataSafetyInputReadiness.mjs",
     "check:google-play-privacy-url-input-readiness": "node scripts/checkGooglePlayPrivacyUrlInputReadiness.mjs",
     "check:google-play-screenshot-readiness": "node scripts/checkGooglePlayScreenshotReadiness.mjs",
     "check:privacy-policy-url-readiness": "node scripts/checkPrivacyPolicyUrlReadiness.mjs",

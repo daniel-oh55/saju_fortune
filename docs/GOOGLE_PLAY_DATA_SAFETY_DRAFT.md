@@ -1,5 +1,12 @@
 # GOOGLE_PLAY_DATA_SAFETY_DRAFT
 
+## 데이터 보안 양식 입력 준비
+
+- Google Play 데이터 보안 양식 최종 입력 전 준비 문서를 추가했습니다.
+- 문서 경로는 `docs/GOOGLE_PLAY_DATA_SAFETY_INPUT_READINESS.md`입니다.
+- 실제 Console 입력은 아직 진행하지 않습니다.
+- 실제 개인정보 처리방침 URL과 문의처가 확정되기 전에는 최종 입력하지 않습니다.
+
 ## 개인정보 문의처
 
 - 데이터 삭제 요청 또는 개인정보 문의를 받을 수 있는 연락처가 필요합니다.
