@@ -1,5 +1,12 @@
 # PRIVACY_POLICY_URL_VERIFICATION
 
+## build output 확인
+
+- 개인정보 처리방침 페이지의 build output 확인 문서를 추가했습니다.
+- 문서 경로는 `docs/PRIVACY_POLICY_BUILD_OUTPUT_VERIFICATION.md`입니다.
+- `npm run build` 후 `dist/privacy/index.html` 생성 여부를 확인해야 합니다.
+- 실제 Vercel URL 접근 확인은 후속 단계입니다.
+
 이 문서는 하루풀이 공개 개인정보 처리방침 페이지가 Vercel 배포 후 `/privacy/` 경로에서 접근 가능한지 확인하기 위한 절차와 결과 기록 문서입니다.
 이번 PR은 URL 확인 준비 문서화가 목적이며, 실제 Google Play Console 입력, release build, signing, AAB 생성, production 앱 로직 변경은 진행하지 않습니다.
 

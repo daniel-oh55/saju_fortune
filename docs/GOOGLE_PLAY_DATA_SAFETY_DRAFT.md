@@ -1,5 +1,11 @@
 # GOOGLE_PLAY_DATA_SAFETY_DRAFT
 
+## 개인정보 처리방침 build output 확인
+
+- 데이터 보안 양식 최종 입력 전 공개 개인정보 처리방침 페이지가 build output에 포함되는지 확인해야 합니다.
+- 확인 문서는 `docs/PRIVACY_POLICY_BUILD_OUTPUT_VERIFICATION.md`입니다.
+- 공개 페이지와 데이터 보안 양식 초안이 충돌하지 않아야 합니다.
+
 ## 개인정보 처리방침 URL 확인 연계
 
 - 데이터 보안 양식 최종 입력 전 공개 개인정보 처리방침 URL을 확인해야 합니다.
