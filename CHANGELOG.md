@@ -1,5 +1,50 @@
 # CHANGELOG
 
+## 2026-06-16 Privacy Policy Contact Readiness
+
+### Added
+- Privacy policy contact readiness 문서 추가
+- Privacy policy contact readiness 검증 스크립트 추가
+
+### Changed
+- Privacy policy draft, privacy policy URL readiness, privacy policy live URL result, Google Play privacy URL input readiness, Google Play store listing draft, Google Play data safety draft, Android packaging readiness 문서에 문의처 확정 준비 문서 경로 반영
+- TODO에 실제 문의처 확정, 수신 가능 여부 확인, public privacy page 및 PrivacyInfoPage 반영 항목 추가
+
+### Tests
+- `npm install`
+- `npm run build`
+- `npm run check:privacy-policy-contact-readiness`
+- `npm run check:privacy-policy-live-url-result`
+- `npm run check:android-debug-build-recovery-result`
+- `npm run check:google-play-privacy-url-input-readiness`
+- `npm run check:privacy-policy-build-output`
+- `npm run check:privacy-policy-url-verification`
+- `npm run check:store-screenshot-sample-profile`
+- `npm run check:brand-copy-consistency`
+- `npm run check:public-privacy-policy-page`
+- `npm run check:google-play-screenshot-readiness`
+- `npm run check:google-play-data-safety`
+- `npm run check:google-play-store-listing`
+- `npm run check:privacy-policy-url-readiness`
+- `npm run check:android-back-button-qa-result`
+- `npm run check:android-icon-splash-qa-result`
+- `npm run check:android-webview-localstorage-qa-result`
+- `npm run check:android-qa-status-summary`
+- `npm run check:android-debug-build-workflow`
+- `npm run check:capacitor-readiness`
+- `npm run check:android-packaging-readiness`
+- `npm run check:content-safety`
+- `npm run check:share-text`
+
+### Additional Checks
+- `docs/PRIVACY_POLICY_CONTACT_READINESS.md`, `scripts/checkPrivacyPolicyContactReadiness.mjs`, `check:privacy-policy-contact-readiness` 존재 확인
+- 문의처 상태 Pending 또는 미확정 유지 확인
+- 임의 이메일 또는 임의 연락처를 작성하지 않는 기준 확인
+- 문의처 후보 유형, Google Play 개발자 계정 지원 이메일, 고객 지원 이메일 또는 개인정보 문의 전용 이메일, 문의처 확정 전 확인 기준, 문의처 반영 차단 조건 확인
+- `public/privacy/index.html`, `docs/PRIVACY_POLICY_DRAFT.md`, PrivacyInfoPage 연결 확인
+- 실제 문의처 반영, 실제 Vercel URL 확인, Google Play Console 입력, release build, signing, AAB 생성, 실제 광고 SDK, 실제 결제 SDK 없음
+- production 코드 로직, 계산 로직, routing, schemaVersion, 기존 localStorage key, Android resource/native 변경 없음
+
 ## 2026-06-16 Privacy Policy Live URL Check Result
 
 ### Changed

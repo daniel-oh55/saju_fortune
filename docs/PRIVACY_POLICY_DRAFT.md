@@ -1,5 +1,12 @@
 # PRIVACY_POLICY_DRAFT
 
+## 문의처 확정 준비
+
+- 개인정보 처리방침 문의처 확정 준비 문서를 추가했습니다.
+- 문서 경로는 `docs/PRIVACY_POLICY_CONTACT_READINESS.md`입니다.
+- 실제 문의처는 아직 미확정입니다.
+- 실제 문의처가 확정되기 전까지 공개 페이지와 앱 내부 안내에 임의 연락처를 반영하지 않습니다.
+
 ## build output 확인 연계
 
 - 공개 개인정보 처리방침 페이지가 build output에 포함되는지 확인해야 합니다.

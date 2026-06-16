@@ -1,5 +1,11 @@
 # GOOGLE_PLAY_PRIVACY_URL_INPUT_READINESS
 
+## 문의처 확정 준비
+
+- Google Play Console 개인정보 처리방침 URL 입력 전 문의처 상태를 확인해야 합니다.
+- 문의처 확정 준비 문서는 `docs/PRIVACY_POLICY_CONTACT_READINESS.md`입니다.
+- 실제 문의처가 확정되기 전에는 Console 입력 전 최종 검토가 필요합니다.
+
 ## 실제 URL 확인 결과 연계
 
 - 개인정보 처리방침 실제 live URL 확인 결과는 `docs/PRIVACY_POLICY_LIVE_URL_RESULT.md`에서 관리합니다.
