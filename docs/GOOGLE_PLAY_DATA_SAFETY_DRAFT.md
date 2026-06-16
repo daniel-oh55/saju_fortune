@@ -1,5 +1,11 @@
 # GOOGLE_PLAY_DATA_SAFETY_DRAFT
 
+## 개인정보 처리방침 URL 입력 준비
+
+- 데이터 보안 양식 최종 입력 전 개인정보 처리방침 URL 입력 준비 상태를 확인해야 합니다.
+- 확인 문서는 `docs/GOOGLE_PLAY_PRIVACY_URL_INPUT_READINESS.md`입니다.
+- 실제 URL 확인 전에는 Console 입력을 진행하지 않습니다.
+
 ## 개인정보 처리방침 live URL 확인 결과
 
 - 데이터 보안 양식 최종 입력 전 실제 개인정보 처리방침 URL 확인 결과를 확인해야 합니다.

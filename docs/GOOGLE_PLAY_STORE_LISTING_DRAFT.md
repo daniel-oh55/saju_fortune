@@ -1,5 +1,11 @@
 # GOOGLE_PLAY_STORE_LISTING_DRAFT
 
+## 개인정보 처리방침 URL 입력 준비
+
+- Google Play Console 개인정보 처리방침 URL 입력 준비 문서를 추가했습니다.
+- 문서 경로는 `docs/GOOGLE_PLAY_PRIVACY_URL_INPUT_READINESS.md`입니다.
+- 실제 URL 확인 전에는 Console 입력을 진행하지 않습니다.
+
 ## 개인정보 처리방침 live URL 확인 결과
 
 - Google Play Console 입력 전 실제 `/privacy/` URL 확인 결과를 기록해야 합니다.

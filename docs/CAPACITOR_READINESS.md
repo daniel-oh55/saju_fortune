@@ -1,5 +1,11 @@
 # CAPACITOR_READINESS
 
+## Google Play 개인정보 처리방침 URL 입력 준비
+
+- Capacitor Android 앱 제출 전 Google Play Console 개인정보 처리방침 URL 입력 준비 문서를 추가했습니다.
+- 실제 URL 확인 전에는 Console 입력을 진행하지 않습니다.
+- production 코드 변경은 없습니다.
+
 ## 개인정보 처리방침 live URL 확인 결과
 
 - Capacitor Android 앱 제출 전 실제 `/privacy/` URL 확인 결과를 기록해야 합니다.

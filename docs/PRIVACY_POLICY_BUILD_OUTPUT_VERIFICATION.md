@@ -1,5 +1,11 @@
 # PRIVACY_POLICY_BUILD_OUTPUT_VERIFICATION
 
+## Google Play Console 입력 준비 연계
+
+- build output 확인 후 실제 URL 확인과 Google Play Console 입력 준비를 진행합니다.
+- 입력 준비 문서는 `docs/GOOGLE_PLAY_PRIVACY_URL_INPUT_READINESS.md`입니다.
+- 실제 Console 입력은 후속 단계입니다.
+
 ## live URL 결과 문서 연계
 
 - build output 확인 이후 실제 Vercel 배포 URL 확인 결과를 별도 문서에 기록합니다.

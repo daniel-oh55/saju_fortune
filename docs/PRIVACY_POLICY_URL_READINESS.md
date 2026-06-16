@@ -1,5 +1,11 @@
 # PRIVACY_POLICY_URL_READINESS
 
+## Google Play Console 입력 준비 연계
+
+- 개인정보 처리방침 URL 입력 준비 문서는 `docs/GOOGLE_PLAY_PRIVACY_URL_INPUT_READINESS.md`입니다.
+- 실제 HTTPS URL 확정 전에는 Google Play Console에 입력하지 않습니다.
+- URL 입력 전 공개 페이지, 데이터 보안 양식, 앱 내부 개인정보 안내가 충돌하지 않는지 확인해야 합니다.
+
 ## live URL 결과 문서 연계
 
 - 개인정보 처리방침 공개 URL 확인 결과 문서는 `docs/PRIVACY_POLICY_LIVE_URL_RESULT.md`입니다.

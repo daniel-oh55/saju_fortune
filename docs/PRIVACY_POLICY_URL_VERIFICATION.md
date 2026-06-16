@@ -1,5 +1,11 @@
 # PRIVACY_POLICY_URL_VERIFICATION
 
+## Google Play Console 입력 준비 연계
+
+- Google Play Console 개인정보 처리방침 URL 입력 준비 문서를 추가했습니다.
+- 문서 경로는 `docs/GOOGLE_PLAY_PRIVACY_URL_INPUT_READINESS.md`입니다.
+- 실제 URL 확인 전에는 Console 입력을 진행하지 않습니다.
+
 ## 실제 URL 확인 결과 문서
 
 - 실제 Vercel 배포 URL 확인 결과를 기록하기 위한 문서를 추가했습니다.
