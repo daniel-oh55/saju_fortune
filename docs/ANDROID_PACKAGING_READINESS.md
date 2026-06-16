@@ -1,5 +1,11 @@
 # ANDROID_PACKAGING_READINESS
 
+## 개인정보 처리방침 문의처 준비
+
+- Android 앱 제출 전 개인정보 처리방침 문의처 상태를 확인해야 합니다.
+- 문의처 확정 준비 문서는 `docs/PRIVACY_POLICY_CONTACT_READINESS.md`입니다.
+- release build, signing, AAB 생성 전 제출 문서의 문의처 상태를 점검합니다.
+
 ## Android Debug Build 복구 결과
 
 - Android Debug Build run #29가 success로 확인되었습니다.

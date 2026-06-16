@@ -1,5 +1,11 @@
 # PRIVACY_POLICY_URL_READINESS
 
+## 문의처 확정 준비
+
+- 공개 URL 사용 전 개인정보 처리방침 문의처 상태를 확인해야 합니다.
+- 문의처 확정 준비 문서는 `docs/PRIVACY_POLICY_CONTACT_READINESS.md`입니다.
+- 문의처가 미확정이면 Google Play 제출 전 보완해야 합니다.
+
 ## live URL 결과 상태
 
 - 개인정보 처리방침 공개 URL readiness는 build output 확인과 live URL 확인 결과를 함께 봅니다.

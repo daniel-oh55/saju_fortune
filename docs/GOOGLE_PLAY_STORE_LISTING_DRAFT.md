@@ -1,5 +1,10 @@
 # GOOGLE_PLAY_STORE_LISTING_DRAFT
 
+## 개인정보 처리방침 문의처
+
+- 개인정보 처리방침 문의처 확정 준비 문서는 `docs/PRIVACY_POLICY_CONTACT_READINESS.md`입니다.
+- 스토어 등록 정보의 개발자 연락처와 개인정보 처리방침 문의처가 충돌하지 않아야 합니다.
+
 ## 개인정보 처리방침 URL 입력 준비
 
 - Google Play Console 개인정보 처리방침 URL 입력 준비 문서를 추가했습니다.

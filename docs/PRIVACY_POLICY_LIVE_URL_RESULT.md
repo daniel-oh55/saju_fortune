@@ -1,5 +1,11 @@
 # PRIVACY_POLICY_LIVE_URL_RESULT
 
+## 문의처 확인 상태
+
+- 실제 Vercel URL 확인과 별도로 개인정보 처리방침 문의처 확정 상태를 확인해야 합니다.
+- 문의처 확정 준비 문서는 `docs/PRIVACY_POLICY_CONTACT_READINESS.md`입니다.
+- 현재 문의처 상태는 Pending입니다.
+
 ## Google Play Console 입력 준비 문서 연계
 
 - 개인정보 처리방침 URL 입력 준비 문서를 추가했습니다.
