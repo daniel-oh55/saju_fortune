@@ -1,5 +1,11 @@
 # PRIVACY_POLICY_URL_READINESS
 
+## 스크린샷 샘플 프로필 주의사항
+
+- 스토어 스크린샷에는 실제 사용자 개인정보가 노출되지 않아야 합니다.
+- 테스트용 샘플 프로필 기준은 `docs/STORE_SCREENSHOT_SAMPLE_PROFILE.md`입니다.
+- 개인정보 처리방침 URL의 데이터 저장 설명과 스크린샷에 표시되는 문구가 충돌하지 않아야 합니다.
+
 이 문서는 하루풀이 앱을 Google Play에 제출하기 전 개인정보 처리방침 URL을 준비하기 위한 체크리스트입니다.
 이번 PR은 개인정보 처리방침 URL 준비 문서화가 목적이며, 실제 URL 배포, Google Play Console 입력, production 앱 로직 변경은 진행하지 않습니다.
 

@@ -2995,3 +2995,54 @@
 #### 남은 이슈
 
 - 브라우저에서 광고 해금 후 상세풀이 문단 표시 확인 필요
+# 2026-06-16 Store Screenshot Sample Profile
+
+## 작업 내용
+
+- PR 목적: 스토어 스크린샷용 테스트 샘플 프로필 기준 추가
+- `STORE_SCREENSHOT_SAMPLE_PROFILE.md` 신규 추가
+- `checkStoreScreenshotSampleProfile` 신규 추가
+- 신규 npm script: `check:store-screenshot-sample-profile`
+- 대표 샘플 프로필 기준 작성
+- 대체 샘플 프로필 기준 작성
+- 화면별 노출 가능/노출 금지 항목 정리
+- 샘플 운세 문구 기준 정리
+- 피해야 할 문구 정리
+- 개인정보 안내 화면 촬영 기준 정리
+- 저장한 운세 화면 촬영 기준 정리
+- 실제 스크린샷 이미지 생성 미진행
+- 테스트용 샘플 프로필을 앱에 내장하지 않음
+- Google Play Console 업로드 미진행
+- Android 실제 기기 QA Blocked 상태 유지
+- production 코드 변경 없음
+- production 계산 로직 변경 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+- Android resource/native 변경 없음
+- release build 미진행
+- signing 미진행
+- AAB 생성 미진행
+- iOS 프로젝트 생성 없음
+- service worker 구현 없음
+- 실제 광고 SDK 추가 없음
+- 실제 결제 SDK 추가 없음
+- `@capacitor/app` 추가 없음
+
+## 테스트 결과
+
+- `npm install`: 성공, 의존성 변경 없음, 기존 high severity audit 경고 2건 표시
+- `npm run build`: 성공, 기존 500 kB chunk size 경고 표시
+- `npm run check:store-screenshot-sample-profile`: 성공
+- `npm run check:google-play-screenshot-readiness`: 성공
+- `npm run check:google-play-data-safety`: 성공
+- `npm run check:privacy-policy-url-readiness`: 성공
+- `npm run check:google-play-store-listing`: 성공
+- `npm run check:android-qa-status-summary`: 성공
+- `npm run check:android-back-button-qa-result`: 성공
+- `npm run check:android-icon-splash-qa-result`: 성공
+- `npm run check:android-webview-localstorage-qa-result`: 성공
+- `npm run check:android-debug-build-workflow`: 성공
+- `npm run check:capacitor-readiness`: 성공
+- `npm run check:android-packaging-readiness`: 성공
+- `npm run check:content-safety`: 성공
+- `npm run check:share-text`: 성공

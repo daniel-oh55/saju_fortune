@@ -1,5 +1,11 @@
 # ANDROID_QA_STATUS_SUMMARY
 
+## 스크린샷 샘플 프로필 준비 상태
+
+- 스토어 스크린샷 촬영 때 사용할 테스트용 샘플 프로필 기준이 추가되었습니다.
+- 문서 경로는 `docs/STORE_SCREENSHOT_SAMPLE_PROFILE.md`입니다.
+- 실제 스크린샷 촬영은 Android 실제 기기 또는 에뮬레이터 QA 환경 준비 후 진행합니다.
+
 ## 스크린샷 준비 상태
 
 - Google Play 스크린샷 준비 문서를 추가했습니다.

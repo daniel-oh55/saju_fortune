@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 2026-06-16 Store Screenshot Sample Profile
+
+### Added
+- Store screenshot sample profile 문서 추가
+- Store screenshot sample profile 검증 스크립트 추가
+- `check:store-screenshot-sample-profile` npm script 추가
+
+### Changed
+- Google Play screenshot readiness, store listing draft, data safety draft, privacy policy URL readiness, Android QA status summary, Android packaging readiness, Capacitor readiness 문서에 샘플 프로필 기준 문서 경로 반영
+
 ## 2026-06-16 Google Play Screenshot Readiness
 
 ### Added

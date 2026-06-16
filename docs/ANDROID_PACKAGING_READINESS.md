@@ -1,5 +1,11 @@
 # ANDROID_PACKAGING_READINESS
 
+## 스토어 스크린샷 샘플 프로필 준비
+
+- Google Play 스크린샷 촬영용 테스트 샘플 프로필 기준이 추가되었습니다.
+- 문서 경로는 `docs/STORE_SCREENSHOT_SAMPLE_PROFILE.md`입니다.
+- 실제 스크린샷 이미지는 아직 생성하지 않았습니다.
+
 ## Google Play 스크린샷 준비
 
 - Google Play 스크린샷 준비 문서를 추가했습니다.
