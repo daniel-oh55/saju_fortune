@@ -1,5 +1,11 @@
 # ANDROID_PACKAGING_READINESS
 
+## 샘플 프로필 화면 QA 결과
+
+- Android 앱 제출 전 스토어 스크린샷용 샘플 프로필 화면 QA 결과를 확인해야 합니다.
+- 문서 경로는 `docs/STORE_SCREENSHOT_SAMPLE_PROFILE_SCREEN_QA_RESULT.md`입니다.
+- release build, signing, AAB 생성은 아직 진행하지 않습니다.
+
 ## 스토어 스크린샷 캡처 QA
 
 - Android 앱 제출 전 스토어 스크린샷 캡처 QA 결과를 확인해야 합니다.

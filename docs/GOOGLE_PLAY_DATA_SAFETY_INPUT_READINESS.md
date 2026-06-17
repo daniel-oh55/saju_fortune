@@ -1,5 +1,11 @@
 # GOOGLE_PLAY_DATA_SAFETY_INPUT_READINESS
 
+## 샘플 프로필 화면 QA 결과 연계
+
+- 샘플 프로필 화면 QA에서 실제 사용자 개인정보가 노출되지 않아야 합니다.
+- 화면 QA 결과 문서는 `docs/STORE_SCREENSHOT_SAMPLE_PROFILE_SCREEN_QA_RESULT.md`입니다.
+- 실제 스크린샷 이미지는 아직 생성하지 않습니다.
+
 ## 스토어 스크린샷 캡처 QA 연계
 
 - 스토어 스크린샷에 개인정보 처리방침, 데이터 보안 양식, 앱 내부 안내와 충돌하는 문구가 없어야 합니다.
