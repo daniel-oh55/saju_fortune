@@ -1,5 +1,42 @@
 # CHANGELOG
 
+## 2026-06-17 Home UI Refresh V1
+
+### Changed
+- 홈 화면을 `고요한 밤의 운세 다이어리` 콘셉트로 1차 리프레시
+- 디자인 토큰, 카드, CTA, 빠른 메뉴, 광고 placeholder 위치 기준 개선
+- 스토어 스크린샷 및 Android QA 관련 문서에 디자인 변경 후 재확인 필요성 반영
+
+### Tests
+- `npm install`
+- `npm run build`
+- `npm run check:content-safety`
+- `npm run check:share-text`
+- `npm run check:brand-copy-consistency`
+- `npm run check:google-play-screenshot-readiness`
+- `npm run check:store-screenshot-capture-qa-result`
+- `npm run check:store-screenshot-sample-profile-screen-qa-result`
+- `npm run check:android-qa-status-summary`
+- `npm run check:android-packaging-readiness`
+- `npm run check:capacitor-readiness`
+- `npm run check:android-debug-apk-artifact-refresh-run38`
+
+### Additional Checks
+- 홈 화면이 깨지지 않는지 확인 필요
+- 모바일 폭에서 레이아웃이 자연스러운지 확인 필요
+- CTA 버튼 표시 확인 필요
+- 빠른 메뉴 동작 확인 필요
+- `저장한 풀이` 명칭 유지
+- 저장 기능의 이전 명칭 미사용
+- 금지 문구 미사용
+- 실제 광고 SDK 미추가
+- 실제 이미지 파일 미추가
+- production 계산 로직 변경 없음
+- routing 변경 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+- Android native/resource 변경 없음
+
 ## 2026-06-17 Android Artifact Refresh Wording Consistency
 
 ### Fixed

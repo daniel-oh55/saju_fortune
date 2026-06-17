@@ -1,5 +1,13 @@
 # ANDROID_QA_STATUS_SUMMARY
 
+## 2026-06-17 홈 화면 디자인 리프레시 후 Android 화면 QA 필요
+
+- 홈 화면이 `고요한 밤의 운세 다이어리` 콘셉트로 1차 리프레시되었습니다.
+- Android 실제 기기 또는 Android Emulator에서 새 홈 화면의 표시 상태를 다시 확인해야 합니다.
+- 확인 대상은 상단 앱명, 히어로 카드, CTA 버튼, 빠른 메뉴, 개인정보 안내 카드, 오늘의 한 줄 풀이, 최근 본 풀이, 광고 placeholder입니다.
+- 실제 APK 다운로드, APK 설치, 앱 실행, Android 실제 기기 QA는 아직 완료로 판정하지 않습니다.
+- Android native code, AndroidManifest.xml, Android res 리소스 파일은 이번 디자인 PR에서 변경하지 않습니다.
+
 ## run #38 artifact 기준 갱신
 
 - Android Debug Build run #38 artifact 기준 문서를 추가했습니다.

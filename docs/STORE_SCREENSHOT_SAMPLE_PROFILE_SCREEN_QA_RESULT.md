@@ -1,5 +1,13 @@
 # STORE_SCREENSHOT_SAMPLE_PROFILE_SCREEN_QA_RESULT
 
+## 2026-06-17 홈 화면 디자인 변경 후 샘플 QA 필요
+
+- 홈 화면 1차 디자인 리프레시 이후 테스트용 샘플 프로필 기준 화면 QA를 다시 확인해야 합니다.
+- 실제 샘플 프로필 입력 및 실제 화면 확인은 아직 Pending입니다.
+- 새 홈 화면에서 `하루풀이`, CTA, 빠른 메뉴, 오늘의 한 줄 풀이, 최근 본 풀이, 광고 placeholder가 의도대로 보이는지 확인해야 합니다.
+- 실제 사용자 이름, 생년월일, 연락처 같은 민감정보가 스크린샷 후보 화면에 노출되지 않는지 확인해야 합니다.
+- 운세 콘텐츠가 참고용이며 전문적인 판단을 대체하지 않는다는 취지의 안내가 유지되는지 확인해야 합니다.
+
 ## Android device QA unblock readiness 연결
 
 - 테스트용 샘플 프로필 화면 확인은 Android device QA unblock readiness 확인 이후 진행합니다.
