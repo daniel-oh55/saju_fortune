@@ -33,6 +33,7 @@
     "check:android-debug-build-success": "node scripts/checkAndroidDebugBuildSuccess.mjs",
     "check:android-debug-apk-install-launch-qa-result": "node scripts/checkAndroidDebugApkInstallLaunchQaResult.mjs",
     "check:android-debug-apk-qa-handoff-readiness": "node scripts/checkAndroidDebugApkQaHandoffReadiness.mjs",
+    "check:android-device-qa-unblock-readiness": "node scripts/checkAndroidDeviceQaUnblockReadiness.mjs",
     "check:android-device-qa-execution-result": "node scripts/checkAndroidDeviceQaExecutionResult.mjs",
     "check:android-device-qa-runbook": "node scripts/checkAndroidDeviceQaRunbookReadiness.mjs",
     "check:android-icon-splash-qa": "node scripts/checkAndroidIconSplashQaReadiness.mjs",

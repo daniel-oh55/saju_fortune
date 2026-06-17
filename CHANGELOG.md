@@ -1,5 +1,58 @@
 # CHANGELOG
 
+## 2026-06-17 Android Device QA Unblock Readiness
+
+### Added
+- Android device QA unblock readiness 문서 추가
+- Android device QA unblock readiness 검증 스크립트 추가
+
+### Changed
+- Android debug APK install/launch QA result, Android debug APK QA handoff readiness, Android device QA execution result, Android device QA runbook, Android QA status summary, Android WebView localStorage QA result, Android back button QA result, Android icon/splash QA result, Store screenshot sample profile screen QA result, Store screenshot capture QA result, Android packaging readiness, Capacitor readiness 문서에 Android device QA unblock readiness 문서 경로 반영
+- TODO에 Android device QA unblock readiness 문서 및 검증 스크립트 완료 항목 추가
+- TODO의 스크린샷 이미지 시작, 서양식 보정, 양력/음력 샘플 관련 문구를 최신 섹션에서 정리
+
+### Tests
+- `npm install`
+- `npm run build`
+- `npm run check:android-device-qa-unblock-readiness`
+- `npm run check:android-debug-apk-install-launch-qa-result`
+- `npm run check:android-debug-apk-qa-handoff-readiness`
+- `npm run check:android-device-qa-execution-result`
+- `npm run check:store-screenshot-sample-profile-screen-qa-result`
+- `npm run check:store-screenshot-capture-qa-result`
+- `npm run check:google-play-data-safety-input-readiness`
+- `npm run check:privacy-policy-contact-readiness`
+- `npm run check:privacy-policy-live-url-result`
+- `npm run check:android-debug-build-recovery-result`
+- `npm run check:google-play-privacy-url-input-readiness`
+- `npm run check:privacy-policy-build-output`
+- `npm run check:privacy-policy-url-verification`
+- `npm run check:store-screenshot-sample-profile`
+- `npm run check:brand-copy-consistency`
+- `npm run check:public-privacy-policy-page`
+- `npm run check:google-play-screenshot-readiness`
+- `npm run check:google-play-data-safety`
+- `npm run check:google-play-store-listing`
+- `npm run check:privacy-policy-url-readiness`
+- `npm run check:android-qa-status-summary`
+- `npm run check:android-back-button-qa-result`
+- `npm run check:android-icon-splash-qa-result`
+- `npm run check:android-webview-localstorage-qa-result`
+- `npm run check:android-debug-build-workflow`
+- `npm run check:capacitor-readiness`
+- `npm run check:android-packaging-readiness`
+- `npm run check:content-safety`
+- `npm run check:share-text`
+
+### Additional Checks
+- `docs/ANDROID_DEVICE_QA_UNBLOCK_READINESS.md`, `scripts/checkAndroidDeviceQaUnblockReadiness.mjs`, `check:android-device-qa-unblock-readiness` 존재 확인
+- 하루풀이, run #37, head sha `ce1b4996ccee5ab38913fae9d75fccb1bde45762`, harupuli-debug-apk, artifact id 7685195152, artifact digest 기록 확인
+- Android 실제 기기 QA Blocked, Android Emulator Pending, ADB Pending, artifact 다운로드 Pending, APK 설치 Pending, 앱 실행 Pending 기록 확인
+- Blocked 이유, Blocked 해소 조건, `adb devices`, `logcat` 기록 확인
+- QA Pass, 실제 기기 QA 완료, Emulator QA 완료, ADB 연결 완료, APK 설치 완료, 앱 실행 완료로 단정하지 않음
+- 실제 스크린샷 이미지 파일, 실제 Vercel URL 확인, 실제 문의처 확정, Google Play Console 입력, release build, signing, AAB 생성, 실제 광고 SDK, 실제 결제 SDK 없음
+- production 코드 로직, 계산 로직, routing, schemaVersion, 기존 localStorage key, Android resource/native 변경 없음
+
 ## 2026-06-17 Android Debug APK Install Launch QA Result
 
 ### Added

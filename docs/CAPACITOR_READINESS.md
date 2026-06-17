@@ -1,5 +1,11 @@
 # CAPACITOR_READINESS
 
+## Android device QA unblock readiness
+
+- Capacitor Android 앱 실제 실행 확인 전 Android device QA unblock readiness를 확인합니다.
+- 문서 경로는 `docs/ANDROID_DEVICE_QA_UNBLOCK_READINESS.md`입니다.
+- production 코드 변경은 없습니다.
+
 ## APK 설치/앱 실행 QA 결과
 
 - Capacitor Android 앱 실제 실행 확인 전 APK 설치와 앱 실행 QA 결과를 확인합니다.

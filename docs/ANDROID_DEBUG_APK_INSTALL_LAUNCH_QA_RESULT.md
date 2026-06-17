@@ -1,5 +1,11 @@
 # ANDROID_DEBUG_APK_INSTALL_LAUNCH_QA_RESULT
 
+## Android device QA unblock readiness 연결
+
+- Android 실제 기기 또는 Emulator QA의 Blocked 상태를 해소하기 위한 준비 문서를 추가했습니다.
+- 문서 경로는 `docs/ANDROID_DEVICE_QA_UNBLOCK_READINESS.md`입니다.
+- 실제 기기 또는 Emulator 준비, ADB 연결, APK 설치, 앱 실행 전까지 QA는 Pending 또는 Blocked 상태를 유지합니다.
+
 이 문서는 하루풀이 Android debug APK 다운로드, 압축 해제, 설치, 앱 실행 QA 결과를 기록하기 위한 템플릿입니다.
 이번 PR은 설치/실행 QA 결과 기록 양식 준비가 목적이며, 실제 APK 설치 성공 판정, 앱 실행 성공 판정, 실제 기기 QA 성공 판정, Google Play Console 입력, release build, signing, AAB 생성, production 코드 로직 변경은 진행하지 않습니다.
 
