@@ -49,6 +49,10 @@ const correctTodoMarkers = [
   '음력/윤달 샘플 외부 검증',
 ];
 
+const oldDocOnlyMarkers = [
+  '스토어 스크린샷 이미지 제작',
+];
+
 const docChecks = [
   ['doc_mentions_service_name', doc.includes('하루풀이'), 'Run #38 artifact refresh doc should mention service name'],
   ['doc_mentions_run_38', includesAny(doc, ['run number: #38', 'run #38']), 'Run #38 artifact refresh doc should mention run #38'],
@@ -110,8 +114,14 @@ const docChecks = [
   [
     'doc_mentions_todo_wording_fixes',
     correctTodoMarkers.every((marker) => doc.includes(marker)) &&
-      oldTodoMarkers.every((marker) => !doc.includes(marker)),
+      oldTodoMarkers.every((marker) => !doc.includes(marker)) &&
+      oldDocOnlyMarkers.every((marker) => !doc.includes(marker)),
     'Run #38 artifact refresh doc should mention corrected TODO wording and avoid old wording',
+  ],
+  [
+    'doc_mentions_run_43_not_reflected',
+    doc.includes('run #43') && doc.includes('갱신하지 않습니다'),
+    'Run #38 artifact refresh doc should mention run #43 is not reflected',
   ],
   [
     'doc_does_not_claim_actual_done',
@@ -139,6 +149,7 @@ const todoChecks = [
   ['todo_has_western_correction_wording', todo.includes(correctTodoMarkers[1]), 'TODO should contain normalized western correction wording'],
   ['todo_has_no_solar_lunar_sample_wording', !todo.includes(oldTodoMarkers[2]), 'TODO should not contain old solar/lunar sample wording'],
   ['todo_has_lunar_leap_month_wording', todo.includes(correctTodoMarkers[2]), 'TODO should contain normalized lunar/leap month sample wording'],
+  ['todo_has_no_doc_only_screenshot_production_wording', !todo.includes(oldDocOnlyMarkers[0]), 'TODO should not contain screenshot production wording'],
 ];
 
 for (const [id, pass, message] of todoChecks) {

@@ -1,5 +1,27 @@
 # CHANGELOG
 
+## PR #116
+
+### Fixed
+
+- Android artifact refresh run #38 문서의 문구 정합성을 최종 보정했습니다.
+- `checkAndroidDebugApkArtifactRefreshRun38` 검증 스크립트의 old/correct marker 기준을 최종 보정했습니다.
+- TODO의 스크린샷 이미지 시작, 서양식 보정, 음력/윤달 샘플 관련 문구 정합성을 최종 보정했습니다.
+- run #38 artifact 기준을 유지하고 run #39/run #42/run #43 artifact 기준을 반영하지 않았습니다.
+
+### Not changed
+
+- 디자인 코드는 변경하지 않았습니다.
+- production 코드 로직은 변경하지 않았습니다.
+- Android native/resource 파일은 변경하지 않았습니다.
+- routing은 변경하지 않았습니다.
+- schemaVersion은 변경하지 않았습니다.
+- 기존 localStorage key는 변경하지 않았습니다.
+- 실제 APK 다운로드/설치/실행은 수행하지 않았습니다.
+- 실제 Android QA는 수행하지 않았습니다.
+- 실제 Google Play Console 입력은 수행하지 않았습니다.
+- release build, signing, AAB 생성은 수행하지 않았습니다.
+
 ## 2026-06-17 Android Artifact Refresh Wording Consistency V2
 
 ### Fixed
