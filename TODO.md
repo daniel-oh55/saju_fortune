@@ -8,7 +8,7 @@
 - [ ] 디자인 변경 후 스토어 스크린샷 실제 제작
 - [ ] 디자인 변경 후 샘플 프로필 화면 QA
 - [ ] 실제 광고 SDK 연동
-- [ ] 실제 스토어 스크린샷 이미지 제작
+- [ ] 실제 스토어 스크린샷 이미지 시작
 - [ ] Google Play Console 스크린샷 업로드
 - [ ] release build 준비
 - [ ] signing 설정 준비
@@ -16,8 +16,8 @@
 
 ## 2026-06-17 Android artifact refresh wording consistency TODO
 
-- [x] Android artifact refresh run #38 TODO 문구 정합성 보정
-- [x] Android artifact refresh run #38 검증 스크립트 문구 검증 보정
+- [x] Android artifact refresh run #38 문구 정합성 재보정
+- [x] Android artifact refresh run #38 검증 스크립트 문구 검증 방향 재보정
 - [ ] Android 실제 기기 또는 에뮬레이터 준비 후 QA 재시도
 - [ ] ADB 연결 확인
 - [ ] harupuli-debug-apk artifact 다운로드 및 APK 설치

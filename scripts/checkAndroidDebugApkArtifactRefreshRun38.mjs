@@ -133,10 +133,10 @@ for (const [id, pass, message] of docChecks) {
 }
 
 const todoChecks = [
-  ['todo_has_no_old_screenshot_start_wording', !todo.includes(oldTodoMarkers[0]), 'TODO should not contain old screenshot start wording'],
-  ['todo_has_screenshot_production_wording', todo.includes(correctTodoMarkers[0]), 'TODO should contain normalized screenshot wording'],
-  ['todo_has_no_western_time_wording', !todo.includes(oldTodoMarkers[1]), 'TODO should not contain old western correction wording'],
-  ['todo_has_solar_time_wording', todo.includes(correctTodoMarkers[1]), 'TODO should contain normalized solar time correction wording'],
+  ['todo_has_no_old_screenshot_production_wording', !todo.includes(oldTodoMarkers[0]), 'TODO should not contain old screenshot production wording'],
+  ['todo_has_screenshot_start_wording', todo.includes(correctTodoMarkers[0]), 'TODO should contain normalized screenshot start wording'],
+  ['todo_has_no_solar_time_wording', !todo.includes(oldTodoMarkers[1]), 'TODO should not contain old solar time correction wording'],
+  ['todo_has_western_correction_wording', todo.includes(correctTodoMarkers[1]), 'TODO should contain normalized western correction wording'],
   ['todo_has_no_solar_lunar_sample_wording', !todo.includes(oldTodoMarkers[2]), 'TODO should not contain old solar/lunar sample wording'],
   ['todo_has_lunar_leap_month_wording', todo.includes(correctTodoMarkers[2]), 'TODO should contain normalized lunar/leap month sample wording'],
 ];
