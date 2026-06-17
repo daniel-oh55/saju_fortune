@@ -1,5 +1,53 @@
 # DEVELOPMENT_LOG
 
+# 2026-06-17 Home UI Refresh V1
+
+## 작업 내용
+
+- PR 목적: 홈 화면 1차 디자인 리프레시
+- 디자인 콘셉트: 고요한 밤의 운세 다이어리
+- 따뜻한 아이보리 배경 적용
+- 딥 네이비, 베이지, 은은한 금색 포인트 적용
+- CSS design token 추가
+- 카드형 UI 개선
+- 홈 화면 CTA 개선
+- 빠른 메뉴 구성 개선
+- 신뢰/개인정보 안내 카드 추가
+- 오늘의 한 줄 풀이 영역 정리
+- 최근 본 풀이 영역 추가
+- 광고 placeholder 위치 기준 추가
+- 실제 광고 SDK 추가 없음
+- 실제 결제 SDK 추가 없음
+- production 계산 로직 변경 없음
+- 사주/운세 결과 생성 로직 변경 없음
+- routing 변경 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+- Android native/resource 변경 없음
+- 실제 스크린샷 이미지 추가 없음
+- Google Play Console 입력 없음
+- release build 미진행
+- signing 미진행
+- AAB 생성 미진행
+
+## 테스트 결과
+
+- `npm install`: 통과
+  - 기존 audit 경고: high severity 2건 유지
+- `npm run build`: 통과
+  - 기존 Vite chunk size 경고 유지
+- `npm run check:content-safety`: 통과
+- `npm run check:share-text`: 통과
+- `npm run check:brand-copy-consistency`: 통과
+- `npm run check:google-play-screenshot-readiness`: 통과
+- `npm run check:store-screenshot-capture-qa-result`: 통과
+- `npm run check:store-screenshot-sample-profile-screen-qa-result`: 통과
+- `npm run check:android-qa-status-summary`: 통과
+- `npm run check:android-packaging-readiness`: 통과
+- `npm run check:capacitor-readiness`: 통과
+- `npm run check:android-debug-apk-artifact-refresh-run38`: 통과
+- `Invoke-WebRequest http://127.0.0.1:5173`: 200 응답 확인
+
 # 2026-06-17 Android Artifact Refresh Wording Consistency
 
 ## 작업 내용

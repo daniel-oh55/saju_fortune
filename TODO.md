@@ -1,5 +1,19 @@
 # TODO
 
+## 2026-06-17 Home UI refresh v1 TODO
+
+- [x] 홈 화면 1차 디자인 리프레시 적용
+- [x] 고요한 밤의 운세 다이어리 디자인 방향 반영
+- [ ] 디자인 변경 후 Android 실제 기기 또는 에뮬레이터 화면 QA
+- [ ] 디자인 변경 후 스토어 스크린샷 실제 제작
+- [ ] 디자인 변경 후 샘플 프로필 화면 QA
+- [ ] 실제 광고 SDK 연동
+- [ ] 실제 스토어 스크린샷 이미지 제작
+- [ ] Google Play Console 스크린샷 업로드
+- [ ] release build 준비
+- [ ] signing 설정 준비
+- [ ] AAB 생성
+
 ## 2026-06-17 Android artifact refresh wording consistency TODO
 
 - [x] Android artifact refresh run #38 TODO 문구 정합성 보정

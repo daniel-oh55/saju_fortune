@@ -1,5 +1,13 @@
 # STORE_SCREENSHOT_CAPTURE_QA_RESULT
 
+## 2026-06-17 홈 화면 디자인 변경 후 재확인 필요
+
+- 홈 화면 1차 디자인 리프레시가 적용되어 실제 스토어 스크린샷 캡처 전 화면 재확인이 필요합니다.
+- 실제 스크린샷 캡처 이미지 파일은 아직 생성하지 않았습니다.
+- 실제 Google Play Console 업로드는 진행하지 않았습니다.
+- 모바일 폭에서 히어로 카드, CTA, 빠른 메뉴, 신뢰/개인정보 안내, 하단 광고 placeholder가 겹치지 않는지 확인해야 합니다.
+- `저장한 풀이` 명칭 유지와 저장 기능의 이전 명칭 미사용 여부를 다시 확인해야 합니다.
+
 ## Android device QA unblock readiness 연결
 
 - 실제 스토어 스크린샷 캡처는 Android device QA unblock readiness 확인 이후 진행합니다.
