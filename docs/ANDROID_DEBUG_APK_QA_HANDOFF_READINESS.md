@@ -1,5 +1,12 @@
 # ANDROID_DEBUG_APK_QA_HANDOFF_READINESS
 
+## APK 설치/앱 실행 QA 결과 연결
+
+- debug APK 설치 및 앱 실행 QA 결과 문서를 추가했습니다.
+- 문서 경로는 `docs/ANDROID_DEBUG_APK_INSTALL_LAUNCH_QA_RESULT.md`입니다.
+- 실제 artifact 다운로드, APK 설치, 앱 실행은 아직 Pending입니다.
+- APK 설치/앱 실행 전에는 실제 기기 QA를 성공 판정으로 기록하지 않습니다.
+
 이 문서는 하루풀이 Android 실제 기기 또는 에뮬레이터 QA를 진행하기 전 debug APK artifact 다운로드 및 설치 준비 상태를 정리하기 위한 문서입니다.
 이번 PR은 QA handoff 준비 문서화가 목적이며, 실제 APK 설치 수행, 앱 실행 수행, 실제 기기 QA 성공 판정, Google Play Console 입력, release build, signing, AAB 생성, production 코드 로직 변경은 진행하지 않습니다.
 

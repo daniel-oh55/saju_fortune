@@ -1,5 +1,11 @@
 # ANDROID_WEBVIEW_LOCALSTORAGE_QA_RESULT
 
+## APK 설치/앱 실행 선행 조건
+
+- WebView localStorage 실제 QA는 APK 설치와 앱 실행 이후 진행할 수 있습니다.
+- 선행 확인 문서는 `docs/ANDROID_DEBUG_APK_INSTALL_LAUNCH_QA_RESULT.md`입니다.
+- 실제 설치 전까지 localStorage QA는 Pending 또는 Blocked 상태를 유지합니다.
+
 ## Android device QA execution result 연계
 
 - WebView localStorage 실제 QA는 Android device QA execution result와 함께 확인합니다.

@@ -1,5 +1,11 @@
 # ANDROID_DEVICE_QA_EXECUTION_RESULT
 
+## APK 설치/앱 실행 QA 결과 연결
+
+- Android device QA 실행 전 debug APK 설치 및 앱 실행 QA 결과를 확인해야 합니다.
+- 문서 경로는 `docs/ANDROID_DEBUG_APK_INSTALL_LAUNCH_QA_RESULT.md`입니다.
+- APK 설치와 앱 실행이 완료되기 전까지 주요 화면 확인 상태는 Pending입니다.
+
 ## debug APK QA handoff 준비
 
 - Android Debug Build run #35의 harupuli-debug-apk artifact 정보를 QA handoff 기준으로 기록했습니다.

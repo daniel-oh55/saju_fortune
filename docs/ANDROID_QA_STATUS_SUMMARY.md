@@ -1,5 +1,12 @@
 # ANDROID_QA_STATUS_SUMMARY
 
+## APK 설치/앱 실행 QA 결과
+
+- Android debug APK 설치 및 앱 실행 QA 결과 문서를 추가했습니다.
+- 문서 경로는 `docs/ANDROID_DEBUG_APK_INSTALL_LAUNCH_QA_RESULT.md`입니다.
+- artifact 다운로드, APK 설치, 앱 실행은 아직 Pending입니다.
+- Android 실제 기기 QA는 Blocked 상태입니다.
+
 ## debug APK QA handoff 준비
 
 - Android Debug Build run #35 artifact를 기준으로 QA handoff 준비 문서를 추가했습니다.
