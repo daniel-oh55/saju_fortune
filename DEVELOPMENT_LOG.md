@@ -1,5 +1,60 @@
 # DEVELOPMENT_LOG
 
+# 2026-06-17 Android Artifact Refresh Wording Consistency V2
+
+## 작업 내용
+
+- PR 목적: Android artifact refresh run #38 문구 정합성 재보정
+- PR #113에서 반대로 반영된 TODO 문구 기준 재보정
+- `ANDROID_DEBUG_APK_ARTIFACT_REFRESH_RUN38.md`의 TODO 문구 기준 보강
+- `checkAndroidDebugApkArtifactRefreshRun38`의 old/correct wording 검증 방향 재확인 및 라벨 보정
+- `TODO.md`의 최신 완료 항목을 재보정 기준으로 수정
+- `실제 스토어 스크린샷 이미지 시작` 문구 유지
+- `서양식 보정 적용 여부` 문구 유지
+- `음력/윤달 샘플 외부 검증` 문구 유지
+- 이전 스토어 스크린샷 제작 표현을 이번 기준에서 사용하지 않음
+- 이전 보정 기준 표현을 이번 기준에서 사용하지 않음
+- 이전 음력 샘플 추가 검증 표현을 이번 기준에서 사용하지 않음
+- run #38 artifact 기준 유지
+- run #39 artifact 기준 미반영
+- run #42 artifact 기준 미반영
+- PR #114 홈 디자인 변경 유지
+- 디자인 코드 변경 없음
+- 실제 APK 다운로드 없음
+- 실제 APK 설치 없음
+- 실제 앱 실행 없음
+- 실제 Android QA 없음
+- 실제 스크린샷 이미지 추가 없음
+- Google Play Console 입력 없음
+- release build 미진행
+- signing 미진행
+- AAB 생성 미진행
+- production 코드 로직 변경 없음
+- Android native/resource 변경 없음
+- routing 변경 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+
+## 테스트 결과
+
+- `npm install`: 통과
+  - 기존 audit 경고: high severity 2건 유지
+- `npm run build`: 통과
+  - 기존 Vite chunk size 경고 유지
+- `npm run check:android-debug-apk-artifact-refresh-run38`: 통과
+- `npm run check:android-device-qa-unblock-readiness`: 통과
+- `npm run check:android-debug-apk-install-launch-qa-result`: 통과
+- `npm run check:android-debug-apk-qa-handoff-readiness`: 통과
+- `npm run check:android-device-qa-execution-result`: 통과
+- `npm run check:android-qa-status-summary`: 통과
+- `npm run check:capacitor-readiness`: 통과
+- `npm run check:android-packaging-readiness`: 통과
+- `npm run check:content-safety`: 통과
+- `npm run check:share-text`: 통과
+- `npm run check:google-play-screenshot-readiness`: 통과
+- `npm run check:store-screenshot-capture-qa-result`: 통과
+- `npm run check:store-screenshot-sample-profile-screen-qa-result`: 통과
+
 # 2026-06-17 Home UI Refresh V1
 
 ## 작업 내용
@@ -58,7 +113,7 @@
 - `TODO.md` 전체 문구 보정
 - `실제 스토어 스크린샷 이미지 시작` 문구 유지
 - `서양식 보정 적용 여부` 문구 유지
-- `양력/음력 샘플 추가 검증` 문구 제거
+- 이전 음력 샘플 추가 검증 문구 제거
 - `음력/윤달 샘플 외부 검증` 문구 적용
 - run #38 artifact 기준 유지
 - run #39 artifact는 이번 PR에서 새 기준으로 갱신하지 않음

@@ -1,5 +1,41 @@
 # CHANGELOG
 
+## 2026-06-17 Android Artifact Refresh Wording Consistency V2
+
+### Fixed
+- Android artifact refresh run #38 문구 정합성 기준 재보정
+- TODO의 `실제 스토어 스크린샷 이미지 시작`, `서양식 보정 적용 여부`, `음력/윤달 샘플 외부 검증` 기준 유지
+- `checkAndroidDebugApkArtifactRefreshRun38` 검증 스크립트의 문구 검증 라벨 보정
+- run #38 artifact 기준 유지, run #39/run #42 artifact 기준 미반영 명시
+- PR #114 홈 디자인 변경 유지 및 디자인 코드 미변경
+
+### Tests
+- `npm install`
+- `npm run build`
+- `npm run check:android-debug-apk-artifact-refresh-run38`
+- `npm run check:android-device-qa-unblock-readiness`
+- `npm run check:android-debug-apk-install-launch-qa-result`
+- `npm run check:android-debug-apk-qa-handoff-readiness`
+- `npm run check:android-device-qa-execution-result`
+- `npm run check:android-qa-status-summary`
+- `npm run check:capacitor-readiness`
+- `npm run check:android-packaging-readiness`
+- `npm run check:content-safety`
+- `npm run check:share-text`
+- `npm run check:google-play-screenshot-readiness`
+- `npm run check:store-screenshot-capture-qa-result`
+- `npm run check:store-screenshot-sample-profile-screen-qa-result`
+
+### Additional Checks
+- 실제 APK 다운로드 없음
+- 실제 APK 설치 없음
+- 실제 앱 실행 없음
+- 실제 Android QA 없음
+- 실제 스크린샷 이미지 파일 추가 없음
+- Google Play Console 입력 없음
+- release build, signing, AAB 생성 없음
+- production 코드 로직, Android native/resource, routing, schemaVersion, 기존 localStorage key 변경 없음
+
 ## 2026-06-17 Home UI Refresh V1
 
 ### Changed
@@ -82,7 +118,7 @@
 ### Changed
 - Android device QA unblock readiness, Android debug APK install/launch QA result, Android debug APK QA handoff readiness, Android device QA execution result, Android QA status summary, Android packaging readiness, Capacitor readiness 문서에 run #38 artifact 기준 갱신 문서 경로 반영
 - TODO에 Android debug APK artifact run #38 기준 갱신 문서 및 검증 스크립트 완료 항목 추가
-- TODO의 스크린샷 이미지 시작, 서양식 보정, 양력/음력 샘플 관련 문구 정합성 보정
+- TODO의 스크린샷 이미지 시작, 서양식 보정, 음력/윤달 샘플 관련 문구 정합성 보정
 
 ### Tests
 - `npm install`
@@ -136,7 +172,7 @@
 ### Changed
 - Android debug APK install/launch QA result, Android debug APK QA handoff readiness, Android device QA execution result, Android device QA runbook, Android QA status summary, Android WebView localStorage QA result, Android back button QA result, Android icon/splash QA result, Store screenshot sample profile screen QA result, Store screenshot capture QA result, Android packaging readiness, Capacitor readiness 문서에 Android device QA unblock readiness 문서 경로 반영
 - TODO에 Android device QA unblock readiness 문서 및 검증 스크립트 완료 항목 추가
-- TODO의 스크린샷 이미지 시작, 서양식 보정, 양력/음력 샘플 관련 문구를 최신 섹션에서 정리
+- TODO의 스크린샷 이미지 시작, 서양식 보정, 음력/윤달 샘플 관련 문구를 최신 섹션에서 정리
 
 ### Tests
 - `npm install`
