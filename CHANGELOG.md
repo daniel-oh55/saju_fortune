@@ -1,5 +1,29 @@
 # CHANGELOG
 
+## PR #117
+
+### Fixed
+
+- PR #116 이후에도 남아 있던 Android artifact 문구 정합성 문제를 재수정했습니다.
+- 스토어 스크린샷 관련 문구를 `실제 스토어 스크린샷 이미지 제작` 기준으로 바로잡았습니다.
+- 보정 기준 관련 문구를 `태양시 보정 적용 여부` 기준으로 바로잡았습니다.
+- 음력 샘플 관련 문구를 `음력/윤달 샘플 외부 검증` 기준으로 유지했습니다.
+- `checkAndroidDebugApkArtifactRefreshRun38`의 old/correct marker 기준을 올바른 방향으로 재수정했습니다.
+- 올바른 `스토어 스크린샷 이미지 제작` 문구를 금지하던 추가 검증 기준을 제거했습니다.
+
+### Not changed
+
+- 디자인 코드는 변경하지 않았습니다.
+- production 코드 로직은 변경하지 않았습니다.
+- Android native/resource 파일은 변경하지 않았습니다.
+- routing은 변경하지 않았습니다.
+- schemaVersion은 변경하지 않았습니다.
+- 기존 localStorage key는 변경하지 않았습니다.
+- 실제 APK 다운로드/설치/실행은 수행하지 않았습니다.
+- 실제 Android QA는 수행하지 않았습니다.
+- 실제 Google Play Console 입력은 수행하지 않았습니다.
+- release build, signing, AAB 생성은 수행하지 않았습니다.
+
 ## PR #116
 
 ### Fixed
@@ -26,7 +50,7 @@
 
 ### Fixed
 - Android artifact refresh run #38 문구 정합성 기준 재보정
-- TODO의 `실제 스토어 스크린샷 이미지 시작`, `서양식 보정 적용 여부`, `음력/윤달 샘플 외부 검증` 기준 유지
+- TODO의 `실제 스토어 스크린샷 이미지 제작`, `태양시 보정 적용 여부`, `음력/윤달 샘플 외부 검증` 기준 유지
 - `checkAndroidDebugApkArtifactRefreshRun38` 검증 스크립트의 문구 검증 라벨 보정
 - run #38 artifact 기준 유지, run #39/run #42 artifact 기준 미반영 명시
 - PR #114 홈 디자인 변경 유지 및 디자인 코드 미변경
@@ -117,11 +141,11 @@
 - `npm run check:share-text`
 
 ### Additional Checks
-- `docs/ANDROID_DEBUG_APK_ARTIFACT_REFRESH_RUN38.md`에 `실제 스토어 스크린샷 이미지 시작` 존재 확인
-- `docs/ANDROID_DEBUG_APK_ARTIFACT_REFRESH_RUN38.md`에 `서양식 보정 적용 여부` 존재 확인
+- `docs/ANDROID_DEBUG_APK_ARTIFACT_REFRESH_RUN38.md`에 `실제 스토어 스크린샷 이미지 제작` 존재 확인
+- `docs/ANDROID_DEBUG_APK_ARTIFACT_REFRESH_RUN38.md`에 `태양시 보정 적용 여부` 존재 확인
 - `docs/ANDROID_DEBUG_APK_ARTIFACT_REFRESH_RUN38.md`에 `음력/윤달 샘플 외부 검증` 존재 확인
-- `TODO.md`에 `실제 스토어 스크린샷 이미지 시작` 존재 확인
-- `TODO.md`에 `서양식 보정 적용 여부` 존재 확인
+- `TODO.md`에 `실제 스토어 스크린샷 이미지 제작` 존재 확인
+- `TODO.md`에 `태양시 보정 적용 여부` 존재 확인
 - `TODO.md`에 `음력/윤달 샘플 외부 검증` 존재 확인
 - run #38 artifact 기준 유지 확인
 - run #39 artifact를 새 기준으로 갱신하지 않음
@@ -247,7 +271,7 @@
 ### Changed
 - Android debug APK QA handoff readiness, Android device QA execution result, Android device QA runbook, Android QA status summary, Android WebView localStorage QA result, Android back button QA result, Android icon/splash QA result, Store screenshot sample profile screen QA result, Android packaging readiness, Capacitor readiness 문서에 APK 설치/앱 실행 QA 결과 문서 경로 반영
 - TODO에 Android debug APK install/launch QA result 문서 및 검증 스크립트 완료 항목 추가
-- TODO의 스토어 스크린샷 이미지 시작 관련 대기 항목을 최신 표현으로 정리
+- TODO의 스토어 스크린샷 이미지 제작 관련 대기 항목을 최신 표현으로 정리
 
 ### Tests
 - `npm install`

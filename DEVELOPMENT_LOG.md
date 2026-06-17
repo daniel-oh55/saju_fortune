@@ -1,5 +1,76 @@
 # DEVELOPMENT_LOG
 
+## PR #117 - PR #116 이후 Android artifact 문구 정합성 재수정
+
+### 목적
+
+- PR #116 merge 이후에도 남아 있던 Android artifact 문구 정합성 문제를 재수정했습니다.
+- `시작`/`서양식` 기준으로 남아 있던 이전 표현을 제거했습니다.
+- `checkAndroidDebugApkArtifactRefreshRun38`의 old/correct marker 기준을 올바른 방향으로 재수정했습니다.
+
+### 문구 보정
+
+- `실제 스토어 스크린샷 이미지 제작` 문구를 적용했습니다.
+- `스토어 스크린샷 이미지 제작` 미진행 항목을 적용했습니다.
+- `태양시 보정 적용 여부` 문구를 적용했습니다.
+- `음력/윤달 샘플 외부 검증` 문구를 적용했습니다.
+- 이전 스크린샷 시작 표현은 이번 기준에서 사용하지 않았습니다.
+- 이전 보정 기준 표현은 이번 기준에서 사용하지 않았습니다.
+- 이전 음력/윤달 샘플 외부 검증 표현은 이번 기준에서 사용하지 않았습니다.
+
+### 검증 스크립트 보정
+
+- `oldTodoMarkers`를 이전 표현 기준으로 수정했습니다.
+- `correctTodoMarkers`를 올바른 표현 기준으로 수정했습니다.
+- 올바른 `스토어 스크린샷 이미지 제작` 문구를 금지하던 추가 검증을 제거했습니다.
+- `doc_does_not_claim_actual_done`의 완료 판정 금지 문구를 `스토어 스크린샷 이미지 제작 완료` 기준으로 수정했습니다.
+
+### 유지 기준
+
+- run #38 artifact 기준을 유지했습니다.
+- run #39 artifact 기준으로 갱신하지 않았습니다.
+- run #42 artifact 기준으로 갱신하지 않았습니다.
+- run #43 artifact 기준으로 갱신하지 않았습니다.
+- PR #114 홈 디자인 변경을 유지했습니다.
+- 디자인 코드 변경은 하지 않았습니다.
+- production 코드 로직 변경은 하지 않았습니다.
+- Android native/resource 변경은 하지 않았습니다.
+- routing 변경은 하지 않았습니다.
+- schemaVersion 변경은 하지 않았습니다.
+- 기존 localStorage key 변경은 하지 않았습니다.
+
+### 실제 미수행 항목
+
+- 실제 APK 다운로드는 수행하지 않았습니다.
+- 실제 APK 설치는 수행하지 않았습니다.
+- 실제 앱 실행은 수행하지 않았습니다.
+- 실제 Android QA는 수행하지 않았습니다.
+- 실제 스토어 스크린샷 이미지 파일은 추가하지 않았습니다.
+- Google Play Console 입력은 수행하지 않았습니다.
+- release build는 진행하지 않았습니다.
+- signing 설정은 진행하지 않았습니다.
+- AAB 생성은 진행하지 않았습니다.
+
+### 검증
+
+- `npm install`: 통과
+  - 기존 audit 경고: high severity 2건 유지
+- `npm run build`: 통과
+  - 기존 Vite chunk size 경고 유지
+- `npm run check:android-debug-apk-artifact-refresh-run38`: 통과
+- `npm run check:android-device-qa-unblock-readiness`: 통과
+- `npm run check:android-debug-apk-install-launch-qa-result`: 통과
+- `npm run check:android-debug-apk-qa-handoff-readiness`: 통과
+- `npm run check:android-device-qa-execution-result`: 통과
+- `npm run check:android-qa-status-summary`: 통과
+- `npm run check:capacitor-readiness`: 통과
+- `npm run check:android-packaging-readiness`: 통과
+- `npm run check:content-safety`: 통과
+- `npm run check:share-text`: 통과
+- `npm run check:google-play-screenshot-readiness`: 통과
+- `npm run check:store-screenshot-capture-qa-result`: 통과
+- `npm run check:store-screenshot-sample-profile-screen-qa-result`: 통과
+
 ## PR #116 - Android artifact refresh run #38 문구 정합성 최종 보정
 
 ### 목적
@@ -10,9 +81,9 @@
 
 ### 문구 보정
 
-- `실제 스토어 스크린샷 이미지 시작` 문구를 적용했습니다.
-- `스토어 스크린샷 이미지 시작` 미진행 항목을 적용했습니다.
-- `서양식 보정 적용 여부` 문구를 적용했습니다.
+- `실제 스토어 스크린샷 이미지 제작` 문구를 적용했습니다.
+- `스토어 스크린샷 이미지 제작` 미진행 항목을 적용했습니다.
+- `태양시 보정 적용 여부` 문구를 적용했습니다.
 - `음력/윤달 샘플 외부 검증` 문구를 적용했습니다.
 - 이전 스토어 스크린샷 제작 표현을 제거했습니다.
 - 이전 보정 기준 표현은 이번 기준에서 사용하지 않았습니다.
@@ -73,8 +144,8 @@
 - `ANDROID_DEBUG_APK_ARTIFACT_REFRESH_RUN38.md`의 TODO 문구 기준 보강
 - `checkAndroidDebugApkArtifactRefreshRun38`의 old/correct wording 검증 방향 재확인 및 라벨 보정
 - `TODO.md`의 최신 완료 항목을 재보정 기준으로 수정
-- `실제 스토어 스크린샷 이미지 시작` 문구 유지
-- `서양식 보정 적용 여부` 문구 유지
+- `실제 스토어 스크린샷 이미지 제작` 문구 유지
+- `태양시 보정 적용 여부` 문구 유지
 - `음력/윤달 샘플 외부 검증` 문구 유지
 - 이전 스토어 스크린샷 제작 표현을 이번 기준에서 사용하지 않음
 - 이전 보정 기준 표현을 이번 기준에서 사용하지 않음
@@ -175,8 +246,8 @@
 - `ANDROID_DEBUG_APK_ARTIFACT_REFRESH_RUN38.md`의 TODO 문구 보정 기준 수정
 - `checkAndroidDebugApkArtifactRefreshRun38`의 old/correct wording 검증 방향 수정
 - `TODO.md` 전체 문구 보정
-- `실제 스토어 스크린샷 이미지 시작` 문구 유지
-- `서양식 보정 적용 여부` 문구 유지
+- `실제 스토어 스크린샷 이미지 제작` 문구 유지
+- `태양시 보정 적용 여부` 문구 유지
 - 이전 음력 샘플 추가 검증 문구 제거
 - `음력/윤달 샘플 외부 검증` 문구 적용
 - run #38 artifact 기준 유지
@@ -3852,7 +3923,7 @@
 
 ### 남은 이슈
 - `lunar-javascript` exact API와 sky.told.me / 포스텔러 외부 기준값이 다른 입춘 당일 경계 정책 결정 필요.
-- 서양식 보정 적용 여부는 별도 PR에서 검토 필요.
+- 태양시 보정 적용 여부는 별도 PR에서 검토 필요.
 - 23시 이후 자시/야자시/조자시 기준은 별도 정책 결정 필요.
 
 ## 현재 상태
@@ -3949,7 +4020,7 @@
 
 - `solar_ipchun_boundary` 년주/월주 mismatch 원인 분석 필요
 - 23시 이후 자시/야자시/조자시 정책 결정 필요
-- 서양식 보정 적용 여부 결정 필요
+- 태양시 보정 적용 여부 결정 필요
 
 ### 2026-06-08
 
