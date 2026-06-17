@@ -1,5 +1,12 @@
 # ANDROID_DEVICE_QA_EXECUTION_RESULT
 
+## debug APK QA handoff 준비
+
+- Android Debug Build run #35의 harupuli-debug-apk artifact 정보를 QA handoff 기준으로 기록했습니다.
+- handoff 준비 문서는 `docs/ANDROID_DEBUG_APK_QA_HANDOFF_READINESS.md`입니다.
+- 실제 APK 다운로드, 설치, 앱 실행은 아직 Pending입니다.
+- Android 실제 기기 QA는 여전히 Blocked입니다.
+
 이 문서는 하루풀이 Android 실제 기기 또는 에뮬레이터 QA 실행 결과를 기록하기 위한 템플릿입니다.
 이번 PR은 QA 실행 결과 기록 양식 준비가 목적이며, 실제 Android 기기 QA 성공 판정, 실제 스크린샷 이미지 생성, Google Play Console 입력, release build, signing, AAB 생성, production 앱 로직 변경은 진행하지 않습니다.
 

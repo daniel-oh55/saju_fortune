@@ -1,5 +1,54 @@
 # CHANGELOG
 
+## 2026-06-17 Android Debug APK QA Handoff Readiness
+
+### Added
+- Android debug APK QA handoff readiness 문서 추가
+- Android debug APK QA handoff readiness 검증 스크립트 추가
+
+### Changed
+- Android device QA execution result, Android device QA runbook, Android QA status summary, Android packaging readiness, Capacitor readiness, Store screenshot sample profile screen QA result 문서에 debug APK QA handoff 준비 문서 경로 반영
+- TODO에 Android debug APK QA handoff readiness 문서 및 검증 스크립트 완료 항목 추가
+
+### Tests
+- `npm install`
+- `npm run build`
+- `npm run check:android-debug-apk-qa-handoff-readiness`
+- `npm run check:android-device-qa-execution-result`
+- `npm run check:store-screenshot-sample-profile-screen-qa-result`
+- `npm run check:store-screenshot-capture-qa-result`
+- `npm run check:google-play-data-safety-input-readiness`
+- `npm run check:privacy-policy-contact-readiness`
+- `npm run check:privacy-policy-live-url-result`
+- `npm run check:android-debug-build-recovery-result`
+- `npm run check:google-play-privacy-url-input-readiness`
+- `npm run check:privacy-policy-build-output`
+- `npm run check:privacy-policy-url-verification`
+- `npm run check:store-screenshot-sample-profile`
+- `npm run check:brand-copy-consistency`
+- `npm run check:public-privacy-policy-page`
+- `npm run check:google-play-screenshot-readiness`
+- `npm run check:google-play-data-safety`
+- `npm run check:google-play-store-listing`
+- `npm run check:privacy-policy-url-readiness`
+- `npm run check:android-qa-status-summary`
+- `npm run check:android-back-button-qa-result`
+- `npm run check:android-icon-splash-qa-result`
+- `npm run check:android-webview-localstorage-qa-result`
+- `npm run check:android-debug-build-workflow`
+- `npm run check:capacitor-readiness`
+- `npm run check:android-packaging-readiness`
+- `npm run check:content-safety`
+- `npm run check:share-text`
+
+### Additional Checks
+- `docs/ANDROID_DEBUG_APK_QA_HANDOFF_READINESS.md`, `scripts/checkAndroidDebugApkQaHandoffReadiness.mjs`, `check:android-debug-apk-qa-handoff-readiness` 존재 확인
+- 하루풀이, Android Debug Build, run #35, head sha `6671ddde9f0362e8a4115b4ba7d9a748f0383243`, harupuli-debug-apk, artifact id 7684142019, artifact digest 기록 확인
+- artifact 다운로드 Pending, APK 설치 Pending, 앱 실행 Pending, Android 실제 기기 QA Blocked, Android Emulator QA Pending, ADB 확인 필요 기록 확인
+- APK 설치 완료, 앱 실행 완료, QA Pass, 실제 기기 QA 완료로 단정하지 않음
+- 실제 스크린샷 이미지 파일, 실제 Vercel URL 확인, 실제 문의처 확정, Google Play Console 입력, release build, signing, AAB 생성, 실제 광고 SDK, 실제 결제 SDK 없음
+- production 코드 로직, 계산 로직, routing, schemaVersion, 기존 localStorage key, Android resource/native 변경 없음
+
 ## 2026-06-17 Android Device QA Execution Result
 
 ### Added
