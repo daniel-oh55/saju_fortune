@@ -1,5 +1,11 @@
 # STORE_SCREENSHOT_SAMPLE_PROFILE_SCREEN_QA_RESULT
 
+## Android device QA execution result 연계
+
+- 테스트용 샘플 프로필 화면 확인은 Android device QA execution result와 연결됩니다.
+- 문서 경로는 `docs/ANDROID_DEVICE_QA_EXECUTION_RESULT.md`입니다.
+- 실제 기기 또는 에뮬레이터에서 화면을 확인하기 전까지 Pending 상태를 유지합니다.
+
 이 문서는 하루풀이 Google Play 스토어 스크린샷 제작 전 테스트용 샘플 프로필 입력 및 주요 화면 확인 결과를 기록하기 위한 문서입니다.
 이번 PR은 샘플 프로필 화면 QA 결과 기록 양식 준비가 목적이며, 실제 스크린샷 이미지 생성, Google Play Console 입력, release build, signing, AAB 생성, production 앱 로직 변경은 진행하지 않습니다.
 

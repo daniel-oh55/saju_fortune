@@ -1,5 +1,11 @@
 # STORE_SCREENSHOT_CAPTURE_QA_RESULT
 
+## Android device QA execution result 연계
+
+- 스토어 스크린샷 실제 캡처 전 Android device QA execution result를 확인해야 합니다.
+- 문서 경로는 `docs/ANDROID_DEVICE_QA_EXECUTION_RESULT.md`입니다.
+- 실제 캡처 이미지는 아직 생성하지 않습니다.
+
 ## 샘플 프로필 화면 QA 결과 연계
 
 - 테스트용 샘플 프로필 입력 및 주요 화면 확인 결과 문서를 추가했습니다.
