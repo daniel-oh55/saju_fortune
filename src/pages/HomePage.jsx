@@ -1,3 +1,4 @@
+import { useEffect, useMemo, useState } from 'react';
 import DailyRoutineCard from '../components/DailyRoutineCard.jsx';
 import ContentSafetyNotice from '../components/ContentSafetyNotice.jsx';
 import FortuneCard from '../components/FortuneCard.jsx';
@@ -6,6 +7,26 @@ import SajuElementSummaryCard from '../components/SajuElementSummaryCard.jsx';
 import SavedReadingsSummaryCard from '../components/SavedReadingsSummaryCard.jsx';
 import ScoreDonut from '../components/ScoreDonut.jsx';
 import VisitStreakCard from '../components/VisitStreakCard.jsx';
+
+const QUICK_MENU_PREFS_KEY = 'harupuli_home_quick_menu_prefs';
+const MAX_HOME_QUICK_MENU_ITEMS = 4;
+const DEFAULT_QUICK_MENU_IDS = ['today', 'saju', 'money', 'love'];
+
+function readQuickMenuPrefs() {
+  if (typeof window === 'undefined') return DEFAULT_QUICK_MENU_IDS;
+
+  try {
+    const saved = JSON.parse(window.localStorage.getItem(QUICK_MENU_PREFS_KEY));
+    return Array.isArray(saved) ? saved : DEFAULT_QUICK_MENU_IDS;
+  } catch {
+    return DEFAULT_QUICK_MENU_IDS;
+  }
+}
+
+function writeQuickMenuPrefs(menuIds) {
+  if (typeof window === 'undefined') return;
+  window.localStorage.setItem(QUICK_MENU_PREFS_KEY, JSON.stringify(menuIds));
+}
 
 function getTimeFortune() {
   const hour = new Date().getHours();
@@ -42,6 +63,9 @@ function getTimeFortune() {
 }
 
 function HomePage({ fortune, profile, savedReadings, visitStreak, onOpenDetail, onNavigate }) {
+  const [quickMenuPrefs, setQuickMenuPrefs] = useState(() => readQuickMenuPrefs());
+  const [isQuickMenuEditorOpen, setIsQuickMenuEditorOpen] = useState(false);
+  const [quickMenuMessage, setQuickMenuMessage] = useState('');
   const overall = fortune.categories.find((category) => category.id === 'overall') || fortune.categories[0];
   const recentSavedReading = Array.isArray(savedReadings?.items) ? savedReadings.items[0] : null;
   const timeFortune = getTimeFortune();
@@ -54,6 +78,42 @@ function HomePage({ fortune, profile, savedReadings, visitStreak, onOpenDetail, 
     { id: 'compatibility', label: '궁합', icon: '⌁', onClick: () => onNavigate('compatibility') },
     { id: 'saved', label: '저장한 풀이', icon: '✧', onClick: () => onNavigate('savedReadings') },
   ];
+  const quickMenuIdSet = new Set(quickMenuItems.map((item) => item.id));
+  const visibleQuickMenuItems = useMemo(() => {
+    const validPrefs = quickMenuPrefs.filter((id) => quickMenuIdSet.has(id));
+    const fallbackIds = DEFAULT_QUICK_MENU_IDS.filter((id) => quickMenuIdSet.has(id));
+    const menuIds = (validPrefs.length > 0 ? validPrefs : fallbackIds).slice(0, MAX_HOME_QUICK_MENU_ITEMS);
+    return menuIds.map((id) => quickMenuItems.find((item) => item.id === id)).filter(Boolean);
+  }, [quickMenuItems, quickMenuIdSet, quickMenuPrefs]);
+
+  useEffect(() => {
+    const validPrefs = quickMenuPrefs.filter((id) => quickMenuIdSet.has(id)).slice(0, MAX_HOME_QUICK_MENU_ITEMS);
+    if (validPrefs.length !== quickMenuPrefs.length || validPrefs.some((id, index) => id !== quickMenuPrefs[index])) {
+      setQuickMenuPrefs(validPrefs.length > 0 ? validPrefs : DEFAULT_QUICK_MENU_IDS);
+    }
+  }, [quickMenuIdSet, quickMenuPrefs]);
+
+  const handleToggleQuickMenu = (menuId) => {
+    setQuickMenuPrefs((currentPrefs) => {
+      if (currentPrefs.includes(menuId)) {
+        const nextPrefs = currentPrefs.filter((id) => id !== menuId);
+        setQuickMenuMessage(nextPrefs.length === 0 ? '최소 1개 메뉴는 남겨두면 홈에서 바로 이동할 수 있어요.' : '');
+        const savedPrefs = nextPrefs.length > 0 ? nextPrefs : currentPrefs;
+        writeQuickMenuPrefs(savedPrefs);
+        return savedPrefs;
+      }
+
+      if (currentPrefs.length >= MAX_HOME_QUICK_MENU_ITEMS) {
+        setQuickMenuMessage('빠른 메뉴는 최대 4개까지 선택할 수 있어요.');
+        return currentPrefs;
+      }
+
+      const nextPrefs = [...currentPrefs, menuId];
+      setQuickMenuMessage('');
+      writeQuickMenuPrefs(nextPrefs);
+      return nextPrefs;
+    });
+  };
 
   return (
     <div className="page-stack home-page home-diary-theme">
@@ -102,9 +162,20 @@ function HomePage({ fortune, profile, savedReadings, visitStreak, onOpenDetail, 
             <p className="eyebrow">Quick Menu</p>
             <h2 id="home-quick-menu-title">빠른 메뉴</h2>
           </div>
+          <button
+            className="quick-menu-edit-button"
+            type="button"
+            onClick={() => {
+              setQuickMenuMessage('');
+              setIsQuickMenuEditorOpen(true);
+            }}
+            aria-label="빠른 메뉴 편집"
+          >
+            편집
+          </button>
         </div>
         <div className="home-menu-grid home-menu-grid-v2">
-          {quickMenuItems.map((item) => (
+          {visibleQuickMenuItems.map((item) => (
             <button key={item.id} type="button" onClick={item.onClick}>
               <span aria-hidden="true">{item.icon}</span>
               <strong>{item.label}</strong>
@@ -112,6 +183,45 @@ function HomePage({ fortune, profile, savedReadings, visitStreak, onOpenDetail, 
           ))}
         </div>
       </section>
+
+      {isQuickMenuEditorOpen && (
+        <div className="home-modal-backdrop" role="presentation">
+          <section className="home-bottom-sheet" role="dialog" aria-modal="true" aria-labelledby="quick-menu-editor-title">
+            <div className="home-modal-head">
+              <div>
+                <p className="eyebrow">Quick Menu</p>
+                <h2 id="quick-menu-editor-title">빠른 메뉴 편집</h2>
+              </div>
+              <button type="button" onClick={() => setIsQuickMenuEditorOpen(false)} aria-label="빠른 메뉴 편집 닫기">
+                ×
+              </button>
+            </div>
+            <p className="quick-menu-editor-copy">홈에 보여줄 메뉴를 최대 4개까지 고를 수 있어요.</p>
+            <div className="quick-menu-choice-list">
+              {quickMenuItems.map((item) => {
+                const isChecked = quickMenuPrefs.includes(item.id);
+                return (
+                  <label className="quick-menu-choice" key={item.id}>
+                    <input
+                      type="checkbox"
+                      checked={isChecked}
+                      onChange={() => handleToggleQuickMenu(item.id)}
+                    />
+                    <span aria-hidden="true">{item.icon}</span>
+                    <strong>{item.label}</strong>
+                  </label>
+                );
+              })}
+            </div>
+            <p className="quick-menu-editor-status" role="status">
+              {quickMenuMessage || `${quickMenuPrefs.length}/${MAX_HOME_QUICK_MENU_ITEMS}개 선택됨`}
+            </p>
+            <button className="primary-button full-width" type="button" onClick={() => setIsQuickMenuEditorOpen(false)}>
+              완료
+            </button>
+          </section>
+        </div>
+      )}
 
       <section className="home-trust-card">
         <span aria-hidden="true">✦</span>
