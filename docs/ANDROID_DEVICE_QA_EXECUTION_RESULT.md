@@ -1,5 +1,11 @@
 # ANDROID_DEVICE_QA_EXECUTION_RESULT
 
+## run #38 artifact 기준 갱신
+
+- Android device QA execution result 갱신 전 run #38 artifact 기준을 확인합니다.
+- 갱신 문서는 `docs/ANDROID_DEBUG_APK_ARTIFACT_REFRESH_RUN38.md`입니다.
+- 실제 기기 또는 Emulator 준비 전까지 QA 성공 판정으로 기록하지 않습니다.
+
 ## Android device QA unblock readiness 연결
 
 - Android device QA execution result는 unblock readiness 확인 이후 갱신합니다.

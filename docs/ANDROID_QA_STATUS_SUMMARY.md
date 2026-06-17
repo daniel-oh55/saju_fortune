@@ -1,5 +1,12 @@
 # ANDROID_QA_STATUS_SUMMARY
 
+## run #38 artifact 기준 갱신
+
+- Android Debug Build run #38 artifact 기준 문서를 추가했습니다.
+- 문서 경로는 `docs/ANDROID_DEBUG_APK_ARTIFACT_REFRESH_RUN38.md`입니다.
+- 실제 기기 QA는 아직 Blocked입니다.
+- Emulator, ADB 연결, artifact 다운로드, APK 설치, 앱 실행은 Pending입니다.
+
 ## Android device QA unblock readiness
 
 - Android 실제 기기 또는 Emulator QA의 Blocked 상태를 해소하기 위한 준비 문서를 추가했습니다.

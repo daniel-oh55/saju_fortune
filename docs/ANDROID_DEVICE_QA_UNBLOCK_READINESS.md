@@ -1,5 +1,12 @@
 # ANDROID_DEVICE_QA_UNBLOCK_READINESS
 
+## run #38 artifact 기준 갱신
+
+- Android Debug Build run #38의 harupuli-debug-apk artifact 정보를 최신 QA 기준으로 기록했습니다.
+- 갱신 문서는 `docs/ANDROID_DEBUG_APK_ARTIFACT_REFRESH_RUN38.md`입니다.
+- 실제 artifact 다운로드, APK 설치, 앱 실행은 아직 Pending입니다.
+- Android 실제 기기 QA는 Blocked 상태입니다.
+
 이 문서는 하루풀이 Android 실제 기기 또는 에뮬레이터 QA의 Blocked 상태를 해소하기 위한 준비 기준을 정리하는 문서입니다.
 이번 PR은 QA unblock readiness 문서화가 목적이며, 실제 Android QA 수행, APK 설치 성공 판정, 앱 실행 성공 판정, Google Play Console 입력, release build, signing, AAB 생성, production 코드 로직 변경은 진행하지 않습니다.
 

@@ -1,5 +1,11 @@
 # ANDROID_PACKAGING_READINESS
 
+## run #38 artifact 기준 갱신
+
+- release build, signing, AAB 생성 전 run #38 debug APK 기준 QA 상태를 확인해야 합니다.
+- 문서 경로는 `docs/ANDROID_DEBUG_APK_ARTIFACT_REFRESH_RUN38.md`입니다.
+- 실제 release build는 아직 진행하지 않았습니다.
+
 ## Android device QA unblock readiness
 
 - release build, signing, AAB 생성 전 Android device QA unblock readiness를 확인해야 합니다.

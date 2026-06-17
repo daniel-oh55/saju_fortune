@@ -31,6 +31,7 @@
     "check:android-debug-build-readiness": "node scripts/checkAndroidDebugBuildReadiness.mjs",
     "check:android-debug-build-recovery-result": "node scripts/checkAndroidDebugBuildRecoveryResult.mjs",
     "check:android-debug-build-success": "node scripts/checkAndroidDebugBuildSuccess.mjs",
+    "check:android-debug-apk-artifact-refresh-run38": "node scripts/checkAndroidDebugApkArtifactRefreshRun38.mjs",
     "check:android-debug-apk-install-launch-qa-result": "node scripts/checkAndroidDebugApkInstallLaunchQaResult.mjs",
     "check:android-debug-apk-qa-handoff-readiness": "node scripts/checkAndroidDebugApkQaHandoffReadiness.mjs",
     "check:android-device-qa-unblock-readiness": "node scripts/checkAndroidDeviceQaUnblockReadiness.mjs",

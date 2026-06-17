@@ -1,5 +1,82 @@
 # DEVELOPMENT_LOG
 
+# 2026-06-17 Android Debug APK Artifact Refresh Run 38
+
+## 작업 내용
+
+- PR 목적: Android debug APK artifact run #38 기준 갱신 문서 및 검증 스크립트 추가
+- `ANDROID_DEBUG_APK_ARTIFACT_REFRESH_RUN38.md` 신규 추가
+- `checkAndroidDebugApkArtifactRefreshRun38` 신규 추가
+- 신규 npm script: `check:android-debug-apk-artifact-refresh-run38`
+- Android Debug Build run #38 success 기록
+- 기준 branch `docs/android-device-qa-unblock-readiness` 기록
+- head sha `33a6ff4b60459fb9e9d9bb0b047df759b19bf559` 기록
+- harupuli-debug-apk artifact id 7685703968 기록
+- artifact digest `sha256:69bea66d93fbe5e4d77e82aa2d93af318feb972e99c4e37cf6c08aafb217d076` 기록
+- run #35, run #36, run #37 기준 문서와의 관계 기록
+- artifact 다운로드 Pending 기록
+- APK 압축 해제 Pending 기록
+- app-debug.apk 확인 Pending 기록
+- ADB 연결 Pending 기록
+- APK 설치 Pending 기록
+- 앱 실행 Pending 기록
+- Android 실제 기기 QA Blocked 기록
+- Android Emulator QA Pending 기록
+- TODO 문구 보정 기록
+- 실제 이미지 파일 추가 없음 기록
+- 실제 Console 입력 없음 기록
+- production 코드 로직 변경 없음
+- production 계산 로직 변경 없음
+- routing 변경 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+- Android resource/native 변경 없음
+- release build 미진행
+- signing 미진행
+- AAB 생성 미진행
+- 실제 광고 SDK 추가 없음
+- 실제 결제 SDK 추가 없음
+- iOS 프로젝트 생성 없음
+- service worker 구현 없음
+- `@capacitor/app` 추가 없음
+
+## 테스트 결과
+
+- `npm install`: 통과
+  - 기존 audit 경고: high severity 2건 유지
+- `npm run build`: 통과
+  - 기존 Vite chunk size 경고 유지
+- `npm run check:android-debug-apk-artifact-refresh-run38`: 통과
+- `npm run check:android-device-qa-unblock-readiness`: 통과
+- `npm run check:android-debug-apk-install-launch-qa-result`: 통과
+- `npm run check:android-debug-apk-qa-handoff-readiness`: 통과
+- `npm run check:android-device-qa-execution-result`: 통과
+- `npm run check:store-screenshot-sample-profile-screen-qa-result`: 통과
+- `npm run check:store-screenshot-capture-qa-result`: 통과
+- `npm run check:google-play-data-safety-input-readiness`: 통과
+- `npm run check:privacy-policy-contact-readiness`: 통과
+- `npm run check:privacy-policy-live-url-result`: 통과
+- `npm run check:android-debug-build-recovery-result`: 통과
+- `npm run check:google-play-privacy-url-input-readiness`: 통과
+- `npm run check:privacy-policy-build-output`: 통과
+- `npm run check:privacy-policy-url-verification`: 통과
+- `npm run check:store-screenshot-sample-profile`: 통과
+- `npm run check:brand-copy-consistency`: 통과
+- `npm run check:public-privacy-policy-page`: 통과
+- `npm run check:google-play-screenshot-readiness`: 통과
+- `npm run check:google-play-data-safety`: 통과
+- `npm run check:google-play-store-listing`: 통과
+- `npm run check:privacy-policy-url-readiness`: 통과
+- `npm run check:android-qa-status-summary`: 통과
+- `npm run check:android-back-button-qa-result`: 통과
+- `npm run check:android-icon-splash-qa-result`: 통과
+- `npm run check:android-webview-localstorage-qa-result`: 통과
+- `npm run check:android-debug-build-workflow`: 통과
+- `npm run check:capacitor-readiness`: 통과
+- `npm run check:android-packaging-readiness`: 통과
+- `npm run check:content-safety`: 통과
+- `npm run check:share-text`: 통과
+
 # 2026-06-17 Android Device QA Unblock Readiness
 
 ## 작업 내용
