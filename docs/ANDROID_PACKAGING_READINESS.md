@@ -1,5 +1,11 @@
 # ANDROID_PACKAGING_READINESS
 
+## Android device QA unblock readiness
+
+- release build, signing, AAB 생성 전 Android device QA unblock readiness를 확인해야 합니다.
+- 문서 경로는 `docs/ANDROID_DEVICE_QA_UNBLOCK_READINESS.md`입니다.
+- 실제 release build는 아직 진행하지 않았습니다.
+
 ## APK 설치/앱 실행 QA 결과
 
 - release build, signing, AAB 생성 전 debug APK 설치 및 앱 실행 QA 결과를 확인해야 합니다.

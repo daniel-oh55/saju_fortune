@@ -1,5 +1,11 @@
 # STORE_SCREENSHOT_SAMPLE_PROFILE_SCREEN_QA_RESULT
 
+## Android device QA unblock readiness 연결
+
+- 테스트용 샘플 프로필 화면 확인은 Android device QA unblock readiness 확인 이후 진행합니다.
+- 문서 경로는 `docs/ANDROID_DEVICE_QA_UNBLOCK_READINESS.md`입니다.
+- 실제 설치와 앱 실행 전까지 화면 확인 상태는 Pending입니다.
+
 ## APK 설치/앱 실행 QA 결과 연결
 
 - 테스트용 샘플 프로필 화면 확인은 APK 설치와 앱 실행 이후 진행할 수 있습니다.

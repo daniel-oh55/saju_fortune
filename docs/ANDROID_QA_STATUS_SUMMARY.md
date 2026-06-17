@@ -1,5 +1,12 @@
 # ANDROID_QA_STATUS_SUMMARY
 
+## Android device QA unblock readiness
+
+- Android 실제 기기 또는 Emulator QA의 Blocked 상태를 해소하기 위한 준비 문서를 추가했습니다.
+- 문서 경로는 `docs/ANDROID_DEVICE_QA_UNBLOCK_READINESS.md`입니다.
+- 실제 기기 QA는 아직 Blocked입니다.
+- Emulator QA, ADB 연결, APK 설치, 앱 실행은 Pending입니다.
+
 ## APK 설치/앱 실행 QA 결과
 
 - Android debug APK 설치 및 앱 실행 QA 결과 문서를 추가했습니다.

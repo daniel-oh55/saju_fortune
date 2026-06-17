@@ -1,5 +1,11 @@
 # ANDROID_DEBUG_APK_QA_HANDOFF_READINESS
 
+## Android device QA unblock readiness 연결
+
+- debug APK QA handoff 후 실제 QA로 이어가기 전 unblock readiness를 확인합니다.
+- 문서 경로는 `docs/ANDROID_DEVICE_QA_UNBLOCK_READINESS.md`입니다.
+- 실제 기기 또는 Emulator가 준비되기 전까지 APK 설치와 앱 실행은 Pending입니다.
+
 ## APK 설치/앱 실행 QA 결과 연결
 
 - debug APK 설치 및 앱 실행 QA 결과 문서를 추가했습니다.

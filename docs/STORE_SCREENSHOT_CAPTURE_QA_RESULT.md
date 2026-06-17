@@ -1,5 +1,11 @@
 # STORE_SCREENSHOT_CAPTURE_QA_RESULT
 
+## Android device QA unblock readiness 연결
+
+- 실제 스토어 스크린샷 캡처는 Android device QA unblock readiness 확인 이후 진행합니다.
+- 문서 경로는 `docs/ANDROID_DEVICE_QA_UNBLOCK_READINESS.md`입니다.
+- 실제 이미지 생성 전까지 캡처 상태는 Pending입니다.
+
 ## Android device QA execution result 연계
 
 - 스토어 스크린샷 실제 캡처 전 Android device QA execution result를 확인해야 합니다.
