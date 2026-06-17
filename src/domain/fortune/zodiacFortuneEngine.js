@@ -13,6 +13,21 @@ export const zodiacAnimals = [
   { animal: '돼지', icon: '🐷' },
 ];
 
+const earthlyBranchAnimals = {
+  자: { animal: '쥐', icon: '🐭' },
+  축: { animal: '소', icon: '🐮' },
+  인: { animal: '호랑이', icon: '🐯' },
+  묘: { animal: '토끼', icon: '🐰' },
+  진: { animal: '용', icon: '🐲' },
+  사: { animal: '뱀', icon: '🐍' },
+  오: { animal: '말', icon: '🐴' },
+  미: { animal: '양', icon: '🐑' },
+  신: { animal: '원숭이', icon: '🐵' },
+  유: { animal: '닭', icon: '🐔' },
+  술: { animal: '개', icon: '🐶' },
+  해: { animal: '돼지', icon: '🐷' },
+};
+
 export const zodiacYears = Array.from({ length: 2019 - 1948 + 1 }, (_, index) => {
   const year = 1948 + index;
   const zodiac = zodiacAnimals[index % zodiacAnimals.length];
@@ -86,12 +101,21 @@ export function getZodiacAnimalByYear(year) {
   return getZodiacByYear(year)?.animal || null;
 }
 
+export function getZodiacByYearPillar(yearPillar) {
+  const branch = String(yearPillar || '').trim().slice(-1);
+  return earthlyBranchAnimals[branch] || null;
+}
+
 export function getYearsByAnimal(animal) {
   return zodiacYears.filter((item) => item.animal === animal);
 }
 
-export function createZodiacFortune({ profile, selectedYear, dateKey }) {
-  const zodiac = getZodiacByYear(selectedYear) || getZodiacByYear(1996);
+export function createZodiacFortune({ profile, selectedYear, selectedAnimal, selectedIcon, dateKey }) {
+  const zodiac = {
+    ...(getZodiacByYear(selectedYear) || getZodiacByYear(1996)),
+    ...(selectedAnimal ? { animal: selectedAnimal } : {}),
+    ...(selectedIcon ? { icon: selectedIcon } : {}),
+  };
   const seed = hashString(`${profile.id}-${dateKey}-${zodiac.year}-${zodiac.animal}`);
 
   const categories = categoryMeta.map((category, index) => {

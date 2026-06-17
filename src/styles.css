@@ -606,6 +606,14 @@ textarea:focus {
   box-shadow: 0 16px 36px rgba(43, 57, 68, 0.08);
 }
 
+.settings-page .saju-basis-card {
+  border-color: rgba(184, 150, 78, 0.18);
+  border-radius: 24px;
+  background:
+    linear-gradient(135deg, rgba(255, 253, 248, 0.98), rgba(239, 248, 245, 0.9)),
+    rgba(255, 255, 255, 0.94);
+}
+
 .saju-basis-head span,
 .saju-basis-grid span,
 .saju-pillar-grid span {
@@ -681,6 +689,136 @@ textarea:focus {
 .settings-actions {
   display: grid;
   gap: 10px;
+}
+
+.settings-page {
+  gap: 16px;
+}
+
+.settings-title-row {
+  display: grid;
+  gap: 3px;
+  text-align: center;
+}
+
+.settings-title-row h1 {
+  margin-bottom: 0;
+  color: var(--color-deep-navy);
+  font-family: Georgia, "Times New Roman", "Noto Serif KR", serif;
+  font-size: 1.42rem;
+}
+
+.settings-profile-card {
+  overflow: hidden;
+  border: 1px solid rgba(184, 150, 78, 0.18);
+  border-radius: 24px;
+  padding: 18px;
+  background:
+    linear-gradient(135deg, rgba(255, 253, 248, 0.98), rgba(246, 239, 227, 0.82)),
+    var(--color-card);
+  box-shadow: var(--shadow-soft);
+}
+
+.settings-profile-head {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 14px;
+  align-items: center;
+  min-height: 108px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(184, 150, 78, 0.18);
+}
+
+.settings-avatar {
+  display: grid;
+  place-items: center;
+  width: 66px;
+  height: 66px;
+  border-radius: 999px;
+  color: #1f817d;
+  background: rgba(226, 246, 240, 0.92);
+  font-size: 1.58rem;
+  box-shadow: 0 12px 28px rgba(31, 129, 125, 0.12);
+}
+
+.settings-profile-head span,
+.settings-profile-list span {
+  color: #2f7470;
+  font-size: 0.84rem;
+  font-weight: 900;
+}
+
+.settings-profile-head strong {
+  display: block;
+  margin-top: 4px;
+  color: var(--color-deep-navy);
+  font-family: Georgia, "Times New Roman", "Noto Serif KR", serif;
+  font-size: 1.52rem;
+}
+
+.settings-profile-list {
+  display: grid;
+  gap: 0;
+}
+
+.settings-profile-list div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 13px 0;
+  border-bottom: 1px solid rgba(184, 150, 78, 0.15);
+}
+
+.settings-profile-list div:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.settings-profile-list strong {
+  color: var(--color-deep-navy);
+}
+
+.settings-menu-list {
+  display: grid;
+  gap: 9px;
+}
+
+.settings-menu-list button,
+.settings-menu-list .settings-consent-summary {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 11px;
+  align-items: center;
+  min-height: 56px;
+  border: 1px solid rgba(184, 150, 78, 0.16);
+  border-radius: 18px;
+  padding: 0 14px;
+  color: #176f6b;
+  background: rgba(255, 253, 248, 0.9);
+  box-shadow: 0 10px 22px rgba(34, 52, 71, 0.05);
+  font-size: 0.94rem;
+  font-weight: 900;
+  text-align: left;
+}
+
+.settings-menu-list button::after {
+  content: "›";
+  color: #607078;
+  font-size: 1.2rem;
+}
+
+.settings-menu-list span {
+  color: #207f7a;
+}
+
+.settings-menu-list .is-danger {
+  color: #bf473a;
+  background: linear-gradient(135deg, rgba(255, 253, 248, 0.94), rgba(255, 240, 232, 0.78));
+}
+
+.settings-menu-list .is-danger span {
+  color: #bf473a;
 }
 
 .bottom-nav {
@@ -986,12 +1124,83 @@ input:disabled {
   background: #f1f5f3;
 }
 
-.year-hero-card {
+.year-page,
+.zodiac-page {
+  gap: 16px;
+}
+
+.year-hero-card,
+.zodiac-hero-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 238px;
+  border: 1px solid rgba(184, 150, 78, 0.2);
+  border-radius: 26px;
   padding: 22px;
-  color: #243039;
+  color: var(--color-deep-navy);
   background:
-    linear-gradient(135deg, rgba(255, 250, 245, 0.95), rgba(232, 245, 241, 0.95)),
-    linear-gradient(135deg, #ffd7c2, #a9ddd6);
+    linear-gradient(135deg, rgba(255, 253, 248, 0.98), rgba(239, 248, 245, 0.88)),
+    var(--color-card);
+  box-shadow: var(--shadow-soft);
+}
+
+.year-hero-copy,
+.zodiac-hero-card > div:first-child {
+  position: relative;
+  z-index: 1;
+}
+
+.year-hero-card h1,
+.zodiac-hero-card h1 {
+  max-width: 12ch;
+  margin-bottom: 8px;
+  color: var(--color-deep-navy);
+  font-family: Georgia, "Times New Roman", "Noto Serif KR", serif;
+  font-size: 2rem;
+  line-height: 1.16;
+}
+
+.year-hero-card p,
+.zodiac-hero-card p {
+  max-width: 18rem;
+  margin-bottom: 0;
+  color: var(--color-muted-blue);
+  font-size: 0.94rem;
+}
+
+.year-score-panel {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 14px;
+  row-gap: 4px;
+  align-items: center;
+  max-width: 330px;
+  margin-top: 18px;
+  border-radius: 18px;
+  padding: 14px;
+  background: rgba(255, 253, 248, 0.84);
+  box-shadow: 0 12px 28px rgba(34, 52, 71, 0.06);
+}
+
+.year-score-panel span {
+  grid-column: 1 / -1;
+  color: var(--color-deep-navy);
+  font-size: 0.84rem;
+  font-weight: 900;
+}
+
+.year-score-panel strong {
+  color: #2f948e;
+  font-family: Georgia, "Times New Roman", "Noto Serif KR", serif;
+  font-size: 3.3rem;
+  line-height: 1;
+}
+
+.year-score-panel p {
+  border-left: 1px solid rgba(184, 150, 78, 0.28);
+  padding-left: 14px;
+  font-size: 0.86rem;
+  line-height: 1.55;
 }
 
 .year-score-card {
@@ -1024,16 +1233,23 @@ input:disabled {
   background: rgba(255, 255, 255, 0.92);
 }
 
-.year-mini-card span {
+.year-mini-card .year-card-icon {
   display: grid;
   place-items: center;
-  width: 34px;
-  height: 34px;
+  width: 46px;
+  height: 46px;
   margin-bottom: 10px;
-  border-radius: 14px;
-  color: #f07d62;
-  background: #fff0e8;
+  border: 1px solid rgba(184, 150, 78, 0.18);
+  border-radius: 999px;
+  color: var(--color-warm-gold);
+  background: rgba(255, 248, 238, 0.92);
   font-weight: 900;
+}
+
+.year-mini-card h3 {
+  color: var(--color-deep-navy);
+  font-family: Georgia, "Times New Roman", "Noto Serif KR", serif;
+  font-size: 1.06rem;
 }
 
 .year-mini-card strong {
@@ -1059,10 +1275,11 @@ input:disabled {
 }
 
 .month-grid div {
+  position: relative;
   min-height: 84px;
   border-radius: 16px;
   padding: 10px;
-  background: #f5fbf8;
+  background: linear-gradient(135deg, rgba(245, 251, 248, 0.96), rgba(255, 253, 248, 0.92));
 }
 
 .month-grid strong,
@@ -1081,6 +1298,28 @@ input:disabled {
   line-height: 1.35;
 }
 
+.month-grid i {
+  position: absolute;
+  right: 9px;
+  bottom: 7px;
+  color: rgba(184, 150, 78, 0.72);
+  font-style: normal;
+}
+
+.year-detail-button,
+.year-page .primary-button,
+.zodiac-page .primary-button {
+  color: #ffffff;
+  background: linear-gradient(135deg, #2f948e, #237a75);
+  box-shadow: 0 12px 26px rgba(47, 148, 142, 0.18);
+}
+
+.year-detail-button.is-unlocked {
+  color: #237a75;
+  background: rgba(239, 248, 245, 0.96);
+  box-shadow: none;
+}
+
 .bottom-nav {
   border-radius: 22px 22px 0 0;
   box-shadow: 0 -10px 30px rgba(43, 57, 68, 0.08);
@@ -1094,6 +1333,88 @@ input:disabled {
 .nav-icon {
   font-size: 0.84rem;
   font-weight: 900;
+}
+
+.sunrise-art {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 56%;
+  height: 78%;
+  pointer-events: none;
+}
+
+.sunrise-art.small {
+  right: 6px;
+  width: 42%;
+  height: 74%;
+}
+
+.sunrise-art.tiny {
+  right: -18px;
+  bottom: -14px;
+  width: 52%;
+  height: 100%;
+  opacity: 0.78;
+}
+
+.sunrise-sun {
+  position: absolute;
+  right: 28%;
+  top: 22%;
+  width: 54px;
+  height: 54px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #e7c07a, #c9974f);
+  box-shadow: 0 0 38px rgba(231, 192, 122, 0.34);
+}
+
+.sunrise-art.small .sunrise-sun {
+  width: 42px;
+  height: 42px;
+}
+
+.sunrise-art.tiny .sunrise-sun {
+  width: 38px;
+  height: 38px;
+}
+
+.sunrise-orbit {
+  position: absolute;
+  right: 9%;
+  top: 8%;
+  width: 180px;
+  height: 180px;
+  border: 1px solid rgba(184, 150, 78, 0.32);
+  border-radius: 999px;
+}
+
+.sunrise-art.small .sunrise-orbit,
+.sunrise-art.tiny .sunrise-orbit {
+  width: 136px;
+  height: 136px;
+}
+
+.sunrise-mountain {
+  position: absolute;
+  right: -8%;
+  bottom: 0;
+  width: 112%;
+  height: 46%;
+  opacity: 0.9;
+  clip-path: polygon(0 100%, 16% 56%, 31% 76%, 48% 32%, 64% 70%, 78% 44%, 100% 100%);
+}
+
+.sunrise-mountain.front {
+  background: linear-gradient(180deg, rgba(65, 91, 105, 0.74), rgba(65, 91, 105, 0.08));
+}
+
+.sunrise-mountain.back {
+  right: 8%;
+  bottom: 16%;
+  width: 96%;
+  height: 34%;
+  background: linear-gradient(180deg, rgba(126, 149, 156, 0.32), rgba(126, 149, 156, 0.04));
 }
 
 .today-summary-card,
@@ -1986,37 +2307,38 @@ input:disabled {
 }
 
 .zodiac-notice-card {
-  border: 1px solid rgba(89, 120, 118, 0.14);
+  border: 1px solid rgba(184, 150, 78, 0.16);
   border-radius: 18px;
   padding: 14px;
   color: #607078;
-  background: #f5fbf8;
+  background: rgba(255, 253, 248, 0.86);
   font-size: 0.9rem;
   line-height: 1.5;
 }
 
 .zodiac-animal-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 9px;
 }
 
 .zodiac-animal-grid button {
   display: grid;
   place-items: center;
   gap: 7px;
-  min-height: 78px;
-  border: 1px solid rgba(89, 120, 118, 0.14);
+  min-height: 84px;
+  border: 1px solid rgba(184, 150, 78, 0.16);
   border-radius: 18px;
   color: #35464d;
-  background: rgba(255, 255, 255, 0.92);
-  box-shadow: 0 10px 22px rgba(43, 57, 68, 0.05);
+  background: rgba(255, 253, 248, 0.92);
+  box-shadow: 0 10px 22px rgba(34, 52, 71, 0.05);
 }
 
 .zodiac-animal-grid button.is-active {
-  border-color: #338f8b;
+  border-color: #2f948e;
   color: #ffffff;
-  background: #338f8b;
+  background: linear-gradient(135deg, #2f948e, #26827d);
+  box-shadow: 0 16px 30px rgba(47, 148, 142, 0.2);
 }
 
 .zodiac-animal-grid span {
@@ -2033,10 +2355,10 @@ input:disabled {
 }
 
 .zodiac-accordion {
-  border: 1px solid rgba(89, 120, 118, 0.14);
+  border: 1px solid rgba(184, 150, 78, 0.16);
   border-radius: 18px;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 253, 248, 0.92);
 }
 
 .zodiac-accordion > button {
@@ -2053,8 +2375,8 @@ input:disabled {
 }
 
 .zodiac-accordion.is-open > button {
-  color: #338f8b;
-  background: #f5fbf8;
+  color: #2f948e;
+  background: rgba(239, 248, 245, 0.92);
 }
 
 .zodiac-accordion-body {
@@ -2068,6 +2390,9 @@ input:disabled {
   grid-template-columns: 1fr auto;
   gap: 12px;
   align-items: start;
+  border: 0;
+  background: linear-gradient(135deg, rgba(239, 248, 245, 0.96), rgba(255, 253, 248, 0.92));
+  box-shadow: none;
 }
 
 .zodiac-score-card span {
@@ -2076,9 +2401,18 @@ input:disabled {
 }
 
 .zodiac-score-card strong {
-  color: #338f8b;
+  color: #2f948e;
+  font-family: Georgia, "Times New Roman", "Noto Serif KR", serif;
   font-size: 3rem;
   line-height: 1;
+}
+
+.zodiac-score-card strong::after {
+  content: "/100";
+  margin-left: 4px;
+  color: #7c8a8f;
+  font-family: Inter, Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 1rem;
 }
 
 .zodiac-score-card p {
@@ -2088,23 +2422,22 @@ input:disabled {
 
 .zodiac-category-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
 }
 
 .zodiac-mini-card {
-  border: 1px solid rgba(89, 120, 118, 0.14);
-  border-radius: 20px;
-  padding: 14px;
+  border: 1px solid rgba(184, 150, 78, 0.14);
+  border-radius: 16px;
+  padding: 11px 8px;
   background: rgba(255, 255, 255, 0.92);
+  text-align: center;
 }
 
 .zodiac-mini-card div {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  margin-bottom: 8px;
+  display: grid;
+  gap: 4px;
+  margin-bottom: 0;
 }
 
 .zodiac-mini-card span {
@@ -2114,21 +2447,20 @@ input:disabled {
 }
 
 .zodiac-mini-card strong {
-  color: #338f8b;
+  color: #2f948e;
 }
 
 .zodiac-mini-card p {
-  margin-bottom: 0;
-  font-size: 0.88rem;
+  display: none;
 }
 
 .zodiac-advice-locked {
   display: grid;
   gap: 12px;
-  border: 1px solid rgba(89, 120, 118, 0.14);
+  border: 1px solid rgba(184, 150, 78, 0.18);
   border-radius: 20px;
   padding: 16px;
-  background: #f5fbf8;
+  background: rgba(255, 253, 248, 0.8);
 }
 
 .zodiac-advice-locked h2 {
@@ -2906,10 +3238,10 @@ input:disabled {
   border: 1px solid rgba(184, 150, 78, 0.24);
   border-radius: 28px;
   padding: 28px 22px 22px;
-  color: #fffdf8;
+  color: var(--color-deep-navy);
   background:
-    linear-gradient(160deg, rgba(34, 52, 71, 0.98), rgba(47, 58, 74, 0.94)),
-    var(--color-deep-navy);
+    linear-gradient(135deg, rgba(255, 253, 248, 0.98), rgba(246, 239, 227, 0.82)),
+    var(--color-card);
   box-shadow: var(--shadow-lift);
 }
 
@@ -2921,7 +3253,7 @@ input:disabled {
 .home-diary-hero .eyebrow,
 .home-diary-hero h1,
 .home-diary-hero p {
-  color: #fffdf8;
+  color: var(--color-deep-navy);
 }
 
 .home-diary-hero h1 {
@@ -2934,7 +3266,7 @@ input:disabled {
 .home-diary-hero p {
   max-width: 25rem;
   margin-bottom: 22px;
-  color: rgba(255, 253, 248, 0.82);
+  color: var(--color-muted-blue);
   font-size: 0.94rem;
 }
 
@@ -2947,34 +3279,23 @@ input:disabled {
 .hero-orbit::before {
   content: "";
   position: absolute;
-  right: -74px;
-  top: -84px;
+  right: -58px;
+  top: -50px;
   width: 226px;
   height: 226px;
   border: 1px solid rgba(184, 150, 78, 0.24);
   border-radius: 999px;
 }
 
-.hero-moon {
+.hero-sun {
   position: absolute;
-  right: 38px;
-  top: 34px;
-  width: 56px;
-  height: 56px;
+  right: 52px;
+  top: 56px;
+  width: 58px;
+  height: 58px;
   border-radius: 999px;
-  background: #f7e7bd;
-  box-shadow: 0 0 42px rgba(247, 231, 189, 0.34);
-}
-
-.hero-moon::after {
-  content: "";
-  position: absolute;
-  right: -8px;
-  top: -3px;
-  width: 48px;
-  height: 56px;
-  border-radius: 999px;
-  background: var(--color-deep-navy);
+  background: linear-gradient(135deg, #e7c07a, #c9974f);
+  box-shadow: 0 0 44px rgba(231, 192, 122, 0.34);
 }
 
 .hero-star {
@@ -3004,8 +3325,8 @@ input:disabled {
   width: 82%;
   height: 94px;
   background:
-    linear-gradient(135deg, transparent 42%, rgba(220, 200, 163, 0.2) 43% 58%, transparent 59%),
-    linear-gradient(165deg, transparent 48%, rgba(255, 253, 248, 0.15) 49% 62%, transparent 63%);
+    linear-gradient(135deg, transparent 42%, rgba(65, 91, 105, 0.25) 43% 58%, transparent 59%),
+    linear-gradient(165deg, transparent 48%, rgba(65, 91, 105, 0.18) 49% 62%, transparent 63%);
   opacity: 0.9;
 }
 
@@ -3023,8 +3344,8 @@ input:disabled {
 
 .home-diary-hero .primary-button {
   border: 1px solid rgba(184, 150, 78, 0.48);
-  color: var(--color-deep-navy);
-  background: #fffdf8;
+  color: #fffdf8;
+  background: linear-gradient(135deg, #2f948e, #237a75);
 }
 
 .home-diary-theme .ghost-button {
@@ -3034,8 +3355,8 @@ input:disabled {
 }
 
 .home-diary-hero .ghost-button {
-  color: #fffdf8;
-  background: rgba(255, 253, 248, 0.12);
+  color: var(--color-deep-navy);
+  background: rgba(255, 253, 248, 0.72);
 }
 
 .home-score-diary-card,
@@ -3184,7 +3505,7 @@ input:disabled {
   place-items: center;
   width: 36px;
   height: 36px;
-  border: 1px solid rgba(184, 150, 78, 0.24);
+  border: 1px solid rgba(184, 150, 78, 0.32);
   border-radius: 999px;
   color: var(--color-deep-navy);
   background: rgba(255, 253, 248, 0.82);

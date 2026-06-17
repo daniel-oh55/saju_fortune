@@ -4,7 +4,7 @@ const navItems = [
   { id: 'year', label: '2026운세', icon: '2026' },
   { id: 'zodiac', label: '띠별', icon: '12' },
   { id: 'ai', label: 'AI상담', icon: 'AI' },
-  { id: 'settings', label: '마이', icon: '☻' },
+  { id: 'settings', label: '내정보', icon: '☻' },
 ];
 
 function BottomNav({ activePage, onNavigate }) {
