@@ -1,5 +1,13 @@
 # ANDROID_QA_STATUS_SUMMARY
 
+## Android device QA execution result
+
+- Android 실제 기기 또는 에뮬레이터 QA 실행 결과 문서를 추가했습니다.
+- 문서 경로는 `docs/ANDROID_DEVICE_QA_EXECUTION_RESULT.md`입니다.
+- Android Debug Build run #34는 success입니다.
+- harupuli-debug-apk artifact는 생성되었습니다.
+- 실제 기기 QA는 아직 Blocked 상태입니다.
+
 ## 개인정보 처리방침 live URL 확인 단계
 
 - Android Debug Build 복구 후 다음 확인 대상은 Vercel `/privacy/` 실제 접근입니다.

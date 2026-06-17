@@ -1,5 +1,18 @@
 # STORE_SCREENSHOT_CAPTURE_QA_RESULT
 
+## Android device QA execution result 연계
+
+- 스토어 스크린샷 실제 캡처 전 Android device QA execution result를 확인해야 합니다.
+- 문서 경로는 `docs/ANDROID_DEVICE_QA_EXECUTION_RESULT.md`입니다.
+- 실제 캡처 이미지는 아직 생성하지 않습니다.
+
+## 샘플 프로필 화면 QA 결과 연계
+
+- 테스트용 샘플 프로필 입력 및 주요 화면 확인 결과 문서를 추가했습니다.
+- 문서 경로는 `docs/STORE_SCREENSHOT_SAMPLE_PROFILE_SCREEN_QA_RESULT.md`입니다.
+- 실제 스크린샷 이미지는 아직 생성하지 않습니다.
+- 화면 확인 완료 전에는 실제 캡처 단계로 넘어가지 않습니다.
+
 이 문서는 하루풀이 Google Play 스토어 스크린샷 실제 캡처 전 QA 결과를 기록하기 위한 템플릿입니다.
 이번 PR은 캡처 QA 결과 기록 양식 준비가 목적이며, 실제 스크린샷 이미지 생성, Google Play Console 입력, release build, signing, AAB 생성, production 앱 로직 변경은 진행하지 않습니다.
 

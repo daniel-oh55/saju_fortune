@@ -1,5 +1,11 @@
 # GOOGLE_PLAY_SCREENSHOT_READINESS
 
+## 샘플 프로필 화면 QA 결과
+
+- 실제 스토어 스크린샷 제작 전 테스트용 샘플 프로필 입력과 주요 화면 확인 결과를 기록해야 합니다.
+- 문서 경로는 `docs/STORE_SCREENSHOT_SAMPLE_PROFILE_SCREEN_QA_RESULT.md`입니다.
+- 실제 캡처 이미지는 후속 단계에서 제작합니다.
+
 ## 실제 캡처 QA 결과 문서
 
 - 스토어 스크린샷 실제 캡처 QA 결과 문서를 추가했습니다.

@@ -1,5 +1,11 @@
 # GOOGLE_PLAY_STORE_LISTING_DRAFT
 
+## 샘플 프로필 화면 QA 결과
+
+- 스토어 등록 정보에 사용할 스크린샷 제작 전 샘플 프로필 화면 QA 결과를 확인해야 합니다.
+- 문서 경로는 `docs/STORE_SCREENSHOT_SAMPLE_PROFILE_SCREEN_QA_RESULT.md`입니다.
+- 실제 Google Play Console 업로드는 후속 단계입니다.
+
 ## 스토어 스크린샷 캡처 QA
 
 - Google Play 스토어 등록 전 스크린샷 캡처 QA 결과를 확인해야 합니다.

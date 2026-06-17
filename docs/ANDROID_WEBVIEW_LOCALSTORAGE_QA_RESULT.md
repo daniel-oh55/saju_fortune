@@ -1,5 +1,11 @@
 # ANDROID_WEBVIEW_LOCALSTORAGE_QA_RESULT
 
+## Android device QA execution result 연계
+
+- WebView localStorage 실제 QA는 Android device QA execution result와 함께 확인합니다.
+- 문서 경로는 `docs/ANDROID_DEVICE_QA_EXECUTION_RESULT.md`입니다.
+- 실제 기기 또는 에뮬레이터에서 확인되기 전까지 Pending 또는 Blocked 상태를 유지합니다.
+
 ## QA 상태 요약 연결
 
 - 현재 WebView localStorage QA 상태는 `docs/ANDROID_QA_STATUS_SUMMARY.md`에서도 관리합니다.

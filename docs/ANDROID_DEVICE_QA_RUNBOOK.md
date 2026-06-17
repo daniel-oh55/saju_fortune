@@ -1,5 +1,12 @@
 # ANDROID_DEVICE_QA_RUNBOOK
 
+## Android device QA execution result 연계
+
+- 실제 기기 또는 에뮬레이터 QA 실행 결과 문서를 추가했습니다.
+- 문서 경로는 `docs/ANDROID_DEVICE_QA_EXECUTION_RESULT.md`입니다.
+- 실제 QA가 수행되지 않은 경우 Blocked 또는 Pending 상태를 유지합니다.
+- QA 결과가 Pass로 바뀌려면 APK 설치와 앱 실행, 주요 화면 확인이 실제로 수행되어야 합니다.
+
 ## Android QA 상태 요약 문서 연결
 
 - Android 실제 QA 상태 요약은 `docs/ANDROID_QA_STATUS_SUMMARY.md`를 참고합니다.

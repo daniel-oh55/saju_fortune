@@ -1,5 +1,11 @@
 # CAPACITOR_READINESS
 
+## Android device QA execution result
+
+- Capacitor Android 앱의 실제 실행 확인은 Android device QA execution result와 연결됩니다.
+- 문서 경로는 `docs/ANDROID_DEVICE_QA_EXECUTION_RESULT.md`입니다.
+- production 코드 변경은 없습니다.
+
 ## Android Debug Build 복구 결과
 
 - Capacitor Android sync/build 전 npm dependency install 단계가 run #29에서 정상화되었습니다.
