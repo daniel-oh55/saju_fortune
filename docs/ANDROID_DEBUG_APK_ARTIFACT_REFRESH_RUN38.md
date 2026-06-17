@@ -2,7 +2,7 @@
 
 이 문서는 하루풀이 Android Debug Build run #38에서 생성된 최신 debug APK artifact 정보를 QA 문서 기준에 반영하기 위한 문서입니다.
 이번 PR은 artifact 기준 갱신과 문구 정합성 보정이 목적이며, 실제 APK 다운로드 수행, APK 설치 수행, 앱 실행 수행, 실제 기기 QA 성공 판정, Google Play Console 입력, release build, signing, AAB 생성, production 코드 로직 변경은 진행하지 않습니다.
-문구 정합성 기준은 run #38 artifact 문서에 고정하며, run #39 또는 run #42 artifact 기준으로 갱신하지 않습니다.
+문구 정합성 기준은 run #38 artifact 문서에 고정하며, run #39, run #42 또는 run #43 artifact 기준으로 갱신하지 않습니다.
 
 ## 1. 목적
 
@@ -70,7 +70,7 @@
 - 첫 화면 확인: 미진행
 - 실제 기기 QA: 미진행
 - Emulator QA: 미진행
-- 스토어 스크린샷 이미지 제작: 미진행
+- 스토어 스크린샷 이미지 시작: 미진행
 
 ## 6. TODO 문구 보정 기준
 

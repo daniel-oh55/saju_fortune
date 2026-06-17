@@ -1,5 +1,69 @@
 # DEVELOPMENT_LOG
 
+## PR #116 - Android artifact refresh run #38 문구 정합성 최종 보정
+
+### 목적
+
+- Android artifact refresh run #38 문서와 TODO의 문구 정합성을 최종 보정했습니다.
+- PR #115 이후에도 남아 있던 잘못된 문구 기준을 제거했습니다.
+- `checkAndroidDebugApkArtifactRefreshRun38`의 old/correct marker 기준을 최종 확인했습니다.
+
+### 문구 보정
+
+- `실제 스토어 스크린샷 이미지 시작` 문구를 적용했습니다.
+- `스토어 스크린샷 이미지 시작` 미진행 항목을 적용했습니다.
+- `서양식 보정 적용 여부` 문구를 적용했습니다.
+- `음력/윤달 샘플 외부 검증` 문구를 적용했습니다.
+- 이전 스토어 스크린샷 제작 표현을 제거했습니다.
+- 이전 보정 기준 표현은 이번 기준에서 사용하지 않았습니다.
+- 이전 음력 샘플 추가 검증 표현은 이번 기준에서 사용하지 않았습니다.
+
+### 유지 기준
+
+- run #38 artifact 기준을 유지했습니다.
+- run #39 artifact 기준으로 갱신하지 않았습니다.
+- run #42 artifact 기준으로 갱신하지 않았습니다.
+- run #43 artifact 기준으로 갱신하지 않았습니다.
+- PR #114 홈 디자인 변경을 유지했습니다.
+- 디자인 코드 변경은 하지 않았습니다.
+- production 코드 로직 변경은 하지 않았습니다.
+- Android native/resource 변경은 하지 않았습니다.
+- routing 변경은 하지 않았습니다.
+- schemaVersion 변경은 하지 않았습니다.
+- 기존 localStorage key 변경은 하지 않았습니다.
+
+### 실제 미수행 항목
+
+- 실제 APK 다운로드는 수행하지 않았습니다.
+- 실제 APK 설치는 수행하지 않았습니다.
+- 실제 앱 실행은 수행하지 않았습니다.
+- 실제 Android QA는 수행하지 않았습니다.
+- 실제 스토어 스크린샷 이미지 파일은 추가하지 않았습니다.
+- Google Play Console 입력은 수행하지 않았습니다.
+- release build는 진행하지 않았습니다.
+- signing 설정은 진행하지 않았습니다.
+- AAB 생성은 진행하지 않았습니다.
+
+### 검증
+
+- `npm install`: 통과
+  - 기존 audit 경고: high severity 2건 유지
+- `npm run build`: 통과
+  - 기존 Vite chunk size 경고 유지
+- `npm run check:android-debug-apk-artifact-refresh-run38`: 통과
+- `npm run check:android-device-qa-unblock-readiness`: 통과
+- `npm run check:android-debug-apk-install-launch-qa-result`: 통과
+- `npm run check:android-debug-apk-qa-handoff-readiness`: 통과
+- `npm run check:android-device-qa-execution-result`: 통과
+- `npm run check:android-qa-status-summary`: 통과
+- `npm run check:capacitor-readiness`: 통과
+- `npm run check:android-packaging-readiness`: 통과
+- `npm run check:content-safety`: 통과
+- `npm run check:share-text`: 통과
+- `npm run check:google-play-screenshot-readiness`: 통과
+- `npm run check:store-screenshot-capture-qa-result`: 통과
+- `npm run check:store-screenshot-sample-profile-screen-qa-result`: 통과
+
 # 2026-06-17 Android Artifact Refresh Wording Consistency V2
 
 ## 작업 내용

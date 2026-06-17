@@ -1,5 +1,44 @@
 # TODO
 
+## 2026-06-17 Android artifact refresh wording consistency final TODO
+
+- [x] Android artifact refresh run #38 문구 정합성 최종 보정
+- [x] Android artifact refresh run #38 검증 스크립트 old/correct 기준 최종 보정
+- [ ] Android 실제 기기 또는 에뮬레이터 준비 후 QA 재시도
+- [ ] ADB 연결 확인
+- [ ] harupuli-debug-apk artifact 다운로드 및 APK 설치
+- [ ] Android 실제 기기 또는 에뮬레이터에서 앱 실행 확인
+- [ ] 테스트용 샘플 프로필 실제 입력 및 화면 확인
+- [ ] Android WebView localStorage 실제 QA 수행
+- [ ] Android back button 실제 QA 수행
+- [ ] Android 실제 기기 또는 에뮬레이터에서 launcher icon 표시 확인
+- [ ] Android 실제 기기 또는 에뮬레이터에서 round icon 표시 확인
+- [ ] Android 12 이상 adaptive icon 표시 확인
+- [ ] Android 12 이상 splash 표시 확인
+- [ ] 실제 스토어 스크린샷 이미지 시작
+- [ ] Google Play Console 스크린샷 업로드
+- [ ] 실제 개인정보 처리방침 문의처 확정
+- [ ] 개인정보 처리방침 문의처 수신 가능 여부 확인
+- [ ] public/privacy/index.html 문의처 실제값 반영
+- [ ] PrivacyInfoPage 문의처 실제값 반영
+- [ ] Vercel 배포 후 /privacy/ 실제 접근 확인
+- [ ] 개인정보 처리방침 외부 공개 URL 배포 확인
+- [ ] Google Play Console 개인정보 처리방침 URL 입력
+- [ ] Google Play 데이터 보안 양식 최종 입력
+- [ ] release build 준비
+- [ ] signing 설정 준비
+- [ ] AAB 생성
+- [ ] 실제 provider placement ID 적용
+- [ ] 실제 광고 SDK 연동
+- [ ] 공유 이미지 생성 기능 검토
+- [ ] 앱 버전 이름 매니페스트 기준 확인 및 기본값 추가
+- [ ] 23시 이후 선택 옵션 문구의 사용자 이해도 확인
+- [ ] 서양식 보정 적용 여부 별도 검토
+- [ ] 음력/윤달 샘플 외부 검증
+- [ ] 디자인 변경 후 Android 실제 기기 또는 에뮬레이터 화면 QA
+- [ ] 디자인 변경 후 스토어 스크린샷 실제 제작
+- [ ] 디자인 변경 후 샘플 프로필 화면 QA
+
 ## 2026-06-17 Home UI refresh v1 TODO
 
 - [x] 홈 화면 1차 디자인 리프레시 적용
