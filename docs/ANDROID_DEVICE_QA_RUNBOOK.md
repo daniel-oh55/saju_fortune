@@ -1,5 +1,11 @@
 # ANDROID_DEVICE_QA_RUNBOOK
 
+## APK 설치/앱 실행 QA 결과 연결
+
+- 실제 QA를 시작하기 전 `docs/ANDROID_DEBUG_APK_INSTALL_LAUNCH_QA_RESULT.md`를 확인합니다.
+- artifact 다운로드, app-debug.apk 확인, ADB 연결, APK 설치, 앱 실행 순서로 진행합니다.
+- 실제 설치와 앱 실행 전에는 QA 성공 판정으로 기록하지 않습니다.
+
 ## debug APK QA handoff 준비
 
 - 실제 QA를 시작하기 전 `docs/ANDROID_DEBUG_APK_QA_HANDOFF_READINESS.md`를 확인합니다.

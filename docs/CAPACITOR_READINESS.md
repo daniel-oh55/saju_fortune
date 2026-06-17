@@ -1,5 +1,11 @@
 # CAPACITOR_READINESS
 
+## APK 설치/앱 실행 QA 결과
+
+- Capacitor Android 앱 실제 실행 확인 전 APK 설치와 앱 실행 QA 결과를 확인합니다.
+- 문서 경로는 `docs/ANDROID_DEBUG_APK_INSTALL_LAUNCH_QA_RESULT.md`입니다.
+- production 코드 변경은 없습니다.
+
 ## debug APK QA handoff 준비
 
 - Capacitor Android 앱 실제 실행 확인 전 debug APK handoff 상태를 확인합니다.

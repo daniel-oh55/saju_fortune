@@ -1,5 +1,11 @@
 # STORE_SCREENSHOT_SAMPLE_PROFILE_SCREEN_QA_RESULT
 
+## APK 설치/앱 실행 QA 결과 연결
+
+- 테스트용 샘플 프로필 화면 확인은 APK 설치와 앱 실행 이후 진행할 수 있습니다.
+- 선행 확인 문서는 `docs/ANDROID_DEBUG_APK_INSTALL_LAUNCH_QA_RESULT.md`입니다.
+- 실제 앱 실행 전까지 주요 화면 확인 상태는 Pending입니다.
+
 ## debug APK QA handoff 준비
 
 - 테스트용 샘플 프로필 화면 확인 전 debug APK QA handoff 상태를 확인해야 합니다.
