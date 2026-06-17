@@ -38,9 +38,15 @@ const doc = refreshDocExists ? readText(refreshDocPath) : '';
 const todo = fileExists('TODO.md') ? readText('TODO.md') : '';
 
 const oldTodoMarkers = [
-  '?ㅼ젣 ?ㅽ넗???ㅽ겕由곗꺑 ?대?吏 ?쒖옉',
-  '?쒖뼇??蹂댁젙 ?곸슜 ?щ?',
-  '?묐젰/?뚮젰 ?섑뵆 異붽? 寃利?',
+  '실제 스토어 스크린샷 이미지 시작',
+  '서양식 보정 적용 여부',
+  '양력/음력 샘플 추가 검증',
+];
+
+const correctTodoMarkers = [
+  '실제 스토어 스크린샷 이미지 제작',
+  '태양시 보정 적용 여부',
+  '음력/윤달 샘플 외부 검증',
 ];
 
 const docChecks = [
@@ -103,10 +109,9 @@ const docChecks = [
   ],
   [
     'doc_mentions_todo_wording_fixes',
-    doc.includes('실제 스토어 스크린샷 이미지 시작') &&
-      doc.includes('서양식 보정 적용 여부') &&
-      doc.includes('양력/음력 샘플 추가 검증'),
-    'Run #38 artifact refresh doc should mention TODO wording fixes',
+    correctTodoMarkers.every((marker) => doc.includes(marker)) &&
+      oldTodoMarkers.every((marker) => !doc.includes(marker)),
+    'Run #38 artifact refresh doc should mention corrected TODO wording and avoid old wording',
   ],
   [
     'doc_does_not_claim_actual_done',
@@ -116,7 +121,7 @@ const docChecks = [
       '앱 실행 완료',
       '실제 기기 QA 완료',
       'Emulator QA 완료',
-      '스토어 스크린샷 이미지 시작 완료',
+      '스토어 스크린샷 이미지 제작 완료',
     ]),
     'Run #38 artifact refresh doc should not claim actual work completed',
   ],
@@ -129,11 +134,11 @@ for (const [id, pass, message] of docChecks) {
 
 const todoChecks = [
   ['todo_has_no_old_screenshot_start_wording', !todo.includes(oldTodoMarkers[0]), 'TODO should not contain old screenshot start wording'],
-  ['todo_has_screenshot_production_wording', todo.includes('실제 스토어 스크린샷 이미지 시작'), 'TODO should contain normalized screenshot start wording'],
+  ['todo_has_screenshot_production_wording', todo.includes(correctTodoMarkers[0]), 'TODO should contain normalized screenshot wording'],
   ['todo_has_no_western_time_wording', !todo.includes(oldTodoMarkers[1]), 'TODO should not contain old western correction wording'],
-  ['todo_has_solar_time_wording', todo.includes('서양식 보정 적용 여부'), 'TODO should contain normalized western correction wording'],
+  ['todo_has_solar_time_wording', todo.includes(correctTodoMarkers[1]), 'TODO should contain normalized solar time correction wording'],
   ['todo_has_no_solar_lunar_sample_wording', !todo.includes(oldTodoMarkers[2]), 'TODO should not contain old solar/lunar sample wording'],
-  ['todo_has_lunar_leap_month_wording', todo.includes('양력/음력 샘플 추가 검증'), 'TODO should contain normalized solar/lunar sample wording'],
+  ['todo_has_lunar_leap_month_wording', todo.includes(correctTodoMarkers[2]), 'TODO should contain normalized lunar/leap month sample wording'],
 ];
 
 for (const [id, pass, message] of todoChecks) {
