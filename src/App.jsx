@@ -110,9 +110,10 @@ function App() {
   }, [fortune?.id]);
 
   const handleSaveProfile = (nextProfile) => {
+    const hadProfile = Boolean(profile);
     saveProfile(nextProfile);
     setProfile(nextProfile);
-    setActivePage('home');
+    setActivePage(hadProfile ? 'settings' : 'home');
   };
 
   const handleOpenDetail = (categoryId) => {
@@ -204,7 +205,7 @@ function App() {
     </>
   );
 
-  if (!profile || activePage === 'onboarding') {
+  if (!profile || activePage === 'onboarding' || activePage === 'profileEdit') {
     return (
       <>
         <OnboardingPage initialProfile={profile} onSave={handleSaveProfile} />
@@ -280,7 +281,7 @@ function App() {
             consentPreferences={consentPreferences}
             onNavigate={setActivePage}
             onOpenConsentSettings={handleOpenConsentSettings}
-            onEditProfile={() => setActivePage('onboarding')}
+            onEditProfile={() => setActivePage('profileEdit')}
             onReset={handleReset}
           />
         )}

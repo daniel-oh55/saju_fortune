@@ -18,20 +18,27 @@ function YearFortunePage({ profile, fortune, onNavigate }) {
   };
 
   return (
-    <div className="page-stack">
+    <div className="page-stack year-page">
       <section className="year-hero-card">
-        <p className="eyebrow">2026 Fortune</p>
-        <h1>2026년 나의 흐름</h1>
-        <p>
-          {profile.nickname}님의 {fortune.sajuAnalysis.elements.dominant} 기운과
-          {yearFortune.keyword} 키워드를 바탕으로 본 2026년 참고용 풀이입니다.
-        </p>
-      </section>
-
-      <section className="year-score-card">
-        <span>2026 총운 점수</span>
-        <strong>{yearFortune.averageScore}</strong>
-        <p>{yearFortune.summary}</p>
+        <div className="year-hero-copy">
+          <p className="eyebrow">2026 Fortune</p>
+          <h1>2026년 나의 흐름</h1>
+          <p>
+            {profile.nickname}님의 {fortune.sajuAnalysis.elements.dominant} 기운과
+            {yearFortune.keyword} 키워드를 바탕으로 본 2026년 참고용 풀이입니다.
+          </p>
+          <div className="year-score-panel">
+            <span>2026 총운 점수</span>
+            <strong>{yearFortune.averageScore}</strong>
+            <p>{yearFortune.summary}</p>
+          </div>
+        </div>
+        <div className="sunrise-art" aria-hidden="true">
+          <span className="sunrise-sun" />
+          <span className="sunrise-orbit" />
+          <span className="sunrise-mountain front" />
+          <span className="sunrise-mountain back" />
+        </div>
       </section>
 
       <section className="year-category-grid">
@@ -40,13 +47,13 @@ function YearFortunePage({ profile, fortune, onNavigate }) {
 
           return (
             <article key={category.id} className="year-mini-card year-unlock-card">
-              <span>{category.icon}</span>
+              <span className="year-card-icon">{category.icon}</span>
               <h3>{category.label}</h3>
               <strong>{category.score}점</strong>
               <p>{category.summary}</p>
 
               <button
-                className={`detail-toggle-button ${isUnlocked ? 'is-unlocked' : ''}`}
+                className={`detail-toggle-button year-detail-button ${isUnlocked ? 'is-unlocked' : ''}`}
                 type="button"
                 onClick={() => setActiveCategoryAd(category)}
                 disabled={isUnlocked}
@@ -78,6 +85,7 @@ function YearFortunePage({ profile, fortune, onNavigate }) {
               <strong>{month.month}월</strong>
               <span>{month.score}</span>
               <p>{month.note}</p>
+              <i aria-hidden="true">✧</i>
             </div>
           ))}
         </div>
@@ -87,8 +95,8 @@ function YearFortunePage({ profile, fortune, onNavigate }) {
         <section className="monthly-unlock-card">
           <div>
             <p className="eyebrow">잠금 콘텐츠</p>
-            <h2>월별 상세 흐름은 광고 시청 후 열립니다</h2>
-            <p>광고 1회로 1월부터 12월까지의 상세 흐름을 한 번에 확인할 수 있어요.</p>
+            <h2>월별 상세 흐름은 광고 시청 후 열리는 구조로 준비 중입니다</h2>
+            <p>실제 광고 SDK 없이, 향후 흐름을 확인할 수 있는 자리만 미리 잡아두었습니다.</p>
           </div>
           <button className="primary-button" type="button" onClick={() => setIsMonthlyAdOpen(true)}>
             광고 보고 월별 상세 흐름 전체 열기

@@ -17,36 +17,48 @@ function lateNightJasiPolicyLabel(value) {
 
 function SettingsPage({ profile, fortune, consentPreferences, onNavigate, onOpenConsentSettings, onEditProfile, onReset }) {
   return (
-    <div className="page-stack">
-      <section className="section-header">
-        <p className="eyebrow">마이</p>
-        <h1>내 정보와 앱 설정</h1>
+    <div className="page-stack settings-page">
+      <section className="settings-title-row">
+        <p className="eyebrow">My Info</p>
+        <h1>내정보</h1>
       </section>
 
-      <section className="settings-card">
-        <div>
-          <span>닉네임</span>
-          <strong>{profile.nickname}</strong>
+      <section className="settings-profile-card">
+        <div className="settings-profile-head">
+          <div className="settings-avatar" aria-hidden="true">☻</div>
+          <div>
+            <span>닉네임</span>
+            <strong>{profile.nickname}</strong>
+          </div>
+          <div className="sunrise-art tiny" aria-hidden="true">
+            <span className="sunrise-sun" />
+            <span className="sunrise-orbit" />
+            <span className="sunrise-mountain front" />
+            <span className="sunrise-mountain back" />
+          </div>
         </div>
-        <div>
-          <span>생년월일</span>
-          <strong>{profile.birthDate}</strong>
-        </div>
-        <div>
-          <span>태어난 시간</span>
-          <strong>{profile.birthTimeUnknown ? '시간 모름' : profile.birthTime}</strong>
-        </div>
-        <div>
-          <span>달력</span>
-          <strong>{profile.calendarType === 'solar' ? '양력' : '음력'}</strong>
-        </div>
-        <div>
-          <span>윤달 여부</span>
-          <strong>{profile.calendarType === 'lunar' && profile.isLeapMonth ? '윤달' : '해당 없음'}</strong>
-        </div>
-        <div>
-          <span>성별</span>
-          <strong>{genderLabel(profile.gender)}</strong>
+
+        <div className="settings-profile-list">
+          <div>
+            <span>▣ 생년월일</span>
+            <strong>{profile.birthDate}</strong>
+          </div>
+          <div>
+            <span>◷ 태어난 시간</span>
+            <strong>{profile.birthTimeUnknown ? '시간 모름' : profile.birthTime}</strong>
+          </div>
+          <div>
+            <span>▣ 달력</span>
+            <strong>{profile.calendarType === 'solar' ? '양력' : '음력'}</strong>
+          </div>
+          <div>
+            <span>☾ 윤달 여부</span>
+            <strong>{profile.calendarType === 'lunar' && profile.isLeapMonth ? '윤달' : '해당 없음'}</strong>
+          </div>
+          <div>
+            <span>♙ 성별</span>
+            <strong>{genderLabel(profile.gender)}</strong>
+          </div>
         </div>
       </section>
 
@@ -67,24 +79,29 @@ function SettingsPage({ profile, fortune, consentPreferences, onNavigate, onOpen
 
       <SajuCalculationBasisCard profile={profile} fortune={fortune} />
 
-      <section className="settings-actions">
-        <button className="ghost-button full-width" type="button" onClick={() => onNavigate('privacyInfo')}>
+      <section className="settings-menu-list" aria-label="내정보 메뉴">
+        <button type="button" onClick={() => onNavigate('privacyInfo')}>
+          <span aria-hidden="true">♢</span>
           개인정보 안내 보기
         </button>
-        <button className="ghost-button full-width" type="button" onClick={onOpenConsentSettings}>
+        <button type="button" onClick={onOpenConsentSettings}>
+          <span aria-hidden="true">▤</span>
           데이터 사용 설정
         </button>
         {consentPreferences && (
-          <p className="settings-consent-summary">
+          <div className="settings-consent-summary">
+            <span aria-hidden="true">◇</span>
             분석 {consentPreferences.analytics ? '동의' : '미동의'} · 광고{' '}
             {consentPreferences.ads ? '동의' : '미동의'} · 맞춤형 광고{' '}
             {consentPreferences.personalizedAds ? '동의' : '미동의'}
-          </p>
+          </div>
         )}
-        <button className="ghost-button full-width" type="button" onClick={onEditProfile}>
+        <button type="button" onClick={onEditProfile}>
+          <span aria-hidden="true">♙</span>
           프로필 수정
         </button>
-        <button className="danger-button full-width" type="button" onClick={onReset}>
+        <button className="is-danger" type="button" onClick={onReset}>
+          <span aria-hidden="true">△</span>
           저장 데이터 초기화
         </button>
       </section>

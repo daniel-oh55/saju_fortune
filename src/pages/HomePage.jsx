@@ -129,13 +129,13 @@ function HomePage({ fortune, profile, savedReadings, visitStreak, onOpenDetail, 
 
       <section className="home-diary-hero" aria-labelledby="home-hero-title">
         <div className="hero-orbit" aria-hidden="true">
-          <span className="hero-moon" />
+          <span className="hero-sun" />
           <span className="hero-star hero-star-one" />
           <span className="hero-star hero-star-two" />
           <span className="hero-mountain" />
         </div>
-        <p className="eyebrow">고요한 밤의 운세 다이어리</p>
-        <h1 id="home-hero-title">오늘의 흐름을 차분히 읽어보세요</h1>
+        <p className="eyebrow">고요한 아침의 운세 다이어리</p>
+        <h1 id="home-hero-title">고요한 아침, 오늘의 흐름을 살펴보세요</h1>
         <p>내 하루의 기운을 가볍게 확인하고, 지금 필요한 작은 방향을 찾아보세요.</p>
         <div className="home-hero-actions">
           <button className="primary-button" type="button" onClick={() => onNavigate('settings')}>

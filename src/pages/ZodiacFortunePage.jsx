@@ -3,18 +3,34 @@ import {
   createZodiacFortune,
   getYearsByAnimal,
   getZodiacByYear,
+  getZodiacByYearPillar,
   zodiacAnimals,
 } from '../domain/fortune/zodiacFortuneEngine.js';
 import RewardAdModal from '../components/RewardAdModal.jsx';
 
-function getInitialState(profile) {
+function getProfileZodiac(profile, fortune) {
   const birthYear = Number(profile.birthDate?.slice(0, 4));
-  const birthZodiac = getZodiacByYear(birthYear);
+  const pillarZodiac = getZodiacByYearPillar(fortune?.sajuAnalysis?.pillars?.year);
+  const fallbackZodiac = getZodiacByYear(birthYear);
+  const birthZodiac = pillarZodiac || fallbackZodiac;
 
-  if (birthZodiac) {
+  if (!birthYear || !birthZodiac) return null;
+
+  return {
+    year: birthYear,
+    animal: birthZodiac.animal,
+    icon: birthZodiac.icon,
+    isSajuYearPillarBased: Boolean(pillarZodiac),
+  };
+}
+
+function getInitialState(profile, fortune) {
+  const profileZodiac = getProfileZodiac(profile, fortune);
+
+  if (profileZodiac) {
     return {
-      selectedAnimal: birthZodiac.animal,
-      openYears: [birthYear],
+      selectedAnimal: profileZodiac.animal,
+      openYears: [profileZodiac.year],
       hasSupportedBirthYear: true,
     };
   }
@@ -27,13 +43,20 @@ function getInitialState(profile) {
 }
 
 function ZodiacFortunePage({ profile, fortune }) {
-  const initialState = useMemo(() => getInitialState(profile), [profile]);
+  const initialState = useMemo(() => getInitialState(profile, fortune), [fortune, profile]);
+  const profileZodiac = useMemo(() => getProfileZodiac(profile, fortune), [fortune, profile]);
   const [selectedAnimal, setSelectedAnimal] = useState(initialState.selectedAnimal);
   const [openYears, setOpenYears] = useState(initialState.openYears);
   const [unlockedZodiacAdvice, setUnlockedZodiacAdvice] = useState({});
   const [activeAdYear, setActiveAdYear] = useState(null);
 
-  const years = getYearsByAnimal(selectedAnimal);
+  const years = useMemo(() => {
+    const baseYears = getYearsByAnimal(selectedAnimal);
+    if (!profileZodiac || profileZodiac.animal !== selectedAnimal) return baseYears;
+    if (baseYears.some((item) => item.year === profileZodiac.year)) return baseYears;
+
+    return [...baseYears, profileZodiac].sort((a, b) => a.year - b.year);
+  }, [profileZodiac, selectedAnimal]);
 
   const toggleYear = (year) => {
     setOpenYears((current) =>
@@ -43,9 +66,7 @@ function ZodiacFortunePage({ profile, fortune }) {
 
   const handleSelectAnimal = (animal) => {
     setSelectedAnimal(animal);
-    const birthYear = Number(profile.birthDate?.slice(0, 4));
-    const birthZodiac = getZodiacByYear(birthYear);
-    setOpenYears(birthZodiac?.animal === animal ? [birthYear] : []);
+    setOpenYears(profileZodiac?.animal === animal ? [profileZodiac.year] : []);
   };
 
   const unlockAdvice = (year) => {
@@ -53,11 +74,23 @@ function ZodiacFortunePage({ profile, fortune }) {
   };
 
   return (
-    <div className="page-stack">
-      <section className="section-header">
-        <p className="eyebrow">Zodiac Fortune</p>
-        <h1>띠별 운세</h1>
-        <p>12가지 띠 중 하나를 선택하고, 연도별 오늘의 흐름을 확인해보세요.</p>
+    <div className="page-stack zodiac-page">
+      <section className="zodiac-hero-card">
+        <div>
+          <p className="eyebrow">Zodiac Fortune</p>
+          <h1>띠별 운세</h1>
+          <p>12가지 띠 중 하나를 선택하고, 연도별 오늘의 흐름을 확인해보세요.</p>
+        </div>
+        <div className="sunrise-art small" aria-hidden="true">
+          <span className="sunrise-sun" />
+          <span className="sunrise-orbit" />
+          <span className="sunrise-mountain front" />
+          <span className="sunrise-mountain back" />
+        </div>
+      </section>
+
+      <section className="zodiac-notice-card">
+        띠는 입력한 생년월일을 바탕으로 계산된 사주 연주의 지지를 우선해 표시됩니다.
       </section>
 
       {!initialState.hasSupportedBirthYear && (
@@ -94,6 +127,8 @@ function ZodiacFortunePage({ profile, fortune }) {
           const zodiacFortune = createZodiacFortune({
             profile,
             selectedYear: item.year,
+            selectedAnimal: item.animal,
+            selectedIcon: item.icon,
             dateKey: fortune.dateKey,
           });
 
@@ -103,7 +138,7 @@ function ZodiacFortunePage({ profile, fortune }) {
                 <span>
                   {item.year}년 {item.animal}띠
                 </span>
-                <strong>{isOpen ? '접기' : '열기'}</strong>
+                <strong>{isOpen ? '⌃' : '⌄'}</strong>
               </button>
 
               {isOpen && (
