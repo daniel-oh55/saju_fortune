@@ -1,5 +1,11 @@
 # ANDROID_PACKAGING_READINESS
 
+## debug APK QA handoff 준비
+
+- release build, signing, AAB 생성 전 debug APK 기준 QA handoff 상태를 확인해야 합니다.
+- handoff 준비 문서는 `docs/ANDROID_DEBUG_APK_QA_HANDOFF_READINESS.md`입니다.
+- 실제 release build는 아직 진행하지 않았습니다.
+
 ## Android device QA execution result
 
 - Android 앱 제출 전 실제 기기 또는 에뮬레이터 QA 실행 결과를 확인해야 합니다.

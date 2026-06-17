@@ -1,5 +1,12 @@
 # ANDROID_QA_STATUS_SUMMARY
 
+## debug APK QA handoff 준비
+
+- Android Debug Build run #35 artifact를 기준으로 QA handoff 준비 문서를 추가했습니다.
+- 문서 경로는 `docs/ANDROID_DEBUG_APK_QA_HANDOFF_READINESS.md`입니다.
+- APK 다운로드, 설치, 앱 실행은 아직 Pending입니다.
+- Android 실제 기기 QA는 Blocked 상태입니다.
+
 ## Android device QA execution result
 
 - Android 실제 기기 또는 에뮬레이터 QA 실행 결과 문서를 추가했습니다.

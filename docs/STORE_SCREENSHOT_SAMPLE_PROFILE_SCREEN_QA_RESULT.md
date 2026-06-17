@@ -1,5 +1,11 @@
 # STORE_SCREENSHOT_SAMPLE_PROFILE_SCREEN_QA_RESULT
 
+## debug APK QA handoff 준비
+
+- 테스트용 샘플 프로필 화면 확인 전 debug APK QA handoff 상태를 확인해야 합니다.
+- 문서 경로는 `docs/ANDROID_DEBUG_APK_QA_HANDOFF_READINESS.md`입니다.
+- 실제 앱 실행 전까지 주요 화면 확인 상태는 Pending입니다.
+
 ## Android device QA execution result 연계
 
 - 테스트용 샘플 프로필 화면 확인은 Android device QA execution result와 연결됩니다.

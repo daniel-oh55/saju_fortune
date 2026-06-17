@@ -1,5 +1,11 @@
 # CAPACITOR_READINESS
 
+## debug APK QA handoff 준비
+
+- Capacitor Android 앱 실제 실행 확인 전 debug APK handoff 상태를 확인합니다.
+- 문서 경로는 `docs/ANDROID_DEBUG_APK_QA_HANDOFF_READINESS.md`입니다.
+- production 코드 변경은 없습니다.
+
 ## Android device QA execution result
 
 - Capacitor Android 앱의 실제 실행 확인은 Android device QA execution result와 연결됩니다.
