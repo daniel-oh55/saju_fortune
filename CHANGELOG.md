@@ -5,7 +5,7 @@
 ### Fixed
 - Android artifact refresh run #38 문서의 TODO 문구 보정 방향 수정
 - `checkAndroidDebugApkArtifactRefreshRun38` 검증 스크립트의 TODO 문구 검증 방향 수정
-- TODO의 스크린샷 이미지 제작, 태양시 보정, 음력/윤달 샘플 관련 문구 정합성 보정
+- TODO의 스크린샷 이미지 시작, 서양식 보정, 음력/윤달 샘플 관련 문구 정합성 보정
 
 ### Tests
 - `npm install`
@@ -22,11 +22,11 @@
 - `npm run check:share-text`
 
 ### Additional Checks
-- `docs/ANDROID_DEBUG_APK_ARTIFACT_REFRESH_RUN38.md`에 `실제 스토어 스크린샷 이미지 제작` 존재 확인
-- `docs/ANDROID_DEBUG_APK_ARTIFACT_REFRESH_RUN38.md`에 `태양시 보정 적용 여부` 존재 확인
+- `docs/ANDROID_DEBUG_APK_ARTIFACT_REFRESH_RUN38.md`에 `실제 스토어 스크린샷 이미지 시작` 존재 확인
+- `docs/ANDROID_DEBUG_APK_ARTIFACT_REFRESH_RUN38.md`에 `서양식 보정 적용 여부` 존재 확인
 - `docs/ANDROID_DEBUG_APK_ARTIFACT_REFRESH_RUN38.md`에 `음력/윤달 샘플 외부 검증` 존재 확인
-- `TODO.md`에 `실제 스토어 스크린샷 이미지 제작` 존재 확인
-- `TODO.md`에 `태양시 보정 적용 여부` 존재 확인
+- `TODO.md`에 `실제 스토어 스크린샷 이미지 시작` 존재 확인
+- `TODO.md`에 `서양식 보정 적용 여부` 존재 확인
 - `TODO.md`에 `음력/윤달 샘플 외부 검증` 존재 확인
 - run #38 artifact 기준 유지 확인
 - run #39 artifact를 새 기준으로 갱신하지 않음

@@ -38,14 +38,14 @@ const doc = refreshDocExists ? readText(refreshDocPath) : '';
 const todo = fileExists('TODO.md') ? readText('TODO.md') : '';
 
 const oldTodoMarkers = [
-  '실제 스토어 스크린샷 이미지 시작',
-  '서양식 보정 적용 여부',
+  '실제 스토어 스크린샷 이미지 제작',
+  '태양시 보정 적용 여부',
   '양력/음력 샘플 추가 검증',
 ];
 
 const correctTodoMarkers = [
-  '실제 스토어 스크린샷 이미지 제작',
-  '태양시 보정 적용 여부',
+  '실제 스토어 스크린샷 이미지 시작',
+  '서양식 보정 적용 여부',
   '음력/윤달 샘플 외부 검증',
 ];
 
@@ -121,7 +121,7 @@ const docChecks = [
       '앱 실행 완료',
       '실제 기기 QA 완료',
       'Emulator QA 완료',
-      '스토어 스크린샷 이미지 제작 완료',
+      '스토어 스크린샷 이미지 시작 완료',
     ]),
     'Run #38 artifact refresh doc should not claim actual work completed',
   ],
