@@ -1,5 +1,53 @@
 # DEVELOPMENT_LOG
 
+# 2026-06-17 Android Artifact Refresh Wording Consistency
+
+## 작업 내용
+
+- PR 목적: Android artifact refresh run #38 문구 정합성 보정
+- `ANDROID_DEBUG_APK_ARTIFACT_REFRESH_RUN38.md`의 TODO 문구 보정 기준 수정
+- `checkAndroidDebugApkArtifactRefreshRun38`의 old/correct wording 검증 방향 수정
+- `TODO.md` 전체 문구 보정
+- `실제 스토어 스크린샷 이미지 시작` 문구 제거
+- `실제 스토어 스크린샷 이미지 제작` 문구 적용
+- `서양식 보정 적용 여부` 문구 제거
+- `태양시 보정 적용 여부` 문구 적용
+- `양력/음력 샘플 추가 검증` 문구 제거
+- `음력/윤달 샘플 외부 검증` 문구 적용
+- run #38 artifact 기준 유지
+- run #39 artifact는 이번 PR에서 새 기준으로 갱신하지 않음
+- 실제 APK 다운로드 없음
+- 실제 APK 설치 없음
+- 실제 앱 실행 없음
+- 실제 Android QA 없음
+- 실제 스크린샷 이미지 없음
+- Google Play Console 입력 없음
+- release build 미진행
+- signing 미진행
+- AAB 생성 미진행
+- production 코드 로직 변경 없음
+- Android native/resource 변경 없음
+- routing 변경 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+
+## 테스트 결과
+
+- `npm install`: 통과
+  - 기존 audit 경고: high severity 2건 유지
+- `npm run build`: 통과
+  - 기존 Vite chunk size 경고 유지
+- `npm run check:android-debug-apk-artifact-refresh-run38`: 통과
+- `npm run check:android-device-qa-unblock-readiness`: 통과
+- `npm run check:android-debug-apk-install-launch-qa-result`: 통과
+- `npm run check:android-debug-apk-qa-handoff-readiness`: 통과
+- `npm run check:android-device-qa-execution-result`: 통과
+- `npm run check:android-qa-status-summary`: 통과
+- `npm run check:capacitor-readiness`: 통과
+- `npm run check:android-packaging-readiness`: 통과
+- `npm run check:content-safety`: 통과
+- `npm run check:share-text`: 통과
+
 # 2026-06-17 Android Debug APK Artifact Refresh Run 38
 
 ## 작업 내용
