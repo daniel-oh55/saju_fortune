@@ -1,5 +1,11 @@
 # ANDROID_DEBUG_APK_QA_HANDOFF_READINESS
 
+## run #38 artifact 기준 갱신
+
+- debug APK QA handoff 기준은 최신 artifact를 함께 확인합니다.
+- 최신 artifact 갱신 문서는 `docs/ANDROID_DEBUG_APK_ARTIFACT_REFRESH_RUN38.md`입니다.
+- 실제 다운로드 전까지 handoff 상태는 Pending입니다.
+
 ## Android device QA unblock readiness 연결
 
 - debug APK QA handoff 후 실제 QA로 이어가기 전 unblock readiness를 확인합니다.

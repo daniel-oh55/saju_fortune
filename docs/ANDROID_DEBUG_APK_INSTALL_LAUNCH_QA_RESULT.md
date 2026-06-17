@@ -1,5 +1,11 @@
 # ANDROID_DEBUG_APK_INSTALL_LAUNCH_QA_RESULT
 
+## run #38 artifact 기준 갱신
+
+- APK 설치/앱 실행 QA 결과 기록 전 run #38 artifact 기준을 함께 확인합니다.
+- 갱신 문서는 `docs/ANDROID_DEBUG_APK_ARTIFACT_REFRESH_RUN38.md`입니다.
+- 실제 설치와 앱 실행 전까지 상태는 Pending입니다.
+
 ## Android device QA unblock readiness 연결
 
 - Android 실제 기기 또는 Emulator QA의 Blocked 상태를 해소하기 위한 준비 문서를 추가했습니다.

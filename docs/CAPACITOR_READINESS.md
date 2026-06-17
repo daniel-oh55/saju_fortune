@@ -1,5 +1,11 @@
 # CAPACITOR_READINESS
 
+## run #38 artifact 기준 갱신
+
+- Capacitor Android 실제 실행 확인 전 run #38 artifact 기준을 확인합니다.
+- 문서 경로는 `docs/ANDROID_DEBUG_APK_ARTIFACT_REFRESH_RUN38.md`입니다.
+- production 코드 변경은 없습니다.
+
 ## Android device QA unblock readiness
 
 - Capacitor Android 앱 실제 실행 확인 전 Android device QA unblock readiness를 확인합니다.
