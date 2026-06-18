@@ -1266,23 +1266,24 @@ textarea,
 
 .score-donut-text {
   position: absolute;
-  inset: 0;
+  inset: 14px;
   display: grid;
   place-content: center;
+  gap: 4px;
   text-align: center;
 }
 
 .score-donut-text strong {
   color: #243039;
-  font-size: 2rem;
-  line-height: 1;
+  font-size: 1.82rem;
+  line-height: 0.95;
 }
 
 .score-donut-text span {
-  margin-top: 5px;
   color: #697a80;
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 900;
+  line-height: 1.15;
 }
 
 .home-menu-grid {
@@ -3640,15 +3641,23 @@ input:disabled {
   font-size: 1.28rem;
 }
 
+.home-score-date {
+  margin: -2px 0 7px;
+  color: rgba(75, 85, 107, 0.72);
+  font-size: 0.82rem;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
 .home-score-copy p {
   margin-bottom: 0;
   font-size: 0.9rem;
 }
 
 .home-score-diary-card .score-donut {
-  flex-basis: 104px;
-  width: 104px;
-  height: 104px;
+  flex-basis: 110px;
+  width: 110px;
+  height: 110px;
 }
 
 .home-score-diary-card .score-donut-value {
@@ -3661,6 +3670,7 @@ input:disabled {
 
 .home-score-diary-card .score-donut-text strong {
   color: var(--color-deep-navy);
+  font-size: 1.76rem;
 }
 
 .home-menu-section {
