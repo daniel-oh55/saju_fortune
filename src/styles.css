@@ -431,6 +431,8 @@ textarea:focus {
 }
 
 .ai-consult-hero {
+  position: relative;
+  overflow: hidden;
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 14px;
@@ -442,6 +444,11 @@ textarea:focus {
     linear-gradient(135deg, rgba(255, 253, 248, 0.98), rgba(246, 239, 227, 0.86)),
     var(--color-card);
   box-shadow: var(--shadow-soft);
+}
+
+.ai-consult-hero > div {
+  position: relative;
+  z-index: 1;
 }
 
 .ai-consult-hero h1 {
@@ -463,6 +470,10 @@ textarea:focus {
   border-radius: 999px;
   color: var(--color-warm-gold);
   background: rgba(184, 150, 78, 0.12);
+}
+
+.ai-consult-hero > span:not([class]) {
+  display: none;
 }
 
 .ai-consult-page .consult-panel {
@@ -580,6 +591,31 @@ textarea:focus {
   gap: 8px;
 }
 
+.fortune-result-card .ad-box.inline-cta {
+  gap: 8px;
+  margin-top: 2px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  text-align: left;
+  background: transparent;
+}
+
+.fortune-result-card .ad-box.inline-cta p {
+  margin: 0;
+  color: rgba(75, 85, 107, 0.76);
+  font-size: 0.84rem;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.fortune-result-card .ad-box.inline-cta .primary-button {
+  width: 100%;
+  min-height: 50px;
+  border: 1px solid rgba(184, 150, 78, 0.42);
+  background: linear-gradient(135deg, var(--color-navy-muted), var(--color-deep-navy));
+}
+
 .fortune-guide-card {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -650,6 +686,14 @@ textarea:focus {
   border-radius: var(--radius-card);
   text-align: center;
   background: linear-gradient(135deg, rgba(255, 253, 248, 0.96), rgba(246, 239, 227, 0.88));
+}
+
+.ad-box.is-placeholder-only {
+  padding: 18px;
+}
+
+.ad-box.is-placeholder-only p {
+  margin-bottom: 0;
 }
 
 .ad-box span {
@@ -972,6 +1016,11 @@ textarea:focus {
   min-height: 108px;
   padding-bottom: 16px;
   border-bottom: 1px solid rgba(184, 150, 78, 0.18);
+}
+
+.settings-profile-head > :not(.mountain-orbit-illustration) {
+  position: relative;
+  z-index: 1;
 }
 
 .settings-avatar {
@@ -1666,6 +1715,176 @@ input:disabled {
   width: 96%;
   height: 34%;
   background: linear-gradient(180deg, rgba(126, 149, 156, 0.32), rgba(126, 149, 156, 0.04));
+}
+
+.mountain-orbit-illustration {
+  position: absolute;
+  right: -8px;
+  bottom: 0;
+  z-index: 0;
+  width: 52%;
+  height: 76%;
+  min-width: 158px;
+  pointer-events: none;
+}
+
+.mountain-orbit-illustration.size-small {
+  right: -10px;
+  bottom: -4px;
+  width: 44%;
+  height: 72%;
+  min-width: 132px;
+}
+
+.mountain-orbit-illustration.size-large {
+  right: -20px;
+  bottom: -2px;
+  width: 60%;
+  height: 82%;
+  min-width: 218px;
+}
+
+.mountain-orbit-illustration.align-left {
+  right: auto;
+  left: -10px;
+  transform: scaleX(-1);
+}
+
+.mountain-orbit-ring {
+  position: absolute;
+  border: 1px solid rgba(184, 150, 78, 0.28);
+  border-radius: 999px;
+}
+
+.mountain-orbit-ring.ring-main {
+  right: 8%;
+  top: 5%;
+  width: 76%;
+  aspect-ratio: 1;
+}
+
+.mountain-orbit-ring.ring-soft {
+  right: 24%;
+  top: 18%;
+  width: 52%;
+  aspect-ratio: 1;
+  opacity: 0.58;
+}
+
+.mountain-orbit-sun {
+  position: absolute;
+  right: 26%;
+  top: 19%;
+  width: clamp(38px, 18%, 58px);
+  aspect-ratio: 1;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 32% 28%, rgba(255, 236, 187, 0.75), transparent 36%),
+    linear-gradient(135deg, #e7c07a, #c9974f);
+  box-shadow: 0 0 34px rgba(231, 192, 122, 0.28);
+}
+
+.mountain-orbit-dot {
+  position: absolute;
+  width: 7px;
+  aspect-ratio: 1;
+  border-radius: 999px;
+  background: rgba(184, 150, 78, 0.62);
+  box-shadow: 0 0 12px rgba(184, 150, 78, 0.18);
+}
+
+.mountain-orbit-dot.dot-one {
+  right: 67%;
+  top: 23%;
+}
+
+.mountain-orbit-dot.dot-two {
+  right: 43%;
+  top: 9%;
+  width: 5px;
+}
+
+.mountain-orbit-star {
+  position: absolute;
+  width: 15px;
+  aspect-ratio: 1;
+  opacity: 0.66;
+}
+
+.mountain-orbit-star::before,
+.mountain-orbit-star::after {
+  content: "";
+  position: absolute;
+  inset: 48% 0 auto;
+  height: 1px;
+  background: rgba(184, 150, 78, 0.58);
+}
+
+.mountain-orbit-star::after {
+  transform: rotate(90deg);
+}
+
+.mountain-orbit-star.star-one {
+  right: 77%;
+  top: 20%;
+}
+
+.mountain-orbit-star.star-two {
+  right: 12%;
+  top: 30%;
+  width: 11px;
+  opacity: 0.42;
+}
+
+.mountain-orbit-ridge {
+  position: absolute;
+  right: -5%;
+  bottom: 0;
+  width: 112%;
+  height: 48%;
+  clip-path: polygon(0 100%, 13% 66%, 27% 82%, 43% 34%, 58% 70%, 73% 46%, 100% 100%);
+}
+
+.mountain-orbit-ridge.ridge-back {
+  right: 8%;
+  bottom: 22%;
+  width: 96%;
+  height: 34%;
+  background: linear-gradient(180deg, rgba(132, 153, 160, 0.28), rgba(132, 153, 160, 0.03));
+}
+
+.mountain-orbit-ridge.ridge-mid {
+  right: 0;
+  bottom: 8%;
+  width: 104%;
+  height: 42%;
+  background: linear-gradient(180deg, rgba(91, 119, 133, 0.42), rgba(91, 119, 133, 0.05));
+}
+
+.mountain-orbit-ridge.ridge-front {
+  background:
+    linear-gradient(180deg, rgba(42, 74, 91, 0.72), rgba(42, 74, 91, 0.05)),
+    linear-gradient(135deg, transparent 38%, rgba(255, 253, 248, 0.22) 39% 52%, transparent 53%);
+}
+
+.home-hero-artwork {
+  bottom: -6px;
+}
+
+.today-fortune-artwork {
+  right: -2px;
+}
+
+.settings-profile-artwork {
+  right: -20px;
+  bottom: -18px;
+  height: 104%;
+}
+
+.ai-consult-artwork {
+  right: -18px;
+  bottom: -20px;
+  height: 112%;
 }
 
 .today-summary-card,
@@ -3498,7 +3717,7 @@ input:disabled {
   box-shadow: var(--shadow-lift);
 }
 
-.home-diary-hero > *:not(.hero-orbit) {
+.home-diary-hero > *:not(.mountain-orbit-illustration) {
   position: relative;
   z-index: 1;
 }

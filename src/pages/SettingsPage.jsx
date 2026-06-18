@@ -1,4 +1,5 @@
 import SajuCalculationBasisCard from '../components/SajuCalculationBasisCard.jsx';
+import MountainOrbitIllustration from '../components/MountainOrbitIllustration.jsx';
 
 function genderLabel(value) {
   if (value === 'female') return '여성';
@@ -30,12 +31,7 @@ function SettingsPage({ profile, fortune, consentPreferences, onNavigate, onOpen
             <span>닉네임</span>
             <strong>{profile.nickname}</strong>
           </div>
-          <div className="sunrise-art tiny" aria-hidden="true">
-            <span className="sunrise-sun" />
-            <span className="sunrise-orbit" />
-            <span className="sunrise-mountain front" />
-            <span className="sunrise-mountain back" />
-          </div>
+          <MountainOrbitIllustration size="small" className="settings-profile-artwork" opacity={0.72} />
         </div>
 
         <div className="settings-profile-list">

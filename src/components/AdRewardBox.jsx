@@ -9,8 +9,19 @@ function AdRewardBox({
   onOpenConsentSettings,
   onUnlock,
   buttonLabel = '광고 보고 상세 풀이 열기',
+  helperText,
+  layout = 'box',
+  showButton = true,
 }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const isInline = layout === 'inline';
+  const boxClassName = [
+    'ad-box',
+    isInline ? 'inline-cta' : '',
+    !showButton ? 'is-placeholder-only' : '',
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   if (isUnlocked) {
     return (
@@ -23,16 +34,22 @@ function AdRewardBox({
 
   return (
     <>
-      <section className="ad-box">
-        <span>광고 영역</span>
-        <strong>보상형 광고 자리</strong>
-        <p>짧은 광고를 보고 {categoryLabel} 상세 풀이를 확인해보세요.</p>
-        <button className="primary-button" type="button" onClick={() => setIsModalOpen(true)}>
-          {buttonLabel}
-        </button>
+      <section className={boxClassName}>
+        {!isInline && (
+          <>
+            <span>광고 영역</span>
+            <strong>보상형 광고 자리</strong>
+          </>
+        )}
+        <p>{helperText || `짧은 광고를 보고 ${categoryLabel} 상세 풀이를 확인해보세요.`}</p>
+        {showButton && (
+          <button className="primary-button" type="button" onClick={() => setIsModalOpen(true)}>
+            {buttonLabel}
+          </button>
+        )}
       </section>
 
-      {isModalOpen && (
+      {showButton && isModalOpen && (
         <RewardAdModal
           categoryLabel={categoryLabel}
           placementId={placementId}

@@ -2,6 +2,7 @@ import AdRewardBox from '../components/AdRewardBox.jsx';
 import ContentAccessNotice from '../components/ContentAccessNotice.jsx';
 import ContentSafetyNotice from '../components/ContentSafetyNotice.jsx';
 import CopyShareButton from '../components/CopyShareButton.jsx';
+import MountainOrbitIllustration from '../components/MountainOrbitIllustration.jsx';
 import SaveReadingButton from '../components/SaveReadingButton.jsx';
 import { REWARDED_AD_PLACEMENTS } from '../config/rewardedAdPlacements.js';
 import { buildFortuneCategoryShareText } from '../utils/shareTextBuilder.js';
@@ -33,12 +34,7 @@ function FortuneDetailPage({
           <h1>오늘운세</h1>
           <p>오늘의 키워드는 {fortune.keyword}입니다.</p>
         </div>
-        <div className="sunrise-art small" aria-hidden="true">
-          <span className="sunrise-sun" />
-          <span className="sunrise-orbit" />
-          <span className="sunrise-mountain front" />
-          <span className="sunrise-mountain back" />
-        </div>
+        <MountainOrbitIllustration size="small" className="today-fortune-artwork" opacity={0.92} />
       </section>
 
       <div className="category-tabs">
@@ -85,6 +81,20 @@ function FortuneDetailPage({
           />
         </div>
 
+        {!isUnlocked && (
+          <AdRewardBox
+            categoryLabel={category.label}
+            placementId={REWARDED_AD_PLACEMENTS.TODAY_FORTUNE_DETAIL}
+            isUnlocked={false}
+            consentPreferences={consentPreferences}
+            onOpenConsentSettings={onOpenConsentSettings}
+            onUnlock={() => onUnlockDetail(category.id)}
+            buttonLabel="상세풀이 열기"
+            helperText="상세 풀이는 짧은 광고 시청 후 열람할 수 있습니다."
+            layout="inline"
+          />
+        )}
+
         {isUnlocked ? (
           <div className="detail-copy">
             <h3>상세 풀이</h3>
@@ -92,11 +102,7 @@ function FortuneDetailPage({
               <p key={paragraph}>{paragraph}</p>
             ))}
           </div>
-        ) : (
-          <div className="locked-copy">
-            상세 풀이는 광고 시청 후 열람할 수 있습니다.
-          </div>
-        )}
+        ) : null}
       </article>
 
       <section className="fortune-guide-card">
@@ -126,6 +132,7 @@ function FortuneDetailPage({
         consentPreferences={consentPreferences}
         onOpenConsentSettings={onOpenConsentSettings}
         onUnlock={() => onUnlockDetail(category.id)}
+        showButton={false}
       />
     </div>
   );
