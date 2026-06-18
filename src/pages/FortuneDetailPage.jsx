@@ -26,11 +26,19 @@ function FortuneDetailPage({
   const visibleBody = isUnlocked ? category.detail : `${category.summary}\n\n행운 색상은 ${category.luckyColor}, 행운 아이템은 ${category.luckyItem}입니다.`;
 
   return (
-    <div className="page-stack">
-      <section className="section-header">
-        <p className="eyebrow">{fortune.dateKey}</p>
-        <h1>오늘운세</h1>
-        <p>오늘의 키워드는 {fortune.keyword}입니다.</p>
+    <div className="page-stack fortune-detail-page">
+      <section className="today-fortune-hero">
+        <div>
+          <p className="eyebrow">{fortune.dateKey}</p>
+          <h1>오늘운세</h1>
+          <p>오늘의 키워드는 {fortune.keyword}입니다.</p>
+        </div>
+        <div className="sunrise-art small" aria-hidden="true">
+          <span className="sunrise-sun" />
+          <span className="sunrise-orbit" />
+          <span className="sunrise-mountain front" />
+          <span className="sunrise-mountain back" />
+        </div>
       </section>
 
       <div className="category-tabs">
@@ -46,51 +54,36 @@ function FortuneDetailPage({
         ))}
       </div>
 
-      <article className="detail-card">
+      <article className="detail-card fortune-result-card">
         <div className="detail-score">
           <span>{category.label}</span>
-          <strong>{category.score}</strong>
+          <strong>{category.score}<small>/100</small></strong>
         </div>
         <h2>{category.summary}</h2>
         <p className="muted">
           행운 색상은 {category.luckyColor}, 행운 아이템은 {category.luckyItem}입니다.
         </p>
 
-        <SaveReadingButton
-          isSaved={isSaved}
-          onSave={() =>
-            onSaveReading({
-              id: savedItemId,
-              type: 'fortuneCategory',
-              title: category.label,
-              summary: category.summary,
-              body: visibleBody,
-              tags: [category.luckyColor, category.luckyItem].filter(Boolean),
-              dateKey: fortune.dateKey,
-            })
-          }
-          onRemove={() => onRemoveSavedReading(savedItemId)}
-        />
-        <CopyShareButton
-          getText={() => buildFortuneCategoryShareText({ fortune, category, isUnlocked })}
-        />
-
-        <ContentSafetyNotice variant="fortune" compact />
-
-        <ContentAccessNotice
-          variant="rewarded"
-          title="광고 해금 상세 풀이"
-          description="기본 운세 요약은 무료로 제공되며, 더 자세한 풀이만 광고 시청 후 열람할 수 있습니다."
-        />
-
-        <AdRewardBox
-          categoryLabel={category.label}
-          placementId={REWARDED_AD_PLACEMENTS.TODAY_FORTUNE_DETAIL}
-          isUnlocked={isUnlocked}
-          consentPreferences={consentPreferences}
-          onOpenConsentSettings={onOpenConsentSettings}
-          onUnlock={() => onUnlockDetail(category.id)}
-        />
+        <div className="fortune-result-actions">
+          <SaveReadingButton
+            isSaved={isSaved}
+            onSave={() =>
+              onSaveReading({
+                id: savedItemId,
+                type: 'fortuneCategory',
+                title: category.label,
+                summary: category.summary,
+                body: visibleBody,
+                tags: [category.luckyColor, category.luckyItem].filter(Boolean),
+                dateKey: fortune.dateKey,
+              })
+            }
+            onRemove={() => onRemoveSavedReading(savedItemId)}
+          />
+          <CopyShareButton
+            getText={() => buildFortuneCategoryShareText({ fortune, category, isUnlocked })}
+          />
+        </div>
 
         {isUnlocked ? (
           <div className="detail-copy">
@@ -105,6 +98,32 @@ function FortuneDetailPage({
           </div>
         )}
       </article>
+
+      <section className="fortune-guide-card">
+        <p className="eyebrow">Guide</p>
+        <h2>운세 해석 안내</h2>
+        <p>
+          오늘운세는 하루를 정리하는 참고용 문구입니다. 결과를 단정하기보다 현재 상황을
+          차분히 살펴보는 데 활용해 주세요.
+        </p>
+      </section>
+
+      <ContentSafetyNotice variant="fortune" compact />
+
+      <ContentAccessNotice
+        variant="rewarded"
+        title="광고 해금 상세 풀이"
+        description="기본 운세 요약은 무료로 제공되며, 더 자세한 풀이는 광고 시청 후 열람할 수 있습니다."
+      />
+
+      <AdRewardBox
+        categoryLabel={category.label}
+        placementId={REWARDED_AD_PLACEMENTS.TODAY_FORTUNE_DETAIL}
+        isUnlocked={isUnlocked}
+        consentPreferences={consentPreferences}
+        onOpenConsentSettings={onOpenConsentSettings}
+        onUnlock={() => onUnlockDetail(category.id)}
+      />
     </div>
   );
 }
