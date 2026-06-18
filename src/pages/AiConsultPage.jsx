@@ -6,14 +6,17 @@ function AiConsultPage({ profile, fortune }) {
   ];
 
   return (
-    <div className="page-stack">
-      <section className="section-header">
-        <p className="eyebrow">준비 중</p>
-        <h1>AI 상담</h1>
-        <p>
-          궁금한 고민이 있다면 편하게 물어보세요. 오늘의 흐름을 바탕으로 현실적인 조언을
-          드릴게요.
-        </p>
+    <div className="page-stack ai-consult-page">
+      <section className="ai-consult-hero">
+        <div>
+          <p className="eyebrow">준비 중</p>
+          <h1>AI 상담</h1>
+          <p>
+            궁금한 고민이 있다면 편하게 물어보세요. 오늘의 흐름을 바탕으로 생각을 정리하는
+            참고용 조언을 드릴게요.
+          </p>
+        </div>
+        <span aria-hidden="true">✦</span>
       </section>
 
       <section className="consult-panel">
