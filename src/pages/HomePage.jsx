@@ -11,6 +11,26 @@ import VisitStreakCard from '../components/VisitStreakCard.jsx';
 const QUICK_MENU_PREFS_KEY = 'harupuli_home_quick_menu_prefs';
 const MAX_HOME_QUICK_MENU_ITEMS = 4;
 const DEFAULT_QUICK_MENU_IDS = ['today', 'saju', 'money', 'love'];
+const ELEMENT_DISPLAY_MAP = {
+  화: '화(火)',
+  수: '수(水)',
+  목: '목(木)',
+  금: '금(金)',
+  토: '토(土)',
+};
+const WEEKDAY_LABELS = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
+
+function formatElementDisplayText(text) {
+  return String(text || '').replace(/(화|수|목|금|토)(?=\s*(균형|정리|기운)|$)/g, (element) => ELEMENT_DISPLAY_MAP[element]);
+}
+
+function formatKoreanDate(dateKey) {
+  const [year, month, day] = String(dateKey || '').split('-').map(Number);
+  if (!year || !month || !day) return '';
+
+  const weekday = WEEKDAY_LABELS[new Date(Date.UTC(year, month - 1, day)).getUTCDay()];
+  return `${year}년 ${month}월 ${day}일 ${weekday}`;
+}
 
 function readQuickMenuPrefs() {
   if (typeof window === 'undefined') return DEFAULT_QUICK_MENU_IDS;
@@ -69,6 +89,8 @@ function HomePage({ fortune, profile, savedReadings, visitStreak, onOpenDetail, 
   const overall = fortune.categories.find((category) => category.id === 'overall') || fortune.categories[0];
   const recentSavedReading = Array.isArray(savedReadings?.items) ? savedReadings.items[0] : null;
   const timeFortune = getTimeFortune();
+  const todayFlowDate = formatKoreanDate(fortune.dateKey);
+  const todayKeyword = formatElementDisplayText(fortune.keyword);
 
   const quickMenuItems = [
     { id: 'today', label: '오늘운세', icon: '☾', onClick: () => onOpenDetail('overall') },
@@ -135,7 +157,7 @@ function HomePage({ fortune, profile, savedReadings, visitStreak, onOpenDetail, 
           <span className="hero-mountain" />
         </div>
         <p className="eyebrow">고요한 아침의 운세 다이어리</p>
-        <h1 id="home-hero-title">고요한 아침, 오늘의 흐름을 살펴보세요</h1>
+        <h1 id="home-hero-title">오늘의 흐름을 살펴보세요</h1>
         <p>내 하루의 기운을 가볍게 확인하고, 지금 필요한 작은 방향을 찾아보세요.</p>
         <div className="home-hero-actions">
           <button className="primary-button" type="button" onClick={() => onNavigate('settings')}>
@@ -150,7 +172,8 @@ function HomePage({ fortune, profile, savedReadings, visitStreak, onOpenDetail, 
       <section className="home-score-diary-card">
         <div className="home-score-copy">
           <p className="eyebrow">오늘의 흐름</p>
-          <h2>{fortune.keyword}</h2>
+          {todayFlowDate && <p className="home-score-date">{todayFlowDate}</p>}
+          <h2>{todayKeyword}</h2>
           <p>{fortune.greeting}</p>
         </div>
         <ScoreDonut score={fortune.averageScore} />
