@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import DailyRoutineCard from '../components/DailyRoutineCard.jsx';
 import ContentSafetyNotice from '../components/ContentSafetyNotice.jsx';
 import FortuneCard from '../components/FortuneCard.jsx';
+import MountainOrbitIllustration from '../components/MountainOrbitIllustration.jsx';
 import PrivacyInfoLinkCard from '../components/PrivacyInfoLinkCard.jsx';
 import SajuElementSummaryCard from '../components/SajuElementSummaryCard.jsx';
 import SavedReadingsSummaryCard from '../components/SavedReadingsSummaryCard.jsx';
@@ -150,12 +151,7 @@ function HomePage({ fortune, profile, savedReadings, visitStreak, onOpenDetail, 
       </header>
 
       <section className="home-diary-hero" aria-labelledby="home-hero-title">
-        <div className="hero-orbit" aria-hidden="true">
-          <span className="hero-sun" />
-          <span className="hero-star hero-star-one" />
-          <span className="hero-star hero-star-two" />
-          <span className="hero-mountain" />
-        </div>
+        <MountainOrbitIllustration size="large" className="home-hero-artwork" opacity={0.86} />
         <p className="eyebrow">고요한 아침의 운세 다이어리</p>
         <h1 id="home-hero-title">오늘의 흐름을 살펴보세요</h1>
         <p>내 하루의 기운을 가볍게 확인하고, 지금 필요한 작은 방향을 찾아보세요.</p>

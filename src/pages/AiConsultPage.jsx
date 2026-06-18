@@ -1,3 +1,5 @@
+import MountainOrbitIllustration from '../components/MountainOrbitIllustration.jsx';
+
 function AiConsultPage({ profile, fortune }) {
   const sampleQuestions = [
     '오늘 중요한 결정을 해도 괜찮을까요?',
@@ -17,6 +19,7 @@ function AiConsultPage({ profile, fortune }) {
           </p>
         </div>
         <span aria-hidden="true">✦</span>
+        <MountainOrbitIllustration size="small" className="ai-consult-artwork" opacity={0.56} />
       </section>
 
       <section className="consult-panel">
