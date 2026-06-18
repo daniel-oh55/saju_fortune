@@ -26,7 +26,7 @@ function AdRewardBox({
       <section className="ad-box">
         <span>광고 영역</span>
         <strong>보상형 광고 자리</strong>
-        <p>짧은 광고를 보고 {categoryLabel}의 더 자세한 풀이를 확인하는 자리로 준비 중입니다.</p>
+        <p>짧은 광고를 보고 {categoryLabel} 상세 풀이를 확인해보세요.</p>
         <button className="primary-button" type="button" onClick={() => setIsModalOpen(true)}>
           {buttonLabel}
         </button>

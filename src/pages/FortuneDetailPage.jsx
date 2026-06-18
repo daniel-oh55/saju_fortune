@@ -100,12 +100,15 @@ function FortuneDetailPage({
       </article>
 
       <section className="fortune-guide-card">
-        <p className="eyebrow">Guide</p>
-        <h2>운세 해석 안내</h2>
-        <p>
-          오늘운세는 하루를 정리하는 참고용 문구입니다. 결과를 단정하기보다 현재 상황을
-          차분히 살펴보는 데 활용해 주세요.
-        </p>
+        <span className="fortune-guide-icon" aria-hidden="true">✣</span>
+        <div>
+          <p className="eyebrow">Guide</p>
+          <h2>운세 해석 안내</h2>
+          <p>
+            오늘운세는 하루를 정리하는 참고용 문구입니다. 결과를 단정하기보다 현재 상황을
+            차분히 살펴보는 데 활용해 주세요.
+          </p>
+        </div>
       </section>
 
       <ContentSafetyNotice variant="fortune" compact />
