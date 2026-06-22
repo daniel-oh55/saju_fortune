@@ -12,6 +12,7 @@ import VisitStreakCard from '../components/VisitStreakCard.jsx';
 const QUICK_MENU_PREFS_KEY = 'harupuli_home_quick_menu_prefs';
 const MAX_HOME_QUICK_MENU_ITEMS = 4;
 const DEFAULT_QUICK_MENU_IDS = ['today', 'saju', 'money', 'love'];
+const TODAY_FORTUNE_CATEGORY_IDS = ['overall', 'money', 'love', 'work', 'study', 'health'];
 const ELEMENT_DISPLAY_MAP = {
   화: '화(火)',
   수: '수(水)',
@@ -92,6 +93,13 @@ function HomePage({ fortune, profile, savedReadings, visitStreak, onOpenDetail, 
   const timeFortune = getTimeFortune();
   const todayFlowDate = formatKoreanDate(fortune.dateKey);
   const todayKeyword = formatElementDisplayText(fortune.keyword);
+  const todayFortuneCategories = useMemo(() => {
+    const categoryMap = new Map(fortune.categories.map((category) => [category.id, category]));
+    const orderedCategories = TODAY_FORTUNE_CATEGORY_IDS.map((categoryId) => categoryMap.get(categoryId)).filter(Boolean);
+    const remainingCategories = fortune.categories.filter((category) => !TODAY_FORTUNE_CATEGORY_IDS.includes(category.id));
+
+    return [...orderedCategories, ...remainingCategories].slice(0, 6);
+  }, [fortune.categories]);
 
   const quickMenuItems = [
     { id: 'today', label: '오늘운세', icon: '☾', onClick: () => onOpenDetail('overall') },
@@ -162,6 +170,37 @@ function HomePage({ fortune, profile, savedReadings, visitStreak, onOpenDetail, 
           <button className="ghost-button" type="button" onClick={() => onOpenDetail('overall')}>
             오늘 운세 보기
           </button>
+        </div>
+      </section>
+
+      <section className="home-today-fortune-section" aria-labelledby="home-today-fortune-title">
+        <div className="section-title-row">
+          <div>
+            <p className="eyebrow">Today Fortune</p>
+            <h2 id="home-today-fortune-title">오늘운세</h2>
+          </div>
+          <span>{todayFlowDate}</span>
+        </div>
+        <div className="fortune-grid home-today-fortune-grid">
+          {todayFortuneCategories.map((category) => (
+            <FortuneCard key={category.id} category={category} onOpenDetail={onOpenDetail} />
+          ))}
+        </div>
+      </section>
+
+      <section className="fortune-flow-card home-fortune-flow-card">
+        <p className="eyebrow">오늘 운세 흐름</p>
+        <h2>여섯 가지 운세를 한눈에 보기</h2>
+        <div className="flow-list">
+          {todayFortuneCategories.map((category) => (
+            <div key={category.id} className="flow-item">
+              <span>{category.label}</span>
+              <div className="score-bar">
+                <span style={{ width: `${category.score}%` }} />
+              </div>
+              <strong>{category.score}</strong>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -287,27 +326,6 @@ function HomePage({ fortune, profile, savedReadings, visitStreak, onOpenDetail, 
         savedReadings={savedReadings}
         onOpenSavedReadings={() => onNavigate('savedReadings')}
       />
-
-      <section className="fortune-grid">
-        {fortune.categories.map((category) => (
-          <FortuneCard key={category.id} category={category} onOpenDetail={onOpenDetail} />
-        ))}
-      </section>
-
-      <section className="fortune-flow-card">
-        <p className="eyebrow">오늘의 운세 흐름</p>
-        <div className="flow-list">
-          {fortune.categories.map((category) => (
-            <div key={category.id} className="flow-item">
-              <span>{category.label}</span>
-              <div className="score-bar">
-                <span style={{ width: `${category.score}%` }} />
-              </div>
-              <strong>{category.score}</strong>
-            </div>
-          ))}
-        </div>
-      </section>
 
       <section className="time-fortune-card">
         <div>

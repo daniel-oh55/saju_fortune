@@ -1120,7 +1120,7 @@ textarea:focus {
   bottom: calc(10px + env(safe-area-inset-bottom));
   left: max(10px, calc((100vw - 480px) / 2 + 10px));
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   max-width: none;
   margin: 0;
   padding: 8px;
@@ -1142,6 +1142,8 @@ textarea:focus {
   background: transparent;
   font-size: 0.68rem;
   font-weight: 800;
+  line-height: 1.15;
+  word-break: keep-all;
 }
 
 .nav-button.is-active {
@@ -3892,6 +3894,104 @@ input:disabled {
   font-size: 1.76rem;
 }
 
+.home-today-fortune-section {
+  display: grid;
+  gap: 12px;
+}
+
+.home-today-fortune-section .section-title-row {
+  align-items: end;
+}
+
+.home-today-fortune-section .section-title-row h2,
+.home-fortune-flow-card h2 {
+  margin-bottom: 0;
+  color: var(--color-deep-navy);
+  font-family: Georgia, "Times New Roman", "Noto Serif KR", serif;
+  font-size: 1.22rem;
+}
+
+.home-today-fortune-section .section-title-row > span {
+  color: rgba(75, 85, 107, 0.74);
+  font-size: 0.78rem;
+  font-weight: 900;
+  line-height: 1.35;
+  text-align: right;
+}
+
+.home-today-fortune-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.home-today-fortune-grid .fortune-card {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+  min-height: 194px;
+  padding: 14px;
+}
+
+.home-today-fortune-grid .card-topline {
+  grid-template-columns: 1fr;
+  gap: 9px;
+}
+
+.home-today-fortune-grid .category-icon {
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(184, 150, 78, 0.2);
+  border-radius: 16px;
+  color: var(--color-warm-gold);
+  background: rgba(246, 239, 227, 0.78);
+  font-size: 1.1rem;
+}
+
+.home-today-fortune-grid .fortune-card h3 {
+  margin-bottom: 5px;
+  color: var(--color-deep-navy);
+  font-size: 1rem;
+  line-height: 1.25;
+}
+
+.home-today-fortune-grid .fortune-card p {
+  display: -webkit-box;
+  min-height: 3.9em;
+  overflow: hidden;
+  color: var(--color-muted-blue);
+  font-size: 0.8rem;
+  line-height: 1.3;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.home-today-fortune-grid .score-row {
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  margin-top: 0;
+}
+
+.home-today-fortune-grid .score-row strong {
+  color: var(--color-deep-navy);
+  font-size: 0.92rem;
+}
+
+.home-today-fortune-grid .score-bar {
+  height: 8px;
+}
+
+.home-today-fortune-grid .text-button {
+  justify-self: start;
+  min-height: 30px;
+  color: var(--color-teal-dark);
+  font-size: 0.82rem;
+}
+
+.home-fortune-flow-card {
+  display: grid;
+  gap: 13px;
+}
+
 .home-menu-section {
   display: grid;
   gap: 10px;
@@ -4165,6 +4265,19 @@ input:disabled {
 
   .home-score-diary-card .score-donut {
     justify-self: center;
+  }
+
+  .home-today-fortune-grid {
+    gap: 8px;
+  }
+
+  .home-today-fortune-grid .fortune-card {
+    min-height: 188px;
+    padding: 12px;
+  }
+
+  .home-today-fortune-grid .fortune-card p {
+    font-size: 0.76rem;
   }
 }
 
