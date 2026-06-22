@@ -1,30 +1,16 @@
 import { useEffect, useMemo, useState } from 'react';
-import DailyRoutineCard from '../components/DailyRoutineCard.jsx';
 import ContentSafetyNotice from '../components/ContentSafetyNotice.jsx';
 import FortuneCard from '../components/FortuneCard.jsx';
 import MountainOrbitIllustration from '../components/MountainOrbitIllustration.jsx';
 import PrivacyInfoLinkCard from '../components/PrivacyInfoLinkCard.jsx';
-import SajuElementSummaryCard from '../components/SajuElementSummaryCard.jsx';
 import SavedReadingsSummaryCard from '../components/SavedReadingsSummaryCard.jsx';
-import ScoreDonut from '../components/ScoreDonut.jsx';
 import VisitStreakCard from '../components/VisitStreakCard.jsx';
 
 const QUICK_MENU_PREFS_KEY = 'harupuli_home_quick_menu_prefs';
 const MAX_HOME_QUICK_MENU_ITEMS = 4;
 const DEFAULT_QUICK_MENU_IDS = ['today', 'saju', 'money', 'love'];
 const TODAY_FORTUNE_CATEGORY_IDS = ['overall', 'money', 'love', 'work', 'study', 'health'];
-const ELEMENT_DISPLAY_MAP = {
-  화: '화(火)',
-  수: '수(水)',
-  목: '목(木)',
-  금: '금(金)',
-  토: '토(土)',
-};
 const WEEKDAY_LABELS = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
-
-function formatElementDisplayText(text) {
-  return String(text || '').replace(/(화|수|목|금|토)(?=\s*(균형|정리|기운)|$)/g, (element) => ELEMENT_DISPLAY_MAP[element]);
-}
 
 function formatKoreanDate(dateKey) {
   const [year, month, day] = String(dateKey || '').split('-').map(Number);
@@ -92,7 +78,6 @@ function HomePage({ fortune, profile, savedReadings, visitStreak, onOpenDetail, 
   const recentSavedReading = Array.isArray(savedReadings?.items) ? savedReadings.items[0] : null;
   const timeFortune = getTimeFortune();
   const todayFlowDate = formatKoreanDate(fortune.dateKey);
-  const todayKeyword = formatElementDisplayText(fortune.keyword);
   const todayFortuneCategories = useMemo(() => {
     const categoryMap = new Map(fortune.categories.map((category) => [category.id, category]));
     const orderedCategories = TODAY_FORTUNE_CATEGORY_IDS.map((categoryId) => categoryMap.get(categoryId)).filter(Boolean);
@@ -204,16 +189,6 @@ function HomePage({ fortune, profile, savedReadings, visitStreak, onOpenDetail, 
         </div>
       </section>
 
-      <section className="home-score-diary-card">
-        <div className="home-score-copy">
-          <p className="eyebrow">오늘의 흐름</p>
-          {todayFlowDate && <p className="home-score-date">{todayFlowDate}</p>}
-          <h2>{todayKeyword}</h2>
-          <p>{fortune.greeting}</p>
-        </div>
-        <ScoreDonut score={fortune.averageScore} />
-      </section>
-
       <section className="home-menu-section" aria-labelledby="home-quick-menu-title">
         <div className="section-title-row">
           <div>
@@ -288,16 +263,6 @@ function HomePage({ fortune, profile, savedReadings, visitStreak, onOpenDetail, 
           <p>하루풀이는 서버 DB와 로그인 없이 이용할 수 있으며, 입력한 정보는 운세 참고 콘텐츠를 보여주는 데 사용됩니다.</p>
         </div>
       </section>
-
-      <SajuElementSummaryCard
-        sajuAnalysis={fortune.sajuAnalysis}
-        onOpenDetail={() => onNavigate('sajuInsight')}
-      />
-
-      <DailyRoutineCard
-        sajuAnalysis={fortune.sajuAnalysis}
-        onOpenDetail={() => onNavigate('sajuInsight')}
-      />
 
       <VisitStreakCard streak={visitStreak} />
 

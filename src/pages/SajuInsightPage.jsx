@@ -2,12 +2,24 @@ import AdRewardBox from '../components/AdRewardBox.jsx';
 import ContentAccessNotice from '../components/ContentAccessNotice.jsx';
 import ContentSafetyNotice from '../components/ContentSafetyNotice.jsx';
 import CopyShareButton from '../components/CopyShareButton.jsx';
+import DailyRoutineCard from '../components/DailyRoutineCard.jsx';
 import SaveReadingButton from '../components/SaveReadingButton.jsx';
 import SajuCalculationBasisCard from '../components/SajuCalculationBasisCard.jsx';
+import SajuElementSummaryCard from '../components/SajuElementSummaryCard.jsx';
+import ScoreDonut from '../components/ScoreDonut.jsx';
 import { REWARDED_AD_PLACEMENTS } from '../config/rewardedAdPlacements.js';
 import { buildSajuInsightShareText } from '../utils/shareTextBuilder.js';
 
 const SAJU_INSIGHT_DEEP_UNLOCK_KEY = 'sajuInsightDeepDive';
+
+const ELEMENT_DISPLAY_MAP = {
+  화: '화(火)',
+  수: '수(水)',
+  목: '목(木)',
+  금: '금(金)',
+  토: '토(土)',
+};
+const WEEKDAY_LABELS = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
 
 const ELEMENT_LABELS = {
   wood: '목',
@@ -23,6 +35,18 @@ function toItems(items, count) {
 
 function labelElement(key, fallback) {
   return ELEMENT_LABELS[key] || fallback || key;
+}
+
+function formatElementDisplayText(text) {
+  return String(text || '').replace(/(화|수|목|금|토)(?=\s*(균형|정리|기운)|$)/g, (element) => ELEMENT_DISPLAY_MAP[element]);
+}
+
+function formatKoreanDate(dateKey) {
+  const [year, month, day] = String(dateKey || '').split('-').map(Number);
+  if (!year || !month || !day) return '';
+
+  const weekday = WEEKDAY_LABELS[new Date(Date.UTC(year, month - 1, day)).getUTCDay()];
+  return `${year}년 ${month}월 ${day}일 ${weekday}`;
 }
 
 function buildElementRows(elements) {
@@ -155,6 +179,8 @@ function SajuInsightPage({
   const insightSummary = elements.balanceHint || '오늘의 사주 흐름을 일상에 적용해볼 수 있는 참고용 가이드입니다.';
   const insightBody = lifeSections.map((section) => `${section.title}: ${section.description}`).join('\n\n');
   const insightTags = [...toItems(sajuAnalysis.luckyKeywords, 3), ...toItems(sajuAnalysis.traits, 2)].slice(0, 5);
+  const todayFlowDate = formatKoreanDate(fortune.dateKey);
+  const todayKeyword = formatElementDisplayText(fortune.keyword);
 
   return (
     <div className="page-stack saju-insight-page">
@@ -162,10 +188,24 @@ function SajuInsightPage({
         <button className="ghost-button" type="button" onClick={() => onNavigate('home')}>
           ← 홈으로
         </button>
-        <p className="eyebrow">Saju Insight</p>
-        <h1>사주 흐름 자세히 보기</h1>
-        <p>입력한 생년월일과 선택한 시간 기준을 바탕으로 계산한 참고용 사주 흐름입니다.</p>
+        <p className="eyebrow">Today Flow</p>
+        <h1>오늘흐름</h1>
+        <p>오늘의 기운과 나의 사주 흐름을 함께 살펴보세요.</p>
       </section>
+
+      <section className="home-score-diary-card today-flow-summary-card">
+        <div className="home-score-copy">
+          <p className="eyebrow">오늘의 흐름</p>
+          {todayFlowDate && <p className="home-score-date">{todayFlowDate}</p>}
+          <h2>{todayKeyword}</h2>
+          <p>{fortune.greeting}</p>
+        </div>
+        <ScoreDonut score={fortune.averageScore} />
+      </section>
+
+      <SajuElementSummaryCard sajuAnalysis={fortune.sajuAnalysis} />
+
+      <DailyRoutineCard sajuAnalysis={fortune.sajuAnalysis} />
 
       <SajuCalculationBasisCard profile={profile} fortune={fortune} />
 

@@ -13,7 +13,7 @@ function getProfileZodiac(profile, fortune) {
   const birthYear = Number(profile.birthDate?.slice(0, 4));
   const pillarZodiac = getZodiacByYearPillar(fortune?.sajuAnalysis?.pillars?.year);
   const fallbackZodiac = getZodiacByYear(birthYear);
-  const birthZodiac = pillarZodiac || fallbackZodiac;
+  const birthZodiac = fallbackZodiac;
 
   if (!birthYear || !birthZodiac) return null;
 
@@ -21,7 +21,7 @@ function getProfileZodiac(profile, fortune) {
     year: birthYear,
     animal: birthZodiac.animal,
     icon: birthZodiac.icon,
-    isSajuYearPillarBased: Boolean(pillarZodiac),
+    isSajuYearPillarBased: Boolean(pillarZodiac && pillarZodiac.animal !== birthZodiac.animal),
   };
 }
 
@@ -87,6 +87,10 @@ function ZodiacFortunePage({ profile, fortune }) {
 
       <section className="zodiac-notice-card">
         띠는 입력한 생년월일을 바탕으로 계산된 사주 연주의 지지를 우선해 표시됩니다.
+      </section>
+
+      <section className="zodiac-notice-card">
+        연도별 띠 목록은 일반적인 출생연도 기준으로 정리했습니다. 개인 사주 흐름의 연주는 생년월일과 절기 기준에 따라 다르게 표시될 수 있습니다.
       </section>
 
       {!initialState.hasSupportedBirthYear && (
