@@ -27,7 +27,7 @@ function FortuneDetailPage({
 
   return (
     <div className="page-stack fortune-detail-page">
-      <section className="today-fortune-hero">
+      <section className="today-fortune-hero shared-hero-artwork-card">
         <div>
           <p className="eyebrow">{fortune.dateKey}</p>
           <h1>오늘운세</h1>

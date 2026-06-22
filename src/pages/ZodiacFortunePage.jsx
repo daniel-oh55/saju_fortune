@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react';
-import MountainOrbitIllustration from '../components/MountainOrbitIllustration.jsx';
 import {
   createZodiacFortune,
   getYearsByAnimal,
@@ -76,13 +75,12 @@ function ZodiacFortunePage({ profile, fortune }) {
 
   return (
     <div className="page-stack zodiac-page">
-      <section className="zodiac-hero-card">
+      <section className="zodiac-hero-card shared-hero-artwork-card">
         <div>
           <p className="eyebrow">Zodiac Fortune</p>
           <h1>띠별 운세</h1>
           <p>12가지 띠 중 하나를 선택하고, 연도별 오늘의 흐름을 확인해보세요.</p>
         </div>
-        <MountainOrbitIllustration size="medium" className="zodiac-hero-artwork" opacity={0.88} />
       </section>
 
       <section className="zodiac-notice-card">
