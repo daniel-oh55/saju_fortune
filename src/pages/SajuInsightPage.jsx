@@ -155,7 +155,7 @@ function SajuInsightPage({
   if (!sajuAnalysis) {
     return (
       <div className="page-stack saju-insight-page">
-        <section className="saju-insight-hero">
+        <section className="saju-insight-hero shared-hero-artwork-card">
           <button className="ghost-button" type="button" onClick={() => onNavigate('home')}>
             ← 홈으로
           </button>
@@ -184,7 +184,7 @@ function SajuInsightPage({
 
   return (
     <div className="page-stack saju-insight-page">
-      <section className="saju-insight-hero">
+      <section className="saju-insight-hero shared-hero-artwork-card">
         <button className="ghost-button" type="button" onClick={() => onNavigate('home')}>
           ← 홈으로
         </button>

@@ -498,22 +498,17 @@ textarea:focus {
   gap: 16px;
 }
 
-.today-fortune-hero {
+.shared-hero-artwork-card {
   position: relative;
   overflow: hidden;
-  min-height: 214px;
-  border: 1px solid rgba(184, 150, 78, 0.2);
-  border-radius: var(--radius-card);
-  padding: 22px;
   background:
     linear-gradient(90deg, rgba(255, 253, 248, 0.92) 0%, rgba(255, 253, 248, 0.72) 42%, rgba(255, 253, 248, 0.18) 100%),
     linear-gradient(180deg, rgba(255, 253, 248, 0.14), rgba(255, 253, 248, 0.2)),
     url("/images/today-fortune-hero-artwork.png") center 45% / cover no-repeat,
     var(--color-card);
-  box-shadow: var(--shadow-soft);
 }
 
-.today-fortune-hero::after {
+.shared-hero-artwork-card::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -521,6 +516,24 @@ textarea:focus {
   background:
     radial-gradient(circle at 18% 16%, rgba(255, 253, 248, 0.5), transparent 34%),
     linear-gradient(180deg, rgba(255, 253, 248, 0.08), rgba(34, 52, 71, 0.04));
+}
+
+.shared-hero-artwork-card > * {
+  position: relative;
+  z-index: 2;
+}
+
+.shared-hero-artwork-card h1,
+.shared-hero-artwork-card p {
+  text-shadow: 0 1px 12px rgba(255, 253, 248, 0.88);
+}
+
+.today-fortune-hero {
+  min-height: 214px;
+  border: 1px solid rgba(184, 150, 78, 0.2);
+  border-radius: var(--radius-card);
+  padding: 22px;
+  box-shadow: var(--shadow-soft);
 }
 
 .today-fortune-hero > div:first-child {
@@ -535,7 +548,6 @@ textarea:focus {
   color: var(--color-deep-navy);
   font-family: Georgia, "Times New Roman", "Noto Serif KR", serif;
   font-size: 2rem;
-  text-shadow: 0 1px 12px rgba(255, 253, 248, 0.9);
 }
 
 .today-fortune-hero p:last-child {
@@ -543,7 +555,6 @@ textarea:focus {
   margin-bottom: 0;
   color: #31455a;
   font-weight: 700;
-  text-shadow: 0 1px 10px rgba(255, 253, 248, 0.84);
 }
 
 .fortune-result-card {
@@ -1455,9 +1466,6 @@ input:disabled {
   border-radius: 26px;
   padding: 22px;
   color: var(--color-deep-navy);
-  background:
-    linear-gradient(135deg, rgba(255, 253, 248, 0.98), rgba(239, 248, 245, 0.88)),
-    var(--color-card);
   box-shadow: var(--shadow-soft);
 }
 
@@ -1465,6 +1473,12 @@ input:disabled {
 .zodiac-hero-card > div:first-child {
   position: relative;
   z-index: 1;
+}
+
+.year-hero-card {
+  background:
+    linear-gradient(135deg, rgba(255, 253, 248, 0.98), rgba(239, 248, 245, 0.88)),
+    var(--color-card);
 }
 
 .year-hero-card h1,
@@ -2367,9 +2381,6 @@ input:disabled {
 .saju-insight-hero {
   display: grid;
   gap: 10px;
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(238, 249, 245, 0.92)),
-    linear-gradient(135deg, #ffe0cb, #b8e4dd);
 }
 
 .saju-insight-hero .ghost-button {
@@ -3728,15 +3739,23 @@ input:disabled {
   border-radius: 28px;
   padding: 28px 22px 22px;
   color: var(--color-deep-navy);
-  background:
-    linear-gradient(135deg, rgba(255, 253, 248, 0.98), rgba(246, 239, 227, 0.82)),
-    var(--color-card);
   box-shadow: var(--shadow-lift);
 }
 
-.home-diary-hero > *:not(.mountain-orbit-illustration) {
+.today-fortune-hero.shared-hero-artwork-card,
+.home-diary-hero.shared-hero-artwork-card,
+.saju-insight-hero.shared-hero-artwork-card,
+.zodiac-hero-card.shared-hero-artwork-card {
+  background:
+    linear-gradient(90deg, rgba(255, 253, 248, 0.92) 0%, rgba(255, 253, 248, 0.72) 42%, rgba(255, 253, 248, 0.18) 100%),
+    linear-gradient(180deg, rgba(255, 253, 248, 0.14), rgba(255, 253, 248, 0.2)),
+    url("/images/today-fortune-hero-artwork.png") center 45% / cover no-repeat,
+    var(--color-card);
+}
+
+.home-diary-hero > * {
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 .home-diary-hero .eyebrow,
@@ -3753,7 +3772,7 @@ input:disabled {
 }
 
 .home-diary-hero p {
-  max-width: 25rem;
+  max-width: 21rem;
   margin-bottom: 22px;
   color: var(--color-muted-blue);
   font-size: 0.94rem;
@@ -4263,10 +4282,13 @@ input:disabled {
 }
 
 @media (max-width: 390px) {
+  .shared-hero-artwork-card {
+    background-position: 56% 50%;
+  }
+
   .today-fortune-hero {
     min-height: 206px;
     padding: 20px;
-    background-position: 56% 50%;
   }
 
   .today-fortune-hero > div:first-child {
