@@ -506,14 +506,27 @@ textarea:focus {
   border-radius: var(--radius-card);
   padding: 22px;
   background:
-    linear-gradient(135deg, rgba(255, 253, 248, 0.98), rgba(246, 239, 227, 0.86)),
+    linear-gradient(90deg, rgba(255, 253, 248, 0.92) 0%, rgba(255, 253, 248, 0.72) 42%, rgba(255, 253, 248, 0.18) 100%),
+    linear-gradient(180deg, rgba(255, 253, 248, 0.14), rgba(255, 253, 248, 0.2)),
+    url("/images/today-fortune-hero-artwork.png") center 45% / cover no-repeat,
     var(--color-card);
   box-shadow: var(--shadow-soft);
 }
 
+.today-fortune-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 18% 16%, rgba(255, 253, 248, 0.5), transparent 34%),
+    linear-gradient(180deg, rgba(255, 253, 248, 0.08), rgba(34, 52, 71, 0.04));
+}
+
 .today-fortune-hero > div:first-child {
   position: relative;
-  z-index: 1;
+  z-index: 2;
+  max-width: 18rem;
 }
 
 .today-fortune-hero h1 {
@@ -522,13 +535,15 @@ textarea:focus {
   color: var(--color-deep-navy);
   font-family: Georgia, "Times New Roman", "Noto Serif KR", serif;
   font-size: 2rem;
+  text-shadow: 0 1px 12px rgba(255, 253, 248, 0.9);
 }
 
 .today-fortune-hero p:last-child {
   max-width: 17rem;
   margin-bottom: 0;
-  color: var(--color-muted-blue);
+  color: #31455a;
   font-weight: 700;
+  text-shadow: 0 1px 10px rgba(255, 253, 248, 0.84);
 }
 
 .fortune-result-card {
@@ -4248,6 +4263,16 @@ input:disabled {
 }
 
 @media (max-width: 390px) {
+  .today-fortune-hero {
+    min-height: 206px;
+    padding: 20px;
+    background-position: 56% 50%;
+  }
+
+  .today-fortune-hero > div:first-child {
+    max-width: 15rem;
+  }
+
   .home-diary-hero {
     min-height: 250px;
     padding: 24px 18px 18px;
