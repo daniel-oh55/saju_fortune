@@ -1,9 +1,8 @@
 const navItems = [
   { id: 'home', label: '홈', icon: '⌂' },
-  { id: 'fortune', label: '오늘운세', icon: '☼' },
+  { id: 'sajuInsight', label: '오늘흐름', icon: '☼' },
   { id: 'year', label: '2026운세', icon: '2026' },
-  { id: 'zodiac', label: '띠별', icon: '12' },
-  { id: 'ai', label: 'AI상담', icon: 'AI' },
+  { id: 'zodiac', label: '띠별운세', icon: '12' },
   { id: 'settings', label: '내정보', icon: '☻' },
 ];
 
