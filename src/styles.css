@@ -12,6 +12,8 @@
   --color-ink: #243039;
   --color-muted: #607078;
   --color-border: rgba(31, 42, 68, 0.12);
+  --color-primary-action: #314A66;
+  --color-primary-action-pressed: #263a50;
   --radius-card: 24px;
   --radius-soft: 18px;
   --shadow-soft: 0 18px 42px rgba(34, 52, 71, 0.1);
@@ -1521,7 +1523,7 @@ input:disabled {
 }
 
 .year-score-panel strong {
-  color: var(--color-navy-muted);
+  color: var(--color-primary-action);
   font-family: Georgia, "Times New Roman", "Noto Serif KR", serif;
   font-size: 3.3rem;
   line-height: 1;
@@ -1641,7 +1643,7 @@ input:disabled {
 .year-page .primary-button,
 .zodiac-page .primary-button {
   color: #ffffff;
-  background: linear-gradient(135deg, var(--color-navy-muted), var(--color-deep-navy));
+  background: var(--color-primary-action);
   box-shadow: 0 12px 26px rgba(34, 52, 71, 0.18);
 }
 
@@ -3854,7 +3856,7 @@ input:disabled {
 .home-diary-hero .primary-button {
   border: 1px solid rgba(184, 150, 78, 0.48);
   color: #fffdf8;
-  background: linear-gradient(135deg, var(--color-navy-muted), var(--color-deep-navy));
+  background: var(--color-primary-action);
 }
 
 .home-diary-theme .ghost-button {
