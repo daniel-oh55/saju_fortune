@@ -1472,7 +1472,7 @@ input:disabled {
 .year-hero-copy,
 .zodiac-hero-card > div:first-child {
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 .year-hero-card {
@@ -3742,6 +3742,7 @@ input:disabled {
   box-shadow: var(--shadow-lift);
 }
 
+.year-hero-card.shared-hero-artwork-card,
 .today-fortune-hero.shared-hero-artwork-card,
 .home-diary-hero.shared-hero-artwork-card,
 .saju-insight-hero.shared-hero-artwork-card,

@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react';
-import MountainOrbitIllustration from '../components/MountainOrbitIllustration.jsx';
 import MonthlyWaveChart from '../components/MonthlyWaveChart.jsx';
 import RewardAdModal from '../components/RewardAdModal.jsx';
 import { createYearFortune } from '../domain/fortune/yearFortuneEngine.js';
@@ -20,7 +19,7 @@ function YearFortunePage({ profile, fortune, onNavigate }) {
 
   return (
     <div className="page-stack year-page">
-      <section className="year-hero-card">
+      <section className="year-hero-card shared-hero-artwork-card">
         <div className="year-hero-copy">
           <p className="eyebrow">2026 Fortune</p>
           <h1>2026년 나의 흐름</h1>
@@ -34,7 +33,6 @@ function YearFortunePage({ profile, fortune, onNavigate }) {
             <p>{yearFortune.summary}</p>
           </div>
         </div>
-        <MountainOrbitIllustration size="large" className="year-hero-artwork" opacity={0.9} />
       </section>
 
       <section className="year-category-grid">
