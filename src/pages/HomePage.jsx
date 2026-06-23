@@ -1,12 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import FortuneCard from '../components/FortuneCard.jsx';
+import PageTopBar from '../components/PageTopBar.jsx';
 import SavedReadingsSummaryCard from '../components/SavedReadingsSummaryCard.jsx';
 import VisitStreakCard from '../components/VisitStreakCard.jsx';
-import {
-  loadDailyReminderSettings,
-  requestDailyReminderPermission,
-  saveDailyReminderSettings,
-} from '../utils/dailyReminderSettings.js';
 
 const QUICK_MENU_PREFS_KEY = 'harupuli_home_quick_menu_prefs';
 const MAX_HOME_QUICK_MENU_ITEMS = 4;
@@ -72,14 +68,19 @@ function getTimeFortune() {
   };
 }
 
-function HomePage({ fortune, profile, savedReadings, visitStreak, onOpenDetail, onNavigate }) {
+function HomePage({
+  fortune,
+  profile,
+  savedReadings,
+  visitStreak,
+  onOpenDetail,
+  onNavigate,
+  onOpenReminderSettings,
+  isReminderEnabled,
+}) {
   const [quickMenuPrefs, setQuickMenuPrefs] = useState(() => readQuickMenuPrefs());
   const [isQuickMenuEditorOpen, setIsQuickMenuEditorOpen] = useState(false);
   const [quickMenuMessage, setQuickMenuMessage] = useState('');
-  const [dailyReminderSettings, setDailyReminderSettings] = useState(() => loadDailyReminderSettings());
-  const [dailyReminderDraft, setDailyReminderDraft] = useState(() => loadDailyReminderSettings());
-  const [isReminderSettingsOpen, setIsReminderSettingsOpen] = useState(false);
-  const [reminderSettingsMessage, setReminderSettingsMessage] = useState('');
   const overall = fortune.categories.find((category) => category.id === 'overall') || fortune.categories[0];
   const timeFortune = getTimeFortune();
   const todayFlowDate = formatKoreanDate(fortune.dateKey);
@@ -136,63 +137,19 @@ function HomePage({ fortune, profile, savedReadings, visitStreak, onOpenDetail, 
     });
   };
 
-  const handleOpenReminderSettings = () => {
-    setDailyReminderDraft(dailyReminderSettings);
-    setReminderSettingsMessage('');
-    setIsReminderSettingsOpen(true);
-  };
-
-  const handleToggleDailyReminder = async (enabled) => {
-    if (!enabled) {
-      setDailyReminderDraft((current) => ({ ...current, enabled: false }));
-      setReminderSettingsMessage('알림을 꺼두면 저장된 시간은 유지됩니다.');
-      return;
-    }
-
-    const permission = await requestDailyReminderPermission();
-    if (permission === 'denied') {
-      setDailyReminderDraft((current) => ({ ...current, enabled: false }));
-      setReminderSettingsMessage('알림 권한이 꺼져 있어요. 기기 설정에서 허용한 뒤 다시 켜주세요.');
-      return;
-    }
-
-    setDailyReminderDraft((current) => ({ ...current, enabled: true }));
-    setReminderSettingsMessage(
-      permission === 'granted'
-        ? '알림 설정을 저장할 수 있어요. Android 앱 알림 연동은 안정적으로 동작하도록 준비 중입니다.'
-        : '앱 알림은 Android 앱 빌드에서 안정적으로 동작하도록 준비 중입니다.',
-    );
-  };
-
-  const handleSaveDailyReminderSettings = () => {
-    const savedSettings = saveDailyReminderSettings(dailyReminderDraft);
-    setDailyReminderSettings(savedSettings);
-    setIsReminderSettingsOpen(false);
-  };
-
   return (
     <div className="page-stack home-page home-diary-theme">
-      <header className="home-topbar" aria-label="하루풀이 홈">
-        <div>
-          <strong>하루풀이</strong>
-          <span>오늘의 흐름을 차분히 읽어보세요</span>
-        </div>
-        <div className="home-topbar-actions">
-          <button
-            className={`home-reminder-button ${dailyReminderSettings.enabled ? 'is-enabled' : ''}`}
-            type="button"
-            onClick={handleOpenReminderSettings}
-            aria-label="알림 설정"
-          />
-          <button type="button" onClick={() => onNavigate('settings')}>
-            {profile.nickname}
-          </button>
-        </div>
-      </header>
+      <PageTopBar
+        title="하루풀이"
+        profileName={profile.nickname}
+        isReminderEnabled={isReminderEnabled}
+        onProfileClick={() => onNavigate('settings')}
+        onReminderClick={onOpenReminderSettings}
+      />
 
       <section className="home-diary-hero shared-hero-artwork-card" aria-labelledby="home-hero-title">
         <p className="eyebrow">고요한 아침의 운세 다이어리</p>
-        <h1 id="home-hero-title">오늘의 흐름을 살펴보세요</h1>
+        <h1 id="home-hero-title">오늘의 운세를 살펴보세요</h1>
         <p>내 하루의 기운을 가볍게 확인하고, 지금 필요한 작은 방향을 찾아보세요.</p>
         <div className="home-hero-actions">
           <button className="primary-button" type="button" onClick={() => onNavigate('settings')}>
@@ -348,51 +305,6 @@ function HomePage({ fortune, profile, savedReadings, visitStreak, onOpenDetail, 
         </div>
       </section>
 
-      {isReminderSettingsOpen && (
-        <div className="home-modal-backdrop" role="presentation">
-          <section className="home-bottom-sheet" role="dialog" aria-modal="true" aria-labelledby="daily-reminder-title">
-            <div className="home-modal-head">
-              <div>
-                <p className="eyebrow">Daily Reminder</p>
-                <h2 id="daily-reminder-title">알림 설정</h2>
-              </div>
-              <button type="button" onClick={() => setIsReminderSettingsOpen(false)} aria-label="알림 설정 닫기">
-                ×
-              </button>
-            </div>
-            <p className="reminder-settings-copy">
-              매일 아침 오늘의 흐름을 확인해보세요. 설정한 시간에 하루풀이가 오늘의 흐름 확인을 알려드릴게요.
-            </p>
-            <label className="reminder-toggle-row">
-              <span>
-                <strong>알림 받기</strong>
-                <small>{dailyReminderDraft.enabled ? '켜짐' : '꺼짐'}</small>
-              </span>
-              <input
-                type="checkbox"
-                checked={dailyReminderDraft.enabled}
-                onChange={(event) => handleToggleDailyReminder(event.target.checked)}
-              />
-            </label>
-            <label className="reminder-time-row">
-              <span>알림 시간</span>
-              <input
-                type="time"
-                value={dailyReminderDraft.time}
-                onChange={(event) =>
-                  setDailyReminderDraft((current) => ({ ...current, time: event.target.value || '08:00' }))
-                }
-              />
-            </label>
-            <p className="reminder-settings-note" role="status">
-              {reminderSettingsMessage || '기본 시간은 오전 8시이며, 처음에는 알림이 꺼져 있습니다.'}
-            </p>
-            <button className="primary-button full-width" type="button" onClick={handleSaveDailyReminderSettings}>
-              저장
-            </button>
-          </section>
-        </div>
-      )}
     </div>
   );
 }

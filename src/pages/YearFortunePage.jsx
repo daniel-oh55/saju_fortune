@@ -1,9 +1,10 @@
 import { useMemo, useState } from 'react';
 import MonthlyWaveChart from '../components/MonthlyWaveChart.jsx';
+import PageTopBar from '../components/PageTopBar.jsx';
 import RewardAdModal from '../components/RewardAdModal.jsx';
 import { createYearFortune } from '../domain/fortune/yearFortuneEngine.js';
 
-function YearFortunePage({ profile, fortune, onNavigate }) {
+function YearFortunePage({ profile, fortune, onNavigate, onOpenReminderSettings, isReminderEnabled }) {
   const [unlockedYearCategories, setUnlockedYearCategories] = useState({});
   const [isMonthlyDetailUnlocked, setIsMonthlyDetailUnlocked] = useState(false);
   const [activeCategoryAd, setActiveCategoryAd] = useState(null);
@@ -19,6 +20,14 @@ function YearFortunePage({ profile, fortune, onNavigate }) {
 
   return (
     <div className="page-stack year-page">
+      <PageTopBar
+        title="오늘흐름"
+        profileName={profile.nickname}
+        isReminderEnabled={isReminderEnabled}
+        onProfileClick={() => onNavigate('settings')}
+        onReminderClick={onOpenReminderSettings}
+      />
+
       <section className="year-hero-card shared-hero-artwork-card">
         <div className="year-hero-copy">
           <p className="eyebrow">2026 Fortune</p>
