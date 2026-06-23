@@ -8,17 +8,15 @@ import SajuCalculationBasisCard from '../components/SajuCalculationBasisCard.jsx
 import SajuElementSummaryCard from '../components/SajuElementSummaryCard.jsx';
 import ScoreDonut from '../components/ScoreDonut.jsx';
 import { REWARDED_AD_PLACEMENTS } from '../config/rewardedAdPlacements.js';
+import {
+  displayFiveElement,
+  displayFiveElementText,
+  FIVE_ELEMENT_INFO,
+  FIVE_ELEMENT_ORDER,
+} from '../utils/fiveElementsInfo.js';
 import { buildSajuInsightShareText } from '../utils/shareTextBuilder.js';
 
 const SAJU_INSIGHT_DEEP_UNLOCK_KEY = 'sajuInsightDeepDive';
-
-const ELEMENT_DISPLAY_MAP = {
-  화: '화(火)',
-  수: '수(水)',
-  목: '목(木)',
-  금: '금(金)',
-  토: '토(土)',
-};
 const WEEKDAY_LABELS = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
 
 const ELEMENT_LABELS = {
@@ -38,7 +36,7 @@ function labelElement(key, fallback) {
 }
 
 function formatElementDisplayText(text) {
-  return String(text || '').replace(/(화|수|목|금|토)(?=\s*(균형|정리|기운)|$)/g, (element) => ELEMENT_DISPLAY_MAP[element]);
+  return String(text || '').replace(/(화|수|목|금|토)(?=\s*(균형|정리|기운)|$)/g, (element) => displayFiveElement(element));
 }
 
 function formatKoreanDate(dateKey) {
@@ -56,7 +54,7 @@ function buildElementRows(elements) {
 
   return keys.map((key) => ({
     key,
-    label: labelElement(key, elements?.labels?.[key]),
+    label: displayFiveElement(labelElement(key, elements?.labels?.[key])),
     percent: typeof percentages[key] === 'number' ? percentages[key] : null,
     count: typeof counts[key] === 'number' ? counts[key] : null,
   }));
@@ -146,7 +144,6 @@ function SajuInsightPage({
   onUnlockDetail,
   onSaveReading,
   onRemoveSavedReading,
-  onNavigate,
   consentPreferences,
   onOpenConsentSettings,
 }) {
@@ -156,9 +153,6 @@ function SajuInsightPage({
     return (
       <div className="page-stack saju-insight-page">
         <section className="saju-insight-hero shared-hero-artwork-card">
-          <button className="ghost-button" type="button" onClick={() => onNavigate('home')}>
-            ← 홈으로
-          </button>
           <h1>사주 흐름 자세히 보기</h1>
           <p>사주 흐름 정보를 준비 중입니다.</p>
         </section>
@@ -168,7 +162,6 @@ function SajuInsightPage({
 
   const elements = sajuAnalysis.elements || {};
   const elementRows = buildElementRows(elements);
-  const traits = toItems(sajuAnalysis.traits, 3);
   const weakPoints = toItems(sajuAnalysis.weakPoints, 3);
   const luckyKeywords = toItems(sajuAnalysis.luckyKeywords, 4);
   const isDeepDiveUnlocked = Boolean(unlockedDetails[SAJU_INSIGHT_DEEP_UNLOCK_KEY]?.unlocked);
@@ -185,9 +178,6 @@ function SajuInsightPage({
   return (
     <div className="page-stack saju-insight-page">
       <section className="saju-insight-hero shared-hero-artwork-card">
-        <button className="ghost-button" type="button" onClick={() => onNavigate('home')}>
-          ← 홈으로
-        </button>
         <p className="eyebrow">Today Flow</p>
         <h1>오늘흐름</h1>
         <p>오늘의 기운과 나의 사주 흐름을 함께 살펴보세요.</p>
@@ -203,6 +193,28 @@ function SajuInsightPage({
         <ScoreDonut score={fortune.averageScore} />
       </section>
 
+      <section className="saju-five-elements-help-card" aria-labelledby="five-elements-help-title">
+        <div>
+          <p className="eyebrow">Five Elements</p>
+          <h2 id="five-elements-help-title">화·수·목·금·토 기운 이해하기</h2>
+          <p>
+            오행은 오늘의 분위기를 이해하기 위한 참고 키워드입니다. 부족하거나 강한 기운을
+            단정하기보다, 하루를 균형 있게 보내기 위한 힌트로 활용해 주세요.
+          </p>
+        </div>
+        <div className="saju-five-elements-list">
+          {FIVE_ELEMENT_ORDER.map((element) => {
+            const info = FIVE_ELEMENT_INFO[element];
+            return (
+              <article key={element}>
+                <strong>{info.label}</strong>
+                <span>{info.summary}</span>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+
       <SajuElementSummaryCard sajuAnalysis={fortune.sajuAnalysis} />
 
       <DailyRoutineCard sajuAnalysis={fortune.sajuAnalysis} />
@@ -212,7 +224,7 @@ function SajuInsightPage({
       <ContentAccessNotice
         variant="free"
         title="무료 기본 해석"
-        description="사주 계산 기준, 오행 균형, 성향 키워드와 생활 흐름 가이드는 무료로 확인할 수 있습니다."
+        description="사주 계산 기준, 오행 균형과 생활 흐름 가이드는 무료로 확인할 수 있습니다."
       />
 
       <SaveReadingButton
@@ -239,11 +251,11 @@ function SajuInsightPage({
         <div className="saju-element-pair-grid">
           <div>
             <span>중심 기운</span>
-            <strong>{elements.dominant || '확인 중'}</strong>
+            <strong>{displayFiveElementText(elements.dominant)}</strong>
           </div>
           <div>
             <span>보완하면 좋은 기운</span>
-            <strong>{elements.weak || '확인 중'}</strong>
+            <strong>{displayFiveElementText(elements.weak)}</strong>
           </div>
         </div>
         {elements.balanceLabel && <p className="saju-insight-muted">{elements.balanceLabel}</p>}
@@ -267,20 +279,6 @@ function SajuInsightPage({
           </div>
         )}
       </section>
-
-      {traits.length > 0 && (
-        <section className="saju-insight-section">
-          <h2>성향 키워드</h2>
-          <div className="saju-insight-chip-list">
-            {traits.map((trait) => (
-              <span key={trait}>{trait}</span>
-            ))}
-          </div>
-          <p className="saju-insight-muted">
-            오늘의 흐름을 살필 때 편안하게 참고해볼 수 있는 성향입니다.
-          </p>
-        </section>
-      )}
 
       {weakPoints.length > 0 && (
         <section className="saju-insight-section">

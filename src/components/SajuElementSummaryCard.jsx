@@ -1,27 +1,49 @@
 import { useState } from 'react';
-
-const ELEMENT_LABELS = {
-  화: '화(火)',
-  수: '수(水)',
-  목: '목(木)',
-  금: '금(金)',
-  토: '토(土)',
-};
+import {
+  displayFiveElementText,
+  getElementsFromText,
+  getFiveElementInfo,
+} from '../utils/fiveElementsInfo.js';
 
 function takeItems(items, count = 3) {
   return Array.isArray(items) ? items.filter(Boolean).slice(0, count) : [];
 }
 
-function labelElement(value) {
-  if (!value) return '확인 중';
-  return String(value)
-    .split('/')
-    .map((item) => ELEMENT_LABELS[item.trim()] || item.trim())
-    .join(' / ');
+function buildElementHelp(kind, value) {
+  const elements = getElementsFromText(value);
+  const infos = elements.map((element) => getFiveElementInfo(element)).filter(Boolean);
+  const label = displayFiveElementText(value);
+
+  if (infos.length === 0) {
+    return {
+      title: kind === 'dominant' ? '중심 기운' : '보완하면 좋은 기운',
+      label,
+      description: '아직 확인 중인 기운입니다. 오늘의 흐름을 가볍게 참고해 주세요.',
+      tip: '무리하게 해석하기보다 하루의 리듬을 천천히 살펴보세요.',
+    };
+  }
+
+  if (kind === 'dominant') {
+    const summaries = infos.map((info) => info.summary.split(', ')[0]).join('과 ');
+    return {
+      title: '중심 기운',
+      label,
+      description: `${label}가 중심 기운이라는 뜻은, ${summaries}의 흐름이 기본 성향에서 비교적 잘 드러난다는 의미입니다. 오늘은 이 기운을 기준으로 일정과 관계의 균형을 함께 살펴보면 좋습니다.`,
+      tip: infos.map((info) => info.balanceTip).join(' '),
+    };
+  }
+
+  return {
+    title: '보완하면 좋은 기운',
+    label,
+    description: `${label} 기운을 보완한다는 것은 부족함을 단정하는 뜻이 아니라, 하루의 균형을 위해 의식적으로 챙겨보면 좋은 방향을 살펴본다는 의미입니다.`,
+    tip: infos.map((info) => info.balanceTip).join(' '),
+  };
 }
 
 function SajuElementSummaryCard({ sajuAnalysis, onOpenDetail }) {
   const [isGuideOpen, setIsGuideOpen] = useState(false);
+  const [activeElementHelp, setActiveElementHelp] = useState(null);
 
   if (!sajuAnalysis?.elements) return null;
 
@@ -47,14 +69,24 @@ function SajuElementSummaryCard({ sajuAnalysis, onOpenDetail }) {
       </div>
 
       <div className="saju-element-pair-grid">
-        <div>
+        <button
+          className="saju-element-help-trigger"
+          type="button"
+          onClick={() => setActiveElementHelp(buildElementHelp('dominant', elements.dominant))}
+        >
           <span>중심 기운</span>
-          <strong>{labelElement(elements.dominant)}</strong>
-        </div>
-        <div>
+          <strong>{displayFiveElementText(elements.dominant)}</strong>
+          <small>눌러서 의미 보기</small>
+        </button>
+        <button
+          className="saju-element-help-trigger"
+          type="button"
+          onClick={() => setActiveElementHelp(buildElementHelp('weak', elements.weak))}
+        >
           <span>보완하면 좋은 기운</span>
-          <strong>{labelElement(elements.weak)}</strong>
-        </div>
+          <strong>{displayFiveElementText(elements.weak)}</strong>
+          <small>눌러서 행동 팁 보기</small>
+        </button>
       </div>
 
       {elements.balanceHint && <p className="saju-balance-hint">{elements.balanceHint}</p>}
@@ -115,6 +147,32 @@ function SajuElementSummaryCard({ sajuAnalysis, onOpenDetail }) {
               </p>
             </div>
             <button className="primary-button full-width" type="button" onClick={() => setIsGuideOpen(false)}>
+              확인했어요
+            </button>
+          </section>
+        </div>
+      )}
+
+      {activeElementHelp && (
+        <div className="home-modal-backdrop" role="presentation">
+          <section className="home-bottom-sheet" role="dialog" aria-modal="true" aria-labelledby="saju-element-help-title">
+            <div className="home-modal-head">
+              <div>
+                <p className="eyebrow">Five Elements</p>
+                <h2 id="saju-element-help-title">{activeElementHelp.title}</h2>
+              </div>
+              <button type="button" onClick={() => setActiveElementHelp(null)} aria-label="오행 설명 닫기">
+                ×
+              </button>
+            </div>
+            <div className="saju-flow-guide-copy">
+              <p>
+                <strong>{activeElementHelp.label}</strong>
+              </p>
+              <p>{activeElementHelp.description}</p>
+              <p>{activeElementHelp.tip}</p>
+            </div>
+            <button className="primary-button full-width" type="button" onClick={() => setActiveElementHelp(null)}>
               확인했어요
             </button>
           </section>
