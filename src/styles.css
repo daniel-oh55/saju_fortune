@@ -3858,26 +3858,35 @@ input:disabled {
 .page-topbar {
   position: relative;
   display: grid;
-  grid-template-columns: 74px minmax(0, 1fr) 74px;
+  grid-template-columns: 44px minmax(0, 1fr) 44px;
   align-items: center;
   min-height: 44px;
   padding: 2px 0 4px;
+}
+
+.page-topbar-left,
+.page-topbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.page-topbar-left {
+  justify-content: flex-start;
+}
+
+.page-topbar-right {
+  justify-content: flex-end;
 }
 
 .page-topbar-title {
   justify-self: center;
   min-width: 0;
   color: var(--color-deep-navy);
-  font-family: Georgia, "Times New Roman", "Noto Serif KR", serif;
+  font-family: inherit;
   font-size: 1.16rem;
+  font-weight: 900;
   line-height: 1.2;
   text-align: center;
-}
-
-.page-topbar-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 8px;
 }
 
 .page-topbar-icon-button {
@@ -4040,6 +4049,35 @@ input:disabled {
   margin-bottom: 10px;
   font-size: 1.86rem;
   line-height: 1.18;
+}
+
+.year-hero-card h1,
+.zodiac-hero-card h1,
+.saju-insight-hero h1 {
+  max-width: 12ch;
+  margin-bottom: 10px;
+  color: var(--color-deep-navy);
+  font-family: inherit;
+  font-size: 1.72rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.year-hero-card .eyebrow,
+.zodiac-hero-card .eyebrow,
+.saju-insight-hero .eyebrow {
+  color: #55706d;
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.year-hero-card p,
+.zodiac-hero-card p,
+.saju-insight-hero p {
+  color: var(--color-muted-blue);
+  font-family: inherit;
+  line-height: 1.58;
 }
 
 .home-diary-hero p {
