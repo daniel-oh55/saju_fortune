@@ -3705,6 +3705,15 @@ input:disabled {
   min-width: 0;
 }
 
+.home-topbar .home-topbar-actions {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  min-width: 0;
+}
+
 .home-topbar strong {
   color: var(--color-deep-navy);
   font-family: Georgia, "Times New Roman", "Noto Serif KR", serif;
@@ -3720,7 +3729,7 @@ input:disabled {
 
 .home-topbar button {
   min-height: 38px;
-  max-width: 42%;
+  max-width: 100%;
   overflow: hidden;
   border: 1px solid rgba(184, 150, 78, 0.28);
   border-radius: 999px;
@@ -3731,6 +3740,42 @@ input:disabled {
   font-weight: 900;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.home-topbar .home-reminder-button {
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: 0 0 38px;
+  width: 38px;
+  max-width: 38px;
+  padding: 0;
+}
+
+.home-reminder-button::before {
+  content: "";
+  width: 15px;
+  height: 17px;
+  border: 2px solid currentColor;
+  border-bottom: 0;
+  border-radius: 10px 10px 4px 4px;
+}
+
+.home-reminder-button::after {
+  content: "";
+  position: absolute;
+  bottom: 8px;
+  width: 20px;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+  box-shadow: 0 4px 0 -1px currentColor;
+}
+
+.home-reminder-button.is-enabled {
+  border-color: rgba(49, 74, 102, 0.42);
+  color: #fffdf8;
+  background: var(--color-primary-action);
 }
 
 .home-diary-hero {
@@ -3843,7 +3888,8 @@ input:disabled {
 
 .home-hero-actions {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 15rem;
   gap: 10px;
 }
 
@@ -4133,11 +4179,60 @@ input:disabled {
 
 .quick-menu-editor-copy,
 .quick-menu-editor-status,
+.reminder-settings-copy,
+.reminder-settings-note,
 .saju-flow-guide-copy p {
   margin: 0;
   color: var(--color-muted-blue);
   font-size: 0.88rem;
   line-height: 1.55;
+}
+
+.reminder-toggle-row,
+.reminder-time-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  border: 1px solid rgba(184, 150, 78, 0.18);
+  border-radius: 18px;
+  padding: 14px;
+  background: rgba(255, 253, 248, 0.74);
+}
+
+.reminder-toggle-row span {
+  display: grid;
+  gap: 3px;
+}
+
+.reminder-toggle-row strong,
+.reminder-time-row span {
+  color: var(--color-deep-navy);
+  font-weight: 900;
+}
+
+.reminder-toggle-row small {
+  color: var(--color-muted-blue);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.reminder-toggle-row input {
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  accent-color: var(--color-primary-action);
+}
+
+.reminder-time-row input {
+  width: 8.5rem;
+  min-height: 42px;
+  border: 1px solid rgba(184, 150, 78, 0.22);
+  border-radius: 14px;
+  padding: 0 12px;
+  color: var(--color-deep-navy);
+  background: rgba(255, 255, 255, 0.86);
+  font-weight: 900;
 }
 
 .quick-menu-choice-list {
