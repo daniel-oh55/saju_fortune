@@ -1,3 +1,4 @@
+import ContentSafetyNotice from '../components/ContentSafetyNotice.jsx';
 import SajuCalculationBasisCard from '../components/SajuCalculationBasisCard.jsx';
 import MountainOrbitIllustration from '../components/MountainOrbitIllustration.jsx';
 
@@ -74,6 +75,12 @@ function SettingsPage({ profile, fortune, consentPreferences, onNavigate, onOpen
       )}
 
       <SajuCalculationBasisCard profile={profile} fortune={fortune} />
+
+      <ContentSafetyNotice
+        title="참고용 해석 안내"
+        description="하루풀이는 사주와 운세 흐름을 참고용으로 정리해드리는 서비스입니다. 중요한 결정은 실제 상황과 전문가의 조언을 함께 고려해 주세요."
+        compact
+      />
 
       <section className="settings-menu-list" aria-label="내정보 메뉴">
         <button type="button" onClick={() => onNavigate('privacyInfo')}>
