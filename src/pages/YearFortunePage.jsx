@@ -21,7 +21,7 @@ function YearFortunePage({ profile, fortune, onNavigate, onOpenReminderSettings,
   return (
     <div className="page-stack year-page">
       <PageTopBar
-        title="오늘흐름"
+        title="2026운세"
         profileName={profile.nickname}
         isReminderEnabled={isReminderEnabled}
         onProfileClick={() => onNavigate('settings')}

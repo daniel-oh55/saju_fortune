@@ -77,7 +77,7 @@ function ZodiacFortunePage({ profile, fortune, onNavigate, onOpenReminderSetting
   return (
     <div className="page-stack zodiac-page">
       <PageTopBar
-        title="오늘흐름"
+        title="띠별운세"
         profileName={profile.nickname}
         isReminderEnabled={isReminderEnabled}
         onProfileClick={() => onNavigate('settings')}

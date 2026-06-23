@@ -11,9 +11,7 @@ function PageTopBar({
 
   return (
     <header className="page-topbar" aria-label={`${title} 상단 메뉴`}>
-      <div className="page-topbar-spacer" aria-hidden="true" />
-      <strong className="page-topbar-title">{title}</strong>
-      <div className="page-topbar-actions">
+      <div className="page-topbar-left">
         <button
           className="page-topbar-icon-button profile"
           type="button"
@@ -22,6 +20,9 @@ function PageTopBar({
         >
           {profileInitial}
         </button>
+      </div>
+      <strong className="page-topbar-title">{title}</strong>
+      <div className="page-topbar-right">
         <button
           className={`page-topbar-icon-button notification ${isReminderEnabled ? 'is-enabled' : ''}`}
           type="button"
