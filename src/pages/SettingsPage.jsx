@@ -74,6 +74,10 @@ function SettingsPage({ profile, fortune, consentPreferences, onNavigate, onOpen
         </section>
       )}
 
+      <button className="ghost-button full-width settings-edit-profile-button" type="button" onClick={onEditProfile}>
+        프로필 수정하기
+      </button>
+
       <SajuCalculationBasisCard profile={profile} fortune={fortune} />
 
       <ContentSafetyNotice
@@ -99,10 +103,6 @@ function SettingsPage({ profile, fortune, consentPreferences, onNavigate, onOpen
             {consentPreferences.personalizedAds ? '동의' : '미동의'}
           </div>
         )}
-        <button type="button" onClick={onEditProfile}>
-          <span aria-hidden="true">♙</span>
-          프로필 수정
-        </button>
         <button className="is-danger" type="button" onClick={onReset}>
           <span aria-hidden="true">△</span>
           저장 데이터 초기화

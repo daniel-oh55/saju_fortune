@@ -161,6 +161,89 @@ p {
   background: transparent;
 }
 
+.profile-field-card {
+  display: grid;
+  gap: 9px;
+  min-width: 0;
+  border: 1px solid rgba(184, 150, 78, 0.16);
+  border-radius: 18px;
+  padding: 14px;
+  background: rgba(255, 253, 248, 0.78);
+}
+
+.profile-field-card > span,
+.profile-field-card label,
+.profile-field-card small {
+  color: var(--color-muted-blue);
+  font-size: 0.84rem;
+  font-weight: 900;
+}
+
+.profile-field-card small {
+  font-size: 0.76rem;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.profile-picker-row {
+  display: grid;
+  gap: 8px;
+}
+
+.profile-date-picker,
+.profile-time-picker {
+  grid-template-columns: 1fr 0.82fr 0.82fr;
+}
+
+.profile-region-picker {
+  grid-template-columns: 1fr 1fr;
+}
+
+.profile-field-card input,
+.profile-field-card select {
+  min-height: 46px;
+  border-color: rgba(49, 74, 102, 0.12);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.92);
+  font-weight: 800;
+}
+
+.profile-segmented-control {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.profile-segmented-control button {
+  min-height: 46px;
+  border: 1px solid rgba(49, 74, 102, 0.14);
+  border-radius: 14px;
+  color: var(--color-deep-navy);
+  background: rgba(255, 255, 255, 0.9);
+  font-weight: 900;
+}
+
+.profile-segmented-control button.selected {
+  border-color: var(--color-primary-action);
+  color: #fffdf8;
+  background: var(--color-primary-action);
+  box-shadow: 0 10px 22px rgba(49, 74, 102, 0.18);
+}
+
+.profile-leap-month-control {
+  border-radius: 18px;
+  padding: 8px;
+  background: rgba(255, 253, 248, 0.78);
+}
+
+.profile-form > .primary-button {
+  min-height: 52px;
+  border-radius: 16px;
+  color: #fffdf8;
+  background: var(--color-primary-action);
+  box-shadow: 0 14px 30px rgba(49, 74, 102, 0.22);
+}
+
 .late-night-time-notice {
   display: grid;
   gap: 8px;
@@ -229,6 +312,11 @@ label {
   color: #37454d;
   font-size: 0.9rem;
   font-weight: 700;
+}
+
+.profile-form label.profile-field-card {
+  display: grid;
+  gap: 9px;
 }
 
 input,
@@ -928,6 +1016,14 @@ textarea:focus {
   background:
     linear-gradient(135deg, rgba(255, 253, 248, 0.98), rgba(239, 248, 245, 0.9)),
     rgba(255, 255, 255, 0.94);
+}
+
+.settings-edit-profile-button {
+  border-color: rgba(49, 74, 102, 0.18);
+  border-radius: 18px;
+  color: var(--color-primary-action);
+  background: rgba(255, 253, 248, 0.9);
+  box-shadow: 0 10px 24px rgba(34, 52, 71, 0.06);
 }
 
 .saju-basis-head span,
