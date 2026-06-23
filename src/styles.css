@@ -3855,6 +3855,65 @@ input:disabled {
   color: var(--color-muted-blue);
 }
 
+.page-topbar {
+  position: relative;
+  display: grid;
+  grid-template-columns: 74px minmax(0, 1fr) 74px;
+  align-items: center;
+  min-height: 44px;
+  padding: 2px 0 4px;
+}
+
+.page-topbar-title {
+  justify-self: center;
+  min-width: 0;
+  color: var(--color-deep-navy);
+  font-family: Georgia, "Times New Roman", "Noto Serif KR", serif;
+  font-size: 1.16rem;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.page-topbar-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.page-topbar-icon-button {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 999px;
+  padding: 0;
+  color: var(--color-deep-navy);
+  background: transparent;
+}
+
+.page-topbar-icon-button.profile {
+  border: 1px solid rgba(49, 74, 102, 0.14);
+  color: var(--color-primary-action);
+  background: rgba(255, 253, 248, 0.82);
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.page-topbar-icon-button.notification {
+  position: relative;
+}
+
+.page-topbar-icon-button.notification.is-enabled {
+  color: var(--color-primary-action);
+}
+
+.notification-bell-icon {
+  width: 28px;
+  height: 28px;
+  color: currentColor;
+}
+
 .home-topbar {
   display: flex;
   align-items: center;

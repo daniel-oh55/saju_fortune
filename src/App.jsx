@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import BottomNav from './components/BottomNav.jsx';
 import ConsentBanner from './components/ConsentBanner.jsx';
 import ConsentSettingsPanel from './components/ConsentSettingsPanel.jsx';
+import DailyReminderSettingsPanel from './components/DailyReminderSettingsPanel.jsx';
 import OnboardingPage from './pages/OnboardingPage.jsx';
 import HomePage from './pages/HomePage.jsx';
 import FortuneDetailPage from './pages/FortuneDetailPage.jsx';
@@ -23,6 +24,11 @@ import {
   saveReadingItem,
 } from './utils/savedReadingsStorage.js';
 import { createEmptyVisitStreak, recordDailyVisit } from './utils/visitStreakStorage.js';
+import {
+  loadDailyReminderSettings,
+  requestDailyReminderPermission,
+  saveDailyReminderSettings,
+} from './utils/dailyReminderSettings.js';
 import {
   loadConsentPreferences,
   saveConsentPreferences,
@@ -77,6 +83,10 @@ function App() {
   const [consentPreferences, setConsentPreferences] = useState(() => loadConsentPreferences());
   const [isConsentBannerVisible, setIsConsentBannerVisible] = useState(() => shouldShowConsentBanner());
   const [isConsentSettingsOpen, setIsConsentSettingsOpen] = useState(false);
+  const [dailyReminderSettings, setDailyReminderSettings] = useState(() => loadDailyReminderSettings());
+  const [dailyReminderDraft, setDailyReminderDraft] = useState(() => loadDailyReminderSettings());
+  const [isReminderSettingsOpen, setIsReminderSettingsOpen] = useState(false);
+  const [reminderSettingsMessage, setReminderSettingsMessage] = useState('');
 
   const fortune = useMemo(() => {
     if (!profile) return null;
@@ -184,6 +194,40 @@ function App() {
     setIsConsentSettingsOpen(false);
   };
 
+  const handleOpenReminderSettings = () => {
+    setDailyReminderDraft(dailyReminderSettings);
+    setReminderSettingsMessage('');
+    setIsReminderSettingsOpen(true);
+  };
+
+  const handleToggleDailyReminder = async (enabled) => {
+    if (!enabled) {
+      setDailyReminderDraft((current) => ({ ...current, enabled: false }));
+      setReminderSettingsMessage('알림을 꺼두면 저장된 시간은 유지됩니다.');
+      return;
+    }
+
+    const permission = await requestDailyReminderPermission();
+    if (permission === 'denied') {
+      setDailyReminderDraft((current) => ({ ...current, enabled: false }));
+      setReminderSettingsMessage('알림 권한이 꺼져 있어요. 기기 설정에서 허용한 뒤 다시 켜주세요.');
+      return;
+    }
+
+    setDailyReminderDraft((current) => ({ ...current, enabled: true }));
+    setReminderSettingsMessage(
+      permission === 'granted'
+        ? '알림 설정을 저장할 수 있어요. Android 앱 알림 연동은 안정적으로 동작하도록 준비 중입니다.'
+        : '앱 알림은 Android 앱 빌드에서 안정적으로 동작하도록 준비 중입니다.',
+    );
+  };
+
+  const handleSaveDailyReminderSettings = () => {
+    const savedSettings = saveDailyReminderSettings(dailyReminderDraft);
+    setDailyReminderSettings(savedSettings);
+    setIsReminderSettingsOpen(false);
+  };
+
   const consentUi = (
     <>
       {isConsentBannerVisible && (
@@ -225,6 +269,8 @@ function App() {
             visitStreak={visitStreak}
             onOpenDetail={handleOpenDetail}
             onNavigate={setActivePage}
+            onOpenReminderSettings={handleOpenReminderSettings}
+            isReminderEnabled={dailyReminderSettings.enabled}
           />
         )}
         {activePage === 'fortune' && (
@@ -242,10 +288,22 @@ function App() {
           />
         )}
         {activePage === 'year' && (
-          <YearFortunePage profile={profile} fortune={fortune} onNavigate={setActivePage} />
+          <YearFortunePage
+            profile={profile}
+            fortune={fortune}
+            onNavigate={setActivePage}
+            onOpenReminderSettings={handleOpenReminderSettings}
+            isReminderEnabled={dailyReminderSettings.enabled}
+          />
         )}
         {activePage === 'zodiac' && (
-          <ZodiacFortunePage profile={profile} fortune={fortune} />
+          <ZodiacFortunePage
+            profile={profile}
+            fortune={fortune}
+            onNavigate={setActivePage}
+            onOpenReminderSettings={handleOpenReminderSettings}
+            isReminderEnabled={dailyReminderSettings.enabled}
+          />
         )}
         {activePage === 'sajuInsight' && (
           <SajuInsightPage
@@ -259,6 +317,8 @@ function App() {
             onSaveReading={handleSaveReading}
             onRemoveSavedReading={handleRemoveSavedReading}
             onNavigate={setActivePage}
+            onOpenReminderSettings={handleOpenReminderSettings}
+            isReminderEnabled={dailyReminderSettings.enabled}
           />
         )}
         {activePage === 'savedReadings' && (
@@ -287,6 +347,16 @@ function App() {
         )}
       </main>
       <BottomNav activePage={activePage} onNavigate={setActivePage} />
+      {isReminderSettingsOpen && (
+        <DailyReminderSettingsPanel
+          draft={dailyReminderDraft}
+          message={reminderSettingsMessage}
+          onClose={() => setIsReminderSettingsOpen(false)}
+          onSave={handleSaveDailyReminderSettings}
+          onToggle={handleToggleDailyReminder}
+          onTimeChange={(time) => setDailyReminderDraft((current) => ({ ...current, time }))}
+        />
+      )}
       {consentUi}
     </div>
   );

@@ -3,6 +3,7 @@ import ContentAccessNotice from '../components/ContentAccessNotice.jsx';
 import ContentSafetyNotice from '../components/ContentSafetyNotice.jsx';
 import CopyShareButton from '../components/CopyShareButton.jsx';
 import DailyRoutineCard from '../components/DailyRoutineCard.jsx';
+import PageTopBar from '../components/PageTopBar.jsx';
 import SaveReadingButton from '../components/SaveReadingButton.jsx';
 import SajuCalculationBasisCard from '../components/SajuCalculationBasisCard.jsx';
 import SajuElementSummaryCard from '../components/SajuElementSummaryCard.jsx';
@@ -144,6 +145,9 @@ function SajuInsightPage({
   onUnlockDetail,
   onSaveReading,
   onRemoveSavedReading,
+  onNavigate,
+  onOpenReminderSettings,
+  isReminderEnabled,
   consentPreferences,
   onOpenConsentSettings,
 }) {
@@ -152,6 +156,13 @@ function SajuInsightPage({
   if (!sajuAnalysis) {
     return (
       <div className="page-stack saju-insight-page">
+        <PageTopBar
+          title="오늘흐름"
+          profileName={profile.nickname}
+          isReminderEnabled={isReminderEnabled}
+          onProfileClick={() => onNavigate('settings')}
+          onReminderClick={onOpenReminderSettings}
+        />
         <section className="saju-insight-hero shared-hero-artwork-card">
           <h1>사주 흐름 자세히 보기</h1>
           <p>사주 흐름 정보를 준비 중입니다.</p>
@@ -177,6 +188,14 @@ function SajuInsightPage({
 
   return (
     <div className="page-stack saju-insight-page">
+      <PageTopBar
+        title="오늘흐름"
+        profileName={profile.nickname}
+        isReminderEnabled={isReminderEnabled}
+        onProfileClick={() => onNavigate('settings')}
+        onReminderClick={onOpenReminderSettings}
+      />
+
       <section className="saju-insight-hero shared-hero-artwork-card">
         <p className="eyebrow">Today Flow</p>
         <h1>오늘흐름</h1>

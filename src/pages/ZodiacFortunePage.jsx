@@ -6,6 +6,7 @@ import {
   getZodiacByYearPillar,
   zodiacAnimals,
 } from '../domain/fortune/zodiacFortuneEngine.js';
+import PageTopBar from '../components/PageTopBar.jsx';
 import RewardAdModal from '../components/RewardAdModal.jsx';
 
 function getProfileZodiac(profile, fortune) {
@@ -42,7 +43,7 @@ function getInitialState(profile, fortune) {
   };
 }
 
-function ZodiacFortunePage({ profile, fortune }) {
+function ZodiacFortunePage({ profile, fortune, onNavigate, onOpenReminderSettings, isReminderEnabled }) {
   const initialState = useMemo(() => getInitialState(profile, fortune), [fortune, profile]);
   const profileZodiac = useMemo(() => getProfileZodiac(profile, fortune), [fortune, profile]);
   const [selectedAnimal, setSelectedAnimal] = useState(initialState.selectedAnimal);
@@ -75,6 +76,14 @@ function ZodiacFortunePage({ profile, fortune }) {
 
   return (
     <div className="page-stack zodiac-page">
+      <PageTopBar
+        title="오늘흐름"
+        profileName={profile.nickname}
+        isReminderEnabled={isReminderEnabled}
+        onProfileClick={() => onNavigate('settings')}
+        onReminderClick={onOpenReminderSettings}
+      />
+
       <section className="zodiac-hero-card shared-hero-artwork-card">
         <div>
           <p className="eyebrow">Zodiac Fortune</p>
