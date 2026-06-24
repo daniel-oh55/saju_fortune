@@ -10,6 +10,10 @@
 
 - 띠별운세 기능은 앱에 존재함
 - 현재 결과 품질, 표현 깊이, 사용자 이해도 개선이 필요함
+- 12지 기본 성향 데이터 확장: 이번 PR에서 추가
+- 결과 조합 로직 개선: Pending
+- 샘플 QA 체크 추가: Pending
+- 실제 화면 QA 결과 기록: Pending
 - 서버 DB 없음
 - 로그인 없음
 - localStorage 중심 구조 유지
@@ -153,15 +157,19 @@ type ZodiacFortuneProfile = {
 
 1. `data: expand zodiac fortune profile dataset`
    - 12지 기본 성향/주의점/루틴 데이터 확장
+   - 이번 PR에서 독립 데이터셋으로 추가
+   - 앱 화면/production 결과 생성 로직에는 아직 연결하지 않음
 
 2. `feat: improve zodiac fortune composition logic`
    - 기존 routing/localStorage/schemaVersion 유지
    - 결과 문장 조합 방식 개선
+   - Pending
 
 3. `test: add zodiac fortune sample QA checks`
    - 12지 샘플 결과 검증
    - 금지 표현/반복 표현 점검
+   - Pending
 
 4. `docs: record zodiac fortune QA result`
    - 실제 화면 기준 QA 결과 기록
-
+   - Pending
