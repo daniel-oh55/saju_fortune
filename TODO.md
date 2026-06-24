@@ -1,5 +1,11 @@
 # TODO
 
+## 2026-06-24 Zodiac fortune sample QA TODO
+
+- [x] 띠별운세 12지 샘플 결과 QA 문서 추가
+- [x] 띠별운세 샘플 결과 문구 안전성 check script 추가
+- [ ] 띠별운세 실제 화면 QA 수행
+
 ## 2026-06-24 Zodiac year pillar policy alignment TODO
 
 - [x] 띠별운세 사주 연주 지지 우선 표시 정책 정합성 보정

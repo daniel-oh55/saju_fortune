@@ -1,5 +1,27 @@
 # DEVELOPMENT_LOG
 
+## Zodiac Fortune Sample QA Checks
+
+- 12지 전체 띠별운세 샘플 결과 QA 문서 추가
+- 샘플 결과의 필수 구성 필드 확인
+- 재물운/건강운 과장 표현 방지 기준 확인
+- 금지 표현 검사 추가
+- composer의 deterministic 구조 유지 확인
+- 실제 화면 QA는 아직 Pending
+- 실제 기기 QA는 아직 Pending
+- 오늘운세/사주풀이/2026운세 계산 로직 변경 없음
+- UI/디자인 변경 없음
+- routing 변경 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+- 서버 DB 추가 없음
+- 로그인 추가 없음
+- 실제 광고 SDK 추가 없음
+- 실제 결제 SDK 추가 없음
+- 외부 분석 SDK 추가 없음
+- Android native/resource 변경 없음
+- Play Console 입력 없음
+
 ## Zodiac Year Pillar Policy Alignment
 
 - 띠별운세의 안내 문구와 실제 초기 선택 로직 정합성 보정
