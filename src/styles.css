@@ -4044,26 +4044,18 @@ input:disabled {
   color: var(--color-deep-navy);
 }
 
-.home-diary-hero h1 {
-  max-width: 12ch;
-  margin-bottom: 10px;
-  font-family: "Noto Serif KR", "Noto Serif CJK KR", "AppleMyungjo", "Batang", serif;
-  font-size: 1.86rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  line-height: 1.35;
-}
-
+.home-diary-hero h1,
 .year-hero-card h1,
 .zodiac-hero-card h1,
 .saju-insight-hero h1 {
   max-width: 12ch;
   margin-bottom: 10px;
   color: var(--color-deep-navy);
-  font-family: inherit;
+  font-family: "Noto Serif KR", "Noto Serif CJK KR", "AppleMyungjo", "Batang", serif;
   font-size: 1.86rem;
-  font-weight: 800;
-  line-height: 1.18;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 1.35;
 }
 
 .year-hero-card .eyebrow,
