@@ -4047,7 +4047,9 @@ input:disabled {
 .home-diary-hero h1 {
   max-width: 12ch;
   margin-bottom: 10px;
+  font-family: inherit;
   font-size: 1.86rem;
+  font-weight: 800;
   line-height: 1.18;
 }
 
@@ -4058,9 +4060,9 @@ input:disabled {
   margin-bottom: 10px;
   color: var(--color-deep-navy);
   font-family: inherit;
-  font-size: 1.72rem;
+  font-size: 1.86rem;
   font-weight: 800;
-  line-height: 1.25;
+  line-height: 1.18;
 }
 
 .year-hero-card .eyebrow,
