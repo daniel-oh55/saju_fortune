@@ -1,5 +1,27 @@
 # DEVELOPMENT_LOG
 
+## Saju Engine Accuracy Roadmap
+
+- 현재 사주/운세 엔진 수준을 문서화
+- 현재 엔진은 “전통 사주 이론 일부를 기반으로 한 개인화 운세 콘텐츠 엔진 1단계”로 정리
+- 지장간/십성/용신/대운/세운/형충회합 등 미구현 항목을 Pending으로 정리
+- 태양시 보정 적용 여부와 음력/윤달 샘플 외부 검증을 후속 검토 항목으로 분리
+- 제품 설명에 사용할 수 있는 표현과 피해야 할 표현 정리
+- production 계산 로직 변경 없음
+- 사주/운세 결과 생성 로직 변경 없음
+- UI/디자인 변경 없음
+- routing 변경 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+- 서버 DB 추가 없음
+- 로그인 추가 없음
+- 실제 광고 SDK 추가 없음
+- 실제 결제 SDK 추가 없음
+- 외부 분석 SDK 추가 없음
+- Android native/resource 변경 없음
+- Play Console 입력 없음
+- 실제 기기 QA 없음
+
 ## Zodiac Fortune Sample QA Checks
 
 - 12지 전체 띠별운세 샘플 결과 QA 문서 추가
