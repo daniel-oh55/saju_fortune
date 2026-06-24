@@ -1,5 +1,13 @@
 # TODO
 
+## 2026-06-24 Zodiac fortune engine improvement plan TODO
+
+- [x] 띠별운세 분석 엔진 보완 설계 문서 추가
+- [ ] 12지 기본 성향 데이터 확장
+- [ ] 띠별운세 결과 조합 로직 개선
+- [ ] 띠별운세 샘플 결과 QA 체크 추가
+- [ ] 띠별운세 실제 화면 QA 수행
+
 ## 2026-06-17 Android artifact refresh wording consistency final TODO
 
 - [x] Android artifact refresh run #38 문구 정합성 최종 보정

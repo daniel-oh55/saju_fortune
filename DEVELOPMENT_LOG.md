@@ -1,5 +1,22 @@
 # DEVELOPMENT_LOG
 
+## Zodiac Fortune Engine Improvement Plan
+
+- 띠별운세 분석 엔진 보완을 위한 설계 문서 추가
+- 현재 PR에서는 production 계산 로직 변경 없음
+- 현재 PR에서는 UI 변경 없음
+- 기존 routing 유지
+- schemaVersion 유지
+- 기존 localStorage key 유지
+- 서버 DB 추가 없음
+- 로그인 추가 없음
+- 실제 광고 SDK 추가 없음
+- 실제 결제 SDK 추가 없음
+- 외부 분석 SDK 추가 없음
+- Android native/resource 변경 없음
+- Play Console 입력 없음
+- 실제 기기 QA 없음
+
 ## PR #117 - PR #116 이후 Android artifact 문구 정합성 재수정
 
 ### 목적
