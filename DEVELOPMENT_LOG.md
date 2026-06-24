@@ -1,5 +1,27 @@
 # DEVELOPMENT_LOG
 
+## Manseryeok External Sample Verification Plan
+
+- 외부 만세력 기준 샘플 검증 준비 문서 추가
+- 양력/음력/윤달/절기 경계/23시 이후 자시/출생시간 모름/태양시 보정 적용 여부 검토 샘플 케이스 정의
+- 모든 실제 외부 검증 결과는 Pending 유지
+- 외부 기준값 임의 입력 없음
+- production 계산 로직 변경 없음
+- 만세력 계산 로직 변경 없음
+- 사주/운세 결과 생성 로직 변경 없음
+- UI/디자인 변경 없음
+- routing 변경 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+- 서버 DB 추가 없음
+- 로그인 추가 없음
+- 실제 광고 SDK 추가 없음
+- 실제 결제 SDK 추가 없음
+- 외부 분석 SDK 추가 없음
+- Android native/resource 변경 없음
+- Play Console 입력 없음
+- 실제 기기 QA 없음
+
 ## Saju Engine Accuracy Roadmap
 
 - 현재 사주/운세 엔진 수준을 문서화

@@ -62,6 +62,7 @@
     "check:late-night-jasi-policy": "node scripts/checkLateNightJasiPolicyRegression.mjs",
     "check:content-safety": "node scripts/checkContentSafetyCopyRegression.mjs",
     "check:manseryeok-jasi-boundary": "node scripts/checkManseryeokJasiBoundaryHypothesis.mjs",
+    "check:manseryeok-external-sample-verification": "node scripts/checkManseryeokExternalSampleVerification.mjs",
     "check:manseryeok-term-timezone": "node scripts/checkManseryeokTermTimezoneHypothesis.mjs",
     "check:pwa-readiness": "node scripts/checkPwaManifestReadiness.mjs",
     "check:rewarded-ad-service": "node scripts/checkRewardedAdServiceRegression.mjs",
