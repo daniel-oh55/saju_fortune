@@ -1,5 +1,12 @@
 # TODO
 
+## 2026-06-24 Zodiac year pillar policy alignment TODO
+
+- [x] 띠별운세 사주 연주 지지 우선 표시 정책 정합성 보정
+- [x] 일반 출생연도 기준 fallback 안내 문구 정리
+- [ ] 띠별운세 샘플 결과 QA 체크 추가
+- [ ] 띠별운세 실제 화면 QA 수행
+
 ## 2026-06-24 Zodiac fortune composition logic improvement TODO
 
 - [x] 띠별운세 결과 조합 로직 개선

@@ -13,15 +13,20 @@ function getProfileZodiac(profile, fortune) {
   const birthYear = Number(profile.birthDate?.slice(0, 4));
   const pillarZodiac = getZodiacByYearPillar(fortune?.sajuAnalysis?.pillars?.year);
   const fallbackZodiac = getZodiacByYear(birthYear);
-  const birthZodiac = fallbackZodiac;
+  const resolvedZodiac = pillarZodiac || fallbackZodiac;
 
-  if (!birthYear || !birthZodiac) return null;
+  if (!birthYear || !resolvedZodiac) return null;
 
   return {
     year: birthYear,
-    animal: birthZodiac.animal,
-    icon: birthZodiac.icon,
-    isSajuYearPillarBased: Boolean(pillarZodiac && pillarZodiac.animal !== birthZodiac.animal),
+    animal: resolvedZodiac.animal,
+    icon: resolvedZodiac.icon,
+    birthYearAnimal: fallbackZodiac?.animal || null,
+    sajuYearPillarAnimal: pillarZodiac?.animal || null,
+    isSajuYearPillarBased: Boolean(pillarZodiac),
+    isDifferentFromBirthYearAnimal: Boolean(
+      pillarZodiac && fallbackZodiac && pillarZodiac.animal !== fallbackZodiac.animal,
+    ),
   };
 }
 
@@ -93,12 +98,22 @@ function ZodiacFortunePage({ profile, fortune, onNavigate, onOpenReminderSetting
       </section>
 
       <section className="zodiac-notice-card">
-        띠는 입력한 생년월일을 바탕으로 계산된 사주 연주의 지지를 우선해 표시됩니다.
+        띠는 입력한 생년월일을 바탕으로 계산된 사주 연주의 지지를 우선해 표시합니다. 사주
+        연주는 절기 기준에 따라 일반 출생연도 띠와 다를 수 있습니다.
       </section>
 
       <section className="zodiac-notice-card">
-        연도별 띠 목록은 일반적인 출생연도 기준으로 정리했습니다. 개인 사주 흐름의 연주는 생년월일과 절기 기준에 따라 다르게 표시될 수 있습니다.
+        아래 연도별 띠 목록은 일반적인 출생연도 기준 참고 목록입니다. 개인 사주 흐름의
+        연주는 생년월일과 절기 기준에 따라 다르게 표시될 수 있습니다.
       </section>
+
+      {profileZodiac?.isDifferentFromBirthYearAnimal && (
+        <section className="zodiac-notice-card">
+          입력하신 생년월일은 일반 출생연도 기준으로는 {profileZodiac.birthYearAnimal}띠에
+          가깝지만, 현재 앱의 사주 연주 기준으로는 {profileZodiac.sajuYearPillarAnimal}띠
+          흐름을 우선 표시합니다.
+        </section>
+      )}
 
       {!initialState.hasSupportedBirthYear && (
         <section className="zodiac-notice-card">
