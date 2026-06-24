@@ -11,11 +11,14 @@ This PR prepares the workflow and documentation only. It does not create, regist
 - Debug APK: Available through the `Android Debug Build` workflow.
   - artifact name: `harupuli-debug-apk`
   - artifact path: `android/app/build/outputs/apk/debug/app-debug.apk`
-- Release AAB: Pending.
+- Release AAB: User-confirmed success.
+- Release AAB artifact: User-confirmed (`harupuli-release-aab`).
+- AAB extracted from artifact: User-confirmed.
 - Signing config: Prepared for environment variables in `android/app/build.gradle`.
 - Upload keystore: Not committed to repo.
-- GitHub Secrets: Pending.
+- GitHub Secrets: Configured enough for the user-confirmed workflow run; do not record actual values.
 - Google Play upload: Not started.
+- Real-device QA: Pending.
 
 ## Required GitHub Secrets
 
@@ -86,6 +89,7 @@ If any required signing secret is missing, the workflow stops before Gradle rele
 
 - artifact name: `harupuli-release-aab`
 - artifact path: `android/app/build/outputs/bundle/release/*.aab`
+- status: User-confirmed artifact generation and extracted `.aab` existence
 
 ## Google Play Release Criteria
 
@@ -98,8 +102,7 @@ If any required signing secret is missing, the workflow stops before Gradle rele
 
 - 실제 upload keystore 생성
 - GitHub Secrets 등록
-- Android Release AAB workflow 성공 확인
-- release AAB artifact 다운로드 및 보관
+- release AAB artifact 안전 보관
 - 실제 기기 QA
 - Google Play Console 앱 생성
 - Google Play Console 내부 테스트 트랙 업로드
@@ -108,4 +111,3 @@ If any required signing secret is missing, the workflow stops before Gradle rele
 - 실제 스토어 스크린샷 이미지 제작
 - feature graphic 제작
 - 앱 설명문 확정
-
