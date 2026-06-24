@@ -1,5 +1,27 @@
 # DEVELOPMENT_LOG
 
+## Zodiac Year Pillar Policy Alignment
+
+- 띠별운세의 안내 문구와 실제 초기 선택 로직 정합성 보정
+- 사주 연주 지지가 계산 가능하면 사주 연주 기준 띠를 우선 사용
+- 사주 연주 지지가 없으면 일반 출생연도 기준 띠를 fallback으로 사용
+- 일반 출생연도 기준 띠와 사주 연주 기준 띠가 다를 수 있음을 안내
+- 연도별 띠 목록은 일반 출생연도 기준 참고 목록으로 유지
+- 띠별운세 composer 연결 유지
+- 오늘운세/사주풀이/2026운세 계산 로직 변경 없음
+- UI/디자인 대규모 변경 없음
+- routing 변경 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+- 서버 DB 추가 없음
+- 로그인 추가 없음
+- 실제 광고 SDK 추가 없음
+- 실제 결제 SDK 추가 없음
+- 외부 분석 SDK 추가 없음
+- Android native/resource 변경 없음
+- Play Console 입력 없음
+- 실제 기기 QA 없음
+
 ## Zodiac Fortune Composition Logic Improvement
 
 - PR #142의 12지 기본 성향 데이터셋을 활용한 띠별운세 결과 조합 로직 추가/개선

@@ -80,6 +80,7 @@
     "check:zodiac-fortune-composition": "node scripts/checkZodiacFortuneComposition.mjs",
     "check:zodiac-fortune-profiles": "node scripts/checkZodiacFortuneProfiles.mjs",
     "check:zodiac-fortune-engine-improvement-plan": "node scripts/checkZodiacFortuneEngineImprovementPlan.mjs",
+    "check:zodiac-year-pillar-policy-alignment": "node scripts/checkZodiacYearPillarPolicyAlignment.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
