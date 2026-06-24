@@ -33,8 +33,10 @@ function YearFortunePage({ profile, fortune, onNavigate, onOpenReminderSettings,
           <p className="eyebrow">2026 Fortune</p>
           <h1>2026년 나의 흐름</h1>
           <p>
-            {profile.nickname}님의 {fortune.sajuAnalysis.elements.dominant} 기운과
-            {yearFortune.keyword} 키워드를 바탕으로 본 2026년 참고용 풀이입니다.
+            {profile.nickname}님의 {fortune.sajuAnalysis.elements.dominant} 기운과{' '}
+            {yearFortune.keyword} 키워드를 바탕으로 본
+            <br />
+            2026년 참고용 풀이입니다.
           </p>
           <div className="year-score-panel">
             <span>2026 총운 점수</span>
