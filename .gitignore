@@ -16,3 +16,9 @@ pnpm-debug.log*
 Thumbs.db
 
 .vercel/
+
+# Android signing keys
+*.jks
+*.keystore
+android/app/keystore/
+android/keystore/

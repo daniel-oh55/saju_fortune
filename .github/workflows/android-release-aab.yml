@@ -1,0 +1,86 @@
+name: Android Release AAB
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-release-aab:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build web app
+        run: npm run build
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Sync Capacitor Android
+        run: npx cap sync android
+
+      - name: Check signing secrets
+        run: |
+          missing=0
+
+          if [ -z "${{ secrets.ANDROID_UPLOAD_KEYSTORE_BASE64 }}" ]; then
+            echo "ANDROID_UPLOAD_KEYSTORE_BASE64 is not configured."
+            missing=1
+          fi
+
+          if [ -z "${{ secrets.ANDROID_UPLOAD_KEYSTORE_PASSWORD }}" ]; then
+            echo "ANDROID_UPLOAD_KEYSTORE_PASSWORD is not configured."
+            missing=1
+          fi
+
+          if [ -z "${{ secrets.ANDROID_UPLOAD_KEY_ALIAS }}" ]; then
+            echo "ANDROID_UPLOAD_KEY_ALIAS is not configured."
+            missing=1
+          fi
+
+          if [ -z "${{ secrets.ANDROID_UPLOAD_KEY_PASSWORD }}" ]; then
+            echo "ANDROID_UPLOAD_KEY_PASSWORD is not configured."
+            missing=1
+          fi
+
+          if [ "$missing" -ne 0 ]; then
+            echo "Release AAB generation is pending until all Android upload signing secrets are configured."
+            exit 1
+          fi
+
+      - name: Restore upload keystore
+        run: |
+          mkdir -p android/app/keystore
+          echo "${{ secrets.ANDROID_UPLOAD_KEYSTORE_BASE64 }}" | base64 --decode > android/app/keystore/upload-keystore.jks
+
+      - name: Make Gradle wrapper executable
+        run: chmod +x android/gradlew
+
+      - name: Build release AAB
+        working-directory: android
+        env:
+          ANDROID_UPLOAD_KEYSTORE_PATH: keystore/upload-keystore.jks
+          ANDROID_UPLOAD_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_UPLOAD_KEYSTORE_PASSWORD }}
+          ANDROID_UPLOAD_KEY_ALIAS: ${{ secrets.ANDROID_UPLOAD_KEY_ALIAS }}
+          ANDROID_UPLOAD_KEY_PASSWORD: ${{ secrets.ANDROID_UPLOAD_KEY_PASSWORD }}
+        run: ./gradlew bundleRelease --stacktrace
+
+      - name: Upload release AAB
+        uses: actions/upload-artifact@v4
+        with:
+          name: harupuli-release-aab
+          path: android/app/build/outputs/bundle/release/*.aab
+          if-no-files-found: error
