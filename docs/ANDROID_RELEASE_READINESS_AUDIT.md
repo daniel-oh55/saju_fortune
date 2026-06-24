@@ -5,9 +5,9 @@
 - Audit date: 2026-06-24
 - Current readiness: Android debug build path is prepared, but Google Play release submission remains Pending.
 - Debug build status: Found. GitHub Actions builds `assembleDebug` and uploads `harupuli-debug-apk`.
-- Release build status: Pending. The Android Gradle project has a `release` build type, but release signing is not configured.
-- AAB status: Pending. The Gradle project shape can support a future `bundleRelease` check, but no release AAB workflow or signed AAB artifact exists yet.
-- Signing status: Pending. No release signing config or upload keystore is present in the repo.
+- Release build status: Prepared/Pending. The Android Gradle project has a `release` build type and environment-variable-based release signing config, but real signing secrets are not configured.
+- AAB status: Pending. A manual GitHub Actions workflow scaffold exists, but no signed AAB artifact has been generated yet.
+- Signing status: Prepared/Pending. Release signing uses environment variables; upload keystore and GitHub Secrets remain Pending.
 - Google Play registration materials status: Draft/partial documents exist, but final Console values and real store assets remain Pending.
 
 This audit is documentation and check-script only. It does not change production app logic, Android native resources, Gradle signing, keystore files, routing, schemaVersion, or localStorage keys.
@@ -44,18 +44,18 @@ Source checked for target SDK requirement:
   - `npm run build`
   - `npx cap sync android`
   - `./gradlew assembleDebug --stacktrace`
-- Android release build: Pending. `android/app/build.gradle` has a `release` build type, but no release signing config.
-- AAB generation: Pending. Project structure can be checked with `./gradlew bundleRelease` in a future PR, but signed release output is not ready.
+- Android release build: Prepared/Pending. `android/app/build.gradle` has a `release` build type and env-based release signing config, but signed output requires GitHub Secrets.
+- AAB generation: Pending. `.github/workflows/android-release-aab.yml` is prepared for manual execution after signing secrets are configured.
 - GitHub Actions debug artifact: Found.
   - artifact name: `harupuli-debug-apk`
   - artifact path: `android/app/build/outputs/apk/debug/app-debug.apk`
-- GitHub Actions release artifact: Pending. No release AAB workflow or artifact upload exists.
+- GitHub Actions release artifact: Pending. Release workflow expects `harupuli-release-aab` at `android/app/build/outputs/bundle/release/*.aab`, but no real artifact has been created yet.
 
 ## Signing Status
 
-- release signing config: Pending. `android/app/build.gradle` does not define `signingConfigs.release` or `signingConfig signingConfigs.release`.
+- release signing config: Prepared. `android/app/build.gradle` defines `signingConfigs.release` from environment variables only.
 - keystore in repo: Found safe state. No `.jks`, `.keystore`, `.p12`, `.pem`, `.key`, or keystore-like files were found outside ignored directories by `npm run check:android-release-readiness`.
-- GitHub Secrets: Pending/Not verifiable from repository contents. No release signing workflow references signing secrets yet.
+- GitHub Secrets: Pending/Not verifiable locally. Release workflow references required signing secrets, but their actual repository values cannot be checked from local files.
 - upload key: Pending. No upload keystore is generated or documented as registered.
 - Play App Signing: Pending. No Google Play Console app/signing setup has been completed in this repository.
 - status: Release signing must be handled in a future PR using secrets and without committing keystore material.
@@ -127,9 +127,8 @@ Additional pending checks:
 
 Recommended next PR:
 
-- Add a release AAB GitHub Actions workflow scaffold that can run after signing secrets are prepared.
-- Document required signing secrets without adding real secret values.
-- Add a guarded `bundleRelease` artifact path check for `android/app/build/outputs/bundle/release/app-release.aab`.
-- Keep release signing values in GitHub Secrets and avoid committing keystore files.
+- Create the upload keystore locally and store it securely outside the repo.
+- Register the four Android upload signing secrets in GitHub Actions.
+- Run the `Android Release AAB` workflow manually and verify the `harupuli-release-aab` artifact.
 - After that, run an internal test track upload readiness PR with real-device QA results and final Play Console material status.
 

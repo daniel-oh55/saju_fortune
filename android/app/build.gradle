@@ -3,6 +3,12 @@ apply plugin: 'com.android.application'
 android {
     namespace = "com.harupuli.app"
     compileSdk = rootProject.ext.compileSdkVersion
+    def uploadKeystorePath = System.getenv("ANDROID_UPLOAD_KEYSTORE_PATH")
+    def uploadKeystorePassword = System.getenv("ANDROID_UPLOAD_KEYSTORE_PASSWORD")
+    def uploadKeyAlias = System.getenv("ANDROID_UPLOAD_KEY_ALIAS")
+    def uploadKeyPassword = System.getenv("ANDROID_UPLOAD_KEY_PASSWORD")
+    def hasUploadSigningConfig = uploadKeystorePath && uploadKeystorePassword && uploadKeyAlias && uploadKeyPassword
+
     defaultConfig {
         applicationId "com.harupuli.app"
         minSdkVersion rootProject.ext.minSdkVersion
@@ -16,8 +22,21 @@ android {
             ignoreAssetsPattern = '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
         }
     }
+    signingConfigs {
+        release {
+            if (hasUploadSigningConfig) {
+                storeFile file(uploadKeystorePath)
+                storePassword uploadKeystorePassword
+                keyAlias uploadKeyAlias
+                keyPassword uploadKeyPassword
+            }
+        }
+    }
     buildTypes {
         release {
+            if (hasUploadSigningConfig) {
+                signingConfig signingConfigs.release
+            }
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }

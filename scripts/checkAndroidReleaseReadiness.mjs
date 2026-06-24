@@ -55,6 +55,9 @@ const variablesGradle = read('android/variables.gradle');
 const stringsXml = read('android/app/src/main/res/values/strings.xml');
 const manifestXml = read('android/app/src/main/AndroidManifest.xml');
 const debugWorkflow = read('.github/workflows/android-debug-build.yml');
+const releaseWorkflow = read('.github/workflows/android-release-aab.yml');
+const gitignore = read('.gitignore');
+const releaseAabDoc = read('docs/ANDROID_RELEASE_AAB_WORKFLOW.md');
 
 const appId = extract(/"appId"\s*:\s*"([^"]+)"/, capacitorConfig);
 const appName = extract(/<string\s+name="app_name">([^<]+)<\/string>/, stringsXml);
@@ -72,7 +75,21 @@ const keystoreMatches = findPotentialKeystores('.');
 const uploadArtifactBlock = extract(/uses:\s*actions\/upload-artifact@v4\s*[\s\S]*?with:\s*([\s\S]*?)(?:\n\s*-\s+name:|\n\S|$)/, debugWorkflow) ?? '';
 const debugArtifactName = extract(/^\s*name:\s*([^\r\n]+)/m, uploadArtifactBlock);
 const debugArtifactPath = extract(/^\s*path:\s*([^\r\n]+)/m, uploadArtifactBlock);
+const releaseUploadArtifactBlock = extract(/uses:\s*actions\/upload-artifact@v4\s*[\s\S]*?with:\s*([\s\S]*?)(?:\n\s*-\s+name:|\n\S|$)/, releaseWorkflow) ?? '';
+const releaseArtifactName = extract(/^\s*name:\s*([^\r\n]+)/m, releaseUploadArtifactBlock);
+const releaseArtifactPath = extract(/^\s*path:\s*([^\r\n]+)/m, releaseUploadArtifactBlock);
 const manifestPermissions = [...manifestXml.matchAll(/<uses-permission\s+android:name="([^"]+)"/g)].map((match) => match[1]);
+const requiredSigningSecrets = [
+  'ANDROID_UPLOAD_KEYSTORE_BASE64',
+  'ANDROID_UPLOAD_KEYSTORE_PASSWORD',
+  'ANDROID_UPLOAD_KEY_ALIAS',
+  'ANDROID_UPLOAD_KEY_PASSWORD',
+];
+const missingWorkflowSecrets = requiredSigningSecrets.filter((secret) => !releaseWorkflow.includes(secret));
+const missingDocSecrets = requiredSigningSecrets.filter((secret) => !releaseAabDoc.includes(secret));
+const missingGitignoreRules = ['*.jks', '*.keystore', 'android/app/keystore/', 'android/keystore/'].filter(
+  (rule) => !gitignore.includes(rule),
+);
 
 console.log('Android release readiness check');
 console.log('');
@@ -97,6 +114,11 @@ log('debug_artifact', debugArtifactName && debugArtifactPath ? 'Found' : 'Missin
 log('release_build_type', hasReleaseBuildType ? 'Found' : 'Missing');
 log('bundle_release_task_shape', hasBundleReleaseTaskShape ? 'Found' : 'Missing', 'Gradle project can be checked with ./gradlew bundleRelease');
 log('release_signing_config', hasReleaseSigningConfig ? 'Found' : 'Pending', hasReleaseSigningConfig ? 'release signing config present' : 'no release signing config in android/app/build.gradle');
+log('release_aab_workflow', exists('.github/workflows/android-release-aab.yml') ? 'Found' : 'Missing');
+log('release_workflow_signing_secrets', missingWorkflowSecrets.length === 0 ? 'Found' : 'Missing', missingWorkflowSecrets.length === 0 ? 'all required secret names referenced' : missingWorkflowSecrets.join(', '));
+log('release_aab_doc', exists('docs/ANDROID_RELEASE_AAB_WORKFLOW.md') ? 'Found' : 'Missing');
+log('release_aab_doc_signing_secrets', missingDocSecrets.length === 0 ? 'Found' : 'Missing', missingDocSecrets.length === 0 ? 'all required secret names documented' : missingDocSecrets.join(', '));
+log('keystore_gitignore_rules', missingGitignoreRules.length === 0 ? 'Found' : 'Missing', missingGitignoreRules.length === 0 ? 'keystore ignore rules present' : missingGitignoreRules.join(', '));
 log('keystore_files_in_repo', keystoreMatches.length === 0 ? 'Found' : 'Review required', keystoreMatches.length === 0 ? 'no keystore-like files found outside ignored dirs' : keystoreMatches.join(', '));
 log('manifest_permissions', manifestPermissions.length > 0 ? 'Found' : 'Missing', manifestPermissions.join(', '));
 log(
@@ -104,5 +126,6 @@ log(
   manifestPermissions.includes('android.permission.POST_NOTIFICATIONS') ? 'Found' : 'Pending',
   'only required if native notifications are implemented for Android 13+',
 );
-log('release_aab_generation', hasReleaseSigningConfig ? 'Pending' : 'Pending', hasReleaseSigningConfig ? 'needs actual bundleRelease run' : 'blocked until release signing/secrets are configured');
-log('github_actions_release_artifact', 'Pending', 'no release AAB workflow detected');
+log('release_aab_generation', 'Pending', hasReleaseSigningConfig ? 'needs GitHub Secrets and actual workflow run' : 'blocked until release signing/secrets are configured');
+log('github_actions_release_artifact', releaseArtifactName && releaseArtifactPath ? 'Pending' : 'Missing', releaseArtifactName && releaseArtifactPath ? `${releaseArtifactName} ${releaseArtifactPath}` : 'release AAB artifact upload not configured');
+log('github_secrets_values', 'Pending', 'cannot verify repository secret values locally');
