@@ -58,6 +58,7 @@ const debugWorkflow = read('.github/workflows/android-debug-build.yml');
 const releaseWorkflow = read('.github/workflows/android-release-aab.yml');
 const gitignore = read('.gitignore');
 const releaseAabDoc = read('docs/ANDROID_RELEASE_AAB_WORKFLOW.md');
+const androidDeviceQaDoc = read('docs/ANDROID_DEVICE_QA_AND_INTERNAL_TEST.md');
 
 const appId = extract(/"appId"\s*:\s*"([^"]+)"/, capacitorConfig);
 const appName = extract(/<string\s+name="app_name">([^<]+)<\/string>/, stringsXml);
@@ -90,6 +91,19 @@ const missingDocSecrets = requiredSigningSecrets.filter((secret) => !releaseAabD
 const missingGitignoreRules = ['*.jks', '*.keystore', 'android/app/keystore/', 'android/keystore/'].filter(
   (rule) => !gitignore.includes(rule),
 );
+const deviceQaRequiredPhrases = [
+  'Release AAB workflow: User-confirmed success',
+  'Release AAB artifact: User-confirmed',
+  'AAB file extracted from artifact: User-confirmed',
+  'Google Play internal test upload: Not started',
+  'Real-device QA: Pending',
+  'Privacy policy URL: Pending',
+  'Data safety form: Pending',
+  '실제 스토어 스크린샷 이미지 제작: Pending',
+];
+const missingDeviceQaPhrases = deviceQaRequiredPhrases.filter((phrase) => !androidDeviceQaDoc.includes(phrase));
+const releaseAabUserConfirmed = releaseAabDoc.includes('Release AAB: User-confirmed success')
+  && releaseAabDoc.includes('AAB extracted from artifact: User-confirmed');
 
 console.log('Android release readiness check');
 console.log('');
@@ -118,6 +132,8 @@ log('release_aab_workflow', exists('.github/workflows/android-release-aab.yml') 
 log('release_workflow_signing_secrets', missingWorkflowSecrets.length === 0 ? 'Found' : 'Missing', missingWorkflowSecrets.length === 0 ? 'all required secret names referenced' : missingWorkflowSecrets.join(', '));
 log('release_aab_doc', exists('docs/ANDROID_RELEASE_AAB_WORKFLOW.md') ? 'Found' : 'Missing');
 log('release_aab_doc_signing_secrets', missingDocSecrets.length === 0 ? 'Found' : 'Missing', missingDocSecrets.length === 0 ? 'all required secret names documented' : missingDocSecrets.join(', '));
+log('android_device_qa_doc', exists('docs/ANDROID_DEVICE_QA_AND_INTERNAL_TEST.md') ? 'Found' : 'Missing');
+log('android_device_qa_doc_status_items', missingDeviceQaPhrases.length === 0 ? 'Found' : 'Missing', missingDeviceQaPhrases.length === 0 ? 'required status items documented' : missingDeviceQaPhrases.join(', '));
 log('keystore_gitignore_rules', missingGitignoreRules.length === 0 ? 'Found' : 'Missing', missingGitignoreRules.length === 0 ? 'keystore ignore rules present' : missingGitignoreRules.join(', '));
 log('keystore_files_in_repo', keystoreMatches.length === 0 ? 'Found' : 'Review required', keystoreMatches.length === 0 ? 'no keystore-like files found outside ignored dirs' : keystoreMatches.join(', '));
 log('manifest_permissions', manifestPermissions.length > 0 ? 'Found' : 'Missing', manifestPermissions.join(', '));
@@ -126,6 +142,8 @@ log(
   manifestPermissions.includes('android.permission.POST_NOTIFICATIONS') ? 'Found' : 'Pending',
   'only required if native notifications are implemented for Android 13+',
 );
-log('release_aab_generation', 'Pending', hasReleaseSigningConfig ? 'needs GitHub Secrets and actual workflow run' : 'blocked until release signing/secrets are configured');
-log('github_actions_release_artifact', releaseArtifactName && releaseArtifactPath ? 'Pending' : 'Missing', releaseArtifactName && releaseArtifactPath ? `${releaseArtifactName} ${releaseArtifactPath}` : 'release AAB artifact upload not configured');
+log('release_aab_generation', releaseAabUserConfirmed ? 'User-confirmed' : 'Pending', releaseAabUserConfirmed ? 'documented user-confirmed workflow success and extracted .aab existence' : 'needs GitHub Secrets and actual workflow run');
+log('github_actions_release_artifact', releaseArtifactName && releaseArtifactPath ? (releaseAabUserConfirmed ? 'User-confirmed' : 'Pending') : 'Missing', releaseArtifactName && releaseArtifactPath ? `${releaseArtifactName} ${releaseArtifactPath}` : 'release AAB artifact upload not configured');
 log('github_secrets_values', 'Pending', 'cannot verify repository secret values locally');
+log('real_device_qa_result', 'Pending', 'manual QA required');
+log('google_play_internal_test_upload', 'Pending', 'Play Console action required');

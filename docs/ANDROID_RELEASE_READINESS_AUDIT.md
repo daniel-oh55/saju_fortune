@@ -6,7 +6,7 @@
 - Current readiness: Android debug build path is prepared, but Google Play release submission remains Pending.
 - Debug build status: Found. GitHub Actions builds `assembleDebug` and uploads `harupuli-debug-apk`.
 - Release build status: Prepared/Pending. The Android Gradle project has a `release` build type and environment-variable-based release signing config, but real signing secrets are not configured.
-- AAB status: Pending. A manual GitHub Actions workflow scaffold exists, but no signed AAB artifact has been generated yet.
+- AAB status: User-confirmed. The `Android Release AAB` workflow succeeded, `harupuli-release-aab` was generated, and the extracted `.aab` file existence was confirmed by the user.
 - Signing status: Prepared/Pending. Release signing uses environment variables; upload keystore and GitHub Secrets remain Pending.
 - Google Play registration materials status: Draft/partial documents exist, but final Console values and real store assets remain Pending.
 
@@ -45,11 +45,11 @@ Source checked for target SDK requirement:
   - `npx cap sync android`
   - `./gradlew assembleDebug --stacktrace`
 - Android release build: Prepared/Pending. `android/app/build.gradle` has a `release` build type and env-based release signing config, but signed output requires GitHub Secrets.
-- AAB generation: Pending. `.github/workflows/android-release-aab.yml` is prepared for manual execution after signing secrets are configured.
+- AAB generation: User-confirmed. `.github/workflows/android-release-aab.yml` succeeded and the extracted `.aab` file existence was confirmed by the user.
 - GitHub Actions debug artifact: Found.
   - artifact name: `harupuli-debug-apk`
   - artifact path: `android/app/build/outputs/apk/debug/app-debug.apk`
-- GitHub Actions release artifact: Pending. Release workflow expects `harupuli-release-aab` at `android/app/build/outputs/bundle/release/*.aab`, but no real artifact has been created yet.
+- GitHub Actions release artifact: User-confirmed. Release workflow produced `harupuli-release-aab`; extracted `.aab` existence was confirmed by the user.
 
 ## Signing Status
 
@@ -98,6 +98,8 @@ Source checked for target SDK requirement:
   - Draft content exists in `docs/GOOGLE_PLAY_STORE_LISTING_DRAFT.md`
   - Final store listing copy remains Pending.
 - status: Not ready for production Play submission until signing, release AAB, QA, and Console materials are completed.
+- Google Play upload: Not started.
+- Real-device QA: Pending.
 
 ## Pending Items
 
@@ -106,7 +108,7 @@ Keep these items Pending until actually completed:
 - release signing 설정
 - upload keystore 생성
 - GitHub Secrets 등록
-- release AAB 생성
+- release AAB artifact 안전 보관
 - 실제 기기 QA
 - Google Play Console 앱 생성
 - 개인정보처리방침 URL 확정
@@ -129,6 +131,7 @@ Recommended next PR:
 
 - Create the upload keystore locally and store it securely outside the repo.
 - Register the four Android upload signing secrets in GitHub Actions.
-- Run the `Android Release AAB` workflow manually and verify the `harupuli-release-aab` artifact.
-- After that, run an internal test track upload readiness PR with real-device QA results and final Play Console material status.
+- Complete real-device QA using the release candidate path.
+- Prepare Google Play internal test upload materials and tester list.
+- Keep privacy policy URL, data safety form, and store screenshots Pending until final values are confirmed.
 
