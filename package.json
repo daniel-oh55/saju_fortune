@@ -74,6 +74,7 @@
     "check:rewarded-ad-sdk-adapter": "node scripts/checkRewardedAdSdkAdapterScaffold.mjs",
     "check:saved-readings": "node scripts/checkSavedReadingsRegression.mjs",
     "check:saju-insight-reward-unlock": "node scripts/checkSajuInsightRewardUnlockRegression.mjs",
+    "check:saju-engine-accuracy-roadmap": "node scripts/checkSajuEngineAccuracyRoadmap.mjs",
     "check:share-text": "node scripts/checkShareTextBuilderRegression.mjs",
     "check:splash-png-export": "node scripts/checkSplashPngExportReadiness.mjs",
     "check:visit-streak": "node scripts/checkVisitStreakRegression.mjs",
