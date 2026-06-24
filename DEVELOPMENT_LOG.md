@@ -1,5 +1,23 @@
 # DEVELOPMENT_LOG
 
+## Zodiac Fortune Profile Dataset Expansion
+
+- 12지 전체 기본 성향 데이터셋 추가/확장
+- 각 띠별 기본 성향, 장점, 주의점, 일일 테마, 관계 힌트, 재물 톤, 건강 톤, 루틴 힌트 정리
+- 띠별운세 결과 조합 로직은 아직 변경하지 않음
+- UI 변경 없음
+- routing 변경 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+- 서버 DB 추가 없음
+- 로그인 추가 없음
+- 실제 광고 SDK 추가 없음
+- 실제 결제 SDK 추가 없음
+- 외부 분석 SDK 추가 없음
+- Android native/resource 변경 없음
+- Play Console 입력 없음
+- 실제 기기 QA 없음
+
 ## Zodiac Fortune Engine Improvement Plan
 
 - 띠별운세 분석 엔진 보완을 위한 설계 문서 추가

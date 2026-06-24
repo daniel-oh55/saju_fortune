@@ -77,6 +77,7 @@
     "check:share-text": "node scripts/checkShareTextBuilderRegression.mjs",
     "check:splash-png-export": "node scripts/checkSplashPngExportReadiness.mjs",
     "check:visit-streak": "node scripts/checkVisitStreakRegression.mjs",
+    "check:zodiac-fortune-profiles": "node scripts/checkZodiacFortuneProfiles.mjs",
     "check:zodiac-fortune-engine-improvement-plan": "node scripts/checkZodiacFortuneEngineImprovementPlan.mjs",
     "preview": "vite preview"
   },
