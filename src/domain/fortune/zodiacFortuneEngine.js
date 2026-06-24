@@ -1,3 +1,8 @@
+import {
+  composeZodiacFortune,
+  getZodiacAnimalByLabel,
+} from '../../lib/zodiacFortuneComposer';
+
 export const zodiacAnimals = [
   { animal: '쥐', icon: '🐭' },
   { animal: '소', icon: '🐮' },
@@ -92,6 +97,16 @@ function scoreFromSeed(seed) {
   return 58 + (seed % 41);
 }
 
+function getDateFromDateKey(dateKey) {
+  const [year, month, day] = String(dateKey || '')
+    .split('-')
+    .map((value) => Number(value));
+
+  if (!year || !month || !day) return new Date();
+
+  return new Date(year, month - 1, day);
+}
+
 export function getZodiacByYear(year) {
   const found = zodiacYears.find((item) => item.year === Number(year));
   return found || null;
@@ -117,6 +132,18 @@ export function createZodiacFortune({ profile, selectedYear, selectedAnimal, sel
     ...(selectedIcon ? { icon: selectedIcon } : {}),
   };
   const seed = hashString(`${profile.id}-${dateKey}-${zodiac.year}-${zodiac.animal}`);
+  const animalKey = getZodiacAnimalByLabel(zodiac.animal);
+  const composition = composeZodiacFortune(animalKey || 'dragon', {
+    date: getDateFromDateKey(dateKey),
+    variantSeed: seed,
+  });
+  const categorySummaryMap = {
+    overall: composition.dailyFlow,
+    money: composition.money,
+    relationship: composition.relationship,
+    work: composition.routine,
+    health: composition.health,
+  };
 
   const categories = categoryMeta.map((category, index) => {
     const categorySeed = hashString(`${seed}-${category.id}-${index}`);
@@ -124,21 +151,12 @@ export function createZodiacFortune({ profile, selectedYear, selectedAnimal, sel
     return {
       ...category,
       score: scoreFromSeed(categorySeed),
-      summary: pickBySeed(categoryTemplates[category.id], categorySeed),
+      summary: categorySummaryMap[category.id] || pickBySeed(categoryTemplates[category.id], categorySeed),
     };
   });
 
   const score = Math.round(
     categories.reduce((total, category) => total + category.score, 0) / categories.length,
-  );
-  const summaryTone = pickBySeed(
-    [
-      '차분히 흐름을 살피면 편안합니다.',
-      '작은 일부터 정리하면 안정감이 생깁니다.',
-      '대화와 확인을 부드럽게 이어가면 좋습니다.',
-      '무리한 속도보다 균형을 챙기는 태도가 어울립니다.',
-    ],
-    seed + 11,
   );
 
   return {
@@ -146,9 +164,9 @@ export function createZodiacFortune({ profile, selectedYear, selectedAnimal, sel
     animal: zodiac.animal,
     icon: zodiac.icon,
     score,
-    summary: `${zodiac.year}년 ${zodiac.animal}띠의 오늘은 ${summaryTone}`,
+    summary: `${zodiac.year}년 ${zodiac.animal}띠의 오늘은 ${composition.summary}`,
     detail:
-      '오늘의 띠별 흐름은 참고용으로 가볍게 살펴보면 좋습니다. 중요한 결정은 여러 정보를 함께 확인하고, 사람과의 대화에서는 부드러운 표현을 선택해보세요. 속도를 조금 낮추면 놓치기 쉬운 부분을 차분히 점검하는 데 도움이 됩니다.',
+      `${composition.relationship} ${composition.money} ${composition.health} ${composition.routine} ${composition.caution}`,
     categories,
   };
 }

@@ -1,5 +1,27 @@
 # DEVELOPMENT_LOG
 
+## Zodiac Fortune Composition Logic Improvement
+
+- PR #142의 12지 기본 성향 데이터셋을 활용한 띠별운세 결과 조합 로직 추가/개선
+- 결과 조합 로직은 deterministic 방식으로 구성
+- Math.random 직접 사용 없음
+- 재물운/건강운 단정 표현 금지 기준 유지
+- 띠별운세 화면 텍스트 소스를 조합 결과로 최소 연결
+- 띠별운세 영역 외 production 계산 로직 변경 없음
+- 오늘운세/사주풀이/2026운세 계산 로직 변경 없음
+- UI/디자인 변경 없음 또는 최소 텍스트 연결 변경만 수행
+- routing 변경 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+- 서버 DB 추가 없음
+- 로그인 추가 없음
+- 실제 광고 SDK 추가 없음
+- 실제 결제 SDK 추가 없음
+- 외부 분석 SDK 추가 없음
+- Android native/resource 변경 없음
+- Play Console 입력 없음
+- 실제 기기 QA 없음
+
 ## Zodiac Fortune Profile Dataset Expansion
 
 - 12지 전체 기본 성향 데이터셋 추가/확장
