@@ -1,5 +1,29 @@
 # DEVELOPMENT_LOG
 
+## Manseryeok Current Sample Snapshot
+
+- 현재 앱 만세력 샘플 산출값 스냅샷 문서 추가
+- 현재 앱의 calculateManseryeok 결과를 샘플 케이스별로 출력할 수 있는 스크립트 추가
+- snapshot 스크립트 실행 결과를 현재 앱 산출값으로 문서에 반영
+- 외부 만세력 기준값 대조 결과는 Pending 유지
+- 태양시 보정 적용 여부는 Pending 유지
+- 음력/윤달 샘플 외부 검증은 Pending 유지
+- production 계산 로직 변경 없음
+- 만세력 계산 로직 변경 없음
+- 사주/운세 결과 생성 로직 변경 없음
+- UI/디자인 변경 없음
+- routing 변경 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+- 서버 DB 추가 없음
+- 로그인 추가 없음
+- 실제 광고 SDK 추가 없음
+- 실제 결제 SDK 추가 없음
+- 외부 분석 SDK 추가 없음
+- Android native/resource 변경 없음
+- Play Console 입력 없음
+- 실제 기기 QA 없음
+
 ## Manseryeok External Sample Verification Plan
 
 - 외부 만세력 기준 샘플 검증 준비 문서 추가

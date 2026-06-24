@@ -89,6 +89,12 @@
 - 태양시 보정 적용 여부는 정책 결정 전까지 Pending으로 유지한다.
 - 검증 완료 전에는 Completed, Pass, Done 표현을 사용하지 않는다.
 
+## Related Docs
+
+- Current app sample snapshot: docs/MANSERYEOK_CURRENT_SAMPLE_SNAPSHOT.md
+- Current app snapshot execution: `npm run snapshot:manseryeok-current-samples`
+- External comparison result: Pending
+
 ## Non-Goals for This PR
 
 이번 PR에서 하지 않는 것:

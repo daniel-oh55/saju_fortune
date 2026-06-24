@@ -1,5 +1,13 @@
 # TODO
 
+## 2026-06-24 Manseryeok current sample snapshot TODO
+
+- [x] 현재 앱 만세력 샘플 산출값 스냅샷 문서 추가
+- [x] 현재 앱 만세력 샘플 산출 스크립트 추가
+- [x] 현재 앱 만세력 샘플 스냅샷 check script 추가
+- [x] 현재 앱 만세력 샘플 산출값 기록
+- [ ] 외부 만세력 기준값 대조 결과 기록
+
 ## 2026-06-24 Manseryeok external sample verification TODO
 
 - [x] 외부 만세력 기준 샘플 검증 준비 문서 추가
