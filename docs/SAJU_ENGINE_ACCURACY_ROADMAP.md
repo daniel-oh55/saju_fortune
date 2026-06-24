@@ -81,6 +81,8 @@ Status: Pending
 - 23시 이후 자시 기준 샘플 검증
 - 태양시 보정 적용 여부 검토
 - 외부 만세력 기준과 결과 비교 문서화
+- 외부 만세력 기준 샘플 검증 준비 문서: docs/MANSERYEOK_EXTERNAL_SAMPLE_VERIFICATION.md 참고
+- 실제 외부 기준값 대조 결과: Pending
 
 ### Phase 3. Hidden Stems / 지장간
 Status: Pending

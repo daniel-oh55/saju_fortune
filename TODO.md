@@ -1,5 +1,15 @@
 # TODO
 
+## 2026-06-24 Manseryeok external sample verification TODO
+
+- [x] 외부 만세력 기준 샘플 검증 준비 문서 추가
+- [x] 외부 만세력 기준 샘플 검증 check script 추가
+- [ ] 양력 샘플 검증 결과 기록
+- [ ] 음력/윤달 샘플 외부 검증 결과 기록
+- [ ] 절기 경계 샘플 검증 결과 기록
+- [ ] 23시 이후 자시 기준 샘플 검증 결과 기록
+- [ ] 태양시 보정 적용 여부 정책 결정
+
 ## 2026-06-24 Saju engine accuracy roadmap TODO
 
 - [x] 사주 엔진 정밀도 향상 로드맵 문서 추가
