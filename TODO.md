@@ -1,5 +1,13 @@
 # TODO
 
+## 2026-06-25 Hidden stems element analysis design TODO
+
+- [x] 지장간 반영 오행 분석 설계 문서 추가
+- [x] 지장간 반영 오행 분석 설계 check script 추가
+- [ ] 지장간 반영 오행 분석 draft 함수 추가
+- [ ] 지장간 반영 오행 분석 QA 추가
+- [ ] 지장간 데이터 외부 기준 검증
+
 ## 2026-06-25 Hidden stems dataset QA TODO
 
 - [x] 지장간 데이터셋 QA 문서 추가

@@ -23,6 +23,7 @@
     "check:google-play-screenshot-readiness": "node scripts/checkGooglePlayScreenshotReadiness.mjs",
     "check:hidden-stems-dataset": "node scripts/checkHiddenStemsDataset.mjs",
     "check:hidden-stems-dataset-qa": "node scripts/checkHiddenStemsDatasetQa.mjs",
+    "check:hidden-stems-element-analysis-design": "node scripts/checkHiddenStemsElementAnalysisDesign.mjs",
     "check:privacy-policy-url-readiness": "node scripts/checkPrivacyPolicyUrlReadiness.mjs",
     "check:privacy-policy-build-output": "node scripts/checkPrivacyPolicyBuildOutput.mjs",
     "check:privacy-policy-contact-readiness": "node scripts/checkPrivacyPolicyContactReadiness.mjs",

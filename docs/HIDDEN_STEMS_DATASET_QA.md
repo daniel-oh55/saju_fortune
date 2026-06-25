@@ -103,6 +103,7 @@
 ## Related Docs
 
 - Hidden stems dataset: docs/HIDDEN_STEMS_DATASET.md
+- Hidden stems element analysis design: docs/HIDDEN_STEMS_ELEMENT_ANALYSIS_DESIGN.md
 - Hidden stems source data: src/data/hiddenStems.ts
 - Saju engine accuracy roadmap: docs/SAJU_ENGINE_ACCURACY_ROADMAP.md
 
