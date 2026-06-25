@@ -141,6 +141,11 @@ Status: Pending
 ### Phase 5. Annual Flow / 세운
 Status: Pending
 
+- 고급 사주 엔진 release scope 문서: docs/ADVANCED_SAJU_ENGINE_RELEASE_SCOPE.md 참고
+- 현재 release scope: 기본 만세력 산출 + 기존 겉오행 중심 분석 + 기존 운세 결과 생성 로직
+- 지장간/십성 production 연결: Pending
+- 태양시 보정 적용 여부: 현재 release scope에서는 미적용
+- 외부 기준 검증: Pending
 - Advanced saju result structure: docs/ADVANCED_SAJU_RESULT_STRUCTURE.md
 - Surface/hidden-stem/ten-gods integrated result structure: Pending
 - production result shape change: Pending

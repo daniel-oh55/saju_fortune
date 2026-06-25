@@ -180,6 +180,7 @@ type AdvancedSajuResultDraft = {
 
 ## Related Docs
 
+- Advanced saju engine release scope: docs/ADVANCED_SAJU_ENGINE_RELEASE_SCOPE.md
 - Hidden stems dataset: docs/HIDDEN_STEMS_DATASET.md
 - Hidden stems dataset QA: docs/HIDDEN_STEMS_DATASET_QA.md
 - Hidden stems element analysis design: docs/HIDDEN_STEMS_ELEMENT_ANALYSIS_DESIGN.md

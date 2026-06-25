@@ -1,5 +1,14 @@
 # TODO
 
+## 2026-06-25 Advanced saju engine release scope TODO
+
+- [x] Advanced saju engine release scope document added
+- [x] Advanced saju engine release scope check script added
+- [ ] Hidden stems data external verification
+- [ ] Ten gods data external verification
+- [ ] Production integration plan review
+- [ ] Google Play listing claim safety review
+
 ## 2026-06-25 Advanced saju result structure TODO
 
 - [x] Advanced saju result structure design document added
