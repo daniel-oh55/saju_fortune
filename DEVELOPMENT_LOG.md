@@ -1,5 +1,33 @@
 # DEVELOPMENT_LOG
 
+## Ten Gods Mapping
+
+- 10천간 메타데이터 추가
+- 10개 십성 기본 프로필 추가
+- 10개 일간 x 10개 target 천간 매핑 데이터 추가
+- 외부 검증 상태는 Pending external verification으로 유지
+- production 십성 분석 연결은 Pending 유지
+- 십성 반영 운세 결과 생성은 Pending 유지
+- production 계산 로직 변경 없음
+- 만세력 계산 로직 변경 없음
+- 기존 겉오행 분석 로직 변경 없음
+- 지장간 반영 오행 분석 변경 없음
+- 십성 분석 production 연결 없음
+- 사주/운세 결과 생성 로직 변경 없음
+- UI/디자인 변경 없음
+- routing 변경 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+- localStorage key 추가 없음
+- 서버 DB 추가 없음
+- 로그인 추가 없음
+- 실제 광고 SDK 추가 없음
+- 실제 결제 SDK 추가 없음
+- 외부 분석 SDK 추가 없음
+- Android native/resource 변경 없음
+- Play Console 입력 없음
+- 실제 기기 QA 없음
+
 ## Hidden Stems Element Analysis QA
 
 - 지장간 반영 오행 분석 QA 문서 추가
