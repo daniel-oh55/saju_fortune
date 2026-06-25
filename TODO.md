@@ -1,5 +1,14 @@
 # TODO
 
+## 2026-06-25 Ten gods analysis design TODO
+
+- [x] 십성 분석 설계 문서 추가
+- [x] 십성 분석 설계 check script 추가
+- [ ] 십성 분석 draft 함수 추가
+- [ ] 십성 분석 QA 추가
+- [ ] 십성 데이터 외부 기준 검증
+- [ ] production 십성 분석 연결 검토
+
 ## 2026-06-25 Ten gods mapping QA TODO
 
 - [x] 십성 매핑 QA 문서 추가
