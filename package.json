@@ -21,6 +21,7 @@
     "check:google-play-data-safety-input-readiness": "node scripts/checkGooglePlayDataSafetyInputReadiness.mjs",
     "check:google-play-privacy-url-input-readiness": "node scripts/checkGooglePlayPrivacyUrlInputReadiness.mjs",
     "check:google-play-screenshot-readiness": "node scripts/checkGooglePlayScreenshotReadiness.mjs",
+    "check:hidden-stems-dataset": "node scripts/checkHiddenStemsDataset.mjs",
     "check:privacy-policy-url-readiness": "node scripts/checkPrivacyPolicyUrlReadiness.mjs",
     "check:privacy-policy-build-output": "node scripts/checkPrivacyPolicyBuildOutput.mjs",
     "check:privacy-policy-contact-readiness": "node scripts/checkPrivacyPolicyContactReadiness.mjs",
