@@ -174,6 +174,9 @@ Status: Pending
 ### Phase 8. QA and Product Safety
 Status: Pending
 
+- Google Play 등록 문구 안전성 문서: docs/GOOGLE_PLAY_LISTING_CLAIM_SAFETY.md 참고
+- Google Play 설명 초안: Pending
+- 실제 Google Play Console 입력: Pending
 - 샘플 프로필별 사주 결과 QA
 - 금지 표현 검사
 - 투자/건강/진로 단정 표현 검사

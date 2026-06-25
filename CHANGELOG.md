@@ -2,6 +2,8 @@
 
 ## Added
 
+- Google Play listing claim safety document added
+- Google Play listing claim safety check script added
 - Advanced saju engine release scope document added
 - Advanced saju engine release scope check script added
 - Advanced saju result structure design document added
