@@ -1,5 +1,13 @@
 # TODO
 
+## 2026-06-25 Hidden stems dataset QA TODO
+
+- [x] 지장간 데이터셋 QA 문서 추가
+- [x] 지장간 데이터셋 QA check script 추가
+- [ ] 지장간 데이터 외부 기준 검증
+- [ ] 지장간 반영 오행 분석 설계
+- [ ] 지장간 반영 오행 분석 구현
+
 ## 2026-06-25 Hidden stems dataset TODO
 
 - [x] 12지지별 지장간 데이터셋 추가
