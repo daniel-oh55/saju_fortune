@@ -92,6 +92,7 @@
 - Ten gods mapping: docs/TEN_GODS_MAPPING.md
 - Ten gods mapping QA: docs/TEN_GODS_MAPPING_QA.md
 - Ten gods analysis design: docs/TEN_GODS_ANALYSIS_DESIGN.md
+- Ten gods analysis QA: docs/TEN_GODS_ANALYSIS_QA.md
 - Ten gods source data: src/data/tenGods.ts
 - Hidden stems element analysis draft: docs/HIDDEN_STEMS_ELEMENT_ANALYSIS_DRAFT.md
 - Saju engine accuracy roadmap: docs/SAJU_ENGINE_ACCURACY_ROADMAP.md

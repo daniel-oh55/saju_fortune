@@ -1,5 +1,13 @@
 # TODO
 
+## 2026-06-25 Ten gods analysis QA TODO
+
+- [x] Ten gods analysis QA document added
+- [x] Ten gods analysis QA check script added
+- [ ] Ten gods data external verification
+- [ ] production ten gods analysis connection review
+- [ ] hidden-stem ten gods calculation review
+
 ## 2026-06-25 Ten gods analysis draft TODO
 
 - [x] Ten gods analysis draft function added
