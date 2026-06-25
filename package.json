@@ -67,6 +67,7 @@
     "check:manseryeok-current-sample-snapshot": "node scripts/checkManseryeokCurrentSampleSnapshot.mjs",
     "check:manseryeok-solar-sample-results": "node scripts/checkManseryeokSolarSampleResults.mjs",
     "check:manseryeok-lunar-leap-sample-results": "node scripts/checkManseryeokLunarLeapSampleResults.mjs",
+    "check:manseryeok-late-night-jasi-sample-results": "node scripts/checkManseryeokLateNightJasiSampleResults.mjs",
     "check:manseryeok-term-timezone": "node scripts/checkManseryeokTermTimezoneHypothesis.mjs",
     "check:pwa-readiness": "node scripts/checkPwaManifestReadiness.mjs",
     "check:rewarded-ad-service": "node scripts/checkRewardedAdServiceRegression.mjs",

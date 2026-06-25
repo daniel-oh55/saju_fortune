@@ -34,6 +34,8 @@
 - Solar sample result records: docs/MANSERYEOK_SOLAR_SAMPLE_RESULTS.md
 - Lunar/leap month sample result records: docs/MANSERYEOK_LUNAR_LEAP_SAMPLE_RESULTS.md
 - Lunar/leap month external comparison result: Pending
+- Late-night jasi sample result records: docs/MANSERYEOK_LATE_NIGHT_JASI_SAMPLE_RESULTS.md
+- Late-night jasi external comparison result: Pending
 - External comparison result: Pending
 
 ## Sample Input Profiles

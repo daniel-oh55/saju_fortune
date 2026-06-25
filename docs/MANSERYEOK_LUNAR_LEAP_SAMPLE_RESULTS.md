@@ -112,3 +112,8 @@
 
 4. `test: record manseryeok external comparison summary`
    - 양력/음력/윤달/자시 샘플 외부 비교 결과 종합
+
+## Related Docs
+
+- Late-night jasi sample result records: docs/MANSERYEOK_LATE_NIGHT_JASI_SAMPLE_RESULTS.md
+- Late-night jasi external comparison result: Pending

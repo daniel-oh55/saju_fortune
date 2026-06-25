@@ -1,5 +1,31 @@
 # DEVELOPMENT_LOG
 
+## Manseryeok Late-Night Jasi Sample Results
+
+- 23시 이후 자시 기준 샘플 외부 기준값 기록 문서 추가
+- PR #148의 현재 앱 산출값을 자시 기준 샘플 표에 참조
+- same_day와 next_day 자시 기준 샘플을 구분
+- 외부 기준값은 아직 Pending 유지
+- Match status는 아직 Pending 유지
+- 양력 샘플 외부 기준값 대조 결과는 Pending 유지
+- 음력/윤달 샘플 외부 검증은 Pending 유지
+- 태양시 보정 적용 여부는 Pending 유지
+- production 계산 로직 변경 없음
+- 만세력 계산 로직 변경 없음
+- 사주/운세 결과 생성 로직 변경 없음
+- UI/디자인 변경 없음
+- routing 변경 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+- 서버 DB 추가 없음
+- 로그인 추가 없음
+- 실제 광고 SDK 추가 없음
+- 실제 결제 SDK 추가 없음
+- 외부 분석 SDK 추가 없음
+- Android native/resource 변경 없음
+- Play Console 입력 없음
+- 실제 기기 QA 없음
+
 ## Manseryeok Lunar and Leap Month Sample Results
 
 - 음력/윤달 샘플 외부 기준값 기록 문서 추가

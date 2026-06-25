@@ -1,5 +1,13 @@
 # TODO
 
+## 2026-06-25 Manseryeok late-night jasi sample results TODO
+
+- [x] 23시 이후 자시 기준 샘플 외부 기준값 기록 문서 추가
+- [x] 23시 이후 자시 기준 샘플 외부 기준값 기록 check script 추가
+- [ ] JASI-001 외부 기준값 기록
+- [ ] JASI-002 외부 기준값 기록
+- [ ] 23시 이후 자시 기준 샘플 외부 기준값 대조 결과 기록
+
 ## 2026-06-25 Manseryeok lunar leap sample results TODO
 
 - [x] 음력/윤달 샘플 외부 기준값 기록 문서 추가
