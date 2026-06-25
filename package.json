@@ -29,6 +29,7 @@
     "check:ten-gods-mapping": "node scripts/checkTenGodsMapping.mjs",
     "check:ten-gods-mapping-qa": "node scripts/checkTenGodsMappingQa.mjs",
     "check:ten-gods-analysis-design": "node scripts/checkTenGodsAnalysisDesign.mjs",
+    "check:ten-gods-analysis-draft": "node scripts/checkTenGodsAnalysisDraft.mjs",
     "check:privacy-policy-url-readiness": "node scripts/checkPrivacyPolicyUrlReadiness.mjs",
     "check:privacy-policy-build-output": "node scripts/checkPrivacyPolicyBuildOutput.mjs",
     "check:privacy-policy-contact-readiness": "node scripts/checkPrivacyPolicyContactReadiness.mjs",

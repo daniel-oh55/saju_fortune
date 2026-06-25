@@ -1,5 +1,14 @@
 # TODO
 
+## 2026-06-25 Ten gods analysis draft TODO
+
+- [x] Ten gods analysis draft function added
+- [x] Ten gods analysis draft document added
+- [x] Ten gods analysis draft check script added
+- [ ] Ten gods analysis QA
+- [ ] Ten gods data external verification
+- [ ] production ten gods analysis connection review
+
 ## 2026-06-25 Ten gods analysis design TODO
 
 - [x] 십성 분석 설계 문서 추가
