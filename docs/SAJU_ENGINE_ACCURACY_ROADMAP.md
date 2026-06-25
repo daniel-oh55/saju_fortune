@@ -128,6 +128,8 @@ Status: Pending
 - Ten gods analysis draft document: docs/TEN_GODS_ANALYSIS_DRAFT.md
 - Ten gods analysis QA document: docs/TEN_GODS_ANALYSIS_QA.md
 - Ten gods analysis QA status: Pending script verification
+- Ten gods copy guidelines: docs/TEN_GODS_COPY_GUIDELINES.md
+- Ten gods copy UI application: Pending
 - Ten gods analysis production connection: Pending
 - Ten gods data external verification: Pending
 - 십성 분석 production 연결: Pending

@@ -1,5 +1,13 @@
 # TODO
 
+## 2026-06-25 Ten gods copy guidelines TODO
+
+- [x] Ten gods copy guidelines document added
+- [x] Ten gods copy guidelines check script added
+- [ ] Ten gods copy UI application review
+- [ ] Ten gods data external verification
+- [ ] production ten gods analysis connection review
+
 ## 2026-06-25 Ten gods analysis QA TODO
 
 - [x] Ten gods analysis QA document added
