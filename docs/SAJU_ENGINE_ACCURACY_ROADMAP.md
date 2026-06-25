@@ -119,6 +119,10 @@ Status: Pending
 Status: Pending
 
 - 일간 기준 십성 매핑 정의
+- 십성 매핑 데이터셋: src/data/tenGods.ts
+- 십성 매핑 설명 문서: docs/TEN_GODS_MAPPING.md
+- 십성 분석 production 연결: Pending
+- 십성 데이터 외부 기준 검증: Pending
 - 년주/월주/일주/시주 각 기둥의 십성 산출
 - 재성/관성/인성/식상/비겁 계열 해석 기준 정리
 - 재물/일/관계/학습 문구 연결 정책 검토
