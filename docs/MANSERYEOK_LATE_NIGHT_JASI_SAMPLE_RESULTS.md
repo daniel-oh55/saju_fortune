@@ -113,3 +113,8 @@
 
 4. `data: add hidden stems dataset`
    - 지지별 지장간 데이터 추가
+
+## Related Docs
+
+- Solar time correction policy: docs/SOLAR_TIME_CORRECTION_POLICY.md
+- Solar time correction status: currently not applied in release scope

@@ -117,3 +117,5 @@
 
 - Late-night jasi sample result records: docs/MANSERYEOK_LATE_NIGHT_JASI_SAMPLE_RESULTS.md
 - Late-night jasi external comparison result: Pending
+- Solar time correction policy: docs/SOLAR_TIME_CORRECTION_POLICY.md
+- Solar time correction status: currently not applied in release scope

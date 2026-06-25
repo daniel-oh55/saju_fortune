@@ -91,6 +91,8 @@ Status: Pending
 - 음력/윤달 샘플 외부 기준값 대조 결과: Pending
 - 23시 이후 자시 기준 샘플 결과 기록 문서: docs/MANSERYEOK_LATE_NIGHT_JASI_SAMPLE_RESULTS.md 참고
 - 23시 이후 자시 기준 샘플 외부 기준값 대조 결과: Pending
+- 태양시 보정 적용 여부 정책 문서: docs/SOLAR_TIME_CORRECTION_POLICY.md 참고
+- 태양시 보정 적용 여부: 현재 release scope에서는 미적용
 
 ### Phase 3. Hidden Stems / 지장간
 Status: Pending
