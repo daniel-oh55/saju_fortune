@@ -1,5 +1,38 @@
 # DEVELOPMENT_LOG
 
+## Ten Gods Copy Guidelines
+
+- Ten gods copy guidelines document added
+- General-user explanations for 10 ten gods documented
+- Allowed copy and avoided copy examples separated
+- Tone criteria favoring reference copy over deterministic prediction documented
+- production ten gods analysis connection remains Pending
+- ten gods data external verification remains Pending
+- hidden-stem ten gods calculation remains Pending
+- ten gods copy UI application remains Pending
+- production calculation logic unchanged
+- manseryeok calculation logic unchanged
+- existing surface element analysis logic unchanged
+- hidden-stem element analysis unchanged
+- ten gods analysis production connection not added
+- ten gods copy UI application not added
+- createSajuAnalysis return structure unchanged
+- saju/fortune result generation logic unchanged
+- today fortune/2026 fortune/zodiac fortune result generation logic not connected
+- UI/design unchanged
+- routing unchanged
+- schemaVersion unchanged
+- existing localStorage keys unchanged
+- localStorage key not added
+- server DB not added
+- login not added
+- real ad SDK not added
+- real payment SDK not added
+- external analysis SDK not added
+- Android native/resource unchanged
+- Play Console input not performed
+- real device QA not performed
+
 ## Ten Gods Analysis QA
 
 - Ten gods analysis QA document added

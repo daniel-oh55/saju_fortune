@@ -126,6 +126,7 @@
 - Ten gods mapping QA: docs/TEN_GODS_MAPPING_QA.md
 - Ten gods analysis design: docs/TEN_GODS_ANALYSIS_DESIGN.md
 - Ten gods analysis draft: docs/TEN_GODS_ANALYSIS_DRAFT.md
+- Ten gods copy guidelines: docs/TEN_GODS_COPY_GUIDELINES.md
 - Ten gods draft source: src/domain/saju/tenGodAnalysisDraft.ts
 - Ten gods source data: src/data/tenGods.ts
 - Saju engine accuracy roadmap: docs/SAJU_ENGINE_ACCURACY_ROADMAP.md
