@@ -25,6 +25,7 @@
     "check:hidden-stems-dataset-qa": "node scripts/checkHiddenStemsDatasetQa.mjs",
     "check:hidden-stems-element-analysis-design": "node scripts/checkHiddenStemsElementAnalysisDesign.mjs",
     "check:hidden-stems-element-analysis-draft": "node scripts/checkHiddenStemsElementAnalysisDraft.mjs",
+    "check:hidden-stems-element-analysis-qa": "node scripts/checkHiddenStemsElementAnalysisQa.mjs",
     "check:privacy-policy-url-readiness": "node scripts/checkPrivacyPolicyUrlReadiness.mjs",
     "check:privacy-policy-build-output": "node scripts/checkPrivacyPolicyBuildOutput.mjs",
     "check:privacy-policy-contact-readiness": "node scripts/checkPrivacyPolicyContactReadiness.mjs",

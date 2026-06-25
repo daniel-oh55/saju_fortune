@@ -149,6 +149,7 @@ type CombinedElementAnalysisDraft = {
 - Hidden stems dataset: docs/HIDDEN_STEMS_DATASET.md
 - Hidden stems dataset QA: docs/HIDDEN_STEMS_DATASET_QA.md
 - Hidden stems element analysis draft: docs/HIDDEN_STEMS_ELEMENT_ANALYSIS_DRAFT.md
+- Hidden stems element analysis QA: docs/HIDDEN_STEMS_ELEMENT_ANALYSIS_QA.md
 - Hidden stems source data: src/data/hiddenStems.ts
 - Saju engine accuracy roadmap: docs/SAJU_ENGINE_ACCURACY_ROADMAP.md
 

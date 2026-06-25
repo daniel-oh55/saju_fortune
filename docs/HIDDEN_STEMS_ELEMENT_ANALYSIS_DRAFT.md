@@ -78,6 +78,7 @@ main/middle/residual 지장간 role별 가중치는 적용하지 않는다.
 - Hidden stems dataset: docs/HIDDEN_STEMS_DATASET.md
 - Hidden stems dataset QA: docs/HIDDEN_STEMS_DATASET_QA.md
 - Hidden stems element analysis design: docs/HIDDEN_STEMS_ELEMENT_ANALYSIS_DESIGN.md
+- Hidden stems element analysis QA: docs/HIDDEN_STEMS_ELEMENT_ANALYSIS_QA.md
 - Hidden stems source data: src/data/hiddenStems.ts
 - Saju engine accuracy roadmap: docs/SAJU_ENGINE_ACCURACY_ROADMAP.md
 
