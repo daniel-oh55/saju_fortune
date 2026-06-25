@@ -103,3 +103,8 @@
 
 4. `docs: record ten gods external verification`
    - 십성 데이터 외부 기준 대조 결과 기록
+
+## Related Docs
+
+- Ten gods mapping QA: docs/TEN_GODS_MAPPING_QA.md
+- Saju engine accuracy roadmap: docs/SAJU_ENGINE_ACCURACY_ROADMAP.md
