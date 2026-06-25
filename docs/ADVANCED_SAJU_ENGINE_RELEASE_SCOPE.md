@@ -161,6 +161,7 @@
 
 ## Related Docs
 
+- Google Play listing claim safety: docs/GOOGLE_PLAY_LISTING_CLAIM_SAFETY.md
 - Advanced saju result structure: docs/ADVANCED_SAJU_RESULT_STRUCTURE.md
 - Solar time correction policy: docs/SOLAR_TIME_CORRECTION_POLICY.md
 - Hidden stems dataset: docs/HIDDEN_STEMS_DATASET.md
@@ -181,5 +182,5 @@
 3. `docs: advanced saju integration plan`
    - production 연결 전 결과 구조와 UI/문구 영향을 검토
 
-4. `docs: google play listing claim safety`
-   - Google Play 등록 문구에서 과장 표현을 피하기 위한 기준 정리
+4. `docs: draft google play short and full description`
+   - 실제 등록 전 검토용 Google Play 설명 초안을 작성

@@ -1,5 +1,16 @@
 # TODO
 
+## 2026-06-25 Google Play listing claim safety TODO
+
+- [x] Google Play listing claim safety document added
+- [x] Google Play listing claim safety check script added
+- [ ] Google Play description draft
+- [ ] Real store screenshot image production
+- [ ] Privacy policy URL finalization
+- [ ] Contact finalization
+- [ ] Google Play data safety form input
+- [ ] Play Console internal test upload
+
 ## 2026-06-25 Advanced saju engine release scope TODO
 
 - [x] Advanced saju engine release scope document added

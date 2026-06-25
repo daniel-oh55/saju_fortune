@@ -1,5 +1,36 @@
 # DEVELOPMENT_LOG
 
+## Google Play Listing Claim Safety
+
+- Google Play listing claim safety document added
+- Current app capability and unavailable features separated
+- Allowed listing claims and avoided listing claims separated
+- App name, short description, full description, and screenshot caption guidance documented
+- Privacy policy URL, contact, data safety form, real store screenshots, real device QA, and Play Console internal test upload remain Pending
+- release build, signing setup, AAB generation, and actual Google Play Console input remain Pending
+- production calculation logic unchanged
+- manseryeok calculation logic unchanged
+- existing surface element analysis logic unchanged
+- hidden-stem element analysis production connection not added
+- ten gods analysis production connection not added
+- solar time correction not applied
+- createSajuAnalysis return structure unchanged
+- production result shape unchanged
+- saju/fortune result generation logic unchanged
+- UI/design unchanged
+- routing unchanged
+- schemaVersion unchanged
+- existing localStorage keys unchanged
+- localStorage key not added
+- server DB not added
+- login not added
+- real ad SDK not added
+- real payment SDK not added
+- external analysis SDK not added
+- Android native/resource unchanged
+- Play Console input not performed
+- real device QA not performed
+
 ## Advanced Saju Engine Release Scope
 
 - Current release scope and future advanced saju engine expansion scope separated
