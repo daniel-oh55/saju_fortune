@@ -85,6 +85,8 @@ Status: Pending
 - 실제 외부 기준값 대조 결과: Pending
 - 현재 앱 만세력 샘플 산출값 스냅샷 문서: docs/MANSERYEOK_CURRENT_SAMPLE_SNAPSHOT.md 참고
 - 외부 기준값 대조 결과: Pending
+- 양력 샘플 결과 기록 문서: docs/MANSERYEOK_SOLAR_SAMPLE_RESULTS.md 참고
+- 양력 샘플 외부 기준값 대조 결과: Pending
 
 ### Phase 3. Hidden Stems / 지장간
 Status: Pending

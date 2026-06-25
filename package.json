@@ -65,6 +65,7 @@
     "check:manseryeok-jasi-boundary": "node scripts/checkManseryeokJasiBoundaryHypothesis.mjs",
     "check:manseryeok-external-sample-verification": "node scripts/checkManseryeokExternalSampleVerification.mjs",
     "check:manseryeok-current-sample-snapshot": "node scripts/checkManseryeokCurrentSampleSnapshot.mjs",
+    "check:manseryeok-solar-sample-results": "node scripts/checkManseryeokSolarSampleResults.mjs",
     "check:manseryeok-term-timezone": "node scripts/checkManseryeokTermTimezoneHypothesis.mjs",
     "check:pwa-readiness": "node scripts/checkPwaManifestReadiness.mjs",
     "check:rewarded-ad-service": "node scripts/checkRewardedAdServiceRegression.mjs",

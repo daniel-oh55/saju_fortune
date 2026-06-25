@@ -91,8 +91,10 @@
 
 ## Related Docs
 
+- Solar sample result records: docs/MANSERYEOK_SOLAR_SAMPLE_RESULTS.md
 - Current app sample snapshot: docs/MANSERYEOK_CURRENT_SAMPLE_SNAPSHOT.md
 - Current app snapshot execution: `npm run snapshot:manseryeok-current-samples`
+- Solar external comparison result: Pending
 - External comparison result: Pending
 
 ## Non-Goals for This PR

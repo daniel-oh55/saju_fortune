@@ -29,6 +29,11 @@
 - SOLAR-TIME-001 current app result: Recorded
 - External comparison result: Pending
 
+## Related Docs
+
+- Solar sample result records: docs/MANSERYEOK_SOLAR_SAMPLE_RESULTS.md
+- External comparison result: Pending
+
 ## Sample Input Profiles
 
 | Case ID | calendarType | birthDate | birthTime | birthTimeUnknown | isLeapMonth | lateNightJasiPolicy |

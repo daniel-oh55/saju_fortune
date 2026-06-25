@@ -1,5 +1,13 @@
 # TODO
 
+## 2026-06-24 Manseryeok solar sample results TODO
+
+- [x] 양력 샘플 외부 기준값 기록 문서 추가
+- [x] 양력 샘플 외부 기준값 기록 check script 추가
+- [ ] SOLAR-001 외부 기준값 기록
+- [ ] SOLAR-TERM-001 외부 기준값 기록
+- [ ] 양력 샘플 외부 기준값 대조 결과 기록
+
 ## 2026-06-24 Manseryeok current sample snapshot TODO
 
 - [x] 현재 앱 만세력 샘플 산출값 스냅샷 문서 추가
