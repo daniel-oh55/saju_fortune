@@ -1,5 +1,35 @@
 # DEVELOPMENT_LOG
 
+## Hidden Stems Element Analysis Draft
+
+- 지장간 반영 오행 분석 draft 함수 추가
+- 지장간 데이터셋 기반 simple count 방식 초안 추가
+- branchBreakdown 초안 구조 추가
+- verificationStatus는 Pending external verification 유지
+- connectionStatus는 Not connected to production analysis 유지
+- 지장간 가중치 정책은 Pending 유지
+- production 오행 분석 연결은 Pending 유지
+- production 계산 로직 변경 없음
+- 만세력 계산 로직 변경 없음
+- 기존 겉오행 분석 로직 변경 없음
+- production elementAnalyzer 연결 없음
+- createSajuAnalysis 반환 구조 변경 없음
+- 사주/운세 결과 생성 로직 변경 없음
+- 오늘운세/2026운세/띠별운세 결과 생성 로직 연결 없음
+- UI/디자인 변경 없음
+- routing 변경 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+- localStorage key 추가 없음
+- 서버 DB 추가 없음
+- 로그인 추가 없음
+- 실제 광고 SDK 추가 없음
+- 실제 결제 SDK 추가 없음
+- 외부 분석 SDK 추가 없음
+- Android native/resource 변경 없음
+- Play Console 입력 없음
+- 실제 기기 QA 없음
+
 ## Hidden Stems Element Analysis Design
 
 - 지장간 반영 오행 분석 설계 문서 추가
