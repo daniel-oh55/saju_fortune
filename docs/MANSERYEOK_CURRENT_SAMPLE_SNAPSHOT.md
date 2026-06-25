@@ -32,6 +32,8 @@
 ## Related Docs
 
 - Solar sample result records: docs/MANSERYEOK_SOLAR_SAMPLE_RESULTS.md
+- Lunar/leap month sample result records: docs/MANSERYEOK_LUNAR_LEAP_SAMPLE_RESULTS.md
+- Lunar/leap month external comparison result: Pending
 - External comparison result: Pending
 
 ## Sample Input Profiles
