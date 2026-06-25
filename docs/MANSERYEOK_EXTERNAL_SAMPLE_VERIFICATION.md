@@ -94,11 +94,13 @@
 - Solar sample result records: docs/MANSERYEOK_SOLAR_SAMPLE_RESULTS.md
 - Lunar/leap month sample result records: docs/MANSERYEOK_LUNAR_LEAP_SAMPLE_RESULTS.md
 - Late-night jasi sample result records: docs/MANSERYEOK_LATE_NIGHT_JASI_SAMPLE_RESULTS.md
+- Solar time correction policy: docs/SOLAR_TIME_CORRECTION_POLICY.md
 - Current app sample snapshot: docs/MANSERYEOK_CURRENT_SAMPLE_SNAPSHOT.md
 - Current app snapshot execution: `npm run snapshot:manseryeok-current-samples`
 - Solar external comparison result: Pending
 - Lunar/leap month external comparison result: Pending
 - Late-night jasi external comparison result: Pending
+- Solar time correction status: currently not applied in release scope
 - External comparison result: Pending
 
 ## Non-Goals for This PR

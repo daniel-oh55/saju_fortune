@@ -1,5 +1,13 @@
 # TODO
 
+## 2026-06-25 Solar time correction policy TODO
+
+- [x] 태양시 보정 적용 여부 정책 문서 추가
+- [x] 태양시 보정 적용 여부 정책 check script 추가
+- [ ] 태양시 보정 적용 전후 결과 비교 QA
+- [ ] 출생지 입력 UX 설계
+- [ ] 출생지 저장 정책 설계
+
 ## 2026-06-25 Manseryeok late-night jasi sample results TODO
 
 - [x] 23시 이후 자시 기준 샘플 외부 기준값 기록 문서 추가

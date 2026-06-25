@@ -36,6 +36,8 @@
 - Lunar/leap month external comparison result: Pending
 - Late-night jasi sample result records: docs/MANSERYEOK_LATE_NIGHT_JASI_SAMPLE_RESULTS.md
 - Late-night jasi external comparison result: Pending
+- Solar time correction policy: docs/SOLAR_TIME_CORRECTION_POLICY.md
+- Current app snapshot basis: standard time input without solar time correction
 - External comparison result: Pending
 
 ## Sample Input Profiles

@@ -1,5 +1,31 @@
 # DEVELOPMENT_LOG
 
+## Solar Time Correction Policy
+
+- 태양시 보정 적용 여부 정책 문서 추가
+- 현재 release scope에서는 태양시 보정을 적용하지 않는 것으로 문서화
+- 현재 앱 산출값은 입력된 표준시 기준으로 유지
+- 향후 적용 시 출생지 입력 UX, 저장 정책, 경도 기반 보정 계산, 외부 만세력 기준 샘플 검증이 필요함을 정리
+- production 계산 로직 변경 없음
+- 만세력 계산 로직 변경 없음
+- 태양시 보정 계산 로직 추가 없음
+- 출생지 입력 UI 추가 없음
+- 출생지 저장 구조 추가 없음
+- localStorage key 추가 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+- 사주/운세 결과 생성 로직 변경 없음
+- UI/디자인 변경 없음
+- routing 변경 없음
+- 서버 DB 추가 없음
+- 로그인 추가 없음
+- 실제 광고 SDK 추가 없음
+- 실제 결제 SDK 추가 없음
+- 외부 분석 SDK 추가 없음
+- Android native/resource 변경 없음
+- Play Console 입력 없음
+- 실제 기기 QA 없음
+
 ## Manseryeok Late-Night Jasi Sample Results
 
 - 23시 이후 자시 기준 샘플 외부 기준값 기록 문서 추가
