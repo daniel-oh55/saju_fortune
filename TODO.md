@@ -1,5 +1,14 @@
 # TODO
 
+## 2026-06-25 Advanced saju result structure TODO
+
+- [x] Advanced saju result structure design document added
+- [x] Advanced saju result structure check script added
+- [ ] Advanced saju engine release scope document
+- [ ] Hidden stems data external verification
+- [ ] Ten gods data external verification
+- [ ] Production integration plan review
+
 ## 2026-06-25 Ten gods copy guidelines TODO
 
 - [x] Ten gods copy guidelines document added

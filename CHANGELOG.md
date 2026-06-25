@@ -2,6 +2,8 @@
 
 ## Added
 
+- Advanced saju result structure design document added
+- Advanced saju result structure check script added
 - Ten gods copy guidelines document added
 - Ten gods copy guidelines check script added
 - Ten gods analysis QA document added
