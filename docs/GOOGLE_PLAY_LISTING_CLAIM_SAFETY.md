@@ -165,6 +165,7 @@ Google Play 등록 필드별 내부 기준:
 
 ## Related Docs
 
+- Google Play description draft: docs/GOOGLE_PLAY_DESCRIPTION_DRAFT.md
 - Advanced saju engine release scope: docs/ADVANCED_SAJU_ENGINE_RELEASE_SCOPE.md
 - Advanced saju result structure: docs/ADVANCED_SAJU_RESULT_STRUCTURE.md
 - Ten gods copy guidelines: docs/TEN_GODS_COPY_GUIDELINES.md
@@ -176,15 +177,11 @@ Google Play 등록 필드별 내부 기준:
 
 ## Suggested Follow-up PRs
 
-1. `docs: draft google play short and full description`
-   - 실제 등록 전 검토용 Google Play 설명 초안을 작성
-   - Pending 항목은 Pending으로 유지
-
-2. `docs: google play screenshot caption plan`
+1. `docs: google play screenshot caption plan`
    - 실제 스토어 스크린샷 이미지 제작 전 캡션과 화면 구성을 정리
 
-3. `docs: record hidden stems external verification`
+2. `docs: record hidden stems external verification`
    - 지장간 데이터 외부 기준 대조 결과 기록
 
-4. `docs: record ten gods external verification`
+3. `docs: record ten gods external verification`
    - 십성 데이터 외부 기준 대조 결과 기록

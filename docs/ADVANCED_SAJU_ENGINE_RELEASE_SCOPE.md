@@ -161,6 +161,7 @@
 
 ## Related Docs
 
+- Google Play description draft: docs/GOOGLE_PLAY_DESCRIPTION_DRAFT.md
 - Google Play listing claim safety: docs/GOOGLE_PLAY_LISTING_CLAIM_SAFETY.md
 - Advanced saju result structure: docs/ADVANCED_SAJU_RESULT_STRUCTURE.md
 - Solar time correction policy: docs/SOLAR_TIME_CORRECTION_POLICY.md
