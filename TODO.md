@@ -1,5 +1,13 @@
 # TODO
 
+## 2026-06-25 Manseryeok lunar leap sample results TODO
+
+- [x] 음력/윤달 샘플 외부 기준값 기록 문서 추가
+- [x] 음력/윤달 샘플 외부 기준값 기록 check script 추가
+- [ ] LUNAR-001 외부 기준값 기록
+- [ ] LEAP-001 외부 기준값 기록
+- [ ] 음력/윤달 샘플 외부 기준값 대조 결과 기록
+
 ## 2026-06-24 Manseryeok solar sample results TODO
 
 - [x] 양력 샘플 외부 기준값 기록 문서 추가

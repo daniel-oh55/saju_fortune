@@ -87,6 +87,8 @@ Status: Pending
 - 외부 기준값 대조 결과: Pending
 - 양력 샘플 결과 기록 문서: docs/MANSERYEOK_SOLAR_SAMPLE_RESULTS.md 참고
 - 양력 샘플 외부 기준값 대조 결과: Pending
+- 음력/윤달 샘플 결과 기록 문서: docs/MANSERYEOK_LUNAR_LEAP_SAMPLE_RESULTS.md 참고
+- 음력/윤달 샘플 외부 기준값 대조 결과: Pending
 
 ### Phase 3. Hidden Stems / 지장간
 Status: Pending
