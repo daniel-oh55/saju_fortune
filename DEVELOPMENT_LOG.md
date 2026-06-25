@@ -1,5 +1,39 @@
 # DEVELOPMENT_LOG
 
+## Advanced Saju Result Structure
+
+- Advanced saju result structure design document added
+- Surface, hidden-stem, and ten-gods result separation structure proposed
+- Current release scope and future advanced analysis scope separated
+- Hidden-stem and ten-gods production connection remains Pending
+- Solar time correction remains outside current release scope
+- External manseryeok verification remains Pending
+- production calculation logic unchanged
+- manseryeok calculation logic unchanged
+- existing surface element analysis logic unchanged
+- hidden-stem element analysis production connection not added
+- ten gods analysis production connection not added
+- hidden-stem ten gods calculation not added
+- solar time correction not applied
+- createSajuAnalysis return structure unchanged
+- production result shape unchanged
+- saju/fortune result generation logic unchanged
+- today fortune/2026 fortune/zodiac fortune result generation logic not connected
+- ten gods copy UI application not added
+- UI/design unchanged
+- routing unchanged
+- schemaVersion unchanged
+- existing localStorage keys unchanged
+- localStorage key not added
+- server DB not added
+- login not added
+- real ad SDK not added
+- real payment SDK not added
+- external analysis SDK not added
+- Android native/resource unchanged
+- Play Console input not performed
+- real device QA not performed
+
 ## Ten Gods Copy Guidelines
 
 - Ten gods copy guidelines document added

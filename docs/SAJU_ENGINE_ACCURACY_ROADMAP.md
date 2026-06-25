@@ -141,6 +141,11 @@ Status: Pending
 ### Phase 5. Annual Flow / 세운
 Status: Pending
 
+- Advanced saju result structure: docs/ADVANCED_SAJU_RESULT_STRUCTURE.md
+- Surface/hidden-stem/ten-gods integrated result structure: Pending
+- production result shape change: Pending
+- production integration plan: Pending
+- external verification: Pending
 - targetYear의 천간/지지 산출
 - 원국과 세운의 오행 관계 분석
 - 세운이 오늘운세/연도운세 문구에 미치는 범위 정의
