@@ -2,6 +2,8 @@
 
 ## Added
 
+- 지장간 반영 오행 분석 QA 문서 추가
+- 지장간 반영 오행 분석 QA check script 추가
 - 지장간 반영 오행 분석 draft 함수 추가
 - 지장간 반영 오행 분석 draft 문서 추가
 - 지장간 반영 오행 분석 draft check script 추가
