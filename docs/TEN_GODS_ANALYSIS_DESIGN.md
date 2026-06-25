@@ -171,6 +171,7 @@ type CombinedSajuAnalysisDraft = {
 
 - Ten gods mapping: docs/TEN_GODS_MAPPING.md
 - Ten gods mapping QA: docs/TEN_GODS_MAPPING_QA.md
+- Ten gods analysis draft: docs/TEN_GODS_ANALYSIS_DRAFT.md
 - Ten gods source data: src/data/tenGods.ts
 - Hidden stems dataset: docs/HIDDEN_STEMS_DATASET.md
 - Hidden stems element analysis design: docs/HIDDEN_STEMS_ELEMENT_ANALYSIS_DESIGN.md

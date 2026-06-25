@@ -124,6 +124,10 @@ Status: Pending
 - 십성 매핑 QA 문서: docs/TEN_GODS_MAPPING_QA.md 참고
 - 십성 매핑 QA 상태: Pending script verification
 - 십성 분석 설계 문서: docs/TEN_GODS_ANALYSIS_DESIGN.md 참고
+- Ten gods analysis draft function: src/domain/saju/tenGodAnalysisDraft.ts
+- Ten gods analysis draft document: docs/TEN_GODS_ANALYSIS_DRAFT.md
+- Ten gods analysis production connection: Pending
+- Ten gods data external verification: Pending
 - 십성 분석 production 연결: Pending
 - 십성 데이터 외부 기준 검증: Pending
 - 년주/월주/일주/시주 각 기둥의 십성 산출

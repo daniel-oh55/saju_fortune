@@ -2,6 +2,10 @@
 
 ## Added
 
+- Ten gods analysis draft function added
+- Ten gods analysis draft document added
+- Ten gods analysis draft check script added
+
 - 십성 분석 설계 문서 추가
 - 십성 분석 설계 check script 추가
 - 십성 매핑 QA 문서 추가
