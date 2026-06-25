@@ -108,5 +108,6 @@
 
 - Ten gods analysis design: docs/TEN_GODS_ANALYSIS_DESIGN.md
 - Ten gods analysis draft: docs/TEN_GODS_ANALYSIS_DRAFT.md
+- Ten gods analysis QA: docs/TEN_GODS_ANALYSIS_QA.md
 - Ten gods mapping QA: docs/TEN_GODS_MAPPING_QA.md
 - Saju engine accuracy roadmap: docs/SAJU_ENGINE_ACCURACY_ROADMAP.md

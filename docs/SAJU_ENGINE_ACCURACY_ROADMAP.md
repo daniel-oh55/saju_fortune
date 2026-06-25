@@ -126,6 +126,8 @@ Status: Pending
 - 십성 분석 설계 문서: docs/TEN_GODS_ANALYSIS_DESIGN.md 참고
 - Ten gods analysis draft function: src/domain/saju/tenGodAnalysisDraft.ts
 - Ten gods analysis draft document: docs/TEN_GODS_ANALYSIS_DRAFT.md
+- Ten gods analysis QA document: docs/TEN_GODS_ANALYSIS_QA.md
+- Ten gods analysis QA status: Pending script verification
 - Ten gods analysis production connection: Pending
 - Ten gods data external verification: Pending
 - 십성 분석 production 연결: Pending

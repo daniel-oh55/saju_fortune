@@ -2,6 +2,8 @@
 
 ## Added
 
+- Ten gods analysis QA document added
+- Ten gods analysis QA check script added
 - Ten gods analysis draft function added
 - Ten gods analysis draft document added
 - Ten gods analysis draft check script added
