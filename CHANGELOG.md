@@ -2,6 +2,8 @@
 
 ## Added
 
+- Google Play description draft document added
+- Google Play description draft check script added
 - Google Play listing claim safety document added
 - Google Play listing claim safety check script added
 - Advanced saju engine release scope document added

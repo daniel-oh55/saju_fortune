@@ -1,5 +1,37 @@
 # DEVELOPMENT_LOG
 
+## Google Play Description Draft
+
+- Google Play description draft document added
+- App name, short description candidates, and full description draft documented
+- Reference-only fortune content positioning retained
+- Current release scope safety criteria retained
+- Actual Google Play Console input remains Pending
+- Privacy policy URL, contact, data safety form, real store screenshot image production, real device QA, and Play Console internal test upload remain Pending
+- release build, signing setup, and AAB generation remain Pending
+- production calculation logic unchanged
+- manseryeok calculation logic unchanged
+- existing surface element analysis logic unchanged
+- hidden-stem element analysis production connection not added
+- ten gods analysis production connection not added
+- solar time correction not applied
+- createSajuAnalysis return structure unchanged
+- production result shape unchanged
+- saju/fortune result generation logic unchanged
+- UI/design unchanged
+- routing unchanged
+- schemaVersion unchanged
+- existing localStorage keys unchanged
+- localStorage key not added
+- server DB not added
+- login not added
+- real ad SDK not added
+- real payment SDK not added
+- external analysis SDK not added
+- Android native/resource unchanged
+- Play Console input not performed
+- real device QA not performed
+
 ## Google Play Listing Claim Safety
 
 - Google Play listing claim safety document added
