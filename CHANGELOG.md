@@ -2,6 +2,8 @@
 
 ## Added
 
+- 십성 분석 설계 문서 추가
+- 십성 분석 설계 check script 추가
 - 십성 매핑 QA 문서 추가
 - 십성 매핑 QA check script 추가
 - 일간 기준 십성 매핑 데이터셋 추가

@@ -135,6 +135,7 @@
 
 ## Related Docs
 
+- Ten gods analysis design: docs/TEN_GODS_ANALYSIS_DESIGN.md
 - Ten gods mapping: docs/TEN_GODS_MAPPING.md
 - Ten gods source data: src/data/tenGods.ts
 - Saju engine accuracy roadmap: docs/SAJU_ENGINE_ACCURACY_ROADMAP.md

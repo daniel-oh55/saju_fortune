@@ -1,5 +1,36 @@
 # DEVELOPMENT_LOG
 
+## Ten Gods Analysis Design
+
+- 십성 분석 설계 문서 추가
+- 기존 겉오행 분석, 지장간 반영 분석, 십성 분석을 분리하는 방향으로 설계
+- 십성 분석 결과는 별도 draft 결과 구조로 검토
+- 지장간 십성 산출은 후속 후보로 분리
+- production 십성 분석 연결은 Pending 유지
+- 십성 데이터 외부 기준 검증은 Pending 유지
+- production 계산 로직 변경 없음
+- 만세력 계산 로직 변경 없음
+- 기존 겉오행 분석 로직 변경 없음
+- 지장간 반영 오행 분석 변경 없음
+- 십성 분석 구현 없음
+- 십성 분석 production 연결 없음
+- createSajuAnalysis 반환 구조 변경 없음
+- 사주/운세 결과 생성 로직 변경 없음
+- 오늘운세/2026운세/띠별운세 결과 생성 로직 연결 없음
+- UI/디자인 변경 없음
+- routing 변경 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+- localStorage key 추가 없음
+- 서버 DB 추가 없음
+- 로그인 추가 없음
+- 실제 광고 SDK 추가 없음
+- 실제 결제 SDK 추가 없음
+- 외부 분석 SDK 추가 없음
+- Android native/resource 변경 없음
+- Play Console 입력 없음
+- 실제 기기 QA 없음
+
 ## Ten Gods Mapping QA
 
 - 십성 매핑 QA 문서 추가
