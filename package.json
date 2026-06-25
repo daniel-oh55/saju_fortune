@@ -22,6 +22,7 @@
     "check:google-play-privacy-url-input-readiness": "node scripts/checkGooglePlayPrivacyUrlInputReadiness.mjs",
     "check:google-play-screenshot-readiness": "node scripts/checkGooglePlayScreenshotReadiness.mjs",
     "check:advanced-saju-result-structure": "node scripts/checkAdvancedSajuResultStructure.mjs",
+    "check:advanced-saju-engine-release-scope": "node scripts/checkAdvancedSajuEngineReleaseScope.mjs",
     "check:hidden-stems-dataset": "node scripts/checkHiddenStemsDataset.mjs",
     "check:hidden-stems-dataset-qa": "node scripts/checkHiddenStemsDatasetQa.mjs",
     "check:hidden-stems-element-analysis-design": "node scripts/checkHiddenStemsElementAnalysisDesign.mjs",

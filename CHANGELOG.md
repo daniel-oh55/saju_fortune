@@ -2,6 +2,8 @@
 
 ## Added
 
+- Advanced saju engine release scope document added
+- Advanced saju engine release scope check script added
 - Advanced saju result structure design document added
 - Advanced saju result structure check script added
 - Ten gods copy guidelines document added
