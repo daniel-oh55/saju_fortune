@@ -107,6 +107,9 @@ Status: Pending
 - 지장간 데이터 외부 기준 검증: Pending
 - 지장간 데이터셋 QA 문서: docs/HIDDEN_STEMS_DATASET_QA.md 참고
 - 지장간 데이터셋 QA 상태: Pending script verification
+- 지장간 반영 오행 분석 설계 문서: docs/HIDDEN_STEMS_ELEMENT_ANALYSIS_DESIGN.md 참고
+- 지장간 가중치 정책: Pending
+- production 오행 분석 연결: Pending
 
 ### Phase 4. Ten Gods / 십성
 Status: Pending

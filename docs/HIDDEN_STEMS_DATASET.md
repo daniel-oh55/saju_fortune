@@ -77,4 +77,5 @@
 ## Related Docs
 
 - Hidden stems dataset QA: docs/HIDDEN_STEMS_DATASET_QA.md
+- Hidden stems element analysis design: docs/HIDDEN_STEMS_ELEMENT_ANALYSIS_DESIGN.md
 - Saju engine accuracy roadmap: docs/SAJU_ENGINE_ACCURACY_ROADMAP.md
