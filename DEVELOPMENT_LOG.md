@@ -1,5 +1,30 @@
 # DEVELOPMENT_LOG
 
+## Hidden Stems Dataset
+
+- 12지지별 지장간 데이터셋 추가
+- 천간별 오행/음양 메타데이터 포함
+- 지지별 한글명/동물명 포함
+- 외부 검증 상태는 Pending external verification으로 유지
+- production 계산 로직 변경 없음
+- 만세력 계산 로직 변경 없음
+- 기존 겉오행 분석 로직 변경 없음
+- 지장간 반영 오행 분석 추가 없음
+- 사주/운세 결과 생성 로직 변경 없음
+- UI/디자인 변경 없음
+- routing 변경 없음
+- schemaVersion 변경 없음
+- 기존 localStorage key 변경 없음
+- localStorage key 추가 없음
+- 서버 DB 추가 없음
+- 로그인 추가 없음
+- 실제 광고 SDK 추가 없음
+- 실제 결제 SDK 추가 없음
+- 외부 분석 SDK 추가 없음
+- Android native/resource 변경 없음
+- Play Console 입력 없음
+- 실제 기기 QA 없음
+
 ## Solar Time Correction Policy
 
 - 태양시 보정 적용 여부 정책 문서 추가

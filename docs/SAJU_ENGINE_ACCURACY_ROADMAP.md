@@ -101,6 +101,10 @@ Status: Pending
 - 천간/지지 겉오행 분석과 지장간 반영 분석 분리
 - 지장간 반영 후 오행 분포 변화 확인
 - 기존 오행 결과와 호환성 점검
+- 지장간 데이터셋: src/data/hiddenStems.ts
+- 지장간 데이터셋 설명 문서: docs/HIDDEN_STEMS_DATASET.md
+- 지장간 반영 오행 분석 연결: Pending
+- 지장간 데이터 외부 기준 검증: Pending
 
 ### Phase 4. Ten Gods / 십성
 Status: Pending

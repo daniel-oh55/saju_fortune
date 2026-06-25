@@ -1,5 +1,14 @@
 # TODO
 
+## 2026-06-25 Hidden stems dataset TODO
+
+- [x] 12지지별 지장간 데이터셋 추가
+- [x] 지장간 데이터셋 설명 문서 추가
+- [x] 지장간 데이터셋 check script 추가
+- [ ] 지장간 데이터 외부 기준 검증
+- [ ] 지장간 반영 오행 분석 설계
+- [ ] 지장간 반영 오행 분석 구현
+
 ## 2026-06-25 Solar time correction policy TODO
 
 - [x] 태양시 보정 적용 여부 정책 문서 추가
