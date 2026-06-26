@@ -97,6 +97,14 @@ Status: Pending
 - release build/signing/AAB 준비 체크리스트 문서: docs/RELEASE_BUILD_SIGNING_CHECKLIST.md 참고
 - Android release AAB workflow 문서: docs/ANDROID_RELEASE_AAB_WORKFLOW.md 참고
 - Android release AAB workflow 수동 실행 결과 문서: docs/ANDROID_RELEASE_AAB_WORKFLOW_RUN_RESULT.md 참고
+- Android Release AAB artifact QA 문서: docs/ANDROID_RELEASE_AAB_ARTIFACT_QA.md 참고
+- Android Release AAB artifact QA: Draft
+- artifact 다운로드: Pending
+- artifact 압축 해제: Pending
+- `.aab` 파일 존재 확인: Pending
+- signing 상태 확인: Pending
+- Play Console 내부 테스트 업로드: Pending
+- 실제 기기 QA: Pending
 - Android release AAB workflow 파일 추가: Added
 - Android release AAB workflow Node.js version: 22
 - Android release AAB workflow Node.js version 보정: 20에서 22로 변경
