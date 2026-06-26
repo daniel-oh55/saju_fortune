@@ -179,11 +179,13 @@ Status: Pending
 - Google Play 스크린샷 캡션 계획 문서: docs/GOOGLE_PLAY_SCREENSHOT_CAPTION_PLAN.md 참고
 - Google Play 앱 메타데이터 체크리스트 문서: docs/GOOGLE_PLAY_APP_METADATA_CHECKLIST.md 참고
 - Google Play 데이터 보안 양식 초안 체크리스트 문서: docs/GOOGLE_PLAY_DATA_SAFETY_DRAFT_CHECKLIST.md 참고
+- localStorage 데이터 인벤토리 문서: docs/LOCAL_STORAGE_DATA_INVENTORY.md 참고
 - 실제 Google Play Console 입력: Pending
 - 개인정보 처리방침 URL 확정: Pending
 - 문의처 확정: Pending
 - Google Play 데이터 보안 양식 입력: Pending
-- localStorage key 최종 점검: Pending
+- 실제 Google Play 데이터 보안 양식 입력: Pending
+- localStorage key 최종 점검: Draft
 - 실제 스토어 스크린샷 이미지 제작: Pending
 - 샘플 프로필별 사주 결과 QA
 - 금지 표현 검사

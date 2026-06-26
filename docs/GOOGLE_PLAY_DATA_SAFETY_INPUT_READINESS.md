@@ -2,6 +2,7 @@
 
 ## Related Docs
 
+- Local storage data inventory: docs/LOCAL_STORAGE_DATA_INVENTORY.md
 - Google Play data safety draft checklist: docs/GOOGLE_PLAY_DATA_SAFETY_DRAFT_CHECKLIST.md
 
 ## 샘플 프로필 화면 QA 결과 연계

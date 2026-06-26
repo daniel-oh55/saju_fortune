@@ -6,6 +6,8 @@
 
 ## Added
 
+- localStorage 데이터 인벤토리 문서 추가
+- localStorage 데이터 인벤토리 check script 추가
 - Google Play data safety draft checklist document added
 - Google Play data safety draft checklist check script added
 - Google Play app metadata checklist document added

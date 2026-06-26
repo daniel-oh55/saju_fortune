@@ -1,5 +1,23 @@
 # DEVELOPMENT_LOG
 
+## Local Storage Data Inventory
+
+- localStorage 데이터 인벤토리 문서 추가
+- 실제 코드 기준 localStorage 사용 위치와 저장 항목 정리
+- localStorage 중심 사용자 입력 저장 구조 기준 유지
+- 기존 localStorage key 변경 없음
+- localStorage key 추가 없음
+- schemaVersion 변경 없음
+- 실제 Google Play 데이터 보안 양식 입력은 Pending 유지
+- 개인정보 처리방침 URL과 문의처는 Pending 유지
+- production 계산 로직 변경 없음
+- 사주/운세 결과 생성 로직 변경 없음
+- UI/디자인 변경 없음
+- Android native/resource 변경 없음
+- 실제 광고 SDK 추가 없음
+- 실제 결제 SDK 추가 없음
+- 로그인/서버 DB 추가 없음
+
 ## Google Play Data Safety Draft Checklist
 
 - Google Play data safety draft checklist document added
