@@ -25,9 +25,14 @@ const requiredSnippets = [
   'AAB artifact 생성은 Play Console 업로드 완료가 아니다',
   'AAB artifact 생성은 실제 기기 QA 완료가 아니다',
   'AAB artifact 생성은 signing 설정 완료가 아니다',
-  'artifact 다운로드 | Pending',
-  'artifact 압축 해제 | Pending',
-  '`.aab` 파일 존재 확인 | Pending',
+  'artifact 다운로드 | Confirmed',
+  'artifact 압축 해제 | Confirmed',
+  '`.aab` 파일 존재 확인 | Confirmed',
+  'AAB 파일명 기록 | Confirmed',
+  'AAB 파일 크기 기록 | Confirmed',
+  'AAB 파일명: app-release.aab',
+  'AAB 파일 크기: 6,016,271 bytes',
+  'repository commit 여부: artifact zip과 `.aab` 파일은 commit하지 않음',
   'Play Console 업로드 가능 여부 | Pending',
   'signing 상태 확인 | Pending',
   '실제 기기 QA | Pending',
@@ -49,6 +54,9 @@ const wrongPhrases = [
   '실제 스토어 스크린샷 이미지 시작',
   '서양식 보정 적용 여부',
   '양력/음력 샘플 추가 검증',
+  'signing 설정: Completed',
+  'Play Console 업로드: Completed',
+  '실제 기기 QA: Completed',
 ];
 
 const protectedFiles = [
@@ -106,6 +114,20 @@ const diffOutput = execSync(`git diff --name-only -- ${protectedFiles.join(' ')}
 const protectedFilesUnchanged = diffOutput.length === 0;
 logResult('workflow_android_gradle_production_files_unchanged_in_working_diff', protectedFilesUnchanged);
 if (!protectedFilesUnchanged) hasFailure = true;
+
+const trackedFiles = execSync('git ls-files', { encoding: 'utf8' })
+  .split(/\r?\n/)
+  .filter(Boolean);
+const statusFiles = execSync('git status --short --untracked-files=all', { encoding: 'utf8' })
+  .split(/\r?\n/)
+  .filter(Boolean)
+  .map((line) => line.slice(3).trim().replace(/^"|"$/g, ''));
+const artifactFiles = [...trackedFiles, ...statusFiles].filter((path) =>
+  path.endsWith('.aab') || path.endsWith('.zip')
+);
+const artifactFilesAbsent = artifactFiles.length === 0;
+logResult('artifact_zip_and_aab_files_not_added_to_repository', artifactFilesAbsent);
+if (!artifactFilesAbsent) hasFailure = true;
 
 if (hasFailure) {
   console.error('Android release AAB artifact QA check failed');
