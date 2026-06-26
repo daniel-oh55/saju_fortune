@@ -92,6 +92,7 @@
 
 ## Related Docs
 
+- Android release AAB artifact QA: docs/ANDROID_RELEASE_AAB_ARTIFACT_QA.md
 - Android release AAB workflow: docs/ANDROID_RELEASE_AAB_WORKFLOW.md
 - Release workflow design: docs/RELEASE_WORKFLOW_DESIGN.md
 - Release build signing checklist: docs/RELEASE_BUILD_SIGNING_CHECKLIST.md

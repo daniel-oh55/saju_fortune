@@ -1,5 +1,19 @@
 # TODO
 
+## 2026-06-26 Android release AAB artifact QA TODO
+
+- [x] Android Release AAB artifact QA 문서 추가
+- [x] Android Release AAB artifact QA check script 추가
+- [x] run number 3 artifact metadata 기록
+- [ ] artifact 다운로드
+- [ ] artifact 압축 해제
+- [ ] `.aab` 파일 존재 확인
+- [ ] AAB 파일명 기록
+- [ ] AAB 파일 크기 기록
+- [ ] signing 상태 확인
+- [ ] Play Console 내부 테스트 업로드
+- [ ] 실제 기기 QA
+
 ## 2026-06-26 Android release AAB run 3 success TODO
 
 - [x] Android Release AAB run number 3 success 결과 기록

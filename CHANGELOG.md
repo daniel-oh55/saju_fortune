@@ -2,6 +2,9 @@
 
 ## Added
 
+- Android Release AAB artifact QA 문서 추가
+- Android Release AAB artifact QA check script 추가
+- run number 3 artifact metadata 기록
 - Android Release AAB run number 3 success 결과 문서 갱신
 - AAB artifact 생성 확인 기록
 - Android Release AAB workflow Node.js 22 보정

@@ -1,5 +1,23 @@
 # DEVELOPMENT_LOG
 
+## Android Release AAB Artifact QA
+
+- Android Release AAB run number 3 artifact QA 문서 추가
+- artifact name, size, digest 기록
+- AAB artifact 생성은 Play Console 업로드 완료가 아님
+- AAB artifact 생성은 signing 설정 완료가 아님
+- AAB artifact 생성은 실제 기기 QA 완료가 아님
+- artifact 다운로드, 압축 해제, `.aab` 파일 존재 확인은 Pending 유지
+- signing 설정은 Pending 유지
+- GitHub Secrets 실제 입력은 Pending 유지
+- Play Console 내부 테스트 업로드는 Pending 유지
+- 실제 기기 QA는 Pending 유지
+- workflow 파일 변경 없음
+- Android native/Manifest/resource/Gradle 변경 없음
+- production 계산 로직 변경 없음
+- 사주/운세 결과 생성 로직 변경 없음
+- UI/디자인 변경 없음
+
 ## Android Release AAB Run 3 Success
 
 - Android Release AAB workflow run number 3 success 결과 기록
