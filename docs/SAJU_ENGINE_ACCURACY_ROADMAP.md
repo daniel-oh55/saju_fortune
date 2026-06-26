@@ -98,6 +98,8 @@ Status: Pending
 - Android release AAB workflow 문서: docs/ANDROID_RELEASE_AAB_WORKFLOW.md 참고
 - Android release AAB workflow 수동 실행 결과 문서: docs/ANDROID_RELEASE_AAB_WORKFLOW_RUN_RESULT.md 참고
 - Android release AAB workflow 파일 추가: Added
+- Android release AAB workflow Node.js version: 22
+- Android release AAB workflow Node.js version 보정: 20에서 22로 변경
 - Android release AAB workflow 수동 실행: completed / failure
 - AAB artifact 확인: Not created
 - 현재 main 기준 Android Release AAB workflow run 결과: run number 2 failure

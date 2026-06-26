@@ -37,6 +37,7 @@ const requiredDocSnippets = [
   'release AAB workflow 수동 실행: Failed',
   '실패 단계: Sync Android project',
   'Capacitor CLI requires NodeJS >=22.0.0',
+  '후속 보정: Android Release AAB workflow Node.js version을 20에서 22로 변경',
   'AAB artifact 생성: Not created',
   '후속 조치: Pending',
   'GitHub Actions run URL: https://github.com/daniel-oh55/saju_fortune/actions/runs/28224107909',
@@ -46,7 +47,7 @@ const requiredDocSnippets = [
   'GitHub Secrets 실제 입력: Pending',
   'Play Console 내부 테스트 업로드: Pending',
   '실제 Google Play Console 입력: Pending',
-  'workflow 파일 변경 없음',
+  'workflow Node.js version 보정 외 변경 없음',
   'signing 설정 적용 없음',
   'keystore 파일 추가 없음',
   'signing password 기록 없음',
@@ -84,7 +85,6 @@ const wrongPhrases = [
 ];
 
 const unchangedFiles = [
-  '.github/workflows/android-release-aab.yml',
   'android/app/src/main/AndroidManifest.xml',
   'android/app/src/main/res',
   'android/app/build.gradle',

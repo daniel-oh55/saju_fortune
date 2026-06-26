@@ -1,5 +1,16 @@
 # TODO
 
+## 2026-06-26 Android release AAB workflow Node.js version TODO
+
+- [x] Android Release AAB workflow Node.js version 22 보정
+- [x] Android Release AAB workflow Node.js version check script 갱신
+- [ ] Android Release AAB workflow 재실행
+- [ ] AAB artifact 확인
+- [ ] signing 설정
+- [ ] GitHub Secrets 실제 입력
+- [ ] Play Console 내부 테스트 업로드
+- [ ] 실제 기기 QA
+
 ## 2026-06-26 Actual current Android release AAB workflow result TODO
 
 - [x] actual current Android Release AAB workflow 실패 결과 기록
