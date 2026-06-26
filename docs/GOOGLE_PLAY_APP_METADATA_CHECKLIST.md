@@ -49,6 +49,7 @@
 | Full description | docs/GOOGLE_PLAY_DESCRIPTION_DRAFT.md | Draft | 실제 Console 입력 전 최종 검토 필요 |
 | Claim safety guide | docs/GOOGLE_PLAY_LISTING_CLAIM_SAFETY.md | Draft | 과장 표현 방지 기준 |
 | Screenshot caption plan | docs/GOOGLE_PLAY_SCREENSHOT_CAPTION_PLAN.md | Draft | 실제 이미지 제작 전 계획 단계 |
+| Screenshot production checklist | docs/GOOGLE_PLAY_SCREENSHOT_PRODUCTION_CHECKLIST.md | Draft | 실제 이미지 제작 전 준비 항목 |
 
 사용 가능한 방향:
 
@@ -187,6 +188,7 @@
 - Google Play description draft: docs/GOOGLE_PLAY_DESCRIPTION_DRAFT.md
 - Google Play listing claim safety: docs/GOOGLE_PLAY_LISTING_CLAIM_SAFETY.md
 - Google Play screenshot caption plan: docs/GOOGLE_PLAY_SCREENSHOT_CAPTION_PLAN.md
+- Google Play screenshot production checklist: docs/GOOGLE_PLAY_SCREENSHOT_PRODUCTION_CHECKLIST.md
 - Google Play screenshot readiness: docs/GOOGLE_PLAY_SCREENSHOT_READINESS.md
 - Google Play data safety input readiness: docs/GOOGLE_PLAY_DATA_SAFETY_INPUT_READINESS.md
 - Google Play privacy URL input readiness: docs/GOOGLE_PLAY_PRIVACY_URL_INPUT_READINESS.md
@@ -198,15 +200,13 @@
 Addressed planning PR:
 
 - `docs: google play data safety draft checklist`
+- `docs: google play screenshot production checklist`
 
 1. `docs: privacy policy content draft`
    - 개인정보 처리방침 URL 확정 전 문서 초안 작성
 
-2. `docs: google play screenshot production checklist`
-   - 실제 스토어 스크린샷 이미지 제작 전 준비 항목 정리
-
-3. `docs: local storage data inventory`
+2. `docs: local storage data inventory`
    - 실제 localStorage key와 저장 항목 목록 정리
 
-4. `docs: record hidden stems external verification`
+3. `docs: record hidden stems external verification`
    - 지장간 데이터 외부 기준 대조 결과 기록

@@ -6,6 +6,8 @@
 
 ## Added
 
+- Google Play 스크린샷 제작 체크리스트 문서 추가
+- Google Play 스크린샷 제작 체크리스트 check script 추가
 - 개인정보처리방침 내용 초안 문서 추가
 - 개인정보처리방침 내용 초안 check script 추가
 - localStorage 데이터 인벤토리 문서 추가

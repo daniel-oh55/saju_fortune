@@ -26,6 +26,7 @@
     "check:google-play-listing-claim-safety": "node scripts/checkGooglePlayListingClaimSafety.mjs",
     "check:google-play-description-draft": "node scripts/checkGooglePlayDescriptionDraft.mjs",
     "check:google-play-screenshot-caption-plan": "node scripts/checkGooglePlayScreenshotCaptionPlan.mjs",
+    "check:google-play-screenshot-production-checklist": "node scripts/checkGooglePlayScreenshotProductionChecklist.mjs",
     "check:google-play-app-metadata-checklist": "node scripts/checkGooglePlayAppMetadataChecklist.mjs",
     "check:google-play-data-safety-draft-checklist": "node scripts/checkGooglePlayDataSafetyDraftChecklist.mjs",
     "check:local-storage-data-inventory": "node scripts/checkLocalStorageDataInventory.mjs",

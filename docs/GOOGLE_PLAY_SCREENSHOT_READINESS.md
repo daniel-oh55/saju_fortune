@@ -2,6 +2,7 @@
 
 ## Related Docs
 
+- Google Play screenshot production checklist: docs/GOOGLE_PLAY_SCREENSHOT_PRODUCTION_CHECKLIST.md
 - Google Play screenshot caption plan: docs/GOOGLE_PLAY_SCREENSHOT_CAPTION_PLAN.md
 
 ## 2026-06-17 홈 화면 디자인 리프레시 후 확인 필요

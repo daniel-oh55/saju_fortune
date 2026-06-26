@@ -1,5 +1,14 @@
 # TODO
 
+## 2026-06-26 Google Play screenshot production checklist TODO
+
+- [x] Google Play 스크린샷 제작 체크리스트 문서 추가
+- [x] Google Play 스크린샷 제작 체크리스트 check script 추가
+- [ ] 실제 스토어 스크린샷 이미지 제작
+- [ ] 실제 기기 QA
+- [ ] Play Console 내부 테스트 업로드
+- [ ] 실제 Google Play Console 입력
+
 ## 2026-06-26 Privacy policy content draft TODO
 
 - [x] 개인정보처리방침 내용 초안 문서 추가
