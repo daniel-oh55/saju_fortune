@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## Added
+
+- Current Android Release AAB workflow run result pending state documentation
+- Current Android Release AAB workflow run result check criteria
+
 ## Fixed
 
 - Android release AAB workflow 수동 실행 결과 문서의 기준 정합성 보정
