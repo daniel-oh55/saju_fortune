@@ -1,5 +1,15 @@
 # TODO
 
+## 2026-06-26 Release build signing checklist TODO
+
+- [x] release build/signing/AAB 준비 체크리스트 문서 추가
+- [x] release build/signing/AAB 준비 체크리스트 check script 추가
+- [ ] release build 생성
+- [ ] signing 설정
+- [ ] AAB 생성
+- [ ] Play Console 내부 테스트 업로드
+- [ ] 실제 기기 QA
+
 ## 2026-06-26 Google Play screenshot production checklist TODO
 
 - [x] Google Play 스크린샷 제작 체크리스트 문서 추가

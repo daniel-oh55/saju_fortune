@@ -94,6 +94,12 @@ Status: Pending
 - 태양시 보정 적용 여부 정책 문서: docs/SOLAR_TIME_CORRECTION_POLICY.md 참고
 - 태양시 보정 적용 여부: 현재 release scope에서는 미적용
 
+- release build/signing/AAB 준비 체크리스트 문서: docs/RELEASE_BUILD_SIGNING_CHECKLIST.md 참고
+- release build: Pending
+- signing 설정: Pending
+- AAB 생성: Pending
+- Play Console 내부 테스트 업로드: Pending
+- 실제 기기 QA: Pending
 ### Phase 3. Hidden Stems / 지장간
 Status: Pending
 

@@ -1,5 +1,20 @@
 # DEVELOPMENT_LOG
 
+## Release Build Signing Checklist
+
+- release build/signing/AAB 준비 체크리스트 문서 추가
+- Android Debug Build와 release build/AAB/signing 완료 상태 구분
+- keystore 파일과 signing password를 repository에 기록하지 않는 보안 기준 정리
+- release build, signing 설정, AAB 생성은 Pending 유지
+- Play Console 내부 테스트 업로드와 실제 기기 QA는 Pending 유지
+- Android native/Manifest/resource/Gradle 변경 없음
+- production 계산 로직 변경 없음
+- 사주/운세 결과 생성 로직 변경 없음
+- UI/디자인 변경 없음
+- 실제 광고 SDK 추가 없음
+- 실제 결제 SDK 추가 없음
+- 로그인/서버 DB 추가 없음
+
 ## Google Play Screenshot Production Checklist
 
 - Google Play 스크린샷 제작 체크리스트 문서 추가
