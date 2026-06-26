@@ -1,5 +1,22 @@
 # DEVELOPMENT_LOG
 
+## Privacy Policy Content Draft
+
+- 개인정보처리방침 내용 초안 문서 추가
+- 개인정보처리방침 내용 초안 check script 추가
+- localStorage 데이터 인벤토리 기준 저장 가능 항목 반영
+- 개인정보처리방침 URL 확정은 Pending 유지
+- 문의처와 적용일은 Pending 유지
+- 실제 Google Play Console 입력 없음
+- 실제 Google Play 데이터 보안 양식 입력 없음
+- production 분석 로직 변경 없음
+- 사주/운세 결과 생성 로직 변경 없음
+- UI/디자인 변경 없음
+- Android native/resource 변경 없음
+- localStorage key 변경 없음
+- schemaVersion 변경 없음
+- 실제 광고 SDK, 결제 SDK, 로그인, 서버 DB, 외부 분석 SDK 추가 없음
+
 ## Local Storage Data Inventory
 
 - localStorage 데이터 인벤토리 문서 추가

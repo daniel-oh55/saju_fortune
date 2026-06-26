@@ -1,5 +1,15 @@
 # TODO
 
+## 2026-06-26 Privacy policy content draft TODO
+
+- [x] 개인정보처리방침 내용 초안 문서 추가
+- [x] 개인정보처리방침 내용 초안 check script 추가
+- [ ] 개인정보처리방침 URL 확정
+- [ ] 문의처 확정
+- [ ] 적용일 확정
+- [ ] 실제 Google Play Console 입력
+- [ ] 실제 Google Play 데이터 보안 양식 입력
+
 ## 2026-06-26 Local storage data inventory TODO
 
 - [x] localStorage 데이터 인벤토리 문서 추가

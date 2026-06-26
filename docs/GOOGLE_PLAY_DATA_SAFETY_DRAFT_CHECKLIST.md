@@ -110,6 +110,7 @@
 
 ## Related Docs
 
+- Privacy policy content draft: docs/PRIVACY_POLICY_CONTENT_DRAFT.md
 - Local storage data inventory: docs/LOCAL_STORAGE_DATA_INVENTORY.md
 - Google Play app metadata checklist: docs/GOOGLE_PLAY_APP_METADATA_CHECKLIST.md
 - Google Play data safety input readiness: docs/GOOGLE_PLAY_DATA_SAFETY_INPUT_READINESS.md

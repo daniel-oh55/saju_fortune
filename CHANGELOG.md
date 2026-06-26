@@ -6,6 +6,8 @@
 
 ## Added
 
+- 개인정보처리방침 내용 초안 문서 추가
+- 개인정보처리방침 내용 초안 check script 추가
 - localStorage 데이터 인벤토리 문서 추가
 - localStorage 데이터 인벤토리 check script 추가
 - Google Play data safety draft checklist document added
