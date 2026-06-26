@@ -2,6 +2,8 @@
 
 ## Added
 
+- Android Release AAB run number 3 success 결과 문서 갱신
+- AAB artifact 생성 확인 기록
 - Android Release AAB workflow Node.js 22 보정
 - Android Release AAB workflow Node.js version check script 갱신
 - actual current Android Release AAB workflow 수동 실행 결과 문서 갱신

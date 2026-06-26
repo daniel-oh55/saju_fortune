@@ -62,6 +62,12 @@
 - release AAB workflow 추가: Added
 - AAB 생성 결과: Pending workflow run
 - AAB artifact 확인: Pending workflow run
+- Android Release AAB run number 3: completed / success
+- AAB artifact `harupuli-release-aab`: Confirmed
+- AAB artifact size: 5.6 MB
+- signing 설정: Pending
+- Play Console 내부 테스트 업로드: Pending
+- 실제 기기 QA: Pending
 - Play Console 업로드: Pending
 
 주의:
