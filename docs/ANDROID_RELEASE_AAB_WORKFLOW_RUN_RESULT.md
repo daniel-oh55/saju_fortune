@@ -15,11 +15,11 @@
 | Workflow | Android Release AAB |
 | Trigger | workflow_dispatch |
 | Branch | main |
-| Run number | 2 |
+| Run number | 3 |
 | Status | completed |
-| Conclusion | failure |
-| AAB artifact name | Not created |
-| AAB artifact 확인 | Not created |
+| Conclusion | success |
+| AAB artifact name | harupuli-release-aab |
+| AAB artifact 확인 | Confirmed |
 
 주의:
 
@@ -31,27 +31,27 @@
 
 실제 결과:
 
-- release AAB workflow 수동 실행: Failed
-- 실패 단계: Sync Android project
-- 실패 원인 요약: npx cap sync android failed because the Capacitor CLI requires NodeJS >=22.0.0, while the workflow used Node.js 20.20.2.
-- 후속 보정: Android Release AAB workflow Node.js version을 20에서 22로 변경
-- AAB artifact 생성: Not created
-- 후속 조치: Pending
-- GitHub Actions run URL: https://github.com/daniel-oh55/saju_fortune/actions/runs/28224107909
+- release AAB workflow 수동 실행: Completed
+- AAB artifact 생성: Confirmed
+- AAB artifact name: harupuli-release-aab
+- AAB artifact size: 5.6 MB
+- AAB artifact digest: sha256:64ba8d4739cb7716893a4bd4a55e8bdcd26a0139febf8a40c6bb86caec45b9b7
+- GitHub Actions run number: 3
+- GitHub Actions run URL: https://github.com/daniel-oh55/saju_fortune/actions/runs/28225624458
 - Play Console 업로드: Pending
 - signing 설정: Pending
 - 실제 기기 QA: Pending
 
 ## Actual Current Run Note
 
-2026-06-26 기준 현재 main의 Android Release AAB workflow를 workflow_dispatch로 수동 실행했고, run number 2는 failure로 완료되었다.
+2026-06-26 기준 current Android Release AAB workflow를 main branch에서 workflow_dispatch로 수동 실행했고, run number 3은 success로 완료되었다.
 
 확인 메모:
 
-- 실패 단계는 `Sync Android project`이다.
-- `Build release AAB`와 `Upload release AAB` 단계는 skipped 처리되었다.
-- `harupuli-release-aab` artifact는 생성되지 않았다.
-- 후속 PR에서 workflow Node.js version만 20에서 22로 보정한다.
+- 이전 run number 2의 Node.js 버전 오류는 PR #184에서 Node.js 22로 보정했다.
+- `harupuli-release-aab` artifact가 생성되었다.
+- AAB artifact 생성은 Play Console 업로드 완료가 아니다.
+- signing 설정과 Play Console 업로드 가능 여부는 별도 검토가 필요하다.
 
 주의:
 
@@ -73,7 +73,7 @@
 
 이번 PR에서 하지 않는 것:
 
-- workflow Node.js version 보정 외 변경 없음
+- workflow 파일 변경 없음
 - signing 설정 적용 없음
 - keystore 파일 추가 없음
 - signing password 기록 없음

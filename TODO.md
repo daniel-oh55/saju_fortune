@@ -1,5 +1,15 @@
 # TODO
 
+## 2026-06-26 Android release AAB run 3 success TODO
+
+- [x] Android Release AAB run number 3 success 결과 기록
+- [x] AAB artifact 생성 확인 기록
+- [ ] AAB artifact QA
+- [ ] signing 설정
+- [ ] GitHub Secrets 실제 입력
+- [ ] Play Console 내부 테스트 업로드
+- [ ] 실제 기기 QA
+
 ## 2026-06-26 Android release AAB workflow Node.js version TODO
 
 - [x] Android Release AAB workflow Node.js version 22 보정
