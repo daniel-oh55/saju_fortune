@@ -6,6 +6,8 @@
 
 ## Added
 
+- Android release AAB workflow 수동 실행 결과 문서 추가
+- Android release AAB workflow 수동 실행 결과 check script 추가
 - Android release AAB workflow 파일 추가
 - Android release AAB workflow 문서 추가
 - Android release AAB workflow check script 추가
