@@ -96,6 +96,7 @@
 ## Related Docs
 
 - Android release AAB workflow run result: docs/ANDROID_RELEASE_AAB_WORKFLOW_RUN_RESULT.md
+  - current `.github/workflows/android-release-aab.yml` 기준 수동 실행 결과 문서
 - Release workflow design: docs/RELEASE_WORKFLOW_DESIGN.md
 - Release build signing checklist: docs/RELEASE_BUILD_SIGNING_CHECKLIST.md
 - Google Play app metadata checklist: docs/GOOGLE_PLAY_APP_METADATA_CHECKLIST.md

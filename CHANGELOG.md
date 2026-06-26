@@ -2,6 +2,7 @@
 
 ## Fixed
 
+- Android release AAB workflow 수동 실행 결과 문서의 기준 정합성 보정
 - Google Play related check script forbidden phrase rules aligned
 
 ## Added

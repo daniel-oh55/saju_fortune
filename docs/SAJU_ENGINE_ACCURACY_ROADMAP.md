@@ -98,8 +98,8 @@ Status: Pending
 - Android release AAB workflow 문서: docs/ANDROID_RELEASE_AAB_WORKFLOW.md 참고
 - Android release AAB workflow 수동 실행 결과 문서: docs/ANDROID_RELEASE_AAB_WORKFLOW_RUN_RESULT.md 참고
 - Android release AAB workflow 파일 추가: Added
-- Android release AAB workflow 수동 실행: completed / success
-- AAB artifact 확인: Confirmed
+- Android release AAB workflow 수동 실행: Pending current workflow run
+- AAB artifact 확인: Pending current workflow run
 - release workflow 설계 문서: docs/RELEASE_WORKFLOW_DESIGN.md 참고
 - GitHub Actions release workflow 파일 추가: Pending
 - GitHub Secrets 실제 입력: Pending

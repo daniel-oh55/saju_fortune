@@ -15,11 +15,11 @@
 | Workflow | Android Release AAB |
 | Trigger | workflow_dispatch |
 | Branch | main |
-| Run number | 1 |
-| Status | completed |
-| Conclusion | success |
-| AAB artifact name | harupuli-release-aab |
-| AAB artifact 확인 | Confirmed |
+| Run number | Pending current workflow run |
+| Status | Pending current workflow run |
+| Conclusion | Pending current workflow run |
+| AAB artifact name | Pending current workflow run |
+| AAB artifact 확인 | Pending current workflow run |
 
 주의:
 
@@ -31,15 +31,20 @@
 
 실제 결과:
 
-- release AAB workflow 수동 실행: Completed
-- AAB artifact 생성: Confirmed
-- AAB artifact name: harupuli-release-aab
-- AAB artifact size: 5,919,891 bytes
-- AAB artifact digest: sha256:fb84e7dbc831e18982a2ab8a386bae50943fd20dfbb4aae5f1455e2cd9a2eab7
-- GitHub Actions run URL: https://github.com/daniel-oh55/saju_fortune/actions/runs/28070724112
+- release AAB workflow 수동 실행: Pending current workflow run
+- AAB artifact 생성: Pending current workflow run
+- AAB artifact name: Pending current workflow run
+- AAB artifact size: Pending current workflow run
+- AAB artifact digest: Pending current workflow run
+- GitHub Actions run URL: Pending current workflow run
 - Play Console 업로드: Pending
 - signing 설정: Pending
 - 실제 기기 QA: Pending
+
+주의:
+
+- 이전 signing workflow run 기준 결과를 현재 workflow 결과로 기록하지 않는다.
+- 현재 `.github/workflows/android-release-aab.yml` 기준 current workflow run 결과만 기록한다.
 
 ## Signing and Upload Status
 

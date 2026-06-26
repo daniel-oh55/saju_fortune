@@ -28,13 +28,13 @@ const requiredSections = [
 const requiredDocSnippets = [
   'Android Release AAB',
   'workflow_dispatch',
-  'harupuli-release-aab',
-  'Run number | 1',
-  'Status | completed',
-  'Conclusion | success',
-  'AAB artifact 확인 | Confirmed',
-  'release AAB workflow 수동 실행: Completed',
-  'AAB artifact 생성: Confirmed',
+  'AAB artifact name | Pending current workflow run',
+  'Run number | Pending current workflow run',
+  'Status | Pending current workflow run',
+  'Conclusion | Pending current workflow run',
+  'AAB artifact 확인 | Pending current workflow run',
+  'release AAB workflow 수동 실행: Pending current workflow run',
+  'AAB artifact 생성: Pending current workflow run',
   'signing 설정: Pending',
   'GitHub Secrets 실제 입력: Pending',
   'Play Console 내부 테스트 업로드: Pending',
@@ -50,12 +50,21 @@ const requiredDocSnippets = [
   'Gradle 설정 변경 없음',
 ];
 
+const forbiddenDocSnippets = [
+  '28070724112',
+  'Check signing secrets',
+  'Restore upload keystore',
+  'Run number | 1',
+  'AAB artifact size: 5,919,891 bytes',
+  'sha256:fb84e7dbc831e18982a2ab8a386bae50943fd20dfbb4aae5f1455e2cd9a2eab7',
+];
+
 const relatedDocSnippet = 'Android release AAB workflow run result: docs/ANDROID_RELEASE_AAB_WORKFLOW_RUN_RESULT.md';
 
 const roadmapSnippets = [
   'Android release AAB workflow 수동 실행 결과 문서: docs/ANDROID_RELEASE_AAB_WORKFLOW_RUN_RESULT.md 참고',
-  'Android release AAB workflow 수동 실행: completed / success',
-  'AAB artifact 확인: Confirmed',
+  'Android release AAB workflow 수동 실행: Pending current workflow run',
+  'AAB artifact 확인: Pending current workflow run',
   'signing 설정: Pending',
   'Play Console 내부 테스트 업로드: Pending',
   '실제 기기 QA: Pending',
@@ -114,6 +123,12 @@ for (const snippet of requiredDocSnippets) {
   const found = doc.includes(snippet);
   logResult(`doc_includes_${labelFromSnippet(snippet)}`, found);
   if (!found) hasFailure = true;
+}
+
+for (const snippet of forbiddenDocSnippets) {
+  const absent = !doc.includes(snippet);
+  logResult(`doc_excludes_${labelFromSnippet(snippet)}`, absent);
+  if (!absent) hasFailure = true;
 }
 
 for (const path of [androidReleaseWorkflowDocPath, releaseWorkflowDesignPath]) {
