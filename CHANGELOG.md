@@ -2,6 +2,8 @@
 
 ## Added
 
+- actual current Android Release AAB workflow 수동 실행 결과 문서 갱신
+- actual current Android Release AAB workflow 결과 check script 갱신
 - Current Android Release AAB workflow run result pending state documentation
 - Current Android Release AAB workflow run result check criteria
 

@@ -15,11 +15,11 @@
 | Workflow | Android Release AAB |
 | Trigger | workflow_dispatch |
 | Branch | main |
-| Run number | Pending current workflow run |
-| Status | Pending current workflow run |
-| Conclusion | Pending current workflow run |
-| AAB artifact name | Pending current workflow run |
-| AAB artifact 확인 | Pending current workflow run |
+| Run number | 2 |
+| Status | completed |
+| Conclusion | failure |
+| AAB artifact name | Not created |
+| AAB artifact 확인 | Not created |
 
 주의:
 
@@ -31,25 +31,26 @@
 
 실제 결과:
 
-- release AAB workflow 수동 실행: Pending current workflow run
-- AAB artifact 생성: Pending current workflow run
-- AAB artifact name: Pending current workflow run
-- AAB artifact size: Pending current workflow run
-- AAB artifact digest: Pending current workflow run
-- GitHub Actions run URL: Pending current workflow run
+- release AAB workflow 수동 실행: Failed
+- 실패 단계: Sync Android project
+- 실패 원인 요약: npx cap sync android failed because the Capacitor CLI requires NodeJS >=22.0.0, while the workflow used Node.js 20.20.2.
+- AAB artifact 생성: Not created
+- 후속 조치: Pending
+- GitHub Actions run URL: https://github.com/daniel-oh55/saju_fortune/actions/runs/28224107909
 - Play Console 업로드: Pending
 - signing 설정: Pending
 - 실제 기기 QA: Pending
 
-## Current Run Availability Note
+## Actual Current Run Note
 
-2026-06-26 기준 현재 main의 Android Release AAB workflow run 결과 확인을 시도했으나, 현재 workflow 기준으로 기록할 신규 run 결과는 아직 확인되지 않았다.
+2026-06-26 기준 현재 main의 Android Release AAB workflow를 workflow_dispatch로 수동 실행했고, run number 2는 failure로 완료되었다.
 
 확인 메모:
 
-- GitHub API에서 확인된 이전 signing workflow run은 과거 signing workflow 기준 결과이므로 현재 workflow run 결과로 기록하지 않는다.
-- 현재 문서는 신규 current workflow run이 확인되기 전까지 `Pending current workflow run` 상태를 유지한다.
-- workflow dispatch는 이 PR에서 수행하지 않았으며, workflow 파일도 변경하지 않았다.
+- 실패 단계는 `Sync Android project`이다.
+- `Build release AAB`와 `Upload release AAB` 단계는 skipped 처리되었다.
+- `harupuli-release-aab` artifact는 생성되지 않았다.
+- workflow 파일은 변경하지 않았다.
 
 주의:
 
