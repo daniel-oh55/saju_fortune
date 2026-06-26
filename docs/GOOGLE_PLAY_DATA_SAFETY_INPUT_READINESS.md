@@ -2,6 +2,7 @@
 
 ## Related Docs
 
+- Privacy policy content draft: docs/PRIVACY_POLICY_CONTENT_DRAFT.md
 - Local storage data inventory: docs/LOCAL_STORAGE_DATA_INVENTORY.md
 - Google Play data safety draft checklist: docs/GOOGLE_PLAY_DATA_SAFETY_DRAFT_CHECKLIST.md
 

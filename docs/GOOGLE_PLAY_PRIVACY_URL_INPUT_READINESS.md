@@ -9,6 +9,7 @@
 ## 문의처 확정 준비
 
 - Google Play Console 개인정보 처리방침 URL 입력 전 문의처 상태를 확인해야 합니다.
+- 개인정보처리방침 내용 초안 문서는 `docs/PRIVACY_POLICY_CONTENT_DRAFT.md`입니다.
 - 문의처 확정 준비 문서는 `docs/PRIVACY_POLICY_CONTACT_READINESS.md`입니다.
 - 실제 문의처가 확정되기 전에는 Console 입력 전 최종 검토가 필요합니다.
 

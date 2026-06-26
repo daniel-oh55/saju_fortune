@@ -118,6 +118,7 @@
 
 ## Related Docs
 
+- Privacy policy content draft: docs/PRIVACY_POLICY_CONTENT_DRAFT.md
 - Google Play data safety draft checklist: docs/GOOGLE_PLAY_DATA_SAFETY_DRAFT_CHECKLIST.md
 - Google Play app metadata checklist: docs/GOOGLE_PLAY_APP_METADATA_CHECKLIST.md
 - Google Play data safety input readiness: docs/GOOGLE_PLAY_DATA_SAFETY_INPUT_READINESS.md
@@ -126,11 +127,8 @@
 
 ## Suggested Follow-up PRs
 
-1. `docs: privacy policy content draft`
-   - 개인정보 처리방침 URL 확정 전 문서 초안 작성
-
-2. `docs: google play screenshot production checklist`
+1. `docs: google play screenshot production checklist`
    - 실제 스토어 스크린샷 이미지 제작 전 준비 항목 정리
 
-3. `docs: release build signing checklist`
+2. `docs: release build signing checklist`
    - release build, signing 설정, AAB 생성 전 준비 항목 정리
