@@ -1,5 +1,14 @@
 # TODO
 
+## 2026-06-26 Google Play screenshot caption plan TODO
+
+- [x] Google Play screenshot caption plan document added
+- [x] Google Play screenshot caption plan check script added
+- [ ] Real store screenshot image production
+- [ ] Google Play app metadata checklist
+- [ ] Actual Google Play Console input
+- [ ] Play Console internal test upload
+
 ## 2026-06-25 Google Play description draft TODO
 
 - [x] Google Play description draft document added

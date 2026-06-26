@@ -164,6 +164,7 @@
 
 ## Related Docs
 
+- Google Play screenshot caption plan: docs/GOOGLE_PLAY_SCREENSHOT_CAPTION_PLAN.md
 - Google Play listing claim safety: docs/GOOGLE_PLAY_LISTING_CLAIM_SAFETY.md
 - Advanced saju engine release scope: docs/ADVANCED_SAJU_ENGINE_RELEASE_SCOPE.md
 - Advanced saju result structure: docs/ADVANCED_SAJU_RESULT_STRUCTURE.md
@@ -175,11 +176,11 @@
 
 ## Suggested Follow-up PRs
 
-1. `docs: google play screenshot caption plan`
-   - 실제 스토어 스크린샷 이미지 제작 전 캡션과 화면 구성을 정리
-
-2. `docs: google play app metadata checklist`
+1. `docs: google play app metadata checklist`
    - 앱 이름, 카테고리, 문의처, 개인정보 처리방침 URL, 데이터 보안 양식 입력값 체크리스트 정리
+
+2. `docs: google play screenshot production checklist`
+   - 실제 스토어 스크린샷 이미지 제작 전 준비 항목 정리
 
 3. `docs: record hidden stems external verification`
    - 지장간 데이터 외부 기준 대조 결과 기록

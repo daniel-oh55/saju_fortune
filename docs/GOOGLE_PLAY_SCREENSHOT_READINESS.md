@@ -1,5 +1,9 @@
 # GOOGLE_PLAY_SCREENSHOT_READINESS
 
+## Related Docs
+
+- Google Play screenshot caption plan: docs/GOOGLE_PLAY_SCREENSHOT_CAPTION_PLAN.md
+
 ## 2026-06-17 홈 화면 디자인 리프레시 후 확인 필요
 
 - 홈 화면이 `고요한 밤의 운세 다이어리` 콘셉트로 1차 리프레시되었습니다.
