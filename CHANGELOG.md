@@ -2,6 +2,8 @@
 
 ## Added
 
+- Google Play screenshot caption plan document added
+- Google Play screenshot caption plan check script added
 - Google Play description draft document added
 - Google Play description draft check script added
 - Google Play listing claim safety document added

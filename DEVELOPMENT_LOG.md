@@ -1,5 +1,26 @@
 # DEVELOPMENT_LOG
 
+## Google Play Screenshot Caption Plan
+
+- Google Play screenshot caption plan document added
+- Candidate store screenshot screens and caption candidates documented
+- Allowed captions and avoided captions separated
+- Visual direction notes documented
+- Real store screenshot image production remains Pending
+- Actual Google Play Console input remains Pending
+- Real device QA and Play Console internal test upload remain Pending
+- production calculation logic unchanged
+- saju/fortune result generation logic unchanged
+- UI/design unchanged
+- routing unchanged
+- schemaVersion unchanged
+- existing localStorage keys unchanged
+- localStorage key not added
+- Android native/resource unchanged
+- real ad SDK not added
+- real payment SDK not added
+- login and server DB not added
+
 ## Google Play Description Draft
 
 - Google Play description draft document added

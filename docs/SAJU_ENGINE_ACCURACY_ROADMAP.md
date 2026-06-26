@@ -176,6 +176,7 @@ Status: Pending
 
 - Google Play 등록 문구 안전성 문서: docs/GOOGLE_PLAY_LISTING_CLAIM_SAFETY.md 참고
 - Google Play 설명 초안 문서: docs/GOOGLE_PLAY_DESCRIPTION_DRAFT.md 참고
+- Google Play 스크린샷 캡션 계획 문서: docs/GOOGLE_PLAY_SCREENSHOT_CAPTION_PLAN.md 참고
 - 실제 Google Play Console 입력: Pending
 - 실제 스토어 스크린샷 이미지 제작: Pending
 - 샘플 프로필별 사주 결과 QA
