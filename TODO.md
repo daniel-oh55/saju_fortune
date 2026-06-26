@@ -1,5 +1,16 @@
 # TODO
 
+## 2026-06-26 Google Play app metadata checklist TODO
+
+- [x] Google Play app metadata checklist document added
+- [x] Google Play app metadata checklist check script added
+- [ ] Actual Google Play Console input
+- [ ] Privacy policy URL finalization
+- [ ] Contact finalization
+- [ ] Google Play data safety form input
+- [ ] Real store screenshot image production
+- [ ] Play Console internal test upload
+
 ## 2026-06-26 Google Play screenshot caption plan TODO
 
 - [x] Google Play screenshot caption plan document added

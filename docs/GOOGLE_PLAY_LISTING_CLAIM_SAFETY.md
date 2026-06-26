@@ -165,6 +165,7 @@ Google Play 등록 필드별 내부 기준:
 
 ## Related Docs
 
+- Google Play app metadata checklist: docs/GOOGLE_PLAY_APP_METADATA_CHECKLIST.md
 - Google Play screenshot caption plan: docs/GOOGLE_PLAY_SCREENSHOT_CAPTION_PLAN.md
 - Google Play description draft: docs/GOOGLE_PLAY_DESCRIPTION_DRAFT.md
 - Advanced saju engine release scope: docs/ADVANCED_SAJU_ENGINE_RELEASE_SCOPE.md
