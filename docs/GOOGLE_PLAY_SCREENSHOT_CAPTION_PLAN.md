@@ -133,6 +133,7 @@ Google Play 스크린샷 후보 화면:
 
 ## Related Docs
 
+- Google Play screenshot production checklist: docs/GOOGLE_PLAY_SCREENSHOT_PRODUCTION_CHECKLIST.md
 - Google Play app metadata checklist: docs/GOOGLE_PLAY_APP_METADATA_CHECKLIST.md
 - Google Play description draft: docs/GOOGLE_PLAY_DESCRIPTION_DRAFT.md
 - Google Play listing claim safety: docs/GOOGLE_PLAY_LISTING_CLAIM_SAFETY.md
@@ -145,18 +146,16 @@ Google Play 스크린샷 후보 화면:
 Addressed planning PR:
 
 - `docs: google play app metadata checklist`
+- `docs: google play screenshot production checklist`
 
-1. `docs: google play screenshot production checklist`
-   - 실제 스토어 스크린샷 이미지 제작 전 준비 항목 정리
-
-2. `docs: google play data safety draft checklist`
+1. `docs: google play data safety draft checklist`
    - localStorage 중심 저장 구조 기준 데이터 보안 양식 검토 항목 정리
 
-3. `docs: privacy policy content draft`
+2. `docs: privacy policy content draft`
    - 개인정보 처리방침 URL 확정 전 문서 초안 작성
 
-4. `docs: record hidden stems external verification`
+3. `docs: record hidden stems external verification`
    - 지장간 데이터 외부 기준 대조 결과 기록
 
-5. `docs: record ten gods external verification`
+4. `docs: record ten gods external verification`
    - 십성 데이터 외부 기준 대조 결과 기록

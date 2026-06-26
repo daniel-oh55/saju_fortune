@@ -1,5 +1,21 @@
 # DEVELOPMENT_LOG
 
+## Google Play Screenshot Production Checklist
+
+- Google Play 스크린샷 제작 체크리스트 문서 추가
+- 실제 스크린샷 제작 전 후보 화면, 캡션 출처, 시각 방향, 캡처 조건 정리
+- 실제 스토어 스크린샷 이미지 제작은 Pending 유지
+- 실제 Google Play Console 입력은 Pending 유지
+- 실제 기기 QA와 Play Console 내부 테스트 업로드는 Pending 유지
+- release build, signing 설정, AAB 생성은 Pending 유지
+- production 계산 로직 변경 없음
+- 사주/운세 결과 생성 로직 변경 없음
+- UI/디자인 변경 없음
+- Android native/resource 변경 없음
+- 실제 광고 SDK 추가 없음
+- 실제 결제 SDK 추가 없음
+- 로그인/서버 DB 추가 없음
+
 ## Privacy Policy Content Draft
 
 - 개인정보처리방침 내용 초안 문서 추가
