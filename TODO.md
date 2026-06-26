@@ -1,5 +1,14 @@
 # TODO
 
+## 2026-06-26 Local storage data inventory TODO
+
+- [x] localStorage 데이터 인벤토리 문서 추가
+- [x] localStorage 데이터 인벤토리 check script 추가
+- [ ] localStorage key 최종 검토
+- [ ] 실제 Google Play 데이터 보안 양식 입력
+- [ ] 개인정보 처리방침 URL 확정
+- [ ] 문의처 확정
+
 ## 2026-06-26 Google Play data safety draft checklist TODO
 
 - [x] Google Play data safety draft checklist document added
