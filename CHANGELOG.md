@@ -2,6 +2,8 @@
 
 ## Added
 
+- Google Play app metadata checklist document added
+- Google Play app metadata checklist check script added
 - Google Play screenshot caption plan document added
 - Google Play screenshot caption plan check script added
 - Google Play description draft document added

@@ -1,5 +1,27 @@
 # DEVELOPMENT_LOG
 
+## Google Play App Metadata Checklist
+
+- Google Play app metadata checklist document added
+- App name, default language, app type, app category, and tag readiness documented
+- Short description, full description, and screenshot caption draft sources linked
+- Contact, privacy policy URL, and data safety form readiness documented
+- Real store screenshot image production remains Pending
+- Actual Google Play Console input remains Pending
+- Real device QA and Play Console internal test upload remain Pending
+- release build, signing setup, and AAB generation remain Pending
+- production calculation logic unchanged
+- saju/fortune result generation logic unchanged
+- UI/design unchanged
+- routing unchanged
+- schemaVersion unchanged
+- existing localStorage keys unchanged
+- localStorage key not added
+- Android native/resource unchanged
+- real ad SDK not added
+- real payment SDK not added
+- login and server DB not added
+
 ## Google Play Screenshot Caption Plan
 
 - Google Play screenshot caption plan document added
