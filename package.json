@@ -27,6 +27,7 @@
     "check:google-play-description-draft": "node scripts/checkGooglePlayDescriptionDraft.mjs",
     "check:google-play-screenshot-caption-plan": "node scripts/checkGooglePlayScreenshotCaptionPlan.mjs",
     "check:google-play-screenshot-production-checklist": "node scripts/checkGooglePlayScreenshotProductionChecklist.mjs",
+    "check:android-release-aab-workflow": "node scripts/checkAndroidReleaseAabWorkflow.mjs",
     "check:release-workflow-design": "node scripts/checkReleaseWorkflowDesign.mjs",
     "check:release-build-signing-checklist": "node scripts/checkReleaseBuildSigningChecklist.mjs",
     "check:google-play-app-metadata-checklist": "node scripts/checkGooglePlayAppMetadataChecklist.mjs",

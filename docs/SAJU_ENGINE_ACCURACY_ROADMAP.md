@@ -95,6 +95,10 @@ Status: Pending
 - 태양시 보정 적용 여부: 현재 release scope에서는 미적용
 
 - release build/signing/AAB 준비 체크리스트 문서: docs/RELEASE_BUILD_SIGNING_CHECKLIST.md 참고
+- Android release AAB workflow 문서: docs/ANDROID_RELEASE_AAB_WORKFLOW.md 참고
+- Android release AAB workflow 파일 추가: Added
+- Android release AAB workflow 수동 실행: Pending
+- AAB artifact 확인: Pending
 - release workflow 설계 문서: docs/RELEASE_WORKFLOW_DESIGN.md 참고
 - GitHub Actions release workflow 파일 추가: Pending
 - GitHub Secrets 실제 입력: Pending
