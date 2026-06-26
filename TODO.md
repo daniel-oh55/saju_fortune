@@ -1,5 +1,14 @@
 # TODO
 
+## 2026-06-26 Google Play check phrase alignment TODO
+
+- [x] Google Play check script forbidden phrase rules aligned
+- [x] `태양시 보정 적용 여부` removed from forbidden phrase checks
+- [x] `서양식 보정 적용 여부` forbidden phrase check retained
+- [x] `실제 스토어 스크린샷 이미지 시작` forbidden phrase check added
+- [ ] Actual Google Play Console input
+- [ ] Real store screenshot image production
+
 ## 2026-06-26 Google Play app metadata checklist TODO
 
 - [x] Google Play app metadata checklist document added

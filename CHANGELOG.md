@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Fixed
+
+- Google Play related check script forbidden phrase rules aligned
+
 ## Added
 
 - Google Play app metadata checklist document added

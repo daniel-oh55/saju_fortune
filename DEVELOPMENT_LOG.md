@@ -1,5 +1,19 @@
 # DEVELOPMENT_LOG
 
+## Google Play Check Phrase Alignment
+
+- Google Play related check script forbidden phrase rules aligned
+- Correct phrase `태양시 보정 적용 여부` is no longer treated as a forbidden phrase
+- Wrong phrase `서양식 보정 적용 여부` remains checked
+- Wrong phrase `실제 스토어 스크린샷 이미지 시작` is checked
+- Wrong phrase `양력/음력 샘플 추가 검증` remains checked
+- production calculation logic unchanged
+- saju/fortune result generation logic unchanged
+- UI/design unchanged
+- actual Google Play Console input not performed
+- real store screenshot image production not performed
+- Android native/resource unchanged
+
 ## Google Play App Metadata Checklist
 
 - Google Play app metadata checklist document added

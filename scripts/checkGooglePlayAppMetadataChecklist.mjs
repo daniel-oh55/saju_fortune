@@ -75,12 +75,12 @@ const relatedDocPaths = [descriptionDraftPath, claimSafetyPath, screenshotCaptio
 
 const forbiddenDocSnippets = ['Completed', 'Pass', 'Done'];
 const wrongPhrases = [
-  '실제 스토어 스크린샷 이미지 제작 완료',
+  '실제 스토어 스크린샷 이미지 시작',
   '실제 Google Play Console 입력 완료',
   '개인정보 처리방침 URL 확정 완료',
   '문의처 확정 완료',
   'Google Play 데이터 보안 양식 입력 완료',
-  '태양시 보정 적용 여부',
+  '서양식 보정 적용 여부',
   '양력/음력 샘플 추가 검증',
 ];
 
