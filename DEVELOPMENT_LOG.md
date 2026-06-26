@@ -1,5 +1,23 @@
 # DEVELOPMENT_LOG
 
+## Google Play Data Safety Draft Checklist
+
+- Google Play data safety draft checklist document added
+- Current app state documented as no server DB, no login, no real ad SDK, no real payment SDK, and no external analytics SDK
+- Data safety review items documented based on localStorage centered user input storage
+- Actual Google Play data safety form input remains Pending
+- Privacy policy URL and contact remain Pending
+- localStorage key final review remains Pending
+- production calculation logic unchanged
+- saju/fortune result generation logic unchanged
+- UI/design unchanged
+- schemaVersion unchanged
+- existing localStorage keys unchanged
+- Android native/resource unchanged
+- real ad SDK not added
+- real payment SDK not added
+- login and server DB not added
+
 ## Google Play Check Phrase Alignment
 
 - Google Play related check script forbidden phrase rules aligned
