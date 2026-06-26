@@ -1,5 +1,16 @@
 # TODO
 
+## 2026-06-27 Android release AAB artifact inspection TODO
+
+- [x] artifact 다운로드 확인
+- [x] artifact 압축 해제 확인
+- [x] `.aab` 파일 존재 확인
+- [x] AAB 파일명 기록
+- [x] AAB 파일 크기 기록
+- [ ] signing 상태 확인
+- [ ] Play Console 내부 테스트 업로드
+- [ ] 실제 기기 QA
+
 ## 2026-06-26 Android release AAB artifact QA TODO
 
 - [x] Android Release AAB artifact QA 문서 추가

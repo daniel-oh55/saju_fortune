@@ -38,6 +38,8 @@
 - AAB artifact digest: sha256:64ba8d4739cb7716893a4bd4a55e8bdcd26a0139febf8a40c6bb86caec45b9b7
 - GitHub Actions run number: 3
 - GitHub Actions run URL: https://github.com/daniel-oh55/saju_fortune/actions/runs/28225624458
+- Android Release AAB artifact inspection: docs/ANDROID_RELEASE_AAB_ARTIFACT_QA.md 참고
+- artifact 다운로드/압축 해제/`.aab` 파일 존재 확인은 PR #187에서 별도 기록
 - Play Console 업로드: Pending
 - signing 설정: Pending
 - 실제 기기 QA: Pending

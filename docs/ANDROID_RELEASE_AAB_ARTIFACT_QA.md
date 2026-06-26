@@ -35,11 +35,11 @@
 | AAB artifact name 확인 | Confirmed | harupuli-release-aab |
 | AAB artifact size 기록 | Confirmed | 5.6 MB |
 | AAB artifact digest 기록 | Confirmed | sha256 기록 |
-| artifact 다운로드 | Pending | 실제 다운로드 확인 전까지 Pending |
-| artifact 압축 해제 | Pending | zip 내부 확인 전까지 Pending |
-| `.aab` 파일 존재 확인 | Pending | 실제 파일 확인 전까지 Pending |
-| AAB 파일명 기록 | Pending | 실제 파일 확인 후 기록 |
-| AAB 파일 크기 기록 | Pending | 실제 파일 확인 후 기록 |
+| artifact 다운로드 | Confirmed | run number 3 artifact 기준 |
+| artifact 압축 해제 | Confirmed | 임시 디렉터리에서 확인 |
+| `.aab` 파일 존재 확인 | Confirmed | app-release.aab |
+| AAB 파일명 기록 | Confirmed | app-release.aab |
+| AAB 파일 크기 기록 | Confirmed | 6,016,271 bytes |
 | Play Console 업로드 가능 여부 | Pending | 실제 업로드 전까지 Pending |
 | signing 상태 확인 | Pending | 실제 signing 검증 전까지 Pending |
 | 실제 기기 QA | Pending | 실제 설치/실행 확인 전까지 Pending |
@@ -59,11 +59,21 @@
 
 현재 상태:
 
-- artifact 다운로드: Pending
-- artifact 압축 해제: Pending
-- `.aab` 파일 존재 확인: Pending
+- artifact 다운로드: Confirmed
+- artifact 압축 해제: Confirmed
+- `.aab` 파일 존재 확인: Confirmed
+- AAB 파일명: app-release.aab
+- AAB 파일 크기: 6,016,271 bytes
+- artifact 확인 위치: 임시 디렉터리
+- repository commit 여부: artifact zip과 `.aab` 파일은 commit하지 않음
 - signing 상태 확인: Pending
 - Play Console 내부 테스트 업로드: Pending
+
+주의:
+
+- artifact 다운로드/압축 해제 확인은 Play Console 업로드 완료가 아니다.
+- `.aab` 파일 존재 확인은 signing 설정 완료가 아니다.
+- `.aab` 파일 존재 확인은 실제 기기 QA 완료가 아니다.
 
 ## Signing and Upload Status
 
