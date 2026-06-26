@@ -18,6 +18,7 @@ const requiredPaths = [
 const requiredWorkflowSnippets = [
   'name: Android Release AAB',
   'workflow_dispatch',
+  'node-version: 22',
   'npm ci',
   'npm run build',
   'npx cap sync android',
@@ -33,6 +34,7 @@ const forbiddenWorkflowSnippets = [
   'keystore/upload-keystore.jks',
   'Check signing secrets',
   'Restore upload keystore',
+  'node-version: 20',
 ];
 
 const requiredSections = [
@@ -49,6 +51,8 @@ const requiredSections = [
 
 const requiredDocSnippets = [
   'Android release AAB workflow 파일 추가: Added',
+  'Node.js version: 22',
+  'Node.js version 보정: 20에서 22로 변경',
   'release build 실행 시도: Pending workflow run',
   'signing 설정: Pending',
   'keystore 파일: Pending',
@@ -63,6 +67,7 @@ const requiredDocSnippets = [
   'Play Console 내부 테스트 업로드 없음',
   'AndroidManifest.xml 변경 없음',
   'Android resource 파일 변경 없음',
+  'Gradle 설정 변경 없음',
 ];
 
 const relatedDocSnippet = 'Android release AAB workflow: docs/ANDROID_RELEASE_AAB_WORKFLOW.md';

@@ -1,5 +1,22 @@
 # DEVELOPMENT_LOG
 
+## Android Release AAB Workflow Node.js Version
+
+- Android Release AAB workflow Node.js version을 20에서 22로 보정
+- Capacitor CLI의 NodeJS >=22.0.0 요구 조건에 맞게 workflow 설정 갱신
+- Android release AAB workflow check script에 Node.js 22 기준 추가
+- Android release AAB workflow run result check script에 후속 보정 문구 반영
+- signing 설정은 Pending 유지
+- GitHub Secrets 실제 입력은 Pending 유지
+- Play Console 내부 테스트 업로드는 Pending 유지
+- 실제 기기 QA는 Pending 유지
+- keystore 파일 추가 없음
+- signing password 기록 없음
+- Android native/Manifest/resource/Gradle 변경 없음
+- production 계산 로직 변경 없음
+- 사주/운세 결과 생성 로직 변경 없음
+- UI/디자인 변경 없음
+
 ## Actual Current Android Release AAB Workflow Result
 
 - actual current Android Release AAB workflow 수동 실행 결과 기록

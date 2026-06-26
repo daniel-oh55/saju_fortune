@@ -34,6 +34,7 @@
 - release AAB workflow 수동 실행: Failed
 - 실패 단계: Sync Android project
 - 실패 원인 요약: npx cap sync android failed because the Capacitor CLI requires NodeJS >=22.0.0, while the workflow used Node.js 20.20.2.
+- 후속 보정: Android Release AAB workflow Node.js version을 20에서 22로 변경
 - AAB artifact 생성: Not created
 - 후속 조치: Pending
 - GitHub Actions run URL: https://github.com/daniel-oh55/saju_fortune/actions/runs/28224107909
@@ -50,7 +51,7 @@
 - 실패 단계는 `Sync Android project`이다.
 - `Build release AAB`와 `Upload release AAB` 단계는 skipped 처리되었다.
 - `harupuli-release-aab` artifact는 생성되지 않았다.
-- workflow 파일은 변경하지 않았다.
+- 후속 PR에서 workflow Node.js version만 20에서 22로 보정한다.
 
 주의:
 
@@ -72,7 +73,7 @@
 
 이번 PR에서 하지 않는 것:
 
-- workflow 파일 변경 없음
+- workflow Node.js version 보정 외 변경 없음
 - signing 설정 적용 없음
 - keystore 파일 추가 없음
 - signing password 기록 없음

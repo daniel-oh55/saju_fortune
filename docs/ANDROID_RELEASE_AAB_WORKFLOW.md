@@ -11,6 +11,8 @@
 ## Workflow Status
 
 - Android release AAB workflow 파일 추가: Added
+- Node.js version: 22
+- Node.js version 보정: 20에서 22로 변경
 - workflow_dispatch 수동 실행: Added
 - release build 실행 시도: Pending workflow run
 - signing 설정: Pending
@@ -29,7 +31,7 @@
 예상 단계:
 
 - Checkout repository
-- Set up Node.js
+- Set up Node.js 22
 - Install dependencies
 - Build web app
 - Set up JDK
@@ -80,6 +82,7 @@
 - 실제 기기 QA 없음
 - AndroidManifest.xml 변경 없음
 - Android resource 파일 변경 없음
+- Gradle 설정 변경 없음
 - production 계산 로직 변경 없음
 - 사주/운세 결과 생성 로직 변경 없음
 - UI/디자인 변경 없음
