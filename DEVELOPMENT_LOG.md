@@ -1,5 +1,20 @@
 # DEVELOPMENT_LOG
 
+## Android Release AAB Workflow Run Result Alignment
+
+- Android release AAB workflow 수동 실행 결과 문서의 기준 정합성 보정
+- 이전 signing workflow run 기준 기록 제거
+- 현재 main의 Android Release AAB workflow 기준 결과로 정리
+- signing 설정은 Pending 유지
+- GitHub Secrets 실제 입력은 Pending 유지
+- Play Console 내부 테스트 업로드는 Pending 유지
+- 실제 기기 QA는 Pending 유지
+- workflow 파일 변경 없음
+- Android native/Manifest/resource/Gradle 변경 없음
+- production 계산 로직 변경 없음
+- 사주/운세 결과 생성 로직 변경 없음
+- UI/디자인 변경 없음
+
 ## Android Release AAB Workflow Run Result
 
 - Android Release AAB workflow 수동 실행 결과 기록

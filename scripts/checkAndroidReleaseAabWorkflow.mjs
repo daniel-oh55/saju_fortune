@@ -70,8 +70,8 @@ const relatedDocSnippet = 'Android release AAB workflow: docs/ANDROID_RELEASE_AA
 const roadmapSnippets = [
   'Android release AAB workflow 문서: docs/ANDROID_RELEASE_AAB_WORKFLOW.md 참고',
   'Android release AAB workflow 파일 추가: Added',
-  'Android release AAB workflow 수동 실행: completed / success',
-  'AAB artifact 확인: Confirmed',
+  'Android release AAB workflow 수동 실행: Pending current workflow run',
+  'AAB artifact 확인: Pending current workflow run',
   'signing 설정: Pending',
   'Play Console 내부 테스트 업로드: Pending',
 ];
