@@ -138,6 +138,7 @@ AAB artifact 정책:
 
 ## Related Docs
 
+- Android release AAB workflow: docs/ANDROID_RELEASE_AAB_WORKFLOW.md
 - Release build signing checklist: docs/RELEASE_BUILD_SIGNING_CHECKLIST.md
 - Google Play app metadata checklist: docs/GOOGLE_PLAY_APP_METADATA_CHECKLIST.md
 - Google Play screenshot production checklist: docs/GOOGLE_PLAY_SCREENSHOT_PRODUCTION_CHECKLIST.md

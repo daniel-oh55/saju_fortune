@@ -1,5 +1,17 @@
 # TODO
 
+## 2026-06-26 Android release AAB workflow TODO
+
+- [x] Android release AAB workflow 파일 추가
+- [x] Android release AAB workflow 문서 추가
+- [x] Android release AAB workflow check script 추가
+- [ ] Android release AAB workflow 수동 실행
+- [ ] AAB artifact 확인
+- [ ] signing 설정
+- [ ] GitHub Secrets 실제 입력
+- [ ] Play Console 내부 테스트 업로드
+- [ ] 실제 기기 QA
+
 ## 2026-06-26 Release workflow design TODO
 
 - [x] release workflow 설계 문서 추가

@@ -1,5 +1,21 @@
 # DEVELOPMENT_LOG
 
+## Android Release AAB Workflow
+
+- Android release AAB GitHub Actions workflow 파일 추가
+- workflow_dispatch 기반 수동 실행 구조 추가
+- web build, Capacitor sync, Gradle bundleRelease, AAB artifact upload 단계 구성
+- signing 설정은 Pending 유지
+- keystore 파일 추가 없음
+- signing password 기록 없음
+- GitHub Secrets 실제 입력 없음
+- AAB artifact 확인은 Pending workflow run 유지
+- Play Console 내부 테스트 업로드와 실제 기기 QA는 Pending 유지
+- Android native/Manifest/resource 변경 없음
+- production 계산 로직 변경 없음
+- 사주/운세 결과 생성 로직 변경 없음
+- UI/디자인 변경 없음
+
 ## Release Workflow Design
 
 - release AAB workflow 작성 전 설계 문서 추가
