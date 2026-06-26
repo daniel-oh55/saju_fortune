@@ -189,6 +189,7 @@
 - Google Play listing claim safety: docs/GOOGLE_PLAY_LISTING_CLAIM_SAFETY.md
 - Google Play screenshot caption plan: docs/GOOGLE_PLAY_SCREENSHOT_CAPTION_PLAN.md
 - Google Play screenshot production checklist: docs/GOOGLE_PLAY_SCREENSHOT_PRODUCTION_CHECKLIST.md
+- Release build signing checklist: docs/RELEASE_BUILD_SIGNING_CHECKLIST.md
 - Google Play screenshot readiness: docs/GOOGLE_PLAY_SCREENSHOT_READINESS.md
 - Google Play data safety input readiness: docs/GOOGLE_PLAY_DATA_SAFETY_INPUT_READINESS.md
 - Google Play privacy URL input readiness: docs/GOOGLE_PLAY_PRIVACY_URL_INPUT_READINESS.md

@@ -138,6 +138,7 @@
 - Google Play listing claim safety: docs/GOOGLE_PLAY_LISTING_CLAIM_SAFETY.md
 - Google Play description draft: docs/GOOGLE_PLAY_DESCRIPTION_DRAFT.md
 - Google Play app metadata checklist: docs/GOOGLE_PLAY_APP_METADATA_CHECKLIST.md
+- Release build signing checklist: docs/RELEASE_BUILD_SIGNING_CHECKLIST.md
 - Saju engine accuracy roadmap: docs/SAJU_ENGINE_ACCURACY_ROADMAP.md
 
 ## Suggested Follow-up PRs
