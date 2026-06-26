@@ -94,6 +94,7 @@ AAB 준비 전 확인할 항목:
 
 ## Related Docs
 
+- Release workflow design: docs/RELEASE_WORKFLOW_DESIGN.md
 - Google Play screenshot production checklist: docs/GOOGLE_PLAY_SCREENSHOT_PRODUCTION_CHECKLIST.md
 - Google Play app metadata checklist: docs/GOOGLE_PLAY_APP_METADATA_CHECKLIST.md
 - Google Play data safety draft checklist: docs/GOOGLE_PLAY_DATA_SAFETY_DRAFT_CHECKLIST.md

@@ -1,5 +1,20 @@
 # DEVELOPMENT_LOG
 
+## Release Workflow Design
+
+- release AAB workflow 작성 전 설계 문서 추가
+- release workflow 단계, signing secret 후보, AAB artifact 정책, versioning 확인 항목 정리
+- 실제 GitHub Actions release workflow 파일 추가 없음
+- release build, signing 설정, AAB 생성은 Pending 유지
+- GitHub Secrets 실제 입력 없음
+- keystore 파일 추가 없음
+- signing password 기록 없음
+- Play Console 내부 테스트 업로드와 실제 기기 QA는 Pending 유지
+- Android native/Manifest/resource/Gradle 변경 없음
+- production 계산 로직 변경 없음
+- 사주/운세 결과 생성 로직 변경 없음
+- UI/디자인 변경 없음
+
 ## Release Build Signing Checklist
 
 - release build/signing/AAB 준비 체크리스트 문서 추가

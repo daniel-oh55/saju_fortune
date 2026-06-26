@@ -6,6 +6,8 @@
 
 ## Added
 
+- release workflow 설계 문서 추가
+- release workflow 설계 check script 추가
 - release build/signing/AAB 준비 체크리스트 문서 추가
 - release build/signing/AAB 준비 체크리스트 check script 추가
 - Google Play 스크린샷 제작 체크리스트 문서 추가
