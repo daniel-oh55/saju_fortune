@@ -1,5 +1,9 @@
 # GOOGLE_PLAY_DATA_SAFETY_INPUT_READINESS
 
+## Related Docs
+
+- Google Play data safety draft checklist: docs/GOOGLE_PLAY_DATA_SAFETY_DRAFT_CHECKLIST.md
+
 ## 샘플 프로필 화면 QA 결과 연계
 
 - 샘플 프로필 화면 QA에서 실제 사용자 개인정보가 노출되지 않아야 합니다.

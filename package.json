@@ -27,6 +27,7 @@
     "check:google-play-description-draft": "node scripts/checkGooglePlayDescriptionDraft.mjs",
     "check:google-play-screenshot-caption-plan": "node scripts/checkGooglePlayScreenshotCaptionPlan.mjs",
     "check:google-play-app-metadata-checklist": "node scripts/checkGooglePlayAppMetadataChecklist.mjs",
+    "check:google-play-data-safety-draft-checklist": "node scripts/checkGooglePlayDataSafetyDraftChecklist.mjs",
     "check:hidden-stems-dataset": "node scripts/checkHiddenStemsDataset.mjs",
     "check:hidden-stems-dataset-qa": "node scripts/checkHiddenStemsDatasetQa.mjs",
     "check:hidden-stems-element-analysis-design": "node scripts/checkHiddenStemsElementAnalysisDesign.mjs",

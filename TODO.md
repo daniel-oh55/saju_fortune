@@ -1,5 +1,15 @@
 # TODO
 
+## 2026-06-26 Google Play data safety draft checklist TODO
+
+- [x] Google Play data safety draft checklist document added
+- [x] Google Play data safety draft checklist check script added
+- [ ] Actual Google Play data safety form input
+- [ ] Privacy policy URL finalization
+- [ ] Contact finalization
+- [ ] localStorage key final review
+- [ ] Actual Google Play Console input
+
 ## 2026-06-26 Google Play check phrase alignment TODO
 
 - [x] Google Play check script forbidden phrase rules aligned

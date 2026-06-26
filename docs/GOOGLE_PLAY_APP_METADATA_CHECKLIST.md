@@ -183,6 +183,7 @@
 
 ## Related Docs
 
+- Google Play data safety draft checklist: docs/GOOGLE_PLAY_DATA_SAFETY_DRAFT_CHECKLIST.md
 - Google Play description draft: docs/GOOGLE_PLAY_DESCRIPTION_DRAFT.md
 - Google Play listing claim safety: docs/GOOGLE_PLAY_LISTING_CLAIM_SAFETY.md
 - Google Play screenshot caption plan: docs/GOOGLE_PLAY_SCREENSHOT_CAPTION_PLAN.md
@@ -194,14 +195,18 @@
 
 ## Suggested Follow-up PRs
 
-1. `docs: google play screenshot production checklist`
+Addressed planning PR:
+
+- `docs: google play data safety draft checklist`
+
+1. `docs: privacy policy content draft`
+   - 개인정보 처리방침 URL 확정 전 문서 초안 작성
+
+2. `docs: google play screenshot production checklist`
    - 실제 스토어 스크린샷 이미지 제작 전 준비 항목 정리
 
-2. `docs: google play data safety draft checklist`
-   - localStorage 중심 저장 구조 기준 데이터 보안 양식 검토 항목 정리
-
-3. `docs: privacy policy content draft`
-   - 개인정보 처리방침 URL 확정 전 문서 초안 작성
+3. `docs: local storage data inventory`
+   - 실제 localStorage key와 저장 항목 목록 정리
 
 4. `docs: record hidden stems external verification`
    - 지장간 데이터 외부 기준 대조 결과 기록
