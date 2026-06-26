@@ -1,5 +1,17 @@
 # TODO
 
+## 2026-06-26 Current Android release AAB workflow result TODO
+
+- [x] current Android Release AAB workflow result check attempted
+- [x] current workflow run remains Pending current workflow run
+- [x] previous signing workflow run result not recorded as current workflow result
+- [ ] current Android Release AAB workflow manual run
+- [ ] AAB artifact confirmation
+- [ ] signing 설정
+- [ ] GitHub Secrets 실제 입력
+- [ ] Play Console 내부 테스트 업로드
+- [ ] 실제 기기 QA
+
 ## 2026-06-26 Android release AAB workflow run result alignment TODO
 
 - [x] Android release AAB workflow 수동 실행 결과 정합성 보정

@@ -41,6 +41,16 @@
 - signing 설정: Pending
 - 실제 기기 QA: Pending
 
+## Current Run Availability Note
+
+2026-06-26 기준 현재 main의 Android Release AAB workflow run 결과 확인을 시도했으나, 현재 workflow 기준으로 기록할 신규 run 결과는 아직 확인되지 않았다.
+
+확인 메모:
+
+- GitHub API에서 확인된 이전 signing workflow run은 과거 signing workflow 기준 결과이므로 현재 workflow run 결과로 기록하지 않는다.
+- 현재 문서는 신규 current workflow run이 확인되기 전까지 `Pending current workflow run` 상태를 유지한다.
+- workflow dispatch는 이 PR에서 수행하지 않았으며, workflow 파일도 변경하지 않았다.
+
 주의:
 
 - 이전 signing workflow run 기준 결과를 현재 workflow 결과로 기록하지 않는다.
