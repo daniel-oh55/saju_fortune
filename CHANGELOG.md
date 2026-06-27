@@ -22,6 +22,8 @@
 
 ## Fixed
 
+- Android AAB signing verification result 문서 상태값 정합성 보정
+- signing 상태 확인 Pending 잔여 문구 정리
 - Android release AAB workflow 수동 실행 결과 문서의 기준 정합성 보정
 - Google Play related check script forbidden phrase rules aligned
 
