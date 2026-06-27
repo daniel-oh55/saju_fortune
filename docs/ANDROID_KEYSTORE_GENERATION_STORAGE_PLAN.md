@@ -14,14 +14,44 @@
 | signing setup plan | Draft | docs/ANDROID_SIGNING_SETUP_PLAN.md |
 | signing secrets checklist | Draft | docs/ANDROID_SIGNING_SECRETS_CHECKLIST.md |
 | keystore generation plan | Draft | this document |
+| keystore generation decision | Decided | local secure environment with JDK keytool |
 | keystore generation | Pending | not created yet |
-| keystore storage decision | Pending | not finalized yet |
-| keystore backup decision | Pending | not finalized yet |
+| keystore storage decision | Decided | repository commit prohibited |
+| keystore backup decision | Decided | separate private safe location |
 | GitHub Secrets actual input | Pending | not entered yet |
 | release workflow signing support | Pending | not implemented |
 | signed AAB generation | Pending | not generated |
 | Play Console internal test upload | Pending | not uploaded |
 | real device QA | Pending | not performed |
+
+## Decision Result
+
+이번 결정은 실제 keystore 생성이 아니라 생성/보관/백업 방식의 운영 기준 결정이다.
+
+| Decision | Result | Status |
+|---|---|---|
+| keystore 생성 방식 | local secure environment에서 JDK keytool 사용 | Decided |
+| keystore 생성 명령 | keytool 기반 생성 방식 사용 | Decided |
+| keystore 파일 repository commit 여부 | commit하지 않음 | Decided |
+| `.jks` 파일 repository commit 여부 | commit하지 않음 | Decided |
+| `.keystore` 파일 repository commit 여부 | commit하지 않음 | Decided |
+| keystore 보관 방식 | 비공개 안전 위치에 보관 | Decided |
+| keystore backup 방식 | 별도 비공개 안전 위치에 백업 | Decided |
+| password 보관 방식 | password manager 또는 내부 보안 저장소 사용 | Decided |
+| GitHub Actions 사용 방식 | keystore 원본 대신 base64 Secret 후보 사용 | Decided |
+| GitHub Secrets 실제 입력 | Pending | Not started |
+| release workflow signing 적용 | Pending | Not started |
+| signed AAB 생성 | Pending | Not started |
+
+주의:
+
+- 실제 keystore 파일은 이번 PR에서 생성하지 않는다.
+- 실제 keystore 파일은 repository에 commit하지 않는다.
+- 실제 keystore 보관 위치는 문서에 기록하지 않는다.
+- 실제 password는 문서, 코드, PR, 로그에 기록하지 않는다.
+- 실제 keystore base64 값은 문서, 코드, PR, 로그에 기록하지 않는다.
+- GitHub Secrets 실제 입력은 별도 작업에서 진행한다.
+- signing 설정 적용은 별도 PR에서 진행한다.
 
 ## Proposed Keystore Generation Method
 
@@ -93,13 +123,13 @@ keystore 보관 기준:
 
 | Decision | Status | Note |
 |---|---|---|
-| keystore 생성 담당자 | Pending | 실제 개인 정보 기록 금지 |
-| keystore 생성 환경 | Pending | local secure environment 권장 |
-| keystore 파일명 정책 | Pending | 실제 파일명 기록 여부 신중히 결정 |
-| key alias 정책 | Pending | 실제 alias 기록 금지 |
-| password 보관 방식 | Pending | password manager 등 검토 |
-| primary backup 위치 | Pending | 실제 경로 기록 금지 |
-| secondary backup 위치 | Pending | 실제 경로 기록 금지 |
+| keystore 생성 담당자 | Decided | 실제 개인 정보 기록 금지 |
+| keystore 생성 환경 | Decided | local secure environment |
+| keystore 파일명 정책 | Decided | 실제 파일명 문서 기록 금지 |
+| key alias 정책 | Decided | 실제 alias 문서 기록 금지 |
+| password 보관 방식 | Decided | 내부 보안 저장소 사용 |
+| primary backup 위치 | Decided | 실제 경로 기록 금지 |
+| secondary backup 위치 | Decided | 실제 경로 기록 금지 |
 | GitHub Secrets 입력 시점 | Pending | 별도 PR 이후 |
 | workflow signing 적용 시점 | Pending | 별도 PR |
 

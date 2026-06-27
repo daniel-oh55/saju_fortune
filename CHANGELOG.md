@@ -2,6 +2,8 @@
 
 ## Added
 
+- Android keystore generation decision 결과 기록
+- keystore 보관/백업 방식 결정 결과 기록
 - Android keystore generation/storage plan 문서 추가
 - Android keystore generation/storage plan check script 추가
 - keystore 보관/백업 정책 초안 정리

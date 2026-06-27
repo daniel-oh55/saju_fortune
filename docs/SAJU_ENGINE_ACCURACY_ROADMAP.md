@@ -119,10 +119,11 @@ Status: Pending
 - signing secrets checklist: Draft
 - candidate GitHub Secrets 입력 전 확인 항목 정리: Draft
 - keystore generation/storage plan: Draft
-- keystore 생성/보관 방식 결정: Pending
-- keystore 생성 방식 결정: Pending
-- keystore 보관 방식 결정: Pending
-- keystore backup 방식 결정: Pending
+- keystore generation/storage decision: Decided
+- keystore 생성 방식 결정: Decided
+- keystore 보관 방식 결정: Decided
+- keystore backup 방식 결정: Decided
+- keystore 실제 생성: Pending
 - GitHub Secrets 실제 입력: Pending
 - release workflow signing 적용: Pending
 - signed AAB 생성: Pending

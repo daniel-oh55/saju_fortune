@@ -1,5 +1,21 @@
 # TODO
 
+## 2026-06-27 Android keystore generation decision TODO
+
+- [x] keystore 생성 방식 결정 결과 기록
+- [x] keystore 보관 방식 결정 결과 기록
+- [x] keystore backup 방식 결정 결과 기록
+- [x] keystore generation/storage plan check script 보강
+- [ ] 실제 keystore 생성
+- [ ] keystore 실제 보관
+- [ ] keystore backup 실제 보관
+- [ ] GitHub Secrets 실제 입력
+- [ ] release workflow signing 적용
+- [ ] signed AAB 생성
+- [ ] signed AAB 검증
+- [ ] Play Console 내부 테스트 업로드
+- [ ] 실제 기기 QA
+
 ## 2026-06-27 Android keystore generation storage plan TODO
 
 - [x] Android keystore generation/storage plan 문서 추가

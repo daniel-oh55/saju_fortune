@@ -1,5 +1,25 @@
 # DEVELOPMENT_LOG
 
+## Android Keystore Generation Decision
+
+- Android keystore 생성/보관/백업 방식 결정 결과 문서화
+- keystore 생성 방식은 local secure environment에서 JDK keytool 사용으로 결정
+- keystore 보관 방식은 repository 외부 비공개 안전 위치로 결정
+- keystore backup 방식은 별도 비공개 안전 위치로 결정
+- password 보관 방식은 내부 보안 저장소 사용으로 결정
+- 실제 keystore 파일 생성 없음
+- keystore 파일 추가 없음
+- `.jks`/`.keystore` 파일 commit 없음
+- signing password 기록 없음
+- keystore base64 실제값 기록 없음
+- GitHub Secrets 실제 입력 없음
+- signing 설정은 Pending 유지
+- workflow 파일 변경 없음
+- Android native/Manifest/resource/Gradle 변경 없음
+- production 계산 로직 변경 없음
+- 사주/운세 결과 생성 로직 변경 없음
+- UI/디자인 변경 없음
+
 ## Android Keystore Generation Storage Plan
 
 - Android keystore generation/storage plan 문서 추가

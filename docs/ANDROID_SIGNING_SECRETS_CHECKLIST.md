@@ -13,8 +13,10 @@
 | AAB signing verification result | Confirmed | Unsigned |
 | signing setup plan | Draft | docs/ANDROID_SIGNING_SETUP_PLAN.md |
 | signing secrets checklist | Draft | this document |
+| keystore generation decision | Decided | docs/ANDROID_KEYSTORE_GENERATION_STORAGE_PLAN.md |
 | keystore generation | Pending | not created yet |
-| keystore storage decision | Pending | repository commit prohibited |
+| keystore storage decision | Decided | repository commit prohibited |
+| keystore backup decision | Decided | separate private safe location |
 | GitHub Secrets actual input | Pending | not entered yet |
 | release workflow signing support | Pending | not implemented |
 | signed AAB generation | Pending | not generated |
@@ -72,9 +74,13 @@ GitHub Secrets 실제 입력 전 확인할 항목:
 
 현재 아직 완료하지 않은 항목:
 
+- keystore generation decision: Decided
+- keystore storage decision: Decided
+- keystore backup decision: Decided
 - keystore 생성: Pending
-- keystore 보관 방식 결정: Pending
 - GitHub Secrets 실제 입력: Pending
+- GitHub Secrets actual input: Pending
+- release workflow signing support: Pending
 - release workflow signing 적용: Pending
 - signed AAB 생성: Pending
 - signed AAB 검증: Pending
