@@ -117,6 +117,7 @@
 
 ## Related Docs
 
+- Android signing setup plan: docs/ANDROID_SIGNING_SETUP_PLAN.md
 - Android AAB signing verification plan: docs/ANDROID_AAB_SIGNING_VERIFICATION_PLAN.md
 - Android release AAB workflow run result: docs/ANDROID_RELEASE_AAB_WORKFLOW_RUN_RESULT.md
 - Android release AAB workflow: docs/ANDROID_RELEASE_AAB_WORKFLOW.md
