@@ -124,6 +124,8 @@ Status: Pending
 - keystore 보관 방식 결정: Decided
 - keystore backup 방식 결정: Decided
 - keystore 실제 생성: Pending
+- keystore 실제 보관: Pending
+- keystore backup 실제 보관: Pending
 - GitHub Secrets 실제 입력: Pending
 - release workflow signing 적용: Pending
 - signed AAB 생성: Pending
