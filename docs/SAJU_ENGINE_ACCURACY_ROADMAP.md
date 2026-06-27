@@ -100,6 +100,7 @@ Status: Pending
 - Android Release AAB artifact QA 문서: docs/ANDROID_RELEASE_AAB_ARTIFACT_QA.md 참고
 - Android AAB signing verification plan 문서: docs/ANDROID_AAB_SIGNING_VERIFICATION_PLAN.md 참고
 - Android AAB signing verification result 문서: docs/ANDROID_AAB_SIGNING_VERIFICATION_PLAN.md 참고
+- Android signing setup plan 문서: docs/ANDROID_SIGNING_SETUP_PLAN.md 참고
 - Android Release AAB artifact QA: Draft
 - artifact 다운로드: Confirmed
 - artifact 압축 해제: Confirmed
@@ -111,7 +112,13 @@ Status: Pending
 - signing 상태 확인 계획: Draft
 - signing 검증 명령 실제 실행: Confirmed
 - signing setup plan: Required
+- signing setup plan 문서: Draft
+- candidate GitHub Secrets 이름 정리: Draft
+- keystore 생성/보관 방식 결정: Pending
 - GitHub Secrets 실제 입력: Pending
+- release workflow signing 적용: Pending
+- signed AAB 생성: Pending
+- signed AAB 검증: Pending
 - Play Console 내부 테스트 업로드: Pending
 - 실제 기기 QA: Pending
 - Android release AAB workflow 파일 추가: Added

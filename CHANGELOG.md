@@ -2,6 +2,9 @@
 
 ## Added
 
+- Android signing setup plan 문서 추가
+- Android signing setup plan check script 추가
+- candidate GitHub Secrets 이름 정리
 - Android AAB signing verification result 기록
 - `app-release.aab` signing 상태 Unsigned 기록
 - Android AAB signing verification plan 문서 추가

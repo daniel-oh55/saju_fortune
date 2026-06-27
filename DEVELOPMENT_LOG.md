@@ -1,5 +1,23 @@
 # DEVELOPMENT_LOG
 
+## Android Signing Setup Plan
+
+- Unsigned AAB 결과를 바탕으로 Android signing setup plan 문서 추가
+- candidate GitHub Secrets 이름 정리
+- keystore/password 보안 기준 문서화
+- signing 설정은 Pending 유지
+- keystore 파일 생성 없음
+- keystore 파일 추가 없음
+- signing password 기록 없음
+- GitHub Secrets 실제 입력 없음
+- Play Console 내부 테스트 업로드는 Pending 유지
+- 실제 기기 QA는 Pending 유지
+- workflow 파일 변경 없음
+- Android native/Manifest/resource/Gradle 변경 없음
+- production 계산 로직 변경 없음
+- 사주/운세 결과 생성 로직 변경 없음
+- UI/디자인 변경 없음
+
 ## Android AAB Signing Verification Doc Consistency
 
 - PR #189 signing verification result 기준 문서 상태값 정합성 보정
