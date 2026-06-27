@@ -149,6 +149,7 @@
 
 ## Related Docs
 
+- Android signing secrets checklist: docs/ANDROID_SIGNING_SECRETS_CHECKLIST.md
 - Android AAB signing verification plan: docs/ANDROID_AAB_SIGNING_VERIFICATION_PLAN.md
 - Android release AAB artifact QA: docs/ANDROID_RELEASE_AAB_ARTIFACT_QA.md
 - Android release AAB workflow run result: docs/ANDROID_RELEASE_AAB_WORKFLOW_RUN_RESULT.md
