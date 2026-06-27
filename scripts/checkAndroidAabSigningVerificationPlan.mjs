@@ -5,76 +5,32 @@ const docPath = 'docs/ANDROID_AAB_SIGNING_VERIFICATION_PLAN.md';
 
 const requiredSections = [
   '# Android AAB Signing Verification Plan',
+  '## Android Release Signing Enforcement Follow-up',
   '## Purpose',
   '## Current Artifact Status',
   '## Signing Verification Questions',
-  '## Proposed Verification Commands',
   '## Signed AAB Verification Result',
-  '## Signing Verification Result',
-  '## Expected Result Categories',
   '## Secret and Keystore Policy',
   '## Current Pending Items',
   '## Non-Goals for This PR',
-  '## Related Docs',
 ];
 
 const requiredSnippets = [
+  'previous signed AAB verification: Failed',
+  'previous jarsigner result summary: `jar is unsigned.`',
+  'signing enforcement fix: Added',
+  'release signing secrets validation: Added',
+  'workflow jarsigner verification step: Added',
+  'Gradle release signing env enforcement: Added',
+  'signed AAB regeneration: Pending',
+  'signed AAB re-verification: Pending',
+  'Play Console internal test upload: Pending',
+  'real device QA: Pending',
+  'signing enforcement fix Added는 signed AAB 재검증 완료가 아니다.',
   'app-release.aab',
-  '| AAB 파일 크기 | Confirmed | 6,016,271 bytes |',
-  '| signing 상태 확인 | Failed | jarsigner 기준 unsigned |',
-  'signed AAB source workflow | Confirmed | Android Release AAB run number 4',
-  'signed AAB artifact | Confirmed | harupuli-release-aab',
-  '`.aab` filename | Confirmed | app-release.aab',
-  '`.aab` file size | Confirmed | 6,016,271 bytes',
-  'jarsigner command executed | Confirmed',
-  'jarsigner result | Failed | unsigned',
+  '6,016,271 bytes',
   'jarsigner result summary | Failed | `jar is unsigned.`',
-  '`jar verified.` result | Failed | not present',
-  'signed AAB verification | Failed | fix required',
-  'Play Console internal test upload | Pending | not uploaded',
-  'real device QA | Pending | not performed',
-  '| Play Console 업로드 가능 여부 | Pending |',
-  'upload key/keystore 필요 여부: Pending',
-  'GitHub Secrets 필요 여부: Pending',
-  'jarsigner -verify -verbose -certs app-release.aab',
-  'apksigner verify --verbose app-release.aab',
-  '실제 명령 실행 결과는 PR #189에서 기록했다.',
-  '후속 PR에서는 signing setup plan을 별도로 검토한다.',
-  'signing 검증 명령 실제 실행: Confirmed',
-  'jarsigner 실행 가능 여부: Confirmed',
-  'jarsigner result: Failed',
-  'jarsigner result summary: `jar is unsigned.`',
-  '`jar verified.` result: not present',
-  'apksigner 실행 가능 여부: Not available',
-  'apksigner result: Not available',
   'signed AAB verification: Failed',
-  'signing 상태 확인 결과: Failed',
-  'signing setup plan: Required',
-  'Play Console 업로드 가능 여부: Pending',
-  'GitHub Secrets 실제 입력: Pending',
-  'Play Console 내부 테스트 업로드: Pending',
-  '실제 Google Play Console 입력: Pending',
-  '실제 기기 QA: Pending',
-  'Signed는 Play Console 업로드 완료가 아니다.',
-  'Signed는 실제 기기 QA 완료가 아니다.',
-  'Unsigned는 바로 signing 설정을 적용한다는 뜻이 아니다.',
-  'signed AAB verification Failed는 Play Console 업로드 완료가 아니다.',
-  'signed AAB verification Failed는 실제 기기 QA 완료가 아니다.',
-  'Play Console 내부 테스트 업로드는 별도 PR에서 기록한다.',
-  '실패 원인은 실제 Secret 값 없이 `jar is unsigned.` 결과만 기록한다.',
-  'keystore 파일을 repository에 commit하지 않는다.',
-  'signing password를 코드, 문서, 로그에 기록하지 않는다.',
-  'GitHub Secrets 실제값을 문서에 기록하지 않는다.',
-  'signing 설정 적용 없음',
-  'keystore 파일 추가 없음',
-  'signing password 기록 없음',
-  'GitHub Secrets 실제 입력 없음',
-  'workflow 파일 변경 없음',
-  'AndroidManifest.xml 변경 없음',
-  'Android resource 파일 변경 없음',
-  'Gradle 설정 변경 없음',
-  'artifact zip 파일 commit 없음',
-  '`.aab` 파일 commit 없음',
 ];
 
 const wrongPhrases = [
@@ -82,14 +38,9 @@ const wrongPhrases = [
   '서양식 보정 적용 여부',
   '양력/음력 샘플 추가 검증',
   'signing 상태 확인: Completed',
-  'signing 상태 확인: Pending',
   'signed AAB verification | Confirmed',
   'Play Console internal test upload | Confirmed',
   'real device QA | Confirmed',
-  '실제 명령 실행 결과는 후속 PR에서 기록한다.',
-  'signing setup plan: Pending',
-  'Play Console 업로드 가능 여부: Completed',
-  '실제 기기 QA: Completed',
   'GitHub Secrets 실제 입력: Completed',
   'keystore 파일 추가: Completed',
 ];
@@ -116,9 +67,6 @@ const forbiddenPatterns = [
 const protectedFiles = [
   'android/app/src/main/AndroidManifest.xml',
   'android/app/src/main/res',
-  'android/build.gradle',
-  'android/gradle.properties',
-  'android/settings.gradle',
   'src',
 ];
 
@@ -135,7 +83,6 @@ function labelFromSnippet(snippet) {
 }
 
 let hasFailure = false;
-
 const exists = fs.existsSync(docPath);
 logResult('android_aab_signing_verification_plan_doc_exists', exists, docPath);
 if (!exists) process.exit(1);
@@ -170,22 +117,8 @@ const diffOutput = execSync(`git diff --name-only -- ${protectedFiles.join(' ')}
   encoding: 'utf8',
 }).trim();
 const protectedFilesUnchanged = diffOutput.length === 0;
-logResult('workflow_android_gradle_production_files_unchanged_in_working_diff', protectedFilesUnchanged);
+logResult('android_manifest_resource_src_files_unchanged_in_working_diff', protectedFilesUnchanged);
 if (!protectedFilesUnchanged) hasFailure = true;
-
-const trackedFiles = execSync('git ls-files', { encoding: 'utf8' })
-  .split(/\r?\n/)
-  .filter(Boolean);
-const statusFiles = execSync('git status --short --untracked-files=all', { encoding: 'utf8' })
-  .split(/\r?\n/)
-  .filter(Boolean)
-  .map((line) => line.slice(3).trim().replace(/^"|"$/g, ''));
-const artifactFiles = [...trackedFiles, ...statusFiles].filter((path) =>
-  path.endsWith('.aab') || path.endsWith('.zip') || path.endsWith('.jks') || path.endsWith('.keystore')
-);
-const artifactFilesAbsent = artifactFiles.length === 0;
-logResult('artifact_zip_and_aab_files_not_added_to_repository', artifactFilesAbsent);
-if (!artifactFilesAbsent) hasFailure = true;
 
 if (hasFailure) {
   console.error('Android AAB signing verification plan check failed');

@@ -1,5 +1,24 @@
 # Android Signing Setup Plan
 
+## Android Release Signing Enforcement Follow-up
+
+- previous signed AAB verification: Failed
+- previous jarsigner result summary: `jar is unsigned.`
+- signing enforcement fix: Added
+- release signing secrets validation: Added
+- workflow jarsigner verification step: Added
+- Gradle release signing env enforcement: Added
+- signed AAB regeneration: Pending
+- signed AAB re-verification: Pending
+- Play Console internal test upload: Pending
+- real device QA: Pending
+
+주의:
+
+- signing enforcement fix Added는 signed AAB 재검증 완료가 아니다.
+- signed AAB regeneration은 workflow 재실행 후 별도 PR에서 기록한다.
+- signed AAB re-verification은 workflow 재실행 후 별도 PR에서 기록한다.
+
 ## Purpose
 
 이 문서는 하루풀이 Android release AAB signing 설정을 실제 적용하기 전 필요한 결정사항, 보안 기준, GitHub Secrets 후보, 후속 작업 순서를 정리한다.

@@ -1,5 +1,27 @@
 # Saju Engine Accuracy Roadmap
 
+## Android Release Signing Enforcement Follow-up
+
+- previous signed AAB verification: Failed
+- previous jarsigner result summary: `jar is unsigned.`
+- release signing enforcement fix: Added
+- signing enforcement fix: Added
+- release signing secrets validation: Added
+- workflow jarsigner verification step: Added
+- Gradle release signing env enforcement: Added
+- signed AAB 재생성: Pending
+- signed AAB 재검증: Pending
+- signed AAB regeneration: Pending
+- signed AAB re-verification: Pending
+- Play Console internal test upload: Pending
+- real device QA: Pending
+
+주의:
+
+- signing enforcement fix Added는 signed AAB 재검증 완료가 아니다.
+- signed AAB regeneration은 workflow 재실행 후 별도 PR에서 기록한다.
+- signed AAB re-verification은 workflow 재실행 후 별도 PR에서 기록한다.
+
 ## Purpose
 
 이 문서는 하루풀이의 사주/운세 분석 엔진이 현재 어느 수준까지 구현되어 있는지 정리하고, 정식 출시 전후로 정밀도를 높이기 위한 개선 로드맵을 정의한다.

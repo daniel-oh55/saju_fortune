@@ -1,5 +1,25 @@
 # DEVELOPMENT_LOG
 
+## Android Release Signing Enforcement
+
+- Android Release AAB workflow signing enforcement 보강
+- release signing secrets validation step 추가
+- Gradle release signing env enforcement 추가
+- bundleRelease 후 jarsigner verification step 추가
+- jarsigner가 `jar verified.`를 확인하지 못하면 workflow 실패 처리
+- unsigned AAB artifact upload 방지 보강
+- signed AAB regeneration은 Pending 유지
+- signed AAB re-verification은 Pending 유지
+- Play Console 내부 테스트 업로드는 Pending 유지
+- 실제 기기 QA는 Pending 유지
+- Secret 실제값 기록 없음
+- keystore 파일 repository commit 없음
+- `.aab` repository commit 없음
+- AndroidManifest.xml/resource 변경 없음
+- production 계산 로직 변경 없음
+- 사주/운세 결과 생성 로직 변경 없음
+- UI/디자인 변경 없음
+
 ## Android Signed AAB Verification Result
 
 - signed AAB signing verification 실패 결과 기록
