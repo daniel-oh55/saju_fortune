@@ -1,5 +1,19 @@
 # TODO
 
+## 2026-06-27 Android signing secrets checklist TODO
+
+- [x] Android signing secrets checklist 문서 추가
+- [x] Android signing secrets checklist check script 추가
+- [x] candidate GitHub Secrets 입력 전 확인 항목 정리
+- [ ] keystore 생성 방식 결정
+- [ ] keystore 보관 방식 결정
+- [ ] GitHub Secrets 실제 입력
+- [ ] release workflow signing 적용
+- [ ] signed AAB 생성
+- [ ] signed AAB 검증
+- [ ] Play Console 내부 테스트 업로드
+- [ ] 실제 기기 QA
+
 ## 2026-06-27 Android signing setup plan TODO
 
 - [x] Android signing setup plan 문서 추가

@@ -1,5 +1,21 @@
 # DEVELOPMENT_LOG
 
+## Android Signing Secrets Checklist
+
+- Android signing secrets 입력 전 체크리스트 문서 추가
+- candidate GitHub Secrets 이름과 입력 전 확인 항목 정리
+- 실제 GitHub Secrets 값은 기록하지 않음
+- keystore 파일 생성 없음
+- keystore 파일 추가 없음
+- signing password 기록 없음
+- GitHub Secrets 실제 입력 없음
+- signing 설정은 Pending 유지
+- workflow 파일 변경 없음
+- Android native/Manifest/resource/Gradle 변경 없음
+- production 계산 로직 변경 없음
+- 사주/운세 결과 생성 로직 변경 없음
+- UI/디자인 변경 없음
+
 ## Android Signing Setup Plan
 
 - Unsigned AAB 결과를 바탕으로 Android signing setup plan 문서 추가

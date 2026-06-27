@@ -2,6 +2,9 @@
 
 ## Added
 
+- Android signing secrets checklist 문서 추가
+- Android signing secrets checklist check script 추가
+- candidate GitHub Secrets 입력 전 확인 항목 정리
 - Android signing setup plan 문서 추가
 - Android signing setup plan check script 추가
 - candidate GitHub Secrets 이름 정리
