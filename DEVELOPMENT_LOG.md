@@ -1,5 +1,23 @@
 # DEVELOPMENT_LOG
 
+## Android Keystore Generation Storage Plan
+
+- Android keystore generation/storage plan 문서 추가
+- keytool 기반 keystore 생성 후보 명령 정리
+- keystore 보관/백업 정책 초안 정리
+- GitHub Secrets mapping 후보 정리
+- 실제 keystore 파일 생성 없음
+- keystore 파일 추가 없음
+- signing password 기록 없음
+- keystore base64 실제값 기록 없음
+- GitHub Secrets 실제 입력 없음
+- signing 설정은 Pending 유지
+- workflow 파일 변경 없음
+- Android native/Manifest/resource/Gradle 변경 없음
+- production 계산 로직 변경 없음
+- 사주/운세 결과 생성 로직 변경 없음
+- UI/디자인 변경 없음
+
 ## Android Signing Secrets Checklist
 
 - Android signing secrets 입력 전 체크리스트 문서 추가

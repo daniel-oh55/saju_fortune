@@ -102,6 +102,7 @@ Status: Pending
 - Android AAB signing verification result 문서: docs/ANDROID_AAB_SIGNING_VERIFICATION_PLAN.md 참고
 - Android signing setup plan 문서: docs/ANDROID_SIGNING_SETUP_PLAN.md 참고
 - Android signing secrets checklist 문서: docs/ANDROID_SIGNING_SECRETS_CHECKLIST.md 참고
+- Android keystore generation storage plan 문서: docs/ANDROID_KEYSTORE_GENERATION_STORAGE_PLAN.md 참고
 - Android Release AAB artifact QA: Draft
 - artifact 다운로드: Confirmed
 - artifact 압축 해제: Confirmed
@@ -117,9 +118,11 @@ Status: Pending
 - candidate GitHub Secrets 이름 정리: Draft
 - signing secrets checklist: Draft
 - candidate GitHub Secrets 입력 전 확인 항목 정리: Draft
+- keystore generation/storage plan: Draft
 - keystore 생성/보관 방식 결정: Pending
 - keystore 생성 방식 결정: Pending
 - keystore 보관 방식 결정: Pending
+- keystore backup 방식 결정: Pending
 - GitHub Secrets 실제 입력: Pending
 - release workflow signing 적용: Pending
 - signed AAB 생성: Pending

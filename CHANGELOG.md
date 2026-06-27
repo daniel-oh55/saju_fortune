@@ -2,6 +2,9 @@
 
 ## Added
 
+- Android keystore generation/storage plan 문서 추가
+- Android keystore generation/storage plan check script 추가
+- keystore 보관/백업 정책 초안 정리
 - Android signing secrets checklist 문서 추가
 - Android signing secrets checklist check script 추가
 - candidate GitHub Secrets 입력 전 확인 항목 정리
