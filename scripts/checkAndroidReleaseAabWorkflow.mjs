@@ -89,7 +89,7 @@ const requiredDocSnippets = [
   'keystore runner temp 임시 복원: Added',
   'release workflow signing support: Added',
   'signed AAB generation: Confirmed',
-  'signed AAB verification: Pending',
+  'signed AAB verification: Failed',
   'Play Console 내부 테스트 업로드: Pending',
   '실제 기기 QA: Pending',
   'keystore 파일은 repository에 추가하지 않는다.',
@@ -100,7 +100,7 @@ const roadmapSnippets = [
   'GitHub Secrets 실제 입력: Confirmed',
   'release workflow signing 적용: Added',
   'signed AAB 생성: Confirmed',
-  'signed AAB 검증: Pending',
+  'signed AAB 검증: Failed',
   'Play Console 내부 테스트 업로드: Pending',
   '실제 기기 QA: Pending',
 ];

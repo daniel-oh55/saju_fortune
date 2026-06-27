@@ -109,8 +109,8 @@ Status: Pending
 - `.aab` 파일 존재 확인: Confirmed
 - AAB 파일명: app-release.aab
 - AAB 파일 크기: 6,016,271 bytes
-- signing 상태 확인: Confirmed
-- signing 상태 확인 결과: Unsigned
+- signing 상태 확인: Failed
+- signing 상태 확인 결과: Failed
 - signing 상태 확인 계획: Draft
 - signing 검증 명령 실제 실행: Confirmed
 - signing setup plan: Required
@@ -130,7 +130,7 @@ Status: Pending
 - release workflow signing 적용: Added
 - signed AAB 생성: Confirmed
 - signed AAB artifact 다운로드/압축 해제 확인: Confirmed
-- signed AAB 검증: Pending
+- signed AAB 검증: Failed
 - Play Console 내부 테스트 업로드: Pending
 - 실제 기기 QA: Pending
 - Android release AAB workflow 파일 추가: Added

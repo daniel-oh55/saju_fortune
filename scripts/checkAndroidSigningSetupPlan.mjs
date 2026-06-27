@@ -18,7 +18,7 @@ const requiredSnippets = [
   '| release workflow signing support | Added | GitHub Secrets based workflow support added |',
   '| GitHub Secrets actual input | Confirmed | values entered in repository settings |',
   '| signed AAB 생성 | Confirmed | Android Release AAB run number 4 success |',
-  '| signed AAB verification | Pending | not performed |',
+  '| signed AAB verification | Failed | jarsigner result: jar is unsigned |',
   '| Play Console internal test upload | Pending | not uploaded |',
   '| real device QA | Pending | not performed |',
   'ANDROID_KEYSTORE_BASE64',
@@ -28,15 +28,15 @@ const requiredSnippets = [
   'workflow signing support 추가 이후 signed AAB generation은 run number 4에서 Confirmed로 기록했다.',
   'workflow signing support 추가는 Play Console 업로드 완료가 아니다.',
   'workflow signing support 추가는 실제 기기 QA 완료가 아니다.',
-  'signed AAB 검증 결과는 artifact 검증 후 별도 PR에서 기록한다.',
+  'signed AAB 검증 결과는 Failed로 기록했다.',
   'release workflow signing support: Added',
   'GitHub Secrets 실제 입력: Confirmed',
   'signed AAB 생성: Confirmed',
-  'signed AAB 검증: Pending',
+  'signed AAB 검증: Failed',
   'Play Console 내부 테스트 업로드: Pending',
   'real device QA: Pending',
   'GitHub Secrets 실제값 기록 없음',
-  'signed AAB 검증 결과 기록 없음',
+  'signed AAB 검증 결과 기록: Failed',
 ];
 
 const wrongPhrases = [
@@ -48,6 +48,7 @@ const wrongPhrases = [
   'signing 설정: Completed',
   'signed AAB 생성: Completed',
   'signed AAB 검증: Completed',
+  'signed AAB verification | Confirmed',
   'Play Console 업로드: Completed',
   '실제 기기 QA: Completed',
 ];

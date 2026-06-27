@@ -22,7 +22,7 @@ keystore 파일은 repository에 추가하지 않는다.
 - keystore 파일: Not committed
 - GitHub Secrets 실제 입력: Confirmed
 - signed AAB generation: Confirmed
-- signed AAB verification: Pending
+- signed AAB verification: Failed
 - AAB artifact 확인: Confirmed
 - signed AAB artifact download: Confirmed
 - signed AAB artifact extract: Confirmed
@@ -65,7 +65,7 @@ Signing support details:
 - signing password 기록: 없음
 - GitHub Secrets 실제 입력: Confirmed
 - signed AAB generation: Confirmed
-- signed AAB verification: Pending
+- signed AAB verification: Failed
 
 주의:
 
@@ -91,6 +91,9 @@ Signing support details:
 - `.aab` file existence: Confirmed
 - `.aab` filename: app-release.aab
 - `.aab` file size: 6,016,271 bytes
+- signed AAB verification: Failed
+- jarsigner result: Failed
+- jarsigner result summary: `jar is unsigned.`
 - signing 설정: Added
 - Play Console 내부 테스트 업로드: Pending
 - 실제 기기 QA: Pending
@@ -106,7 +109,7 @@ Signing support details:
 
 이번 PR에서 하지 않는 것:
 
-- signed AAB verification 결과 기록 없음
+- signed AAB verification 결과 기록: Failed
 - keystore 파일 추가 없음
 - signing password 기록 없음
 - GitHub Secrets 실제값 기록 없음
