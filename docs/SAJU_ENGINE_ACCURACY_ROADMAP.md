@@ -128,7 +128,7 @@ Status: Pending
 - keystore backup 실제 보관: Confirmed
 - GitHub Secrets 실제 입력: Confirmed
 - release workflow signing 적용: Added
-- signed AAB 생성: Pending
+- signed AAB 생성: Confirmed
 - signed AAB 검증: Pending
 - Play Console 내부 테스트 업로드: Pending
 - 실제 기기 QA: Pending
@@ -136,10 +136,11 @@ Status: Pending
 - Android release AAB workflow Node.js version: 22
 - Android release AAB workflow Node.js version 보정: 20에서 22로 변경
 - Android release AAB workflow 수동 실행: completed / success
-- Android Release AAB run number: 3
+- Android Release AAB run number: 4
 - AAB artifact 확인: Confirmed
 - AAB artifact name: harupuli-release-aab
-- 현재 main 기준 Android Release AAB workflow run 결과: run number 3 success
+- AAB artifact digest: sha256:6a88573362f259fe6797a4c28a40678a32770e571714a5dd51a47a7351564b98
+- 현재 main 기준 Android Release AAB workflow run 결과: run number 4 success
 - 이전 run number 2 실패 결과는 PR #184 Node.js 22 보정 이후 run number 3 success로 대체
 - 이전 문서 기준 Android release AAB workflow 수동 실행: Pending current workflow run, 현재 run number 2 failure로 대체
 - 이전 문서 기준 AAB artifact 확인: Pending current workflow run, 현재 Not created로 대체

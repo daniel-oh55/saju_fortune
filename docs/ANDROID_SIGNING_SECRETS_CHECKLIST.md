@@ -22,10 +22,16 @@
 | keystore backup storage | Confirmed | separate private safe location, actual path not recorded |
 | GitHub Secrets actual input | Confirmed | values entered in repository settings |
 | release workflow signing support | Added | GitHub Secrets based workflow support added |
-| signed AAB generation | Pending | not generated |
+| signed AAB generation | Confirmed | Android Release AAB run number 4 success |
 | signed AAB verification | Pending | not performed |
 | Play Console internal test upload | Pending | not uploaded |
 | real device QA | Pending | not performed |
+
+Run metadata:
+
+- Android Release AAB run number 4: completed / success
+- signed AAB generation: Confirmed
+- Artifact digest: sha256:6a88573362f259fe6797a4c28a40678a32770e571714a5dd51a47a7351564b98
 
 ## Secrets Input Status
 
@@ -49,7 +55,7 @@ GitHub Secrets 실제 입력 여부만 기록한다.
 | signing password record | Not recorded | actual password not recorded |
 | key alias value record | Not recorded | actual alias not recorded |
 | release workflow signing support | Added | GitHub Secrets based workflow support added |
-| signed AAB generation | Pending | not generated |
+| signed AAB generation | Confirmed | Android Release AAB run number 4 success |
 | signed AAB verification | Pending | not performed |
 | Play Console internal test upload | Pending | not uploaded |
 | real device QA | Pending | not performed |
@@ -58,7 +64,7 @@ GitHub Secrets 실제 입력 여부만 기록한다.
 
 - Confirmed는 GitHub Secrets 입력 여부만 의미한다.
 - Confirmed는 signing 설정 적용 완료가 아니다.
-- Confirmed는 signed AAB 생성 완료가 아니다.
+- GitHub Secrets input Confirmed는 Secret 입력 여부만 의미하며, signed AAB generation Confirmed와 구분한다.
 - Confirmed는 Play Console 업로드 완료가 아니다.
 - Confirmed는 실제 기기 QA 완료가 아니다.
 - 실제 Secret 값은 문서, 코드, PR, 로그에 기록하지 않는다.
@@ -128,7 +134,7 @@ GitHub Secrets 실제 입력 전 확인할 항목:
 - GitHub Secrets actual input: Confirmed
 - release workflow signing support: Added
 - release workflow signing 적용: Added
-- signed AAB 생성: Pending
+- signed AAB 생성: Confirmed
 - signed AAB 검증: Pending
 - Play Console 내부 테스트 업로드: Pending
 - 실제 Google Play Console 입력: Pending
@@ -146,7 +152,7 @@ GitHub Secrets 실제 입력 전 확인할 항목:
 - `.keystore` 파일 commit 없음
 - signing password 기록 없음
 - keystore base64 실제값 기록 없음
-- signed AAB 생성 결과 기록 없음
+- signed AAB 검증 결과 기록 없음
 - AndroidManifest.xml 변경 없음
 - Android resource 파일 변경 없음
 - Play Console 내부 테스트 업로드 없음

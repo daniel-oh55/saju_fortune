@@ -26,9 +26,16 @@
 | GitHub Secrets actual input | Confirmed | values entered in repository settings |
 | release workflow signing support | Added | GitHub Secrets based workflow support added |
 | workflow signing 적용 | Added | workflow support added |
-| signed AAB 생성 | Pending | not generated |
+| signed AAB 생성 | Confirmed | Android Release AAB run number 4 success |
+| signed AAB verification | Pending | not performed |
 | Play Console internal test upload | Pending | not uploaded |
 | real device QA | Pending | not performed |
+
+Run metadata:
+
+- Android Release AAB run number 4: completed / success
+- signed AAB generation: Confirmed
+- Artifact digest: sha256:6a88573362f259fe6797a4c28a40678a32770e571714a5dd51a47a7351564b98
 
 ## Signing Goal
 
@@ -45,10 +52,10 @@
 - signing setup plan은 signing 설정 완료가 아니다.
 - signing setup plan은 Play Console 업로드 완료가 아니다.
 - signing setup plan은 실제 기기 QA 완료가 아니다.
-- workflow signing support 추가는 signed AAB 생성 완료가 아니다.
+- workflow signing support 추가 이후 signed AAB generation은 run number 4에서 Confirmed로 기록했다.
 - workflow signing support 추가는 Play Console 업로드 완료가 아니다.
 - workflow signing support 추가는 실제 기기 QA 완료가 아니다.
-- signed AAB 생성 결과는 workflow 수동 실행 후 별도 PR에서 기록한다.
+- signed AAB 검증 결과는 artifact 검증 후 별도 PR에서 기록한다.
 
 ## Required Decisions
 
@@ -113,10 +120,10 @@
 - GitHub Secrets actual input: Confirmed
 - release workflow signing support: Added
 - workflow signing 적용: Added
-- signed AAB 생성: Pending
+- signed AAB 생성: Confirmed
 - workflow signing 적용: Added
 - GitHub Secrets 실제 입력: Confirmed
-- signed AAB 생성: Pending
+- signed AAB 생성: Confirmed
 - signed AAB 검증: Pending
 - Play Console 내부 테스트 업로드: Pending
 - real device QA: Pending
@@ -125,7 +132,7 @@
 
 이번 PR에서 하지 않는 것:
 
-- signed AAB 생성 결과 기록 없음
+- signed AAB 검증 결과 기록 없음
 - keystore 파일 생성 없음
 - keystore 파일 추가 없음
 - keystore 파일 commit 없음

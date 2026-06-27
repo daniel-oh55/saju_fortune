@@ -24,18 +24,18 @@ const requiredSnippets = [
   '| signing password record | Not recorded | actual password not recorded |',
   '| key alias value record | Not recorded | actual alias not recorded |',
   '| release workflow signing support | Added | GitHub Secrets based workflow support added |',
-  '| signed AAB generation | Pending | not generated |',
+  '| signed AAB generation | Confirmed | Android Release AAB run number 4 success |',
   '| signed AAB verification | Pending | not performed |',
   '| Play Console internal test upload | Pending | not uploaded |',
   '| real device QA | Pending | not performed |',
   'workflow에서만 Secrets를 사용한다.',
   'PR body/log/doc에는 Secret 값을 기록하지 않는다.',
-  'workflow signing support 추가는 signed AAB 생성 완료가 아니다.',
+  'GitHub Secrets input Confirmed는 Secret 입력 여부만 의미하며, signed AAB generation Confirmed와 구분한다.',
   'release workflow signing support: Added',
-  'signed AAB 생성: Pending',
+  'signed AAB 생성: Confirmed',
   'signed AAB 검증: Pending',
   'GitHub Secrets 실제값 기록 없음',
-  'signed AAB 생성 결과 기록 없음',
+  'signed AAB 검증 결과 기록 없음',
 ];
 
 const wrongPhrases = [

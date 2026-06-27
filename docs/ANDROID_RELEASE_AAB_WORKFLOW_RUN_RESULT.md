@@ -2,85 +2,102 @@
 
 ## Purpose
 
-이 문서는 하루풀이 Android release AAB workflow 수동 실행 결과를 기록한다.
+이 문서는 하루풀이 Android Release AAB workflow의 실제 수동 실행 결과를 기록한다.
 
-이번 문서는 실행 결과 기록 문서이며, signing 설정이나 Play Console 업로드를 포함하지 않는다.
+이번 PR은 Android signed AAB workflow run result 기록 PR이며, signing Secret 실제값, keystore 파일, Play Console 업로드, 실제 기기 QA는 포함하지 않는다.
 
-## Workflow Run Summary
+## Android Signed Release AAB Workflow Run Result
 
-아래 값은 실제 GitHub Actions 실행 결과를 기준으로 작성한다.
+아래 값은 GitHub Actions의 actual current Android Release AAB workflow run 결과를 기준으로 작성한다.
 
 | Item | Value |
 |---|---|
 | Workflow | Android Release AAB |
 | Trigger | workflow_dispatch |
 | Branch | main |
-| Run number | 3 |
+| Run number | 4 |
+| Run id | 28293198750 |
+| Commit sha | fbf84f5102b75e2b999902b4c4755ba8214d60ef |
 | Status | completed |
 | Conclusion | success |
-| AAB artifact name | harupuli-release-aab |
-| AAB artifact 확인 | Confirmed |
+| release workflow signing support | Added |
+| signed AAB generation | Confirmed |
+| Artifact name | harupuli-release-aab |
+| Artifact size | 5,875,942 bytes |
+| Artifact digest | sha256:6a88573362f259fe6797a4c28a40678a32770e571714a5dd51a47a7351564b98 |
+| signed AAB verification | Pending |
+| Play Console internal test upload | Pending |
+| real device QA | Pending |
 
-주의:
+Run URL:
 
-- workflow가 실패했다면 실패를 그대로 기록한다.
-- workflow가 성공했더라도 Play Console 업로드 완료로 표시하지 않는다.
-- AAB artifact가 생성되었더라도 signing 설정과 Play Console 업로드 가능 여부는 별도 검토한다.
+- https://github.com/daniel-oh55/saju_fortune/actions/runs/28293198750
+
+## Job Result Summary
+
+| Step | Result |
+|---|---|
+| Checkout | success |
+| Set up Node.js | success |
+| Install dependencies | success |
+| Build web app | success |
+| Set up JDK | success |
+| Sync Android project | success |
+| Make Gradle wrapper executable | success |
+| Restore release keystore | success |
+| Build signed release AAB | success |
+| Upload release AAB | success |
 
 ## Result Details
 
 실제 결과:
 
-- release AAB workflow 수동 실행: Completed
-- AAB artifact 생성: Confirmed
-- AAB artifact name: harupuli-release-aab
-- AAB artifact size: 5.6 MB
-- AAB artifact digest: sha256:64ba8d4739cb7716893a4bd4a55e8bdcd26a0139febf8a40c6bb86caec45b9b7
-- GitHub Actions run number: 3
-- GitHub Actions run URL: https://github.com/daniel-oh55/saju_fortune/actions/runs/28225624458
-- Android Release AAB artifact inspection: docs/ANDROID_RELEASE_AAB_ARTIFACT_QA.md 참고
-- artifact 다운로드/압축 해제/`.aab` 파일 존재 확인은 PR #187에서 별도 기록
-- Play Console 업로드: Pending
-- signing 설정: Pending
-- 실제 기기 QA: Pending
-
-## Actual Current Run Note
-
-2026-06-26 기준 current Android Release AAB workflow를 main branch에서 workflow_dispatch로 수동 실행했고, run number 3은 success로 완료되었다.
-
-확인 메모:
-
-- 이전 run number 2의 Node.js 버전 오류는 PR #184에서 Node.js 22로 보정했다.
-- `harupuli-release-aab` artifact가 생성되었다.
-- AAB artifact 생성은 Play Console 업로드 완료가 아니다.
-- signing 설정과 Play Console 업로드 가능 여부는 별도 검토가 필요하다.
+- Android Release AAB workflow 수동 실행: completed / success
+- release workflow signing support: Added
+- signed AAB generation: Confirmed
+- artifact name: harupuli-release-aab
+- artifact size: 5,875,942 bytes
+- artifact digest: sha256:6a88573362f259fe6797a4c28a40678a32770e571714a5dd51a47a7351564b98
+- GitHub Actions run number: 4
+- GitHub Actions run id: 28293198750
+- GitHub Actions commit sha: fbf84f5102b75e2b999902b4c4755ba8214d60ef
+- signed AAB verification: Pending
+- Play Console internal test upload: Pending
+- real device QA: Pending
 
 주의:
 
-- 이전 signing workflow run 기준 결과를 현재 workflow 결과로 기록하지 않는다.
-- 현재 `.github/workflows/android-release-aab.yml` 기준 current workflow run 결과만 기록한다.
+- signed AAB generation Confirmed is not Play Console upload complete.
+- signed AAB generation Confirmed is not signed AAB verification complete.
+- signed AAB generation Confirmed is not real device QA complete.
+- artifact download/extract/verification to be recorded in a separate PR.
 
 ## Signing and Upload Status
 
 현재 상태:
 
-- signing 설정: Pending
-- keystore 파일 추가: 없음
-- signing password 기록: 없음
-- GitHub Secrets 실제 입력: Pending
-- Play Console 내부 테스트 업로드: Pending
-- 실제 Google Play Console 입력: Pending
+- keystore file commit: 없음
+- signing password record: 없음
+- GitHub Secrets actual values record: 없음
+- signed AAB generation: Confirmed
+- signed AAB verification: Pending
+- Play Console internal test upload: Pending
+- actual Google Play Console input: Pending
+- real device QA: Pending
 
 ## Non-Goals for This PR
 
 이번 PR에서 하지 않는 것:
 
-- workflow 파일 변경 없음
-- signing 설정 적용 없음
 - keystore 파일 추가 없음
+- `.jks` 파일 추가 없음
+- `.keystore` 파일 추가 없음
 - signing password 기록 없음
-- GitHub Secrets 실제 입력 없음
+- key alias 실제값 기록 없음
+- keystore base64 실제값 기록 없음
+- GitHub Secrets 실제값 기록 없음
 - Play Console 내부 테스트 업로드 없음
+- 실제 Google Play Console 입력 없음
 - 실제 기기 QA 없음
 - AndroidManifest.xml 변경 없음
 - Android resource 파일 변경 없음
@@ -94,20 +111,18 @@
 
 ## Related Docs
 
-- Android AAB signing verification plan: docs/ANDROID_AAB_SIGNING_VERIFICATION_PLAN.md
-- Android release AAB artifact QA: docs/ANDROID_RELEASE_AAB_ARTIFACT_QA.md
 - Android release AAB workflow: docs/ANDROID_RELEASE_AAB_WORKFLOW.md
-- Release workflow design: docs/RELEASE_WORKFLOW_DESIGN.md
+- Android release AAB artifact QA: docs/ANDROID_RELEASE_AAB_ARTIFACT_QA.md
+- Android signing setup plan: docs/ANDROID_SIGNING_SETUP_PLAN.md
+- Android signing secrets checklist: docs/ANDROID_SIGNING_SECRETS_CHECKLIST.md
+- Android AAB signing verification plan: docs/ANDROID_AAB_SIGNING_VERIFICATION_PLAN.md
 - Release build signing checklist: docs/RELEASE_BUILD_SIGNING_CHECKLIST.md
 - Saju engine accuracy roadmap: docs/SAJU_ENGINE_ACCURACY_ROADMAP.md
 
 ## Suggested Follow-up PRs
 
-1. `docs: signing setup plan`
-   - 실제 signing 설정 전 keystore/secrets 운영 계획 정리
+1. `docs: record signed AAB artifact verification`
+   - artifact download, extract, and signed AAB verification result 기록
 
-2. `docs: google play internal test checklist`
-   - Play Console 내부 테스트 업로드 전 확인 항목 정리
-
-3. `docs: android release AAB artifact QA`
-   - AAB artifact 다운로드/보관/검증 절차 정리
+2. `docs: google play internal test upload checklist`
+   - Play Console internal test upload 전 확인 항목 정리

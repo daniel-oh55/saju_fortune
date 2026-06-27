@@ -2,6 +2,9 @@
 
 ## Added
 
+- Android signed AAB workflow result 기록
+- signed AAB generation Confirmed 상태 기록
+
 - Android release signing workflow support 추가
 - GitHub Secrets 기반 release AAB signing 준비 추가
 - Android signing secrets input status 기록

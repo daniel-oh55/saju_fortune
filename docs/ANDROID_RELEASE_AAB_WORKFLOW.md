@@ -21,9 +21,9 @@ keystore 파일은 repository에 추가하지 않는다.
 - signing 설정: Added
 - keystore 파일: Not committed
 - GitHub Secrets 실제 입력: Confirmed
-- signed AAB generation: Pending
+- signed AAB generation: Confirmed
 - signed AAB verification: Pending
-- AAB artifact 확인: Pending workflow run
+- AAB artifact 확인: Confirmed
 - Play Console 내부 테스트 업로드: Pending
 - 실제 기기 QA: Pending
 
@@ -62,7 +62,7 @@ Signing support details:
 - keystore 파일 commit: 없음
 - signing password 기록: 없음
 - GitHub Secrets 실제 입력: Confirmed
-- signed AAB generation: Pending
+- signed AAB generation: Confirmed
 - signed AAB verification: Pending
 
 주의:
@@ -77,11 +77,13 @@ Signing support details:
 
 - release AAB workflow 추가: Added
 - release workflow signing support: Added
-- AAB 생성 결과: Pending workflow run
-- AAB artifact 확인: Pending workflow run
-- Android Release AAB run number 3: completed / success
+- AAB 생성 결과: Confirmed
+- AAB artifact 확인: Confirmed
+- Android Release AAB run number 4: completed / success
+- Android Release AAB run id: 28293198750
 - AAB artifact `harupuli-release-aab`: Confirmed
-- AAB artifact size: 5.6 MB
+- AAB artifact size: 5,875,942 bytes
+- Artifact digest: sha256:6a88573362f259fe6797a4c28a40678a32770e571714a5dd51a47a7351564b98
 - signing 설정: Added
 - Play Console 내부 테스트 업로드: Pending
 - 실제 기기 QA: Pending
@@ -97,7 +99,7 @@ Signing support details:
 
 이번 PR에서 하지 않는 것:
 
-- signed AAB 생성 결과 기록 없음
+- signed AAB verification 결과 기록 없음
 - keystore 파일 추가 없음
 - signing password 기록 없음
 - GitHub Secrets 실제값 기록 없음
