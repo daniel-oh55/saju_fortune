@@ -6,6 +6,7 @@ const docPath = 'docs/ANDROID_RELEASE_AAB_ARTIFACT_QA.md';
 const requiredSections = [
   '# Android Release AAB Artifact QA',
   '## Artifact Metadata',
+  '## Signed AAB Artifact Inspection Result',
   '## Artifact QA Checklist',
   '## Download and Inspection Notes',
   '## Signing and Upload Status',
@@ -21,16 +22,29 @@ const requiredSnippets = [
   'Artifact size | 5,875,942 bytes',
   'sha256:6a88573362f259fe6797a4c28a40678a32770e571714a5dd51a47a7351564b98',
   'Android Release AAB run number 4: completed / success',
-  'artifact 다운로드: Pending',
-  'artifact 압축 해제: Pending',
-  'AAB 파일명: Pending',
-  'AAB 파일 크기: Pending',
+  'signed AAB artifact download | Confirmed',
+  'signed AAB artifact extract | Confirmed',
+  '`.aab` file existence | Confirmed',
+  '`.aab` filename | Confirmed',
+  '`.aab` file size | Confirmed',
+  'artifact zip repository commit | Not committed',
+  '`.aab` repository commit | Not committed',
+  'app-release.aab',
+  '6,016,271 bytes',
+  'artifact 다운로드: Confirmed',
+  'artifact 압축 해제: Confirmed',
+  'AAB 파일명: app-release.aab',
+  'AAB 파일 크기: 6,016,271 bytes',
   'repository commit 여부: artifact zip과 `.aab` 파일은 commit하지 않음',
+  'signed AAB artifact inspection Confirmed는 signed AAB verification 완료가 아니다.',
+  'signed AAB artifact inspection Confirmed는 Play Console 업로드 완료가 아니다.',
+  'signed AAB artifact inspection Confirmed는 실제 기기 QA 완료가 아니다.',
+  'signed AAB verification은 별도 PR에서 기록한다.',
   'release workflow signing support: Added',
   'signing 설정: Added',
   'GitHub Secrets 실제 입력: Confirmed',
   'signed AAB generation: Confirmed',
-  'signed AAB artifact QA: Pending',
+  'signed AAB artifact QA: Confirmed',
   'signed AAB verification: Pending',
   'Play Console 내부 테스트 업로드: Pending',
   '실제 Google Play Console 입력: Pending',
@@ -48,8 +62,30 @@ const wrongPhrases = [
   '서양식 보정 적용 여부',
   '양력/음력 샘플 추가 검증',
   'signing 설정: Completed',
+  'signed AAB verification | Confirmed',
+  'Play Console internal test upload | Confirmed',
+  'real device QA | Confirmed',
   'Play Console 업로드: Completed',
   '실제 기기 QA: Completed',
+];
+
+const forbiddenPatterns = [
+  {
+    label: 'actual_secret_assignment_absent',
+    pattern: /ANDROID_(?:KEYSTORE_BASE64|KEYSTORE_PASSWORD|KEY_ALIAS|KEY_PASSWORD)\s*=\s*['"]?[^\s'"<|`]+/i,
+  },
+  {
+    label: 'long_base64_like_value_absent',
+    pattern: /[A-Za-z0-9+/]{120,}={0,2}/,
+  },
+  {
+    label: 'private_keystore_path_absent',
+    pattern: /(?:[A-Za-z]:\\|\/(?:Users|home|var|tmp|private)\/)[^\r\n|`<>]*(?:\.jks|\.keystore)/i,
+  },
+  {
+    label: 'private_aab_path_absent',
+    pattern: /(?:[A-Za-z]:\\|\/(?:Users|home|var|tmp|private)\/)[^\r\n|`<>]*\.aab/i,
+  },
 ];
 
 const protectedFiles = [
@@ -95,6 +131,12 @@ for (const snippet of requiredSnippets) {
 for (const snippet of wrongPhrases) {
   const absent = !doc.includes(snippet);
   logResult(`wrong_phrase_absent_${labelFromSnippet(snippet)}`, absent);
+  if (!absent) hasFailure = true;
+}
+
+for (const { label, pattern } of forbiddenPatterns) {
+  const absent = !pattern.test(doc);
+  logResult(label, absent);
   if (!absent) hasFailure = true;
 }
 

@@ -24,6 +24,8 @@ keystore 파일은 repository에 추가하지 않는다.
 - signed AAB generation: Confirmed
 - signed AAB verification: Pending
 - AAB artifact 확인: Confirmed
+- signed AAB artifact download: Confirmed
+- signed AAB artifact extract: Confirmed
 - Play Console 내부 테스트 업로드: Pending
 - 실제 기기 QA: Pending
 
@@ -84,6 +86,11 @@ Signing support details:
 - AAB artifact `harupuli-release-aab`: Confirmed
 - AAB artifact size: 5,875,942 bytes
 - Artifact digest: sha256:6a88573362f259fe6797a4c28a40678a32770e571714a5dd51a47a7351564b98
+- signed AAB artifact download: Confirmed
+- signed AAB artifact extract: Confirmed
+- `.aab` file existence: Confirmed
+- `.aab` filename: app-release.aab
+- `.aab` file size: 6,016,271 bytes
 - signing 설정: Added
 - Play Console 내부 테스트 업로드: Pending
 - 실제 기기 QA: Pending

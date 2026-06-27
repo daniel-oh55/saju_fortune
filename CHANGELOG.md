@@ -2,6 +2,9 @@
 
 ## Added
 
+- Android signed AAB artifact inspection 결과 기록
+- signed AAB `.aab` 파일 존재 확인 상태 기록
+
 - Android signed AAB workflow result 기록
 - signed AAB generation Confirmed 상태 기록
 
