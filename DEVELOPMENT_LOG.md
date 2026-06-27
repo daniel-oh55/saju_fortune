@@ -1,5 +1,25 @@
 # DEVELOPMENT_LOG
 
+## Android Signing Secrets Input Status
+
+- GitHub Secrets 실제 입력 여부 Confirmed로 기록
+- 실제 Secret 값 기록 없음
+- keystore base64 실제값 기록 없음
+- signing password 기록 없음
+- key alias 실제값 기록 없음
+- keystore 파일명/경로 기록 없음
+- signing 설정은 Pending 유지
+- release workflow signing 적용은 Pending 유지
+- signed AAB 생성은 Pending 유지
+- signed AAB 검증은 Pending 유지
+- Play Console 내부 테스트 업로드는 Pending 유지
+- 실제 기기 QA는 Pending 유지
+- workflow 파일 변경 없음
+- Android native/Manifest/resource/Gradle 변경 없음
+- production 계산 로직 변경 없음
+- 사주/운세 결과 생성 로직 변경 없음
+- UI/디자인 변경 없음
+
 ## Android Keystore Generation Confirmed
 
 - 실제 keystore 생성 여부 Confirmed로 기록

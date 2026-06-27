@@ -20,11 +20,49 @@
 | keystore backup decision | Decided | separate private safe location |
 | keystore storage | Confirmed | private safe location, actual path not recorded |
 | keystore backup storage | Confirmed | separate private safe location, actual path not recorded |
-| GitHub Secrets actual input | Pending | not entered yet |
+| GitHub Secrets actual input | Confirmed | values entered in repository settings |
 | release workflow signing support | Pending | not implemented |
 | signed AAB generation | Pending | not generated |
+| signed AAB verification | Pending | not performed |
 | Play Console internal test upload | Pending | not uploaded |
 | real device QA | Pending | not performed |
+
+## Secrets Input Status
+
+GitHub Secrets 실제 입력 여부만 기록한다.
+실제 Secret 값은 기록하지 않는다.
+
+| Secret name | Input Status | Value Recorded |
+|---|---|---|
+| ANDROID_KEYSTORE_BASE64 | Confirmed | Not recorded |
+| ANDROID_KEYSTORE_PASSWORD | Confirmed | Not recorded |
+| ANDROID_KEY_ALIAS | Confirmed | Not recorded |
+| ANDROID_KEY_PASSWORD | Confirmed | Not recorded |
+
+추가 상태:
+
+| Item | Status | Note |
+|---|---|---|
+| GitHub Secrets actual input | Confirmed | values entered in repository settings |
+| Secret actual values record | Not recorded | docs/code/PR/logs do not contain values |
+| keystore base64 value record | Not recorded | actual base64 not recorded |
+| signing password record | Not recorded | actual password not recorded |
+| key alias value record | Not recorded | actual alias not recorded |
+| release workflow signing support | Pending | not implemented |
+| signed AAB generation | Pending | not generated |
+| signed AAB verification | Pending | not performed |
+| Play Console internal test upload | Pending | not uploaded |
+| real device QA | Pending | not performed |
+
+주의:
+
+- Confirmed는 GitHub Secrets 입력 여부만 의미한다.
+- Confirmed는 signing 설정 적용 완료가 아니다.
+- Confirmed는 signed AAB 생성 완료가 아니다.
+- Confirmed는 Play Console 업로드 완료가 아니다.
+- Confirmed는 실제 기기 QA 완료가 아니다.
+- 실제 Secret 값은 문서, 코드, PR, 로그에 기록하지 않는다.
+- workflow signing 적용은 별도 PR에서 진행한다.
 
 ## Candidate Secrets
 
@@ -84,8 +122,8 @@ GitHub Secrets 실제 입력 전 확인할 항목:
 - keystore actual generation: Confirmed
 - keystore storage: Confirmed
 - keystore backup storage: Confirmed
-- GitHub Secrets 실제 입력: Pending
-- GitHub Secrets actual input: Pending
+- GitHub Secrets 실제 입력: Confirmed
+- GitHub Secrets actual input: Confirmed
 - release workflow signing support: Pending
 - release workflow signing 적용: Pending
 - signed AAB 생성: Pending
@@ -98,7 +136,7 @@ GitHub Secrets 실제 입력 전 확인할 항목:
 
 이번 PR에서 하지 않는 것:
 
-- GitHub Secrets 실제 입력 없음
+- GitHub Secrets 실제값 기록 없음
 - keystore 파일 생성 없음
 - keystore 파일 추가 없음
 - keystore 파일 commit 없음
