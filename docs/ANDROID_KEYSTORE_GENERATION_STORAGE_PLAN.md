@@ -15,12 +15,12 @@
 | signing secrets checklist | Draft | docs/ANDROID_SIGNING_SECRETS_CHECKLIST.md |
 | keystore generation plan | Draft | this document |
 | keystore generation decision | Decided | local secure environment with JDK keytool |
-| keystore generation | Pending | not created yet |
-| keystore actual generation | Pending | external secure local generation not performed in this PR |
+| keystore generation | Confirmed | repository outside private location |
+| keystore actual generation | Confirmed | repository outside private location |
 | keystore storage decision | Decided | repository commit prohibited |
 | keystore backup decision | Decided | separate private safe location |
-| keystore storage | Pending | requires actual keystore generation outside repository |
-| keystore backup storage | Pending | requires actual keystore backup outside repository |
+| keystore storage | Confirmed | private safe location, actual path not recorded |
+| keystore backup storage | Confirmed | separate private safe location, actual path not recorded |
 | GitHub Secrets actual input | Pending | not entered yet |
 | release workflow signing support | Pending | not implemented |
 | signed AAB generation | Pending | not generated |
@@ -58,12 +58,17 @@
 
 ## Generation Status
 
-이번 PR에서는 실제 keystore 생성이 수행되지 않았으며, 비공개 안전 위치에서의 별도 로컬 작업으로 남겨 둔다.
+실제 keystore 생성/보관/백업 상태는 실제값을 기록하지 않는 기준으로만 문서화한다.
 
 | Item | Status | Note |
 |---|---|---|
-| keystore actual generation | Pending | secure external local generation not performed in this PR |
+| keystore actual generation | Confirmed | repository outside private location |
 | keystore file commit | Not committed | `.jks`/`.keystore` not added |
+| keystore storage | Confirmed | private safe location, actual path not recorded |
+| keystore backup storage | Confirmed | separate private safe location, actual path not recorded |
+| signing password record | Not recorded | password not recorded in docs/code/PR/logs |
+| key alias record | Not recorded | actual alias not recorded |
+| keystore base64 value record | Not recorded | actual base64 not recorded |
 | GitHub Secrets actual input | Pending | not entered yet |
 | release workflow signing support | Pending | not implemented |
 | signed AAB generation | Pending | not generated |
@@ -164,7 +169,6 @@ keystore 보관 기준:
 
 이번 PR에서 하지 않는 것:
 
-- keystore 파일 실제 생성 없음
 - keystore 파일 추가 없음
 - keystore 파일 commit 없음
 - `.jks` 파일 commit 없음

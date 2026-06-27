@@ -17,11 +17,11 @@
 | signing status result | Confirmed | Unsigned |
 | signing setup plan | Required | this document |
 | signing setup applied | Pending | not applied yet |
-| keystore file | Pending | not created or committed |
+| keystore file | Pending | not committed to repository, actual filename not recorded |
 | keystore generation/storage decision | Decided | docs/ANDROID_KEYSTORE_GENERATION_STORAGE_PLAN.md |
-| keystore actual generation | Pending | not performed in this PR |
-| keystore storage | Pending | actual private location not recorded |
-| keystore backup storage | Pending | actual private location not recorded |
+| keystore actual generation | Confirmed | repository outside private location |
+| keystore storage | Confirmed | private safe location, actual path not recorded |
+| keystore backup storage | Confirmed | separate private safe location, actual path not recorded |
 | signing password | Pending | not recorded |
 | GitHub Secrets actual input | Pending | not entered yet |
 | workflow signing 적용 | Pending | separate PR |
@@ -102,9 +102,9 @@
 현재 상태:
 
 - keystore generation/storage decision: Decided
-- keystore actual generation: Pending
-- keystore storage: Pending
-- keystore backup storage: Pending
+- keystore actual generation: Confirmed
+- keystore storage: Confirmed
+- keystore backup storage: Confirmed
 - GitHub Secrets actual input: Pending
 - workflow signing 적용: Pending
 - signed AAB 생성: Pending
