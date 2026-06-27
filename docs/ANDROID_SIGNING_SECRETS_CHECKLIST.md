@@ -10,7 +10,7 @@
 
 | Item | Status | Note |
 |---|---|---|
-| AAB signing verification result | Confirmed | Unsigned |
+| AAB signing verification result | Failed | jarsigner result: jar is unsigned |
 | signing setup plan | Draft | docs/ANDROID_SIGNING_SETUP_PLAN.md |
 | signing secrets checklist | Draft | this document |
 | keystore generation decision | Decided | docs/ANDROID_KEYSTORE_GENERATION_STORAGE_PLAN.md |
@@ -23,7 +23,7 @@
 | GitHub Secrets actual input | Confirmed | values entered in repository settings |
 | release workflow signing support | Added | GitHub Secrets based workflow support added |
 | signed AAB generation | Confirmed | Android Release AAB run number 4 success |
-| signed AAB verification | Pending | not performed |
+| signed AAB verification | Failed | jarsigner result: jar is unsigned |
 | Play Console internal test upload | Pending | not uploaded |
 | real device QA | Pending | not performed |
 
@@ -56,7 +56,7 @@ GitHub Secrets 실제 입력 여부만 기록한다.
 | key alias value record | Not recorded | actual alias not recorded |
 | release workflow signing support | Added | GitHub Secrets based workflow support added |
 | signed AAB generation | Confirmed | Android Release AAB run number 4 success |
-| signed AAB verification | Pending | not performed |
+| signed AAB verification | Failed | jarsigner result: jar is unsigned |
 | Play Console internal test upload | Pending | not uploaded |
 | real device QA | Pending | not performed |
 
@@ -135,7 +135,7 @@ GitHub Secrets 실제 입력 전 확인할 항목:
 - release workflow signing support: Added
 - release workflow signing 적용: Added
 - signed AAB 생성: Confirmed
-- signed AAB 검증: Pending
+- signed AAB 검증: Failed
 - Play Console 내부 테스트 업로드: Pending
 - 실제 Google Play Console 입력: Pending
 - 실제 기기 QA: Pending
@@ -152,7 +152,7 @@ GitHub Secrets 실제 입력 전 확인할 항목:
 - `.keystore` 파일 commit 없음
 - signing password 기록 없음
 - keystore base64 실제값 기록 없음
-- signed AAB 검증 결과 기록 없음
+- signed AAB 검증 결과 기록: Failed
 - AndroidManifest.xml 변경 없음
 - Android resource 파일 변경 없음
 - Play Console 내부 테스트 업로드 없음

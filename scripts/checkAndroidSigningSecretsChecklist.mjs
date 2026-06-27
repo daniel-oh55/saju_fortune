@@ -25,7 +25,7 @@ const requiredSnippets = [
   '| key alias value record | Not recorded | actual alias not recorded |',
   '| release workflow signing support | Added | GitHub Secrets based workflow support added |',
   '| signed AAB generation | Confirmed | Android Release AAB run number 4 success |',
-  '| signed AAB verification | Pending | not performed |',
+  '| signed AAB verification | Failed | jarsigner result: jar is unsigned |',
   '| Play Console internal test upload | Pending | not uploaded |',
   '| real device QA | Pending | not performed |',
   'workflow에서만 Secrets를 사용한다.',
@@ -33,9 +33,9 @@ const requiredSnippets = [
   'GitHub Secrets input Confirmed는 Secret 입력 여부만 의미하며, signed AAB generation Confirmed와 구분한다.',
   'release workflow signing support: Added',
   'signed AAB 생성: Confirmed',
-  'signed AAB 검증: Pending',
+  'signed AAB 검증: Failed',
   'GitHub Secrets 실제값 기록 없음',
-  'signed AAB 검증 결과 기록 없음',
+  'signed AAB 검증 결과 기록: Failed',
 ];
 
 const wrongPhrases = [

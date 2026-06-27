@@ -1,5 +1,15 @@
 # TODO
 
+## 2026-06-27 Android signed AAB verification TODO
+
+- [x] signed AAB signing verification 실패 결과 기록
+- [x] jarsigner command 실행 결과 기록
+- [ ] signing verification 실패 원인 수정
+- [ ] signed AAB workflow 재실행
+- [ ] signed AAB 재검증
+- [ ] Play Console 내부 테스트 업로드
+- [ ] 실제 기기 QA
+
 ## 2026-06-27 Android signed AAB artifact inspection TODO
 
 - [x] signed AAB artifact 다운로드 확인

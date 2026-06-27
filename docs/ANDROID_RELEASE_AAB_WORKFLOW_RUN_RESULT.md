@@ -30,7 +30,8 @@
 | `.aab` file existence | Confirmed |
 | `.aab` filename | app-release.aab |
 | `.aab` file size | 6,016,271 bytes |
-| signed AAB verification | Pending |
+| jarsigner result | Failed |
+| signed AAB verification | Failed |
 | Play Console internal test upload | Pending |
 | real device QA | Pending |
 
@@ -71,7 +72,9 @@ Run URL:
 - GitHub Actions run number: 4
 - GitHub Actions run id: 28293198750
 - GitHub Actions commit sha: fbf84f5102b75e2b999902b4c4755ba8214d60ef
-- signed AAB verification: Pending
+- jarsigner result: Failed
+- jarsigner result summary: `jar is unsigned.`
+- signed AAB verification: Failed
 - Play Console internal test upload: Pending
 - real device QA: Pending
 
@@ -81,6 +84,7 @@ Run URL:
 - signed AAB generation Confirmed is not signed AAB verification complete.
 - signed AAB generation Confirmed is not real device QA complete.
 - signed AAB artifact inspection Confirmed is not signed AAB verification complete.
+- signed AAB verification Failed는 Play Console upload complete가 아니다.
 
 ## Signing and Upload Status
 
@@ -95,7 +99,8 @@ Run URL:
 - `.aab` file existence: Confirmed
 - `.aab` filename: app-release.aab
 - `.aab` file size: 6,016,271 bytes
-- signed AAB verification: Pending
+- jarsigner result: Failed
+- signed AAB verification: Failed
 - Play Console internal test upload: Pending
 - actual Google Play Console input: Pending
 - real device QA: Pending

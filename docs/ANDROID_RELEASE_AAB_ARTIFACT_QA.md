@@ -21,7 +21,7 @@
 | Artifact digest | sha256:6a88573362f259fe6797a4c28a40678a32770e571714a5dd51a47a7351564b98 |
 | Artifact 확인 | Confirmed |
 | signed AAB generation | Confirmed |
-| signed AAB verification | Pending |
+| signed AAB verification | Failed |
 
 Run metadata:
 
@@ -46,7 +46,7 @@ Run metadata:
 | `.aab` file size | Confirmed | 6,016,271 bytes |
 | artifact zip repository commit | Not committed | zip file not committed |
 | `.aab` repository commit | Not committed | `.aab` file not committed |
-| signed AAB verification | Pending | separate PR |
+| signed AAB verification | Failed | jarsigner result: jar is unsigned |
 | Play Console internal test upload | Pending | not uploaded |
 | real device QA | Pending | not performed |
 
@@ -55,7 +55,7 @@ Run metadata:
 - signed AAB artifact inspection Confirmed는 signed AAB verification 완료가 아니다.
 - signed AAB artifact inspection Confirmed는 Play Console 업로드 완료가 아니다.
 - signed AAB artifact inspection Confirmed는 실제 기기 QA 완료가 아니다.
-- signed AAB verification은 별도 PR에서 기록한다.
+- signed AAB verification은 Failed로 기록하며, 실패 원인은 Secret 실제값 없이 `jar is unsigned.`로만 요약한다.
 
 ## Artifact QA Checklist
 
@@ -71,7 +71,7 @@ Run metadata:
 | AAB 파일명 기록 | Confirmed | app-release.aab |
 | AAB 파일 크기 기록 | Confirmed | 6,016,271 bytes |
 | Play Console 업로드 가능 여부 | Pending | 실제 업로드 전까지 Pending |
-| signing 상태 확인 | Pending | 실제 signing 검증 전까지 Pending |
+| signing 상태 확인 | Failed | jarsigner result: jar is unsigned |
 | 실제 기기 QA | Pending | 실제 설치/실행 확인 전까지 Pending |
 
 ## Download and Inspection Notes
@@ -97,7 +97,7 @@ Run metadata:
 - AAB 파일 크기: 6,016,271 bytes
 - artifact 확인 위치: temporary directory only
 - repository commit 여부: artifact zip과 `.aab` 파일은 commit하지 않음
-- signing 상태 확인: Pending
+- signing 상태 확인: Failed
 - Play Console 내부 테스트 업로드: Pending
 
 주의:
@@ -111,8 +111,9 @@ Run metadata:
 현재 상태:
 
 - signing 검증 명령 실제 실행: Confirmed
-- signing 상태 확인 결과: Unsigned
-- jarsigner result: Unsigned
+- signing 상태 확인 결과: Failed
+- jarsigner result: Failed
+- jarsigner result summary: `jar is unsigned.`
 - apksigner result: Not available
 - Play Console 업로드 가능 여부: Pending
 - signing setup plan: Required
@@ -120,7 +121,7 @@ Run metadata:
 - signing 설정: Added
 - signed AAB generation: Confirmed
 - signed AAB artifact QA: Confirmed
-- signed AAB verification: Pending
+- signed AAB verification: Failed
 - keystore 파일 추가: 없음
 - signing password 기록: 없음
 - GitHub Secrets 실제 입력: Confirmed
@@ -132,7 +133,7 @@ Run metadata:
 
 이번 PR에서 하지 않는 것:
 
-- signed AAB 검증 결과 기록 없음
+- signed AAB 검증 결과 기록: Failed
 - keystore 파일 추가 없음
 - signing password 기록 없음
 - GitHub Secrets 실제값 기록 없음

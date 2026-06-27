@@ -10,13 +10,13 @@
 
 | Item | Status | Note |
 |---|---|---|
-| Android Release AAB workflow run number 3 | Confirmed | completed / success |
+| Android Release AAB workflow run number 4 | Confirmed | completed / success |
 | AAB artifact name | Confirmed | harupuli-release-aab |
-| artifact 다운로드 | Confirmed | PR #187 기준 |
-| artifact 압축 해제 | Confirmed | PR #187 기준 |
+| artifact 다운로드 | Confirmed | temporary directory only |
+| artifact 압축 해제 | Confirmed | temporary directory only |
 | `.aab` 파일 존재 확인 | Confirmed | app-release.aab |
 | AAB 파일 크기 | Confirmed | 6,016,271 bytes |
-| signing 상태 확인 | Confirmed | jarsigner 기준 Unsigned |
+| signing 상태 확인 | Failed | jarsigner 기준 unsigned |
 | Play Console 업로드 가능 여부 | Pending | 실제 업로드 전까지 Pending |
 | 실제 기기 QA | Pending | 실제 설치/실행 전까지 Pending |
 
@@ -54,6 +54,30 @@ apksigner verify --verbose app-release.aab
 
 ## Signing Verification Result
 
+## Signed AAB Verification Result
+
+| Item | Status | Note |
+|---|---|---|
+| signed AAB source workflow | Confirmed | Android Release AAB run number 4 |
+| signed AAB artifact | Confirmed | harupuli-release-aab |
+| `.aab` filename | Confirmed | app-release.aab |
+| `.aab` file size | Confirmed | 6,016,271 bytes |
+| jarsigner command executed | Confirmed | `jarsigner -verify -verbose -certs app-release.aab` |
+| jarsigner result | Failed | unsigned |
+| jarsigner result summary | Failed | `jar is unsigned.` |
+| `jar verified.` result | Failed | not present |
+| signed AAB verification | Failed | fix required |
+| Play Console internal test upload | Pending | not uploaded |
+| real device QA | Pending | not performed |
+
+주의:
+
+- signed AAB verification Failed는 Play Console 업로드 완료가 아니다.
+- signed AAB verification Failed는 실제 기기 QA 완료가 아니다.
+- Play Console 내부 테스트 업로드는 별도 PR에서 기록한다.
+- 실제 Google Play Console 입력은 별도 PR에서 기록한다.
+- 실패 원인은 실제 Secret 값 없이 `jar is unsigned.` 결과만 기록한다.
+
 실제 확인 결과:
 
 - signing 검증 명령 실제 실행: Confirmed
@@ -62,11 +86,13 @@ apksigner verify --verbose app-release.aab
 - AAB 파일 크기: 6,016,271 bytes
 - jarsigner 실행 가능 여부: Confirmed
 - jarsigner command: `jarsigner -verify -verbose -certs app-release.aab`
-- jarsigner result: Unsigned
+- jarsigner result: Failed
 - jarsigner result summary: `jar is unsigned.`
+- `jar verified.` result: not present
 - apksigner 실행 가능 여부: Not available
 - apksigner result: Not available
-- signing 상태 확인 결과: Unsigned
+- signed AAB verification: Failed
+- signing 상태 확인 결과: Failed
 - Play Console 업로드 가능 여부: Pending
 - signing setup plan: Required
 - GitHub Secrets 실제 입력: Pending
@@ -122,8 +148,8 @@ apksigner verify --verbose app-release.aab
 
 ## Current Pending Items
 
-- signing 상태 확인: Confirmed
-- signing 상태 확인 결과: Unsigned
+- signing 상태 확인: Failed
+- signing 상태 확인 결과: Failed
 - signing 검증 명령 실제 실행: Confirmed
 - Play Console 업로드 가능 여부: Pending
 - signing setup plan: Required

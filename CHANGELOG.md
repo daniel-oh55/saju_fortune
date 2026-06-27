@@ -2,6 +2,9 @@
 
 ## Added
 
+- Android signed AAB verification failure result 기록
+- jarsigner 기준 signed AAB verification Failed 상태 기록
+
 - Android signed AAB artifact inspection 결과 기록
 - signed AAB `.aab` 파일 존재 확인 상태 기록
 

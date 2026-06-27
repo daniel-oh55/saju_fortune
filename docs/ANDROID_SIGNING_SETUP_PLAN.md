@@ -13,8 +13,8 @@
 | AAB file | Confirmed | app-release.aab |
 | AAB file size | Confirmed | 6,016,271 bytes |
 | signing verification command | Confirmed | PR #189 |
-| jarsigner result | Confirmed | Unsigned |
-| signing status result | Confirmed | Unsigned |
+| jarsigner result | Failed | jar is unsigned |
+| signing status result | Failed | jarsigner result: jar is unsigned |
 | signing setup plan | Required | this document |
 | signing setup applied | Partially added | Gradle release signing config uses environment variables |
 | keystore file | Pending | not committed to repository, actual filename not recorded |
@@ -28,7 +28,7 @@
 | workflow signing 적용 | Added | workflow support added |
 | signed AAB 생성 | Confirmed | Android Release AAB run number 4 success |
 | signed AAB artifact inspection | Confirmed | app-release.aab, 6,016,271 bytes |
-| signed AAB verification | Pending | not performed |
+| signed AAB verification | Failed | jarsigner result: jar is unsigned |
 | Play Console internal test upload | Pending | not uploaded |
 | real device QA | Pending | not performed |
 
@@ -37,6 +37,7 @@ Run metadata:
 - Android Release AAB run number 4: completed / success
 - signed AAB generation: Confirmed
 - signed AAB artifact inspection: Confirmed
+- signed AAB verification: Failed
 - Artifact digest: sha256:6a88573362f259fe6797a4c28a40678a32770e571714a5dd51a47a7351564b98
 
 ## Signing Goal
@@ -57,7 +58,7 @@ Run metadata:
 - workflow signing support 추가 이후 signed AAB generation은 run number 4에서 Confirmed로 기록했다.
 - workflow signing support 추가는 Play Console 업로드 완료가 아니다.
 - workflow signing support 추가는 실제 기기 QA 완료가 아니다.
-- signed AAB 검증 결과는 artifact 검증 후 별도 PR에서 기록한다.
+- signed AAB 검증 결과는 Failed로 기록했다.
 
 ## Required Decisions
 
@@ -128,7 +129,7 @@ Run metadata:
 - GitHub Secrets 실제 입력: Confirmed
 - signed AAB 생성: Confirmed
 - signed AAB artifact inspection: Confirmed
-- signed AAB 검증: Pending
+- signed AAB 검증: Failed
 - Play Console 내부 테스트 업로드: Pending
 - real device QA: Pending
 
@@ -136,7 +137,7 @@ Run metadata:
 
 이번 PR에서 하지 않는 것:
 
-- signed AAB 검증 결과 기록 없음
+- signed AAB 검증 결과 기록: Failed
 - keystore 파일 생성 없음
 - keystore 파일 추가 없음
 - keystore 파일 commit 없음

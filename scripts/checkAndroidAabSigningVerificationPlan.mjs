@@ -9,6 +9,7 @@ const requiredSections = [
   '## Current Artifact Status',
   '## Signing Verification Questions',
   '## Proposed Verification Commands',
+  '## Signed AAB Verification Result',
   '## Signing Verification Result',
   '## Expected Result Categories',
   '## Secret and Keystore Policy',
@@ -20,7 +21,18 @@ const requiredSections = [
 const requiredSnippets = [
   'app-release.aab',
   '| AAB 파일 크기 | Confirmed | 6,016,271 bytes |',
-  '| signing 상태 확인 | Confirmed | jarsigner 기준 Unsigned |',
+  '| signing 상태 확인 | Failed | jarsigner 기준 unsigned |',
+  'signed AAB source workflow | Confirmed | Android Release AAB run number 4',
+  'signed AAB artifact | Confirmed | harupuli-release-aab',
+  '`.aab` filename | Confirmed | app-release.aab',
+  '`.aab` file size | Confirmed | 6,016,271 bytes',
+  'jarsigner command executed | Confirmed',
+  'jarsigner result | Failed | unsigned',
+  'jarsigner result summary | Failed | `jar is unsigned.`',
+  '`jar verified.` result | Failed | not present',
+  'signed AAB verification | Failed | fix required',
+  'Play Console internal test upload | Pending | not uploaded',
+  'real device QA | Pending | not performed',
   '| Play Console 업로드 가능 여부 | Pending |',
   'upload key/keystore 필요 여부: Pending',
   'GitHub Secrets 필요 여부: Pending',
@@ -30,11 +42,13 @@ const requiredSnippets = [
   '후속 PR에서는 signing setup plan을 별도로 검토한다.',
   'signing 검증 명령 실제 실행: Confirmed',
   'jarsigner 실행 가능 여부: Confirmed',
-  'jarsigner result: Unsigned',
+  'jarsigner result: Failed',
   'jarsigner result summary: `jar is unsigned.`',
+  '`jar verified.` result: not present',
   'apksigner 실행 가능 여부: Not available',
   'apksigner result: Not available',
-  'signing 상태 확인 결과: Unsigned',
+  'signed AAB verification: Failed',
+  'signing 상태 확인 결과: Failed',
   'signing setup plan: Required',
   'Play Console 업로드 가능 여부: Pending',
   'GitHub Secrets 실제 입력: Pending',
@@ -44,6 +58,10 @@ const requiredSnippets = [
   'Signed는 Play Console 업로드 완료가 아니다.',
   'Signed는 실제 기기 QA 완료가 아니다.',
   'Unsigned는 바로 signing 설정을 적용한다는 뜻이 아니다.',
+  'signed AAB verification Failed는 Play Console 업로드 완료가 아니다.',
+  'signed AAB verification Failed는 실제 기기 QA 완료가 아니다.',
+  'Play Console 내부 테스트 업로드는 별도 PR에서 기록한다.',
+  '실패 원인은 실제 Secret 값 없이 `jar is unsigned.` 결과만 기록한다.',
   'keystore 파일을 repository에 commit하지 않는다.',
   'signing password를 코드, 문서, 로그에 기록하지 않는다.',
   'GitHub Secrets 실제값을 문서에 기록하지 않는다.',
@@ -65,12 +83,34 @@ const wrongPhrases = [
   '양력/음력 샘플 추가 검증',
   'signing 상태 확인: Completed',
   'signing 상태 확인: Pending',
+  'signed AAB verification | Confirmed',
+  'Play Console internal test upload | Confirmed',
+  'real device QA | Confirmed',
   '실제 명령 실행 결과는 후속 PR에서 기록한다.',
   'signing setup plan: Pending',
   'Play Console 업로드 가능 여부: Completed',
   '실제 기기 QA: Completed',
   'GitHub Secrets 실제 입력: Completed',
   'keystore 파일 추가: Completed',
+];
+
+const forbiddenPatterns = [
+  {
+    label: 'actual_secret_assignment_absent',
+    pattern: /ANDROID_(?:KEYSTORE_BASE64|KEYSTORE_PASSWORD|KEY_ALIAS|KEY_PASSWORD)\s*=\s*['"]?[^\s'"<|`]+/i,
+  },
+  {
+    label: 'long_base64_like_value_absent',
+    pattern: /[A-Za-z0-9+/]{120,}={0,2}/,
+  },
+  {
+    label: 'private_keystore_path_absent',
+    pattern: /(?:[A-Za-z]:\\|\/(?:Users|home|var|tmp|private)\/)[^\r\n|`<>]*(?:\.jks|\.keystore)/i,
+  },
+  {
+    label: 'private_aab_path_absent',
+    pattern: /(?:[A-Za-z]:\\|\/(?:Users|home|var|tmp|private)\/)[^\r\n|`<>]*\.aab/i,
+  },
 ];
 
 const protectedFiles = [
@@ -120,6 +160,12 @@ for (const snippet of wrongPhrases) {
   if (!absent) hasFailure = true;
 }
 
+for (const { label, pattern } of forbiddenPatterns) {
+  const absent = !pattern.test(doc);
+  logResult(label, absent);
+  if (!absent) hasFailure = true;
+}
+
 const diffOutput = execSync(`git diff --name-only -- ${protectedFiles.join(' ')}`, {
   encoding: 'utf8',
 }).trim();
@@ -135,7 +181,7 @@ const statusFiles = execSync('git status --short --untracked-files=all', { encod
   .filter(Boolean)
   .map((line) => line.slice(3).trim().replace(/^"|"$/g, ''));
 const artifactFiles = [...trackedFiles, ...statusFiles].filter((path) =>
-  path.endsWith('.aab') || path.endsWith('.zip')
+  path.endsWith('.aab') || path.endsWith('.zip') || path.endsWith('.jks') || path.endsWith('.keystore')
 );
 const artifactFilesAbsent = artifactFiles.length === 0;
 logResult('artifact_zip_and_aab_files_not_added_to_repository', artifactFilesAbsent);
