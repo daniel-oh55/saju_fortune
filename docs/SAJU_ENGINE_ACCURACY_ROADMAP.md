@@ -129,6 +129,7 @@ Status: Pending
 - GitHub Secrets 실제 입력: Confirmed
 - release workflow signing 적용: Added
 - signed AAB 생성: Confirmed
+- signed AAB artifact 다운로드/압축 해제 확인: Confirmed
 - signed AAB 검증: Pending
 - Play Console 내부 테스트 업로드: Pending
 - 실제 기기 QA: Pending

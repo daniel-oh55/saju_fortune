@@ -25,6 +25,11 @@
 | Artifact name | harupuli-release-aab |
 | Artifact size | 5,875,942 bytes |
 | Artifact digest | sha256:6a88573362f259fe6797a4c28a40678a32770e571714a5dd51a47a7351564b98 |
+| signed AAB artifact download | Confirmed |
+| signed AAB artifact extract | Confirmed |
+| `.aab` file existence | Confirmed |
+| `.aab` filename | app-release.aab |
+| `.aab` file size | 6,016,271 bytes |
 | signed AAB verification | Pending |
 | Play Console internal test upload | Pending |
 | real device QA | Pending |
@@ -58,6 +63,11 @@ Run URL:
 - artifact name: harupuli-release-aab
 - artifact size: 5,875,942 bytes
 - artifact digest: sha256:6a88573362f259fe6797a4c28a40678a32770e571714a5dd51a47a7351564b98
+- signed AAB artifact download: Confirmed
+- signed AAB artifact extract: Confirmed
+- `.aab` file existence: Confirmed
+- `.aab` filename: app-release.aab
+- `.aab` file size: 6,016,271 bytes
 - GitHub Actions run number: 4
 - GitHub Actions run id: 28293198750
 - GitHub Actions commit sha: fbf84f5102b75e2b999902b4c4755ba8214d60ef
@@ -70,7 +80,7 @@ Run URL:
 - signed AAB generation Confirmed is not Play Console upload complete.
 - signed AAB generation Confirmed is not signed AAB verification complete.
 - signed AAB generation Confirmed is not real device QA complete.
-- artifact download/extract/verification to be recorded in a separate PR.
+- signed AAB artifact inspection Confirmed is not signed AAB verification complete.
 
 ## Signing and Upload Status
 
@@ -80,6 +90,11 @@ Run URL:
 - signing password record: 없음
 - GitHub Secrets actual values record: 없음
 - signed AAB generation: Confirmed
+- signed AAB artifact download: Confirmed
+- signed AAB artifact extract: Confirmed
+- `.aab` file existence: Confirmed
+- `.aab` filename: app-release.aab
+- `.aab` file size: 6,016,271 bytes
 - signed AAB verification: Pending
 - Play Console internal test upload: Pending
 - actual Google Play Console input: Pending

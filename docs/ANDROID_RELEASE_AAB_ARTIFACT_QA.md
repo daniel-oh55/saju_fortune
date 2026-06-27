@@ -4,7 +4,7 @@
 
 이 문서는 하루풀이 Android Release AAB workflow run number 4에서 생성된 signed AAB artifact의 QA 확인 항목을 정리한다.
 
-이번 문서는 signed AAB generation Confirmed 상태를 기록하며, artifact 다운로드/압축 해제 확인과 signed AAB verification은 후속 PR에서 별도 기록한다.
+이번 문서는 signed AAB generation Confirmed 상태와 signed AAB artifact inspection 결과를 기록한다.
 
 ## Artifact Metadata
 
@@ -35,6 +35,28 @@ Run metadata:
 - AAB artifact 생성은 signing 설정 완료가 아니다.
 - Play Console 업로드 가능 여부는 별도 검토가 필요하다.
 
+## Signed AAB Artifact Inspection Result
+
+| Item | Status | Note |
+|---|---|---|
+| signed AAB artifact download | Confirmed | temporary directory only |
+| signed AAB artifact extract | Confirmed | temporary directory only |
+| `.aab` file existence | Confirmed | app-release.aab |
+| `.aab` filename | Confirmed | app-release.aab |
+| `.aab` file size | Confirmed | 6,016,271 bytes |
+| artifact zip repository commit | Not committed | zip file not committed |
+| `.aab` repository commit | Not committed | `.aab` file not committed |
+| signed AAB verification | Pending | separate PR |
+| Play Console internal test upload | Pending | not uploaded |
+| real device QA | Pending | not performed |
+
+주의:
+
+- signed AAB artifact inspection Confirmed는 signed AAB verification 완료가 아니다.
+- signed AAB artifact inspection Confirmed는 Play Console 업로드 완료가 아니다.
+- signed AAB artifact inspection Confirmed는 실제 기기 QA 완료가 아니다.
+- signed AAB verification은 별도 PR에서 기록한다.
+
 ## Artifact QA Checklist
 
 | Item | Status | Note |
@@ -43,11 +65,11 @@ Run metadata:
 | AAB artifact name 확인 | Confirmed | harupuli-release-aab |
 | AAB artifact size 기록 | Confirmed | 5,875,942 bytes |
 | AAB artifact digest 기록 | Confirmed | sha256 기록 |
-| artifact 다운로드 | Pending | signed AAB artifact 기준 별도 PR에서 확인 |
-| artifact 압축 해제 | Pending | signed AAB artifact 기준 별도 PR에서 확인 |
-| `.aab` 파일 존재 확인 | Pending | signed AAB artifact 기준 별도 PR에서 확인 |
-| AAB 파일명 기록 | Pending | signed AAB artifact 기준 별도 PR에서 확인 |
-| AAB 파일 크기 기록 | Pending | signed AAB artifact 기준 별도 PR에서 확인 |
+| artifact 다운로드 | Confirmed | signed AAB artifact 기준 |
+| artifact 압축 해제 | Confirmed | signed AAB artifact 기준 |
+| `.aab` 파일 존재 확인 | Confirmed | app-release.aab |
+| AAB 파일명 기록 | Confirmed | app-release.aab |
+| AAB 파일 크기 기록 | Confirmed | 6,016,271 bytes |
 | Play Console 업로드 가능 여부 | Pending | 실제 업로드 전까지 Pending |
 | signing 상태 확인 | Pending | 실제 signing 검증 전까지 Pending |
 | 실제 기기 QA | Pending | 실제 설치/실행 확인 전까지 Pending |
@@ -68,12 +90,12 @@ Run metadata:
 현재 상태:
 
 - signed AAB generation: Confirmed
-- artifact 다운로드: Pending
-- artifact 압축 해제: Pending
-- `.aab` 파일 존재 확인: Pending
-- AAB 파일명: Pending
-- AAB 파일 크기: Pending
-- artifact 확인 위치: Pending
+- artifact 다운로드: Confirmed
+- artifact 압축 해제: Confirmed
+- `.aab` 파일 존재 확인: Confirmed
+- AAB 파일명: app-release.aab
+- AAB 파일 크기: 6,016,271 bytes
+- artifact 확인 위치: temporary directory only
 - repository commit 여부: artifact zip과 `.aab` 파일은 commit하지 않음
 - signing 상태 확인: Pending
 - Play Console 내부 테스트 업로드: Pending
@@ -97,7 +119,7 @@ Run metadata:
 - release workflow signing support: Added
 - signing 설정: Added
 - signed AAB generation: Confirmed
-- signed AAB artifact QA: Pending
+- signed AAB artifact QA: Confirmed
 - signed AAB verification: Pending
 - keystore 파일 추가: 없음
 - signing password 기록: 없음

@@ -1,5 +1,16 @@
 # TODO
 
+## 2026-06-27 Android signed AAB artifact inspection TODO
+
+- [x] signed AAB artifact 다운로드 확인
+- [x] signed AAB artifact 압축 해제 확인
+- [x] `.aab` 파일 존재 확인
+- [x] `.aab` 파일명/크기 기록
+- [x] artifact zip/`.aab` repository 미추가 확인
+- [ ] signed AAB 검증
+- [ ] Play Console 내부 테스트 업로드
+- [ ] 실제 기기 QA
+
 ## 2026-06-27 Android signed AAB workflow result TODO
 
 - [x] Android Release AAB workflow 수동 실행 결과 기록
