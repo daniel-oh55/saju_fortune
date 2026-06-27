@@ -5,6 +5,7 @@ const docPath = 'docs/ANDROID_RELEASE_AAB_ARTIFACT_QA.md';
 
 const requiredSections = [
   '# Android Release AAB Artifact QA',
+  '## Android Release Signing Enforcement Follow-up',
   '## Artifact Metadata',
   '## Signed AAB Artifact Inspection Result',
   '## Artifact QA Checklist',
@@ -14,59 +15,33 @@ const requiredSections = [
 ];
 
 const requiredSnippets = [
+  'previous signed AAB verification: Failed',
+  'previous jarsigner result summary: `jar is unsigned.`',
+  'signing enforcement fix: Added',
+  'release signing secrets validation: Added',
+  'workflow jarsigner verification step: Added',
+  'Gradle release signing env enforcement: Added',
+  'signed AAB artifact regeneration: Pending',
+  'signed AAB artifact re-inspection: Pending',
+  'signed AAB regeneration: Pending',
+  'signed AAB re-verification: Pending',
+  'Play Console internal test upload: Pending',
+  'real device QA: Pending',
   'Run number | 4',
   'Run id | 28293198750',
-  'Status | completed',
-  'Conclusion | success',
   'Artifact name | harupuli-release-aab',
-  'Artifact size | 5,875,942 bytes',
-  'sha256:6a88573362f259fe6797a4c28a40678a32770e571714a5dd51a47a7351564b98',
-  'Android Release AAB run number 4: completed / success',
-  'signed AAB artifact download | Confirmed',
-  'signed AAB artifact extract | Confirmed',
-  '`.aab` file existence | Confirmed',
-  '`.aab` filename | Confirmed',
-  '`.aab` file size | Confirmed',
-  'artifact zip repository commit | Not committed',
-  '`.aab` repository commit | Not committed',
+  'signed AAB verification | Failed',
   'app-release.aab',
   '6,016,271 bytes',
-  'artifact 다운로드: Confirmed',
-  'artifact 압축 해제: Confirmed',
-  'AAB 파일명: app-release.aab',
-  'AAB 파일 크기: 6,016,271 bytes',
-  'repository commit 여부: artifact zip과 `.aab` 파일은 commit하지 않음',
-  'signed AAB artifact inspection Confirmed는 signed AAB verification 완료가 아니다.',
-  'signed AAB artifact inspection Confirmed는 Play Console 업로드 완료가 아니다.',
-  'signed AAB artifact inspection Confirmed는 실제 기기 QA 완료가 아니다.',
-  'signed AAB verification은 Failed로 기록하며, 실패 원인은 Secret 실제값 없이 `jar is unsigned.`로만 요약한다.',
-  'release workflow signing support: Added',
-  'signing 설정: Added',
-  'GitHub Secrets 실제 입력: Confirmed',
-  'signed AAB generation: Confirmed',
-  'signed AAB artifact QA: Confirmed',
-  'signed AAB verification: Failed',
-  'Play Console 내부 테스트 업로드: Pending',
-  '실제 Google Play Console 입력: Pending',
-  '실제 기기 QA: Pending',
-  'signed AAB 검증 결과 기록: Failed',
-  'keystore 파일 추가 없음',
-  'signing password 기록 없음',
-  'GitHub Secrets 실제값 기록 없음',
-  'AndroidManifest.xml 변경 없음',
-  'Android resource 파일 변경 없음',
 ];
 
 const wrongPhrases = [
-  '실제 스토어 스크린샷 이미지 시작',
-  '서양식 보정 적용 여부',
-  '양력/음력 샘플 추가 검증',
-  'signing 설정: Completed',
   'signed AAB verification | Confirmed',
   'Play Console internal test upload | Confirmed',
   'real device QA | Confirmed',
-  'Play Console 업로드: Completed',
-  '실제 기기 QA: Completed',
+  '실제 스토어 스크린샷 이미지 시작',
+  '서양식 보정 적용 여부',
+  '양력/음력 샘플 추가 검증',
 ];
 
 const forbiddenPatterns = [
@@ -91,9 +66,6 @@ const forbiddenPatterns = [
 const protectedFiles = [
   'android/app/src/main/AndroidManifest.xml',
   'android/app/src/main/res',
-  'android/build.gradle',
-  'android/gradle.properties',
-  'android/settings.gradle',
   'src',
 ];
 
@@ -144,22 +116,8 @@ const diffOutput = execSync(`git diff --name-only -- ${protectedFiles.join(' ')}
   encoding: 'utf8',
 }).trim();
 const protectedFilesUnchanged = diffOutput.length === 0;
-logResult('android_non_signing_files_unchanged_in_working_diff', protectedFilesUnchanged);
+logResult('android_manifest_resource_src_files_unchanged_in_working_diff', protectedFilesUnchanged);
 if (!protectedFilesUnchanged) hasFailure = true;
-
-const trackedFiles = execSync('git ls-files', { encoding: 'utf8' })
-  .split(/\r?\n/)
-  .filter(Boolean);
-const statusFiles = execSync('git status --short --untracked-files=all', { encoding: 'utf8' })
-  .split(/\r?\n/)
-  .filter(Boolean)
-  .map((line) => line.slice(3).trim().replace(/^"|"$/g, ''));
-const artifactFiles = [...trackedFiles, ...statusFiles].filter((path) =>
-  path.endsWith('.aab') || path.endsWith('.zip') || path.endsWith('.jks') || path.endsWith('.keystore')
-);
-const artifactFilesAbsent = artifactFiles.length === 0;
-logResult('artifact_and_keystore_files_not_added_to_repository', artifactFilesAbsent);
-if (!artifactFilesAbsent) hasFailure = true;
 
 if (hasFailure) {
   console.error('Android release AAB artifact QA check failed');

@@ -2,6 +2,9 @@
 
 ## Added
 
+- Android release signing enforcement 보강
+- release workflow jarsigner verification step 추가
+- Gradle release signing env enforcement 추가
 - Android signed AAB verification failure result 기록
 - jarsigner 기준 signed AAB verification Failed 상태 기록
 

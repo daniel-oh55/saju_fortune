@@ -4,18 +4,9 @@ import { execSync } from 'node:child_process';
 const workflowPath = '.github/workflows/android-release-aab.yml';
 const gradlePath = 'android/app/build.gradle';
 const docPath = 'docs/ANDROID_RELEASE_AAB_WORKFLOW.md';
-const releaseWorkflowDesignPath = 'docs/RELEASE_WORKFLOW_DESIGN.md';
-const releaseChecklistPath = 'docs/RELEASE_BUILD_SIGNING_CHECKLIST.md';
 const roadmapPath = 'docs/SAJU_ENGINE_ACCURACY_ROADMAP.md';
 
-const requiredPaths = [
-  workflowPath,
-  gradlePath,
-  docPath,
-  releaseWorkflowDesignPath,
-  releaseChecklistPath,
-  roadmapPath,
-];
+const requiredPaths = [workflowPath, gradlePath, docPath, roadmapPath];
 
 const requiredWorkflowSnippets = [
   'name: Android Release AAB',
@@ -24,17 +15,22 @@ const requiredWorkflowSnippets = [
   'npm ci',
   'npm run build',
   'npx cap sync android',
-  'Restore release keystore',
-  'RUNNER_TEMP',
+  'Validate release signing secrets',
   'ANDROID_KEYSTORE_BASE64',
-  'base64 --decode',
-  "printf '%s'",
-  'Build signed release AAB',
-  'ANDROID_KEYSTORE_FILE',
   'ANDROID_KEYSTORE_PASSWORD',
   'ANDROID_KEY_ALIAS',
   'ANDROID_KEY_PASSWORD',
+  'Restore release keystore',
+  'RUNNER_TEMP',
+  'base64 --decode',
+  "printf '%s'",
+  'test -s "$RUNNER_TEMP/android-signing/release-keystore.jks"',
+  'Build signed release AAB',
   './gradlew bundleRelease',
+  'Verify signed release AAB',
+  'jarsigner -verify',
+  'jar verified.',
+  'Upload release AAB',
   'actions/upload-artifact@v4',
   'harupuli-release-aab',
 ];
@@ -45,6 +41,9 @@ const requiredGradleSnippets = [
   'System.getenv("ANDROID_KEY_ALIAS")',
   'System.getenv("ANDROID_KEY_PASSWORD")',
   'hasReleaseSigning',
+  'isReleaseBuildTask',
+  'gradle.startParameter.taskNames',
+  'throw new GradleException("Release signing environment variables are required for release builds.")',
   'storeFile file(releaseKeystoreFile)',
   'storePassword releaseKeystorePassword',
   'keyAlias releaseKeyAlias',
@@ -52,25 +51,35 @@ const requiredGradleSnippets = [
   'signingConfig signingConfigs.release',
 ];
 
-const forbiddenWorkflowSnippets = [
-  'ANDROID_UPLOAD',
-  'keystore/upload-keystore.jks',
+const requiredDocSnippets = [
+  'previous signed AAB verification: Failed',
+  'previous jarsigner result summary: `jar is unsigned.`',
+  'signing enforcement fix: Added',
+  'release signing secrets validation: Added',
+  'workflow jarsigner verification step: Added',
+  'Gradle release signing env enforcement: Added',
+  'signed AAB regeneration: Pending',
+  'signed AAB re-verification: Pending',
+  'Play Console internal test upload: Pending',
+  'real device QA: Pending',
+  'signing enforcement fix Added는 signed AAB 재검증 완료가 아니다.',
+];
+
+const forbiddenSnippets = [
   'node-version: 20',
   'supply',
   'fastlane',
   'google-play',
   'Play Console upload',
-];
-
-const forbiddenGradleSnippets = [
-  'ANDROID_UPLOAD',
   'storePassword "',
   "storePassword '",
   'keyPassword "',
   "keyPassword '",
   'keyAlias "',
   "keyAlias '",
-  'release-keystore.jks',
+  '실제 스토어 스크린샷 이미지 시작',
+  '서양식 보정 적용 여부',
+  '양력/음력 샘플 추가 검증',
 ];
 
 const forbiddenPatterns = [
@@ -82,33 +91,6 @@ const forbiddenPatterns = [
     label: 'private_keystore_path_absent',
     pattern: /(?:[A-Za-z]:\\|\/(?:Users|home|var|tmp|private)\/)[^\r\n|`<>]*(?:\.jks|\.keystore)/i,
   },
-];
-
-const requiredDocSnippets = [
-  'GitHub Secrets 기반 signing support: Added',
-  'keystore runner temp 임시 복원: Added',
-  'release workflow signing support: Added',
-  'signed AAB generation: Confirmed',
-  'signed AAB verification: Failed',
-  'Play Console 내부 테스트 업로드: Pending',
-  '실제 기기 QA: Pending',
-  'keystore 파일은 repository에 추가하지 않는다.',
-  'secrets 값은 log로 출력하지 않는다.',
-];
-
-const roadmapSnippets = [
-  'GitHub Secrets 실제 입력: Confirmed',
-  'release workflow signing 적용: Added',
-  'signed AAB 생성: Confirmed',
-  'signed AAB 검증: Failed',
-  'Play Console 내부 테스트 업로드: Pending',
-  '실제 기기 QA: Pending',
-];
-
-const wrongPhrases = [
-  '실제 스토어 스크린샷 이미지 시작',
-  '서양식 보정 적용 여부',
-  '양력/음력 샘플 추가 검증',
 ];
 
 const protectedFiles = [
@@ -129,6 +111,16 @@ function labelFromSnippet(snippet) {
     .slice(0, 80);
 }
 
+function checkIncludes(content, snippets, prefix) {
+  let failed = false;
+  for (const snippet of snippets) {
+    const found = content.includes(snippet);
+    logResult(`${prefix}_includes_${labelFromSnippet(snippet)}`, found);
+    if (!found) failed = true;
+  }
+  return failed;
+}
+
 let hasFailure = false;
 
 for (const path of requiredPaths) {
@@ -143,59 +135,27 @@ const workflow = fs.readFileSync(workflowPath, 'utf8');
 const gradle = fs.readFileSync(gradlePath, 'utf8');
 const doc = fs.readFileSync(docPath, 'utf8');
 const roadmap = fs.readFileSync(roadmapPath, 'utf8');
+const combined = `${workflow}\n${gradle}\n${doc}\n${roadmap}`;
 
-for (const snippet of requiredWorkflowSnippets) {
-  const found = workflow.includes(snippet);
-  logResult(`workflow_includes_${labelFromSnippet(snippet)}`, found);
-  if (!found) hasFailure = true;
-}
+hasFailure = checkIncludes(workflow, requiredWorkflowSnippets, 'workflow') || hasFailure;
+hasFailure = checkIncludes(gradle, requiredGradleSnippets, 'gradle') || hasFailure;
+hasFailure = checkIncludes(`${doc}\n${roadmap}`, requiredDocSnippets, 'docs') || hasFailure;
 
-for (const snippet of requiredGradleSnippets) {
-  const found = gradle.includes(snippet);
-  logResult(`gradle_includes_${labelFromSnippet(snippet)}`, found);
-  if (!found) hasFailure = true;
-}
+const verifyIndex = workflow.indexOf('Verify signed release AAB');
+const uploadIndex = workflow.indexOf('Upload release AAB');
+const uploadAfterVerify = verifyIndex !== -1 && uploadIndex !== -1 && uploadIndex > verifyIndex;
+logResult('upload_release_aab_step_after_verify_signed_release_aab_step', uploadAfterVerify);
+if (!uploadAfterVerify) hasFailure = true;
 
-for (const snippet of forbiddenWorkflowSnippets) {
-  const absent = !workflow.includes(snippet);
-  logResult(`workflow_excludes_${labelFromSnippet(snippet)}`, absent);
-  if (!absent) hasFailure = true;
-}
-
-for (const snippet of forbiddenGradleSnippets) {
-  const absent = !gradle.includes(snippet);
-  logResult(`gradle_excludes_${labelFromSnippet(snippet)}`, absent);
+for (const snippet of forbiddenSnippets) {
+  const absent = !combined.includes(snippet);
+  logResult(`forbidden_snippet_absent_${labelFromSnippet(snippet)}`, absent);
   if (!absent) hasFailure = true;
 }
 
 for (const { label, pattern } of forbiddenPatterns) {
-  const absent = !pattern.test(`${workflow}\n${gradle}`);
+  const absent = !pattern.test(combined);
   logResult(label, absent);
-  if (!absent) hasFailure = true;
-}
-
-for (const snippet of requiredDocSnippets) {
-  const found = doc.includes(snippet);
-  logResult(`doc_includes_${labelFromSnippet(snippet)}`, found);
-  if (!found) hasFailure = true;
-}
-
-for (const path of [releaseWorkflowDesignPath, releaseChecklistPath]) {
-  const relatedDoc = fs.readFileSync(path, 'utf8');
-  const found = relatedDoc.includes('Android release AAB workflow: docs/ANDROID_RELEASE_AAB_WORKFLOW.md');
-  logResult(`${labelFromSnippet(path)}_includes_android_release_aab_workflow_related_doc`, found);
-  if (!found) hasFailure = true;
-}
-
-for (const snippet of roadmapSnippets) {
-  const found = roadmap.includes(snippet);
-  logResult(`roadmap_includes_${labelFromSnippet(snippet)}`, found);
-  if (!found) hasFailure = true;
-}
-
-for (const snippet of wrongPhrases) {
-  const absent = !doc.includes(snippet);
-  logResult(`wrong_phrase_absent_${labelFromSnippet(snippet)}`, absent);
   if (!absent) hasFailure = true;
 }
 

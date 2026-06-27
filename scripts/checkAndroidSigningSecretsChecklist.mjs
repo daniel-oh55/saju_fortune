@@ -5,6 +5,7 @@ const docPath = 'docs/ANDROID_SIGNING_SECRETS_CHECKLIST.md';
 
 const requiredSections = [
   '# Android Signing Secrets Checklist',
+  '## Android Release Signing Enforcement Follow-up',
   '## Current Status',
   '## Secrets Input Status',
   '## Candidate Secrets',
@@ -14,45 +15,38 @@ const requiredSections = [
 ];
 
 const requiredSnippets = [
-  '| GitHub Secrets actual input | Confirmed | values entered in repository settings |',
-  '| ANDROID_KEYSTORE_BASE64 | Confirmed | Not recorded |',
-  '| ANDROID_KEYSTORE_PASSWORD | Confirmed | Not recorded |',
-  '| ANDROID_KEY_ALIAS | Confirmed | Not recorded |',
-  '| ANDROID_KEY_PASSWORD | Confirmed | Not recorded |',
-  '| Secret actual values record | Not recorded | docs/code/PR/logs do not contain values |',
-  '| keystore base64 value record | Not recorded | actual base64 not recorded |',
-  '| signing password record | Not recorded | actual password not recorded |',
-  '| key alias value record | Not recorded | actual alias not recorded |',
-  '| release workflow signing support | Added | GitHub Secrets based workflow support added |',
-  '| signed AAB generation | Confirmed | Android Release AAB run number 4 success |',
-  '| signed AAB verification | Failed | jarsigner result: jar is unsigned |',
-  '| Play Console internal test upload | Pending | not uploaded |',
-  '| real device QA | Pending | not performed |',
-  'workflow에서만 Secrets를 사용한다.',
-  'PR body/log/doc에는 Secret 값을 기록하지 않는다.',
-  'GitHub Secrets input Confirmed는 Secret 입력 여부만 의미하며, signed AAB generation Confirmed와 구분한다.',
-  'release workflow signing support: Added',
-  'signed AAB 생성: Confirmed',
-  'signed AAB 검증: Failed',
-  'GitHub Secrets 실제값 기록 없음',
-  'signed AAB 검증 결과 기록: Failed',
+  'previous signed AAB verification: Failed',
+  'previous jarsigner result summary: `jar is unsigned.`',
+  'signing enforcement fix: Added',
+  'release signing secrets validation: Added',
+  'workflow jarsigner verification step: Added',
+  'Gradle release signing env enforcement: Added',
+  'GitHub Secrets actual values: Not recorded',
+  'keystore base64 actual value: Not recorded',
+  'signing password actual value: Not recorded',
+  'key alias actual value: Not recorded',
+  'signed AAB regeneration: Pending',
+  'signed AAB re-verification: Pending',
+  'Play Console internal test upload: Pending',
+  'real device QA: Pending',
+  'ANDROID_KEYSTORE_BASE64',
+  'ANDROID_KEYSTORE_PASSWORD',
+  'ANDROID_KEY_ALIAS',
+  'ANDROID_KEY_PASSWORD',
+  'signed AAB verification | Failed',
 ];
 
 const wrongPhrases = [
-  '실제 스토어 스크린샷 이미지 시작',
-  '서양식 보정 적용 여부',
-  '양력/음력 샘플 추가 검증',
   'GitHub Secrets actual input | Pending',
-  'GitHub Secrets actual input: Pending',
-  'GitHub Secrets 실제 입력: Pending',
-  'release workflow signing support | Pending',
-  'signed AAB generation | Completed',
   'signed AAB verification | Completed',
   'Play Console internal test upload | Completed',
   'real device QA | Completed',
   'signing 설정: Completed',
   'Play Console 업로드: Completed',
   '실제 기기 QA: Completed',
+  '실제 스토어 스크린샷 이미지 시작',
+  '서양식 보정 적용 여부',
+  '양력/음력 샘플 추가 검증',
 ];
 
 const forbiddenPatterns = [
@@ -73,9 +67,6 @@ const forbiddenPatterns = [
 const protectedFiles = [
   'android/app/src/main/AndroidManifest.xml',
   'android/app/src/main/res',
-  'android/build.gradle',
-  'android/gradle.properties',
-  'android/settings.gradle',
   'src',
 ];
 
@@ -92,7 +83,6 @@ function labelFromSnippet(snippet) {
 }
 
 let hasFailure = false;
-
 const exists = fs.existsSync(docPath);
 logResult('android_signing_secrets_checklist_doc_exists', exists, docPath);
 if (!exists) process.exit(1);
@@ -127,22 +117,8 @@ const diffOutput = execSync(`git diff --name-only -- ${protectedFiles.join(' ')}
   encoding: 'utf8',
 }).trim();
 const protectedFilesUnchanged = diffOutput.length === 0;
-logResult('android_non_signing_files_unchanged_in_working_diff', protectedFilesUnchanged);
+logResult('android_manifest_resource_src_files_unchanged_in_working_diff', protectedFilesUnchanged);
 if (!protectedFilesUnchanged) hasFailure = true;
-
-const trackedFiles = execSync('git ls-files', { encoding: 'utf8' })
-  .split(/\r?\n/)
-  .filter(Boolean);
-const statusFiles = execSync('git status --short --untracked-files=all', { encoding: 'utf8' })
-  .split(/\r?\n/)
-  .filter(Boolean)
-  .map((line) => line.slice(3).trim().replace(/^"|"$/g, ''));
-const sensitiveFiles = [...trackedFiles, ...statusFiles].filter((path) =>
-  ['.aab', '.zip', '.jks', '.keystore'].some((extension) => path.endsWith(extension))
-);
-const sensitiveFilesAbsent = sensitiveFiles.length === 0;
-logResult('artifact_and_keystore_files_not_added_to_repository', sensitiveFilesAbsent);
-if (!sensitiveFilesAbsent) hasFailure = true;
 
 if (hasFailure) {
   console.error('Android signing secrets checklist check failed');

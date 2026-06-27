@@ -1,5 +1,17 @@
 # TODO
 
+## 2026-06-27 Android release signing enforcement TODO
+
+- [x] release signing secrets validation step 추가
+- [x] workflow jarsigner verification step 추가
+- [x] Gradle release signing env enforcement 추가
+- [x] unsigned AAB artifact upload 방지 보강
+- [ ] Android Release AAB workflow 재실행
+- [ ] signed AAB 재생성 결과 기록
+- [ ] signed AAB 재검증
+- [ ] Play Console 내부 테스트 업로드
+- [ ] 실제 기기 QA
+
 ## 2026-06-27 Android signed AAB verification TODO
 
 - [x] signed AAB signing verification 실패 결과 기록

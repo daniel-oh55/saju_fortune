@@ -1,5 +1,26 @@
 # Android Release AAB Artifact QA
 
+## Android Release Signing Enforcement Follow-up
+
+- previous signed AAB verification: Failed
+- previous jarsigner result summary: `jar is unsigned.`
+- signing enforcement fix: Added
+- release signing secrets validation: Added
+- workflow jarsigner verification step: Added
+- Gradle release signing env enforcement: Added
+- signed AAB artifact regeneration: Pending
+- signed AAB artifact re-inspection: Pending
+- signed AAB regeneration: Pending
+- signed AAB re-verification: Pending
+- Play Console internal test upload: Pending
+- real device QA: Pending
+
+주의:
+
+- signing enforcement fix Added는 signed AAB 재검증 완료가 아니다.
+- signed AAB regeneration은 workflow 재실행 후 별도 PR에서 기록한다.
+- signed AAB re-verification은 workflow 재실행 후 별도 PR에서 기록한다.
+
 ## Purpose
 
 이 문서는 하루풀이 Android Release AAB workflow run number 4에서 생성된 signed AAB artifact의 QA 확인 항목을 정리한다.
