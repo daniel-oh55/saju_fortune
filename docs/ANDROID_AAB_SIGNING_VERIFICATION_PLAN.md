@@ -85,7 +85,8 @@ apksigner verify --verbose app-release.aab
 
 주의:
 
-- 실제 명령 실행 결과는 후속 PR에서 기록한다.
+- 실제 명령 실행 결과는 PR #189에서 기록했다.
+- 후속 PR에서는 signing setup plan을 별도로 검토한다.
 - 명령 실행이 실패하더라도 실패 결과를 그대로 기록한다.
 - signing 설정을 즉시 적용하지 않는다.
 - keystore를 repository에 추가하지 않는다.
