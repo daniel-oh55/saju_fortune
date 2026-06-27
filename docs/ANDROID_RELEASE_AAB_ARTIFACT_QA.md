@@ -79,6 +79,12 @@
 
 현재 상태:
 
+- signing 검증 명령 실제 실행: Confirmed
+- signing 상태 확인 결과: Unsigned
+- jarsigner result: Unsigned
+- apksigner result: Not available
+- Play Console 업로드 가능 여부: Pending
+- signing setup plan: Required
 - signing 설정: Pending
 - keystore 파일 추가: 없음
 - signing password 기록: 없음
