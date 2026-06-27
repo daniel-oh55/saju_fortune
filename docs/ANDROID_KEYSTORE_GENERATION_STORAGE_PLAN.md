@@ -16,8 +16,11 @@
 | keystore generation plan | Draft | this document |
 | keystore generation decision | Decided | local secure environment with JDK keytool |
 | keystore generation | Pending | not created yet |
+| keystore actual generation | Pending | external secure local generation not performed in this PR |
 | keystore storage decision | Decided | repository commit prohibited |
 | keystore backup decision | Decided | separate private safe location |
+| keystore storage | Pending | requires actual keystore generation outside repository |
+| keystore backup storage | Pending | requires actual keystore backup outside repository |
 | GitHub Secrets actual input | Pending | not entered yet |
 | release workflow signing support | Pending | not implemented |
 | signed AAB generation | Pending | not generated |
@@ -53,17 +56,41 @@
 - GitHub Secrets 실제 입력은 별도 작업에서 진행한다.
 - signing 설정 적용은 별도 PR에서 진행한다.
 
+## Generation Status
+
+이번 PR에서는 실제 keystore 생성이 수행되지 않았으며, 비공개 안전 위치에서의 별도 로컬 작업으로 남겨 둔다.
+
+| Item | Status | Note |
+|---|---|---|
+| keystore actual generation | Pending | secure external local generation not performed in this PR |
+| keystore file commit | Not committed | `.jks`/`.keystore` not added |
+| GitHub Secrets actual input | Pending | not entered yet |
+| release workflow signing support | Pending | not implemented |
+| signed AAB generation | Pending | not generated |
+
+주의:
+
+- 실제 keystore 파일명은 기록하지 않는다.
+- 실제 keystore 저장 경로는 기록하지 않는다.
+- 실제 key alias는 기록하지 않는다.
+- 실제 signing password는 기록하지 않는다.
+- 실제 keystore base64 값은 기록하지 않는다.
+- GitHub Secrets 실제 입력은 별도 PR에서 진행한다.
+- workflow signing 적용은 별도 PR에서 진행한다.
+
 ## Proposed Keystore Generation Method
 
 후속 작업에서 검토할 keystore 생성 방식:
 
 ```bash
-keytool -genkeypair -v -keystore upload-keystore.jks -keyalg RSA -keysize 2048 -validity 10000 -alias upload
+keytool -genkeypair -v -keystore <private-keystore-file>.jks -keyalg RSA -keysize 2048 -validity 10000 -alias <private-alias>
 ```
 
 주의:
 
 - 이 명령은 예시이며 이번 PR에서 실행하지 않는다.
+- `<private-keystore-file>` 실제값은 기록하지 않는다.
+- `<private-alias>` 실제값은 기록하지 않는다.
 - 실제 alias, password, 파일명은 문서에 기록하지 않는다.
 - 실제 keystore 생성은 별도 작업에서 수행한다.
 - 생성한 keystore 파일은 repository에 commit하지 않는다.

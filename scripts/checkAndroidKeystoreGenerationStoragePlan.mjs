@@ -8,6 +8,7 @@ const requiredSections = [
   '## Purpose',
   '## Current Status',
   '## Decision Result',
+  '## Generation Status',
   '## Proposed Keystore Generation Method',
   '## Storage Policy',
   '## Backup Policy',
@@ -23,8 +24,11 @@ const requiredSnippets = [
   '| keystore generation plan | Draft |',
   '| keystore generation decision | Decided |',
   '| keystore generation | Pending |',
+  '| keystore actual generation | Pending |',
   '| keystore storage decision | Decided |',
   '| keystore backup decision | Decided |',
+  '| keystore storage | Pending |',
+  '| keystore backup storage | Pending |',
   '이번 결정은 실제 keystore 생성이 아니라 생성/보관/백업 방식의 운영 기준 결정이다.',
   '| keystore 생성 방식 | local secure environment에서 JDK keytool 사용 | Decided |',
   '| keystore 생성 명령 | keytool 기반 생성 방식 사용 | Decided |',
@@ -38,6 +42,19 @@ const requiredSnippets = [
   '| GitHub Secrets 실제 입력 | Pending | Not started |',
   '| release workflow signing 적용 | Pending | Not started |',
   '| signed AAB 생성 | Pending | Not started |',
+  '이번 PR에서는 실제 keystore 생성이 수행되지 않았으며, 비공개 안전 위치에서의 별도 로컬 작업으로 남겨 둔다.',
+  '| keystore actual generation | Pending | secure external local generation not performed in this PR |',
+  '| keystore file commit | Not committed | `.jks`/`.keystore` not added |',
+  '| GitHub Secrets actual input | Pending | not entered yet |',
+  '| release workflow signing support | Pending | not implemented |',
+  '| signed AAB generation | Pending | not generated |',
+  '실제 keystore 파일명은 기록하지 않는다.',
+  '실제 keystore 저장 경로는 기록하지 않는다.',
+  '실제 key alias는 기록하지 않는다.',
+  '실제 signing password는 기록하지 않는다.',
+  '실제 keystore base64 값은 기록하지 않는다.',
+  'GitHub Secrets 실제 입력은 별도 PR에서 진행한다.',
+  'workflow signing 적용은 별도 PR에서 진행한다.',
   '실제 keystore 파일은 이번 PR에서 생성하지 않는다.',
   '실제 keystore 파일은 repository에 commit하지 않는다.',
   '실제 keystore 보관 위치는 문서에 기록하지 않는다.',
@@ -46,6 +63,11 @@ const requiredSnippets = [
   'GitHub Secrets 실제 입력은 별도 작업에서 진행한다.',
   'signing 설정 적용은 별도 PR에서 진행한다.',
   'keytool -genkeypair',
+  'keytool -genkeypair -v -keystore <private-keystore-file>.jks -keyalg RSA -keysize 2048 -validity 10000 -alias <private-alias>',
+  '<private-keystore-file>',
+  '<private-alias>',
+  '`<private-keystore-file>` 실제값은 기록하지 않는다.',
+  '`<private-alias>` 실제값은 기록하지 않는다.',
   '이 명령은 예시이며 이번 PR에서 실행하지 않는다.',
   '실제 alias, password, 파일명은 문서에 기록하지 않는다.',
   'keystore 파일은 repository에 commit하지 않는다.',
@@ -95,6 +117,8 @@ const wrongPhrases = [
   'signed AAB generation | Completed',
   'Play Console internal test upload | Completed',
   'real device QA | Completed',
+  'upload-keystore.jks',
+  '-alias upload',
   'signing 설정: Completed',
   'GitHub Secrets 실제 입력: Completed',
   'keystore 파일 생성: Completed',
@@ -107,6 +131,25 @@ const wrongPhrases = [
   'signing 설정: Completed',
   'Play Console 업로드: Completed',
   '실제 기기 QA: Completed',
+];
+
+const forbiddenPatterns = [
+  {
+    label: 'windows_private_keystore_path_absent',
+    pattern: /[A-Za-z]:\\[^\r\n|`<>]*(?:\.jks|\.keystore)/i,
+  },
+  {
+    label: 'unix_private_keystore_path_absent',
+    pattern: /\/(?:Users|home|var|tmp|private)\/[^\r\n|`<>]*(?:\.jks|\.keystore)/i,
+  },
+  {
+    label: 'actual_secret_assignment_absent',
+    pattern: /ANDROID_(?:KEYSTORE_BASE64|KEYSTORE_PASSWORD|KEY_ALIAS|KEY_PASSWORD)\s*=\s*['"]?[^\s'"<|`]+/i,
+  },
+  {
+    label: 'long_base64_like_value_absent',
+    pattern: /(?:[A-Za-z0-9+/]{80,}={0,2})/,
+  },
 ];
 
 const protectedFiles = [
@@ -155,6 +198,12 @@ for (const snippet of requiredSnippets) {
 for (const snippet of wrongPhrases) {
   const absent = !doc.includes(snippet);
   logResult(`wrong_phrase_absent_${labelFromSnippet(snippet)}`, absent);
+  if (!absent) hasFailure = true;
+}
+
+for (const { label, pattern } of forbiddenPatterns) {
+  const absent = !pattern.test(doc);
+  logResult(label, absent);
   if (!absent) hasFailure = true;
 }
 

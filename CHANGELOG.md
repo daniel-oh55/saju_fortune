@@ -2,6 +2,8 @@
 
 ## Added
 
+- Android keystore generation status 기록
+- keystore 생성 Pending 상태 기록
 - Android keystore generation decision 결과 기록
 - keystore 보관/백업 방식 결정 결과 기록
 - Android keystore generation/storage plan 문서 추가

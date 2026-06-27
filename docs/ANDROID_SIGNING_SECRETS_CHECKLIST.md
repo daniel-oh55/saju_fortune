@@ -15,8 +15,11 @@
 | signing secrets checklist | Draft | this document |
 | keystore generation decision | Decided | docs/ANDROID_KEYSTORE_GENERATION_STORAGE_PLAN.md |
 | keystore generation | Pending | not created yet |
+| keystore actual generation | Pending | not performed in this PR |
 | keystore storage decision | Decided | repository commit prohibited |
 | keystore backup decision | Decided | separate private safe location |
+| keystore storage | Pending | actual private location not recorded |
+| keystore backup storage | Pending | actual private location not recorded |
 | GitHub Secrets actual input | Pending | not entered yet |
 | release workflow signing support | Pending | not implemented |
 | signed AAB generation | Pending | not generated |
@@ -78,6 +81,9 @@ GitHub Secrets 실제 입력 전 확인할 항목:
 - keystore storage decision: Decided
 - keystore backup decision: Decided
 - keystore 생성: Pending
+- keystore actual generation: Pending
+- keystore storage: Pending
+- keystore backup storage: Pending
 - GitHub Secrets 실제 입력: Pending
 - GitHub Secrets actual input: Pending
 - release workflow signing support: Pending
