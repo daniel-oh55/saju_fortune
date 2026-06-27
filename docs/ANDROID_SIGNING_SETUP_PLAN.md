@@ -149,6 +149,7 @@
 
 ## Related Docs
 
+- Android keystore generation storage plan: docs/ANDROID_KEYSTORE_GENERATION_STORAGE_PLAN.md
 - Android signing secrets checklist: docs/ANDROID_SIGNING_SECRETS_CHECKLIST.md
 - Android AAB signing verification plan: docs/ANDROID_AAB_SIGNING_VERIFICATION_PLAN.md
 - Android release AAB artifact QA: docs/ANDROID_RELEASE_AAB_ARTIFACT_QA.md

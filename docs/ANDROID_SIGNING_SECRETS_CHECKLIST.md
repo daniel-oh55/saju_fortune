@@ -135,6 +135,7 @@ GitHub Secrets 실제 입력 전 확인할 항목:
 
 ## Related Docs
 
+- Android keystore generation storage plan: docs/ANDROID_KEYSTORE_GENERATION_STORAGE_PLAN.md
 - Android signing setup plan: docs/ANDROID_SIGNING_SETUP_PLAN.md
 - Android AAB signing verification plan: docs/ANDROID_AAB_SIGNING_VERIFICATION_PLAN.md
 - Android release AAB artifact QA: docs/ANDROID_RELEASE_AAB_ARTIFACT_QA.md
