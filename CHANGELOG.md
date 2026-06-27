@@ -2,6 +2,9 @@
 
 ## Added
 
+- Android signing secrets input status 기록
+- GitHub Secrets 실제값 미기록 상태 기록
+
 - Android keystore generation confirmed 상태 기록
 - keystore 보관/백업 confirmed 상태 기록
 - Android keystore generation status 기록

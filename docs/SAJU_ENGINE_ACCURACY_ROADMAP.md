@@ -126,7 +126,7 @@ Status: Pending
 - keystore 실제 생성: Confirmed
 - keystore 실제 보관: Confirmed
 - keystore backup 실제 보관: Confirmed
-- GitHub Secrets 실제 입력: Pending
+- GitHub Secrets 실제 입력: Confirmed
 - release workflow signing 적용: Pending
 - signed AAB 생성: Pending
 - signed AAB 검증: Pending
@@ -146,7 +146,7 @@ Status: Pending
 - 이전 signing workflow run 기준 결과는 현재 workflow run 결과로 기록하지 않음
 - release workflow 설계 문서: docs/RELEASE_WORKFLOW_DESIGN.md 참고
 - GitHub Actions release workflow 파일 추가: Pending
-- GitHub Secrets 실제 입력: Pending
+- GitHub Secrets 실제 입력: Confirmed
 - release build: Pending
 - signing 설정: Pending
 - AAB 생성: Pending

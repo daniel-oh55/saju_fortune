@@ -23,7 +23,7 @@
 | keystore storage | Confirmed | private safe location, actual path not recorded |
 | keystore backup storage | Confirmed | separate private safe location, actual path not recorded |
 | signing password | Pending | not recorded |
-| GitHub Secrets actual input | Pending | not entered yet |
+| GitHub Secrets actual input | Confirmed | values entered in repository settings |
 | workflow signing 적용 | Pending | separate PR |
 | signed AAB 생성 | Pending | not generated |
 | Play Console internal test upload | Pending | not uploaded |
@@ -105,11 +105,11 @@
 - keystore actual generation: Confirmed
 - keystore storage: Confirmed
 - keystore backup storage: Confirmed
-- GitHub Secrets actual input: Pending
+- GitHub Secrets actual input: Confirmed
 - workflow signing 적용: Pending
 - signed AAB 생성: Pending
 - workflow signing 적용: Pending
-- GitHub Secrets 실제 입력: Pending
+- GitHub Secrets 실제 입력: Confirmed
 - signed AAB 생성: Pending
 - signed AAB 검증: Pending
 - Play Console 내부 테스트 업로드: Pending
@@ -123,7 +123,7 @@
 - keystore 파일 추가 없음
 - keystore 파일 commit 없음
 - signing password 기록 없음
-- GitHub Secrets 실제 입력 없음
+- GitHub Secrets 실제값 기록 없음
 - workflow 파일 변경 없음
 - Gradle 설정 변경 없음
 - AndroidManifest.xml 변경 없음

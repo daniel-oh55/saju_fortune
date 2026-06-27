@@ -1,5 +1,17 @@
 # TODO
 
+## 2026-06-27 Android signing secrets input status TODO
+
+- [x] GitHub Secrets 실제 입력 여부 Confirmed 기록
+- [x] Secret 실제값 미기록 확인
+- [x] keystore base64 실제값 미기록 확인
+- [x] signing password/key alias 실제값 미기록 확인
+- [ ] release workflow signing 적용
+- [ ] signed AAB 생성
+- [ ] signed AAB 검증
+- [ ] Play Console 내부 테스트 업로드
+- [ ] 실제 기기 QA
+
 ## 2026-06-27 Android keystore generation confirmed TODO
 
 - [x] 실제 keystore 생성 여부 Confirmed 기록

@@ -5,61 +5,74 @@ const docPath = 'docs/ANDROID_SIGNING_SECRETS_CHECKLIST.md';
 
 const requiredSections = [
   '# Android Signing Secrets Checklist',
-  '## Purpose',
   '## Current Status',
+  '## Secrets Input Status',
   '## Candidate Secrets',
-  '## Pre-Input Checklist',
   '## Security Rules',
   '## Not Yet Done',
   '## Non-Goals for This PR',
-  '## Follow-up PR Order',
-  '## Related Docs',
 ];
 
 const requiredSnippets = [
-  '| AAB signing verification result | Confirmed | Unsigned |',
-  '| signing secrets checklist | Draft |',
-  '| GitHub Secrets actual input | Pending |',
-  'ANDROID_KEYSTORE_BASE64',
-  'ANDROID_KEYSTORE_PASSWORD',
-  'ANDROID_KEY_ALIAS',
-  'ANDROID_KEY_PASSWORD',
-  '이 항목은 Secret 이름 후보이며 실제 값이 아니다.',
+  '| GitHub Secrets actual input | Confirmed | values entered in repository settings |',
+  '| ANDROID_KEYSTORE_BASE64 | Confirmed | Not recorded |',
+  '| ANDROID_KEYSTORE_PASSWORD | Confirmed | Not recorded |',
+  '| ANDROID_KEY_ALIAS | Confirmed | Not recorded |',
+  '| ANDROID_KEY_PASSWORD | Confirmed | Not recorded |',
+  '| Secret actual values record | Not recorded | docs/code/PR/logs do not contain values |',
+  '| keystore base64 value record | Not recorded | actual base64 not recorded |',
+  '| signing password record | Not recorded | actual password not recorded |',
+  '| key alias value record | Not recorded | actual alias not recorded |',
+  '| release workflow signing support | Pending | not implemented |',
+  '| signed AAB generation | Pending | not generated |',
+  '| signed AAB verification | Pending | not performed |',
+  '| Play Console internal test upload | Pending | not uploaded |',
+  '| real device QA | Pending | not performed |',
+  'GitHub Secrets 실제 입력 여부만 기록한다.',
+  '실제 Secret 값은 기록하지 않는다.',
+  'Confirmed는 GitHub Secrets 입력 여부만 의미한다.',
+  'Confirmed는 signing 설정 적용 완료가 아니다.',
+  'Confirmed는 signed AAB 생성 완료가 아니다.',
+  'Confirmed는 Play Console 업로드 완료가 아니다.',
+  'Confirmed는 실제 기기 QA 완료가 아니다.',
   '실제 Secret 값은 문서, 코드, PR, 로그에 기록하지 않는다.',
-  'keystore 파일은 repository에 commit하지 않는다.',
-  '`.jks` 파일은 repository에 commit하지 않는다.',
-  '`.keystore` 파일은 repository에 commit하지 않는다.',
-  'signing password는 코드, 문서, PR, 로그에 기록하지 않는다.',
-  'GitHub Secrets 실제값은 문서에 기록하지 않는다.',
-  'GitHub Secrets 실제값은 PR body에 기록하지 않는다.',
-  'keystore base64 실제값은 문서나 로그에 기록하지 않는다.',
-  'GitHub Secrets 실제 입력 없음',
-  'keystore 파일 생성 없음',
-  'keystore 파일 추가 없음',
-  'keystore 파일 commit 없음',
-  '`.jks` 파일 commit 없음',
-  '`.keystore` 파일 commit 없음',
-  'signing password 기록 없음',
-  'keystore base64 실제값 기록 없음',
-  'signing 설정 적용 없음',
-  'workflow 파일 변경 없음',
-  'Gradle 설정 변경 없음',
-  'AndroidManifest.xml 변경 없음',
-  'Android resource 파일 변경 없음',
-  'Play Console 내부 테스트 업로드 없음',
-  '실제 기기 QA 없음',
+  'workflow signing 적용은 별도 PR에서 진행한다.',
 ];
 
 const wrongPhrases = [
   '실제 스토어 스크린샷 이미지 시작',
   '서양식 보정 적용 여부',
   '양력/음력 샘플 추가 검증',
-  'GitHub Secrets 실제 입력: Completed',
-  'keystore 파일 생성: Completed',
-  'keystore 파일 추가: Completed',
+  'GitHub Secrets actual input | Pending',
+  'GitHub Secrets actual input: Pending',
+  'GitHub Secrets 실제 입력: Pending',
+  'release workflow signing support | Completed',
+  'signed AAB generation | Completed',
+  'signed AAB verification | Completed',
+  'Play Console internal test upload | Completed',
+  'real device QA | Completed',
   'signing 설정: Completed',
   'Play Console 업로드: Completed',
   '실제 기기 QA: Completed',
+];
+
+const forbiddenPatterns = [
+  {
+    label: 'actual_secret_assignment_absent',
+    pattern: /ANDROID_(?:KEYSTORE_BASE64|KEYSTORE_PASSWORD|KEY_ALIAS|KEY_PASSWORD)\s*=\s*['"]?[^\s'"<|`]+/i,
+  },
+  {
+    label: 'long_base64_like_value_absent',
+    pattern: /(?:[A-Za-z0-9+/]{80,}={0,2})/,
+  },
+  {
+    label: 'windows_private_keystore_path_absent',
+    pattern: /[A-Za-z]:\\[^\r\n|`<>]*(?:\.jks|\.keystore)/i,
+  },
+  {
+    label: 'unix_private_keystore_path_absent',
+    pattern: /\/(?:Users|home|var|tmp|private)\/[^\r\n|`<>]*(?:\.jks|\.keystore)/i,
+  },
 ];
 
 const protectedFiles = [
@@ -108,6 +121,12 @@ for (const snippet of requiredSnippets) {
 for (const snippet of wrongPhrases) {
   const absent = !doc.includes(snippet);
   logResult(`wrong_phrase_absent_${labelFromSnippet(snippet)}`, absent);
+  if (!absent) hasFailure = true;
+}
+
+for (const { label, pattern } of forbiddenPatterns) {
+  const absent = !pattern.test(doc);
+  logResult(label, absent);
   if (!absent) hasFailure = true;
 }
 

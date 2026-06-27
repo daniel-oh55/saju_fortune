@@ -21,7 +21,7 @@
 | keystore backup decision | Decided | separate private safe location |
 | keystore storage | Confirmed | private safe location, actual path not recorded |
 | keystore backup storage | Confirmed | separate private safe location, actual path not recorded |
-| GitHub Secrets actual input | Pending | not entered yet |
+| GitHub Secrets actual input | Confirmed | values entered in repository settings |
 | release workflow signing support | Pending | not implemented |
 | signed AAB generation | Pending | not generated |
 | Play Console internal test upload | Pending | not uploaded |
@@ -42,7 +42,7 @@
 | keystore backup 방식 | 별도 비공개 안전 위치에 백업 | Decided |
 | password 보관 방식 | password manager 또는 내부 보안 저장소 사용 | Decided |
 | GitHub Actions 사용 방식 | keystore 원본 대신 base64 Secret 후보 사용 | Decided |
-| GitHub Secrets 실제 입력 | Pending | Not started |
+| GitHub Secrets actual input | Confirmed | values entered in repository settings |
 | release workflow signing 적용 | Pending | Not started |
 | signed AAB 생성 | Pending | Not started |
 
@@ -69,7 +69,7 @@
 | signing password record | Not recorded | password not recorded in docs/code/PR/logs |
 | key alias record | Not recorded | actual alias not recorded |
 | keystore base64 value record | Not recorded | actual base64 not recorded |
-| GitHub Secrets actual input | Pending | not entered yet |
+| GitHub Secrets actual input | Confirmed | values entered in repository settings |
 | release workflow signing support | Pending | not implemented |
 | signed AAB generation | Pending | not generated |
 
@@ -146,7 +146,8 @@ keystore 보관 기준:
 
 - Secret 이름만 기록한다.
 - 실제 Secret 값은 기록하지 않는다.
-- GitHub Secrets 실제 입력은 Pending이다.
+- GitHub Secrets actual input is Confirmed.
+- Secret actual values are Not recorded.
 - Secret 입력 완료 여부는 실제 입력 후 별도 PR에서 상태만 기록한다.
 
 ## Decision Checklist
@@ -175,7 +176,7 @@ keystore 보관 기준:
 - `.keystore` 파일 commit 없음
 - signing password 기록 없음
 - keystore base64 실제값 기록 없음
-- GitHub Secrets 실제 입력 없음
+- GitHub Secrets 실제값 기록 없음
 - signing 설정 적용 없음
 - workflow 파일 변경 없음
 - Gradle 설정 변경 없음
