@@ -18,8 +18,11 @@
 | signing setup plan | Required | this document |
 | signing setup applied | Pending | not applied yet |
 | keystore file | Pending | not created or committed |
+| keystore generation/storage decision | Decided | docs/ANDROID_KEYSTORE_GENERATION_STORAGE_PLAN.md |
 | signing password | Pending | not recorded |
 | GitHub Secrets actual input | Pending | not entered yet |
+| workflow signing 적용 | Pending | separate PR |
+| signed AAB 생성 | Pending | not generated |
 | Play Console internal test upload | Pending | not uploaded |
 | real device QA | Pending | not performed |
 
@@ -95,6 +98,10 @@
 
 현재 상태:
 
+- keystore generation/storage decision: Decided
+- GitHub Secrets actual input: Pending
+- workflow signing 적용: Pending
+- signed AAB 생성: Pending
 - workflow signing 적용: Pending
 - GitHub Secrets 실제 입력: Pending
 - signed AAB 생성: Pending
