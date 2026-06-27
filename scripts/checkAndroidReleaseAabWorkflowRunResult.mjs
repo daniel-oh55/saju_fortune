@@ -83,7 +83,7 @@ const roadmapSnippets = [
   'Android Release AAB run number: 3',
   'AAB artifact 확인: Confirmed',
   'AAB artifact name: harupuli-release-aab',
-  'signing 설정: Pending',
+  'signing 설정: Added',
   'Play Console 내부 테스트 업로드: Pending',
   '실제 기기 QA: Pending',
 ];
@@ -95,10 +95,8 @@ const wrongPhrases = [
 ];
 
 const unchangedFiles = [
-  '.github/workflows/android-release-aab.yml',
   'android/app/src/main/AndroidManifest.xml',
   'android/app/src/main/res',
-  'android/app/build.gradle',
   'android/build.gradle',
   'android/gradle.properties',
   'android/settings.gradle',

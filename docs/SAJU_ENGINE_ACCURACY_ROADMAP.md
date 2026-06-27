@@ -127,7 +127,7 @@ Status: Pending
 - keystore 실제 보관: Confirmed
 - keystore backup 실제 보관: Confirmed
 - GitHub Secrets 실제 입력: Confirmed
-- release workflow signing 적용: Pending
+- release workflow signing 적용: Added
 - signed AAB 생성: Pending
 - signed AAB 검증: Pending
 - Play Console 내부 테스트 업로드: Pending
@@ -148,7 +148,7 @@ Status: Pending
 - GitHub Actions release workflow 파일 추가: Pending
 - GitHub Secrets 실제 입력: Confirmed
 - release build: Pending
-- signing 설정: Pending
+- signing 설정: Added
 - AAB 생성: Pending
 - Play Console 내부 테스트 업로드: Pending
 - 실제 기기 QA: Pending

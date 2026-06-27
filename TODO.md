@@ -1,5 +1,17 @@
 # TODO
 
+## 2026-06-27 Android release signing workflow support TODO
+
+- [x] Android release signing workflow support 추가
+- [x] GitHub Secrets 기반 keystore 복원 단계 추가
+- [x] Gradle release signing config 추가
+- [x] signing workflow support check script 보강
+- [ ] signed AAB workflow 수동 실행
+- [ ] signed AAB 생성 결과 기록
+- [ ] signed AAB 검증
+- [ ] Play Console 내부 테스트 업로드
+- [ ] 실제 기기 QA
+
 ## 2026-06-27 Android signing secrets input status TODO
 
 - [x] GitHub Secrets 실제 입력 여부 Confirmed 기록

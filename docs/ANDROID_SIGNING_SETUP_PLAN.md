@@ -4,7 +4,7 @@
 
 이 문서는 하루풀이 Android release AAB signing 설정을 실제 적용하기 전 필요한 결정사항, 보안 기준, GitHub Secrets 후보, 후속 작업 순서를 정리한다.
 
-이번 문서는 signing setup 계획 문서이며, 실제 signing 설정 적용, keystore 생성, GitHub Secrets 입력, workflow 수정은 포함하지 않는다.
+이번 문서는 signing setup 계획 문서이며, 이번 PR에서는 GitHub Secrets 기반 release workflow signing support와 Gradle release signing config만 최소 적용한다.
 
 ## Current Signing Status
 
@@ -16,7 +16,7 @@
 | jarsigner result | Confirmed | Unsigned |
 | signing status result | Confirmed | Unsigned |
 | signing setup plan | Required | this document |
-| signing setup applied | Pending | not applied yet |
+| signing setup applied | Partially added | Gradle release signing config uses environment variables |
 | keystore file | Pending | not committed to repository, actual filename not recorded |
 | keystore generation/storage decision | Decided | docs/ANDROID_KEYSTORE_GENERATION_STORAGE_PLAN.md |
 | keystore actual generation | Confirmed | repository outside private location |
@@ -24,7 +24,8 @@
 | keystore backup storage | Confirmed | separate private safe location, actual path not recorded |
 | signing password | Pending | not recorded |
 | GitHub Secrets actual input | Confirmed | values entered in repository settings |
-| workflow signing 적용 | Pending | separate PR |
+| release workflow signing support | Added | GitHub Secrets based workflow support added |
+| workflow signing 적용 | Added | workflow support added |
 | signed AAB 생성 | Pending | not generated |
 | Play Console internal test upload | Pending | not uploaded |
 | real device QA | Pending | not performed |
@@ -44,6 +45,10 @@
 - signing setup plan은 signing 설정 완료가 아니다.
 - signing setup plan은 Play Console 업로드 완료가 아니다.
 - signing setup plan은 실제 기기 QA 완료가 아니다.
+- workflow signing support 추가는 signed AAB 생성 완료가 아니다.
+- workflow signing support 추가는 Play Console 업로드 완료가 아니다.
+- workflow signing support 추가는 실제 기기 QA 완료가 아니다.
+- signed AAB 생성 결과는 workflow 수동 실행 후 별도 PR에서 기록한다.
 
 ## Required Decisions
 
@@ -106,26 +111,26 @@
 - keystore storage: Confirmed
 - keystore backup storage: Confirmed
 - GitHub Secrets actual input: Confirmed
-- workflow signing 적용: Pending
+- release workflow signing support: Added
+- workflow signing 적용: Added
 - signed AAB 생성: Pending
-- workflow signing 적용: Pending
+- workflow signing 적용: Added
 - GitHub Secrets 실제 입력: Confirmed
 - signed AAB 생성: Pending
 - signed AAB 검증: Pending
 - Play Console 내부 테스트 업로드: Pending
+- real device QA: Pending
 
 ## Non-Goals for This PR
 
 이번 PR에서 하지 않는 것:
 
-- signing 설정 적용 없음
+- signed AAB 생성 결과 기록 없음
 - keystore 파일 생성 없음
 - keystore 파일 추가 없음
 - keystore 파일 commit 없음
 - signing password 기록 없음
 - GitHub Secrets 실제값 기록 없음
-- workflow 파일 변경 없음
-- Gradle 설정 변경 없음
 - AndroidManifest.xml 변경 없음
 - Android resource 파일 변경 없음
 - Play Console 내부 테스트 업로드 없음

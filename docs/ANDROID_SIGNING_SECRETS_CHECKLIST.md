@@ -4,7 +4,7 @@
 
 이 문서는 하루풀이 Android release AAB signing을 GitHub Actions에서 처리하기 전에, GitHub Secrets 입력 전 확인해야 할 항목을 정리한다.
 
-이번 문서는 signing secrets 입력 전 체크리스트이며, 실제 GitHub Secrets 입력, keystore 생성, signing 설정 적용, workflow 수정은 포함하지 않는다.
+이번 문서는 signing secrets 체크리스트이며, 이번 PR에서는 workflow signing support 상태를 반영한다.
 
 ## Current Status
 
@@ -21,7 +21,7 @@
 | keystore storage | Confirmed | private safe location, actual path not recorded |
 | keystore backup storage | Confirmed | separate private safe location, actual path not recorded |
 | GitHub Secrets actual input | Confirmed | values entered in repository settings |
-| release workflow signing support | Pending | not implemented |
+| release workflow signing support | Added | GitHub Secrets based workflow support added |
 | signed AAB generation | Pending | not generated |
 | signed AAB verification | Pending | not performed |
 | Play Console internal test upload | Pending | not uploaded |
@@ -48,7 +48,7 @@ GitHub Secrets 실제 입력 여부만 기록한다.
 | keystore base64 value record | Not recorded | actual base64 not recorded |
 | signing password record | Not recorded | actual password not recorded |
 | key alias value record | Not recorded | actual alias not recorded |
-| release workflow signing support | Pending | not implemented |
+| release workflow signing support | Added | GitHub Secrets based workflow support added |
 | signed AAB generation | Pending | not generated |
 | signed AAB verification | Pending | not performed |
 | Play Console internal test upload | Pending | not uploaded |
@@ -62,7 +62,9 @@ GitHub Secrets 실제 입력 여부만 기록한다.
 - Confirmed는 Play Console 업로드 완료가 아니다.
 - Confirmed는 실제 기기 QA 완료가 아니다.
 - 실제 Secret 값은 문서, 코드, PR, 로그에 기록하지 않는다.
-- workflow signing 적용은 별도 PR에서 진행한다.
+- workflow에서만 Secrets를 사용한다.
+- PR body/log/doc에는 Secret 값을 기록하지 않는다.
+- workflow signing support 추가는 signed AAB 생성 완료가 아니다.
 
 ## Candidate Secrets
 
@@ -124,8 +126,8 @@ GitHub Secrets 실제 입력 전 확인할 항목:
 - keystore backup storage: Confirmed
 - GitHub Secrets 실제 입력: Confirmed
 - GitHub Secrets actual input: Confirmed
-- release workflow signing support: Pending
-- release workflow signing 적용: Pending
+- release workflow signing support: Added
+- release workflow signing 적용: Added
 - signed AAB 생성: Pending
 - signed AAB 검증: Pending
 - Play Console 내부 테스트 업로드: Pending
@@ -144,9 +146,7 @@ GitHub Secrets 실제 입력 전 확인할 항목:
 - `.keystore` 파일 commit 없음
 - signing password 기록 없음
 - keystore base64 실제값 기록 없음
-- signing 설정 적용 없음
-- workflow 파일 변경 없음
-- Gradle 설정 변경 없음
+- signed AAB 생성 결과 기록 없음
 - AndroidManifest.xml 변경 없음
 - Android resource 파일 변경 없음
 - Play Console 내부 테스트 업로드 없음

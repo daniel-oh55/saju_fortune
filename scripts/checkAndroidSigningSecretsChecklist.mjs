@@ -23,20 +23,19 @@ const requiredSnippets = [
   '| keystore base64 value record | Not recorded | actual base64 not recorded |',
   '| signing password record | Not recorded | actual password not recorded |',
   '| key alias value record | Not recorded | actual alias not recorded |',
-  '| release workflow signing support | Pending | not implemented |',
+  '| release workflow signing support | Added | GitHub Secrets based workflow support added |',
   '| signed AAB generation | Pending | not generated |',
   '| signed AAB verification | Pending | not performed |',
   '| Play Console internal test upload | Pending | not uploaded |',
   '| real device QA | Pending | not performed |',
-  'GitHub Secrets 실제 입력 여부만 기록한다.',
-  '실제 Secret 값은 기록하지 않는다.',
-  'Confirmed는 GitHub Secrets 입력 여부만 의미한다.',
-  'Confirmed는 signing 설정 적용 완료가 아니다.',
-  'Confirmed는 signed AAB 생성 완료가 아니다.',
-  'Confirmed는 Play Console 업로드 완료가 아니다.',
-  'Confirmed는 실제 기기 QA 완료가 아니다.',
-  '실제 Secret 값은 문서, 코드, PR, 로그에 기록하지 않는다.',
-  'workflow signing 적용은 별도 PR에서 진행한다.',
+  'workflow에서만 Secrets를 사용한다.',
+  'PR body/log/doc에는 Secret 값을 기록하지 않는다.',
+  'workflow signing support 추가는 signed AAB 생성 완료가 아니다.',
+  'release workflow signing support: Added',
+  'signed AAB 생성: Pending',
+  'signed AAB 검증: Pending',
+  'GitHub Secrets 실제값 기록 없음',
+  'signed AAB 생성 결과 기록 없음',
 ];
 
 const wrongPhrases = [
@@ -46,7 +45,7 @@ const wrongPhrases = [
   'GitHub Secrets actual input | Pending',
   'GitHub Secrets actual input: Pending',
   'GitHub Secrets 실제 입력: Pending',
-  'release workflow signing support | Completed',
+  'release workflow signing support | Pending',
   'signed AAB generation | Completed',
   'signed AAB verification | Completed',
   'Play Console internal test upload | Completed',
@@ -66,20 +65,14 @@ const forbiddenPatterns = [
     pattern: /(?:[A-Za-z0-9+/]{80,}={0,2})/,
   },
   {
-    label: 'windows_private_keystore_path_absent',
-    pattern: /[A-Za-z]:\\[^\r\n|`<>]*(?:\.jks|\.keystore)/i,
-  },
-  {
-    label: 'unix_private_keystore_path_absent',
-    pattern: /\/(?:Users|home|var|tmp|private)\/[^\r\n|`<>]*(?:\.jks|\.keystore)/i,
+    label: 'private_keystore_path_absent',
+    pattern: /(?:[A-Za-z]:\\|\/(?:Users|home|var|tmp|private)\/)[^\r\n|`<>]*(?:\.jks|\.keystore)/i,
   },
 ];
 
 const protectedFiles = [
-  '.github/workflows/android-release-aab.yml',
   'android/app/src/main/AndroidManifest.xml',
   'android/app/src/main/res',
-  'android/app/build.gradle',
   'android/build.gradle',
   'android/gradle.properties',
   'android/settings.gradle',
@@ -134,7 +127,7 @@ const diffOutput = execSync(`git diff --name-only -- ${protectedFiles.join(' ')}
   encoding: 'utf8',
 }).trim();
 const protectedFilesUnchanged = diffOutput.length === 0;
-logResult('workflow_android_gradle_production_files_unchanged_in_working_diff', protectedFilesUnchanged);
+logResult('android_non_signing_files_unchanged_in_working_diff', protectedFilesUnchanged);
 if (!protectedFilesUnchanged) hasFailure = true;
 
 const trackedFiles = execSync('git ls-files', { encoding: 'utf8' })

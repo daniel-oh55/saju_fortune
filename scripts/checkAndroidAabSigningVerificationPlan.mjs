@@ -74,10 +74,8 @@ const wrongPhrases = [
 ];
 
 const protectedFiles = [
-  '.github/workflows/android-release-aab.yml',
   'android/app/src/main/AndroidManifest.xml',
   'android/app/src/main/res',
-  'android/app/build.gradle',
   'android/build.gradle',
   'android/gradle.properties',
   'android/settings.gradle',

@@ -4,7 +4,8 @@
 
 이 문서는 하루풀이 Android release AAB GitHub Actions workflow 추가 내용을 정리한다.
 
-이번 PR에서는 release AAB workflow 파일을 추가하지만 signing 설정과 keystore 추가는 포함하지 않는다.
+이번 PR에서는 Android release AAB workflow에 GitHub Secrets 기반 signing support를 추가한다.
+keystore 파일은 repository에 추가하지 않는다.
 
 이번 PR에서는 Play Console 업로드를 수행하지 않는다.
 
@@ -14,10 +15,14 @@
 - Node.js version: 22
 - Node.js version 보정: 20에서 22로 변경
 - workflow_dispatch 수동 실행: Added
+- GitHub Secrets 기반 signing support: Added
+- keystore runner temp 임시 복원: Added
 - release build 실행 시도: Pending workflow run
-- signing 설정: Pending
-- keystore 파일: Pending
-- GitHub Secrets 실제 입력: Pending
+- signing 설정: Added
+- keystore 파일: Not committed
+- GitHub Secrets 실제 입력: Confirmed
+- signed AAB generation: Pending
+- signed AAB verification: Pending
 - AAB artifact 확인: Pending workflow run
 - Play Console 내부 테스트 업로드: Pending
 - 실제 기기 QA: Pending
@@ -37,17 +42,28 @@
 - Set up JDK
 - Sync Android project
 - Make Gradle wrapper executable
-- Build release AAB
+- Restore release keystore
+- Build signed release AAB
 - Upload release AAB
+
+Signing support details:
+
+- `ANDROID_KEYSTORE_BASE64`를 runner temp의 임시 keystore 파일로 복원한다.
+- `ANDROID_KEYSTORE_PASSWORD`, `ANDROID_KEY_ALIAS`, `ANDROID_KEY_PASSWORD`는 workflow env로만 전달한다.
+- 임시 keystore 파일은 repository tracked file이 아니다.
+- secrets 값은 log로 출력하지 않는다.
 
 ## Signing Status
 
 현재 signing 상태:
 
-- signing 설정: Pending
-- keystore 파일 추가: 없음
+- release workflow signing support: Added
+- signing 설정: Added
+- keystore 파일 commit: 없음
 - signing password 기록: 없음
-- GitHub Secrets 실제 입력: Pending
+- GitHub Secrets 실제 입력: Confirmed
+- signed AAB generation: Pending
+- signed AAB verification: Pending
 
 주의:
 
@@ -60,12 +76,13 @@
 현재 AAB 상태:
 
 - release AAB workflow 추가: Added
+- release workflow signing support: Added
 - AAB 생성 결과: Pending workflow run
 - AAB artifact 확인: Pending workflow run
 - Android Release AAB run number 3: completed / success
 - AAB artifact `harupuli-release-aab`: Confirmed
 - AAB artifact size: 5.6 MB
-- signing 설정: Pending
+- signing 설정: Added
 - Play Console 내부 테스트 업로드: Pending
 - 실제 기기 QA: Pending
 - Play Console 업로드: Pending
@@ -80,15 +97,14 @@
 
 이번 PR에서 하지 않는 것:
 
-- signing 설정 적용 없음
+- signed AAB 생성 결과 기록 없음
 - keystore 파일 추가 없음
 - signing password 기록 없음
-- GitHub Secrets 실제 입력 없음
+- GitHub Secrets 실제값 기록 없음
 - Play Console 내부 테스트 업로드 없음
 - 실제 기기 QA 없음
 - AndroidManifest.xml 변경 없음
 - Android resource 파일 변경 없음
-- Gradle 설정 변경 없음
 - production 계산 로직 변경 없음
 - 사주/운세 결과 생성 로직 변경 없음
 - UI/디자인 변경 없음

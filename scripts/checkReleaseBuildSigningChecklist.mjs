@@ -51,7 +51,7 @@ const relatedDocPaths = [screenshotChecklistPath, appMetadataPath];
 const roadmapSnippets = [
   'release build/signing/AAB 준비 체크리스트 문서: docs/RELEASE_BUILD_SIGNING_CHECKLIST.md 참고',
   'release build: Pending',
-  'signing 설정: Pending',
+  'signing 설정: Added',
   'AAB 생성: Pending',
   'Play Console 내부 테스트 업로드: Pending',
   '실제 기기 QA: Pending',
@@ -67,7 +67,6 @@ const wrongPhrases = [
 const androidNativeGradleSigningFiles = [
   'android/app/src/main/AndroidManifest.xml',
   'android/app/src/main/res',
-  'android/app/build.gradle',
   'android/build.gradle',
   'android/gradle.properties',
   'android/settings.gradle',

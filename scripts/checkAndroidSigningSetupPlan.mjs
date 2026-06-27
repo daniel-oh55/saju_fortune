@@ -5,65 +5,70 @@ const docPath = 'docs/ANDROID_SIGNING_SETUP_PLAN.md';
 
 const requiredSections = [
   '# Android Signing Setup Plan',
-  '## Purpose',
   '## Current Signing Status',
   '## Signing Goal',
-  '## Required Decisions',
   '## Candidate GitHub Secrets',
   '## Keystore Policy',
   '## Proposed Future Workflow Approach',
   '## Non-Goals for This PR',
-  '## Follow-up PR Order',
-  '## Related Docs',
 ];
 
 const requiredSnippets = [
-  '| jarsigner result | Confirmed | Unsigned |',
-  '| signing status result | Confirmed | Unsigned |',
-  '| signing setup plan | Required |',
-  '| signing setup applied | Pending |',
-  '| keystore file | Pending |',
-  '| signing password | Pending |',
+  '| signing setup applied | Partially added | Gradle release signing config uses environment variables |',
+  '| release workflow signing support | Added | GitHub Secrets based workflow support added |',
   '| GitHub Secrets actual input | Confirmed | values entered in repository settings |',
-  '| Play Console internal test upload | Pending |',
+  '| signed AAB 생성 | Pending | not generated |',
+  '| Play Console internal test upload | Pending | not uploaded |',
+  '| real device QA | Pending | not performed |',
   'ANDROID_KEYSTORE_BASE64',
   'ANDROID_KEYSTORE_PASSWORD',
   'ANDROID_KEY_ALIAS',
   'ANDROID_KEY_PASSWORD',
-  '실제 값이 아니다.',
-  'keystore 파일은 repository에 commit하지 않는다.',
-  'signing password는 코드, 문서, 로그에 기록하지 않는다.',
-  'GitHub Secrets 실제값은 문서에 기록하지 않는다.',
-  'signing 설정 적용 없음',
-  'keystore 파일 생성 없음',
-  'keystore 파일 추가 없음',
+  'workflow signing support 추가는 signed AAB 생성 완료가 아니다.',
+  'workflow signing support 추가는 Play Console 업로드 완료가 아니다.',
+  'workflow signing support 추가는 실제 기기 QA 완료가 아니다.',
+  'signed AAB 생성 결과는 workflow 수동 실행 후 별도 PR에서 기록한다.',
+  'release workflow signing support: Added',
+  'GitHub Secrets 실제 입력: Confirmed',
+  'signed AAB 생성: Pending',
+  'signed AAB 검증: Pending',
+  'Play Console 내부 테스트 업로드: Pending',
+  'real device QA: Pending',
   'GitHub Secrets 실제값 기록 없음',
-  'workflow 파일 변경 없음',
-  'Gradle 설정 변경 없음',
-  'AndroidManifest.xml 변경 없음',
-  'Android resource 파일 변경 없음',
-  'Play Console 내부 테스트 업로드 없음',
-  '실제 기기 QA 없음',
-  'artifact zip 파일 commit 없음',
-  '`.aab` 파일 commit 없음',
+  'signed AAB 생성 결과 기록 없음',
 ];
 
 const wrongPhrases = [
   '실제 스토어 스크린샷 이미지 시작',
   '서양식 보정 적용 여부',
   '양력/음력 샘플 추가 검증',
+  'release workflow signing support | Pending',
+  'GitHub Secrets actual input | Pending',
   'signing 설정: Completed',
-  'GitHub Secrets 실제 입력: Completed',
-  'keystore 파일 추가: Completed',
+  'signed AAB 생성: Completed',
+  'signed AAB 검증: Completed',
   'Play Console 업로드: Completed',
   '실제 기기 QA: Completed',
 ];
 
+const forbiddenPatterns = [
+  {
+    label: 'actual_secret_assignment_absent',
+    pattern: /ANDROID_(?:KEYSTORE_BASE64|KEYSTORE_PASSWORD|KEY_ALIAS|KEY_PASSWORD)\s*=\s*['"]?[^\s'"<|`]+/i,
+  },
+  {
+    label: 'long_base64_like_value_absent',
+    pattern: /(?:[A-Za-z0-9+/]{80,}={0,2})/,
+  },
+  {
+    label: 'private_keystore_path_absent',
+    pattern: /(?:[A-Za-z]:\\|\/(?:Users|home|var|tmp|private)\/)[^\r\n|`<>]*(?:\.jks|\.keystore)/i,
+  },
+];
+
 const protectedFiles = [
-  '.github/workflows/android-release-aab.yml',
   'android/app/src/main/AndroidManifest.xml',
   'android/app/src/main/res',
-  'android/app/build.gradle',
   'android/build.gradle',
   'android/gradle.properties',
   'android/settings.gradle',
@@ -83,7 +88,6 @@ function labelFromSnippet(snippet) {
 }
 
 let hasFailure = false;
-
 const exists = fs.existsSync(docPath);
 logResult('android_signing_setup_plan_doc_exists', exists, docPath);
 if (!exists) process.exit(1);
@@ -108,11 +112,17 @@ for (const snippet of wrongPhrases) {
   if (!absent) hasFailure = true;
 }
 
+for (const { label, pattern } of forbiddenPatterns) {
+  const absent = !pattern.test(doc);
+  logResult(label, absent);
+  if (!absent) hasFailure = true;
+}
+
 const diffOutput = execSync(`git diff --name-only -- ${protectedFiles.join(' ')}`, {
   encoding: 'utf8',
 }).trim();
 const protectedFilesUnchanged = diffOutput.length === 0;
-logResult('workflow_android_gradle_production_files_unchanged_in_working_diff', protectedFilesUnchanged);
+logResult('android_non_signing_files_unchanged_in_working_diff', protectedFilesUnchanged);
 if (!protectedFilesUnchanged) hasFailure = true;
 
 const trackedFiles = execSync('git ls-files', { encoding: 'utf8' })

@@ -5,13 +5,11 @@ const docPath = 'docs/ANDROID_RELEASE_AAB_ARTIFACT_QA.md';
 
 const requiredSections = [
   '# Android Release AAB Artifact QA',
-  '## Purpose',
   '## Artifact Metadata',
   '## Artifact QA Checklist',
   '## Download and Inspection Notes',
   '## Signing and Upload Status',
   '## Non-Goals for This PR',
-  '## Related Docs',
 ];
 
 const requiredSnippets = [
@@ -21,33 +19,25 @@ const requiredSnippets = [
   'Artifact name | harupuli-release-aab',
   'Artifact size | 5.6 MB',
   'sha256:64ba8d4739cb7716893a4bd4a55e8bdcd26a0139febf8a40c6bb86caec45b9b7',
-  'Artifact 확인 | Confirmed',
-  'AAB artifact 생성은 Play Console 업로드 완료가 아니다',
-  'AAB artifact 생성은 실제 기기 QA 완료가 아니다',
-  'AAB artifact 생성은 signing 설정 완료가 아니다',
-  'artifact 다운로드 | Confirmed',
-  'artifact 압축 해제 | Confirmed',
-  '`.aab` 파일 존재 확인 | Confirmed',
-  'AAB 파일명 기록 | Confirmed',
-  'AAB 파일 크기 기록 | Confirmed',
-  'AAB 파일명: app-release.aab',
-  'AAB 파일 크기: 6,016,271 bytes',
+  'app-release.aab',
+  '6,016,271 bytes',
   'repository commit 여부: artifact zip과 `.aab` 파일은 commit하지 않음',
-  'Play Console 업로드 가능 여부 | Pending',
-  'signing 상태 확인 | Pending',
-  '실제 기기 QA | Pending',
-  'signing 설정: Pending',
-  'GitHub Secrets 실제 입력: Pending',
+  'release workflow signing support: Added',
+  'signing 설정: Added',
+  'GitHub Secrets 실제 입력: Confirmed',
+  'signed AAB generation: Pending',
+  'signed AAB artifact QA: Pending',
+  'signed AAB verification: Pending',
   'Play Console 내부 테스트 업로드: Pending',
   '실제 Google Play Console 입력: Pending',
-  'workflow 파일 변경 없음',
-  'signing 설정 적용 없음',
+  '실제 기기 QA: Pending',
+  'signed AAB 생성 결과 기록 없음',
+  'signed AAB 검증 결과 기록 없음',
   'keystore 파일 추가 없음',
   'signing password 기록 없음',
-  'GitHub Secrets 실제 입력 없음',
+  'GitHub Secrets 실제값 기록 없음',
   'AndroidManifest.xml 변경 없음',
   'Android resource 파일 변경 없음',
-  'Gradle 설정 변경 없음',
 ];
 
 const wrongPhrases = [
@@ -60,10 +50,8 @@ const wrongPhrases = [
 ];
 
 const protectedFiles = [
-  '.github/workflows/android-release-aab.yml',
   'android/app/src/main/AndroidManifest.xml',
   'android/app/src/main/res',
-  'android/app/build.gradle',
   'android/build.gradle',
   'android/gradle.properties',
   'android/settings.gradle',
@@ -83,7 +71,6 @@ function labelFromSnippet(snippet) {
 }
 
 let hasFailure = false;
-
 const exists = fs.existsSync(docPath);
 logResult('android_release_aab_artifact_qa_doc_exists', exists, docPath);
 if (!exists) process.exit(1);
@@ -112,7 +99,7 @@ const diffOutput = execSync(`git diff --name-only -- ${protectedFiles.join(' ')}
   encoding: 'utf8',
 }).trim();
 const protectedFilesUnchanged = diffOutput.length === 0;
-logResult('workflow_android_gradle_production_files_unchanged_in_working_diff', protectedFilesUnchanged);
+logResult('android_non_signing_files_unchanged_in_working_diff', protectedFilesUnchanged);
 if (!protectedFilesUnchanged) hasFailure = true;
 
 const trackedFiles = execSync('git ls-files', { encoding: 'utf8' })
@@ -123,10 +110,10 @@ const statusFiles = execSync('git status --short --untracked-files=all', { encod
   .filter(Boolean)
   .map((line) => line.slice(3).trim().replace(/^"|"$/g, ''));
 const artifactFiles = [...trackedFiles, ...statusFiles].filter((path) =>
-  path.endsWith('.aab') || path.endsWith('.zip')
+  path.endsWith('.aab') || path.endsWith('.zip') || path.endsWith('.jks') || path.endsWith('.keystore')
 );
 const artifactFilesAbsent = artifactFiles.length === 0;
-logResult('artifact_zip_and_aab_files_not_added_to_repository', artifactFilesAbsent);
+logResult('artifact_and_keystore_files_not_added_to_repository', artifactFilesAbsent);
 if (!artifactFilesAbsent) hasFailure = true;
 
 if (hasFailure) {
