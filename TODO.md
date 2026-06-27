@@ -1,5 +1,14 @@
 # TODO
 
+## 2026-06-27 Android AAB signing verification result TODO
+
+- [x] signing 검증 명령 실제 실행
+- [x] unsigned 상태 기록
+- [ ] signing setup plan
+- [ ] GitHub Secrets 실제 입력
+- [ ] Play Console 내부 테스트 업로드
+- [ ] 실제 기기 QA
+
 ## 2026-06-27 Android AAB signing verification plan TODO
 
 - [x] Android AAB signing verification plan 문서 추가

@@ -16,7 +16,7 @@
 | artifact 압축 해제 | Confirmed | PR #187 기준 |
 | `.aab` 파일 존재 확인 | Confirmed | app-release.aab |
 | AAB 파일 크기 | Confirmed | 6,016,271 bytes |
-| signing 상태 확인 | Pending | 실제 검증 전까지 Pending |
+| signing 상태 확인 | Confirmed | jarsigner 기준 Unsigned |
 | Play Console 업로드 가능 여부 | Pending | 실제 업로드 전까지 Pending |
 | 실제 기기 QA | Pending | 실제 설치/실행 전까지 Pending |
 
@@ -51,6 +51,37 @@ jarsigner -verify -verbose -certs app-release.aab
 ```bash
 apksigner verify --verbose app-release.aab
 ```
+
+## Signing Verification Result
+
+실제 확인 결과:
+
+- signing 검증 명령 실제 실행: Confirmed
+- artifact 확인 위치: 임시 디렉터리
+- AAB 파일명: app-release.aab
+- AAB 파일 크기: 6,016,271 bytes
+- jarsigner 실행 가능 여부: Confirmed
+- jarsigner command: `jarsigner -verify -verbose -certs app-release.aab`
+- jarsigner result: Unsigned
+- jarsigner result summary: `jar is unsigned.`
+- apksigner 실행 가능 여부: Not available
+- apksigner result: Not available
+- signing 상태 확인 결과: Unsigned
+- Play Console 업로드 가능 여부: Pending
+- signing setup plan: Required
+- GitHub Secrets 실제 입력: Pending
+- Play Console 내부 테스트 업로드: Pending
+- 실제 Google Play Console 입력: Pending
+- 실제 기기 QA: Pending
+
+주의:
+
+- Signed는 Play Console 업로드 완료가 아니다.
+- Signed는 실제 기기 QA 완료가 아니다.
+- Unsigned는 바로 signing 설정을 적용한다는 뜻이 아니다.
+- signing setup은 별도 PR에서 진행한다.
+- keystore 파일을 repository에 추가하지 않는다.
+- signing password를 문서나 로그에 기록하지 않는다.
 
 주의:
 
@@ -90,9 +121,11 @@ apksigner verify --verbose app-release.aab
 
 ## Current Pending Items
 
-- signing 상태 확인: Pending
+- signing 상태 확인: Confirmed
+- signing 상태 확인 결과: Unsigned
+- signing 검증 명령 실제 실행: Confirmed
 - Play Console 업로드 가능 여부: Pending
-- signing setup plan: Pending
+- signing setup plan: Required
 - GitHub Secrets 실제 입력: Pending
 - Play Console 내부 테스트 업로드: Pending
 - 실제 Google Play Console 입력: Pending
@@ -102,7 +135,6 @@ apksigner verify --verbose app-release.aab
 
 이번 PR에서 하지 않는 것:
 
-- signing 검증 명령 실제 실행 없음
 - signing 설정 적용 없음
 - keystore 파일 추가 없음
 - signing password 기록 없음
