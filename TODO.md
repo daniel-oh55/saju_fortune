@@ -1,5 +1,18 @@
 # TODO
 
+## 2026-06-27 Android keystore generation confirmed TODO
+
+- [x] 실제 keystore 생성 여부 Confirmed 기록
+- [x] keystore 실제 보관 여부 Confirmed 기록
+- [x] keystore backup 실제 보관 여부 Confirmed 기록
+- [x] keystore file repository 미추가 확인
+- [ ] GitHub Secrets 실제 입력
+- [ ] release workflow signing 적용
+- [ ] signed AAB 생성
+- [ ] signed AAB 검증
+- [ ] Play Console 내부 테스트 업로드
+- [ ] 실제 기기 QA
+
 ## 2026-06-27 Android keystore generation status TODO
 
 - [x] keystore generation status 기록
