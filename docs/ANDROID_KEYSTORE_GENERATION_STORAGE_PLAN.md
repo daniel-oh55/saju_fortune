@@ -4,7 +4,7 @@
 
 이 문서는 하루풀이 Android release AAB signing에 필요한 keystore 생성 방식과 보관 방식을 실제 생성 전에 정리한다.
 
-이번 문서는 keystore generation/storage 계획 문서이며, 실제 keystore 생성, keystore 파일 추가, signing 설정 적용, GitHub Secrets 입력, workflow 수정은 포함하지 않는다.
+이번 문서는 keystore generation/storage 계획 문서이며, 이번 PR에서는 release workflow signing support 상태만 반영한다.
 
 ## Current Status
 
@@ -22,7 +22,7 @@
 | keystore storage | Confirmed | private safe location, actual path not recorded |
 | keystore backup storage | Confirmed | separate private safe location, actual path not recorded |
 | GitHub Secrets actual input | Confirmed | values entered in repository settings |
-| release workflow signing support | Pending | not implemented |
+| release workflow signing support | Added | GitHub Secrets based workflow support added |
 | signed AAB generation | Pending | not generated |
 | Play Console internal test upload | Pending | not uploaded |
 | real device QA | Pending | not performed |
@@ -43,7 +43,7 @@
 | password 보관 방식 | password manager 또는 내부 보안 저장소 사용 | Decided |
 | GitHub Actions 사용 방식 | keystore 원본 대신 base64 Secret 후보 사용 | Decided |
 | GitHub Secrets actual input | Confirmed | values entered in repository settings |
-| release workflow signing 적용 | Pending | Not started |
+| release workflow signing 적용 | Added | workflow support added |
 | signed AAB 생성 | Pending | Not started |
 
 주의:
@@ -54,7 +54,7 @@
 - 실제 password는 문서, 코드, PR, 로그에 기록하지 않는다.
 - 실제 keystore base64 값은 문서, 코드, PR, 로그에 기록하지 않는다.
 - GitHub Secrets 실제 입력은 별도 작업에서 진행한다.
-- signing 설정 적용은 별도 PR에서 진행한다.
+- workflow signing support는 추가되었다.
 
 ## Generation Status
 
@@ -70,7 +70,7 @@
 | key alias record | Not recorded | actual alias not recorded |
 | keystore base64 value record | Not recorded | actual base64 not recorded |
 | GitHub Secrets actual input | Confirmed | values entered in repository settings |
-| release workflow signing support | Pending | not implemented |
+| release workflow signing support | Added | GitHub Secrets based workflow support added |
 | signed AAB generation | Pending | not generated |
 
 주의:
@@ -81,7 +81,9 @@
 - 실제 signing password는 기록하지 않는다.
 - 실제 keystore base64 값은 기록하지 않는다.
 - GitHub Secrets 실제 입력은 별도 PR에서 진행한다.
-- workflow signing 적용은 별도 PR에서 진행한다.
+- workflow signing support는 추가되었다.
+- signed AAB generation remains Pending.
+- signed AAB verification remains Pending.
 
 ## Proposed Keystore Generation Method
 
@@ -177,9 +179,7 @@ keystore 보관 기준:
 - signing password 기록 없음
 - keystore base64 실제값 기록 없음
 - GitHub Secrets 실제값 기록 없음
-- signing 설정 적용 없음
-- workflow 파일 변경 없음
-- Gradle 설정 변경 없음
+- signed AAB 생성 결과 기록 없음
 - AndroidManifest.xml 변경 없음
 - Android resource 파일 변경 없음
 - Play Console 내부 테스트 업로드 없음

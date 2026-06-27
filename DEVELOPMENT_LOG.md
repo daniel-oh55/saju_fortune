@@ -1,5 +1,22 @@
 # DEVELOPMENT_LOG
 
+## Android Release Signing Workflow Support
+
+- Android release AAB workflow에 GitHub Secrets 기반 signing support 추가
+- keystore는 GitHub Actions runner temp에 임시 복원
+- release Gradle signing config는 환경변수 기반으로 적용
+- 실제 Secret 값 기록 없음
+- keystore 파일 repository commit 없음
+- signing password/key alias/base64 실제값 기록 없음
+- signed AAB 생성은 Pending 유지
+- signed AAB 검증은 Pending 유지
+- Play Console 내부 테스트 업로드는 Pending 유지
+- 실제 기기 QA는 Pending 유지
+- AndroidManifest.xml/resource 변경 없음
+- production 계산 로직 변경 없음
+- 사주/운세 결과 생성 로직 변경 없음
+- UI/디자인 변경 없음
+
 ## Android Signing Secrets Input Status
 
 - GitHub Secrets 실제 입력 여부 Confirmed로 기록

@@ -35,9 +35,20 @@ jobs:
       - name: Make Gradle wrapper executable
         run: chmod +x android/gradlew
 
-      - name: Build release AAB
+      - name: Restore release keystore
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/android-signing"
+          printf '%s' "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 --decode > "$RUNNER_TEMP/android-signing/release-keystore.jks"
+
+      - name: Build signed release AAB
         working-directory: android
         run: ./gradlew bundleRelease
+        env:
+          ANDROID_KEYSTORE_FILE: ${{ runner.temp }}/android-signing/release-keystore.jks
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
 
       - name: Upload release AAB
         uses: actions/upload-artifact@v4

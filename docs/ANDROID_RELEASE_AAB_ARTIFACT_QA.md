@@ -4,7 +4,7 @@
 
 이 문서는 하루풀이 Android Release AAB workflow run number 3에서 생성된 AAB artifact의 QA 확인 항목을 정리한다.
 
-이번 문서는 AAB artifact QA 체크리스트와 metadata 기록 문서이며, Play Console 업로드나 signing 설정을 포함하지 않는다.
+이번 문서는 기존 run number 3의 unsigned AAB artifact QA 결과를 유지하면서, release workflow signing support 추가 상태를 기록한다.
 
 ## Artifact Metadata
 
@@ -85,10 +85,14 @@
 - apksigner result: Not available
 - Play Console 업로드 가능 여부: Pending
 - signing setup plan: Required
-- signing 설정: Pending
+- release workflow signing support: Added
+- signing 설정: Added
+- signed AAB generation: Pending
+- signed AAB artifact QA: Pending
+- signed AAB verification: Pending
 - keystore 파일 추가: 없음
 - signing password 기록: 없음
-- GitHub Secrets 실제 입력: Pending
+- GitHub Secrets 실제 입력: Confirmed
 - Play Console 내부 테스트 업로드: Pending
 - 실제 Google Play Console 입력: Pending
 - 실제 기기 QA: Pending
@@ -97,17 +101,16 @@
 
 이번 PR에서 하지 않는 것:
 
-- workflow 파일 변경 없음
-- signing 설정 적용 없음
+- signed AAB 생성 결과 기록 없음
+- signed AAB 검증 결과 기록 없음
 - keystore 파일 추가 없음
 - signing password 기록 없음
-- GitHub Secrets 실제 입력 없음
+- GitHub Secrets 실제값 기록 없음
 - Play Console 내부 테스트 업로드 없음
 - 실제 Google Play Console 입력 없음
 - 실제 기기 QA 없음
 - AndroidManifest.xml 변경 없음
 - Android resource 파일 변경 없음
-- Gradle 설정 변경 없음
 - production 계산 로직 변경 없음
 - 사주/운세 결과 생성 로직 변경 없음
 - UI/디자인 변경 없음

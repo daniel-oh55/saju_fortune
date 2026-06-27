@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import { execSync } from 'node:child_process';
 
 const workflowPath = '.github/workflows/android-release-aab.yml';
+const gradlePath = 'android/app/build.gradle';
 const docPath = 'docs/ANDROID_RELEASE_AAB_WORKFLOW.md';
 const releaseWorkflowDesignPath = 'docs/RELEASE_WORKFLOW_DESIGN.md';
 const releaseChecklistPath = 'docs/RELEASE_BUILD_SIGNING_CHECKLIST.md';
@@ -9,6 +10,7 @@ const roadmapPath = 'docs/SAJU_ENGINE_ACCURACY_ROADMAP.md';
 
 const requiredPaths = [
   workflowPath,
+  gradlePath,
   docPath,
   releaseWorkflowDesignPath,
   releaseChecklistPath,
@@ -22,63 +24,85 @@ const requiredWorkflowSnippets = [
   'npm ci',
   'npm run build',
   'npx cap sync android',
+  'Restore release keystore',
+  'RUNNER_TEMP',
+  'ANDROID_KEYSTORE_BASE64',
+  'base64 --decode',
+  "printf '%s'",
+  'Build signed release AAB',
+  'ANDROID_KEYSTORE_FILE',
+  'ANDROID_KEYSTORE_PASSWORD',
+  'ANDROID_KEY_ALIAS',
+  'ANDROID_KEY_PASSWORD',
   './gradlew bundleRelease',
   'actions/upload-artifact@v4',
   'harupuli-release-aab',
 ];
 
-const forbiddenWorkflowSnippets = [
-  '${{ secrets.',
-  'ANDROID_UPLOAD',
-  'ANDROID_KEYSTORE',
-  'keystore/upload-keystore.jks',
-  'Check signing secrets',
-  'Restore upload keystore',
-  'node-version: 20',
+const requiredGradleSnippets = [
+  'System.getenv("ANDROID_KEYSTORE_FILE")',
+  'System.getenv("ANDROID_KEYSTORE_PASSWORD")',
+  'System.getenv("ANDROID_KEY_ALIAS")',
+  'System.getenv("ANDROID_KEY_PASSWORD")',
+  'hasReleaseSigning',
+  'storeFile file(releaseKeystoreFile)',
+  'storePassword releaseKeystorePassword',
+  'keyAlias releaseKeyAlias',
+  'keyPassword releaseKeyPassword',
+  'signingConfig signingConfigs.release',
 ];
 
-const requiredSections = [
-  '# Android Release AAB Workflow',
-  '## Purpose',
-  '## Workflow Status',
-  '## Workflow File',
-  '## Workflow Steps',
-  '## Signing Status',
-  '## AAB Artifact Status',
-  '## Non-Goals for This PR',
-  '## Related Docs',
+const forbiddenWorkflowSnippets = [
+  'ANDROID_UPLOAD',
+  'keystore/upload-keystore.jks',
+  'node-version: 20',
+  'supply',
+  'fastlane',
+  'google-play',
+  'Play Console upload',
+];
+
+const forbiddenGradleSnippets = [
+  'ANDROID_UPLOAD',
+  'storePassword "',
+  "storePassword '",
+  'keyPassword "',
+  "keyPassword '",
+  'keyAlias "',
+  "keyAlias '",
+  'release-keystore.jks',
+];
+
+const forbiddenPatterns = [
+  {
+    label: 'literal_base64_secret_value_absent',
+    pattern: /ANDROID_KEYSTORE_BASE64:\s*['"]?[A-Za-z0-9+/]{80,}={0,2}/,
+  },
+  {
+    label: 'private_keystore_path_absent',
+    pattern: /(?:[A-Za-z]:\\|\/(?:Users|home|var|tmp|private)\/)[^\r\n|`<>]*(?:\.jks|\.keystore)/i,
+  },
 ];
 
 const requiredDocSnippets = [
-  'Android release AAB workflow 파일 추가: Added',
-  'Node.js version: 22',
-  'Node.js version 보정: 20에서 22로 변경',
-  'release build 실행 시도: Pending workflow run',
-  'signing 설정: Pending',
-  'keystore 파일: Pending',
-  'GitHub Secrets 실제 입력: Pending',
-  'AAB artifact 확인: Pending workflow run',
+  'GitHub Secrets 기반 signing support: Added',
+  'keystore runner temp 임시 복원: Added',
+  'release workflow signing support: Added',
+  'signed AAB generation: Pending',
+  'signed AAB verification: Pending',
   'Play Console 내부 테스트 업로드: Pending',
   '실제 기기 QA: Pending',
-  'signing 설정 적용 없음',
-  'keystore 파일 추가 없음',
-  'signing password 기록 없음',
-  'GitHub Secrets 실제 입력 없음',
-  'Play Console 내부 테스트 업로드 없음',
-  'AndroidManifest.xml 변경 없음',
-  'Android resource 파일 변경 없음',
-  'Gradle 설정 변경 없음',
+  'keystore 파일은 repository에 추가하지 않는다.',
+  'secrets 값은 log로 출력하지 않는다.',
 ];
 
-const relatedDocSnippet = 'Android release AAB workflow: docs/ANDROID_RELEASE_AAB_WORKFLOW.md';
-
 const roadmapSnippets = [
-  'Android release AAB workflow 문서: docs/ANDROID_RELEASE_AAB_WORKFLOW.md 참고',
-  'Android release AAB workflow 파일 추가: Added',
-  'Android release AAB workflow 수동 실행: Pending current workflow run',
-  'AAB artifact 확인: Pending current workflow run',
-  'signing 설정: Pending',
+  'GitHub Secrets 실제 입력: Confirmed',
+  'release workflow signing 적용: Added',
+  'signed AAB 생성: Pending',
+  'signed AAB 검증: Pending',
   'Play Console 내부 테스트 업로드: Pending',
+  '실제 기기 QA: Pending',
 ];
 
 const wrongPhrases = [
@@ -87,7 +111,7 @@ const wrongPhrases = [
   '양력/음력 샘플 추가 검증',
 ];
 
-const androidNativeManifestResourceFiles = [
+const protectedFiles = [
   'android/app/src/main/AndroidManifest.xml',
   'android/app/src/main/res',
   'src',
@@ -113,14 +137,22 @@ for (const path of requiredPaths) {
   if (!exists) hasFailure = true;
 }
 
-if (hasFailure) {
-  process.exit(1);
-}
+if (hasFailure) process.exit(1);
 
 const workflow = fs.readFileSync(workflowPath, 'utf8');
+const gradle = fs.readFileSync(gradlePath, 'utf8');
+const doc = fs.readFileSync(docPath, 'utf8');
+const roadmap = fs.readFileSync(roadmapPath, 'utf8');
+
 for (const snippet of requiredWorkflowSnippets) {
   const found = workflow.includes(snippet);
   logResult(`workflow_includes_${labelFromSnippet(snippet)}`, found);
+  if (!found) hasFailure = true;
+}
+
+for (const snippet of requiredGradleSnippets) {
+  const found = gradle.includes(snippet);
+  logResult(`gradle_includes_${labelFromSnippet(snippet)}`, found);
   if (!found) hasFailure = true;
 }
 
@@ -130,11 +162,16 @@ for (const snippet of forbiddenWorkflowSnippets) {
   if (!absent) hasFailure = true;
 }
 
-const doc = fs.readFileSync(docPath, 'utf8');
-for (const section of requiredSections) {
-  const found = doc.includes(section);
-  logResult(`doc_includes_${labelFromSnippet(section)}`, found);
-  if (!found) hasFailure = true;
+for (const snippet of forbiddenGradleSnippets) {
+  const absent = !gradle.includes(snippet);
+  logResult(`gradle_excludes_${labelFromSnippet(snippet)}`, absent);
+  if (!absent) hasFailure = true;
+}
+
+for (const { label, pattern } of forbiddenPatterns) {
+  const absent = !pattern.test(`${workflow}\n${gradle}`);
+  logResult(label, absent);
+  if (!absent) hasFailure = true;
 }
 
 for (const snippet of requiredDocSnippets) {
@@ -145,12 +182,11 @@ for (const snippet of requiredDocSnippets) {
 
 for (const path of [releaseWorkflowDesignPath, releaseChecklistPath]) {
   const relatedDoc = fs.readFileSync(path, 'utf8');
-  const found = relatedDoc.includes(relatedDocSnippet);
+  const found = relatedDoc.includes('Android release AAB workflow: docs/ANDROID_RELEASE_AAB_WORKFLOW.md');
   logResult(`${labelFromSnippet(path)}_includes_android_release_aab_workflow_related_doc`, found);
   if (!found) hasFailure = true;
 }
 
-const roadmap = fs.readFileSync(roadmapPath, 'utf8');
 for (const snippet of roadmapSnippets) {
   const found = roadmap.includes(snippet);
   logResult(`roadmap_includes_${labelFromSnippet(snippet)}`, found);
@@ -163,12 +199,26 @@ for (const snippet of wrongPhrases) {
   if (!absent) hasFailure = true;
 }
 
-const androidDiffOutput = execSync(`git diff --name-only -- ${androidNativeManifestResourceFiles.join(' ')}`, {
+const protectedDiff = execSync(`git diff --name-only -- ${protectedFiles.join(' ')}`, {
   encoding: 'utf8',
 }).trim();
-const androidNativeManifestResourceFilesUnchanged = androidDiffOutput.length === 0;
-logResult('android_native_manifest_resource_files_unchanged_in_working_diff', androidNativeManifestResourceFilesUnchanged);
-if (!androidNativeManifestResourceFilesUnchanged) hasFailure = true;
+const protectedFilesUnchanged = protectedDiff.length === 0;
+logResult('android_manifest_resource_src_files_unchanged_in_working_diff', protectedFilesUnchanged);
+if (!protectedFilesUnchanged) hasFailure = true;
+
+const trackedFiles = execSync('git ls-files', { encoding: 'utf8' })
+  .split(/\r?\n/)
+  .filter(Boolean);
+const statusFiles = execSync('git status --short --untracked-files=all', { encoding: 'utf8' })
+  .split(/\r?\n/)
+  .filter(Boolean)
+  .map((line) => line.slice(3).trim().replace(/^"|"$/g, ''));
+const sensitiveFiles = [...trackedFiles, ...statusFiles].filter((path) =>
+  ['.aab', '.zip', '.jks', '.keystore'].some((extension) => path.endsWith(extension))
+);
+const sensitiveFilesAbsent = sensitiveFiles.length === 0;
+logResult('artifact_and_keystore_files_not_added_to_repository', sensitiveFilesAbsent);
+if (!sensitiveFilesAbsent) hasFailure = true;
 
 if (hasFailure) {
   console.error('Android release AAB workflow check failed');
