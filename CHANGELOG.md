@@ -2,6 +2,8 @@
 
 ## Added
 
+- Android AAB signing verification plan 문서 추가
+- Android AAB signing verification plan check script 추가
 - Android Release AAB artifact inspection 결과 기록
 - AAB 파일명과 파일 크기 기록
 - Android Release AAB artifact QA 문서 추가

@@ -1,5 +1,22 @@
 # DEVELOPMENT_LOG
 
+## Android AAB Signing Verification Plan
+
+- Android AAB signing 상태 확인 전 검증 계획 문서 추가
+- `app-release.aab` signing 확인 질문과 명령 후보 정리
+- signing 검증 명령 실제 실행은 Pending 유지
+- signing 설정은 Pending 유지
+- keystore 파일 추가 없음
+- signing password 기록 없음
+- GitHub Secrets 실제 입력 없음
+- Play Console 내부 테스트 업로드는 Pending 유지
+- 실제 기기 QA는 Pending 유지
+- workflow 파일 변경 없음
+- Android native/Manifest/resource/Gradle 변경 없음
+- production 계산 로직 변경 없음
+- 사주/운세 결과 생성 로직 변경 없음
+- UI/디자인 변경 없음
+
 ## Android Release AAB Artifact Inspection
 
 - Android Release AAB run number 3 artifact 다운로드 확인
