@@ -13,11 +13,11 @@ This document is not a Vercel setting change completion record.
 | Static page path | Confirmed | public/privacy-policy.html |
 | Vercel production deployment check | Confirmed | deployment exists |
 | HTTPS request | Confirmed | request completed |
-| `/privacy-policy.html` public access | Blocked | Vercel Login response |
-| No-login access | Blocked | public access not available |
-| Desktop browser check | Blocked | Vercel Login response |
-| Mobile browser check | Blocked | Vercel Login response |
-| Page title check | Blocked | privacy policy page not returned |
+| `/privacy-policy.html` public access | Confirmed | privacy policy page returned without Vercel Login |
+| No-login access | Confirmed | public access available |
+| Desktop browser check | Confirmed | privacy policy page returned |
+| Mobile browser check | Confirmed | privacy policy page returned |
+| Page title check | Confirmed | Harupuli privacy policy title returned |
 | Privacy policy public URL | Pending | actual URL not recorded |
 | Privacy policy URL Play Console input | Pending | not entered |
 
@@ -25,22 +25,54 @@ This document is not a Vercel setting change completion record.
 
 | Item | Status | Note |
 |---|---|---|
-| Vercel project access protection check | Pending | verify project/deployment protection setting |
-| Production deployment public access check | Pending | verify production URL can be opened without login |
-| Password protection check | Pending | verify whether password or login protection is enabled |
-| Vercel authentication/login requirement check | Pending | verify why Vercel Login is returned |
+| Vercel project access protection check | Confirmed | checked in Vercel dashboard |
+| Production deployment public access check | Confirmed | production page opened without login |
+| Password protection check | Confirmed | Vercel Login no longer returned in re-check |
+| Vercel authentication/login requirement check | Confirmed | Vercel Login no longer returned |
 | Preview deployment protection check | Pending | not required for Play Console, but note if enabled |
-| Production redeploy after setting change | Pending | if required |
-| `/privacy-policy.html` no-login re-check | Pending | after Vercel setting change |
-| Desktop browser re-check | Pending | after Vercel setting change |
-| Mobile browser re-check | Pending | after Vercel setting change |
-| HTTPS re-check | Pending | after Vercel setting change |
+| Production redeploy after setting change | Pending | not recorded as required or completed in this PR |
+| `/privacy-policy.html` no-login re-check | Confirmed | privacy policy page returned |
+| Desktop browser re-check | Confirmed | privacy policy page returned |
+| Mobile browser re-check | Confirmed | privacy policy page returned |
+| HTTPS re-check | Confirmed | HTTPS request completed |
+
+## Vercel Public Access Re-check Result
+
+| Item | Status | Note |
+|---|---|---|
+| Vercel protection setting review | Confirmed | checked in Vercel dashboard |
+| Public no-login access restore | Confirmed | privacy policy page returned without Vercel Login |
+| `/privacy-policy.html` no-login re-check | Confirmed | privacy policy page returned |
+| HTTPS re-check | Confirmed | HTTPS request completed |
+| Desktop browser re-check | Confirmed | privacy policy page returned |
+| Mobile browser re-check | Confirmed | privacy policy page returned |
+| Page title check | Confirmed | Harupuli privacy policy title returned |
+| Contact email placeholder check | Confirmed | placeholder returned |
+| Effective date placeholder check | Confirmed | placeholder returned |
+| Actual Vercel URL string | Not recorded | keep URL out of repository docs |
+| Privacy policy public URL final confirmation | Pending | separate confirmation required |
+| Play Console URL input | Pending | not entered |
+| Actual Google Play Console input | Pending | not completed |
+| Contact email confirmation | Pending | actual value not recorded |
+| Data safety form submission | Pending | not submitted |
+| AAB internal test upload | Pending | not uploaded |
+| Real device QA | Pending | not performed |
+
+Notes:
+
+- Public no-login access restore Confirmed is not Play Console URL input completion.
+- Public no-login access restore Confirmed is not privacy policy public URL final confirmation.
+- The actual Vercel URL string is not recorded in repository docs.
+- Actual contact email value is not recorded in repository docs.
+- Data safety form submission remains Pending.
+- AAB internal test upload remains Pending.
+- Real device QA remains Pending.
 
 ## Play Console Impact
 
 | Item | Status | Note |
 |---|---|---|
-| Play Console privacy policy URL readiness | Blocked | public no-login access not available yet |
+| Play Console privacy policy URL readiness | Pending | public access restored, but final URL confirmation is still required |
 | Privacy policy final URL confirmation | Pending | not confirmed |
 | Play Console URL input | Pending | not entered |
 | Actual Google Play Console input | Pending | not completed |
@@ -53,9 +85,9 @@ This document is not a Vercel setting change completion record.
 
 | Item | Status | Note |
 |---|---|---|
-| Vercel protection setting review | Pending | manual Vercel dashboard action |
-| Public no-login access restore | Pending | manual Vercel dashboard action |
-| URL accessibility re-check | Pending | separate PR after setting change |
+| Vercel protection setting review | Confirmed | checked in Vercel dashboard |
+| Public no-login access restore | Confirmed | public no-login access re-check succeeded |
+| URL accessibility re-check | Confirmed | desktop/mobile/HTTPS checks succeeded |
 | Privacy policy public URL final confirmation | Pending | separate PR |
 | Privacy policy final content confirmation | Pending | separate PR |
 | Contact email confirmation | Pending | separate PR or Play Console task |

@@ -1,5 +1,18 @@
 # TODO
 
+## 2026-06-29 Vercel public access re-check TODO
+
+- [x] Vercel protection setting review result recorded
+- [x] Public no-login access re-check result recorded
+- [x] Actual URL string not recorded
+- [x] Play Console URL input remains Pending
+- [ ] Privacy policy public URL final confirmation
+- [ ] Privacy policy URL Play Console input
+- [ ] Contact email confirmation
+- [ ] Data safety form submission
+- [ ] AAB internal test upload
+- [ ] Real device QA
+
 ## 2026-06-28 Vercel public access unblock plan TODO
 
 - [x] Vercel Login blocked status documented

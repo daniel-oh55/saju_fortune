@@ -2,6 +2,8 @@
 
 ## Added
 
+- Vercel public access re-check result recorded
+- Privacy policy static page public no-login access re-check status documented
 - Vercel public access unblock plan added
 - Privacy policy public no-login access blocked status and restore requirements documented
 - Privacy policy URL accessibility check document added

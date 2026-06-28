@@ -17,6 +17,23 @@ The actual Vercel URL string is not recorded in this PR. This result is not Goog
 - Privacy policy URL Play Console input: Pending
 - Actual Google Play Console input: Pending
 
+## Vercel Public Access Re-check Result
+
+- Vercel public access re-check result: Added
+- Vercel protection setting review: Confirmed
+- Public no-login access restore: Confirmed
+- `/privacy-policy.html` no-login re-check: Confirmed
+- HTTPS re-check: Confirmed
+- Desktop browser re-check: Confirmed
+- Mobile browser re-check: Confirmed
+- Privacy policy public URL final confirmation: Pending
+- Privacy policy URL Play Console input: Pending
+- Actual Google Play Console input: Pending
+- Contact email: Pending
+- Data safety form: Pending
+- AAB upload: Pending
+- Real device QA: Pending
+
 ## Static Page Status
 
 | Item | Status | Note |
