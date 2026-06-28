@@ -1,5 +1,20 @@
 # TODO
 
+## 2026-06-28 Android release AAB secret correction rerun TODO
+
+- [x] ANDROID_KEYSTORE_BASE64 Secret 보정 여부 기록
+- [x] Android Release AAB workflow 재실행 결과 기록
+- [x] release signing secrets validation step success 기록
+- [x] Restore release keystore success 기록
+- [x] Build signed release AAB success 기록
+- [x] workflow jarsigner verification step success 기록
+- [x] signed AAB regeneration Confirmed 기록
+- [x] signed AAB re-verification Confirmed 기록
+- [x] artifact 생성 개수 기록
+- [ ] signed AAB artifact 다운로드/압축 해제 확인
+- [ ] Play Console 내부 테스트 업로드
+- [ ] 실제 기기 QA
+
 ## 2026-06-27 Android release AAB enforced rerun TODO
 
 - [x] Android Release AAB workflow 재실행 실패 결과 기록

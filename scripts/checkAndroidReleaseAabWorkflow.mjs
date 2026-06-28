@@ -30,22 +30,22 @@ const requiredGradleSnippets = [
 ];
 
 const requiredDocSnippets = [
-  'Android Release AAB enforced rerun result: Failed',
-  'Run number: 5',
-  'Run id: 28309520915',
-  'Failed step: Validate release signing secrets',
-  'Failure summary: `ANDROID_KEYSTORE_BASE64 is not configured`',
-  'Validate release signing secrets: Failed',
-  'Restore release keystore: Not reached',
-  'Build signed release AAB: Not reached',
-  'Verify signed release AAB: Not reached',
-  'Upload release AAB: Not reached',
-  'unsigned artifact upload prevention: Confirmed',
-  'signed AAB regeneration: Failed',
-  'signed AAB re-verification: Pending',
-  'Artifact created: Not created',
+  'ANDROID_KEYSTORE_BASE64 configuration: Confirmed',
+  'Android Release AAB run number 6: completed / success',
+  'Run id: 28310971077',
+  'Validate release signing secrets: Confirmed',
+  'Restore release keystore: Confirmed',
+  'Build signed release AAB: Confirmed',
+  'Verify signed release AAB: Confirmed',
+  'Upload release AAB: Confirmed',
+  'signed AAB regeneration: Confirmed',
+  'signed AAB re-verification: Confirmed',
+  'Artifact count: Confirmed 1',
+  'Artifact name: harupuli-release-aab',
+  'signed AAB artifact download/extract: Pending',
   'Play Console internal test upload: Pending',
   'real device QA: Pending',
+  'Secret actual values: Not recorded',
 ];
 
 const forbiddenSnippets = [

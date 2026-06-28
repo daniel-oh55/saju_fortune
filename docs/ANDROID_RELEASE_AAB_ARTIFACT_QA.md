@@ -1,5 +1,25 @@
 # Android Release AAB Artifact QA
 
+## Android Release AAB Secret Correction Rerun Result
+
+- ANDROID_KEYSTORE_BASE64 configuration: Confirmed
+- Android Release AAB run number 6: completed / success
+- Run id: 28310971077
+- signed AAB regeneration: Confirmed
+- signed AAB re-verification: Confirmed
+- Artifact count: Confirmed 1
+- Artifact name: harupuli-release-aab
+- Artifact size: 5,925,298 bytes
+- Artifact digest: sha256:7a2efee684ee16f85d55de4c2e101c88efbf12611c312c9d73cc75084ffc796c
+- signed AAB artifact download/extract: Pending
+- Play Console internal test upload: Pending
+- real device QA: Pending
+
+주의:
+
+- artifact 다운로드/압축 해제 확인은 이번 PR에서 진행하지 않았다.
+- `.aab`, `.zip`, `.jks`, `.keystore` 파일은 repository에 추가하지 않았다.
+
 ## Android Release AAB Enforced Rerun Result
 
 - Android Release AAB enforced rerun result: Failed

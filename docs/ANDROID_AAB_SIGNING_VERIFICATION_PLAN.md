@@ -1,5 +1,29 @@
 # Android AAB Signing Verification Plan
 
+## Android Release AAB Secret Correction Rerun Result
+
+- ANDROID_KEYSTORE_BASE64 configuration: Confirmed
+- Android Release AAB run number 6: completed / success
+- Run id: 28310971077
+- Validate release signing secrets: Confirmed
+- Restore release keystore: Confirmed
+- Build signed release AAB: Confirmed
+- Verify signed release AAB: Confirmed
+- Upload release AAB: Confirmed
+- signed AAB regeneration: Confirmed
+- signed AAB re-verification: Confirmed
+- Artifact count: Confirmed 1
+- Artifact name: harupuli-release-aab
+- signed AAB artifact download/extract: Pending
+- Play Console internal test upload: Pending
+- real device QA: Pending
+- Secret actual values: Not recorded
+
+주의:
+
+- signed AAB re-verification Confirmed는 Play Console 업로드 완료가 아니다.
+- signed AAB artifact download/extract는 별도 PR에서 기록한다.
+
 ## Android Release AAB Enforced Rerun Result
 
 - Android Release AAB enforced rerun result: Failed

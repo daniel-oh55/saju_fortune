@@ -1,5 +1,26 @@
 # Android Signing Setup Plan
 
+## Android Release AAB Secret Correction Rerun Result
+
+- ANDROID_KEYSTORE_BASE64 configuration: Confirmed
+- Android Release AAB run number 6: completed / success
+- Run id: 28310971077
+- release signing secrets validation: Confirmed
+- Restore release keystore: Confirmed
+- Build signed release AAB: Confirmed
+- Verify signed release AAB: Confirmed
+- Upload release AAB: Confirmed
+- signed AAB regeneration: Confirmed
+- signed AAB re-verification: Confirmed
+- signed AAB artifact download/extract: Pending
+- Play Console internal test upload: Pending
+- real device QA: Pending
+- Secret actual values: Not recorded
+
+주의:
+
+- Secret 실제값, keystore base64 실제값, signing password, key alias 실제값은 기록하지 않는다.
+
 ## Android Release AAB Enforced Rerun Result
 
 - Android Release AAB enforced rerun result: Failed
