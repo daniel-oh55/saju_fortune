@@ -2,6 +2,8 @@
 
 ## Added
 
+- Android Release AAB secret correction rerun success result 기록
+- signed AAB regeneration/re-verification Confirmed 상태 기록
 - Android Release AAB enforced rerun failure result 기록
 - signed AAB regeneration Failed 상태 기록
 - Android release signing enforcement 보강

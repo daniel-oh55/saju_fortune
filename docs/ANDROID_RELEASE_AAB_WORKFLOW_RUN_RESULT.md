@@ -1,5 +1,46 @@
 # Android Release AAB Workflow Run Result
 
+## Android Release AAB Secret Correction Rerun Result
+
+| Item | Status | Note |
+|---|---|---|
+| Workflow | Confirmed | Android Release AAB |
+| Trigger | Confirmed | workflow_dispatch |
+| Branch | Confirmed | main |
+| Run number | Confirmed | 6 |
+| Run id | Confirmed | 28310971077 |
+| Commit sha | Confirmed | c2c6f21db45d5cb9605a0133100e1fcb09569b42 |
+| Status | Confirmed | completed |
+| Conclusion | Confirmed | success |
+| ANDROID_KEYSTORE_BASE64 configuration | Confirmed | value not recorded |
+| Validate release signing secrets | Confirmed | success |
+| Restore release keystore | Confirmed | success |
+| Build signed release AAB | Confirmed | success |
+| Verify signed release AAB | Confirmed | success |
+| Upload release AAB | Confirmed | success |
+| signed AAB regeneration | Confirmed | workflow success |
+| signed AAB re-verification | Confirmed | workflow jarsigner verified |
+| Artifact count | Confirmed | 1 |
+| Artifact name | Confirmed | harupuli-release-aab |
+| Artifact size | Confirmed | 5,925,298 bytes |
+| Artifact digest | Confirmed | sha256:7a2efee684ee16f85d55de4c2e101c88efbf12611c312c9d73cc75084ffc796c |
+| signed AAB artifact download/extract | Pending | separate PR |
+| Play Console internal test upload | Pending | not uploaded |
+| real device QA | Pending | not performed |
+
+Run URL:
+
+- https://github.com/daniel-oh55/saju_fortune/actions/runs/28310971077
+
+주의:
+
+- signed AAB re-verification Confirmed는 Play Console 업로드 완료가 아니다.
+- signed AAB re-verification Confirmed는 실제 기기 QA 완료가 아니다.
+- artifact 다운로드/압축 해제 확인은 별도 PR에서 기록한다.
+- Play Console internal test upload는 별도 PR에서 기록한다.
+- Secret 실제값은 기록하지 않는다.
+- keystore base64 실제값, signing password, key alias 실제값은 기록하지 않는다.
+
 ## Android Release AAB Enforced Rerun Result
 
 | Item | Status | Note |

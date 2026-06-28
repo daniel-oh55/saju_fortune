@@ -5,6 +5,7 @@ const docPath = 'docs/ANDROID_RELEASE_AAB_ARTIFACT_QA.md';
 
 const requiredSections = [
   '# Android Release AAB Artifact QA',
+  '## Android Release AAB Secret Correction Rerun Result',
   '## Android Release AAB Enforced Rerun Result',
   '## Android Release Signing Enforcement Follow-up',
   '## Artifact Metadata',
@@ -16,26 +17,23 @@ const requiredSections = [
 ];
 
 const requiredSnippets = [
-  'Android Release AAB enforced rerun result: Failed',
-  'Run number: 5',
-  'Run id: 28309520915',
-  'Failed step: Validate release signing secrets',
-  'signed AAB regeneration: Failed',
-  'signed AAB re-verification: Pending',
-  'Artifact created: Not created',
-  'Artifact name: Not created',
-  'Artifact size: Not created',
-  'Artifact digest: Pending',
+  'ANDROID_KEYSTORE_BASE64 configuration: Confirmed',
+  'Android Release AAB run number 6: completed / success',
+  'Run id: 28310971077',
+  'signed AAB regeneration: Confirmed',
+  'signed AAB re-verification: Confirmed',
+  'Artifact count: Confirmed 1',
+  'Artifact name: harupuli-release-aab',
+  'Artifact size: 5,925,298 bytes',
+  'Artifact digest: sha256:7a2efee684ee16f85d55de4c2e101c88efbf12611c312c9d73cc75084ffc796c',
   'signed AAB artifact download/extract: Pending',
   'Play Console internal test upload: Pending',
   'real device QA: Pending',
-  'artifact가 생성되지 않았으므로 `.aab` 다운로드/압축 해제 확인은 진행하지 않았다.',
+  'artifact 다운로드/압축 해제 확인은 이번 PR에서 진행하지 않았다.',
   '`.aab`, `.zip`, `.jks`, `.keystore` 파일은 repository에 추가하지 않았다.',
 ];
 
 const forbiddenSnippets = [
-  'Artifact created: Confirmed',
-  'signed AAB re-verification: Confirmed',
   'Play Console internal test upload | Confirmed',
   'real device QA | Confirmed',
   '실제 스토어 스크린샷 이미지 시작',

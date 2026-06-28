@@ -5,6 +5,7 @@ const docPath = 'docs/ANDROID_AAB_SIGNING_VERIFICATION_PLAN.md';
 
 const requiredSections = [
   '# Android AAB Signing Verification Plan',
+  '## Android Release AAB Secret Correction Rerun Result',
   '## Android Release AAB Enforced Rerun Result',
   '## Android Release Signing Enforcement Follow-up',
   '## Purpose',
@@ -17,22 +18,26 @@ const requiredSections = [
 ];
 
 const requiredSnippets = [
-  'Android Release AAB enforced rerun result: Failed',
-  'Run number: 5',
-  'Run id: 28309520915',
-  'Failed step: Validate release signing secrets',
-  'Failure summary: `ANDROID_KEYSTORE_BASE64 is not configured`',
-  'signed AAB regeneration: Failed',
-  'signed AAB re-verification: Pending',
-  'Verify signed release AAB: Not reached',
-  'Artifact created: Not created',
+  'ANDROID_KEYSTORE_BASE64 configuration: Confirmed',
+  'Android Release AAB run number 6: completed / success',
+  'Run id: 28310971077',
+  'Validate release signing secrets: Confirmed',
+  'Restore release keystore: Confirmed',
+  'Build signed release AAB: Confirmed',
+  'Verify signed release AAB: Confirmed',
+  'Upload release AAB: Confirmed',
+  'signed AAB regeneration: Confirmed',
+  'signed AAB re-verification: Confirmed',
+  'Artifact count: Confirmed 1',
+  'Artifact name: harupuli-release-aab',
+  'signed AAB artifact download/extract: Pending',
   'Play Console internal test upload: Pending',
   'real device QA: Pending',
-  'Secret 실제값은 기록하지 않는다.',
+  'Secret actual values: Not recorded',
+  'signed AAB re-verification Confirmed는 Play Console 업로드 완료가 아니다.',
 ];
 
 const forbiddenSnippets = [
-  'signed AAB re-verification: Confirmed',
   'Play Console internal test upload | Confirmed',
   'real device QA | Confirmed',
   '실제 스토어 스크린샷 이미지 시작',

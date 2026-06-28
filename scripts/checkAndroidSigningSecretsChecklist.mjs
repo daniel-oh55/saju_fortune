@@ -5,6 +5,7 @@ const docPath = 'docs/ANDROID_SIGNING_SECRETS_CHECKLIST.md';
 
 const requiredSections = [
   '# Android Signing Secrets Checklist',
+  '## Android Release AAB Secret Correction Rerun Result',
   '## Android Release AAB Enforced Rerun Result',
   '## Android Release Signing Enforcement Follow-up',
   '## Current Status',
@@ -16,26 +17,22 @@ const requiredSections = [
 ];
 
 const requiredSnippets = [
-  'Android Release AAB enforced rerun result: Failed',
-  'Run number: 5',
-  'Run id: 28309520915',
-  'Failed step: Validate release signing secrets',
-  'Failure summary: `ANDROID_KEYSTORE_BASE64 is not configured`',
-  'ANDROID_KEYSTORE_BASE64 configuration: Missing',
+  'ANDROID_KEYSTORE_BASE64 configuration: Confirmed',
+  'Android Release AAB run number 6: completed / success',
+  'Run id: 28310971077',
   'Secret actual values: Not recorded',
   'keystore base64 actual value: Not recorded',
   'signing password actual value: Not recorded',
   'key alias actual value: Not recorded',
-  'signed AAB regeneration: Failed',
-  'signed AAB re-verification: Pending',
+  'signed AAB regeneration: Confirmed',
+  'signed AAB re-verification: Confirmed',
+  'signed AAB artifact download/extract: Pending',
   'Play Console internal test upload: Pending',
   'real device QA: Pending',
-  'Secret 이름만 기록하고 실제값은 기록하지 않는다.',
-  'GitHub Secrets 보정은 별도 작업으로 진행한다.',
+  'Secret 이름과 설정 여부만 기록하고 실제값은 기록하지 않는다.',
 ];
 
 const forbiddenSnippets = [
-  'signed AAB re-verification: Confirmed',
   'Play Console internal test upload | Confirmed',
   'real device QA | Confirmed',
   '실제 스토어 스크린샷 이미지 시작',
