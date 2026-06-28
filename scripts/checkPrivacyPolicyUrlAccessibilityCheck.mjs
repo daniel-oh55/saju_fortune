@@ -49,8 +49,8 @@ const relatedDocs = [
     path: 'docs/PRIVACY_POLICY_HOSTING_OPTIONS.md',
     snippets: [
       'Privacy policy URL accessibility check document: Added',
+      'Vercel public access re-check result: Added',
       'Vercel production deployment check: Confirmed',
-      '/privacy-policy.html public access: Blocked',
       'Privacy policy public URL: Pending',
       'Privacy policy URL Play Console input: Pending',
       'Contact email: Pending',
@@ -60,8 +60,8 @@ const relatedDocs = [
     path: 'docs/PRIVACY_POLICY_FINALIZATION_READINESS.md',
     snippets: [
       'Privacy policy URL accessibility check document: Added',
+      'Vercel public access re-check result: Added',
       'Vercel production deployment check: Confirmed',
-      '/privacy-policy.html public access: Blocked',
       'Privacy policy final content: Pending',
       'Privacy policy public URL: Pending',
       'Play Console URL input: Pending',
@@ -71,8 +71,8 @@ const relatedDocs = [
     path: 'docs/PLAY_CONSOLE_CONTACT_PRIVACY_READINESS.md',
     snippets: [
       'Privacy policy URL accessibility check document: Added',
+      'Vercel public access re-check result: Added',
       'Vercel production deployment check: Confirmed',
-      '/privacy-policy.html public access: Blocked',
       'Contact email: Pending',
       'Privacy policy public URL: Pending',
       'Privacy policy URL Play Console input: Pending',
@@ -82,8 +82,8 @@ const relatedDocs = [
     path: 'docs/PLAY_CONSOLE_APP_CREATION_FIELDS.md',
     snippets: [
       'Privacy policy URL accessibility check document: Added',
+      'Vercel public access re-check result: Added',
       'Vercel production deployment check: Confirmed',
-      '/privacy-policy.html public access: Blocked',
       'Privacy policy public URL: Pending',
       'Actual Google Play Console input: Pending',
     ],
@@ -92,8 +92,8 @@ const relatedDocs = [
     path: 'docs/PLAY_CONSOLE_INTERNAL_TEST_UPLOAD_CHECKLIST.md',
     snippets: [
       'Privacy policy URL accessibility check document: Added',
+      'Vercel public access re-check result: Added',
       'Vercel production deployment check: Confirmed',
-      '/privacy-policy.html public access: Blocked',
       'Privacy policy URL: Pending',
       'AAB upload to internal test: Pending',
       'Real device QA: Pending',
@@ -103,9 +103,11 @@ const relatedDocs = [
     path: 'docs/SAJU_ENGINE_ACCURACY_ROADMAP.md',
     snippets: [
       'Privacy policy URL accessibility check document: Added',
+      'Vercel public access re-check result: Added',
       'Privacy policy static page path: public/privacy-policy.html',
       'Privacy policy Vercel production deployment check: Confirmed',
-      'Privacy policy /privacy-policy.html public access check: Blocked',
+      'Privacy policy public no-login access restore: Confirmed',
+      'Privacy policy URL accessibility re-check: Confirmed',
       'Privacy policy URL confirmation: Pending',
       'Privacy policy URL Play Console input: Pending',
       'Contact email confirmation: Pending',

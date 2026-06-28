@@ -32,6 +32,15 @@
 - Privacy policy public URL: Pending
 - Privacy policy URL Play Console input: Pending
 
+## Vercel Public Access Re-check Result
+
+- Vercel public access re-check result: Added
+- Public no-login access restore: Confirmed
+- URL accessibility re-check: Confirmed
+- Privacy policy public URL final confirmation: Pending
+- Privacy policy URL Play Console input: Pending
+- Contact email: Pending
+
 ## Privacy Policy URL Accessibility Check
 
 - Privacy policy URL accessibility check document: Added

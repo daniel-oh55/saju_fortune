@@ -29,6 +29,16 @@
 - Play Console URL input: Pending
 - Contact email: Pending
 
+## Vercel Public Access Re-check Result
+
+- Vercel public access re-check result: Added
+- Public no-login access restore: Confirmed
+- URL accessibility re-check: Confirmed
+- Privacy policy final content: Pending
+- Privacy policy public URL final confirmation: Pending
+- Play Console URL input: Pending
+- Contact email: Pending
+
 ## Privacy Policy URL Accessibility Check
 
 - Privacy policy URL accessibility check document: Added
