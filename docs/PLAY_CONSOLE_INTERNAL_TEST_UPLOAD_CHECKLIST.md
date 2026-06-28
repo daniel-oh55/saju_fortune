@@ -2,6 +2,7 @@
 
 ## Play Console App Creation Fields Checklist
 
+- Contact and privacy readiness checklist: Added
 - Play Console app creation fields checklist: Added
 - Free or paid: Confirmed
 - Default language: Confirmed

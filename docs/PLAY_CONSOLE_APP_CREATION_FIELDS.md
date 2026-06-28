@@ -1,5 +1,16 @@
 # Play Console App Creation Fields
 
+## Contact and Privacy Readiness
+
+- Contact and privacy readiness checklist: Added
+- Contact email candidate selected: Pending
+- Contact email Play Console input: Pending
+- Privacy policy final content: Pending
+- Privacy policy public URL: Pending
+- Privacy policy URL Play Console input: Pending
+- Actual Google Play Console input: Pending
+- Real device QA: Pending
+
 ## Purpose
 
 이 문서는 하루풀이 앱을 Google Play Console에 생성하기 전에 필요한 입력값의 확정/보류 상태를 정리한다.
@@ -139,6 +150,7 @@
 ## Related Docs
 
 - docs/PLAY_CONSOLE_INTERNAL_TEST_UPLOAD_CHECKLIST.md
+- docs/PLAY_CONSOLE_CONTACT_PRIVACY_READINESS.md
 - docs/ANDROID_RELEASE_AAB_ARTIFACT_QA.md
 - docs/ANDROID_RELEASE_AAB_WORKFLOW_RUN_RESULT.md
 - docs/ANDROID_SIGNING_SETUP_PLAN.md

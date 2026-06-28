@@ -1,5 +1,28 @@
 # DEVELOPMENT_LOG
 
+## Play Console Contact and Privacy Readiness
+
+- 문의 이메일 / 개인정보 처리방침 URL 확정 준비 체크리스트 추가
+- Contact email은 Pending 유지
+- Contact email 실제값 기록 없음
+- Privacy policy final content는 Pending 유지
+- Privacy policy public URL은 Pending 유지
+- Privacy policy 실제 URL 기록 없음
+- Data safety form은 Pending 유지
+- AAB 내부 테스트 업로드는 Pending 유지
+- 실제 기기 QA는 Pending 유지
+- 현재 앱 데이터 처리 상태 반영
+- Server DB/Login/Payment SDK/Ad SDK/External analytics SDK는 Not used 유지
+- localStorage usage는 Used 유지
+- Secret 실제값 기록 없음
+- `.aab` repository commit 없음
+- `.zip` repository commit 없음
+- AndroidManifest.xml/resource 변경 없음
+- Gradle 설정 변경 없음
+- production 계산 로직 변경 없음
+- 사주/운세 결과 생성 로직 변경 없음
+- UI/디자인 변경 없음
+
 ## Play Console App Creation Field Decisions
 
 - Play Console 앱 생성 입력값 1차 결정 결과 기록

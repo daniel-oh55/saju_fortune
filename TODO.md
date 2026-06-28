@@ -1,5 +1,21 @@
 # TODO
 
+## 2026-06-28 Play Console contact and privacy readiness TODO
+
+- [x] 문의 이메일 / 개인정보 처리방침 URL 확정 준비 체크리스트 추가
+- [x] Contact email 준비 상태 Pending 정리
+- [x] Privacy policy URL 준비 상태 Pending 정리
+- [x] 현재 앱 데이터 처리 상태 반영
+- [ ] Contact email 후보 확정
+- [ ] Contact email 접근 가능 여부 확인
+- [ ] Privacy policy 최종 내용 확정
+- [ ] Privacy policy hosting location 선택
+- [ ] Privacy policy public URL 확정
+- [ ] Privacy policy URL 접근 가능 여부 확인
+- [ ] Data safety form 제출
+- [ ] AAB 내부 테스트 업로드
+- [ ] 실제 기기 QA
+
 ## 2026-06-28 Play Console app creation field decisions TODO
 
 - [x] Free or paid 선택값 기록
