@@ -1,5 +1,31 @@
 # DEVELOPMENT_LOG
 
+## Play Console App Creation Field Decisions
+
+- Play Console 앱 생성 입력값 1차 결정 결과 기록
+- Free or paid는 Free로 Confirmed 기록
+- Default language는 Korean으로 Confirmed 기록
+- App category는 Lifestyle로 Confirmed 기록
+- 실제 Play Console 앱 생성은 Pending 유지
+- 실제 Google Play Console 입력은 Pending 유지
+- Contact email은 Pending 유지
+- Privacy policy URL은 Pending 유지
+- 실제 스토어 스크린샷 이미지 제작은 Pending 유지
+- Data safety form은 Pending 유지
+- AAB 내부 테스트 업로드는 Pending 유지
+- 실제 기기 QA는 Pending 유지
+- 실제 Contact email 값 기록 없음
+- 실제 Privacy policy URL 기록 없음
+- 실제 tester email list 기록 없음
+- Secret 실제값 기록 없음
+- `.aab` repository commit 없음
+- `.zip` repository commit 없음
+- AndroidManifest.xml/resource 변경 없음
+- Gradle 설정 변경 없음
+- production 계산 로직 변경 없음
+- 사주/운세 결과 생성 로직 변경 없음
+- UI/디자인 변경 없음
+
 ## Play Console App Creation Fields
 
 - Play Console 앱 생성 입력값 체크리스트 추가

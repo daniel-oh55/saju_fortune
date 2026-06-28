@@ -2,6 +2,8 @@
 
 ## Added
 
+- Play Console app creation field decision result 기록
+- Free/Paid, default language, app category 1차 결정값 기록
 - Play Console app creation fields checklist 추가
 - Play Console 앱 생성 전 Confirmed/Pending 입력값 정리
 - Play Console internal test upload checklist 추가

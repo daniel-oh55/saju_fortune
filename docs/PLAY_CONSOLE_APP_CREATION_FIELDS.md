@@ -12,9 +12,9 @@
 |---|---|---|
 | App name | Confirmed | 하루풀이 |
 | App or game | Confirmed | App |
-| Free or paid | Pending | actual Play Console selection not confirmed |
-| Default language | Pending | actual Play Console selection not confirmed |
-| App category | Pending | actual Play Console selection not confirmed |
+| Free or paid | Confirmed | Free |
+| Default language | Confirmed | Korean |
+| App category | Confirmed | Lifestyle |
 | Store listing short description | Pending | not finalized |
 | Store listing full description | Pending | not finalized |
 | Contact email | Pending | actual value not recorded |
@@ -34,6 +34,47 @@
 | AAB upload | Pending | not uploaded |
 | Internal test rollout | Pending | not started |
 | Real device QA | Pending | not performed |
+
+## App Creation Field Decision Result
+
+| Field | Status | Note |
+|---|---|---|
+| App name | Confirmed | 하루풀이 |
+| App or game | Confirmed | App |
+| Free or paid | Confirmed | Free |
+| Default language | Confirmed | Korean |
+| App category | Confirmed | Lifestyle |
+| Store listing short description | Pending | not finalized |
+| Store listing full description | Pending | not finalized |
+| Contact email | Pending | actual value not recorded |
+| Privacy policy URL | Pending | actual URL not confirmed |
+| Developer name | Pending | actual Play Console value not recorded |
+| App icon | Pending | final asset not confirmed |
+| Feature graphic | Pending | final asset not confirmed |
+| Phone screenshots | Pending | 실제 스토어 스크린샷 이미지 제작 필요 |
+| Tablet screenshots | Pending | required 여부 확인 필요 |
+| Content rating questionnaire | Pending | not submitted |
+| Data safety form | Pending | not submitted |
+| App access declaration | Pending | not submitted |
+| Ads declaration | Pending | no actual ad SDK currently |
+| Target audience and content | Pending | not submitted |
+| Internal test track | Pending | not created |
+| Tester list | Pending | actual emails not recorded |
+| AAB upload | Pending | not uploaded |
+| Internal test rollout | Pending | not started |
+| Real device QA | Pending | not performed |
+
+주의:
+
+- 이번 결정은 Play Console 입력 완료가 아니다.
+- 실제 Play Console 앱 생성은 별도 작업에서 진행한다.
+- 실제 Contact email 값은 문서에 기록하지 않는다.
+- 실제 Privacy policy URL은 확정 전까지 Pending으로 유지한다.
+- 실제 tester email list는 문서에 기록하지 않는다.
+- 실제 스토어 스크린샷 이미지 제작은 Pending으로 유지한다.
+- Data safety form 제출은 Pending으로 유지한다.
+- AAB 내부 테스트 업로드는 Pending으로 유지한다.
+- 실제 기기 QA는 Pending으로 유지한다.
 
 ## Confirmed Technical Status
 

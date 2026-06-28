@@ -3,10 +3,17 @@
 ## Play Console App Creation Fields Checklist
 
 - Play Console 앱 생성 입력값 체크리스트: Added
+- Play Console 앱 생성 입력값 1차 결정: Added
+- Free or paid 선택: Confirmed
+- Default language 선택: Confirmed
+- App category 선택: Confirmed
 - Play Console 앱 생성: Pending
 - 실제 Google Play Console 입력: Pending
+- 문의 이메일 확정: Pending
 - 개인정보 처리방침 URL 확정: Pending
 - 실제 스토어 스크린샷 이미지 제작: Pending
+- Data safety form 제출: Pending
+- AAB 내부 테스트 업로드: Pending
 - 실제 기기 QA: Pending
 
 ## Play Console Internal Test Upload Checklist

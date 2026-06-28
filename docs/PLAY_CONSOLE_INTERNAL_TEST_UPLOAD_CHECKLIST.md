@@ -3,11 +3,16 @@
 ## Play Console App Creation Fields Checklist
 
 - Play Console app creation fields checklist: Added
+- Free or paid: Confirmed
+- Default language: Confirmed
+- App category: Confirmed
 - Play Console app creation: Pending
 - Actual Google Play Console input: Pending
 - Contact email: Pending
 - Privacy policy URL: Pending
 - Store screenshots upload: Pending
+- Data safety form: Pending
+- AAB upload to internal test: Pending
 - Real device QA: Pending
 
 ## Purpose
@@ -38,8 +43,9 @@
 |---|---|---|
 | Play Console app creation | Pending | not confirmed |
 | App name entry | Pending | not confirmed |
-| Default language | Pending | not confirmed |
-| App category | Pending | not confirmed |
+| Free or paid | Confirmed | Free |
+| Default language | Confirmed | Korean |
+| App category | Confirmed | Lifestyle |
 | Contact email | Pending | actual value not recorded |
 | Privacy policy URL | Pending | actual URL not confirmed |
 | Data safety form | Pending | not submitted |

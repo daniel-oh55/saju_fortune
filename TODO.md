@@ -1,5 +1,21 @@
 # TODO
 
+## 2026-06-28 Play Console app creation field decisions TODO
+
+- [x] Free or paid 선택값 기록
+- [x] Default language 선택값 기록
+- [x] App category 선택값 기록
+- [x] Play Console 입력 완료와 결정값 기록을 구분
+- [ ] Play Console app creation
+- [ ] 실제 Google Play Console 입력
+- [ ] Contact email 확정
+- [ ] Privacy policy URL 확정
+- [ ] Store listing short/full description 확정
+- [ ] 실제 스토어 스크린샷 이미지 제작
+- [ ] Data safety form 제출
+- [ ] AAB 내부 테스트 업로드
+- [ ] 실제 기기 QA
+
 ## 2026-06-28 Play Console app creation fields TODO
 
 - [x] Play Console 앱 생성 입력값 체크리스트 추가
