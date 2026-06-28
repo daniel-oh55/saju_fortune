@@ -1,5 +1,24 @@
 # Saju Engine Accuracy Roadmap
 
+## Android Release AAB Enforced Rerun Result
+
+- Android Release AAB enforced rerun result: Failed
+- Run number: 5
+- Run id: 28309520915
+- Failed step: Validate release signing secrets
+- release signing secrets validation: Failed
+- signed AAB regeneration: Failed
+- signed AAB re-verification: Pending
+- Play Console internal test upload: Pending
+- real device QA: Pending
+- Secret actual values: Not recorded
+- artifact repository commit: Not added
+
+주의:
+
+- 이번 PR은 Android Release AAB workflow 재실행 결과 기록 PR이다.
+- production 계산 로직, 사주/운세 결과 생성 로직, UI/디자인은 변경하지 않는다.
+
 ## Android Release Signing Enforcement Follow-up
 
 - previous signed AAB verification: Failed

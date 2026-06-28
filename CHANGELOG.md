@@ -2,6 +2,8 @@
 
 ## Added
 
+- Android Release AAB enforced rerun failure result 기록
+- signed AAB regeneration Failed 상태 기록
 - Android release signing enforcement 보강
 - release workflow jarsigner verification step 추가
 - Gradle release signing env enforcement 추가

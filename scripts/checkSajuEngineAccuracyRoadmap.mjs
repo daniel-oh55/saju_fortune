@@ -4,6 +4,7 @@ const docPath = 'docs/SAJU_ENGINE_ACCURACY_ROADMAP.md';
 
 const requiredSnippets = [
   '# Saju Engine Accuracy Roadmap',
+  '## Android Release AAB Enforced Rerun Result',
   '## Current Limitations',
   '## Product Copy Guidance',
   '## Accuracy Roadmap',
@@ -13,22 +14,28 @@ const requiredSnippets = [
   '### Phase 5. Annual Flow / 세운',
   '### Phase 6. Major Luck Cycle / 대운',
   '## Non-Goals for This PR',
-  'release signing enforcement fix: Added',
-  'signing enforcement fix: Added',
-  'release signing secrets validation: Added',
-  'workflow jarsigner verification step: Added',
-  'Gradle release signing env enforcement: Added',
-  'signed AAB 재생성: Pending',
-  'signed AAB 재검증: Pending',
+  'Android Release AAB enforced rerun result: Failed',
+  'Run number: 5',
+  'Run id: 28309520915',
+  'Failed step: Validate release signing secrets',
+  'release signing secrets validation: Failed',
+  'signed AAB regeneration: Failed',
+  'signed AAB re-verification: Pending',
   'Play Console internal test upload: Pending',
   'real device QA: Pending',
-  'signing enforcement fix Added는 signed AAB 재검증 완료가 아니다.',
-  'production 계산 로직 변경 없음',
-  'schemaVersion 변경 없음',
-  '기존 localStorage key 변경 없음',
+  'Secret actual values: Not recorded',
+  'artifact repository commit: Not added',
+  'production 계산 로직',
+  '사주/운세 결과 생성 로직',
+  'UI/디자인',
 ];
 
-const forbiddenSnippets = ['서양식 보정 적용 여부', '양력/음력 샘플 추가 검증'];
+const forbiddenSnippets = [
+  '서양식 보정 적용 여부',
+  '양력/음력 샘플 추가 검증',
+  'Play Console internal test upload | Confirmed',
+  'real device QA | Confirmed',
+];
 
 function logResult(label, passed, detail = '') {
   const suffix = detail ? ` - ${detail}` : '';

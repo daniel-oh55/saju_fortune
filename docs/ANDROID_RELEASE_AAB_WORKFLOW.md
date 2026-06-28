@@ -1,5 +1,35 @@
 # Android Release AAB Workflow
 
+## Android Release AAB Enforced Rerun Result
+
+- Android Release AAB enforced rerun result: Failed
+- Run number: 5
+- Run id: 28309520915
+- Branch: main
+- Commit sha: ed5f2a415de6bd0971274d6f87e4f25f99ae961d
+- Status: completed
+- Conclusion: failure
+- Failed step: Validate release signing secrets
+- Failure summary: `ANDROID_KEYSTORE_BASE64 is not configured`
+- Validate release signing secrets: Failed
+- Restore release keystore: Not reached
+- Build signed release AAB: Not reached
+- Verify signed release AAB: Not reached
+- Upload release AAB: Not reached
+- unsigned artifact upload prevention: Confirmed
+- signed AAB regeneration: Failed
+- signed AAB re-verification: Pending
+- Artifact created: Not created
+- Artifact name: Not created
+- Play Console internal test upload: Pending
+- real device QA: Pending
+
+주의:
+
+- Secret 실제값은 기록하지 않는다.
+- keystore base64 실제값, signing password, key alias 실제값은 기록하지 않는다.
+- `.aab`, `.zip`, `.jks`, `.keystore` 파일은 repository에 추가하지 않는다.
+
 ## Android Release Signing Enforcement Update
 
 - previous signed AAB verification: Failed

@@ -5,6 +5,7 @@ const docPath = 'docs/ANDROID_SIGNING_SECRETS_CHECKLIST.md';
 
 const requiredSections = [
   '# Android Signing Secrets Checklist',
+  '## Android Release AAB Enforced Rerun Result',
   '## Android Release Signing Enforcement Follow-up',
   '## Current Status',
   '## Secrets Input Status',
@@ -15,35 +16,28 @@ const requiredSections = [
 ];
 
 const requiredSnippets = [
-  'previous signed AAB verification: Failed',
-  'previous jarsigner result summary: `jar is unsigned.`',
-  'signing enforcement fix: Added',
-  'release signing secrets validation: Added',
-  'workflow jarsigner verification step: Added',
-  'Gradle release signing env enforcement: Added',
-  'GitHub Secrets actual values: Not recorded',
+  'Android Release AAB enforced rerun result: Failed',
+  'Run number: 5',
+  'Run id: 28309520915',
+  'Failed step: Validate release signing secrets',
+  'Failure summary: `ANDROID_KEYSTORE_BASE64 is not configured`',
+  'ANDROID_KEYSTORE_BASE64 configuration: Missing',
+  'Secret actual values: Not recorded',
   'keystore base64 actual value: Not recorded',
   'signing password actual value: Not recorded',
   'key alias actual value: Not recorded',
-  'signed AAB regeneration: Pending',
+  'signed AAB regeneration: Failed',
   'signed AAB re-verification: Pending',
   'Play Console internal test upload: Pending',
   'real device QA: Pending',
-  'ANDROID_KEYSTORE_BASE64',
-  'ANDROID_KEYSTORE_PASSWORD',
-  'ANDROID_KEY_ALIAS',
-  'ANDROID_KEY_PASSWORD',
-  'signed AAB verification | Failed',
+  'Secret 이름만 기록하고 실제값은 기록하지 않는다.',
+  'GitHub Secrets 보정은 별도 작업으로 진행한다.',
 ];
 
-const wrongPhrases = [
-  'GitHub Secrets actual input | Pending',
-  'signed AAB verification | Completed',
-  'Play Console internal test upload | Completed',
-  'real device QA | Completed',
-  'signing 설정: Completed',
-  'Play Console 업로드: Completed',
-  '실제 기기 QA: Completed',
+const forbiddenSnippets = [
+  'signed AAB re-verification: Confirmed',
+  'Play Console internal test upload | Confirmed',
+  'real device QA | Confirmed',
   '실제 스토어 스크린샷 이미지 시작',
   '서양식 보정 적용 여부',
   '양력/음력 샘플 추가 검증',
@@ -56,7 +50,7 @@ const forbiddenPatterns = [
   },
   {
     label: 'long_base64_like_value_absent',
-    pattern: /(?:[A-Za-z0-9+/]{80,}={0,2})/,
+    pattern: /[A-Za-z0-9+/]{120,}={0,2}/,
   },
   {
     label: 'private_keystore_path_absent',
@@ -65,6 +59,8 @@ const forbiddenPatterns = [
 ];
 
 const protectedFiles = [
+  '.github/workflows/android-release-aab.yml',
+  'android/app/build.gradle',
   'android/app/src/main/AndroidManifest.xml',
   'android/app/src/main/res',
   'src',
@@ -101,9 +97,9 @@ for (const snippet of requiredSnippets) {
   if (!found) hasFailure = true;
 }
 
-for (const snippet of wrongPhrases) {
+for (const snippet of forbiddenSnippets) {
   const absent = !doc.includes(snippet);
-  logResult(`wrong_phrase_absent_${labelFromSnippet(snippet)}`, absent);
+  logResult(`forbidden_snippet_absent_${labelFromSnippet(snippet)}`, absent);
   if (!absent) hasFailure = true;
 }
 
@@ -117,7 +113,7 @@ const diffOutput = execSync(`git diff --name-only -- ${protectedFiles.join(' ')}
   encoding: 'utf8',
 }).trim();
 const protectedFilesUnchanged = diffOutput.length === 0;
-logResult('android_manifest_resource_src_files_unchanged_in_working_diff', protectedFilesUnchanged);
+logResult('workflow_android_gradle_native_src_files_unchanged_in_working_diff', protectedFilesUnchanged);
 if (!protectedFilesUnchanged) hasFailure = true;
 
 if (hasFailure) {

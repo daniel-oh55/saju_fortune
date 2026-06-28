@@ -1,5 +1,25 @@
 # Android AAB Signing Verification Plan
 
+## Android Release AAB Enforced Rerun Result
+
+- Android Release AAB enforced rerun result: Failed
+- Run number: 5
+- Run id: 28309520915
+- Failed step: Validate release signing secrets
+- Failure summary: `ANDROID_KEYSTORE_BASE64 is not configured`
+- signed AAB regeneration: Failed
+- signed AAB re-verification: Pending
+- Verify signed release AAB: Not reached
+- Artifact created: Not created
+- Play Console internal test upload: Pending
+- real device QA: Pending
+
+주의:
+
+- signed AAB re-verification Pending은 Play Console 업로드 완료가 아니다.
+- artifact 다운로드/압축 해제 확인은 artifact 생성 후 별도 PR에서 기록한다.
+- Secret 실제값은 기록하지 않는다.
+
 ## Android Release Signing Enforcement Follow-up
 
 - previous signed AAB verification: Failed

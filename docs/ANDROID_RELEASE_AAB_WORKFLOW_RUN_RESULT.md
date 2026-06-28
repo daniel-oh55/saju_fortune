@@ -1,5 +1,51 @@
 # Android Release AAB Workflow Run Result
 
+## Android Release AAB Enforced Rerun Result
+
+| Item | Status | Note |
+|---|---|---|
+| Workflow | Confirmed | Android Release AAB |
+| Trigger | Confirmed | workflow_dispatch |
+| Branch | Confirmed | main |
+| Run number | Confirmed | 5 |
+| Run id | Confirmed | 28309520915 |
+| Commit sha | Confirmed | ed5f2a415de6bd0971274d6f87e4f25f99ae961d |
+| Status | Confirmed | completed |
+| Conclusion | Failed | failure |
+| Failed step | Failed | Validate release signing secrets |
+| Validate release signing secrets | Failed | ANDROID_KEYSTORE_BASE64 is not configured |
+| Restore release keystore | Not reached | skipped |
+| Build signed release AAB | Not reached | skipped |
+| Verify signed release AAB | Not reached | skipped |
+| Upload release AAB | Not reached | skipped |
+| unsigned artifact upload prevention | Confirmed | upload step skipped |
+| signed AAB regeneration | Failed | workflow failure |
+| signed AAB re-verification | Pending | verify step not reached |
+| Artifact created | Not created | artifacts total_count 0 |
+| Artifact name | Not created | no artifact |
+| Artifact size | Not created | no artifact |
+| Artifact digest | Pending | no artifact digest |
+| Play Console internal test upload | Pending | not uploaded |
+| real device QA | Pending | not performed |
+
+Run URL:
+
+- https://github.com/daniel-oh55/saju_fortune/actions/runs/28309520915
+
+실패 원인 요약:
+
+- release signing secrets validation 단계에서 `ANDROID_KEYSTORE_BASE64 is not configured` 오류로 실패했다.
+- Secret 실제값, keystore base64 실제값, signing password, key alias 실제값은 기록하지 않았다.
+- Restore release keystore, Build signed release AAB, Verify signed release AAB, Upload release AAB 단계는 실행되지 않았다.
+- artifact는 생성되지 않았고 repository에 `.aab`, `.zip`, `.jks`, `.keystore` 파일을 추가하지 않았다.
+
+주의:
+
+- signed AAB regeneration Failed는 Play Console 업로드 완료가 아니다.
+- signed AAB re-verification Pending은 실제 기기 QA 완료가 아니다.
+- Play Console internal test upload는 별도 PR에서 기록한다.
+- 실제 기기 QA는 별도 PR에서 기록한다.
+
 ## Android Release Signing Enforcement Follow-up
 
 - previous signed AAB verification: Failed
