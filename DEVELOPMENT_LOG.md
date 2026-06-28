@@ -1,5 +1,29 @@
 # DEVELOPMENT_LOG
 
+## Privacy Policy Hosting Options
+
+- 개인정보 처리방침 hosting option 후보 정리
+- Vercel static privacy page를 우선 후보로 기록
+- 실제 hosting option selected는 Pending 유지
+- 실제 개인정보 처리방침 page implementation은 Pending 유지
+- 실제 개인정보 처리방침 public URL은 Pending 유지
+- Privacy policy URL Play Console input은 Pending 유지
+- Contact email은 Pending 유지
+- Data safety form은 Pending 유지
+- AAB 내부 테스트 업로드는 Pending 유지
+- 실제 기기 QA는 Pending 유지
+- 실제 Contact email 값 기록 없음
+- 실제 Privacy policy URL 기록 없음
+- routing 변경 없음
+- Secret 실제값 기록 없음
+- `.aab` repository commit 없음
+- `.zip` repository commit 없음
+- AndroidManifest.xml/resource 변경 없음
+- Gradle 설정 변경 없음
+- production 계산 로직 변경 없음
+- 사주/운세 결과 생성 로직 변경 없음
+- UI/디자인 변경 없음
+
 ## Privacy Policy Finalization Readiness
 
 - 개인정보 처리방침 최종화 준비 체크리스트 추가

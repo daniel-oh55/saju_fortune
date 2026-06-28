@@ -1,5 +1,16 @@
 # Privacy Policy Finalization Readiness
 
+## Privacy Policy Hosting Options
+
+- Privacy policy hosting options checklist: Added
+- Preferred hosting option: Candidate / Vercel static privacy page
+- Hosting option selected: Pending
+- Privacy policy public URL: Pending
+- Privacy policy page implementation: Pending
+- Routing change: Pending
+- URL accessibility check: Pending
+- Play Console URL input: Pending
+
 ## Purpose
 
 이 문서는 하루풀이 앱의 개인정보 처리방침 최종화 전에 확인해야 할 항목을 정리한다.
@@ -103,6 +114,7 @@
 ## Related Docs
 
 - docs/PRIVACY_POLICY_DRAFT.md
+- docs/PRIVACY_POLICY_HOSTING_OPTIONS.md
 - docs/PLAY_CONSOLE_CONTACT_PRIVACY_READINESS.md
 - docs/PLAY_CONSOLE_APP_CREATION_FIELDS.md
 - docs/PLAY_CONSOLE_INTERNAL_TEST_UPLOAD_CHECKLIST.md

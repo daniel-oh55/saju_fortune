@@ -1,5 +1,17 @@
 # Play Console Contact and Privacy Readiness
 
+## Privacy Policy Hosting Options
+
+- Privacy policy hosting options checklist: Added
+- Preferred hosting option: Candidate
+- Privacy policy public URL: Pending
+- Privacy policy URL accessibility check: Pending
+- Privacy policy URL Play Console input: Pending
+- Contact email: Pending
+- Data safety form: Pending
+- AAB upload: Pending
+- Real device QA: Pending
+
 ## Privacy Policy Finalization Readiness
 
 - Privacy policy finalization readiness checklist: Added
