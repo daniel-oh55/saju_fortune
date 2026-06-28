@@ -1,5 +1,16 @@
 # TODO
 
+## 2026-06-28 Android release AAB run 6 artifact inspection TODO
+
+- [x] Android Release AAB run 6 artifact 다운로드 확인
+- [x] Android Release AAB run 6 artifact 압축 해제 확인
+- [x] `.aab` 파일 존재 확인
+- [x] `.aab` 파일명/크기 기록
+- [x] artifact zip/`.aab` repository 미추가 확인
+- [ ] Play Console 내부 테스트 업로드
+- [ ] 실제 Google Play Console 입력
+- [ ] 실제 기기 QA
+
 ## 2026-06-28 Android release AAB secret correction rerun TODO
 
 - [x] ANDROID_KEYSTORE_BASE64 Secret 보정 여부 기록
