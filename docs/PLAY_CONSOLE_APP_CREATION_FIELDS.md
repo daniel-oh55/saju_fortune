@@ -3,7 +3,9 @@
 ## Contact and Privacy Readiness
 
 - Privacy policy hosting options checklist: Added
-- Preferred hosting option: Candidate
+- Privacy policy hosting decision: Added
+- Hosting option selected: Confirmed
+- Preferred hosting option: Confirmed
 - Privacy policy finalization readiness checklist: Added
 - Contact and privacy readiness checklist: Added
 - Contact email candidate selected: Pending

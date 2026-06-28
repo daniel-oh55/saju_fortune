@@ -3,11 +3,13 @@
 ## Privacy Policy Hosting Options
 
 - Privacy policy hosting options checklist: Added
-- Preferred hosting option: Candidate / Vercel static privacy page
-- Hosting option selected: Pending
+- Privacy policy hosting decision: Added
+- Hosting option selected: Confirmed / Vercel static privacy page
+- Preferred hosting option: Confirmed / Vercel static privacy page
 - Privacy policy public URL: Pending
 - Privacy policy page implementation: Pending
 - Routing change: Pending
+- Privacy policy final content: Pending
 - URL accessibility check: Pending
 - Play Console URL input: Pending
 

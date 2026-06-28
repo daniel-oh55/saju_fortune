@@ -3,7 +3,9 @@
 ## Privacy Policy Hosting Options
 
 - Privacy policy hosting options checklist: Added
-- Preferred hosting option: Candidate
+- Privacy policy hosting decision: Added
+- Hosting option selected: Confirmed
+- Preferred hosting option: Confirmed
 - Privacy policy public URL: Pending
 - Privacy policy URL accessibility check: Pending
 - Privacy policy URL Play Console input: Pending

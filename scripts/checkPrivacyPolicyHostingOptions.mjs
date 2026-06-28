@@ -7,6 +7,7 @@ const requiredSections = [
   '# Privacy Policy Hosting Options',
   '## Purpose',
   '## Current Status',
+  '## Privacy Policy Hosting Decision Result',
   '## Hosting Option Candidates',
   '## Preferred Direction',
   '## Required Follow-up Before URL Confirmation',
@@ -18,22 +19,25 @@ const requiredSections = [
 const requiredSnippets = [
   'Privacy policy draft | Confirmed',
   'Privacy policy final content | Pending',
-  'Hosting option selected | Pending',
-  'Preferred hosting option | Candidate | Vercel static privacy page',
-  'Privacy policy public URL | Pending',
-  'Privacy policy URL accessibility check | Pending',
-  'Privacy policy URL Play Console input | Pending',
-  'Contact email | Pending',
-  'Data safety form | Pending',
-  'AAB upload | Pending',
-  'Real device QA | Pending',
+  'Hosting option selected | Confirmed | Vercel static privacy page',
+  'Preferred hosting option | Confirmed | Vercel static privacy page',
+  'Selection reason | Confirmed | Same app/repo deployment flow and PR-based review history',
+  'Privacy policy page implementation | Pending | separate PR required',
+  'Routing change | Pending | not changed in this PR',
+  'Privacy policy public URL | Pending | actual URL not confirmed',
+  'Privacy policy URL accessibility check | Pending | not checked',
+  'Privacy policy URL Play Console input | Pending | not entered',
+  'Contact email | Pending | actual value not recorded',
+  'Data safety form | Pending | not submitted',
+  'AAB upload | Pending | not uploaded',
+  'Real device QA | Pending | not performed',
   'Vercel static privacy page | Candidate',
   'GitHub Pages | Candidate',
   'Google Sites | Candidate',
   'Notion/public document | Candidate',
   'External website | Candidate',
+  'Reason | Confirmed | Same app/repo deployment flow and PR-based review history',
   'Actual implementation | Pending',
-  'Routing change | Pending',
   'Public URL confirmation | Pending',
   'Accessibility check | Pending',
   'Play Console input | Pending',
@@ -46,18 +50,15 @@ const requiredSnippets = [
   'No-login access check | Pending',
   'HTTPS check | Pending',
   'Play Console URL input | Pending',
-  '실제 개인정보 처리방침 URL은 이번 PR에서 기록하지 않는다.',
-  '실제 개인정보 처리방침 페이지 구현은 이번 PR에서 진행하지 않는다.',
-  'routing 변경은 이번 PR에서 진행하지 않는다.',
-  '실제 문의 이메일 값은 이번 PR에서 기록하지 않는다.',
-  '실제 개인정보 처리방침 최종 내용 확정은 이번 PR에서 완료 처리하지 않는다.',
-  '실제 Play Console 앱 생성은 이번 PR에서 진행하지 않는다.',
-  '실제 Google Play Console 입력은 이번 PR에서 진행하지 않는다.',
-  'Data safety form 제출은 Pending으로 유지한다.',
-  'AAB 내부 테스트 업로드는 Pending으로 유지한다.',
-  '실제 기기 QA는 Pending으로 유지한다.',
-  '`.aab`, `.zip`, `.jks`, `.keystore` 파일은 repository에 추가하지 않는다.',
-  'Secret 실제값은 문서, 코드, PR, 로그에 기록하지 않는다.',
+  'This decision is not actual privacy policy URL confirmation.',
+  'This decision is not privacy policy page implementation completion.',
+  'This decision is not routing change completion.',
+  'Actual privacy policy page implementation requires a separate PR.',
+  'Actual privacy policy public URL confirmation requires a separate PR.',
+  'Actual contact email value is not recorded in docs.',
+  'Data safety form remains Pending.',
+  'AAB internal test upload remains Pending.',
+  'Real device QA remains Pending.',
   'Privacy policy page implementation',
   'Privacy policy public URL confirmation',
   'Actual Google Play Console input',
@@ -69,12 +70,12 @@ const relatedDocs = [
   {
     path: 'docs/PRIVACY_POLICY_FINALIZATION_READINESS.md',
     snippets: [
-      'Privacy policy hosting options checklist: Added',
-      'Preferred hosting option: Candidate / Vercel static privacy page',
-      'Hosting option selected: Pending',
-      'Privacy policy public URL: Pending',
+      'Privacy policy hosting decision: Added',
+      'Hosting option selected: Confirmed / Vercel static privacy page',
       'Privacy policy page implementation: Pending',
       'Routing change: Pending',
+      'Privacy policy final content: Pending',
+      'Privacy policy public URL: Pending',
       'URL accessibility check: Pending',
       'Play Console URL input: Pending',
     ],
@@ -82,8 +83,8 @@ const relatedDocs = [
   {
     path: 'docs/PLAY_CONSOLE_CONTACT_PRIVACY_READINESS.md',
     snippets: [
-      'Privacy policy hosting options checklist: Added',
-      'Preferred hosting option: Candidate',
+      'Privacy policy hosting decision: Added',
+      'Hosting option selected: Confirmed',
       'Privacy policy public URL: Pending',
       'Privacy policy URL accessibility check: Pending',
       'Privacy policy URL Play Console input: Pending',
@@ -96,8 +97,8 @@ const relatedDocs = [
   {
     path: 'docs/PLAY_CONSOLE_APP_CREATION_FIELDS.md',
     snippets: [
-      'Privacy policy hosting options checklist: Added',
-      'Preferred hosting option: Candidate',
+      'Privacy policy hosting decision: Added',
+      'Hosting option selected: Confirmed',
       'Privacy policy public URL: Pending',
       'Contact email: Pending',
       'Data safety form: Pending',
@@ -108,8 +109,8 @@ const relatedDocs = [
   {
     path: 'docs/PLAY_CONSOLE_INTERNAL_TEST_UPLOAD_CHECKLIST.md',
     snippets: [
-      'Privacy policy hosting options checklist: Added',
-      'Preferred hosting option: Candidate',
+      'Privacy policy hosting decision: Added',
+      'Hosting option selected: Confirmed',
       'Privacy policy public URL: Pending',
       'Contact email: Pending',
       'Data safety form: Pending',
@@ -120,22 +121,22 @@ const relatedDocs = [
   {
     path: 'docs/SAJU_ENGINE_ACCURACY_ROADMAP.md',
     snippets: [
-      '개인정보 처리방침 hosting option 후보 정리: Added',
-      '개인정보 처리방침 우선 hosting 후보: Candidate',
-      '개인정보 처리방침 page implementation: Pending',
-      '개인정보 처리방침 URL 확정: Pending',
-      '개인정보 처리방침 URL 접근 가능 여부 확인: Pending',
-      '개인정보 처리방침 URL Play Console 입력: Pending',
-      '문의 이메일 확정: Pending',
-      'Data safety form 제출: Pending',
-      'AAB 내부 테스트 업로드: Pending',
-      '실제 기기 QA: Pending',
+      'Privacy policy hosting decision: Added',
+      'Privacy policy hosting option selected: Confirmed',
+      'Privacy policy hosting option: Vercel static privacy page',
+      'Privacy policy page implementation: Pending',
+      'Privacy policy URL confirmation: Pending',
+      'Privacy policy URL accessibility check: Pending',
+      'Privacy policy URL Play Console input: Pending',
+      'Contact email confirmation: Pending',
+      'Data safety form submission: Pending',
+      'AAB internal test upload: Pending',
+      'Real device QA: Pending',
     ],
   },
 ];
 
 const forbiddenSnippets = [
-  'Hosting option selected | Confirmed',
   'Privacy policy public URL | Confirmed',
   'Privacy policy URL Play Console input | Confirmed',
   'Privacy policy page implementation | Confirmed',
@@ -145,10 +146,10 @@ const forbiddenSnippets = [
   'AAB upload | Confirmed',
   'Real device QA | Confirmed',
   'Play Console upload: Completed',
-  '실제 기기 QA: Completed',
-  '실제 스토어 스크린샷 이미지 시작',
-  '서양식 보정 적용 여부',
-  '양력/음력 샘플 추가 검증',
+  '?ㅼ젣 湲곌린 QA: Completed',
+  '?ㅼ젣 ?ㅽ넗???ㅽ겕由곗꺑 ?대?吏 ?쒖옉',
+  '?쒖뼇??蹂댁젙 ?곸슜 ?щ?',
+  '?묐젰/?뚮젰 ?섑뵆 異붽? 寃利?',
 ];
 
 const forbiddenPatterns = [
@@ -175,6 +176,7 @@ const protectedFiles = [
   'android/app/build.gradle',
   'android/app/src/main/AndroidManifest.xml',
   'android/app/src/main/res',
+  'public/privacy',
   'src',
 ];
 
@@ -207,6 +209,7 @@ logResult('privacy_policy_hosting_options_doc_exists', exists, docPath);
 if (!exists) process.exit(1);
 
 const doc = fs.readFileSync(docPath, 'utf8');
+const relatedDocSources = [];
 
 if (!checkIncludes('doc', doc, requiredSections)) hasFailure = true;
 if (!checkIncludes('doc', doc, requiredSnippets)) hasFailure = true;
@@ -219,6 +222,7 @@ for (const { path, snippets } of relatedDocs) {
     continue;
   }
   const relatedDoc = fs.readFileSync(path, 'utf8');
+  relatedDocSources.push({ path, source: relatedDoc });
   if (!checkIncludes(labelFromSnippet(path), relatedDoc, snippets)) hasFailure = true;
 }
 
@@ -229,9 +233,15 @@ for (const snippet of forbiddenSnippets) {
 }
 
 for (const { label, pattern } of forbiddenPatterns) {
-  const absent = !pattern.test(doc);
-  logResult(label, absent);
-  if (!absent) hasFailure = true;
+  const absentFromDoc = !pattern.test(doc);
+  logResult(`${label}_from_main_doc`, absentFromDoc);
+  if (!absentFromDoc) hasFailure = true;
+
+  for (const { path, source } of relatedDocSources) {
+    const absentFromRelatedDoc = !pattern.test(source);
+    logResult(`${label}_from_${labelFromSnippet(path)}`, absentFromRelatedDoc);
+    if (!absentFromRelatedDoc) hasFailure = true;
+  }
 }
 
 const diffOutput = execSync(`git diff --name-only -- ${protectedFiles.join(' ')}`, {

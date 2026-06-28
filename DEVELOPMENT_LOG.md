@@ -1,5 +1,29 @@
 # DEVELOPMENT_LOG
 
+## Privacy Policy Hosting Decision
+
+- Privacy policy hosting option decision result recorded
+- Vercel static privacy page recorded as selected hosting option
+- Privacy policy page implementation remains Pending
+- Routing change remains Pending
+- Privacy policy public URL remains Pending
+- Privacy policy URL Play Console input remains Pending
+- Contact email remains Pending
+- Data safety form remains Pending
+- AAB internal test upload remains Pending
+- Real device QA remains Pending
+- Actual contact email value not recorded
+- Actual privacy policy URL not recorded
+- Routing unchanged
+- Secret actual values not recorded
+- `.aab` repository commit not added
+- `.zip` repository commit not added
+- AndroidManifest.xml/resource unchanged
+- Gradle settings unchanged
+- Production calculation logic unchanged
+- Saju/fortune result generation logic unchanged
+- UI/design unchanged
+
 ## Privacy Policy Hosting Options
 
 - 개인정보 처리방침 hosting option 후보 정리

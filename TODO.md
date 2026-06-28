@@ -1,5 +1,21 @@
 # TODO
 
+## 2026-06-28 Privacy policy hosting decision TODO
+
+- [x] Privacy policy hosting option decision result recorded
+- [x] Vercel static privacy page recorded as selected hosting option
+- [x] Actual URL confirmation separated from hosting option selection
+- [x] Page implementation and routing change remain Pending
+- [ ] Privacy policy final content confirmation
+- [ ] Contact email confirmation
+- [ ] Privacy policy page implementation
+- [ ] Privacy policy public URL confirmation
+- [ ] Privacy policy URL accessibility check
+- [ ] Privacy policy URL Play Console input
+- [ ] Data safety form submission
+- [ ] AAB internal test upload
+- [ ] Real device QA
+
 ## 2026-06-28 Privacy policy hosting options TODO
 
 - [x] 개인정보 처리방침 hosting option 후보 정리

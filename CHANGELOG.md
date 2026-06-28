@@ -2,6 +2,9 @@
 
 ## Added
 
+- Privacy policy hosting option decision result recorded
+- Vercel static privacy page recorded as selected privacy policy hosting option
+
 - Privacy policy hosting options checklist 추가
 - 개인정보 처리방침 hosting 후보와 우선 후보 정리
 - Privacy policy finalization readiness checklist 추가
