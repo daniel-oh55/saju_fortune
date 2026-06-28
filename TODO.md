@@ -1,5 +1,20 @@
 # TODO
 
+## 2026-06-28 Vercel public access unblock plan TODO
+
+- [x] Vercel Login blocked status documented
+- [x] Public no-login access restore requirements documented
+- [x] Play Console privacy policy URL readiness Blocked status recorded
+- [x] Actual URL string not recorded
+- [ ] Vercel protection setting review
+- [ ] Public no-login access restore
+- [ ] /privacy-policy.html no-login re-check
+- [ ] Privacy policy public URL final confirmation
+- [ ] Privacy policy URL Play Console input
+- [ ] Data safety form submission
+- [ ] AAB internal test upload
+- [ ] Real device QA
+
 ## 2026-06-28 Privacy policy URL accessibility check TODO
 
 - [x] Privacy policy URL accessibility check document added

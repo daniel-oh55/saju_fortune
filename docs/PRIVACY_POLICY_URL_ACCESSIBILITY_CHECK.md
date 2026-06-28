@@ -6,6 +6,17 @@ This document records the Vercel deployment accessibility check for the static p
 
 The actual Vercel URL string is not recorded in this PR. This result is not Google Play Console input completion.
 
+## Vercel Public Access Unblock Plan
+
+- Vercel public access unblock plan: Added
+- Vercel project access protection check: Pending
+- Production deployment public access check: Pending
+- Public no-login access restore: Pending
+- `/privacy-policy.html` no-login re-check: Pending
+- Privacy policy public URL: Pending
+- Privacy policy URL Play Console input: Pending
+- Actual Google Play Console input: Pending
+
 ## Static Page Status
 
 | Item | Status | Note |

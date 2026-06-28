@@ -2,6 +2,8 @@
 
 ## Added
 
+- Vercel public access unblock plan added
+- Privacy policy public no-login access blocked status and restore requirements documented
 - Privacy policy URL accessibility check document added
 - public/privacy-policy.html Vercel deployment accessibility result recorded
 - Vercel Login blocked public access result recorded without actual URL string

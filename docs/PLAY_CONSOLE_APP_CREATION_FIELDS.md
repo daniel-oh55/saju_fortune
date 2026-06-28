@@ -21,6 +21,16 @@
 - Actual Google Play Console input: Pending
 - Real device QA: Pending
 
+## Vercel Public Access Unblock Plan
+
+- Vercel public access unblock plan: Added
+- Play Console privacy policy URL readiness: Blocked
+- Privacy policy public URL: Pending
+- Contact email: Pending
+- Data safety form: Pending
+- Actual Google Play Console input: Pending
+- Real device QA: Pending
+
 ## Privacy Policy URL Accessibility Check
 
 - Privacy policy URL accessibility check document: Added

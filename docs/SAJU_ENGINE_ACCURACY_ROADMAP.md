@@ -1,5 +1,18 @@
 # Saju Engine Accuracy Roadmap
 
+## Vercel Public Access Unblock Plan
+
+- Vercel public access unblock plan: Added
+- Privacy policy Vercel Login blocked status: Blocked
+- Privacy policy public no-login access restore: Pending
+- Privacy policy URL accessibility re-check: Pending
+- Privacy policy URL confirmation: Pending
+- Privacy policy URL Play Console input: Pending
+- Contact email confirmation: Pending
+- Data safety form submission: Pending
+- AAB internal test upload: Pending
+- Real device QA: Pending
+
 ## Privacy Policy URL Accessibility Check
 
 - Privacy policy URL accessibility check document: Added
