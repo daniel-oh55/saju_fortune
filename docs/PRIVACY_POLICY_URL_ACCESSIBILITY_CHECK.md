@@ -34,6 +34,17 @@ The actual Vercel URL string is not recorded in this PR. This result is not Goog
 - AAB upload: Pending
 - Real device QA: Pending
 
+## Privacy Policy Public URL Confirmation
+
+- Privacy policy public URL confirmation document: Added
+- Privacy policy public URL final confirmation: Confirmed
+- Privacy policy URL Play Console input: Pending
+- Actual Google Play Console input: Pending
+- Contact email confirmation: Pending
+- Data safety form submission: Pending
+- AAB internal test upload: Pending
+- Real device QA: Pending
+
 ## Static Page Status
 
 | Item | Status | Note |

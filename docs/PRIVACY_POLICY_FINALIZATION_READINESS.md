@@ -39,6 +39,14 @@
 - Play Console URL input: Pending
 - Contact email: Pending
 
+## Privacy Policy Public URL Confirmation
+
+- Privacy policy public URL confirmation document: Added
+- Privacy policy public URL final confirmation: Confirmed
+- Privacy policy final content: Pending
+- Play Console URL input: Pending
+- Contact email: Pending
+
 ## Privacy Policy URL Accessibility Check
 
 - Privacy policy URL accessibility check document: Added
