@@ -22,6 +22,30 @@
 | AAB upload | Pending | not uploaded |
 | Real device QA | Pending | not performed |
 
+## Static Privacy Policy Page Draft
+
+| Item | Status | Note |
+|---|---|---|
+| Static privacy policy page draft | Added | draft static public asset |
+| Static page path | Confirmed | public/privacy-policy.html |
+| Privacy policy page draft implementation | Confirmed | static HTML draft only |
+| Routing change | Not changed | React routing not changed |
+| Privacy policy final content | Pending | not finalized |
+| Privacy policy public URL | Pending | actual URL not confirmed |
+| Privacy policy URL accessibility check | Pending | not checked |
+| Privacy policy URL Play Console input | Pending | not entered |
+| Contact email | Pending | actual value not recorded |
+| Data safety form | Pending | not submitted |
+| AAB upload | Pending | not uploaded |
+| Real device QA | Pending | not performed |
+
+Notes:
+
+- Static page draft implementation Confirmed is not privacy policy final content Confirmed.
+- Static page draft implementation Confirmed is not public URL Confirmed.
+- Static page draft implementation Confirmed is not Play Console input completion.
+- Actual contact email value is not recorded.
+
 ## Privacy Policy Hosting Decision Result
 
 | Item | Status | Note |
