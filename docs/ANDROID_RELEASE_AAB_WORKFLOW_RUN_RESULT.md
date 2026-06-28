@@ -24,7 +24,10 @@
 | Artifact name | Confirmed | harupuli-release-aab |
 | Artifact size | Confirmed | 5,925,298 bytes |
 | Artifact digest | Confirmed | sha256:7a2efee684ee16f85d55de4c2e101c88efbf12611c312c9d73cc75084ffc796c |
-| signed AAB artifact download/extract | Pending | separate PR |
+| signed AAB artifact download/extract | Confirmed | temporary directory only |
+| `.aab` file existence | Confirmed | app-release.aab |
+| `.aab` filename | Confirmed | app-release.aab |
+| `.aab` file size | Confirmed | 6,046,282 bytes |
 | Play Console internal test upload | Pending | not uploaded |
 | real device QA | Pending | not performed |
 

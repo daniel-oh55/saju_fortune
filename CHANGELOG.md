@@ -2,6 +2,8 @@
 
 ## Added
 
+- Android Release AAB run 6 artifact inspection 결과 기록
+- signed AAB `.aab` 파일 존재 확인 상태 기록
 - Android Release AAB secret correction rerun success result 기록
 - signed AAB regeneration/re-verification Confirmed 상태 기록
 - Android Release AAB enforced rerun failure result 기록

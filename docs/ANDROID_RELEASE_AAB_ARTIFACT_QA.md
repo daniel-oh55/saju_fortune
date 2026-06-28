@@ -1,5 +1,35 @@
 # Android Release AAB Artifact QA
 
+## Android Release AAB Run 6 Artifact Inspection Result
+
+| Item | Status | Note |
+|---|---|---|
+| Source workflow | Confirmed | Android Release AAB run number 6 |
+| Run id | Confirmed | 28310971077 |
+| Artifact id | Confirmed | 7930942301 |
+| Artifact name | Confirmed | harupuli-release-aab |
+| Artifact size | Confirmed | 5,925,298 bytes |
+| Artifact digest | Confirmed | sha256:7a2efee684ee16f85d55de4c2e101c88efbf12611c312c9d73cc75084ffc796c |
+| artifact download | Confirmed | temporary directory only |
+| artifact extract | Confirmed | temporary directory only |
+| `.aab` file existence | Confirmed | app-release.aab |
+| `.aab` filename | Confirmed | app-release.aab |
+| `.aab` file size | Confirmed | 6,046,282 bytes |
+| artifact zip repository commit | Not committed | zip file not committed |
+| `.aab` repository commit | Not committed | `.aab` file not committed |
+| signed AAB re-verification | Confirmed | workflow jarsigner verified |
+| Play Console internal test upload | Pending | not uploaded |
+| real device QA | Pending | not performed |
+
+주의:
+
+- artifact inspection Confirmed는 Play Console 업로드 완료가 아니다.
+- artifact inspection Confirmed는 실제 기기 QA 완료가 아니다.
+- Play Console internal test upload는 별도 PR에서 기록한다.
+- 실제 기기 QA는 별도 PR에서 기록한다.
+- `.aab`, `.zip`, `.jks`, `.keystore` 파일은 repository에 추가하지 않는다.
+- Secret 실제값은 기록하지 않는다.
+
 ## Android Release AAB Secret Correction Rerun Result
 
 - ANDROID_KEYSTORE_BASE64 configuration: Confirmed

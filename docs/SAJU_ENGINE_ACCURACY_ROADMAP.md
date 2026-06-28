@@ -8,8 +8,12 @@
 - release signing secrets validation: Confirmed
 - signed AAB regeneration: Confirmed
 - signed AAB re-verification: Confirmed
-- signed AAB artifact download/extract: Pending
+- signed AAB artifact download/extract: Confirmed
+- `.aab` file existence: Confirmed
+- `.aab` filename: app-release.aab
+- `.aab` file size: 6,046,282 bytes
 - Play Console internal test upload: Pending
+- actual Google Play Console input: Pending
 - real device QA: Pending
 - Secret actual values: Not recorded
 - artifact repository commit: Not added

@@ -12,9 +12,12 @@
 - Upload release AAB: Confirmed
 - signed AAB regeneration: Confirmed
 - signed AAB re-verification: Confirmed
+- signed AAB artifact download/extract: Confirmed
+- `.aab` file existence: Confirmed
+- `.aab` filename: app-release.aab
+- `.aab` file size: 6,046,282 bytes
 - Artifact count: Confirmed 1
 - Artifact name: harupuli-release-aab
-- signed AAB artifact download/extract: Pending
 - Play Console internal test upload: Pending
 - real device QA: Pending
 - Secret actual values: Not recorded
