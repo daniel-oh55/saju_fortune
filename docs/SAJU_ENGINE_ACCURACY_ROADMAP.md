@@ -2,6 +2,18 @@
 
 ## Privacy Policy Hosting Options
 
+- Privacy policy hosting decision: Added
+- Privacy policy hosting option selected: Confirmed
+- Privacy policy hosting option: Vercel static privacy page
+- Privacy policy page implementation: Pending
+- Privacy policy URL confirmation: Pending
+- Privacy policy URL accessibility check: Pending
+- Privacy policy URL Play Console input: Pending
+- Contact email confirmation: Pending
+- Data safety form submission: Pending
+- AAB internal test upload: Pending
+- Real device QA: Pending
+
 - 개인정보 처리방침 hosting option 후보 정리: Added
 - 개인정보 처리방침 우선 hosting 후보: Candidate
 - 개인정보 처리방침 page implementation: Pending

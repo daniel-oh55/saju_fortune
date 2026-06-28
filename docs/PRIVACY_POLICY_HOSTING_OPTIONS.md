@@ -12,8 +12,8 @@
 |---|---|---|
 | Privacy policy draft | Confirmed | existing draft document only |
 | Privacy policy final content | Pending | not finalized |
-| Hosting option selected | Pending | not selected |
-| Preferred hosting option | Candidate | Vercel static privacy page |
+| Hosting option selected | Confirmed | Vercel static privacy page |
+| Preferred hosting option | Confirmed | Vercel static privacy page |
 | Privacy policy public URL | Pending | actual URL not confirmed |
 | Privacy policy URL accessibility check | Pending | not checked |
 | Privacy policy URL Play Console input | Pending | not entered |
@@ -21,6 +21,35 @@
 | Data safety form | Pending | not submitted |
 | AAB upload | Pending | not uploaded |
 | Real device QA | Pending | not performed |
+
+## Privacy Policy Hosting Decision Result
+
+| Item | Status | Note |
+|---|---|---|
+| Hosting option selected | Confirmed | Vercel static privacy page |
+| Selection reason | Confirmed | Same app/repo deployment flow and PR-based review history |
+| Privacy policy page implementation | Pending | separate PR required |
+| Routing change | Pending | not changed in this PR |
+| Privacy policy final content | Pending | not finalized |
+| Privacy policy public URL | Pending | actual URL not confirmed |
+| Privacy policy URL accessibility check | Pending | not checked |
+| Privacy policy URL Play Console input | Pending | not entered |
+| Contact email | Pending | actual value not recorded |
+| Data safety form | Pending | not submitted |
+| AAB upload | Pending | not uploaded |
+| Real device QA | Pending | not performed |
+
+Notes:
+
+- This decision is not actual privacy policy URL confirmation.
+- This decision is not privacy policy page implementation completion.
+- This decision is not routing change completion.
+- Actual privacy policy page implementation requires a separate PR.
+- Actual privacy policy public URL confirmation requires a separate PR.
+- Actual contact email value is not recorded in docs.
+- Data safety form remains Pending.
+- AAB internal test upload remains Pending.
+- Real device QA remains Pending.
 
 ## Hosting Option Candidates
 
@@ -36,8 +65,9 @@
 
 | Item | Status | Note |
 |---|---|---|
-| Preferred hosting option | Candidate | Vercel static privacy page |
-| Reason | Draft | Same app/repo deployment flow and PR-based review history |
+| Hosting option selected | Confirmed | Vercel static privacy page |
+| Preferred hosting option | Confirmed | Vercel static privacy page |
+| Reason | Confirmed | Same app/repo deployment flow and PR-based review history |
 | Actual implementation | Pending | separate PR required |
 | Routing change | Pending | not changed in this PR |
 | Public URL confirmation | Pending | not confirmed |
