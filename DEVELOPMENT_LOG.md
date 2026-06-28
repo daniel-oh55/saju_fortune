@@ -1,5 +1,31 @@
 # DEVELOPMENT_LOG
 
+## Privacy Policy URL Accessibility Check
+
+- Privacy policy URL accessibility check document added
+- public/privacy-policy.html path retained
+- Vercel production deployment status checked after PR 213 merge
+- /privacy-policy.html public access blocked by Vercel Login response
+- HTTPS request completed
+- Desktop and mobile user-agent checks returned Vercel Login instead of the privacy policy page
+- Actual Vercel URL string not recorded in docs
+- Actual contact email value not recorded
+- Privacy policy final content remains Pending
+- Privacy policy public URL remains Pending
+- Privacy policy URL Play Console input remains Pending
+- Data safety form remains Pending
+- AAB internal test upload remains Pending
+- Real device QA remains Pending
+- React routing unchanged
+- AndroidManifest.xml/resource unchanged
+- Gradle settings unchanged
+- Production calculation logic unchanged
+- Saju/fortune result generation logic unchanged
+- UI/design unchanged
+- `.aab` repository commit not added
+- `.zip` repository commit not added
+- Secret actual values not recorded
+
 ## Static Privacy Policy Page Draft
 
 - Static privacy policy page draft added

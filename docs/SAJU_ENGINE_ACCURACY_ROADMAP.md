@@ -1,5 +1,22 @@
 # Saju Engine Accuracy Roadmap
 
+## Privacy Policy URL Accessibility Check
+
+- Privacy policy URL accessibility check document: Added
+- Privacy policy static page path: public/privacy-policy.html
+- Privacy policy Vercel production deployment check: Confirmed
+- Privacy policy /privacy-policy.html public access check: Blocked
+- Privacy policy HTTPS access check: Confirmed
+- Privacy policy no-login access check: Blocked
+- Privacy policy desktop browser check: Blocked
+- Privacy policy mobile browser check: Blocked
+- Privacy policy URL confirmation: Pending
+- Privacy policy URL Play Console input: Pending
+- Contact email confirmation: Pending
+- Data safety form submission: Pending
+- AAB internal test upload: Pending
+- Real device QA: Pending
+
 ## Privacy Policy Hosting Options
 
 - Static privacy policy page draft implementation: Confirmed

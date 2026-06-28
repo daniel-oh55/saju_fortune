@@ -1,5 +1,22 @@
 # TODO
 
+## 2026-06-28 Privacy policy URL accessibility check TODO
+
+- [x] Privacy policy URL accessibility check document added
+- [x] public/privacy-policy.html path reflected
+- [x] Vercel production deployment status checked
+- [x] /privacy-policy.html public access blocked result recorded
+- [x] Actual Vercel URL string not recorded
+- [x] Play Console input remains Pending
+- [ ] Privacy policy final content confirmation
+- [ ] Contact email confirmation
+- [ ] Privacy policy public URL confirmation
+- [ ] Public no-login URL accessibility re-check
+- [ ] Privacy policy URL Play Console input
+- [ ] Data safety form submission
+- [ ] AAB internal test upload
+- [ ] Real device QA
+
 ## 2026-06-28 Static privacy policy page draft TODO
 
 - [x] Static privacy policy page draft added

@@ -2,6 +2,9 @@
 
 ## Added
 
+- Privacy policy URL accessibility check document added
+- public/privacy-policy.html Vercel deployment accessibility result recorded
+- Vercel Login blocked public access result recorded without actual URL string
 - Static privacy policy page draft added
 - public/privacy-policy.html based privacy policy draft added
 - Privacy policy hosting option decision result recorded

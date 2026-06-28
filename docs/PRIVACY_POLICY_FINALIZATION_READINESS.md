@@ -18,6 +18,24 @@
 - URL accessibility check: Pending
 - Play Console URL input: Pending
 
+## Privacy Policy URL Accessibility Check
+
+- Privacy policy URL accessibility check document: Added
+- Static page path: Confirmed / public/privacy-policy.html
+- Vercel production deployment check: Confirmed
+- /privacy-policy.html public access: Blocked
+- HTTPS access check: Confirmed
+- No-login access check: Blocked
+- Desktop browser check: Blocked
+- Mobile browser check: Blocked
+- Privacy policy final content: Pending
+- Privacy policy public URL: Pending
+- Play Console URL input: Pending
+- Contact email: Pending
+- Data safety form: Pending
+- AAB upload: Pending
+- Real device QA: Pending
+
 ## Purpose
 
 이 문서는 하루풀이 앱의 개인정보 처리방침 최종화 전에 확인해야 할 항목을 정리한다.
