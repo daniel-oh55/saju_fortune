@@ -1,5 +1,17 @@
 # Saju Engine Accuracy Roadmap
 
+## Play Console Contact and Privacy Readiness
+
+- 문의 이메일 / 개인정보 처리방침 URL 확정 준비 체크리스트: Added
+- 문의 이메일 후보 확정: Pending
+- 문의 이메일 Play Console 입력: Pending
+- 개인정보 처리방침 최종 내용 확정: Pending
+- 개인정보 처리방침 URL 확정: Pending
+- 개인정보 처리방침 URL Play Console 입력: Pending
+- Data safety form 제출: Pending
+- AAB 내부 테스트 업로드: Pending
+- 실제 기기 QA: Pending
+
 ## Play Console App Creation Fields Checklist
 
 - Play Console 앱 생성 입력값 체크리스트: Added
