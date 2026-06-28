@@ -55,6 +55,15 @@
 - AAB upload to internal test: Pending
 - Real device QA: Pending
 
+## Privacy Policy Final Content Review Readiness
+
+- Privacy policy final content review readiness: Added
+- Contact email confirmation: Pending
+- Privacy policy final content confirmation: Pending
+- Data safety form: Pending
+- AAB upload to internal test: Pending
+- Real device QA: Pending
+
 ## Privacy Policy URL Accessibility Check
 
 - Privacy policy URL accessibility check document: Added

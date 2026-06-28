@@ -51,6 +51,18 @@
 - AAB upload: Pending
 - Real device QA: Pending
 
+## Privacy Policy Final Content Review Readiness
+
+- Privacy policy final content review readiness: Added
+- Contact email placeholder: Pending
+- Effective date placeholder: Pending
+- Contact email confirmation: Pending
+- Privacy policy final content confirmation: Pending
+- Privacy policy URL Play Console input: Pending
+- Data safety form: Pending
+- AAB upload: Pending
+- Real device QA: Pending
+
 ## Privacy Policy URL Accessibility Check
 
 - Privacy policy URL accessibility check document: Added

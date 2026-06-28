@@ -47,6 +47,16 @@ This document is not Google Play Console input completion.
 | AAB internal test upload | Pending | not uploaded |
 | Real device QA | Pending | not performed |
 
+## Privacy Policy Final Content Review Readiness
+
+- Privacy policy final content review readiness: Added
+- Contact email placeholder: Pending
+- Effective date placeholder: Pending
+- Privacy policy final content confirmation: Pending
+- public/privacy-policy.html final content update: Pending
+- Privacy policy URL Play Console input: Pending
+- Actual Google Play Console input: Pending
+
 ## Guardrails
 
 - This PR confirms the public privacy policy URL only.
