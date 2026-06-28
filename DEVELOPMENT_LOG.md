@@ -1,5 +1,33 @@
 # DEVELOPMENT_LOG
 
+## Vercel Public Access Unblock Plan
+
+- Vercel Login blocked status documented
+- public/privacy-policy.html path retained
+- Vercel production deployment remains Confirmed
+- /privacy-policy.html public access remains Blocked
+- no-login access remains Blocked
+- Play Console privacy policy URL readiness remains Blocked
+- Vercel protection setting review remains Pending
+- public no-login access restore remains Pending
+- URL accessibility re-check remains Pending
+- actual Vercel URL string not recorded
+- actual contact email value not recorded
+- Privacy policy final content remains Pending
+- Privacy policy URL Play Console input remains Pending
+- Data safety form remains Pending
+- AAB internal test upload remains Pending
+- Real device QA remains Pending
+- React routing unchanged
+- AndroidManifest.xml/resource unchanged
+- Gradle settings unchanged
+- Production calculation logic unchanged
+- Saju/fortune result generation logic unchanged
+- UI/design unchanged
+- `.aab` repository commit not added
+- `.zip` repository commit not added
+- Secret actual values not recorded
+
 ## Privacy Policy URL Accessibility Check
 
 - Privacy policy URL accessibility check document added

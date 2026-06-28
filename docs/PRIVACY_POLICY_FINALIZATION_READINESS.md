@@ -18,6 +18,17 @@
 - URL accessibility check: Pending
 - Play Console URL input: Pending
 
+## Vercel Public Access Unblock Plan
+
+- Vercel public access unblock plan: Added
+- `/privacy-policy.html` public access: Blocked
+- No-login access: Blocked
+- Public no-login access restore: Pending
+- Privacy policy final content: Pending
+- Privacy policy public URL: Pending
+- Play Console URL input: Pending
+- Contact email: Pending
+
 ## Privacy Policy URL Accessibility Check
 
 - Privacy policy URL accessibility check document: Added

@@ -17,6 +17,18 @@
 - AAB upload: Pending
 - Real device QA: Pending
 
+## Vercel Public Access Unblock Plan
+
+- Vercel public access unblock plan: Added
+- Play Console privacy policy URL readiness: Blocked
+- Public no-login access restore: Pending
+- Privacy policy public URL: Pending
+- Privacy policy URL Play Console input: Pending
+- Contact email: Pending
+- Data safety form: Pending
+- AAB upload: Pending
+- Real device QA: Pending
+
 ## Privacy Policy URL Accessibility Check
 
 - Privacy policy URL accessibility check document: Added
