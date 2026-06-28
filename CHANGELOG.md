@@ -2,6 +2,8 @@
 
 ## Added
 
+- Play Console internal test upload checklist 추가
+- Play Console 업로드 전 Pending 항목 정리
 - Android Release AAB run 6 artifact inspection 결과 기록
 - signed AAB `.aab` 파일 존재 확인 상태 기록
 - Android Release AAB secret correction rerun success result 기록

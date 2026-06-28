@@ -1,5 +1,12 @@
 # Android Release AAB Workflow Run Result
 
+## Play Console Internal Test Upload Checklist
+
+- Play Console internal test upload checklist: Added
+- Play Console internal test upload: Pending
+- Actual Google Play Console input: Pending
+- Real device QA: Pending
+
 ## Android Release AAB Secret Correction Rerun Result
 
 | Item | Status | Note |

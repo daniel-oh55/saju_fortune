@@ -1,5 +1,19 @@
 # TODO
 
+## 2026-06-28 Play Console internal test upload checklist TODO
+
+- [x] Play Console 내부 테스트 업로드 전 체크리스트 추가
+- [x] signed AAB artifact 상태 반영
+- [x] Play Console 필수 입력 항목 Pending 정리
+- [x] app capability status 정리
+- [ ] Play Console app creation
+- [ ] 실제 Google Play Console 입력
+- [ ] Privacy policy URL 확정
+- [ ] Data safety form 제출
+- [ ] AAB 내부 테스트 업로드
+- [ ] Internal test rollout
+- [ ] 실제 기기 QA
+
 ## 2026-06-28 Android release AAB run 6 artifact inspection TODO
 
 - [x] Android Release AAB run 6 artifact 다운로드 확인
