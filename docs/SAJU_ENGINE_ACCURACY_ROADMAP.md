@@ -1,5 +1,14 @@
 # Saju Engine Accuracy Roadmap
 
+## Play Console App Creation Fields Checklist
+
+- Play Console 앱 생성 입력값 체크리스트: Added
+- Play Console 앱 생성: Pending
+- 실제 Google Play Console 입력: Pending
+- 개인정보 처리방침 URL 확정: Pending
+- 실제 스토어 스크린샷 이미지 제작: Pending
+- 실제 기기 QA: Pending
+
 ## Play Console Internal Test Upload Checklist
 
 - Play Console 내부 테스트 업로드 체크리스트: Added
