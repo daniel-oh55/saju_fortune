@@ -2,11 +2,14 @@
 
 ## Contact and Privacy Readiness
 
+- Privacy policy finalization readiness checklist: Added
 - Contact and privacy readiness checklist: Added
 - Contact email candidate selected: Pending
 - Contact email Play Console input: Pending
 - Privacy policy final content: Pending
 - Privacy policy public URL: Pending
+- Contact email: Pending
+- Data safety form: Pending
 - Privacy policy URL Play Console input: Pending
 - Actual Google Play Console input: Pending
 - Real device QA: Pending
@@ -151,6 +154,7 @@
 
 - docs/PLAY_CONSOLE_INTERNAL_TEST_UPLOAD_CHECKLIST.md
 - docs/PLAY_CONSOLE_CONTACT_PRIVACY_READINESS.md
+- docs/PRIVACY_POLICY_FINALIZATION_READINESS.md
 - docs/ANDROID_RELEASE_AAB_ARTIFACT_QA.md
 - docs/ANDROID_RELEASE_AAB_WORKFLOW_RUN_RESULT.md
 - docs/ANDROID_SIGNING_SETUP_PLAN.md

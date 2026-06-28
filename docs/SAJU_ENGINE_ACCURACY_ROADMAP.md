@@ -1,5 +1,18 @@
 # Saju Engine Accuracy Roadmap
 
+## Privacy Policy Finalization Readiness
+
+- 개인정보 처리방침 최종화 준비 체크리스트: Added
+- 개인정보 처리방침 최종 내용 확정: Pending
+- 개인정보 처리방침 hosting location 선택: Pending
+- 개인정보 처리방침 URL 확정: Pending
+- 개인정보 처리방침 URL 접근 가능 여부 확인: Pending
+- 개인정보 처리방침 URL Play Console 입력: Pending
+- 문의 이메일 확정: Pending
+- Data safety form 제출: Pending
+- AAB 내부 테스트 업로드: Pending
+- 실제 기기 QA: Pending
+
 ## Play Console Contact and Privacy Readiness
 
 - 문의 이메일 / 개인정보 처리방침 URL 확정 준비 체크리스트: Added

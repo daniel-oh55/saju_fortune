@@ -2,6 +2,8 @@
 
 ## Added
 
+- Privacy policy finalization readiness checklist 추가
+- 개인정보 처리방침 최종화 전 데이터 처리 기준 및 hosting readiness 항목 정리
 - Play Console contact and privacy readiness checklist 추가
 - 문의 이메일 및 개인정보 처리방침 URL 확정 전 Pending 상태 정리
 - Play Console app creation field decision result 기록

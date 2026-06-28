@@ -53,6 +53,7 @@
     "check:ten-gods-analysis-draft": "node scripts/checkTenGodsAnalysisDraft.mjs",
     "check:ten-gods-analysis-qa": "node scripts/checkTenGodsAnalysisQa.mjs",
     "check:ten-gods-copy-guidelines": "node scripts/checkTenGodsCopyGuidelines.mjs",
+    "check:privacy-policy-finalization-readiness": "node scripts/checkPrivacyPolicyFinalizationReadiness.mjs",
     "check:privacy-policy-url-readiness": "node scripts/checkPrivacyPolicyUrlReadiness.mjs",
     "check:privacy-policy-content-draft": "node scripts/checkPrivacyPolicyContentDraft.mjs",
     "check:privacy-policy-build-output": "node scripts/checkPrivacyPolicyBuildOutput.mjs",
