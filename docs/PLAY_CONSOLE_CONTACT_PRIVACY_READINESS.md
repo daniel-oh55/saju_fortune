@@ -1,5 +1,18 @@
 # Play Console Contact and Privacy Readiness
 
+## Privacy Policy Finalization Readiness
+
+- Privacy policy finalization readiness checklist: Added
+- Privacy policy final content: Pending
+- Privacy policy hosting location: Pending
+- Privacy policy public URL: Pending
+- Privacy policy URL accessibility check: Pending
+- Privacy policy URL Play Console input: Pending
+- Contact email: Pending
+- Data safety form: Pending
+- AAB upload: Pending
+- Real device QA: Pending
+
 ## Purpose
 
 이 문서는 하루풀이 앱의 Google Play Console 입력 전에 문의 이메일과 개인정보 처리방침 URL 확정 준비 상태를 정리한다.

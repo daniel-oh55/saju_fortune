@@ -1,5 +1,21 @@
 # TODO
 
+## 2026-06-28 Privacy policy finalization readiness TODO
+
+- [x] 개인정보 처리방침 최종화 준비 체크리스트 추가
+- [x] 현재 앱 데이터 처리 기준 반영
+- [x] 개인정보 처리방침 최종 내용 체크 항목 정리
+- [x] 개인정보 처리방침 hosting readiness 항목 정리
+- [ ] 개인정보 처리방침 최종 내용 확정
+- [ ] 개인정보 처리방침 hosting location 선택
+- [ ] 개인정보 처리방침 public URL 확정
+- [ ] 개인정보 처리방침 URL 접근 가능 여부 확인
+- [ ] 개인정보 처리방침 URL Play Console 입력
+- [ ] 문의 이메일 확정
+- [ ] Data safety form 제출
+- [ ] AAB 내부 테스트 업로드
+- [ ] 실제 기기 QA
+
 ## 2026-06-28 Play Console contact and privacy readiness TODO
 
 - [x] 문의 이메일 / 개인정보 처리방침 URL 확정 준비 체크리스트 추가

@@ -2,6 +2,7 @@
 
 ## Play Console App Creation Fields Checklist
 
+- Privacy policy finalization readiness checklist: Added
 - Contact and privacy readiness checklist: Added
 - Play Console app creation fields checklist: Added
 - Free or paid: Confirmed
@@ -11,6 +12,8 @@
 - Actual Google Play Console input: Pending
 - Contact email: Pending
 - Privacy policy URL: Pending
+- Privacy policy final content: Pending
+- Privacy policy public URL: Pending
 - Store screenshots upload: Pending
 - Data safety form: Pending
 - AAB upload to internal test: Pending
