@@ -21,6 +21,23 @@
 - Actual Google Play Console input: Pending
 - Real device QA: Pending
 
+## Privacy Policy URL Accessibility Check
+
+- Privacy policy URL accessibility check document: Added
+- Static page path: Confirmed / public/privacy-policy.html
+- Vercel production deployment check: Confirmed
+- /privacy-policy.html public access: Blocked
+- HTTPS access check: Confirmed
+- No-login access check: Blocked
+- Desktop browser check: Blocked
+- Mobile browser check: Blocked
+- Privacy policy public URL: Pending
+- Privacy policy URL Play Console input: Pending
+- Actual Google Play Console input: Pending
+- Contact email: Pending
+- Data safety form: Pending
+- Real device QA: Pending
+
 ## Purpose
 
 이 문서는 하루풀이 앱을 Google Play Console에 생성하기 전에 필요한 입력값의 확정/보류 상태를 정리한다.

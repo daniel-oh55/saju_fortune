@@ -17,6 +17,23 @@
 - AAB upload: Pending
 - Real device QA: Pending
 
+## Privacy Policy URL Accessibility Check
+
+- Privacy policy URL accessibility check document: Added
+- Static page path: Confirmed / public/privacy-policy.html
+- Vercel production deployment check: Confirmed
+- /privacy-policy.html public access: Blocked
+- HTTPS access check: Confirmed
+- No-login access check: Blocked
+- Desktop browser check: Blocked
+- Mobile browser check: Blocked
+- Contact email: Pending
+- Privacy policy public URL: Pending
+- Privacy policy URL Play Console input: Pending
+- Data safety form: Pending
+- AAB upload: Pending
+- Real device QA: Pending
+
 ## Privacy Policy Finalization Readiness
 
 - Privacy policy finalization readiness checklist: Added

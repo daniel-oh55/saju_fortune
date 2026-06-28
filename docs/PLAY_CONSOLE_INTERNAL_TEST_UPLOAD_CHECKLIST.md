@@ -26,6 +26,23 @@
 - AAB upload to internal test: Pending
 - Real device QA: Pending
 
+## Privacy Policy URL Accessibility Check
+
+- Privacy policy URL accessibility check document: Added
+- Static page path: Confirmed / public/privacy-policy.html
+- Vercel production deployment check: Confirmed
+- /privacy-policy.html public access: Blocked
+- HTTPS access check: Confirmed
+- No-login access check: Blocked
+- Desktop browser check: Blocked
+- Mobile browser check: Blocked
+- Privacy policy URL: Pending
+- Privacy policy URL Play Console input: Pending
+- Contact email: Pending
+- Data safety form: Pending
+- AAB upload to internal test: Pending
+- Real device QA: Pending
+
 ## Purpose
 
 이 문서는 하루풀이 Android signed AAB를 Google Play Console 내부 테스트 트랙에 업로드하기 전에 확인해야 할 항목을 정리한다.
