@@ -1,5 +1,12 @@
 # Saju Engine Accuracy Roadmap
 
+## Play Console Internal Test Upload Checklist
+
+- Play Console 내부 테스트 업로드 체크리스트: Added
+- Play Console 내부 테스트 업로드: Pending
+- 실제 Google Play Console 입력: Pending
+- 실제 기기 QA: Pending
+
 ## Android Release AAB Secret Correction Rerun Result
 
 - ANDROID_KEYSTORE_BASE64 configuration: Confirmed

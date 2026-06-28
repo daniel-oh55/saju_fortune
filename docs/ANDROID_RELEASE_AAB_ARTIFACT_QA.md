@@ -1,5 +1,12 @@
 # Android Release AAB Artifact QA
 
+## Play Console Internal Test Upload Checklist
+
+- Play Console internal test upload checklist: Added
+- Play Console internal test upload: Pending
+- Actual Google Play Console input: Pending
+- Real device QA: Pending
+
 ## Android Release AAB Run 6 Artifact Inspection Result
 
 | Item | Status | Note |

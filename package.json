@@ -27,6 +27,7 @@
     "check:google-play-description-draft": "node scripts/checkGooglePlayDescriptionDraft.mjs",
     "check:google-play-screenshot-caption-plan": "node scripts/checkGooglePlayScreenshotCaptionPlan.mjs",
     "check:google-play-screenshot-production-checklist": "node scripts/checkGooglePlayScreenshotProductionChecklist.mjs",
+    "check:play-console-internal-test-upload-checklist": "node scripts/checkPlayConsoleInternalTestUploadChecklist.mjs",
     "check:android-keystore-generation-storage-plan": "node scripts/checkAndroidKeystoreGenerationStoragePlan.mjs",
     "check:android-signing-secrets-checklist": "node scripts/checkAndroidSigningSecretsChecklist.mjs",
     "check:android-signing-setup-plan": "node scripts/checkAndroidSigningSetupPlan.mjs",

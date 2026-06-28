@@ -1,5 +1,26 @@
 # DEVELOPMENT_LOG
 
+## Play Console Internal Test Upload Checklist
+
+- Play Console 내부 테스트 업로드 전 체크리스트 추가
+- signed AAB run number 6 artifact 상태 반영
+- Play Console app creation은 Pending 유지
+- 실제 Google Play Console 입력은 Pending 유지
+- Privacy policy URL은 Pending 유지
+- Data safety form은 Pending 유지
+- AAB 내부 테스트 업로드는 Pending 유지
+- 실제 기기 QA는 Pending 유지
+- 실제 Contact email 값 기록 없음
+- 실제 tester email list 기록 없음
+- Secret 실제값 기록 없음
+- `.aab` repository commit 없음
+- `.zip` repository commit 없음
+- AndroidManifest.xml/resource 변경 없음
+- Gradle 설정 변경 없음
+- production 계산 로직 변경 없음
+- 사주/운세 결과 생성 로직 변경 없음
+- UI/디자인 변경 없음
+
 ## Android Release AAB Run 6 Artifact Inspection
 
 - Android Release AAB run number 6 artifact 다운로드/압축 해제 확인 결과 기록
