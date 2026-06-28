@@ -1,5 +1,27 @@
 # DEVELOPMENT_LOG
 
+## Privacy Policy Public URL Confirmation
+
+- Privacy policy public URL final confirmation recorded
+- Public no-login access restore remains Confirmed
+- URL accessibility re-check remains Confirmed
+- Play Console URL input remains Pending
+- Actual Google Play Console input remains Pending
+- Contact email confirmation remains Pending
+- Data safety form remains Pending
+- AAB internal test upload remains Pending
+- Real device QA remains Pending
+- Actual contact email value not recorded
+- React routing unchanged
+- AndroidManifest.xml/resource unchanged
+- Gradle settings unchanged
+- Production calculation logic unchanged
+- Saju/fortune result generation logic unchanged
+- UI/design unchanged
+- `.aab` repository commit not added
+- `.zip` repository commit not added
+- Secret actual values not recorded
+
 ## Vercel Public Access Re-check Result
 
 - Vercel protection setting review result recorded

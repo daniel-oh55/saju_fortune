@@ -1,5 +1,19 @@
 # TODO
 
+## 2026-06-29 Privacy policy public URL confirmation TODO
+
+- [x] Privacy policy public URL final confirmation recorded
+- [x] Public no-login access and URL final confirmation separated from Play Console input
+- [x] Contact email remains Pending
+- [x] Play Console URL input remains Pending
+- [ ] Contact email confirmation
+- [ ] Privacy policy final content review
+- [ ] Effective date confirmation
+- [ ] Privacy policy URL Play Console input
+- [ ] Data safety form submission
+- [ ] AAB internal test upload
+- [ ] Real device QA
+
 ## 2026-06-29 Vercel public access re-check TODO
 
 - [x] Vercel protection setting review result recorded

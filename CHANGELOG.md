@@ -2,6 +2,8 @@
 
 ## Added
 
+- Privacy policy public URL confirmation document added
+- Public privacy policy URL final confirmation status recorded
 - Vercel public access re-check result recorded
 - Privacy policy static page public no-login access re-check status documented
 - Vercel public access unblock plan added
