@@ -1,5 +1,21 @@
 # TODO
 
+## 2026-06-28 Static privacy policy page draft TODO
+
+- [x] Static privacy policy page draft added
+- [x] public/privacy-policy.html path recorded
+- [x] Current app data handling status reflected
+- [x] Routing unchanged confirmed
+- [x] Actual email and URL not recorded
+- [ ] Privacy policy final content confirmation
+- [ ] Contact email confirmation
+- [ ] Privacy policy public URL confirmation
+- [ ] Privacy policy URL accessibility check
+- [ ] Privacy policy URL Play Console input
+- [ ] Data safety form submission
+- [ ] AAB internal test upload
+- [ ] Real device QA
+
 ## 2026-06-28 Privacy policy hosting decision TODO
 
 - [x] Privacy policy hosting option decision result recorded

@@ -1,5 +1,31 @@
 # DEVELOPMENT_LOG
 
+## Static Privacy Policy Page Draft
+
+- Static privacy policy page draft added
+- public/privacy-policy.html path used
+- Vercel static privacy page direction retained
+- Current app data handling status reflected
+- Server DB/Login/Account creation/Payment SDK/Ad SDK/External analytics SDK/Push notification SDK not used
+- localStorage usage retained
+- Actual contact email value not recorded
+- Actual privacy policy URL not recorded
+- Privacy policy final content remains Pending
+- Privacy policy public URL remains Pending
+- Privacy policy URL Play Console input remains Pending
+- Data safety form remains Pending
+- AAB internal test upload remains Pending
+- Real device QA remains Pending
+- React routing unchanged
+- AndroidManifest.xml/resource unchanged
+- Gradle settings unchanged
+- Production calculation logic unchanged
+- Saju/fortune result generation logic unchanged
+- UI/design unchanged
+- `.aab` repository commit not added
+- `.zip` repository commit not added
+- Secret actual values not recorded
+
 ## Privacy Policy Hosting Decision
 
 - Privacy policy hosting option decision result recorded

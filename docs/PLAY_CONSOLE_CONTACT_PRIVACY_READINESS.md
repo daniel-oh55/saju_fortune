@@ -4,6 +4,9 @@
 
 - Privacy policy hosting options checklist: Added
 - Privacy policy hosting decision: Added
+- Static privacy policy page draft: Added
+- Static page path: Confirmed / public/privacy-policy.html
+- Privacy policy page draft implementation: Confirmed
 - Hosting option selected: Confirmed
 - Preferred hosting option: Confirmed
 - Privacy policy public URL: Pending

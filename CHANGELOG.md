@@ -2,6 +2,8 @@
 
 ## Added
 
+- Static privacy policy page draft added
+- public/privacy-policy.html based privacy policy draft added
 - Privacy policy hosting option decision result recorded
 - Vercel static privacy page recorded as selected privacy policy hosting option
 

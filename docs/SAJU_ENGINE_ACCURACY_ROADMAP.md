@@ -2,6 +2,17 @@
 
 ## Privacy Policy Hosting Options
 
+- Static privacy policy page draft implementation: Confirmed
+- Static privacy policy page path: public/privacy-policy.html
+- Static privacy policy page routing change: Not changed
+- Static privacy policy page final content: Pending
+- Static privacy policy page contact email confirmation: Pending
+- Static privacy policy page URL confirmation: Pending
+- Static privacy policy page URL accessibility check: Pending
+- Static privacy policy page URL Play Console input: Pending
+- Static privacy policy page Data safety form submission: Pending
+- Static privacy policy page AAB internal test upload: Pending
+- Static privacy policy page real device QA: Pending
 - Privacy policy hosting decision: Added
 - Privacy policy hosting option selected: Confirmed
 - Privacy policy hosting option: Vercel static privacy page
