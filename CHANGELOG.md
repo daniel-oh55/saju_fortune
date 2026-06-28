@@ -2,6 +2,8 @@
 
 ## Added
 
+- Privacy policy hosting options checklist 추가
+- 개인정보 처리방침 hosting 후보와 우선 후보 정리
 - Privacy policy finalization readiness checklist 추가
 - 개인정보 처리방침 최종화 전 데이터 처리 기준 및 hosting readiness 항목 정리
 - Play Console contact and privacy readiness checklist 추가

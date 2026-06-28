@@ -2,6 +2,8 @@
 
 ## Play Console App Creation Fields Checklist
 
+- Privacy policy hosting options checklist: Added
+- Preferred hosting option: Candidate
 - Privacy policy finalization readiness checklist: Added
 - Contact and privacy readiness checklist: Added
 - Play Console app creation fields checklist: Added

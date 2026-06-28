@@ -1,5 +1,20 @@
 # TODO
 
+## 2026-06-28 Privacy policy hosting options TODO
+
+- [x] 개인정보 처리방침 hosting option 후보 정리
+- [x] 우선 hosting 후보 기록
+- [x] 실제 URL 확정과 후보 기록 구분
+- [ ] 개인정보 처리방침 최종 내용 확정
+- [ ] 문의 이메일 확정
+- [ ] 개인정보 처리방침 page implementation
+- [ ] 개인정보 처리방침 public URL 확정
+- [ ] 개인정보 처리방침 URL 접근 가능 여부 확인
+- [ ] 개인정보 처리방침 URL Play Console 입력
+- [ ] Data safety form 제출
+- [ ] AAB 내부 테스트 업로드
+- [ ] 실제 기기 QA
+
 ## 2026-06-28 Privacy policy finalization readiness TODO
 
 - [x] 개인정보 처리방침 최종화 준비 체크리스트 추가
