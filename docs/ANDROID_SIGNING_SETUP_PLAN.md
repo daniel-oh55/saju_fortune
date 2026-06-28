@@ -1,5 +1,24 @@
 # Android Signing Setup Plan
 
+## Android Release AAB Enforced Rerun Result
+
+- Android Release AAB enforced rerun result: Failed
+- Run number: 5
+- Run id: 28309520915
+- Failed step: Validate release signing secrets
+- Failure summary: `ANDROID_KEYSTORE_BASE64 is not configured`
+- release signing secrets validation: Failed
+- signed AAB regeneration: Failed
+- signed AAB re-verification: Pending
+- Play Console internal test upload: Pending
+- real device QA: Pending
+
+주의:
+
+- 이번 결과는 signing enforcement가 Secret 누락을 초기에 차단한 기록이다.
+- Secret 실제값, keystore base64 실제값, signing password, key alias 실제값은 기록하지 않는다.
+- GitHub Secrets 보정 후 Android Release AAB workflow를 다시 실행해야 한다.
+
 ## Android Release Signing Enforcement Follow-up
 
 - previous signed AAB verification: Failed

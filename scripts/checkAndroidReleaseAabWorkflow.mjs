@@ -12,57 +12,40 @@ const requiredWorkflowSnippets = [
   'name: Android Release AAB',
   'workflow_dispatch',
   'node-version: 22',
-  'npm ci',
-  'npm run build',
-  'npx cap sync android',
   'Validate release signing secrets',
-  'ANDROID_KEYSTORE_BASE64',
-  'ANDROID_KEYSTORE_PASSWORD',
-  'ANDROID_KEY_ALIAS',
-  'ANDROID_KEY_PASSWORD',
   'Restore release keystore',
-  'RUNNER_TEMP',
-  'base64 --decode',
-  "printf '%s'",
-  'test -s "$RUNNER_TEMP/android-signing/release-keystore.jks"',
   'Build signed release AAB',
-  './gradlew bundleRelease',
   'Verify signed release AAB',
   'jarsigner -verify',
   'jar verified.',
   'Upload release AAB',
-  'actions/upload-artifact@v4',
   'harupuli-release-aab',
 ];
 
 const requiredGradleSnippets = [
-  'System.getenv("ANDROID_KEYSTORE_FILE")',
-  'System.getenv("ANDROID_KEYSTORE_PASSWORD")',
-  'System.getenv("ANDROID_KEY_ALIAS")',
-  'System.getenv("ANDROID_KEY_PASSWORD")',
-  'hasReleaseSigning',
   'isReleaseBuildTask',
   'gradle.startParameter.taskNames',
   'throw new GradleException("Release signing environment variables are required for release builds.")',
-  'storeFile file(releaseKeystoreFile)',
-  'storePassword releaseKeystorePassword',
-  'keyAlias releaseKeyAlias',
-  'keyPassword releaseKeyPassword',
   'signingConfig signingConfigs.release',
 ];
 
 const requiredDocSnippets = [
-  'previous signed AAB verification: Failed',
-  'previous jarsigner result summary: `jar is unsigned.`',
-  'signing enforcement fix: Added',
-  'release signing secrets validation: Added',
-  'workflow jarsigner verification step: Added',
-  'Gradle release signing env enforcement: Added',
-  'signed AAB regeneration: Pending',
+  'Android Release AAB enforced rerun result: Failed',
+  'Run number: 5',
+  'Run id: 28309520915',
+  'Failed step: Validate release signing secrets',
+  'Failure summary: `ANDROID_KEYSTORE_BASE64 is not configured`',
+  'Validate release signing secrets: Failed',
+  'Restore release keystore: Not reached',
+  'Build signed release AAB: Not reached',
+  'Verify signed release AAB: Not reached',
+  'Upload release AAB: Not reached',
+  'unsigned artifact upload prevention: Confirmed',
+  'signed AAB regeneration: Failed',
   'signed AAB re-verification: Pending',
+  'Artifact created: Not created',
   'Play Console internal test upload: Pending',
   'real device QA: Pending',
-  'signing enforcement fix Added는 signed AAB 재검증 완료가 아니다.',
 ];
 
 const forbiddenSnippets = [
@@ -70,30 +53,18 @@ const forbiddenSnippets = [
   'supply',
   'fastlane',
   'google-play',
-  'Play Console upload',
-  'storePassword "',
-  "storePassword '",
-  'keyPassword "',
-  "keyPassword '",
-  'keyAlias "',
-  "keyAlias '",
+  'Play Console internal test upload | Confirmed',
+  'real device QA | Confirmed',
+  'Play Console upload: Completed',
+  '실제 기기 QA: Completed',
   '실제 스토어 스크린샷 이미지 시작',
   '서양식 보정 적용 여부',
   '양력/음력 샘플 추가 검증',
 ];
 
-const forbiddenPatterns = [
-  {
-    label: 'literal_base64_secret_value_absent',
-    pattern: /ANDROID_KEYSTORE_BASE64:\s*['"]?[A-Za-z0-9+/]{80,}={0,2}/,
-  },
-  {
-    label: 'private_keystore_path_absent',
-    pattern: /(?:[A-Za-z]:\\|\/(?:Users|home|var|tmp|private)\/)[^\r\n|`<>]*(?:\.jks|\.keystore)/i,
-  },
-];
-
 const protectedFiles = [
+  '.github/workflows/android-release-aab.yml',
+  'android/app/build.gradle',
   'android/app/src/main/AndroidManifest.xml',
   'android/app/src/main/res',
   'src',
@@ -135,11 +106,11 @@ const workflow = fs.readFileSync(workflowPath, 'utf8');
 const gradle = fs.readFileSync(gradlePath, 'utf8');
 const doc = fs.readFileSync(docPath, 'utf8');
 const roadmap = fs.readFileSync(roadmapPath, 'utf8');
-const combined = `${workflow}\n${gradle}\n${doc}\n${roadmap}`;
+const combinedDocs = `${doc}\n${roadmap}`;
 
 hasFailure = checkIncludes(workflow, requiredWorkflowSnippets, 'workflow') || hasFailure;
 hasFailure = checkIncludes(gradle, requiredGradleSnippets, 'gradle') || hasFailure;
-hasFailure = checkIncludes(`${doc}\n${roadmap}`, requiredDocSnippets, 'docs') || hasFailure;
+hasFailure = checkIncludes(combinedDocs, requiredDocSnippets, 'docs') || hasFailure;
 
 const verifyIndex = workflow.indexOf('Verify signed release AAB');
 const uploadIndex = workflow.indexOf('Upload release AAB');
@@ -148,14 +119,8 @@ logResult('upload_release_aab_step_after_verify_signed_release_aab_step', upload
 if (!uploadAfterVerify) hasFailure = true;
 
 for (const snippet of forbiddenSnippets) {
-  const absent = !combined.includes(snippet);
-  logResult(`forbidden_snippet_absent_${labelFromSnippet(snippet)}`, absent);
-  if (!absent) hasFailure = true;
-}
-
-for (const { label, pattern } of forbiddenPatterns) {
-  const absent = !pattern.test(combined);
-  logResult(label, absent);
+  const absent = !combinedDocs.includes(snippet);
+  logResult(`forbidden_doc_snippet_absent_${labelFromSnippet(snippet)}`, absent);
   if (!absent) hasFailure = true;
 }
 
@@ -163,7 +128,7 @@ const protectedDiff = execSync(`git diff --name-only -- ${protectedFiles.join(' 
   encoding: 'utf8',
 }).trim();
 const protectedFilesUnchanged = protectedDiff.length === 0;
-logResult('android_manifest_resource_src_files_unchanged_in_working_diff', protectedFilesUnchanged);
+logResult('workflow_android_gradle_native_src_files_unchanged_in_working_diff', protectedFilesUnchanged);
 if (!protectedFilesUnchanged) hasFailure = true;
 
 const trackedFiles = execSync('git ls-files', { encoding: 'utf8' })

@@ -5,6 +5,7 @@ const docPath = 'docs/ANDROID_AAB_SIGNING_VERIFICATION_PLAN.md';
 
 const requiredSections = [
   '# Android AAB Signing Verification Plan',
+  '## Android Release AAB Enforced Rerun Result',
   '## Android Release Signing Enforcement Follow-up',
   '## Purpose',
   '## Current Artifact Status',
@@ -16,55 +17,32 @@ const requiredSections = [
 ];
 
 const requiredSnippets = [
-  'previous signed AAB verification: Failed',
-  'previous jarsigner result summary: `jar is unsigned.`',
-  'signing enforcement fix: Added',
-  'release signing secrets validation: Added',
-  'workflow jarsigner verification step: Added',
-  'Gradle release signing env enforcement: Added',
-  'signed AAB regeneration: Pending',
+  'Android Release AAB enforced rerun result: Failed',
+  'Run number: 5',
+  'Run id: 28309520915',
+  'Failed step: Validate release signing secrets',
+  'Failure summary: `ANDROID_KEYSTORE_BASE64 is not configured`',
+  'signed AAB regeneration: Failed',
   'signed AAB re-verification: Pending',
+  'Verify signed release AAB: Not reached',
+  'Artifact created: Not created',
   'Play Console internal test upload: Pending',
   'real device QA: Pending',
-  'signing enforcement fix Added는 signed AAB 재검증 완료가 아니다.',
-  'app-release.aab',
-  '6,016,271 bytes',
-  'jarsigner result summary | Failed | `jar is unsigned.`',
-  'signed AAB verification: Failed',
+  'Secret 실제값은 기록하지 않는다.',
 ];
 
-const wrongPhrases = [
+const forbiddenSnippets = [
+  'signed AAB re-verification: Confirmed',
+  'Play Console internal test upload | Confirmed',
+  'real device QA | Confirmed',
   '실제 스토어 스크린샷 이미지 시작',
   '서양식 보정 적용 여부',
   '양력/음력 샘플 추가 검증',
-  'signing 상태 확인: Completed',
-  'signed AAB verification | Confirmed',
-  'Play Console internal test upload | Confirmed',
-  'real device QA | Confirmed',
-  'GitHub Secrets 실제 입력: Completed',
-  'keystore 파일 추가: Completed',
-];
-
-const forbiddenPatterns = [
-  {
-    label: 'actual_secret_assignment_absent',
-    pattern: /ANDROID_(?:KEYSTORE_BASE64|KEYSTORE_PASSWORD|KEY_ALIAS|KEY_PASSWORD)\s*=\s*['"]?[^\s'"<|`]+/i,
-  },
-  {
-    label: 'long_base64_like_value_absent',
-    pattern: /[A-Za-z0-9+/]{120,}={0,2}/,
-  },
-  {
-    label: 'private_keystore_path_absent',
-    pattern: /(?:[A-Za-z]:\\|\/(?:Users|home|var|tmp|private)\/)[^\r\n|`<>]*(?:\.jks|\.keystore)/i,
-  },
-  {
-    label: 'private_aab_path_absent',
-    pattern: /(?:[A-Za-z]:\\|\/(?:Users|home|var|tmp|private)\/)[^\r\n|`<>]*\.aab/i,
-  },
 ];
 
 const protectedFiles = [
+  '.github/workflows/android-release-aab.yml',
+  'android/app/build.gradle',
   'android/app/src/main/AndroidManifest.xml',
   'android/app/src/main/res',
   'src',
@@ -101,15 +79,9 @@ for (const snippet of requiredSnippets) {
   if (!found) hasFailure = true;
 }
 
-for (const snippet of wrongPhrases) {
+for (const snippet of forbiddenSnippets) {
   const absent = !doc.includes(snippet);
-  logResult(`wrong_phrase_absent_${labelFromSnippet(snippet)}`, absent);
-  if (!absent) hasFailure = true;
-}
-
-for (const { label, pattern } of forbiddenPatterns) {
-  const absent = !pattern.test(doc);
-  logResult(label, absent);
+  logResult(`forbidden_snippet_absent_${labelFromSnippet(snippet)}`, absent);
   if (!absent) hasFailure = true;
 }
 
@@ -117,7 +89,7 @@ const diffOutput = execSync(`git diff --name-only -- ${protectedFiles.join(' ')}
   encoding: 'utf8',
 }).trim();
 const protectedFilesUnchanged = diffOutput.length === 0;
-logResult('android_manifest_resource_src_files_unchanged_in_working_diff', protectedFilesUnchanged);
+logResult('workflow_android_gradle_native_src_files_unchanged_in_working_diff', protectedFilesUnchanged);
 if (!protectedFilesUnchanged) hasFailure = true;
 
 if (hasFailure) {

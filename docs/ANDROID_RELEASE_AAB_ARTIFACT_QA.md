@@ -1,5 +1,27 @@
 # Android Release AAB Artifact QA
 
+## Android Release AAB Enforced Rerun Result
+
+- Android Release AAB enforced rerun result: Failed
+- Run number: 5
+- Run id: 28309520915
+- Failed step: Validate release signing secrets
+- signed AAB regeneration: Failed
+- signed AAB re-verification: Pending
+- Artifact created: Not created
+- Artifact name: Not created
+- Artifact size: Not created
+- Artifact digest: Pending
+- signed AAB artifact download/extract: Pending
+- Play Console internal test upload: Pending
+- real device QA: Pending
+
+주의:
+
+- artifact가 생성되지 않았으므로 `.aab` 다운로드/압축 해제 확인은 진행하지 않았다.
+- `.aab`, `.zip`, `.jks`, `.keystore` 파일은 repository에 추가하지 않았다.
+- Play Console internal test upload는 별도 PR에서 기록한다.
+
 ## Android Release Signing Enforcement Follow-up
 
 - previous signed AAB verification: Failed

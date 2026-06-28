@@ -1,5 +1,25 @@
 # DEVELOPMENT_LOG
 
+## Android Release AAB Enforced Rerun Result
+
+- Android Release AAB workflow 재실행 실패 결과 기록
+- run number 5 / run id 28309520915 기록
+- failed step 기록: Validate release signing secrets
+- 실패 원인 요약 기록: `ANDROID_KEYSTORE_BASE64 is not configured`
+- unsigned AAB artifact upload 방지 여부 기록
+- Restore release keystore, Build signed release AAB, Verify signed release AAB, Upload release AAB는 skipped로 기록
+- artifact 생성 없음 기록
+- Play Console 내부 테스트 업로드는 Pending 유지
+- 실제 기기 QA는 Pending 유지
+- Secret 실제값 기록 없음
+- keystore 파일 repository commit 없음
+- `.aab` repository commit 없음
+- `.zip` repository commit 없음
+- AndroidManifest.xml/resource 변경 없음
+- production 계산 로직 변경 없음
+- 사주/운세 결과 생성 로직 변경 없음
+- UI/디자인 변경 없음
+
 ## Android Release Signing Enforcement
 
 - Android Release AAB workflow signing enforcement 보강

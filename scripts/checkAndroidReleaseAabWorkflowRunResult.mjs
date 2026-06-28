@@ -5,6 +5,7 @@ const docPath = 'docs/ANDROID_RELEASE_AAB_WORKFLOW_RUN_RESULT.md';
 
 const requiredSections = [
   '# Android Release AAB Workflow Run Result',
+  '## Android Release AAB Enforced Rerun Result',
   '## Android Release Signing Enforcement Follow-up',
   '## Purpose',
   '## Android Signed Release AAB Workflow Run Result',
@@ -15,34 +16,41 @@ const requiredSections = [
 ];
 
 const requiredSnippets = [
-  'previous signed AAB verification: Failed',
-  'previous jarsigner result summary: `jar is unsigned.`',
-  'run number 4 signed AAB verification: Failed',
-  'signing enforcement fix: Added',
-  'release signing secrets validation: Added',
-  'workflow jarsigner verification step: Added',
-  'Gradle release signing env enforcement: Added',
-  'next signed AAB workflow rerun: Pending',
-  'signed AAB regeneration: Pending',
-  'next signed AAB verification: Pending',
-  'signed AAB re-verification: Pending',
-  'Play Console internal test upload: Pending',
-  'real device QA: Pending',
-  'Run number | 4',
-  'Run id | 28293198750',
-  'Conclusion | success',
-  'jarsigner result | Failed',
-  'signed AAB verification | Failed',
+  'Workflow | Confirmed | Android Release AAB',
+  'Trigger | Confirmed | workflow_dispatch',
+  'Branch | Confirmed | main',
+  'Run number | Confirmed | 5',
+  'Run id | Confirmed | 28309520915',
+  'Commit sha | Confirmed | ed5f2a415de6bd0971274d6f87e4f25f99ae961d',
+  'Status | Confirmed | completed',
+  'Conclusion | Failed | failure',
+  'Failed step | Failed | Validate release signing secrets',
+  'Validate release signing secrets | Failed | ANDROID_KEYSTORE_BASE64 is not configured',
+  'Restore release keystore | Not reached | skipped',
+  'Build signed release AAB | Not reached | skipped',
+  'Verify signed release AAB | Not reached | skipped',
+  'Upload release AAB | Not reached | skipped',
+  'unsigned artifact upload prevention | Confirmed | upload step skipped',
+  'signed AAB regeneration | Failed | workflow failure',
+  'signed AAB re-verification | Pending | verify step not reached',
+  'Artifact created | Not created | artifacts total_count 0',
+  'Artifact name | Not created | no artifact',
+  'Artifact size | Not created | no artifact',
+  'Artifact digest | Pending | no artifact digest',
+  'Play Console internal test upload | Pending | not uploaded',
+  'real device QA | Pending | not performed',
+  'https://github.com/daniel-oh55/saju_fortune/actions/runs/28309520915',
+  'Secret 실제값, keystore base64 실제값, signing password, key alias 실제값은 기록하지 않았다.',
+  'repository에 `.aab`, `.zip`, `.jks`, `.keystore` 파일을 추가하지 않았다.',
+  'signed AAB regeneration Failed는 Play Console 업로드 완료가 아니다.',
+  'signed AAB re-verification Pending은 실제 기기 QA 완료가 아니다.',
 ];
 
-const wrongPhrases = [
-  'Run number | 1',
-  'Run number | 2',
-  'Run number | 3',
-  'Conclusion | failure',
-  'signed AAB verification | Confirmed',
+const forbiddenSnippets = [
   'Play Console internal test upload | Confirmed',
   'real device QA | Confirmed',
+  'Play Console upload: Completed',
+  '실제 기기 QA: Completed',
   '실제 스토어 스크린샷 이미지 시작',
   '서양식 보정 적용 여부',
   '양력/음력 샘플 추가 검증',
@@ -58,12 +66,18 @@ const forbiddenPatterns = [
     pattern: /ANDROID_KEYSTORE_BASE64:\s*['"]?[A-Za-z0-9+/]{80,}={0,2}/,
   },
   {
-    label: 'private_keystore_path_absent',
-    pattern: /(?:[A-Za-z]:\\|\/(?:Users|home|var|tmp|private)\/)[^\r\n|`<>]*(?:\.jks|\.keystore)/i,
+    label: 'long_base64_like_value_absent',
+    pattern: /[A-Za-z0-9+/]{120,}={0,2}/,
+  },
+  {
+    label: 'private_keystore_or_aab_path_absent',
+    pattern: /(?:[A-Za-z]:\\|\/(?:Users|home|var|tmp|private)\/)[^\r\n|`<>]*(?:\.jks|\.keystore|\.aab)/i,
   },
 ];
 
 const protectedPaths = [
+  '.github/workflows/android-release-aab.yml',
+  'android/app/build.gradle',
   'android/app/src/main/AndroidManifest.xml',
   'android/app/src/main/res',
   'src',
@@ -100,9 +114,9 @@ for (const snippet of requiredSnippets) {
   if (!found) hasFailure = true;
 }
 
-for (const snippet of wrongPhrases) {
+for (const snippet of forbiddenSnippets) {
   const absent = !doc.includes(snippet);
-  logResult(`wrong_phrase_absent_${labelFromSnippet(snippet)}`, absent);
+  logResult(`forbidden_snippet_absent_${labelFromSnippet(snippet)}`, absent);
   if (!absent) hasFailure = true;
 }
 
@@ -116,12 +130,26 @@ const diffOutput = execSync(`git diff --name-only -- ${protectedPaths.join(' ')}
   encoding: 'utf8',
 }).trim();
 const protectedFilesUnchanged = diffOutput.length === 0;
-logResult('android_manifest_resource_src_files_unchanged_in_working_diff', protectedFilesUnchanged);
+logResult('workflow_android_gradle_native_src_files_unchanged_in_working_diff', protectedFilesUnchanged);
 if (!protectedFilesUnchanged) hasFailure = true;
 
+const trackedFiles = execSync('git ls-files', { encoding: 'utf8' })
+  .split(/\r?\n/)
+  .filter(Boolean);
+const statusFiles = execSync('git status --short --untracked-files=all', { encoding: 'utf8' })
+  .split(/\r?\n/)
+  .filter(Boolean)
+  .map((line) => line.slice(3).trim().replace(/^"|"$/g, ''));
+const artifactFiles = [...trackedFiles, ...statusFiles].filter((path) =>
+  path.endsWith('.aab') || path.endsWith('.zip') || path.endsWith('.jks') || path.endsWith('.keystore')
+);
+const artifactFilesAbsent = artifactFiles.length === 0;
+logResult('artifact_zip_and_keystore_files_not_added_to_repository', artifactFilesAbsent);
+if (!artifactFilesAbsent) hasFailure = true;
+
 if (hasFailure) {
-  console.error('Android signed AAB workflow run result check failed');
+  console.error('Android release AAB workflow run result check failed');
   process.exit(1);
 }
 
-console.log('Android signed AAB workflow run result check passed');
+console.log('Android release AAB workflow run result check passed');

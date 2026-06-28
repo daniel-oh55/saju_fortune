@@ -1,5 +1,16 @@
 # TODO
 
+## 2026-06-27 Android release AAB enforced rerun TODO
+
+- [x] Android Release AAB workflow 재실행 실패 결과 기록
+- [x] failed step 기록
+- [x] unsigned artifact upload 방지 여부 기록
+- [ ] 실패 원인 수정
+- [ ] Android Release AAB workflow 재실행
+- [ ] signed AAB 재검증
+- [ ] Play Console 내부 테스트 업로드
+- [ ] 실제 기기 QA
+
 ## 2026-06-27 Android release signing enforcement TODO
 
 - [x] release signing secrets validation step 추가
