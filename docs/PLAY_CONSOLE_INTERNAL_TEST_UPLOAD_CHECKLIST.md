@@ -1,5 +1,15 @@
 # Play Console Internal Test Upload Checklist
 
+## Play Console App Creation Fields Checklist
+
+- Play Console app creation fields checklist: Added
+- Play Console app creation: Pending
+- Actual Google Play Console input: Pending
+- Contact email: Pending
+- Privacy policy URL: Pending
+- Store screenshots upload: Pending
+- Real device QA: Pending
+
 ## Purpose
 
 이 문서는 하루풀이 Android signed AAB를 Google Play Console 내부 테스트 트랙에 업로드하기 전에 확인해야 할 항목을 정리한다.

@@ -2,6 +2,8 @@
 
 ## Added
 
+- Play Console app creation fields checklist 추가
+- Play Console 앱 생성 전 Confirmed/Pending 입력값 정리
 - Play Console internal test upload checklist 추가
 - Play Console 업로드 전 Pending 항목 정리
 - Android Release AAB run 6 artifact inspection 결과 기록

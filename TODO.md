@@ -1,5 +1,23 @@
 # TODO
 
+## 2026-06-28 Play Console app creation fields TODO
+
+- [x] Play Console 앱 생성 입력값 체크리스트 추가
+- [x] 확정 입력값과 Pending 입력값 분리
+- [x] signed AAB 기술 상태 반영
+- [x] app capability status 반영
+- [ ] Play Console app creation
+- [ ] 실제 Google Play Console 입력
+- [ ] Free or paid 선택 확정
+- [ ] Default language 확정
+- [ ] App category 확정
+- [ ] Contact email 확정
+- [ ] Privacy policy URL 확정
+- [ ] 실제 스토어 스크린샷 이미지 제작
+- [ ] Data safety form 제출
+- [ ] AAB 내부 테스트 업로드
+- [ ] 실제 기기 QA
+
 ## 2026-06-28 Play Console internal test upload checklist TODO
 
 - [x] Play Console 내부 테스트 업로드 전 체크리스트 추가
