@@ -1,21 +1,25 @@
-# Google Play Data Safety Form Draft
-
-## Google Play Data Safety Form Final Review
-
-- Google Play Data safety form final review: Confirmed
-- Actual Google Play Console Data safety input: Pending
-- Data safety form submission: Pending
-- Privacy policy URL Play Console input: Pending
-- AAB internal test upload: Pending
-- Real device QA: Pending
+# Google Play Data Safety Form Final Review
 
 ## Purpose
 
-This document prepares a draft answer set for the Google Play Data safety form based on the current 하루풀이 app implementation.
+This document records the final review status of the Google Play Data safety form draft for 하루풀이 before actual Google Play Console input.
 
 This document is not Google Play Console submission completion.
 
-## Current App Data Architecture
+## Final Review Status
+
+| Item | Status | Note |
+|---|---|---|
+| Google Play Data safety form draft | Confirmed | prepared in previous PR |
+| Data safety form final review | Confirmed | reviewed for current app implementation |
+| Actual Google Play Console Data safety input | Pending | not completed |
+| Data safety form submission | Pending | not submitted |
+| Privacy policy URL Play Console input | Pending | not entered |
+| Actual Google Play Console input | Pending | not completed |
+| AAB internal test upload | Pending | not uploaded |
+| Real device QA | Pending | not performed |
+
+## Reviewed Current App Data Architecture
 
 | Item | Status | Note |
 |---|---|---|
@@ -27,25 +31,25 @@ This document is not Google Play Console submission completion.
 | Push notification SDK | Not used | no push notification SDK |
 | Personal data server transfer | Not used | data is not sent to a server |
 | localStorage | Used | device-local browser/app storage |
-| Privacy policy final content confirmation | Confirmed | final content confirmed before this draft |
+| Privacy policy final content confirmation | Confirmed | final content confirmed |
 | Privacy policy public URL | Confirmed | https://saju-fortune-nu.vercel.app/privacy-policy.html |
 
-## Data Safety Draft Answers
+## Reviewed Draft Answers
 
-| Question Area | Draft Answer | Rationale |
+| Question Area | Final Review Status | Draft Answer |
 |---|---|---|
-| Does the app collect user data? | No server-side collection | Current implementation stores data locally only and does not send it to a server |
-| Is user data shared with third parties? | No | No server transfer, no external analytics SDK, no ad SDK, no payment SDK |
-| Is data encrypted in transit? | Not applicable for app data collection | Current app does not transmit personal data to a server |
-| Can users request data deletion? | Local deletion/reset guidance applies | Data is stored in localStorage and can be removed by app/browser data deletion |
-| Does the app use account creation? | No | Login/account system is not implemented |
-| Does the app use payment data? | No | Payment SDK is not implemented |
-| Does the app use advertising ID or ad data? | No | Actual ad SDK is not implemented |
-| Does the app use analytics data? | No external analytics SDK | External analytics SDK is not implemented |
-| Does the app use precise location? | No | No location SDK or server transfer is implemented |
-| Does the app use contacts, photos, files, or device identifiers? | No | No related SDK or permission is implemented |
+| User data collection | Confirmed | No server-side collection |
+| User data sharing with third parties | Confirmed | No |
+| Data encrypted in transit | Confirmed | Not applicable for app data collection |
+| Data deletion request | Confirmed | Local deletion/reset guidance applies |
+| Account creation | Confirmed | No |
+| Payment data | Confirmed | No |
+| Advertising ID or ad data | Confirmed | No |
+| Analytics data | Confirmed | No external analytics SDK |
+| Precise location | Confirmed | No |
+| Contacts/photos/files/device identifiers | Confirmed | No related SDK or permission implemented |
 
-## Local Data Stored on Device
+## Reviewed Local Device Data
 
 | Local Data Type | Status | Storage |
 |---|---|---|
@@ -56,38 +60,25 @@ This document is not Google Play Console submission completion.
 | Reminder settings if present in current app state | Used locally | localStorage |
 | Visit streak if present in current app state | Used locally | localStorage |
 
-## Not Used Capabilities
-
-| Capability | Status |
-|---|---|
-| Server database | Not used |
-| Login/account | Not used |
-| Payment SDK | Not used |
-| Actual ad SDK | Not used |
-| External analytics SDK | Not used |
-| Push notification SDK | Not used |
-| Personal data server transfer | Not used |
-| Location SDK | Not used |
-| Contacts access | Not used |
-| Photos/files access | Not used |
-
-## Remaining Before Data Safety Submission
+## Remaining Before Actual Console Submission
 
 | Item | Status | Note |
 |---|---|---|
-| Data safety form draft | Added | this document |
-| Data safety form final review | Pending | before Console input |
-| Actual Google Play Console Data safety input | Pending | not completed |
-| Data safety form submission | Pending | not submitted |
-| Privacy policy URL Play Console input | Pending | not entered |
+| Actual Google Play Console Data safety input | Pending | separate Console task |
+| Data safety form submission | Pending | separate Console task |
+| Privacy policy URL Play Console input | Pending | separate Console task |
+| App access declaration | Pending | not completed |
+| Ads declaration | Pending | not completed |
+| Content rating questionnaire | Pending | not completed |
+| Target audience and content | Pending | not completed |
 | AAB internal test upload | Pending | not uploaded |
 | Real device QA | Pending | not performed |
 
 ## Guardrails
 
-- This PR creates a Data safety form draft only.
+- This PR records Data safety form final review only.
 - This PR is not Google Play Console submission completion.
-- Actual Google Play Console input remains Pending.
+- Actual Google Play Console Data safety input remains Pending.
 - Data safety form submission remains Pending.
 - Privacy policy URL Play Console input remains Pending.
 - AAB internal test upload remains Pending.
@@ -120,6 +111,7 @@ This document is not Google Play Console submission completion.
 
 ## Related Docs
 
+- docs/GOOGLE_PLAY_DATA_SAFETY_FORM_DRAFT.md
 - docs/PRIVACY_POLICY_FINAL_CONTENT_CONFIRMATION.md
 - docs/PLAY_CONSOLE_CONTACT_PRIVACY_READINESS.md
 - docs/PLAY_CONSOLE_APP_CREATION_FIELDS.md

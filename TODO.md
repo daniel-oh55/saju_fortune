@@ -1,5 +1,17 @@
 # TODO
 
+## 2026-06-29 Google Play Data safety form final review TODO
+
+- [x] Google Play Data safety form final review recorded
+- [x] Data safety draft answers reviewed against current app implementation
+- [x] Actual Console input remains Pending
+- [x] Data safety form submission remains Pending
+- [ ] Actual Google Play Console Data safety input
+- [ ] Data safety form submission
+- [ ] Privacy policy URL Play Console input
+- [ ] AAB internal test upload
+- [ ] Real device QA
+
 ## 2026-06-29 Google Play Data safety form draft TODO
 
 - [x] Google Play Data safety form draft added

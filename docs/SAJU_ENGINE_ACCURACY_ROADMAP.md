@@ -1,5 +1,14 @@
 # Saju Engine Accuracy Roadmap
 
+## Google Play Data Safety Form Final Review
+
+- Google Play Data safety form final review: Confirmed
+- Actual Google Play Console Data safety input: Pending
+- Data safety form submission: Pending
+- Privacy policy URL Play Console input: Pending
+- AAB internal test upload: Pending
+- Real device QA: Pending
+
 ## Google Play Data Safety Form Draft
 
 - Google Play Data safety form draft: Added
