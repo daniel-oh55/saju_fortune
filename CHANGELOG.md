@@ -2,6 +2,8 @@
 
 ## Added
 
+- Google Play Data safety form draft document added
+- Current app data architecture and localStorage-only data handling status summarized before Console input
 - Privacy policy final content confirmation document added
 - Final privacy policy content confirmation status recorded before Play Console input
 - Recorded privacy policy final HTML deployment re-check results and added a verification script.

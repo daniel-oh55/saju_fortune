@@ -1,5 +1,18 @@
 # TODO
 
+## 2026-06-29 Google Play Data safety form draft TODO
+
+- [x] Google Play Data safety form draft added
+- [x] Current app data architecture summarized
+- [x] localStorage-only storage status recorded
+- [x] Server DB/Login/Payment/Ad/Analytics/Push/Personal data server transfer not used status recorded
+- [ ] Data safety form final review
+- [ ] Actual Google Play Console Data safety input
+- [ ] Data safety form submission
+- [ ] Privacy policy URL Play Console input
+- [ ] AAB internal test upload
+- [ ] Real device QA
+
 ## 2026-06-29 Privacy policy final content confirmation TODO
 
 - [x] Privacy policy final content confirmation recorded
