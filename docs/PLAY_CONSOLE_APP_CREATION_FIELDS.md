@@ -1,5 +1,15 @@
 # Play Console App Creation Fields
 
+## Privacy Policy Contact and Effective Date Confirmation
+
+- Privacy policy contact and effective date confirmation: Added
+- Contact email confirmation: Confirmed
+- Effective date confirmation: Confirmed
+- Privacy policy final content confirmation: Pending
+- Data safety form: Pending
+- Actual Google Play Console input: Pending
+- Real device QA: Pending
+
 ## Contact and Privacy Readiness
 
 - Privacy policy hosting options checklist: Added

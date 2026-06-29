@@ -2,6 +2,8 @@
 
 ## Added
 
+- Privacy policy contact and effective date confirmation document added
+- Contact email and effective date confirmation status recorded before final privacy policy HTML update
 - Privacy policy final content review readiness document added
 - Contact email and effective date placeholder status recorded before final privacy policy update
 - Privacy policy public URL confirmation document added
