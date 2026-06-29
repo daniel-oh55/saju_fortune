@@ -2,6 +2,8 @@
 
 ## Added
 
+- Google Play Data safety form final review document added
+- Data safety draft answers reviewed against current app implementation before Console input
 - Google Play Data safety form draft document added
 - Current app data architecture and localStorage-only data handling status summarized before Console input
 - Privacy policy final content confirmation document added
