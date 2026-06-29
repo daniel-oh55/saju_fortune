@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Added
+
+- Recorded privacy policy final HTML deployment re-check results and added a verification script.
+
 ## Changed
 
 - public/privacy-policy.html contact email and effective date placeholders replaced

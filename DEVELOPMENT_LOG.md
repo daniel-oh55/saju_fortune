@@ -1,5 +1,12 @@
 # DEVELOPMENT_LOG
 
+## Privacy Policy Final HTML Deployment Re-check
+
+- Recorded deployed privacy policy final HTML re-check results.
+- Confirmed public URL, no-login access, HTTPS access, desktop/mobile browser re-check, deployed contact email, deployed effective date, old placeholder removal, and final review notice removal.
+- Kept Privacy policy final content confirmation, Privacy policy URL Play Console input, Actual Google Play Console input, Data safety form submission, AAB internal test upload, and Real device QA as Pending.
+- Added `scripts/checkPrivacyPolicyFinalHtmlDeploymentRecheck.mjs` and `check:privacy-policy-final-html-deployment-recheck`.
+
 ## Privacy Policy Final HTML Update
 
 - public/privacy-policy.html final content update completed
