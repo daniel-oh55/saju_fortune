@@ -6,6 +6,19 @@ This document records the confirmed public contact email and effective date for 
 
 This document is not final privacy policy content confirmation.
 
+## Privacy Policy Final HTML Update
+
+- public/privacy-policy.html final content update: Confirmed
+- Contact email replacement in HTML: Confirmed
+- Effective date replacement in HTML: Confirmed
+- Final submission notice removal decision: Confirmed
+- Privacy policy final content confirmation: Pending
+- Privacy policy URL Play Console input: Pending
+- Actual Google Play Console input: Pending
+- Data safety form submission: Pending
+- AAB internal test upload: Pending
+- Real device QA: Pending
+
 ## Confirmed Values
 
 | Item | Status | Value |

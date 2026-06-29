@@ -1,5 +1,18 @@
 # TODO
 
+## 2026-06-29 Privacy policy final HTML update TODO
+
+- [x] Contact email replaced in public/privacy-policy.html
+- [x] Effective date replaced in public/privacy-policy.html
+- [x] Google Play final review notice removed
+- [x] public/privacy-policy.html final content update recorded
+- [ ] Privacy policy final content confirmation
+- [ ] Privacy policy final URL re-check after deployment
+- [ ] Privacy policy URL Play Console input
+- [ ] Data safety form submission
+- [ ] AAB internal test upload
+- [ ] Real device QA
+
 ## 2026-06-29 Privacy policy contact and effective date confirmation TODO
 
 - [x] Contact email confirmation recorded

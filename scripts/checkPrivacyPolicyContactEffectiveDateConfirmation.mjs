@@ -81,7 +81,6 @@ const forbiddenSnippets = [
 ];
 
 const protectedFiles = [
-  'public/privacy-policy.html',
   '.github/workflows/android-release-aab.yml',
   'android/app/build.gradle',
   'android/app/src/main/AndroidManifest.xml',
