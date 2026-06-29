@@ -1,5 +1,20 @@
 # TODO
 
+## 2026-06-29 Privacy policy final content review readiness TODO
+
+- [x] Privacy policy final content review readiness added
+- [x] Contact email placeholder state recorded
+- [x] Effective date placeholder state recorded
+- [x] Final content confirmation remains Pending
+- [ ] Contact email confirmation
+- [ ] Effective date confirmation
+- [ ] public/privacy-policy.html final content update
+- [ ] Privacy policy final content confirmation
+- [ ] Privacy policy URL Play Console input
+- [ ] Data safety form submission
+- [ ] AAB internal test upload
+- [ ] Real device QA
+
 ## 2026-06-29 Privacy policy public URL confirmation TODO
 
 - [x] Privacy policy public URL final confirmation recorded

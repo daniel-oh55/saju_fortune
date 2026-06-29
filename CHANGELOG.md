@@ -2,6 +2,8 @@
 
 ## Added
 
+- Privacy policy final content review readiness document added
+- Contact email and effective date placeholder status recorded before final privacy policy update
 - Privacy policy public URL confirmation document added
 - Public privacy policy URL final confirmation status recorded
 - Vercel public access re-check result recorded
