@@ -1,5 +1,15 @@
 # Play Console Internal Test Upload Checklist
 
+## Privacy Policy Contact and Effective Date Confirmation
+
+- Privacy policy contact and effective date confirmation: Added
+- Contact email confirmation: Confirmed
+- Effective date confirmation: Confirmed
+- Privacy policy final content confirmation: Pending
+- Data safety form: Pending
+- AAB upload to internal test: Pending
+- Real device QA: Pending
+
 ## Play Console App Creation Fields Checklist
 
 - Privacy policy hosting options checklist: Added

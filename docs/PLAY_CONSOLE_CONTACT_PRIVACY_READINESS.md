@@ -1,5 +1,17 @@
 # Play Console Contact and Privacy Readiness
 
+## Privacy Policy Contact and Effective Date Confirmation
+
+- Privacy policy contact and effective date confirmation: Added
+- Contact email confirmation: Confirmed
+- Effective date confirmation: Confirmed
+- public/privacy-policy.html final content update: Pending
+- Privacy policy final content confirmation: Pending
+- Privacy policy URL Play Console input: Pending
+- Data safety form: Pending
+- AAB upload: Pending
+- Real device QA: Pending
+
 ## Privacy Policy Hosting Options
 
 - Privacy policy hosting options checklist: Added

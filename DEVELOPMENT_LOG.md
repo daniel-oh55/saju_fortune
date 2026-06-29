@@ -1,5 +1,29 @@
 # DEVELOPMENT_LOG
 
+## Privacy Policy Contact and Effective Date Confirmation
+
+- Contact email confirmation recorded
+- Effective date confirmation recorded
+- public/privacy-policy.html final content update remains Pending
+- Privacy policy final content confirmation remains Pending
+- Privacy policy URL Play Console input remains Pending
+- Actual Google Play Console input remains Pending
+- Data safety form remains Pending
+- AAB internal test upload remains Pending
+- Real device QA remains Pending
+- public/privacy-policy.html unchanged
+- React routing unchanged
+- AndroidManifest.xml/resource unchanged
+- Gradle settings unchanged
+- Production calculation logic unchanged
+- Saju/fortune result generation logic unchanged
+- UI/design unchanged
+- `.aab` repository commit not added
+- `.zip` repository commit not added
+- Secret actual values not recorded
+- Tester email list not recorded
+- Signing password, keystore path, key alias, and keystore base64 not recorded
+
 ## Privacy Policy Final Content Review Readiness
 
 - Privacy policy final content review readiness added

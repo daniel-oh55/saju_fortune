@@ -6,6 +6,16 @@ This document records the confirmation status of the public privacy policy URL f
 
 This document is not Google Play Console input completion.
 
+## Privacy Policy Contact and Effective Date Confirmation
+
+- Privacy policy contact and effective date confirmation: Added
+- Contact email confirmation: Confirmed
+- Effective date confirmation: Confirmed
+- public/privacy-policy.html final content update: Pending
+- Privacy policy final content confirmation: Pending
+- Privacy policy URL Play Console input: Pending
+- Actual Google Play Console input: Pending
+
 ## Public URL Confirmation Status
 
 | Item | Status | Note |

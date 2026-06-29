@@ -1,5 +1,17 @@
 # Saju Engine Accuracy Roadmap
 
+## Privacy Policy Contact and Effective Date Confirmation
+
+- Privacy policy contact and effective date confirmation: Added
+- Contact email confirmation: Confirmed
+- Effective date confirmation: Confirmed
+- public/privacy-policy.html final content update: Pending
+- Privacy policy final content confirmation: Pending
+- Privacy policy URL Play Console input: Pending
+- Data safety form submission: Pending
+- AAB internal test upload: Pending
+- Real device QA: Pending
+
 ## Vercel Public Access Unblock Plan
 
 - Vercel public access unblock plan: Added
