@@ -1,5 +1,33 @@
 # DEVELOPMENT_LOG
 
+## Play Console Actual Input Readiness
+
+- Play Console actual input readiness checklist added
+- Confirmed Console-ready values consolidated
+- Privacy policy public URL remains Confirmed
+- Contact email remains Confirmed
+- Privacy policy final content confirmation remains Confirmed
+- Google Play Data safety form final review remains Confirmed
+- Actual Google Play Console input remains Pending
+- Play Console app creation remains Pending
+- Privacy policy URL Play Console input remains Pending
+- Actual Google Play Console Data safety input remains Pending
+- Data safety form submission remains Pending
+- AAB internal test upload remains Pending
+- Real device QA remains Pending
+- public/privacy-policy.html unchanged
+- React routing unchanged
+- AndroidManifest.xml/resource unchanged
+- Gradle settings unchanged
+- Production calculation logic unchanged
+- Saju/fortune result generation logic unchanged
+- UI/design unchanged
+- `.aab` repository commit not added
+- `.zip` repository commit not added
+- Secret actual values not recorded
+- Tester email list not recorded
+- Signing password, keystore path, key alias, and keystore base64 not recorded
+
 ## Google Play Data Safety Form Final Review
 
 - Google Play Data safety form final review recorded

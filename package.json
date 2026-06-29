@@ -57,6 +57,7 @@
     "check:privacy-policy-final-content-confirmation": "node scripts/checkPrivacyPolicyFinalContentConfirmation.mjs",
     "check:google-play-data-safety-form-draft": "node scripts/checkGooglePlayDataSafetyFormDraft.mjs",
     "check:google-play-data-safety-form-final-review": "node scripts/checkGooglePlayDataSafetyFormFinalReview.mjs",
+    "check:play-console-actual-input-readiness": "node scripts/checkPlayConsoleActualInputReadiness.mjs",
     "check:privacy-policy-final-html-deployment-recheck": "node scripts/checkPrivacyPolicyFinalHtmlDeploymentRecheck.mjs",
     "check:privacy-policy-final-html-update": "node scripts/checkPrivacyPolicyFinalHtmlUpdate.mjs",
     "check:privacy-policy-contact-effective-date-confirmation": "node scripts/checkPrivacyPolicyContactEffectiveDateConfirmation.mjs",

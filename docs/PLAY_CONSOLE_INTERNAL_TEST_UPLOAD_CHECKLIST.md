@@ -1,5 +1,16 @@
 # Play Console Internal Test Upload Checklist
 
+## Play Console Actual Input Readiness
+
+- Play Console actual input readiness checklist: Added
+- Play Console app creation: Pending
+- Actual Google Play Console input: Pending
+- Privacy policy URL Play Console input: Pending
+- Actual Google Play Console Data safety input: Pending
+- Data safety form submission: Pending
+- AAB internal test upload: Pending
+- Real device QA: Pending
+
 ## Google Play Data Safety Form Final Review
 
 - Google Play Data safety form final review: Confirmed

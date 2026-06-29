@@ -2,6 +2,8 @@
 
 ## Added
 
+- Play Console actual input readiness checklist added
+- Confirmed Play Console-ready values consolidated before manual Console input
 - Google Play Data safety form final review document added
 - Data safety draft answers reviewed against current app implementation before Console input
 - Google Play Data safety form draft document added
