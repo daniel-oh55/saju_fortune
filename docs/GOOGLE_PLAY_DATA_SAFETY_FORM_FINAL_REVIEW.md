@@ -1,5 +1,16 @@
 # Google Play Data Safety Form Final Review
 
+## Play Console Actual Input Readiness
+
+- Play Console actual input readiness checklist: Added
+- Play Console app creation: Pending
+- Actual Google Play Console input: Pending
+- Privacy policy URL Play Console input: Pending
+- Actual Google Play Console Data safety input: Pending
+- Data safety form submission: Pending
+- AAB internal test upload: Pending
+- Real device QA: Pending
+
 ## Purpose
 
 This document records the final review status of the Google Play Data safety form draft for 하루풀이 before actual Google Play Console input.

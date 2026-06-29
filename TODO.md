@@ -1,5 +1,19 @@
 # TODO
 
+## 2026-06-29 Play Console actual input readiness TODO
+
+- [x] Play Console actual input readiness checklist added
+- [x] Confirmed Console-ready values consolidated
+- [x] Data safety final review status linked
+- [x] Actual Console input remains Pending
+- [ ] Play Console app creation
+- [ ] Privacy policy URL Play Console input
+- [ ] Actual Google Play Console Data safety input
+- [ ] Data safety form submission
+- [ ] Store listing assets
+- [ ] AAB internal test upload
+- [ ] Real device QA
+
 ## 2026-06-29 Google Play Data safety form final review TODO
 
 - [x] Google Play Data safety form final review recorded
