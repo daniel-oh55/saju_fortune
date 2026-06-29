@@ -1,5 +1,14 @@
 # Privacy Policy Final HTML Deployment Re-check
 
+## Privacy Policy Final Content Confirmation
+
+- Privacy policy final content confirmation: Confirmed
+- Privacy policy URL Play Console input: Pending
+- Actual Google Play Console input: Pending
+- Data safety form submission: Pending
+- AAB internal test upload: Pending
+- Real device QA: Pending
+
 ## Purpose
 
 This document records the deployed privacy policy HTML re-check result after the final HTML content update.
@@ -20,7 +29,7 @@ This document is not final privacy policy content confirmation and is not Google
 | Old contact email placeholder removal check | Confirmed | removed from deployed page |
 | Old effective date placeholder removal check | Confirmed | removed from deployed page |
 | Google Play final review notice removal check | Confirmed | removed from deployed page |
-| Privacy policy final content confirmation | Pending | separate final review remains |
+| Privacy policy final content confirmation | Confirmed | final content confirmed for Play Console use |
 | Privacy policy URL Play Console input | Pending | not entered |
 | Actual Google Play Console input | Pending | not completed |
 | Data safety form submission | Pending | not submitted |
@@ -30,7 +39,7 @@ This document is not final privacy policy content confirmation and is not Google
 ## Guardrails
 
 - This PR records deployment re-check results only.
-- Privacy policy final content confirmation remains Pending.
+- Privacy policy final content confirmation is Confirmed in a later documentation PR.
 - Privacy policy URL Play Console input remains Pending.
 - Actual Google Play Console input remains Pending.
 - Data safety form submission remains Pending.

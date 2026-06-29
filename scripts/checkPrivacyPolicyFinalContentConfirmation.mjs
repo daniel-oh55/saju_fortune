@@ -1,14 +1,12 @@
 import fs from 'node:fs';
 import { execSync } from 'node:child_process';
 
-const deploymentDocPath = 'docs/PRIVACY_POLICY_FINAL_HTML_DEPLOYMENT_RECHECK.md';
-const publicUrl = 'https://saju-fortune-nu.vercel.app/privacy-policy.html';
-const contactEmail = 'support.hym@gmail.com';
-const effectiveDate = '2026년6월29일';
+const confirmationDocPath = 'docs/PRIVACY_POLICY_FINAL_CONTENT_CONFIRMATION.md';
 
 const relatedDocs = [
-  'docs/PRIVACY_POLICY_CONTACT_EFFECTIVE_DATE_CONFIRMATION.md',
+  'docs/PRIVACY_POLICY_FINAL_HTML_DEPLOYMENT_RECHECK.md',
   'docs/PRIVACY_POLICY_FINAL_CONTENT_REVIEW_READINESS.md',
+  'docs/PRIVACY_POLICY_CONTACT_EFFECTIVE_DATE_CONFIRMATION.md',
   'docs/PRIVACY_POLICY_PUBLIC_URL_CONFIRMATION.md',
   'docs/PRIVACY_POLICY_FINALIZATION_READINESS.md',
   'docs/PLAY_CONSOLE_CONTACT_PRIVACY_READINESS.md',
@@ -17,42 +15,48 @@ const relatedDocs = [
   'docs/SAJU_ENGINE_ACCURACY_ROADMAP.md',
 ];
 
-const requiredDeploymentDocSnippets = [
+const requiredDocSnippets = [
+  '# Privacy Policy Final Content Confirmation',
+  'This document is not Google Play Console input completion.',
   'Privacy policy public URL | Confirmed | https://saju-fortune-nu.vercel.app/privacy-policy.html',
-  'Public no-login access | Confirmed',
-  'HTTPS access | Confirmed',
-  'Desktop browser re-check | Confirmed',
-  'Mobile browser re-check | Confirmed',
-  `Contact email deployed content check | Confirmed | ${contactEmail}`,
-  `Effective date deployed content check | Confirmed | ${effectiveDate}`,
-  'Old contact email placeholder removal check | Confirmed',
-  'Old effective date placeholder removal check | Confirmed',
-  'Google Play final review notice removal check | Confirmed',
+  'public/privacy-policy.html final content update | Confirmed',
+  'Privacy policy final HTML deployment re-check | Confirmed',
   'Privacy policy final content confirmation | Confirmed',
+  'Contact email confirmation | Confirmed | support.hym@gmail.com',
+  'Effective date confirmation | Confirmed | 2026년6월29일',
   'Privacy policy URL Play Console input | Pending',
   'Actual Google Play Console input | Pending',
   'Data safety form submission | Pending',
   'AAB internal test upload | Pending',
   'Real device QA | Pending',
+  'This PR records final privacy policy content confirmation only.',
+  'public/privacy-policy.html is not changed in this PR.',
+  'React routing is not changed.',
+  'Production saju/fortune calculation logic is not changed.',
+  'schemaVersion and existing localStorage keys are not changed.',
 ];
 
 const requiredRelatedDocSnippets = [
-  'Privacy policy final HTML deployment re-check: Added',
   'Privacy policy final content confirmation: Confirmed',
   'Privacy policy URL Play Console input: Pending',
   'Actual Google Play Console input: Pending',
+  'Data safety form submission: Pending',
+  'AAB internal test upload: Pending',
+  'Real device QA: Pending',
 ];
 
 const forbiddenSnippets = [
-  'Privacy policy URL Play Console input: Confirmed',
   'Privacy policy URL Play Console input | Confirmed',
-  'Actual Google Play Console input: Confirmed',
+  'Privacy policy URL Play Console input: Confirmed',
   'Actual Google Play Console input | Confirmed',
+  'Actual Google Play Console input: Confirmed',
   'Data safety form | Submitted',
   'Data safety form submission | Submitted',
   'AAB upload | Confirmed',
   'AAB internal test upload | Confirmed',
   'Real device QA | Confirmed',
+  'Play Console upload: Completed',
+  '실제 기기 QA: Completed',
   '실제 스토어 스크린샷 이미지 시작',
   '서양식 보정 적용 여부',
   '양력/음력 샘플 추가 검증',
@@ -82,6 +86,7 @@ const secretPatterns = [
 ];
 
 const protectedFiles = [
+  'public/privacy-policy.html',
   '.github/workflows/android-release-aab.yml',
   'android/app/build.gradle',
   'android/app/src/main/AndroidManifest.xml',
@@ -113,19 +118,18 @@ function checkIncludes(sourceLabel, source, snippets) {
 
 let hasFailure = false;
 
-const deploymentDocExists = fs.existsSync(deploymentDocPath);
-logResult('privacy_policy_final_html_deployment_recheck_doc_exists', deploymentDocExists, deploymentDocPath);
-if (!deploymentDocExists) process.exit(1);
+const confirmationDocExists = fs.existsSync(confirmationDocPath);
+logResult('privacy_policy_final_content_confirmation_doc_exists', confirmationDocExists, confirmationDocPath);
+if (!confirmationDocExists) process.exit(1);
 
 const docsToScan = [
   {
-    path: deploymentDocPath,
-    source: fs.readFileSync(deploymentDocPath, 'utf8'),
+    path: confirmationDocPath,
+    source: fs.readFileSync(confirmationDocPath, 'utf8'),
   },
 ];
 
-const deploymentDoc = docsToScan[0].source;
-if (!checkIncludes('deployment_doc', deploymentDoc, requiredDeploymentDocSnippets)) hasFailure = true;
+if (!checkIncludes('confirmation_doc', docsToScan[0].source, requiredDocSnippets)) hasFailure = true;
 
 for (const path of relatedDocs) {
   const exists = fs.existsSync(path);
@@ -158,7 +162,7 @@ for (const { label, pattern } of secretPatterns) {
 
 const packageJson = fs.readFileSync('package.json', 'utf8');
 const scriptRegistered = packageJson.includes(
-  '"check:privacy-policy-final-html-deployment-recheck": "node scripts/checkPrivacyPolicyFinalHtmlDeploymentRecheck.mjs"'
+  '"check:privacy-policy-final-content-confirmation": "node scripts/checkPrivacyPolicyFinalContentConfirmation.mjs"'
 );
 logResult('package_script_registered', scriptRegistered);
 if (!scriptRegistered) hasFailure = true;
@@ -167,7 +171,7 @@ const diffOutput = execSync(`git diff --name-only -- ${protectedFiles.join(' ')}
   encoding: 'utf8',
 }).trim();
 const protectedFilesUnchanged = diffOutput.length === 0;
-logResult('android_native_gradle_routing_source_files_unchanged_in_working_diff', protectedFilesUnchanged);
+logResult('privacy_html_android_gradle_routing_source_files_unchanged_in_working_diff', protectedFilesUnchanged);
 if (!protectedFilesUnchanged) hasFailure = true;
 
 const trackedFiles = execSync('git ls-files', { encoding: 'utf8' })
@@ -184,13 +188,9 @@ const artifactFilesAbsent = artifactFiles.length === 0;
 logResult('artifact_zip_and_keystore_files_not_added_to_repository', artifactFilesAbsent);
 if (!artifactFilesAbsent) hasFailure = true;
 
-const publicUrlRecorded = deploymentDoc.includes(publicUrl);
-logResult('privacy_policy_public_url_recorded', publicUrlRecorded);
-if (!publicUrlRecorded) hasFailure = true;
-
 if (hasFailure) {
-  console.error('Privacy policy final HTML deployment re-check failed');
+  console.error('Privacy policy final content confirmation check failed');
   process.exit(1);
 }
 
-console.log('Privacy policy final HTML deployment re-check passed');
+console.log('Privacy policy final content confirmation check passed');

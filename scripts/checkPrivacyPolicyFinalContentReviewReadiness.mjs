@@ -122,7 +122,6 @@ const relatedDocs = [
 ];
 
 const forbiddenSnippets = [
-  'Privacy policy final content confirmation | Confirmed',
   'Contact email confirmation | Confirmed',
   'Effective date confirmation | Confirmed',
   'public/privacy-policy.html final content update | Confirmed',
