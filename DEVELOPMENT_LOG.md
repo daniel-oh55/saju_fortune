@@ -1,5 +1,37 @@
 # DEVELOPMENT_LOG
 
+## Google Play Data Safety Form Draft
+
+- Google Play Data safety form draft added
+- Current app data architecture summarized
+- Server DB not used
+- Login/account creation not used
+- Payment SDK not used
+- Actual ad SDK not used
+- External analytics SDK not used
+- Push notification SDK not used
+- Personal data server transfer not used
+- localStorage used for device-local storage
+- Privacy policy final content confirmation remains Confirmed
+- Data safety form final review remains Pending
+- Actual Google Play Console Data safety input remains Pending
+- Data safety form submission remains Pending
+- Privacy policy URL Play Console input remains Pending
+- AAB internal test upload remains Pending
+- Real device QA remains Pending
+- public/privacy-policy.html unchanged
+- React routing unchanged
+- AndroidManifest.xml/resource unchanged
+- Gradle settings unchanged
+- Production calculation logic unchanged
+- Saju/fortune result generation logic unchanged
+- UI/design unchanged
+- `.aab` repository commit not added
+- `.zip` repository commit not added
+- Secret actual values not recorded
+- Tester email list not recorded
+- Signing password, keystore path, key alias, and keystore base64 not recorded
+
 ## Privacy Policy Final Content Confirmation
 
 - Privacy policy final content confirmation recorded

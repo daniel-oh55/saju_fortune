@@ -1,5 +1,15 @@
 # Privacy Policy Final Content Confirmation
 
+## Google Play Data Safety Form Draft
+
+- Google Play Data safety form draft: Added
+- Data safety form final review: Pending
+- Actual Google Play Console Data safety input: Pending
+- Data safety form submission: Pending
+- Privacy policy URL Play Console input: Pending
+- AAB internal test upload: Pending
+- Real device QA: Pending
+
 ## Purpose
 
 This document records that the 하루풀이 privacy policy final content is confirmed after the final HTML update and deployed page re-check.
