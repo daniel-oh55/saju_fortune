@@ -1,5 +1,15 @@
 # Privacy Policy Public URL Confirmation
 
+## Privacy Policy Final HTML Deployment Re-check
+
+- Privacy policy final HTML deployment re-check: Added
+- Privacy policy final content confirmation: Pending
+- Privacy policy URL Play Console input: Pending
+- Actual Google Play Console input: Pending
+- Data safety form submission: Pending
+- AAB internal test upload: Pending
+- Real device QA: Pending
+
 ## Purpose
 
 This document records the confirmation status of the public privacy policy URL for Harupuli before Google Play Console input.

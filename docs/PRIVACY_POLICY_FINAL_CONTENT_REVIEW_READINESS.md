@@ -1,5 +1,15 @@
 # Privacy Policy Final Content Review Readiness
 
+## Privacy Policy Final HTML Deployment Re-check
+
+- Privacy policy final HTML deployment re-check: Added
+- Privacy policy final content confirmation: Pending
+- Privacy policy URL Play Console input: Pending
+- Actual Google Play Console input: Pending
+- Data safety form submission: Pending
+- AAB internal test upload: Pending
+- Real device QA: Pending
+
 ## Purpose
 
 This document records the remaining review items before the Harupuli privacy policy page can be treated as final for Google Play Console use.

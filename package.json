@@ -54,6 +54,7 @@
     "check:ten-gods-analysis-qa": "node scripts/checkTenGodsAnalysisQa.mjs",
     "check:ten-gods-copy-guidelines": "node scripts/checkTenGodsCopyGuidelines.mjs",
     "check:static-privacy-policy-page-draft": "node scripts/checkStaticPrivacyPolicyPageDraft.mjs",
+    "check:privacy-policy-final-html-deployment-recheck": "node scripts/checkPrivacyPolicyFinalHtmlDeploymentRecheck.mjs",
     "check:privacy-policy-final-html-update": "node scripts/checkPrivacyPolicyFinalHtmlUpdate.mjs",
     "check:privacy-policy-contact-effective-date-confirmation": "node scripts/checkPrivacyPolicyContactEffectiveDateConfirmation.mjs",
     "check:privacy-policy-final-content-review-readiness": "node scripts/checkPrivacyPolicyFinalContentReviewReadiness.mjs",

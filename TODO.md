@@ -1,5 +1,24 @@
 # TODO
 
+## 2026-06-29 Privacy policy final HTML deployment re-check TODO
+
+- [x] Privacy policy final HTML deployment re-check recorded
+- [x] Privacy policy public URL recorded
+- [x] Public no-login access recorded
+- [x] HTTPS access recorded
+- [x] Desktop browser re-check recorded
+- [x] Mobile browser re-check recorded
+- [x] Contact email deployed content check recorded
+- [x] Effective date deployed content check recorded
+- [x] Old placeholder removal checks recorded
+- [x] Google Play final review notice removal check recorded
+- [ ] Privacy policy final content confirmation
+- [ ] Privacy policy URL Play Console input
+- [ ] Actual Google Play Console input
+- [ ] Data safety form submission
+- [ ] AAB internal test upload
+- [ ] Real device QA
+
 ## 2026-06-29 Privacy policy final HTML update TODO
 
 - [x] Contact email replaced in public/privacy-policy.html

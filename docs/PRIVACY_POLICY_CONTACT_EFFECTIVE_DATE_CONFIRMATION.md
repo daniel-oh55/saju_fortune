@@ -1,5 +1,15 @@
 # Privacy Policy Contact and Effective Date Confirmation
 
+## Privacy Policy Final HTML Deployment Re-check
+
+- Privacy policy final HTML deployment re-check: Added
+- Privacy policy final content confirmation: Pending
+- Privacy policy URL Play Console input: Pending
+- Actual Google Play Console input: Pending
+- Data safety form submission: Pending
+- AAB internal test upload: Pending
+- Real device QA: Pending
+
 ## Purpose
 
 This document records the confirmed public contact email and effective date for the 하루풀이 privacy policy before updating public/privacy-policy.html.
