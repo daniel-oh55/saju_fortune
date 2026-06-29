@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## Changed
+
+- public/privacy-policy.html contact email and effective date placeholders replaced
+- Google Play final review notice removed from privacy policy page
+
 ## Added
 
 - Privacy policy contact and effective date confirmation document added

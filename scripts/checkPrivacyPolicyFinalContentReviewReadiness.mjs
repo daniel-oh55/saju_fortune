@@ -156,7 +156,6 @@ const forbiddenPatterns = [
 ];
 
 const protectedFiles = [
-  'public/privacy-policy.html',
   '.github/workflows/android-release-aab.yml',
   'android/app/build.gradle',
   'android/app/src/main/AndroidManifest.xml',
@@ -200,11 +199,21 @@ if (!checkIncludes('doc', doc, requiredSnippets)) hasFailure = true;
 
 const publicHtml = fs.readFileSync('public/privacy-policy.html', 'utf8');
 const placeholderChecks = [
+  '문의 이메일: support.hym@gmail.com',
+  '시행일: 2026년6월29일',
+];
+if (!checkIncludes('public_privacy_policy_html', publicHtml, placeholderChecks)) hasFailure = true;
+
+const removedPlaceholderChecks = [
   '문의 이메일: 출시 전 확정 예정',
   '시행일: 출시 전 확정 예정',
   'Google Play 제출 전 최종 검토가 필요합니다.',
 ];
-if (!checkIncludes('public_privacy_policy_html', publicHtml, placeholderChecks)) hasFailure = true;
+for (const snippet of removedPlaceholderChecks) {
+  const absent = !publicHtml.includes(snippet);
+  logResult(`public_privacy_policy_html_removed_${labelFromSnippet(snippet)}`, absent);
+  if (!absent) hasFailure = true;
+}
 
 for (const { path, snippets } of relatedDocs) {
   const relatedExists = fs.existsSync(path);
