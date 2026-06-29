@@ -24,7 +24,7 @@ const requiredSnippets = [
   'Privacy policy URL Play Console input | Pending',
   'Actual Google Play Console input | Pending',
   'Contact email confirmation | Pending',
-  'Privacy policy final content confirmation | Pending',
+  'Privacy policy final content confirmation | Confirmed',
   'Data safety form submission | Pending',
   'AAB internal test upload | Pending',
   'Real device QA | Pending',

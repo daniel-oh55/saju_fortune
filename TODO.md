@@ -1,5 +1,18 @@
 # TODO
 
+## 2026-06-29 Privacy policy final content confirmation TODO
+
+- [x] Privacy policy final content confirmation recorded
+- [x] Final privacy policy content separated from Play Console input
+- [x] Data safety form remains Pending
+- [x] AAB internal test upload remains Pending
+- [x] Real device QA remains Pending
+- [ ] Privacy policy URL Play Console input
+- [ ] Actual Google Play Console input
+- [ ] Data safety form submission
+- [ ] AAB internal test upload
+- [ ] Real device QA
+
 ## 2026-06-29 Privacy policy final HTML deployment re-check TODO
 
 - [x] Privacy policy final HTML deployment re-check recorded

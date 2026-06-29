@@ -46,11 +46,10 @@ const relatedDocs = [
 
 const requiredRelatedDocSnippets = [
   'public/privacy-policy.html final content update: Confirmed',
-  'Privacy policy final content confirmation: Pending',
+  'Privacy policy final content confirmation: Confirmed',
 ];
 
 const forbiddenDocSnippets = [
-  'Privacy policy final content confirmation | Confirmed',
   'Privacy policy URL Play Console input | Confirmed',
   'Actual Google Play Console input | Confirmed',
   'Data safety form | Submitted',
