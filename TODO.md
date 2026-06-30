@@ -1,5 +1,20 @@
 # TODO
 
+## 2026-07-01 Manseryeok external comparison template TODO
+
+- [x] Manseryeok external comparison template added
+- [x] External reference columns documented
+- [x] Sample comparison template documented
+- [x] Match status values documented
+- [x] Discrepancy log template documented
+- [ ] Select external manseryeok references
+- [ ] Actual external reference comparison
+- [ ] Manual comparison sheet completion
+- [ ] Discrepancy log
+- [ ] 음력/윤달 샘플 외부 검증
+- [ ] 태양시 보정 적용 여부
+- [ ] Engine accuracy approval
+
 ## 2026-06-30 Manseryeok external verification plan TODO
 
 - [x] Manseryeok external verification plan added
