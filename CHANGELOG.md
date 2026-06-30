@@ -2,6 +2,8 @@
 
 ## Added
 
+- Manseryeok external comparison template document added
+- Manual comparison fields, match status values, and discrepancy log template documented before external verification
 - Manseryeok external verification plan document added
 - External sample matrix, verification fields, pass/fail criteria, and discrepancy handling plan documented before production engine changes
 - Fortune engine sample snapshot quality review document added

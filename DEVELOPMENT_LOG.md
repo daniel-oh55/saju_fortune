@@ -1,5 +1,34 @@
 # DEVELOPMENT_LOG
 
+## Manseryeok External Comparison Template
+
+- Manseryeok external comparison template added
+- External reference columns documented
+- Sample comparison template documented
+- Match status values documented
+- Discrepancy log template documented
+- Actual external reference comparison remains Pending
+- External manseryeok reference selection remains Pending
+- Manual comparison sheet completion remains Pending
+- Discrepancy log remains Pending
+- 음력/윤달 샘플 외부 검증 remains Pending
+- 태양시 보정 적용 여부 remains Pending
+- Engine accuracy approval remains Pending
+- Production engine logic unchanged
+- Manseryeok logic unchanged
+- CURRENT_FORTUNE_SCHEMA_VERSION unchanged
+- schemaVersion unchanged
+- Existing localStorage keys unchanged
+- Snapshot JSON unchanged
+- Routing unchanged
+- UI/design unchanged
+- public/privacy-policy.html unchanged
+- AndroidManifest.xml/resource unchanged
+- Gradle settings unchanged
+- `.aab` repository commit not added
+- `.zip` repository commit not added
+- Secret actual values not recorded
+
 ## Manseryeok External Verification Plan
 
 - Manseryeok external verification plan added
