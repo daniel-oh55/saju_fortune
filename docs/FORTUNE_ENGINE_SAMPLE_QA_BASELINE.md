@@ -1,5 +1,14 @@
 # Fortune Engine Sample QA Baseline
 
+## Manseryeok External Verification Plan
+
+- Manseryeok external verification plan: Added
+- Actual external reference comparison: Pending
+- 음력/윤달 샘플 외부 검증: Pending
+- 태양시 보정 적용 여부: Pending
+- Engine accuracy approval: Pending
+- Production engine logic change: Pending
+
 ## Fortune Engine Sample Snapshot Quality Review
 
 - Fortune engine sample snapshot quality review: Added

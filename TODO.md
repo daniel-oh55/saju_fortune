@@ -1,5 +1,18 @@
 # TODO
 
+## 2026-06-30 Manseryeok external verification plan TODO
+
+- [x] Manseryeok external verification plan added
+- [x] External verification sample matrix documented
+- [x] Verification fields documented
+- [x] Pass/fail criteria draft documented
+- [x] Discrepancy handling plan documented
+- [ ] Select external manseryeok references
+- [ ] Actual external reference comparison
+- [ ] 음력/윤달 샘플 외부 검증
+- [ ] 태양시 보정 적용 여부
+- [ ] Engine accuracy approval
+
 ## 2026-06-30 Fortune engine sample snapshot quality review TODO
 
 - [x] Fortune engine sample snapshot quality review added

@@ -2,6 +2,8 @@
 
 ## Added
 
+- Manseryeok external verification plan document added
+- External sample matrix, verification fields, pass/fail criteria, and discrepancy handling plan documented before production engine changes
 - Fortune engine sample snapshot quality review document added
 - Snapshot output coverage and quality observations documented before production engine changes
 - Fortune engine sample snapshot runner added
