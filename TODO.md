@@ -1,5 +1,21 @@
 # TODO
 
+## 2026-06-30 Fortune engine sample snapshot TODO
+
+- [x] Fortune engine sample snapshot runner added
+- [x] Fortune engine sample snapshot JSON generated
+- [x] Today fortune sample output recorded
+- [x] Saju analysis sample output recorded
+- [x] Manseryeok sample output recorded
+- [x] Year/monthly fortune sample output recorded
+- [x] Zodiac fortune sample output recorded
+- [ ] Snapshot output quality review
+- [ ] 음력/윤달 샘플 외부 검증
+- [ ] 태양시 보정 적용 여부
+- [ ] Today fortune engine improvement design
+- [ ] Year/monthly fortune engine improvement design
+- [ ] Zodiac fortune engine improvement design
+
 ## 2026-06-30 Fortune engine sample snapshot readiness TODO
 
 - [x] Fortune engine sample snapshot readiness added

@@ -1,0 +1,1705 @@
+{
+  "snapshotVersion": "fortune_engine_sample_snapshot_v1",
+  "dateKey": "2026-06-30",
+  "targetYear": 2026,
+  "source": "artificial_sample_profiles_only",
+  "productionLogicChanged": false,
+  "engineAccuracyApproval": "Pending",
+  "externalVerification": {
+    "음력/윤달 샘플 외부 검증": "Pending",
+    "태양시 보정 적용 여부": "Pending"
+  },
+  "samples": [
+    {
+      "sampleId": "solar-known-time-01",
+      "purpose": "standard solar known-time sample",
+      "profileInputSummary": {
+        "id": "sample-solar-known-time-01",
+        "nickname": "Sample A",
+        "birthDate": "1990-03-15",
+        "birthTime": "09:30",
+        "birthTimeUnknown": false,
+        "calendarType": "solar",
+        "isLeapMonth": false,
+        "lateNightJasiPolicy": "same_day",
+        "gender": "female"
+      },
+      "todayFortuneSummary": {
+        "id": "sample-solar-known-time-01-2026-06-30",
+        "schemaVersion": 5,
+        "profileId": "sample-solar-known-time-01",
+        "dateKey": "2026-06-30",
+        "averageScore": 79,
+        "keyword": "토 균형",
+        "greeting": "Sample A님의 오늘 흐름은 79점입니다.",
+        "categoryIds": [
+          "overall",
+          "money",
+          "love",
+          "work",
+          "study",
+          "health"
+        ],
+        "categoryScores": {
+          "overall": 82,
+          "money": 71,
+          "love": 76,
+          "work": 78,
+          "study": 73,
+          "health": 91
+        },
+        "categorySummaries": {
+          "overall": "오늘은 작은 선택이 하루의 분위기를 바꾸는 날입니다.",
+          "money": "충동 지출만 줄이면 만족스러운 재물 흐름입니다.",
+          "love": "상대의 속도를 존중하면 좋은 대화가 열립니다.",
+          "work": "협업에서 당신의 차분함이 돋보입니다.",
+          "study": "새 내용을 많이 보기보다 핵심을 정리하기 좋은 날입니다.",
+          "health": "수면과 수분 섭취가 오늘 컨디션의 핵심입니다."
+        },
+        "monetization": {
+          "freeSummaryEnabled": true,
+          "rewardedAdDetailEnabled": true,
+          "premiumUpsellEnabled": true
+        },
+        "aiConsult": {
+          "enabled": false
+        }
+      },
+      "sajuAnalysisSummary": {
+        "engineStatus": "manseryeok_core_v0",
+        "birth": {
+          "birthDate": "1990-03-15",
+          "birthTime": "09:30",
+          "birthTimeUnknown": false,
+          "calendarType": "solar",
+          "isLeapMonth": false,
+          "gender": "female"
+        },
+        "pillars": {
+          "year": "경오",
+          "month": "기묘",
+          "day": "기묘",
+          "hour": "기사"
+        },
+        "elements": {
+          "dominant": "토",
+          "weak": "수",
+          "counts": {
+            "wood": 2,
+            "fire": 2,
+            "earth": 3,
+            "metal": 1,
+            "water": 0
+          },
+          "percentages": {
+            "wood": 25,
+            "fire": 25,
+            "earth": 38,
+            "metal": 13,
+            "water": 0
+          },
+          "balanceLabel": "토 기운이 비교적 두드러지는 구조"
+        },
+        "traits": [
+          "토 일간의 관찰력",
+          "토 기운의 흐름 감각",
+          "균형을 맞추려는 현실 감각"
+        ],
+        "weakPoints": [
+          "수 기운이 약하게 느껴질 때의 리듬 저하",
+          "한쪽 흐름에 치우치지 않도록 점검하기"
+        ],
+        "luckyKeywords": [
+          "토 균형",
+          "토 정리",
+          "차분한 점검"
+        ]
+      },
+      "manseryeokSummary": {
+        "ok": true,
+        "engine": "manseryeok_core_v0",
+        "accuracyStatus": "library_based_needs_reference_verification",
+        "timezone": "Asia/Seoul",
+        "convertedSolar": "1990-03-15 09:30:00",
+        "convertedLunar": {
+          "year": 1990,
+          "month": 2,
+          "day": 19,
+          "isLeapMonth": false
+        },
+        "dayMaster": {
+          "stem": "기",
+          "element": "토",
+          "yinYang": "음"
+        },
+        "notes": [
+          "태양시 보정은 아직 적용하지 않으며, 23시 이후 자시 기준은 사용자가 다음 날 자시 기준을 선택한 경우에만 적용합니다.",
+          "년주/월주는 KST 입력을 CST 기준으로 1시간 보정한 뒤 lunar-javascript exact API를 우선 사용합니다.",
+          "lunar-javascript 기반 계산 결과이며 외부 만세력 기준 샘플 검증이 필요합니다.",
+          "절기 경계 및 23시 이후 자시 기준은 추가 정책 검토가 필요합니다."
+        ]
+      },
+      "yearFortuneSummary": {
+        "targetYear": 2026,
+        "averageScore": 80,
+        "summary": "2026년은 작게 시작한 일이 하반기에 의미 있는 성과로 이어질 수 있습니다.",
+        "keyword": "토 균형",
+        "categoryIds": [
+          "money",
+          "love",
+          "work",
+          "health"
+        ],
+        "categoryScores": {
+          "money": 78,
+          "love": 92,
+          "work": 66,
+          "health": 85
+        },
+        "categorySummaries": {
+          "money": "고정비를 줄이고 장기 목표를 세우면 재물 흐름이 안정됩니다.",
+          "love": "감정을 쌓아두지 않고 부드럽게 표현할수록 관계운이 살아납니다.",
+          "work": "실력을 드러낼 기회가 오지만 무리한 약속은 피하는 편이 좋습니다.",
+          "health": "수면, 소화, 체력 루틴을 꾸준히 관리하면 큰 흔들림을 줄일 수 있습니다."
+        },
+        "monthsCount": 12,
+        "monthScores": {
+          "1": 72,
+          "2": 73,
+          "3": 74,
+          "4": 75,
+          "5": 76,
+          "6": 77,
+          "7": 78,
+          "8": 79,
+          "9": 80,
+          "10": 63,
+          "11": 62,
+          "12": 96
+        },
+        "monthNotes": {
+          "1": "집중 실행",
+          "2": "정리와 준비",
+          "3": "관계 확장",
+          "4": "재정 점검",
+          "5": "휴식과 회복",
+          "6": "새로운 기회",
+          "7": "집중 실행",
+          "8": "정리와 준비",
+          "9": "관계 확장",
+          "10": "집중 실행",
+          "11": "새로운 기회",
+          "12": "휴식과 회복"
+        }
+      },
+      "zodiacFortuneSummary": {
+        "selectedYear": 1990,
+        "selectedAnimal": "말",
+        "score": 75,
+        "summary": "1990년 말띠의 오늘은 활동성과 자유로운 흐름을 좋아합니다. 오늘은 행동으로 실마리를 찾는 편입니다.",
+        "categoryIds": [
+          "overall",
+          "money",
+          "relationship",
+          "work",
+          "health"
+        ],
+        "categoryScores": {
+          "overall": 85,
+          "money": 86,
+          "relationship": 62,
+          "work": 68,
+          "health": 76
+        },
+        "categorySummaries": {
+          "overall": "미뤄둔 연락을 정리하기 좋습니다. 하루의 방향을 크게 바꾸기보다 지금 보이는 흐름을 차분히 살펴보세요.",
+          "money": "기분 전환 지출은 한도를 정하면 편합니다. 지출 흐름과 예산 범위를 차분히 확인하는 정도가 어울립니다.",
+          "relationship": "가벼운 농담도 상대의 분위기를 살피면 좋습니다. 대화에서는 결론보다 서로의 속도를 맞추는 태도가 도움이 됩니다.",
+          "work": "오늘 약속 시간을 다시 확인해보세요. 바로 할 수 있는 작은 루틴 하나가 하루를 정돈하는 데 도움이 됩니다.",
+          "health": "활동 후에는 충분히 쉬어가세요. 컨디션을 살피며 휴식과 수면 리듬을 가볍게 챙겨보세요."
+        },
+        "detail": "가벼운 농담도 상대의 분위기를 살피면 좋습니다. 대화에서는 결론보다 서로의 속도를 맞추는 태도가 도움이 됩니다. 기분 전환 지출은 한도를 정하면 편합니다. 지출 흐름과 예산 범위를 차분히 확인하는 정도가 어울립니다. 활동 후에는 충분히 쉬어가세요. 컨디션을 살피며 휴식과 수면 리듬을 가볍게 챙겨보세요. 오늘 약속 시간을 다시 확인해보세요. 바로 할 수 있는 작은 루틴 하나가 하루를 정돈하는 데 도움이 됩니다. 지루함을 피하려다 마무리를 놓칠 수 있습니다. 오늘의 흐름은 참고용으로 살펴보고, 중요한 선택은 여러 정보를 함께 확인해보세요."
+      }
+    },
+    {
+      "sampleId": "solar-unknown-time-01",
+      "purpose": "birthTimeUnknown 시주 미상 sample",
+      "profileInputSummary": {
+        "id": "sample-solar-unknown-time-01",
+        "nickname": "Sample B",
+        "birthDate": "1988-07-21",
+        "birthTime": null,
+        "birthTimeUnknown": true,
+        "calendarType": "solar",
+        "isLeapMonth": false,
+        "lateNightJasiPolicy": "same_day",
+        "gender": "male"
+      },
+      "todayFortuneSummary": {
+        "id": "sample-solar-unknown-time-01-2026-06-30",
+        "schemaVersion": 5,
+        "profileId": "sample-solar-unknown-time-01",
+        "dateKey": "2026-06-30",
+        "averageScore": 74,
+        "keyword": "토 균형",
+        "greeting": "Sample B님의 오늘 흐름은 74점입니다.",
+        "categoryIds": [
+          "overall",
+          "money",
+          "love",
+          "work",
+          "study",
+          "health"
+        ],
+        "categoryScores": {
+          "overall": 65,
+          "money": 83,
+          "love": 66,
+          "work": 68,
+          "study": 74,
+          "health": 90
+        },
+        "categorySummaries": {
+          "overall": "오늘은 작은 선택이 하루의 분위기를 바꾸는 날입니다.",
+          "money": "충동 지출만 줄이면 만족스러운 재물 흐름입니다.",
+          "love": "상대의 속도를 존중하면 좋은 대화가 열립니다.",
+          "work": "협업에서 당신의 차분함이 돋보입니다.",
+          "study": "새 내용을 많이 보기보다 핵심을 정리하기 좋은 날입니다.",
+          "health": "수면과 수분 섭취가 오늘 컨디션의 핵심입니다."
+        },
+        "monetization": {
+          "freeSummaryEnabled": true,
+          "rewardedAdDetailEnabled": true,
+          "premiumUpsellEnabled": true
+        },
+        "aiConsult": {
+          "enabled": false
+        }
+      },
+      "sajuAnalysisSummary": {
+        "engineStatus": "manseryeok_core_v0",
+        "birth": {
+          "birthDate": "1988-07-21",
+          "birthTime": null,
+          "birthTimeUnknown": true,
+          "calendarType": "solar",
+          "isLeapMonth": false,
+          "gender": "male"
+        },
+        "pillars": {
+          "year": "무진",
+          "month": "기미",
+          "day": "정축",
+          "hour": "시주 미상"
+        },
+        "elements": {
+          "dominant": "토",
+          "weak": "목/금/수",
+          "counts": {
+            "wood": 0,
+            "fire": 1,
+            "earth": 5,
+            "metal": 0,
+            "water": 0
+          },
+          "percentages": {
+            "wood": 0,
+            "fire": 17,
+            "earth": 83,
+            "metal": 0,
+            "water": 0
+          },
+          "balanceLabel": "토 기운이 비교적 두드러지는 구조"
+        },
+        "traits": [
+          "화 일간의 관찰력",
+          "토 기운의 흐름 감각",
+          "균형을 맞추려는 현실 감각"
+        ],
+        "weakPoints": [
+          "목/금/수 기운이 약하게 느껴질 때의 리듬 저하",
+          "한쪽 흐름에 치우치지 않도록 점검하기"
+        ],
+        "luckyKeywords": [
+          "토 균형",
+          "화 정리",
+          "차분한 점검"
+        ]
+      },
+      "manseryeokSummary": {
+        "ok": true,
+        "engine": "manseryeok_core_v0",
+        "accuracyStatus": "library_based_needs_reference_verification",
+        "timezone": "Asia/Seoul",
+        "convertedSolar": "1988-07-21 12:00:00",
+        "convertedLunar": {
+          "year": 1988,
+          "month": 6,
+          "day": 8,
+          "isLeapMonth": false
+        },
+        "dayMaster": {
+          "stem": "정",
+          "element": "화",
+          "yinYang": "음"
+        },
+        "notes": [
+          "태양시 보정은 아직 적용하지 않으며, 23시 이후 자시 기준은 사용자가 다음 날 자시 기준을 선택한 경우에만 적용합니다.",
+          "년주/월주는 KST 입력을 CST 기준으로 1시간 보정한 뒤 lunar-javascript exact API를 우선 사용합니다.",
+          "lunar-javascript 기반 계산 결과이며 외부 만세력 기준 샘플 검증이 필요합니다.",
+          "절기 경계 및 23시 이후 자시 기준은 추가 정책 검토가 필요합니다.",
+          "시주 미상: birthTimeUnknown=true"
+        ]
+      },
+      "yearFortuneSummary": {
+        "targetYear": 2026,
+        "averageScore": 67,
+        "summary": "2026년은 작게 시작한 일이 하반기에 의미 있는 성과로 이어질 수 있습니다.",
+        "keyword": "토 균형",
+        "categoryIds": [
+          "money",
+          "love",
+          "work",
+          "health"
+        ],
+        "categoryScores": {
+          "money": 64,
+          "love": 72,
+          "work": 63,
+          "health": 70
+        },
+        "categorySummaries": {
+          "money": "상반기에는 지출 관리, 하반기에는 수익 확장 기회에 집중해보세요.",
+          "love": "관계에서 솔직함과 배려를 함께 가져가면 깊이가 생기는 해입니다.",
+          "work": "실력을 드러낼 기회가 오지만 무리한 약속은 피하는 편이 좋습니다.",
+          "health": "가벼운 운동과 휴식 시간을 일정에 먼저 넣어두는 것이 좋습니다."
+        },
+        "monthsCount": 12,
+        "monthScores": {
+          "1": 70,
+          "2": 69,
+          "3": 68,
+          "4": 67,
+          "5": 66,
+          "6": 65,
+          "7": 64,
+          "8": 63,
+          "9": 62,
+          "10": 92,
+          "11": 93,
+          "12": 94
+        },
+        "monthNotes": {
+          "1": "재정 점검",
+          "2": "관계 확장",
+          "3": "정리와 준비",
+          "4": "집중 실행",
+          "5": "새로운 기회",
+          "6": "휴식과 회복",
+          "7": "재정 점검",
+          "8": "관계 확장",
+          "9": "정리와 준비",
+          "10": "정리와 준비",
+          "11": "관계 확장",
+          "12": "재정 점검"
+        }
+      },
+      "zodiacFortuneSummary": {
+        "selectedYear": 1988,
+        "selectedAnimal": "용",
+        "score": 74,
+        "summary": "1988년 용띠의 오늘은 큰 그림을 보려는 기질이 있습니다. 오늘은 새 목표를 세우는 힘이 좋습니다.",
+        "categoryIds": [
+          "overall",
+          "money",
+          "relationship",
+          "work",
+          "health"
+        ],
+        "categoryScores": {
+          "overall": 63,
+          "money": 73,
+          "relationship": 80,
+          "work": 93,
+          "health": 62
+        },
+        "categorySummaries": {
+          "overall": "진행 중인 일을 다시 정렬해보세요. 하루의 방향을 크게 바꾸기보다 지금 보이는 흐름을 차분히 살펴보세요.",
+          "money": "새로운 제안은 조건과 기간을 차분히 살펴보세요. 지출 흐름과 예산 범위를 차분히 확인하는 정도가 어울립니다.",
+          "relationship": "조언보다 질문을 먼저 건네면 좋습니다. 대화에서는 결론보다 서로의 속도를 맞추는 태도가 도움이 됩니다.",
+          "work": "책상이나 휴대폰 메모를 정리해보세요. 바로 할 수 있는 작은 루틴 하나가 하루를 정돈하는 데 도움이 됩니다.",
+          "health": "바쁜 흐름 속에서 휴식 시간을 먼저 확보해보세요. 컨디션을 살피며 휴식과 수면 리듬을 가볍게 챙겨보세요."
+        },
+        "detail": "조언보다 질문을 먼저 건네면 좋습니다. 대화에서는 결론보다 서로의 속도를 맞추는 태도가 도움이 됩니다. 새로운 제안은 조건과 기간을 차분히 살펴보세요. 지출 흐름과 예산 범위를 차분히 확인하는 정도가 어울립니다. 바쁜 흐름 속에서 휴식 시간을 먼저 확보해보세요. 컨디션을 살피며 휴식과 수면 리듬을 가볍게 챙겨보세요. 책상이나 휴대폰 메모를 정리해보세요. 바로 할 수 있는 작은 루틴 하나가 하루를 정돈하는 데 도움이 됩니다. 기대가 커지면 부담도 함께 커질 수 있습니다. 오늘의 흐름은 참고용으로 살펴보고, 중요한 선택은 여러 정보를 함께 확인해보세요."
+      }
+    },
+    {
+      "sampleId": "solar-late-night-same-day-01",
+      "purpose": "23시 이후 자시 same-day policy sample",
+      "profileInputSummary": {
+        "id": "sample-solar-late-night-same-day-01",
+        "nickname": "Sample C",
+        "birthDate": "1992-11-08",
+        "birthTime": "23:30",
+        "birthTimeUnknown": false,
+        "calendarType": "solar",
+        "isLeapMonth": false,
+        "lateNightJasiPolicy": "same_day",
+        "gender": "female"
+      },
+      "todayFortuneSummary": {
+        "id": "sample-solar-late-night-same-day-01-2026-06-30",
+        "schemaVersion": 5,
+        "profileId": "sample-solar-late-night-same-day-01",
+        "dateKey": "2026-06-30",
+        "averageScore": 73,
+        "keyword": "수 균형",
+        "greeting": "Sample C님의 오늘 흐름은 73점입니다.",
+        "categoryIds": [
+          "overall",
+          "money",
+          "love",
+          "work",
+          "study",
+          "health"
+        ],
+        "categoryScores": {
+          "overall": 65,
+          "money": 65,
+          "love": 74,
+          "work": 72,
+          "study": 79,
+          "health": 81
+        },
+        "categorySummaries": {
+          "overall": "익숙한 루틴 안에서 새로운 기회가 보입니다.",
+          "money": "작은 절약이 예상보다 큰 안정감을 줍니다.",
+          "love": "새로운 만남보다 기존 관계를 돌보기 좋은 날입니다.",
+          "work": "새로운 제안은 기록해두면 곧 쓸모가 생깁니다.",
+          "study": "시험, 자격증, 업무 학습은 실수하기 쉬운 부분을 점검해보세요.",
+          "health": "몸이 보내는 작은 신호를 무시하지 마세요."
+        },
+        "monetization": {
+          "freeSummaryEnabled": true,
+          "rewardedAdDetailEnabled": true,
+          "premiumUpsellEnabled": true
+        },
+        "aiConsult": {
+          "enabled": false
+        }
+      },
+      "sajuAnalysisSummary": {
+        "engineStatus": "manseryeok_core_v0",
+        "birth": {
+          "birthDate": "1992-11-08",
+          "birthTime": "23:30",
+          "birthTimeUnknown": false,
+          "calendarType": "solar",
+          "isLeapMonth": false,
+          "gender": "female"
+        },
+        "pillars": {
+          "year": "임신",
+          "month": "신해",
+          "day": "무자",
+          "hour": "갑자"
+        },
+        "elements": {
+          "dominant": "수",
+          "weak": "화",
+          "counts": {
+            "wood": 1,
+            "fire": 0,
+            "earth": 1,
+            "metal": 2,
+            "water": 4
+          },
+          "percentages": {
+            "wood": 13,
+            "fire": 0,
+            "earth": 13,
+            "metal": 25,
+            "water": 50
+          },
+          "balanceLabel": "수 기운이 비교적 두드러지는 구조"
+        },
+        "traits": [
+          "토 일간의 관찰력",
+          "수 기운의 흐름 감각",
+          "균형을 맞추려는 현실 감각"
+        ],
+        "weakPoints": [
+          "화 기운이 약하게 느껴질 때의 리듬 저하",
+          "한쪽 흐름에 치우치지 않도록 점검하기"
+        ],
+        "luckyKeywords": [
+          "수 균형",
+          "토 정리",
+          "차분한 점검"
+        ]
+      },
+      "manseryeokSummary": {
+        "ok": true,
+        "engine": "manseryeok_core_v0",
+        "accuracyStatus": "library_based_needs_reference_verification",
+        "timezone": "Asia/Seoul",
+        "convertedSolar": "1992-11-08 23:30:00",
+        "convertedLunar": {
+          "year": 1992,
+          "month": 10,
+          "day": 14,
+          "isLeapMonth": false
+        },
+        "dayMaster": {
+          "stem": "무",
+          "element": "토",
+          "yinYang": "양"
+        },
+        "notes": [
+          "태양시 보정은 아직 적용하지 않으며, 23시 이후 자시 기준은 사용자가 다음 날 자시 기준을 선택한 경우에만 적용합니다.",
+          "년주/월주는 KST 입력을 CST 기준으로 1시간 보정한 뒤 lunar-javascript exact API를 우선 사용합니다.",
+          "lunar-javascript 기반 계산 결과이며 외부 만세력 기준 샘플 검증이 필요합니다.",
+          "절기 경계 및 23시 이후 자시 기준은 추가 정책 검토가 필요합니다.",
+          "23시 이후 자시 기준은 입력한 날짜 기준으로 계산했습니다."
+        ]
+      },
+      "yearFortuneSummary": {
+        "targetYear": 2026,
+        "averageScore": 72,
+        "summary": "2026년은 작게 시작한 일이 하반기에 의미 있는 성과로 이어질 수 있습니다.",
+        "keyword": "수 균형",
+        "categoryIds": [
+          "money",
+          "love",
+          "work",
+          "health"
+        ],
+        "categoryScores": {
+          "money": 67,
+          "love": 66,
+          "work": 75,
+          "health": 80
+        },
+        "categorySummaries": {
+          "money": "상반기에는 지출 관리, 하반기에는 수익 확장 기회에 집중해보세요.",
+          "love": "관계에서 솔직함과 배려를 함께 가져가면 깊이가 생기는 해입니다.",
+          "work": "배움과 협업을 함께 가져가면 커리어 흐름이 더 단단해집니다.",
+          "health": "가벼운 운동과 휴식 시간을 일정에 먼저 넣어두는 것이 좋습니다."
+        },
+        "monthsCount": 12,
+        "monthScores": {
+          "1": 73,
+          "2": 72,
+          "3": 71,
+          "4": 70,
+          "5": 69,
+          "6": 68,
+          "7": 67,
+          "8": 66,
+          "9": 65,
+          "10": 67,
+          "11": 68,
+          "12": 69
+        },
+        "monthNotes": {
+          "1": "재정 점검",
+          "2": "관계 확장",
+          "3": "정리와 준비",
+          "4": "집중 실행",
+          "5": "새로운 기회",
+          "6": "휴식과 회복",
+          "7": "재정 점검",
+          "8": "관계 확장",
+          "9": "정리와 준비",
+          "10": "정리와 준비",
+          "11": "관계 확장",
+          "12": "재정 점검"
+        }
+      },
+      "zodiacFortuneSummary": {
+        "selectedYear": 1992,
+        "selectedAnimal": "원숭이",
+        "score": 73,
+        "summary": "1992년 원숭이띠의 오늘은 새로운 방식에 관심이 많습니다. 오늘은 문제를 다르게 보는 힘이 있습니다.",
+        "categoryIds": [
+          "overall",
+          "money",
+          "relationship",
+          "work",
+          "health"
+        ],
+        "categoryScores": {
+          "overall": 65,
+          "money": 81,
+          "relationship": 82,
+          "work": 65,
+          "health": 74
+        },
+        "categorySummaries": {
+          "overall": "복잡한 일을 놀이처럼 나누어보세요. 하루의 방향을 크게 바꾸기보다 지금 보이는 흐름을 차분히 살펴보세요.",
+          "money": "작은 절약 아이디어를 적용해보세요. 지출 흐름과 예산 범위를 차분히 확인하는 정도가 어울립니다.",
+          "relationship": "상대의 반응을 보며 속도를 맞추면 좋습니다. 대화에서는 결론보다 서로의 속도를 맞추는 태도가 도움이 됩니다.",
+          "work": "짧은 퍼즐이나 가벼운 정리로 머리를 환기하세요. 바로 할 수 있는 작은 루틴 하나가 하루를 정돈하는 데 도움이 됩니다.",
+          "health": "눈과 손목의 피로를 중간중간 살펴보세요. 컨디션을 살피며 휴식과 수면 리듬을 가볍게 챙겨보세요."
+        },
+        "detail": "상대의 반응을 보며 속도를 맞추면 좋습니다. 대화에서는 결론보다 서로의 속도를 맞추는 태도가 도움이 됩니다. 작은 절약 아이디어를 적용해보세요. 지출 흐름과 예산 범위를 차분히 확인하는 정도가 어울립니다. 눈과 손목의 피로를 중간중간 살펴보세요. 컨디션을 살피며 휴식과 수면 리듬을 가볍게 챙겨보세요. 짧은 퍼즐이나 가벼운 정리로 머리를 환기하세요. 바로 할 수 있는 작은 루틴 하나가 하루를 정돈하는 데 도움이 됩니다. 가벼운 말이 오해가 되지 않게 살피면 좋습니다. 오늘의 흐름은 참고용으로 살펴보고, 중요한 선택은 여러 정보를 함께 확인해보세요."
+      }
+    },
+    {
+      "sampleId": "solar-late-night-next-day-01",
+      "purpose": "23시 이후 자시 next-day policy sample",
+      "profileInputSummary": {
+        "id": "sample-solar-late-night-next-day-01",
+        "nickname": "Sample D",
+        "birthDate": "1992-11-08",
+        "birthTime": "23:30",
+        "birthTimeUnknown": false,
+        "calendarType": "solar",
+        "isLeapMonth": false,
+        "lateNightJasiPolicy": "next_day",
+        "gender": "female"
+      },
+      "todayFortuneSummary": {
+        "id": "sample-solar-late-night-next-day-01-2026-06-30",
+        "schemaVersion": 5,
+        "profileId": "sample-solar-late-night-next-day-01",
+        "dateKey": "2026-06-30",
+        "averageScore": 72,
+        "keyword": "수 균형",
+        "greeting": "Sample D님의 오늘 흐름은 72점입니다.",
+        "categoryIds": [
+          "overall",
+          "money",
+          "love",
+          "work",
+          "study",
+          "health"
+        ],
+        "categoryScores": {
+          "overall": 85,
+          "money": 71,
+          "love": 64,
+          "work": 62,
+          "study": 73,
+          "health": 79
+        },
+        "categorySummaries": {
+          "overall": "오늘은 작은 선택이 하루의 분위기를 바꾸는 날입니다.",
+          "money": "충동 지출만 줄이면 만족스러운 재물 흐름입니다.",
+          "love": "솔직하지만 부드러운 표현이 행운을 부릅니다.",
+          "work": "작은 실수를 줄이면 평가가 좋아지는 날입니다.",
+          "study": "새 내용을 많이 보기보다 핵심을 정리하기 좋은 날입니다.",
+          "health": "수면과 수분 섭취가 오늘 컨디션의 핵심입니다."
+        },
+        "monetization": {
+          "freeSummaryEnabled": true,
+          "rewardedAdDetailEnabled": true,
+          "premiumUpsellEnabled": true
+        },
+        "aiConsult": {
+          "enabled": false
+        }
+      },
+      "sajuAnalysisSummary": {
+        "engineStatus": "manseryeok_core_v0",
+        "birth": {
+          "birthDate": "1992-11-08",
+          "birthTime": "23:30",
+          "birthTimeUnknown": false,
+          "calendarType": "solar",
+          "isLeapMonth": false,
+          "gender": "female"
+        },
+        "pillars": {
+          "year": "임신",
+          "month": "신해",
+          "day": "기축",
+          "hour": "갑자"
+        },
+        "elements": {
+          "dominant": "수",
+          "weak": "화",
+          "counts": {
+            "wood": 1,
+            "fire": 0,
+            "earth": 2,
+            "metal": 2,
+            "water": 3
+          },
+          "percentages": {
+            "wood": 13,
+            "fire": 0,
+            "earth": 25,
+            "metal": 25,
+            "water": 38
+          },
+          "balanceLabel": "수 기운이 비교적 두드러지는 구조"
+        },
+        "traits": [
+          "토 일간의 관찰력",
+          "수 기운의 흐름 감각",
+          "균형을 맞추려는 현실 감각"
+        ],
+        "weakPoints": [
+          "화 기운이 약하게 느껴질 때의 리듬 저하",
+          "한쪽 흐름에 치우치지 않도록 점검하기"
+        ],
+        "luckyKeywords": [
+          "수 균형",
+          "토 정리",
+          "차분한 점검"
+        ]
+      },
+      "manseryeokSummary": {
+        "ok": true,
+        "engine": "manseryeok_core_v0",
+        "accuracyStatus": "library_based_needs_reference_verification",
+        "timezone": "Asia/Seoul",
+        "convertedSolar": "1992-11-09 00:30:00",
+        "convertedLunar": {
+          "year": 1992,
+          "month": 10,
+          "day": 15,
+          "isLeapMonth": false
+        },
+        "dayMaster": {
+          "stem": "기",
+          "element": "토",
+          "yinYang": "음"
+        },
+        "notes": [
+          "태양시 보정은 아직 적용하지 않으며, 23시 이후 자시 기준은 사용자가 다음 날 자시 기준을 선택한 경우에만 적용합니다.",
+          "년주/월주는 KST 입력을 CST 기준으로 1시간 보정한 뒤 lunar-javascript exact API를 우선 사용합니다.",
+          "lunar-javascript 기반 계산 결과이며 외부 만세력 기준 샘플 검증이 필요합니다.",
+          "절기 경계 및 23시 이후 자시 기준은 추가 정책 검토가 필요합니다.",
+          "사용자가 선택한 다음 날 자시 기준에 따라 23시 이후 출생 시간을 다음 날 00시로 보정해 계산했습니다."
+        ]
+      },
+      "yearFortuneSummary": {
+        "targetYear": 2026,
+        "averageScore": 89,
+        "summary": "2026년은 관계와 실속 사이에서 균형을 찾을수록 좋은 결과가 따릅니다.",
+        "keyword": "수 균형",
+        "categoryIds": [
+          "money",
+          "love",
+          "work",
+          "health"
+        ],
+        "categoryScores": {
+          "money": 90,
+          "love": 90,
+          "work": 81,
+          "health": 94
+        },
+        "categorySummaries": {
+          "money": "고정비를 줄이고 장기 목표를 세우면 재물 흐름이 안정됩니다.",
+          "love": "새로운 만남은 느리게, 기존 관계는 따뜻하게 돌보는 태도가 좋습니다.",
+          "work": "배움과 협업을 함께 가져가면 커리어 흐름이 더 단단해집니다.",
+          "health": "수면, 소화, 체력 루틴을 꾸준히 관리하면 큰 흔들림을 줄일 수 있습니다."
+        },
+        "monthsCount": 12,
+        "monthScores": {
+          "1": 84,
+          "2": 85,
+          "3": 86,
+          "4": 87,
+          "5": 88,
+          "6": 89,
+          "7": 90,
+          "8": 91,
+          "9": 92,
+          "10": 89,
+          "11": 88,
+          "12": 87
+        },
+        "monthNotes": {
+          "1": "집중 실행",
+          "2": "정리와 준비",
+          "3": "관계 확장",
+          "4": "재정 점검",
+          "5": "휴식과 회복",
+          "6": "새로운 기회",
+          "7": "집중 실행",
+          "8": "정리와 준비",
+          "9": "관계 확장",
+          "10": "휴식과 회복",
+          "11": "재정 점검",
+          "12": "관계 확장"
+        }
+      },
+      "zodiacFortuneSummary": {
+        "selectedYear": 1992,
+        "selectedAnimal": "원숭이",
+        "score": 79,
+        "summary": "1992년 원숭이띠의 오늘은 복잡한 상황에서도 실마리를 찾으려 합니다. 오늘은 대화 속에서 분위기를 살리는 편입니다.",
+        "categoryIds": [
+          "overall",
+          "money",
+          "relationship",
+          "work",
+          "health"
+        ],
+        "categoryScores": {
+          "overall": 80,
+          "money": 81,
+          "relationship": 66,
+          "work": 92,
+          "health": 74
+        },
+        "categorySummaries": {
+          "overall": "새 아이디어를 메모하기 좋습니다. 하루의 방향을 크게 바꾸기보다 지금 보이는 흐름을 차분히 살펴보세요.",
+          "money": "새로운 서비스나 구독을 점검해보세요. 지출 흐름과 예산 범위를 차분히 확인하는 정도가 어울립니다.",
+          "relationship": "가벼운 제안은 선택지를 함께 주면 편합니다. 대화에서는 결론보다 서로의 속도를 맞추는 태도가 도움이 됩니다.",
+          "work": "새 아이디어를 세 줄로 적어보세요. 바로 할 수 있는 작은 루틴 하나가 하루를 정돈하는 데 도움이 됩니다.",
+          "health": "잠들기 전 자극적인 정보를 줄여보세요. 컨디션을 살피며 휴식과 수면 리듬을 가볍게 챙겨보세요."
+        },
+        "detail": "가벼운 제안은 선택지를 함께 주면 편합니다. 대화에서는 결론보다 서로의 속도를 맞추는 태도가 도움이 됩니다. 새로운 서비스나 구독을 점검해보세요. 지출 흐름과 예산 범위를 차분히 확인하는 정도가 어울립니다. 잠들기 전 자극적인 정보를 줄여보세요. 컨디션을 살피며 휴식과 수면 리듬을 가볍게 챙겨보세요. 새 아이디어를 세 줄로 적어보세요. 바로 할 수 있는 작은 루틴 하나가 하루를 정돈하는 데 도움이 됩니다. 여러 일을 벌이기보다 하나씩 마무리해보세요. 오늘의 흐름은 참고용으로 살펴보고, 중요한 선택은 여러 정보를 함께 확인해보세요."
+      }
+    },
+    {
+      "sampleId": "lunar-non-leap-01",
+      "purpose": "음력 일반 월 sample",
+      "profileInputSummary": {
+        "id": "sample-lunar-non-leap-01",
+        "nickname": "Sample E",
+        "birthDate": "1991-01-10",
+        "birthTime": "14:20",
+        "birthTimeUnknown": false,
+        "calendarType": "lunar",
+        "isLeapMonth": false,
+        "lateNightJasiPolicy": "same_day",
+        "gender": "male"
+      },
+      "todayFortuneSummary": {
+        "id": "sample-lunar-non-leap-01-2026-06-30",
+        "schemaVersion": 5,
+        "profileId": "sample-lunar-non-leap-01",
+        "dateKey": "2026-06-30",
+        "averageScore": 69,
+        "keyword": "토 균형",
+        "greeting": "Sample E님의 오늘 흐름은 69점입니다.",
+        "categoryIds": [
+          "overall",
+          "money",
+          "love",
+          "work",
+          "study",
+          "health"
+        ],
+        "categoryScores": {
+          "overall": 92,
+          "money": 58,
+          "love": 60,
+          "work": 62,
+          "study": 67,
+          "health": 74
+        },
+        "categorySummaries": {
+          "overall": "오늘은 작은 선택이 하루의 분위기를 바꾸는 날입니다.",
+          "money": "충동 지출만 줄이면 만족스러운 재물 흐름입니다.",
+          "love": "상대의 속도를 존중하면 좋은 대화가 열립니다.",
+          "work": "협업에서 당신의 차분함이 돋보입니다.",
+          "study": "새 내용을 많이 보기보다 핵심을 정리하기 좋은 날입니다.",
+          "health": "수면과 수분 섭취가 오늘 컨디션의 핵심입니다."
+        },
+        "monetization": {
+          "freeSummaryEnabled": true,
+          "rewardedAdDetailEnabled": true,
+          "premiumUpsellEnabled": true
+        },
+        "aiConsult": {
+          "enabled": false
+        }
+      },
+      "sajuAnalysisSummary": {
+        "engineStatus": "manseryeok_core_v0",
+        "birth": {
+          "birthDate": "1991-01-10",
+          "birthTime": "14:20",
+          "birthTimeUnknown": false,
+          "calendarType": "lunar",
+          "isLeapMonth": false,
+          "gender": "male"
+        },
+        "pillars": {
+          "year": "신미",
+          "month": "경인",
+          "day": "을축",
+          "hour": "계미"
+        },
+        "elements": {
+          "dominant": "토",
+          "weak": "화",
+          "counts": {
+            "wood": 2,
+            "fire": 0,
+            "earth": 3,
+            "metal": 2,
+            "water": 1
+          },
+          "percentages": {
+            "wood": 25,
+            "fire": 0,
+            "earth": 38,
+            "metal": 25,
+            "water": 13
+          },
+          "balanceLabel": "토 기운이 비교적 두드러지는 구조"
+        },
+        "traits": [
+          "목 일간의 관찰력",
+          "토 기운의 흐름 감각",
+          "균형을 맞추려는 현실 감각"
+        ],
+        "weakPoints": [
+          "화 기운이 약하게 느껴질 때의 리듬 저하",
+          "한쪽 흐름에 치우치지 않도록 점검하기"
+        ],
+        "luckyKeywords": [
+          "토 균형",
+          "목 정리",
+          "차분한 점검"
+        ]
+      },
+      "manseryeokSummary": {
+        "ok": true,
+        "engine": "manseryeok_core_v0",
+        "accuracyStatus": "library_based_needs_reference_verification",
+        "timezone": "Asia/Seoul",
+        "convertedSolar": "1991-02-24 14:20:00",
+        "convertedLunar": {
+          "year": 1991,
+          "month": 1,
+          "day": 10,
+          "isLeapMonth": false
+        },
+        "dayMaster": {
+          "stem": "을",
+          "element": "목",
+          "yinYang": "음"
+        },
+        "notes": [
+          "태양시 보정은 아직 적용하지 않으며, 23시 이후 자시 기준은 사용자가 다음 날 자시 기준을 선택한 경우에만 적용합니다.",
+          "년주/월주는 KST 입력을 CST 기준으로 1시간 보정한 뒤 lunar-javascript exact API를 우선 사용합니다.",
+          "lunar-javascript 기반 계산 결과이며 외부 만세력 기준 샘플 검증이 필요합니다.",
+          "절기 경계 및 23시 이후 자시 기준은 추가 정책 검토가 필요합니다."
+        ]
+      },
+      "yearFortuneSummary": {
+        "targetYear": 2026,
+        "averageScore": 77,
+        "summary": "2026년은 방향을 다시 정하고 생활의 리듬을 단단히 만드는 해입니다.",
+        "keyword": "토 균형",
+        "categoryIds": [
+          "money",
+          "love",
+          "work",
+          "health"
+        ],
+        "categoryScores": {
+          "money": 93,
+          "love": 71,
+          "work": 62,
+          "health": 80
+        },
+        "categorySummaries": {
+          "money": "상반기에는 지출 관리, 하반기에는 수익 확장 기회에 집중해보세요.",
+          "love": "관계에서 솔직함과 배려를 함께 가져가면 깊이가 생기는 해입니다.",
+          "work": "배움과 협업을 함께 가져가면 커리어 흐름이 더 단단해집니다.",
+          "health": "몸의 신호를 일찍 알아차리는 습관이 2026년 건강운의 핵심입니다."
+        },
+        "monthsCount": 12,
+        "monthScores": {
+          "1": 64,
+          "2": 63,
+          "3": 62,
+          "4": 96,
+          "5": 95,
+          "6": 94,
+          "7": 93,
+          "8": 92,
+          "9": 91,
+          "10": 93,
+          "11": 92,
+          "12": 91
+        },
+        "monthNotes": {
+          "1": "재정 점검",
+          "2": "관계 확장",
+          "3": "정리와 준비",
+          "4": "집중 실행",
+          "5": "새로운 기회",
+          "6": "휴식과 회복",
+          "7": "재정 점검",
+          "8": "관계 확장",
+          "9": "정리와 준비",
+          "10": "정리와 준비",
+          "11": "집중 실행",
+          "12": "새로운 기회"
+        }
+      },
+      "zodiacFortuneSummary": {
+        "selectedYear": 1991,
+        "selectedAnimal": "양",
+        "score": 79,
+        "summary": "1991년 양띠의 오늘은 주변 분위기에 민감하게 반응합니다. 오늘은 타인을 편안하게 만드는 배려가 있습니다.",
+        "categoryIds": [
+          "overall",
+          "money",
+          "relationship",
+          "work",
+          "health"
+        ],
+        "categoryScores": {
+          "overall": 96,
+          "money": 87,
+          "relationship": 66,
+          "work": 65,
+          "health": 83
+        },
+        "categorySummaries": {
+          "overall": "작은 정돈이 마음을 가볍게 합니다. 하루의 방향을 크게 바꾸기보다 지금 보이는 흐름을 차분히 살펴보세요.",
+          "money": "지출 전 내 예산을 먼저 살펴보세요. 지출 흐름과 예산 범위를 차분히 확인하는 정도가 어울립니다.",
+          "relationship": "상대의 기분과 내 마음을 함께 살펴보세요. 대화에서는 결론보다 서로의 속도를 맞추는 태도가 도움이 됩니다.",
+          "work": "오늘 고마웠던 일을 적어보세요. 바로 할 수 있는 작은 루틴 하나가 하루를 정돈하는 데 도움이 됩니다.",
+          "health": "따뜻한 식사와 수면 리듬을 챙겨보세요. 컨디션을 살피며 휴식과 수면 리듬을 가볍게 챙겨보세요."
+        },
+        "detail": "상대의 기분과 내 마음을 함께 살펴보세요. 대화에서는 결론보다 서로의 속도를 맞추는 태도가 도움이 됩니다. 지출 전 내 예산을 먼저 살펴보세요. 지출 흐름과 예산 범위를 차분히 확인하는 정도가 어울립니다. 따뜻한 식사와 수면 리듬을 챙겨보세요. 컨디션을 살피며 휴식과 수면 리듬을 가볍게 챙겨보세요. 오늘 고마웠던 일을 적어보세요. 바로 할 수 있는 작은 루틴 하나가 하루를 정돈하는 데 도움이 됩니다. 자신의 기준을 작게라도 표현하는 편이 좋습니다. 오늘의 흐름은 참고용으로 살펴보고, 중요한 선택은 여러 정보를 함께 확인해보세요."
+      }
+    },
+    {
+      "sampleId": "lunar-leap-01",
+      "purpose": "음력/윤달 샘플 외부 검증 대상",
+      "profileInputSummary": {
+        "id": "sample-lunar-leap-01",
+        "nickname": "Sample F",
+        "birthDate": "1995-08-10",
+        "birthTime": "10:10",
+        "birthTimeUnknown": false,
+        "calendarType": "lunar",
+        "isLeapMonth": true,
+        "lateNightJasiPolicy": "same_day",
+        "gender": "female"
+      },
+      "todayFortuneSummary": {
+        "id": "sample-lunar-leap-01-2026-06-30",
+        "schemaVersion": 5,
+        "profileId": "sample-lunar-leap-01",
+        "dateKey": "2026-06-30",
+        "averageScore": 77,
+        "keyword": "목 균형",
+        "greeting": "Sample F님의 오늘 흐름은 77점입니다.",
+        "categoryIds": [
+          "overall",
+          "money",
+          "love",
+          "work",
+          "study",
+          "health"
+        ],
+        "categoryScores": {
+          "overall": 79,
+          "money": 95,
+          "love": 62,
+          "work": 64,
+          "study": 71,
+          "health": 92
+        },
+        "categorySummaries": {
+          "overall": "주변의 도움을 자연스럽게 받아들이기 좋은 날입니다.",
+          "money": "정리하지 않은 구독이나 자동결제를 확인해보세요.",
+          "love": "새로운 만남보다 기존 관계를 돌보기 좋은 날입니다.",
+          "work": "새로운 제안은 기록해두면 곧 쓸모가 생깁니다.",
+          "study": "짧게 나누어 반복하면 이해가 더 분명해집니다.",
+          "health": "몸이 보내는 작은 신호를 무시하지 마세요."
+        },
+        "monetization": {
+          "freeSummaryEnabled": true,
+          "rewardedAdDetailEnabled": true,
+          "premiumUpsellEnabled": true
+        },
+        "aiConsult": {
+          "enabled": false
+        }
+      },
+      "sajuAnalysisSummary": {
+        "engineStatus": "manseryeok_core_v0",
+        "birth": {
+          "birthDate": "1995-08-10",
+          "birthTime": "10:10",
+          "birthTimeUnknown": false,
+          "calendarType": "lunar",
+          "isLeapMonth": true,
+          "gender": "female"
+        },
+        "pillars": {
+          "year": "을해",
+          "month": "을유",
+          "day": "무진",
+          "hour": "정사"
+        },
+        "elements": {
+          "dominant": "목/화/토",
+          "weak": "금/수",
+          "counts": {
+            "wood": 2,
+            "fire": 2,
+            "earth": 2,
+            "metal": 1,
+            "water": 1
+          },
+          "percentages": {
+            "wood": 25,
+            "fire": 25,
+            "earth": 25,
+            "metal": 13,
+            "water": 13
+          },
+          "balanceLabel": "목/화/토 기운이 비슷하게 드러나는 구조"
+        },
+        "traits": [
+          "토 일간의 관찰력",
+          "목/화/토 기운의 흐름 감각",
+          "균형을 맞추려는 현실 감각"
+        ],
+        "weakPoints": [
+          "금/수 기운이 약하게 느껴질 때의 리듬 저하",
+          "한쪽 흐름에 치우치지 않도록 점검하기"
+        ],
+        "luckyKeywords": [
+          "목 균형",
+          "토 정리",
+          "차분한 점검"
+        ]
+      },
+      "manseryeokSummary": {
+        "ok": true,
+        "engine": "manseryeok_core_v0",
+        "accuracyStatus": "library_based_needs_reference_verification",
+        "timezone": "Asia/Seoul",
+        "convertedSolar": "1995-10-04 10:10:00",
+        "convertedLunar": {
+          "year": 1995,
+          "month": 8,
+          "day": 10,
+          "isLeapMonth": true
+        },
+        "dayMaster": {
+          "stem": "무",
+          "element": "토",
+          "yinYang": "양"
+        },
+        "notes": [
+          "태양시 보정은 아직 적용하지 않으며, 23시 이후 자시 기준은 사용자가 다음 날 자시 기준을 선택한 경우에만 적용합니다.",
+          "년주/월주는 KST 입력을 CST 기준으로 1시간 보정한 뒤 lunar-javascript exact API를 우선 사용합니다.",
+          "lunar-javascript 기반 계산 결과이며 외부 만세력 기준 샘플 검증이 필요합니다.",
+          "절기 경계 및 23시 이후 자시 기준은 추가 정책 검토가 필요합니다."
+        ]
+      },
+      "yearFortuneSummary": {
+        "targetYear": 2026,
+        "averageScore": 76,
+        "summary": "2026년은 방향을 다시 정하고 생활의 리듬을 단단히 만드는 해입니다.",
+        "keyword": "목 균형",
+        "categoryIds": [
+          "money",
+          "love",
+          "work",
+          "health"
+        ],
+        "categoryScores": {
+          "money": 74,
+          "love": 81,
+          "work": 72,
+          "health": 78
+        },
+        "categorySummaries": {
+          "money": "고정비를 줄이고 장기 목표를 세우면 재물 흐름이 안정됩니다.",
+          "love": "관계에서 솔직함과 배려를 함께 가져가면 깊이가 생기는 해입니다.",
+          "work": "실력을 드러낼 기회가 오지만 무리한 약속은 피하는 편이 좋습니다.",
+          "health": "몸의 신호를 일찍 알아차리는 습관이 2026년 건강운의 핵심입니다."
+        },
+        "monthsCount": 12,
+        "monthScores": {
+          "1": 68,
+          "2": 69,
+          "3": 70,
+          "4": 71,
+          "5": 72,
+          "6": 73,
+          "7": 74,
+          "8": 75,
+          "9": 76,
+          "10": 68,
+          "11": 69,
+          "12": 70
+        },
+        "monthNotes": {
+          "1": "재정 점검",
+          "2": "휴식과 회복",
+          "3": "새로운 기회",
+          "4": "집중 실행",
+          "5": "정리와 준비",
+          "6": "관계 확장",
+          "7": "재정 점검",
+          "8": "휴식과 회복",
+          "9": "새로운 기회",
+          "10": "정리와 준비",
+          "11": "관계 확장",
+          "12": "재정 점검"
+        }
+      },
+      "zodiacFortuneSummary": {
+        "selectedYear": 1995,
+        "selectedAnimal": "돼지",
+        "score": 94,
+        "summary": "1995년 돼지띠의 오늘은 사람과 시간을 나누는 일을 좋아합니다. 오늘은 필요한 순간에는 성실하게 힘을 냅니다.",
+        "categoryIds": [
+          "overall",
+          "money",
+          "relationship",
+          "work",
+          "health"
+        ],
+        "categoryScores": {
+          "overall": 97,
+          "money": 87,
+          "relationship": 96,
+          "work": 94,
+          "health": 96
+        },
+        "categorySummaries": {
+          "overall": "즐거움과 해야 할 일의 균형을 맞춰보세요. 하루의 방향을 크게 바꾸기보다 지금 보이는 흐름을 차분히 살펴보세요.",
+          "money": "기분 좋은 소비의 범위를 정해보세요. 지출 흐름과 예산 범위를 차분히 확인하는 정도가 어울립니다.",
+          "relationship": "즐거운 약속도 시간과 체력을 살펴보세요. 대화에서는 결론보다 서로의 속도를 맞추는 태도가 도움이 됩니다.",
+          "work": "미룬 일 하나를 작게 끝내보세요. 바로 할 수 있는 작은 루틴 하나가 하루를 정돈하는 데 도움이 됩니다.",
+          "health": "몸이 보내는 피로 신호를 가볍게 넘기지 마세요. 컨디션을 살피며 휴식과 수면 리듬을 가볍게 챙겨보세요."
+        },
+        "detail": "즐거운 약속도 시간과 체력을 살펴보세요. 대화에서는 결론보다 서로의 속도를 맞추는 태도가 도움이 됩니다. 기분 좋은 소비의 범위를 정해보세요. 지출 흐름과 예산 범위를 차분히 확인하는 정도가 어울립니다. 몸이 보내는 피로 신호를 가볍게 넘기지 마세요. 컨디션을 살피며 휴식과 수면 리듬을 가볍게 챙겨보세요. 미룬 일 하나를 작게 끝내보세요. 바로 할 수 있는 작은 루틴 하나가 하루를 정돈하는 데 도움이 됩니다. 지나친 양보보다 내 기준을 챙겨보세요. 오늘의 흐름은 참고용으로 살펴보고, 중요한 선택은 여러 정보를 함께 확인해보세요."
+      }
+    },
+    {
+      "sampleId": "term-boundary-01",
+      "purpose": "절기 경계 sample",
+      "profileInputSummary": {
+        "id": "sample-term-boundary-01",
+        "nickname": "Sample G",
+        "birthDate": "1990-02-04",
+        "birthTime": "05:00",
+        "birthTimeUnknown": false,
+        "calendarType": "solar",
+        "isLeapMonth": false,
+        "lateNightJasiPolicy": "same_day",
+        "gender": "male"
+      },
+      "todayFortuneSummary": {
+        "id": "sample-term-boundary-01-2026-06-30",
+        "schemaVersion": 5,
+        "profileId": "sample-term-boundary-01",
+        "dateKey": "2026-06-30",
+        "averageScore": 79,
+        "keyword": "토 균형",
+        "greeting": "Sample G님의 오늘 흐름은 79점입니다.",
+        "categoryIds": [
+          "overall",
+          "money",
+          "love",
+          "work",
+          "study",
+          "health"
+        ],
+        "categoryScores": {
+          "overall": 80,
+          "money": 91,
+          "love": 62,
+          "work": 93,
+          "study": 75,
+          "health": 72
+        },
+        "categorySummaries": {
+          "overall": "속도를 낮추면 놓쳤던 흐름이 선명해집니다.",
+          "money": "가격보다 오래 쓸 수 있는지를 보는 눈이 필요합니다.",
+          "love": "상대의 속도를 존중하면 좋은 대화가 열립니다.",
+          "work": "작은 실수를 줄이면 평가가 좋아지는 날입니다.",
+          "study": "메모와 복습이 오늘의 집중력을 도와줍니다.",
+          "health": "과한 카페인보다 규칙적인 식사가 도움이 됩니다."
+        },
+        "monetization": {
+          "freeSummaryEnabled": true,
+          "rewardedAdDetailEnabled": true,
+          "premiumUpsellEnabled": true
+        },
+        "aiConsult": {
+          "enabled": false
+        }
+      },
+      "sajuAnalysisSummary": {
+        "engineStatus": "manseryeok_core_v0",
+        "birth": {
+          "birthDate": "1990-02-04",
+          "birthTime": "05:00",
+          "birthTimeUnknown": false,
+          "calendarType": "solar",
+          "isLeapMonth": false,
+          "gender": "male"
+        },
+        "pillars": {
+          "year": "기사",
+          "month": "정축",
+          "day": "경자",
+          "hour": "기묘"
+        },
+        "elements": {
+          "dominant": "토",
+          "weak": "목/금/수",
+          "counts": {
+            "wood": 1,
+            "fire": 2,
+            "earth": 3,
+            "metal": 1,
+            "water": 1
+          },
+          "percentages": {
+            "wood": 13,
+            "fire": 25,
+            "earth": 38,
+            "metal": 13,
+            "water": 13
+          },
+          "balanceLabel": "토 기운이 비교적 두드러지는 구조"
+        },
+        "traits": [
+          "금 일간의 관찰력",
+          "토 기운의 흐름 감각",
+          "균형을 맞추려는 현실 감각"
+        ],
+        "weakPoints": [
+          "목/금/수 기운이 약하게 느껴질 때의 리듬 저하",
+          "한쪽 흐름에 치우치지 않도록 점검하기"
+        ],
+        "luckyKeywords": [
+          "토 균형",
+          "금 정리",
+          "차분한 점검"
+        ]
+      },
+      "manseryeokSummary": {
+        "ok": true,
+        "engine": "manseryeok_core_v0",
+        "accuracyStatus": "library_based_needs_reference_verification",
+        "timezone": "Asia/Seoul",
+        "convertedSolar": "1990-02-04 05:00:00",
+        "convertedLunar": {
+          "year": 1990,
+          "month": 1,
+          "day": 9,
+          "isLeapMonth": false
+        },
+        "dayMaster": {
+          "stem": "경",
+          "element": "금",
+          "yinYang": "양"
+        },
+        "notes": [
+          "태양시 보정은 아직 적용하지 않으며, 23시 이후 자시 기준은 사용자가 다음 날 자시 기준을 선택한 경우에만 적용합니다.",
+          "년주/월주는 KST 입력을 CST 기준으로 1시간 보정한 뒤 lunar-javascript exact API를 우선 사용합니다.",
+          "lunar-javascript 기반 계산 결과이며 외부 만세력 기준 샘플 검증이 필요합니다.",
+          "절기 경계 및 23시 이후 자시 기준은 추가 정책 검토가 필요합니다."
+        ]
+      },
+      "yearFortuneSummary": {
+        "targetYear": 2026,
+        "averageScore": 87,
+        "summary": "2026년은 작게 시작한 일이 하반기에 의미 있는 성과로 이어질 수 있습니다.",
+        "keyword": "토 균형",
+        "categoryIds": [
+          "money",
+          "love",
+          "work",
+          "health"
+        ],
+        "categoryScores": {
+          "money": 95,
+          "love": 95,
+          "work": 86,
+          "health": 70
+        },
+        "categorySummaries": {
+          "money": "상반기에는 지출 관리, 하반기에는 수익 확장 기회에 집중해보세요.",
+          "love": "감정을 쌓아두지 않고 부드럽게 표현할수록 관계운이 살아납니다.",
+          "work": "역할이 넓어질 수 있으니 기록과 우선순위 관리가 중요합니다.",
+          "health": "몸의 신호를 일찍 알아차리는 습관이 2026년 건강운의 핵심입니다."
+        },
+        "monthsCount": 12,
+        "monthScores": {
+          "1": 89,
+          "2": 90,
+          "3": 91,
+          "4": 92,
+          "5": 93,
+          "6": 94,
+          "7": 95,
+          "8": 96,
+          "9": 62,
+          "10": 76,
+          "11": 77,
+          "12": 78
+        },
+        "monthNotes": {
+          "1": "휴식과 회복",
+          "2": "새로운 기회",
+          "3": "집중 실행",
+          "4": "정리와 준비",
+          "5": "관계 확장",
+          "6": "재정 점검",
+          "7": "휴식과 회복",
+          "8": "새로운 기회",
+          "9": "집중 실행",
+          "10": "휴식과 회복",
+          "11": "새로운 기회",
+          "12": "집중 실행"
+        }
+      },
+      "zodiacFortuneSummary": {
+        "selectedYear": 1990,
+        "selectedAnimal": "뱀",
+        "score": 78,
+        "summary": "1990년 뱀띠의 오늘은 말보다 상황을 오래 살펴봅니다. 오늘은 복잡한 맥락을 조용히 파악합니다.",
+        "categoryIds": [
+          "overall",
+          "money",
+          "relationship",
+          "work",
+          "health"
+        ],
+        "categoryScores": {
+          "overall": 97,
+          "money": 97,
+          "relationship": 67,
+          "work": 65,
+          "health": 64
+        },
+        "categorySummaries": {
+          "overall": "말보다 기록으로 정리하기 좋습니다. 하루의 방향을 크게 바꾸기보다 지금 보이는 흐름을 차분히 살펴보세요.",
+          "money": "지출 이유를 적어보면 선택이 쉬워집니다. 지출 흐름과 예산 범위를 차분히 확인하는 정도가 어울립니다.",
+          "relationship": "상대의 표현 방식을 천천히 이해해보세요. 대화에서는 결론보다 서로의 속도를 맞추는 태도가 도움이 됩니다.",
+          "work": "가벼운 스트레칭으로 집중을 풀어보세요. 바로 할 수 있는 작은 루틴 하나가 하루를 정돈하는 데 도움이 됩니다.",
+          "health": "눈과 목의 긴장을 쉬어가며 살펴보세요. 컨디션을 살피며 휴식과 수면 리듬을 가볍게 챙겨보세요."
+        },
+        "detail": "상대의 표현 방식을 천천히 이해해보세요. 대화에서는 결론보다 서로의 속도를 맞추는 태도가 도움이 됩니다. 지출 이유를 적어보면 선택이 쉬워집니다. 지출 흐름과 예산 범위를 차분히 확인하는 정도가 어울립니다. 눈과 목의 긴장을 쉬어가며 살펴보세요. 컨디션을 살피며 휴식과 수면 리듬을 가볍게 챙겨보세요. 가벼운 스트레칭으로 집중을 풀어보세요. 바로 할 수 있는 작은 루틴 하나가 하루를 정돈하는 데 도움이 됩니다. 의심보다 확인이 더 편한 길이 됩니다. 오늘의 흐름은 참고용으로 살펴보고, 중요한 선택은 여러 정보를 함께 확인해보세요."
+      }
+    },
+    {
+      "sampleId": "profile-zodiac-boundary-01",
+      "purpose": "사주 연주 띠와 일반 출생연도 띠 차이 검토 sample",
+      "profileInputSummary": {
+        "id": "sample-profile-zodiac-boundary-01",
+        "nickname": "Sample H",
+        "birthDate": "1988-02-03",
+        "birthTime": "12:00",
+        "birthTimeUnknown": false,
+        "calendarType": "solar",
+        "isLeapMonth": false,
+        "lateNightJasiPolicy": "same_day",
+        "gender": "female"
+      },
+      "todayFortuneSummary": {
+        "id": "sample-profile-zodiac-boundary-01-2026-06-30",
+        "schemaVersion": 5,
+        "profileId": "sample-profile-zodiac-boundary-01",
+        "dateKey": "2026-06-30",
+        "averageScore": 81,
+        "keyword": "토 균형",
+        "greeting": "Sample H님의 오늘 흐름은 81점입니다.",
+        "categoryIds": [
+          "overall",
+          "money",
+          "love",
+          "work",
+          "study",
+          "health"
+        ],
+        "categoryScores": {
+          "overall": 63,
+          "money": 81,
+          "love": 95,
+          "work": 97,
+          "study": 72,
+          "health": 77
+        },
+        "categorySummaries": {
+          "overall": "오늘은 작은 선택이 하루의 분위기를 바꾸는 날입니다.",
+          "money": "충동 지출만 줄이면 만족스러운 재물 흐름입니다.",
+          "love": "상대의 속도를 존중하면 좋은 대화가 열립니다.",
+          "work": "협업에서 당신의 차분함이 돋보입니다.",
+          "study": "새 내용을 많이 보기보다 핵심을 정리하기 좋은 날입니다.",
+          "health": "수면과 수분 섭취가 오늘 컨디션의 핵심입니다."
+        },
+        "monetization": {
+          "freeSummaryEnabled": true,
+          "rewardedAdDetailEnabled": true,
+          "premiumUpsellEnabled": true
+        },
+        "aiConsult": {
+          "enabled": false
+        }
+      },
+      "sajuAnalysisSummary": {
+        "engineStatus": "manseryeok_core_v0",
+        "birth": {
+          "birthDate": "1988-02-03",
+          "birthTime": "12:00",
+          "birthTimeUnknown": false,
+          "calendarType": "solar",
+          "isLeapMonth": false,
+          "gender": "female"
+        },
+        "pillars": {
+          "year": "정묘",
+          "month": "계축",
+          "day": "무자",
+          "hour": "무오"
+        },
+        "elements": {
+          "dominant": "토",
+          "weak": "금",
+          "counts": {
+            "wood": 1,
+            "fire": 2,
+            "earth": 3,
+            "metal": 0,
+            "water": 2
+          },
+          "percentages": {
+            "wood": 13,
+            "fire": 25,
+            "earth": 38,
+            "metal": 0,
+            "water": 25
+          },
+          "balanceLabel": "토 기운이 비교적 두드러지는 구조"
+        },
+        "traits": [
+          "토 일간의 관찰력",
+          "토 기운의 흐름 감각",
+          "균형을 맞추려는 현실 감각"
+        ],
+        "weakPoints": [
+          "금 기운이 약하게 느껴질 때의 리듬 저하",
+          "한쪽 흐름에 치우치지 않도록 점검하기"
+        ],
+        "luckyKeywords": [
+          "토 균형",
+          "토 정리",
+          "차분한 점검"
+        ]
+      },
+      "manseryeokSummary": {
+        "ok": true,
+        "engine": "manseryeok_core_v0",
+        "accuracyStatus": "library_based_needs_reference_verification",
+        "timezone": "Asia/Seoul",
+        "convertedSolar": "1988-02-03 12:00:00",
+        "convertedLunar": {
+          "year": 1987,
+          "month": 12,
+          "day": 16,
+          "isLeapMonth": false
+        },
+        "dayMaster": {
+          "stem": "무",
+          "element": "토",
+          "yinYang": "양"
+        },
+        "notes": [
+          "태양시 보정은 아직 적용하지 않으며, 23시 이후 자시 기준은 사용자가 다음 날 자시 기준을 선택한 경우에만 적용합니다.",
+          "년주/월주는 KST 입력을 CST 기준으로 1시간 보정한 뒤 lunar-javascript exact API를 우선 사용합니다.",
+          "lunar-javascript 기반 계산 결과이며 외부 만세력 기준 샘플 검증이 필요합니다.",
+          "절기 경계 및 23시 이후 자시 기준은 추가 정책 검토가 필요합니다."
+        ]
+      },
+      "yearFortuneSummary": {
+        "targetYear": 2026,
+        "averageScore": 85,
+        "summary": "2026년은 방향을 다시 정하고 생활의 리듬을 단단히 만드는 해입니다.",
+        "keyword": "토 균형",
+        "categoryIds": [
+          "money",
+          "love",
+          "work",
+          "health"
+        ],
+        "categoryScores": {
+          "money": 80,
+          "love": 92,
+          "work": 76,
+          "health": 93
+        },
+        "categorySummaries": {
+          "money": "상반기에는 지출 관리, 하반기에는 수익 확장 기회에 집중해보세요.",
+          "love": "새로운 만남은 느리게, 기존 관계는 따뜻하게 돌보는 태도가 좋습니다.",
+          "work": "실력을 드러낼 기회가 오지만 무리한 약속은 피하는 편이 좋습니다.",
+          "health": "가벼운 운동과 휴식 시간을 일정에 먼저 넣어두는 것이 좋습니다."
+        },
+        "monthsCount": 12,
+        "monthScores": {
+          "1": 74,
+          "2": 75,
+          "3": 76,
+          "4": 77,
+          "5": 78,
+          "6": 79,
+          "7": 80,
+          "8": 81,
+          "9": 82,
+          "10": 71,
+          "11": 70,
+          "12": 69
+        },
+        "monthNotes": {
+          "1": "휴식과 회복",
+          "2": "새로운 기회",
+          "3": "집중 실행",
+          "4": "정리와 준비",
+          "5": "관계 확장",
+          "6": "재정 점검",
+          "7": "휴식과 회복",
+          "8": "새로운 기회",
+          "9": "집중 실행",
+          "10": "관계 확장",
+          "11": "정리와 준비",
+          "12": "집중 실행"
+        }
+      },
+      "zodiacFortuneSummary": {
+        "selectedYear": 1988,
+        "selectedAnimal": "토끼",
+        "score": 83,
+        "summary": "1988년 토끼띠의 오늘은 분위기를 부드럽게 읽는 편입니다. 오늘은 상대의 기분을 살피는 능력이 좋습니다.",
+        "categoryIds": [
+          "overall",
+          "money",
+          "relationship",
+          "work",
+          "health"
+        ],
+        "categoryScores": {
+          "overall": 77,
+          "money": 87,
+          "relationship": 91,
+          "work": 89,
+          "health": 69
+        },
+        "categorySummaries": {
+          "overall": "작은 마감부터 처리하기 좋습니다. 하루의 방향을 크게 바꾸기보다 지금 보이는 흐름을 차분히 살펴보세요.",
+          "money": "작은 지출을 기록하면 흐름이 정리됩니다. 지출 흐름과 예산 범위를 차분히 확인하는 정도가 어울립니다.",
+          "relationship": "감사의 말을 전하면 관계가 따뜻해집니다. 대화에서는 결론보다 서로의 속도를 맞추는 태도가 도움이 됩니다.",
+          "work": "조용한 음악으로 흐름을 바꿔보세요. 바로 할 수 있는 작은 루틴 하나가 하루를 정돈하는 데 도움이 됩니다.",
+          "health": "따뜻한 음료와 짧은 쉼이 도움이 됩니다. 컨디션을 살피며 휴식과 수면 리듬을 가볍게 챙겨보세요."
+        },
+        "detail": "감사의 말을 전하면 관계가 따뜻해집니다. 대화에서는 결론보다 서로의 속도를 맞추는 태도가 도움이 됩니다. 작은 지출을 기록하면 흐름이 정리됩니다. 지출 흐름과 예산 범위를 차분히 확인하는 정도가 어울립니다. 따뜻한 음료와 짧은 쉼이 도움이 됩니다. 컨디션을 살피며 휴식과 수면 리듬을 가볍게 챙겨보세요. 조용한 음악으로 흐름을 바꿔보세요. 바로 할 수 있는 작은 루틴 하나가 하루를 정돈하는 데 도움이 됩니다. 불편한 일을 너무 오래 참지 않는 편이 좋습니다. 오늘의 흐름은 참고용으로 살펴보고, 중요한 선택은 여러 정보를 함께 확인해보세요."
+      }
+    }
+  ]
+}

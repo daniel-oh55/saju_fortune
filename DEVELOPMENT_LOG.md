@@ -1,5 +1,30 @@
 # DEVELOPMENT_LOG
 
+## Fortune Engine Sample Snapshot
+
+- Fortune engine sample snapshot runner added
+- Fortune engine sample snapshot JSON generated
+- Fixed dateKey 2026-06-30 used
+- targetYear 2026 used
+- Artificial sample profiles only
+- Today fortune sample output recorded
+- Saju analysis sample output recorded
+- Manseryeok sample output recorded
+- Year/monthly fortune sample output recorded
+- Zodiac fortune sample output recorded
+- Production engine logic unchanged
+- CURRENT_FORTUNE_SCHEMA_VERSION unchanged
+- schemaVersion unchanged
+- Existing localStorage keys unchanged
+- Routing unchanged
+- UI/design unchanged
+- public/privacy-policy.html unchanged
+- AndroidManifest.xml/resource unchanged
+- Gradle settings unchanged
+- `.aab` repository commit not added
+- `.zip` repository commit not added
+- Secret actual values not recorded
+
 ## Fortune Engine Sample Snapshot Readiness
 
 - Fortune engine sample snapshot readiness added
