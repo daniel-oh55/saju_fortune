@@ -1,5 +1,31 @@
 # DEVELOPMENT_LOG
 
+## Manseryeok External Verification Plan
+
+- Manseryeok external verification plan added
+- External verification sample matrix documented
+- Verification fields documented
+- Pass/fail criteria draft documented
+- Discrepancy handling plan documented
+- Actual external reference comparison remains Pending
+- 음력/윤달 샘플 외부 검증 remains Pending
+- 태양시 보정 적용 여부 remains Pending
+- Engine accuracy approval remains Pending
+- Production engine logic unchanged
+- Manseryeok logic unchanged
+- CURRENT_FORTUNE_SCHEMA_VERSION unchanged
+- schemaVersion unchanged
+- Existing localStorage keys unchanged
+- Snapshot JSON unchanged
+- Routing unchanged
+- UI/design unchanged
+- public/privacy-policy.html unchanged
+- AndroidManifest.xml/resource unchanged
+- Gradle settings unchanged
+- `.aab` repository commit not added
+- `.zip` repository commit not added
+- Secret actual values not recorded
+
 ## Fortune Engine Sample Snapshot Quality Review
 
 - Fortune engine sample snapshot quality review added
