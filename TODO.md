@@ -1,5 +1,21 @@
 # TODO
 
+## 2026-06-30 Fortune engine sample QA baseline TODO
+
+- [x] Fortune engine sample QA baseline added
+- [x] Sample profile matrix documented
+- [x] Today fortune output shape checks documented
+- [x] Saju analysis shape checks documented
+- [x] Manseryeok QA notes documented
+- [x] Year/monthly fortune shape checks documented
+- [x] Zodiac fortune shape checks documented
+- [ ] Actual output snapshot generation
+- [ ] 음력/윤달 샘플 외부 검증
+- [ ] 태양시 보정 적용 여부
+- [ ] Today fortune engine improvement design
+- [ ] Year/monthly fortune engine improvement design
+- [ ] Zodiac fortune engine improvement design
+
 ## 2026-06-30 Fortune engine current state audit TODO
 
 - [x] Fortune engine current state audit document added
