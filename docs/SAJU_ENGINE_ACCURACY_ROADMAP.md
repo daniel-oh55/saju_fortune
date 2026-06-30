@@ -1,5 +1,15 @@
 # Saju Engine Accuracy Roadmap
 
+## Fortune Engine Current State Audit
+
+- Fortune engine current state audit: Added
+- Production engine logic change: Pending
+- Today fortune engine improvement: Pending
+- Year/monthly fortune engine improvement: Pending
+- Zodiac fortune engine improvement: Pending
+- 음력/윤달 샘플 외부 검증: Pending
+- 태양시 보정 적용 여부: Pending
+
 ## Play Console Actual Input Readiness
 
 - Play Console actual input readiness checklist: Added
