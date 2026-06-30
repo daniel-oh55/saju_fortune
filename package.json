@@ -61,6 +61,7 @@
     "check:play-console-actual-input-readiness": "node scripts/checkPlayConsoleActualInputReadiness.mjs",
     "check:privacy-policy-final-html-deployment-recheck": "node scripts/checkPrivacyPolicyFinalHtmlDeploymentRecheck.mjs",
     "check:privacy-policy-final-html-update": "node scripts/checkPrivacyPolicyFinalHtmlUpdate.mjs",
+    "check:fortune-engine-sample-snapshot-quality-review": "node scripts/checkFortuneEngineSampleSnapshotQualityReview.mjs",
     "check:fortune-engine-sample-snapshot": "node scripts/checkFortuneEngineSampleSnapshot.mjs",
     "check:fortune-engine-sample-snapshot-readiness": "node scripts/checkFortuneEngineSampleSnapshotReadiness.mjs",
     "check:fortune-engine-sample-qa-baseline": "node scripts/checkFortuneEngineSampleQaBaseline.mjs",
