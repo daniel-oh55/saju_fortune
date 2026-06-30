@@ -1,5 +1,14 @@
 # Fortune Engine Current State Audit
 
+## Fortune Engine Sample Snapshot Quality Review
+
+- Fortune engine sample snapshot quality review: Added
+- Snapshot output quality review: Confirmed
+- Production engine logic change: Pending
+- Engine accuracy approval: Pending
+- 음력/윤달 샘플 외부 검증: Pending
+- 태양시 보정 적용 여부: Pending
+
 ## Fortune Engine Sample Snapshot Result
 
 - Fortune engine sample snapshot result: Added

@@ -1,5 +1,18 @@
 # TODO
 
+## 2026-06-30 Fortune engine sample snapshot quality review TODO
+
+- [x] Fortune engine sample snapshot quality review added
+- [x] Snapshot fixed input review documented
+- [x] Sample coverage review documented
+- [x] Output shape review documented
+- [x] Quality observations documented
+- [ ] 음력/윤달 샘플 외부 검증
+- [ ] 태양시 보정 적용 여부
+- [ ] Today fortune engine improvement design
+- [ ] Year/monthly fortune engine improvement design
+- [ ] Zodiac fortune engine improvement design
+
 ## 2026-06-30 Fortune engine sample snapshot TODO
 
 - [x] Fortune engine sample snapshot runner added

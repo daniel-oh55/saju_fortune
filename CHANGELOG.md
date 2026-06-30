@@ -2,6 +2,8 @@
 
 ## Added
 
+- Fortune engine sample snapshot quality review document added
+- Snapshot output coverage and quality observations documented before production engine changes
 - Fortune engine sample snapshot runner added
 - Fortune engine generated sample snapshot JSON added before production engine changes
 - Fortune engine sample snapshot readiness document added
