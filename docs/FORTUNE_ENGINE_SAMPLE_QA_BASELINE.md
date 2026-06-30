@@ -1,5 +1,16 @@
 # Fortune Engine Sample QA Baseline
 
+## Fortune Engine Sample Snapshot Result
+
+- Fortune engine sample snapshot result: Added
+- Actual output snapshot generation: Confirmed
+- Snapshot runner script: Added
+- Snapshot check script: Added
+- Production engine logic change: Pending
+- Engine accuracy approval: Pending
+- 음력/윤달 샘플 외부 검증: Pending
+- 태양시 보정 적용 여부: Pending
+
 ## Fortune Engine Sample Snapshot Readiness
 
 - Fortune engine sample snapshot readiness: Added

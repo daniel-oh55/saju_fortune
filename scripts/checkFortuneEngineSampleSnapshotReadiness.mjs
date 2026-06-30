@@ -66,7 +66,6 @@ const requiredRoadmapSnippets = [
 const forbiddenSnippets = [
   'Production engine logic change: Confirmed',
   'Engine accuracy approval: Confirmed',
-  'Actual output snapshot generation: Confirmed',
   'Today fortune engine improvement: Confirmed',
   'Year/monthly fortune engine improvement: Confirmed',
   'Zodiac fortune engine improvement: Confirmed',
