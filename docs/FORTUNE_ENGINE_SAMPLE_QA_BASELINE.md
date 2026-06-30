@@ -1,5 +1,14 @@
 # Fortune Engine Sample QA Baseline
 
+## Fortune Engine Sample Snapshot Readiness
+
+- Fortune engine sample snapshot readiness: Added
+- Actual output snapshot generation: Pending
+- Production engine logic change: Pending
+- Engine accuracy approval: Pending
+- 음력/윤달 샘플 외부 검증: Pending
+- 태양시 보정 적용 여부: Pending
+
 ## Purpose
 
 This document defines sample QA baseline cases for the 하루풀이 fortune engines before production engine improvements.
@@ -25,7 +34,7 @@ This document is not a production logic change and does not record final engine 
 | Sample ID | Calendar Type | Birth Date | Birth Time | Birth Time Unknown | Leap Month | Late-night Jasi Policy | Purpose |
 |---|---|---|---|---|---|---|---|
 | solar-known-time-01 | solar | 1990-03-15 | 09:30 | false | false | same_day | standard solar known-time sample |
-| solar-unknown-time-01 | solar | 1988-07-21 | null | true | false | same_day | birthTimeUnknown 사주 미상 sample |
+| solar-unknown-time-01 | solar | 1988-07-21 | null | true | false | same_day | birthTimeUnknown 시주 미상 sample |
 | solar-late-night-same-day-01 | solar | 1992-11-08 | 23:30 | false | false | same_day | 23시 이후 자시 same-day policy sample |
 | solar-late-night-next-day-01 | solar | 1992-11-08 | 23:30 | false | false | next_day | 23시 이후 자시 next-day policy sample |
 | lunar-non-leap-01 | lunar | 1991-01-10 | 14:20 | false | false | same_day | 음력 일반 월 sample |
@@ -56,7 +65,7 @@ This document is not a production logic change and does not record final engine 
 | pillars.year | present or fallback state documented |
 | pillars.month | present or fallback state documented |
 | pillars.day | present or fallback state documented |
-| pillars.hour | present or 사주 미상 when birthTimeUnknown=true |
+| pillars.hour | present or 시주 미상 when birthTimeUnknown=true |
 | manseryeok | included when calculation succeeds |
 | elements.dominant | present |
 | elements.weak | present |

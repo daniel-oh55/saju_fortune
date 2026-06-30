@@ -2,6 +2,8 @@
 
 ## Added
 
+- Fortune engine sample snapshot readiness document added
+- Sample snapshot target areas and safety rules documented before production engine changes
 - Fortune engine sample QA baseline document added
 - Sample profile matrix and output shape checks documented before production engine changes
 - Fortune engine current state audit document added
@@ -20,6 +22,10 @@
 
 - public/privacy-policy.html contact email and effective date placeholders replaced
 - Google Play final review notice removed from privacy policy page
+
+## Fixed
+
+- Corrected `사주 미상` wording to `시주 미상` in fortune engine sample QA baseline
 
 ## Added
 

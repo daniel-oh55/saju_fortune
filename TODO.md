@@ -1,5 +1,19 @@
 # TODO
 
+## 2026-06-30 Fortune engine sample snapshot readiness TODO
+
+- [x] Fortune engine sample snapshot readiness added
+- [x] Sample snapshot target areas documented
+- [x] Fixed dateKey and targetYear documented
+- [x] Artificial sample profile safety rules documented
+- [x] 시주 미상 wording corrected in sample QA baseline
+- [ ] Actual output snapshot generation
+- [ ] 음력/윤달 샘플 외부 검증
+- [ ] 태양시 보정 적용 여부
+- [ ] Today fortune engine improvement design
+- [ ] Year/monthly fortune engine improvement design
+- [ ] Zodiac fortune engine improvement design
+
 ## 2026-06-30 Fortune engine sample QA baseline TODO
 
 - [x] Fortune engine sample QA baseline added
