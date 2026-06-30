@@ -1,5 +1,21 @@
 # TODO
 
+## 2026-06-30 Fortune engine current state audit TODO
+
+- [x] Fortune engine current state audit document added
+- [x] Current today fortune engine status recorded
+- [x] Current saju analysis engine status recorded
+- [x] Current manseryeok engine status recorded
+- [x] Current element analysis status recorded
+- [x] Current year/monthly fortune engine status recorded
+- [x] Current zodiac fortune engine status recorded
+- [x] Production logic unchanged guardrails recorded
+- [ ] Engine sample QA baseline
+- [ ] Manseryeok external sample verification expansion
+- [ ] Today fortune engine improvement
+- [ ] Year/monthly fortune engine improvement
+- [ ] Zodiac fortune engine improvement
+
 ## 2026-06-29 Play Console actual input readiness TODO
 
 - [x] Play Console actual input readiness checklist added

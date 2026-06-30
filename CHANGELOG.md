@@ -2,6 +2,8 @@
 
 ## Added
 
+- Fortune engine current state audit document added
+- Fortune engine improvement candidates and production-change guardrails documented
 - Play Console actual input readiness checklist added
 - Confirmed Play Console-ready values consolidated before manual Console input
 - Google Play Data safety form final review document added
