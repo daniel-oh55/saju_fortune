@@ -1,5 +1,28 @@
 # DEVELOPMENT_LOG
 
+## Fortune Engine Sample QA Baseline
+
+- Fortune engine sample QA baseline added
+- Sample profile matrix documented
+- Today fortune output shape checks documented
+- Saju analysis shape checks documented
+- Manseryeok QA notes documented
+- Year/monthly fortune shape checks documented
+- Zodiac fortune shape checks documented
+- Actual output snapshot generation remains Pending
+- Production engine logic unchanged
+- CURRENT_FORTUNE_SCHEMA_VERSION unchanged
+- schemaVersion unchanged
+- Existing localStorage keys unchanged
+- Routing unchanged
+- UI/design unchanged
+- public/privacy-policy.html unchanged
+- AndroidManifest.xml/resource unchanged
+- Gradle settings unchanged
+- `.aab` repository commit not added
+- `.zip` repository commit not added
+- Secret actual values not recorded
+
 ## Fortune Engine Current State Audit
 
 - Fortune engine current state audit document added

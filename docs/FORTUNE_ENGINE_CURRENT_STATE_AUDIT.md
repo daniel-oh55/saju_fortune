@@ -1,5 +1,14 @@
 # Fortune Engine Current State Audit
 
+## Fortune Engine Sample QA Baseline
+
+- Fortune engine sample QA baseline: Added
+- Actual output snapshot generation: Pending
+- Production engine logic change: Pending
+- Engine accuracy approval: Pending
+- 음력/윤달 샘플 외부 검증: Pending
+- 태양시 보정 적용 여부: Pending
+
 ## Purpose
 
 This document records the current state of the 하루풀이 fortune engines before planning production engine improvements.

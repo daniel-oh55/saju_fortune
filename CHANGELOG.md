@@ -2,6 +2,8 @@
 
 ## Added
 
+- Fortune engine sample QA baseline document added
+- Sample profile matrix and output shape checks documented before production engine changes
 - Fortune engine current state audit document added
 - Fortune engine improvement candidates and production-change guardrails documented
 - Play Console actual input readiness checklist added
