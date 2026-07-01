@@ -1,5 +1,16 @@
 # TODO
 
+## 2026-07-01 Today fortune snapshot comparison check design TODO
+
+- [x] Today fortune snapshot comparison check design added
+- [x] Comparison targets documented
+- [x] Allowed difference policy documented
+- [x] Future comparison file names documented
+- [ ] Before/after snapshot comparison check
+- [ ] CURRENT_FORTUNE_SCHEMA_VERSION decision
+- [ ] Production today fortune engine improvement
+- [ ] Snapshot comparison after implementation
+
 ## 2026-07-01 Today fortune engine implementation plan TODO
 
 - [x] Today fortune engine implementation plan added

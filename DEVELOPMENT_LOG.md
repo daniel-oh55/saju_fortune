@@ -1,5 +1,28 @@
 # DEVELOPMENT_LOG
 
+## Today Fortune Snapshot Comparison Check Design
+
+- Today fortune snapshot comparison check design added
+- Comparison targets documented
+- Allowed difference policy documented
+- Future comparison file names documented
+- Before/after snapshot comparison check remains Pending
+- Production today fortune engine improvement remains Pending
+- Production engine logic unchanged
+- Today fortune output logic unchanged
+- CURRENT_FORTUNE_SCHEMA_VERSION unchanged
+- schemaVersion unchanged
+- Existing localStorage keys unchanged
+- Existing snapshot JSON unchanged
+- Routing unchanged
+- UI/design unchanged
+- public/privacy-policy.html unchanged
+- AndroidManifest.xml/resource unchanged
+- Gradle settings unchanged
+- `.aab` repository commit not added
+- `.zip` repository commit not added
+- Secret actual values not recorded
+
 ## Today Fortune Engine Implementation Plan
 
 - Today fortune engine implementation plan added

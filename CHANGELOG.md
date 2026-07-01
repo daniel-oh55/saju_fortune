@@ -2,6 +2,8 @@
 
 ## Added
 
+- Today fortune snapshot comparison check design document added
+- Comparison targets, allowed difference policy, and future comparison file names documented before production logic changes
 - Today fortune engine implementation plan document added
 - Planned production scope, schemaVersion decision plan, and before/after snapshot comparison plan documented before production logic changes
 - Today fortune engine improvement design document added

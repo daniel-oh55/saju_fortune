@@ -1,5 +1,15 @@
 # Today Fortune Engine Implementation Plan
 
+## Today Fortune Snapshot Comparison Check Design
+
+- Today fortune snapshot comparison check design: Added
+- Before/after snapshot comparison check: Pending
+- Production today fortune engine improvement: Pending
+- Production engine logic change: Pending
+- Snapshot comparison after implementation: Pending
+- CURRENT_FORTUNE_SCHEMA_VERSION decision: Pending
+- Engine accuracy approval: Pending
+
 ## Purpose
 
 This document defines the implementation plan for improving the 하루풀이 today fortune engine in a future production PR.
