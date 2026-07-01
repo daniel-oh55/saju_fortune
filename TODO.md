@@ -1,5 +1,15 @@
 # TODO
 
+## 2026-07-01 Today fortune after snapshot comparison TODO
+
+- [x] After snapshot generation
+- [x] Snapshot comparison after implementation
+- [x] Comparison result generated
+- [x] Required category IDs preserved
+- [x] Manseryeok/year/zodiac unchanged check generated
+- [ ] Output quality review after implementation
+- [ ] Engine accuracy approval
+
 ## 2026-07-01 Today fortune first production change TODO
 
 - [x] First today fortune production change implemented
