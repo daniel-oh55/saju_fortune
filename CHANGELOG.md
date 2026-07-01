@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## Added
+
+- Today fortune after-improvement snapshot generated
+- Today fortune before/after snapshot comparison result generated
+
 ## Changed
 
 - Improved today fortune category-specific scoring and text composition

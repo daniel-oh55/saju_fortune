@@ -1,5 +1,18 @@
 # Saju Engine Accuracy Roadmap
 
+## Today Fortune After Snapshot Comparison
+
+- After snapshot generation: Generated
+- Snapshot comparison after implementation: Generated
+- Output quality review after implementation: Pending
+- Engine accuracy approval: Pending
+- Production today fortune engine improvement: Implemented in first scope
+- CURRENT_FORTUNE_SCHEMA_VERSION decision: Incremented for cache refresh
+- Year/monthly fortune engine improvement: Pending
+- Zodiac fortune engine improvement: Pending
+- 음력/윤달 샘플 외부 검증: Pending
+- 태양시 보정 적용 여부: Pending
+
 ## Today Fortune First Production Change
 
 - Production today fortune engine improvement: Implemented in first scope

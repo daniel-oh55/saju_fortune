@@ -1,0 +1,17 @@
+{
+  "comparisonVersion": "today_fortune_snapshot_comparison_v1",
+  "dateKey": "2026-06-30",
+  "targetYear": 2026,
+  "baselineSnapshot": "docs/generated/fortune-engine-sample-snapshot.json",
+  "afterSnapshot": "docs/generated/fortune-engine-sample-snapshot-after-today-improvement.json",
+  "sampleCount": 8,
+  "sampleIdsPreserved": true,
+  "requiredCategoryIdsPreserved": true,
+  "manseryeokUnchanged": true,
+  "yearFortuneUnchanged": true,
+  "zodiacFortuneUnchanged": true,
+  "todayFortuneChanged": true,
+  "engineAccuracyApproval": "Pending",
+  "snapshotComparisonAfterImplementation": "Generated",
+  "notes": "Today fortune output changes are generated for comparison only. Engine accuracy approval remains separate."
+}
