@@ -71,6 +71,7 @@
     "check:today-fortune-output-quality-review": "node scripts/checkTodayFortuneOutputQualityReview.mjs",
     "check:year-monthly-fortune-engine-improvement-design": "node scripts/checkYearMonthlyFortuneEngineImprovementDesign.mjs",
     "check:year-monthly-fortune-implementation-plan": "node scripts/checkYearMonthlyFortuneImplementationPlan.mjs",
+    "check:year-monthly-snapshot-comparison-check-design": "node scripts/checkYearMonthlySnapshotComparisonCheckDesign.mjs",
     "check:today-fortune-first-production-change": "node scripts/checkTodayFortuneFirstProductionChange.mjs",
     "check:today-fortune-first-production-scope": "node scripts/checkTodayFortuneFirstProductionScope.mjs",
     "check:today-fortune-snapshot-comparison-check-design": "node scripts/checkTodayFortuneSnapshotComparisonCheckDesign.mjs",

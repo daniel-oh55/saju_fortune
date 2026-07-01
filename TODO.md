@@ -1,5 +1,18 @@
 # TODO
 
+## 2026-07-02 Year/monthly snapshot comparison check design TODO
+
+- [x] Year/monthly snapshot comparison check design added
+- [x] Practical baseline documented
+- [x] Future comparison files documented
+- [x] Comparison targets documented
+- [x] Allowed difference policy documented
+- [ ] First year/monthly production change scope
+- [ ] Production year/monthly fortune engine improvement
+- [ ] Year/monthly after snapshot generation
+- [ ] Snapshot comparison for year/monthly improvement
+- [ ] Engine accuracy approval
+
 ## 2026-07-01 Year/monthly fortune implementation plan TODO
 
 - [x] Year/monthly fortune implementation plan added
