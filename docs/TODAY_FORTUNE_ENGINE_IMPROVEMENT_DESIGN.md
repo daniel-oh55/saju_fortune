@@ -1,5 +1,16 @@
 # Today Fortune Engine Improvement Design
 
+## Today Fortune Engine Implementation Plan
+
+- Today fortune engine implementation plan: Added
+- Today fortune engine improvement: Pending
+- Production engine logic change: Pending
+- Snapshot comparison after implementation: Pending
+- CURRENT_FORTUNE_SCHEMA_VERSION decision: Pending
+- Engine accuracy approval: Pending
+- 음력/윤달 샘플 외부 검증: Pending
+- 태양시 보정 적용 여부: Pending
+
 ## Purpose
 
 This document defines the design direction for improving the 하루풀이 today fortune engine before production logic changes.
