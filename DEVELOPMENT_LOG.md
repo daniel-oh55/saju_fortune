@@ -1,11 +1,39 @@
 # DEVELOPMENT_LOG
 
+## Manseryeok Reference Standard Time Wording Fix
+
+- 기준점 wording corrected to 기준시
+- Manseryeok external reference candidates wording updated
+- Manseryeok external reference selection criteria wording updated
+- Related check scripts updated
+- External reference 2 selection remains Pending
+- Actual external reference comparison remains Pending
+- Manual comparison sheet completion remains Pending
+- Discrepancy log remains Pending
+- 음력/윤달 샘플 외부 검증 remains Pending
+- 태양시 보정 적용 여부 remains Pending
+- Engine accuracy approval remains Pending
+- Production engine logic unchanged
+- Manseryeok logic unchanged
+- CURRENT_FORTUNE_SCHEMA_VERSION unchanged
+- schemaVersion unchanged
+- Existing localStorage keys unchanged
+- Snapshot JSON unchanged
+- Routing unchanged
+- UI/design unchanged
+- public/privacy-policy.html unchanged
+- AndroidManifest.xml/resource unchanged
+- Gradle settings unchanged
+- `.aab` repository commit not added
+- `.zip` repository commit not added
+- Secret actual values not recorded
+
 ## Manseryeok External Reference Candidates
 
 - Manseryeok external reference candidates added
 - External reference 1 candidate recorded
 - Candidate 2 selection requirements documented
-- 기준점 wording corrected in reference selection criteria
+- 기준시 wording corrected in reference selection criteria
 - External reference 2 selection remains Pending
 - Actual external reference comparison remains Pending
 - Manual comparison sheet completion remains Pending

@@ -37,7 +37,8 @@
 
 ## Fixed
 
-- Corrected `기준` wording to `기준점` in manseryeok external reference selection criteria
+- Corrected `기준점` wording to `기준시` in manseryeok external reference documents and checks
+- Corrected `기준` wording to `기준시` in manseryeok external reference selection criteria
 - Corrected `사주 미상` wording to `시주 미상` in fortune engine sample QA baseline
 
 ## Added

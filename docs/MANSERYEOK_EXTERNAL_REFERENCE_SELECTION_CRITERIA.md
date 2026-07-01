@@ -41,7 +41,7 @@ This document is not external reference selection completion, actual external co
 |---|---|---|
 | Reference should provide solar-lunar conversion | Pending | needed for convertedSolar/convertedLunar checks |
 | Reference should provide year/month/day/hour pillars | Pending | needed for pillar comparison |
-| Reference should disclose timezone or 기준점 | Pending | needed for policy-sensitive checks |
+| Reference should disclose timezone or 기준시 | Pending | needed for policy-sensitive checks |
 | Reference should disclose 23시 이후 자시 policy if possible | Pending | needed for same_day/next_day comparison |
 | Reference should disclose 태양시 보정 policy if possible | Pending | needed for policy difference classification |
 | Reference should support 음력/윤달 input or conversion | Pending | needed for 음력/윤달 샘플 외부 검증 |
@@ -69,7 +69,7 @@ This document is not external reference selection completion, actual external co
 
 | Policy Field | Status | Note |
 |---|---|---|
-| Timezone / 기준점 | Pending | required before comparison |
+| Timezone / 기준시 | Pending | required before comparison |
 | 태양시 보정 policy | Pending | record whether applied, not applied, or unknown |
 | 23시 이후 자시 policy | Pending | record same_day, next_day, or unknown |
 | 절기 기준 | Pending | record source explanation if available |

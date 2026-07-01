@@ -38,7 +38,7 @@ This document is not actual external comparison completion, manual comparison sh
 | Source type | Candidate recorded | public astronomy/calendar information source |
 | Solar-lunar conversion support | Candidate recorded | supports 양력/음력 reference usage |
 | Ganji calendar support | Candidate recorded | monthly table can include 음력간지 |
-| Timezone / 기준점 policy | Pending review | record manually during comparison |
+| Timezone / 기준시 policy | Pending review | record manually during comparison |
 | 태양시 보정 policy | Pending review | not decided by this PR |
 | 23시 이후 자시 policy | Pending review | not decided by this PR |
 | 음력/윤달 handling | Pending review | verify manually during comparison |
@@ -49,7 +49,7 @@ This document is not actual external comparison completion, manual comparison sh
 |---|---|---|
 | Independent manseryeok calculator source | Pending | select in a later step |
 | Provides year/month/day/hour pillars | Pending | required for pillar comparison |
-| Discloses timezone or 기준점 if possible | Pending | required for policy-sensitive review |
+| Discloses timezone or 기준시 if possible | Pending | required for policy-sensitive review |
 | Discloses 태양시 보정 policy if possible | Pending | required for policy difference classification |
 | Discloses 23시 이후 자시 policy if possible | Pending | required for same_day/next_day comparison |
 | Supports 음력/윤달 input or conversion if possible | Pending | useful for 음력/윤달 샘플 외부 검증 |
