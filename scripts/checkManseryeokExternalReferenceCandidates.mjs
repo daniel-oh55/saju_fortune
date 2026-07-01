@@ -1,19 +1,22 @@
 import fs from 'node:fs';
 import { execSync } from 'node:child_process';
 
+const candidatesDocPath = 'docs/MANSERYEOK_EXTERNAL_REFERENCE_CANDIDATES.md';
 const criteriaDocPath = 'docs/MANSERYEOK_EXTERNAL_REFERENCE_SELECTION_CRITERIA.md';
 const snapshotPath = 'docs/generated/fortune-engine-sample-snapshot.json';
 const relatedDocs = [
+  criteriaDocPath,
   'docs/MANSERYEOK_EXTERNAL_COMPARISON_TEMPLATE.md',
   'docs/MANSERYEOK_EXTERNAL_VERIFICATION_PLAN.md',
   'docs/SAJU_ENGINE_ACCURACY_ROADMAP.md',
 ];
 
-const requiredCriteriaSnippets = [
-  '# Manseryeok External Reference Selection Criteria',
-  'This document is not external reference selection completion, actual external comparison completion, or final engine accuracy approval.',
-  'Manseryeok external reference selection criteria | Added',
-  'External manseryeok reference selection | Pending',
+const requiredCandidatesSnippets = [
+  '# Manseryeok External Reference Candidates',
+  'This document is not actual external comparison completion, manual comparison sheet completion, or final engine accuracy approval.',
+  'Manseryeok external reference candidates | Added',
+  'External manseryeok reference selection | Candidate recorded',
+  'External reference 2 selection | Pending',
   'Actual external reference comparison | Pending',
   'Manual comparison sheet completion | Pending',
   'Discrepancy log | Pending',
@@ -21,27 +24,35 @@ const requiredCriteriaSnippets = [
   '태양시 보정 적용 여부 | Pending',
   'Engine accuracy approval | Pending',
   'Production engine logic change | Pending',
-  'Reference should provide solar-lunar conversion | Pending',
-  'Reference should provide year/month/day/hour pillars | Pending',
-  'Reference should disclose timezone or 기준점 | Pending',
-  'Reference should disclose 23시 이후 자시 policy if possible | Pending',
-  'Reference should disclose 태양시 보정 policy if possible | Pending',
-  'Reference should support 음력/윤달 input or conversion | Pending',
-  'External reference 1 | Pending',
-  'External reference 2 | Pending',
-  'At least two references selected | Pending',
-  'This PR defines reference selection criteria only.',
-  'This PR is not external reference selection completion.',
+  '한국천문연구원 천문우주지식정보 생활천문관',
+  'https://astro.kasi.re.kr/life/pageView/5',
+  'solar-lunar conversion and ganji/monthly calendar reference',
+  'External reference 2 | Pending selection',
+  'Candidate 2 Selection Requirements',
+  'Discloses timezone or 기준점 if possible',
+  'This PR records external reference candidates only.',
   'This PR is not actual external comparison completion.',
+  'This PR is not manual comparison sheet completion.',
   'Snapshot JSON is not regenerated.',
   'CURRENT_FORTUNE_SCHEMA_VERSION is not changed.',
   'schemaVersion is not changed.',
   'Existing localStorage keys are not changed.',
 ];
 
+const requiredCriteriaSnippets = [
+  'Reference should disclose timezone or 기준점 | Pending',
+  'Timezone / 기준점 | Pending',
+];
+
+const forbiddenCriteriaSnippets = [
+  'Reference should disclose timezone or 기준 |',
+  'Timezone / 기준 |',
+];
+
 const requiredRelatedDocSnippets = [
-  'Manseryeok external reference selection criteria: Added',
-  'External manseryeok reference selection: Pending',
+  'Manseryeok external reference candidates: Added',
+  'External manseryeok reference selection: Candidate recorded',
+  'External reference 2 selection: Pending',
   'Actual external reference comparison: Pending',
   'Manual comparison sheet completion: Pending',
   'Discrepancy log: Pending',
@@ -59,6 +70,7 @@ const requiredRoadmapOnlySnippets = [
 
 const forbiddenSnippets = [
   'External manseryeok reference selection: Confirmed',
+  'External reference 2 selection: Confirmed',
   'Actual external reference comparison: Confirmed',
   'Manual comparison sheet completion: Confirmed',
   'Discrepancy log: Confirmed',
@@ -113,7 +125,7 @@ function checkIncludes(sourceLabel, source, snippets) {
 
 let hasFailure = false;
 
-for (const path of [criteriaDocPath, snapshotPath, ...relatedDocs]) {
+for (const path of [candidatesDocPath, snapshotPath, ...relatedDocs]) {
   const exists = fs.existsSync(path);
   logResult(`${labelFromSnippet(path)}_exists`, exists, path);
   if (!exists) hasFailure = true;
@@ -121,10 +133,18 @@ for (const path of [criteriaDocPath, snapshotPath, ...relatedDocs]) {
 
 if (hasFailure) process.exit(1);
 
+const candidatesDoc = fs.readFileSync(candidatesDocPath, 'utf8');
 const criteriaDoc = fs.readFileSync(criteriaDocPath, 'utf8');
-const docsToScan = [{ path: criteriaDocPath, source: criteriaDoc }];
+const docsToScan = [{ path: candidatesDocPath, source: candidatesDoc }];
 
+if (!checkIncludes('candidates_doc', candidatesDoc, requiredCandidatesSnippets)) hasFailure = true;
 if (!checkIncludes('criteria_doc', criteriaDoc, requiredCriteriaSnippets)) hasFailure = true;
+
+for (const snippet of forbiddenCriteriaSnippets) {
+  const absent = !criteriaDoc.includes(snippet);
+  logResult(`criteria_doc_forbidden_wording_absent_${labelFromSnippet(snippet)}`, absent);
+  if (!absent) hasFailure = true;
+}
 
 for (const path of relatedDocs) {
   const source = fs.readFileSync(path, 'utf8');
@@ -146,7 +166,7 @@ for (const snippet of forbiddenSnippets) {
 
 const packageJson = fs.readFileSync('package.json', 'utf8');
 const scriptRegistered = packageJson.includes(
-  '"check:manseryeok-external-reference-selection-criteria": "node scripts/checkManseryeokExternalReferenceSelectionCriteria.mjs"'
+  '"check:manseryeok-external-reference-candidates": "node scripts/checkManseryeokExternalReferenceCandidates.mjs"'
 );
 logResult('package_script_registered', scriptRegistered);
 if (!scriptRegistered) hasFailure = true;
@@ -173,8 +193,8 @@ logResult('artifact_zip_and_keystore_files_not_added_to_repository', artifactFil
 if (!artifactFilesAbsent) hasFailure = true;
 
 if (hasFailure) {
-  console.error('Manseryeok external reference selection criteria check failed');
+  console.error('Manseryeok external reference candidates check failed');
   process.exit(1);
 }
 
-console.log('Manseryeok external reference selection criteria check passed');
+console.log('Manseryeok external reference candidates check passed');

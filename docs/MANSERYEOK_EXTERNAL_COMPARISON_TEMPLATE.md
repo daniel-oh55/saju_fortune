@@ -1,5 +1,18 @@
 # Manseryeok External Comparison Template
 
+## Manseryeok External Reference Candidates
+
+- Manseryeok external reference candidates: Added
+- External manseryeok reference selection: Candidate recorded
+- External reference 2 selection: Pending
+- Actual external reference comparison: Pending
+- Manual comparison sheet completion: Pending
+- Discrepancy log: Pending
+- 음력/윤달 샘플 외부 검증: Pending
+- 태양시 보정 적용 여부: Pending
+- Engine accuracy approval: Pending
+- Production engine logic change: Pending
+
 ## Manseryeok External Reference Selection Criteria
 
 - Manseryeok external reference selection criteria: Added
