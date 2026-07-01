@@ -2,6 +2,8 @@
 
 ## Added
 
+- Today fortune first production scope document added
+- First production change scope, schemaVersion proposal, and snapshot comparison requirements documented before production logic changes
 - Today fortune snapshot comparison check design document added
 - Comparison targets, allowed difference policy, and future comparison file names documented before production logic changes
 - Today fortune engine implementation plan document added

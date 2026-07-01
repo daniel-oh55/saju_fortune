@@ -1,5 +1,14 @@
 # Today Fortune Engine Improvement Design
 
+## Today Fortune First Production Scope
+
+- Today fortune first production scope: Added
+- Production today fortune engine improvement: Pending
+- Production engine logic change: Pending
+- CURRENT_FORTUNE_SCHEMA_VERSION decision: Proposed
+- Snapshot comparison after implementation: Pending
+- Engine accuracy approval: Pending
+
 ## Today Fortune Snapshot Comparison Check Design
 
 - Today fortune snapshot comparison check design: Added

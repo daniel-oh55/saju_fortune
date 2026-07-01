@@ -1,5 +1,28 @@
 # DEVELOPMENT_LOG
 
+## Today Fortune First Production Scope
+
+- Today fortune first production scope added
+- First production PR target file documented
+- Category/output compatibility requirements documented
+- CURRENT_FORTUNE_SCHEMA_VERSION proposed decision documented
+- Snapshot comparison requirement documented
+- Production today fortune engine improvement remains Pending
+- Production engine logic unchanged
+- Today fortune output logic unchanged
+- CURRENT_FORTUNE_SCHEMA_VERSION unchanged in this PR
+- schemaVersion unchanged in this PR
+- Existing localStorage keys unchanged
+- Existing snapshot JSON unchanged
+- Routing unchanged
+- UI/design unchanged
+- public/privacy-policy.html unchanged
+- AndroidManifest.xml/resource unchanged
+- Gradle settings unchanged
+- `.aab` repository commit not added
+- `.zip` repository commit not added
+- Secret actual values not recorded
+
 ## Today Fortune Snapshot Comparison Check Design
 
 - Today fortune snapshot comparison check design added
