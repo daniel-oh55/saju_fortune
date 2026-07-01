@@ -2,6 +2,8 @@
 
 ## Added
 
+- Manseryeok external reference selection criteria document added
+- Reference requirements, candidate slots, and policy fields documented before selecting external references
 - Manseryeok external comparison template document added
 - Manual comparison fields, match status values, and discrepancy log template documented before external verification
 - Manseryeok external verification plan document added

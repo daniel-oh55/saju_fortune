@@ -1,5 +1,17 @@
 # Manseryeok External Comparison Template
 
+## Manseryeok External Reference Selection Criteria
+
+- Manseryeok external reference selection criteria: Added
+- External manseryeok reference selection: Pending
+- Actual external reference comparison: Pending
+- Manual comparison sheet completion: Pending
+- Discrepancy log: Pending
+- 음력/윤달 샘플 외부 검증: Pending
+- 태양시 보정 적용 여부: Pending
+- Engine accuracy approval: Pending
+- Production engine logic change: Pending
+
 ## Purpose
 
 This document provides a manual comparison template for checking the 하루풀이 manseryeok sample outputs against external references.

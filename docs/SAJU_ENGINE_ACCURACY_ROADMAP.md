@@ -1,5 +1,20 @@
 # Saju Engine Accuracy Roadmap
 
+## Manseryeok External Reference Selection Criteria
+
+- Manseryeok external reference selection criteria: Added
+- External manseryeok reference selection: Pending
+- Actual external reference comparison: Pending
+- Manual comparison sheet completion: Pending
+- Discrepancy log: Pending
+- 음력/윤달 샘플 외부 검증: Pending
+- 태양시 보정 적용 여부: Pending
+- Engine accuracy approval: Pending
+- Production engine logic change: Pending
+- Today fortune engine improvement: Pending
+- Year/monthly fortune engine improvement: Pending
+- Zodiac fortune engine improvement: Pending
+
 ## Manseryeok External Comparison Template
 
 - Manseryeok external comparison template: Added
