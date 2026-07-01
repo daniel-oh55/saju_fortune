@@ -1,5 +1,29 @@
 # DEVELOPMENT_LOG
 
+## Today Fortune Engine Improvement Design
+
+- Today fortune engine improvement design added
+- Current today fortune baseline documented
+- Improvement goals documented
+- Proposed input signals documented
+- Proposed category design documented
+- Proposed score/text design documented
+- Today fortune engine improvement remains Pending
+- Production engine logic unchanged
+- Today fortune output logic unchanged
+- CURRENT_FORTUNE_SCHEMA_VERSION unchanged
+- schemaVersion unchanged
+- Existing localStorage keys unchanged
+- Snapshot JSON unchanged
+- Routing unchanged
+- UI/design unchanged
+- public/privacy-policy.html unchanged
+- AndroidManifest.xml/resource unchanged
+- Gradle settings unchanged
+- `.aab` repository commit not added
+- `.zip` repository commit not added
+- Secret actual values not recorded
+
 ## Manseryeok Reference Standard Time Wording Fix
 
 - 기준점 wording corrected to 기준시

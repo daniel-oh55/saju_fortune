@@ -2,6 +2,8 @@
 
 ## Added
 
+- Today fortune engine improvement design document added
+- Today fortune baseline, improvement goals, input signals, category design, and score/text design documented before production logic changes
 - Manseryeok external reference candidates document added
 - External reference 1 candidate and External reference 2 selection requirements documented before actual comparison
 - Manseryeok external reference selection criteria document added
