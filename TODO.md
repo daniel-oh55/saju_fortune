@@ -1,5 +1,19 @@
 # TODO
 
+## 2026-07-01 Today fortune engine improvement design TODO
+
+- [x] Today fortune engine improvement design added
+- [x] Current today fortune baseline documented
+- [x] Improvement goals documented
+- [x] Proposed input signals documented
+- [x] Proposed category design documented
+- [x] Proposed score/text design documented
+- [ ] Today fortune engine implementation plan
+- [ ] Before/after snapshot comparison check
+- [ ] Production today fortune engine improvement
+- [ ] Snapshot comparison after implementation
+- [ ] CURRENT_FORTUNE_SCHEMA_VERSION decision
+
 ## 2026-07-01 Manseryeok reference standard time wording TODO
 
 - [x] 기준점 wording corrected to 기준시

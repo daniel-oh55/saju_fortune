@@ -1,5 +1,15 @@
 # Fortune Engine Sample Snapshot Quality Review
 
+## Today Fortune Engine Improvement Design
+
+- Today fortune engine improvement design: Added
+- Today fortune engine improvement: Pending
+- Production engine logic change: Pending
+- Engine accuracy approval: Pending
+- Snapshot JSON regeneration: Pending
+- 음력/윤달 샘플 외부 검증: Pending
+- 태양시 보정 적용 여부: Pending
+
 ## Manseryeok External Comparison Template
 
 - Manseryeok external comparison template: Added
