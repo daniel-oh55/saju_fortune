@@ -1,5 +1,19 @@
 # TODO
 
+## 2026-07-01 Year/monthly fortune implementation plan TODO
+
+- [x] Year/monthly fortune implementation plan added
+- [x] Planned production scope documented
+- [x] Practical snapshot baseline documented
+- [x] Schema version decision plan documented
+- [x] Before/after snapshot comparison plan documented
+- [ ] Year/monthly before/after snapshot comparison design
+- [ ] First year/monthly production change scope
+- [ ] Production year/monthly fortune engine improvement
+- [ ] Year/monthly after snapshot generation
+- [ ] Snapshot comparison for year/monthly improvement
+- [ ] Engine accuracy approval
+
 ## 2026-07-01 Year/monthly fortune engine improvement design TODO
 
 - [x] Year/monthly fortune engine improvement design added
