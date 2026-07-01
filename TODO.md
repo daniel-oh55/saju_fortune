@@ -1,5 +1,17 @@
 # TODO
 
+## 2026-07-01 Today fortune first production scope TODO
+
+- [x] Today fortune first production scope added
+- [x] First production PR target file documented
+- [x] Category/output compatibility requirements documented
+- [x] CURRENT_FORTUNE_SCHEMA_VERSION proposed decision documented
+- [x] Snapshot comparison requirement documented
+- [ ] Production today fortune engine improvement
+- [ ] CURRENT_FORTUNE_SCHEMA_VERSION increment in implementation PR
+- [ ] After snapshot generation
+- [ ] Snapshot comparison after implementation
+
 ## 2026-07-01 Today fortune snapshot comparison check design TODO
 
 - [x] Today fortune snapshot comparison check design added
