@@ -1,5 +1,30 @@
 # DEVELOPMENT_LOG
 
+## Today Fortune First Production Change
+
+- First today fortune production change implemented
+- Category-specific scoring adjustment added
+- Category text composition improved
+- CURRENT_FORTUNE_SCHEMA_VERSION incremented for cache refresh
+- Production engine logic changed only for today fortune
+- Year/monthly fortune logic unchanged
+- Zodiac fortune logic unchanged
+- Manseryeok logic unchanged
+- Saju analysis logic unchanged
+- Existing localStorage keys unchanged
+- Existing baseline snapshot JSON unchanged
+- After snapshot generation remains Pending
+- Snapshot comparison after implementation remains Pending
+- Engine accuracy approval remains Pending
+- Routing unchanged
+- UI/design unchanged
+- public/privacy-policy.html unchanged
+- AndroidManifest.xml/resource unchanged
+- Gradle settings unchanged
+- `.aab` repository commit not added
+- `.zip` repository commit not added
+- Secret actual values not recorded
+
 ## Today Fortune First Production Scope
 
 - Today fortune first production scope added

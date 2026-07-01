@@ -1,5 +1,18 @@
 # Today Fortune First Production Scope
 
+## Today Fortune First Production Change
+
+- Production today fortune engine improvement: Implemented in first scope
+- Production engine logic change: Today fortune only
+- CURRENT_FORTUNE_SCHEMA_VERSION decision: Incremented for cache refresh
+- Snapshot comparison after implementation: Pending
+- After snapshot generation: Pending
+- Engine accuracy approval: Pending
+- Year/monthly fortune engine improvement: Pending
+- Zodiac fortune engine improvement: Pending
+- 음력/윤달 샘플 외부 검증: Pending
+- 태양시 보정 적용 여부: Pending
+
 ## Purpose
 
 This document defines the first small production change scope for the 하루풀이 today fortune engine.

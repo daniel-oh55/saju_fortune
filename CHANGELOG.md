@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## Changed
+
+- Improved today fortune category-specific scoring and text composition
+- Incremented CURRENT_FORTUNE_SCHEMA_VERSION for today fortune cache refresh
+
 ## Added
 
 - Today fortune first production scope document added
