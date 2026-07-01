@@ -1,5 +1,16 @@
 # TODO
 
+## 2026-07-01 Today fortune first production change TODO
+
+- [x] First today fortune production change implemented
+- [x] Category-specific scoring adjustment added
+- [x] Category text composition improved
+- [x] CURRENT_FORTUNE_SCHEMA_VERSION incremented for cache refresh
+- [ ] After snapshot generation
+- [ ] Snapshot comparison after implementation
+- [ ] Output quality review after implementation
+- [ ] Engine accuracy approval
+
 ## 2026-07-01 Today fortune first production scope TODO
 
 - [x] Today fortune first production scope added
