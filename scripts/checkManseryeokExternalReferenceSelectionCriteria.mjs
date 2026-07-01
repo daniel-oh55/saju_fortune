@@ -23,7 +23,8 @@ const requiredCriteriaSnippets = [
   'Production engine logic change | Pending',
   'Reference should provide solar-lunar conversion | Pending',
   'Reference should provide year/month/day/hour pillars | Pending',
-  'Reference should disclose timezone or 기준점 | Pending',
+  'Reference should disclose timezone or 기준시 | Pending',
+  'Timezone / 기준시 | Pending',
   'Reference should disclose 23시 이후 자시 policy if possible | Pending',
   'Reference should disclose 태양시 보정 policy if possible | Pending',
   'Reference should support 음력/윤달 input or conversion | Pending',
@@ -58,6 +59,11 @@ const requiredRoadmapOnlySnippets = [
 ];
 
 const forbiddenSnippets = [
+  'Reference should disclose timezone or 기준점',
+  'Timezone / 기준점',
+  'Discloses timezone or 기준점 if possible',
+  'Timezone / 기준점 policy',
+  '기준점 wording corrected',
   'External manseryeok reference selection: Confirmed',
   'Actual external reference comparison: Confirmed',
   'Manual comparison sheet completion: Confirmed',

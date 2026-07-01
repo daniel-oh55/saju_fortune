@@ -1,11 +1,25 @@
 # TODO
 
+## 2026-07-01 Manseryeok reference standard time wording TODO
+
+- [x] 기준점 wording corrected to 기준시
+- [x] Manseryeok external reference candidates wording updated
+- [x] Manseryeok external reference selection criteria wording updated
+- [x] Related check scripts updated
+- [ ] External reference 2 selection
+- [ ] Actual external reference comparison
+- [ ] Manual comparison sheet completion
+- [ ] Discrepancy log
+- [ ] 음력/윤달 샘플 외부 검증
+- [ ] 태양시 보정 적용 여부
+- [ ] Engine accuracy approval
+
 ## 2026-07-01 Manseryeok external reference candidates TODO
 
 - [x] Manseryeok external reference candidates added
 - [x] External reference 1 candidate recorded
 - [x] Candidate 2 selection requirements documented
-- [x] 기준점 wording corrected in reference selection criteria
+- [x] 기준시 wording corrected in reference selection criteria
 - [ ] External reference 2 selection
 - [ ] Actual external reference comparison
 - [ ] Manual comparison sheet completion

@@ -29,7 +29,8 @@ const requiredCandidatesSnippets = [
   'solar-lunar conversion and ganji/monthly calendar reference',
   'External reference 2 | Pending selection',
   'Candidate 2 Selection Requirements',
-  'Discloses timezone or 기준점 if possible',
+  'Timezone / 기준시 policy',
+  'Discloses timezone or 기준시 if possible',
   'This PR records external reference candidates only.',
   'This PR is not actual external comparison completion.',
   'This PR is not manual comparison sheet completion.',
@@ -40,11 +41,13 @@ const requiredCandidatesSnippets = [
 ];
 
 const requiredCriteriaSnippets = [
-  'Reference should disclose timezone or 기준점 | Pending',
-  'Timezone / 기준점 | Pending',
+  'Reference should disclose timezone or 기준시 | Pending',
+  'Timezone / 기준시 | Pending',
 ];
 
 const forbiddenCriteriaSnippets = [
+  'Reference should disclose timezone or 기준점',
+  'Timezone / 기준점',
   'Reference should disclose timezone or 기준 |',
   'Timezone / 기준 |',
 ];
@@ -83,6 +86,9 @@ const forbiddenSnippets = [
   'Zodiac fortune engine improvement: Confirmed',
   'schemaVersion changed',
   'CURRENT_FORTUNE_SCHEMA_VERSION changed',
+  'Discloses timezone or 기준점 if possible',
+  'Timezone / 기준점 policy',
+  '기준점 wording corrected',
   'birthTimeUnknown 사주 미상 sample',
   'present or 사주 미상 when birthTimeUnknown=true',
   '실제 스토어 스크린샷 이미지 시작',
