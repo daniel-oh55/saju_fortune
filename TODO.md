@@ -1,5 +1,18 @@
 # TODO
 
+## 2026-07-01 Year/monthly fortune engine improvement design TODO
+
+- [x] Year/monthly fortune engine improvement design added
+- [x] Current year/monthly fortune baseline documented
+- [x] Annual improvement goals documented
+- [x] Monthly improvement goals documented
+- [x] Output compatibility requirements documented
+- [ ] Year/monthly fortune implementation plan
+- [ ] Year/monthly before/after snapshot comparison design
+- [ ] Production year/monthly fortune engine improvement
+- [ ] Snapshot comparison for year/monthly improvement
+- [ ] Engine accuracy approval
+
 ## 2026-07-01 Today fortune output quality review TODO
 
 - [x] Output quality review after implementation
