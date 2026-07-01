@@ -1,5 +1,20 @@
 # TODO
 
+## 2026-07-01 Manseryeok external reference selection criteria TODO
+
+- [x] Manseryeok external reference selection criteria added
+- [x] Reference selection requirements documented
+- [x] Preferred reference types documented
+- [x] Reference candidate slots documented
+- [x] Policy fields per reference documented
+- [ ] External manseryeok reference selection
+- [ ] Actual external reference comparison
+- [ ] Manual comparison sheet completion
+- [ ] Discrepancy log
+- [ ] 음력/윤달 샘플 외부 검증
+- [ ] 태양시 보정 적용 여부
+- [ ] Engine accuracy approval
+
 ## 2026-07-01 Manseryeok external comparison template TODO
 
 - [x] Manseryeok external comparison template added
