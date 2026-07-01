@@ -1,5 +1,17 @@
 # TODO
 
+## 2026-07-01 Today fortune output quality review TODO
+
+- [x] Output quality review after implementation
+- [x] Category-specific summary clarity reviewed
+- [x] Reason/advice/caution structure reviewed
+- [x] Required category IDs preserved
+- [x] Health safety wording reviewed
+- [ ] Engine accuracy approval
+- [ ] External reference comparison
+- [ ] 음력/윤달 샘플 외부 검증
+- [ ] 태양시 보정 적용 여부
+
 ## 2026-07-01 Today fortune after snapshot comparison TODO
 
 - [x] After snapshot generation

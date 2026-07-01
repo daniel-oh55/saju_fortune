@@ -2,6 +2,8 @@
 
 ## Added
 
+- Today fortune output quality review document added
+- Today fortune category summary clarity, reason/advice/caution structure, and health safety wording reviewed after implementation
 - Today fortune after-improvement snapshot generated
 - Today fortune before/after snapshot comparison result generated
 

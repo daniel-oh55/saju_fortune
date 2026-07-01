@@ -1,5 +1,18 @@
 # Today Fortune First Production Scope
 
+## Today Fortune Output Quality Review
+
+- Output quality review after implementation: Reviewed
+- Engine accuracy approval: Pending
+- External reference comparison: Pending
+- 음력/윤달 샘플 외부 검증: Pending
+- 태양시 보정 적용 여부: Pending
+- Production today fortune engine improvement: Implemented in first scope
+- After snapshot generation: Generated
+- Snapshot comparison after implementation: Generated
+- Year/monthly fortune engine improvement: Pending
+- Zodiac fortune engine improvement: Pending
+
 ## Today Fortune After Snapshot Comparison
 
 - After snapshot generation: Generated
