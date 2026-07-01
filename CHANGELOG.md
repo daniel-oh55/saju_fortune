@@ -2,6 +2,8 @@
 
 ## Added
 
+- Year/monthly fortune implementation plan document added
+- Planned production scope, practical snapshot baseline, schemaVersion decision plan, and before/after comparison plan documented before production logic changes
 - Year/monthly fortune engine improvement design document added
 - Annual/monthly improvement goals and output compatibility requirements documented before production logic changes
 - Today fortune output quality review document added
