@@ -2,6 +2,8 @@
 
 ## Added
 
+- Manseryeok external reference candidates document added
+- External reference 1 candidate and External reference 2 selection requirements documented before actual comparison
 - Manseryeok external reference selection criteria document added
 - Reference requirements, candidate slots, and policy fields documented before selecting external references
 - Manseryeok external comparison template document added
@@ -35,6 +37,7 @@
 
 ## Fixed
 
+- Corrected `기준` wording to `기준점` in manseryeok external reference selection criteria
 - Corrected `사주 미상` wording to `시주 미상` in fortune engine sample QA baseline
 
 ## Added
