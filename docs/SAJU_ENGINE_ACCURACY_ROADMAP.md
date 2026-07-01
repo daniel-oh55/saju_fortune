@@ -1,5 +1,19 @@
 # Saju Engine Accuracy Roadmap
 
+## Today Fortune Snapshot Comparison Check Design
+
+- Today fortune snapshot comparison check design: Added
+- Before/after snapshot comparison check: Pending
+- Production today fortune engine improvement: Pending
+- Production engine logic change: Pending
+- Snapshot comparison after implementation: Pending
+- CURRENT_FORTUNE_SCHEMA_VERSION decision: Pending
+- Engine accuracy approval: Pending
+- Year/monthly fortune engine improvement: Pending
+- Zodiac fortune engine improvement: Pending
+- 음력/윤달 샘플 외부 검증: Pending
+- 태양시 보정 적용 여부: Pending
+
 ## Today Fortune Engine Implementation Plan
 
 - Today fortune engine implementation plan: Added
