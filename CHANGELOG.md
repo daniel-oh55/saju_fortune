@@ -2,6 +2,8 @@
 
 ## Added
 
+- Year/monthly fortune engine improvement design document added
+- Annual/monthly improvement goals and output compatibility requirements documented before production logic changes
 - Today fortune output quality review document added
 - Today fortune category summary clarity, reason/advice/caution structure, and health safety wording reviewed after implementation
 - Today fortune after-improvement snapshot generated

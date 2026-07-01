@@ -1,5 +1,18 @@
 # Fortune Engine Current State Audit
 
+## Year Monthly Fortune Engine Improvement Design
+
+- Year/monthly fortune engine improvement design: Added
+- Year/monthly fortune engine improvement: Pending
+- Production engine logic change: Pending
+- Snapshot comparison for year/monthly improvement: Pending
+- Engine accuracy approval: Pending
+- External reference comparison: Pending
+- 음력/윤달 샘플 외부 검증: Pending
+- 태양시 보정 적용 여부: Pending
+- Today fortune first production improvement: Reviewed
+- Zodiac fortune engine improvement: Pending
+
 ## Today Fortune Engine Implementation Plan
 
 - Today fortune engine implementation plan: Added
