@@ -65,6 +65,7 @@
     "check:manseryeok-external-comparison-template": "node scripts/checkManseryeokExternalComparisonTemplate.mjs",
     "check:manseryeok-external-reference-selection-criteria": "node scripts/checkManseryeokExternalReferenceSelectionCriteria.mjs",
     "check:manseryeok-external-reference-candidates": "node scripts/checkManseryeokExternalReferenceCandidates.mjs",
+    "check:today-fortune-engine-implementation-plan": "node scripts/checkTodayFortuneEngineImplementationPlan.mjs",
     "check:today-fortune-engine-improvement-design": "node scripts/checkTodayFortuneEngineImprovementDesign.mjs",
     "check:fortune-engine-sample-snapshot-quality-review": "node scripts/checkFortuneEngineSampleSnapshotQualityReview.mjs",
     "check:fortune-engine-sample-snapshot": "node scripts/checkFortuneEngineSampleSnapshot.mjs",

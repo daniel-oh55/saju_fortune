@@ -2,6 +2,8 @@
 
 ## Added
 
+- Today fortune engine implementation plan document added
+- Planned production scope, schemaVersion decision plan, and before/after snapshot comparison plan documented before production logic changes
 - Today fortune engine improvement design document added
 - Today fortune baseline, improvement goals, input signals, category design, and score/text design documented before production logic changes
 - Manseryeok external reference candidates document added

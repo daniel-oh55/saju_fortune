@@ -1,5 +1,29 @@
 # DEVELOPMENT_LOG
 
+## Today Fortune Engine Implementation Plan
+
+- Today fortune engine implementation plan added
+- Planned production scope documented
+- Implementation principles documented
+- Proposed first production PR scope documented
+- Schema version decision plan documented
+- Before/after snapshot comparison plan documented
+- Today fortune engine improvement remains Pending
+- Production engine logic unchanged
+- Today fortune output logic unchanged
+- CURRENT_FORTUNE_SCHEMA_VERSION unchanged
+- schemaVersion unchanged
+- Existing localStorage keys unchanged
+- Snapshot JSON unchanged
+- Routing unchanged
+- UI/design unchanged
+- public/privacy-policy.html unchanged
+- AndroidManifest.xml/resource unchanged
+- Gradle settings unchanged
+- `.aab` repository commit not added
+- `.zip` repository commit not added
+- Secret actual values not recorded
+
 ## Today Fortune Engine Improvement Design
 
 - Today fortune engine improvement design added

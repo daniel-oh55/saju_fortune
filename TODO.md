@@ -1,5 +1,18 @@
 # TODO
 
+## 2026-07-01 Today fortune engine implementation plan TODO
+
+- [x] Today fortune engine implementation plan added
+- [x] Planned production scope documented
+- [x] Implementation principles documented
+- [x] Proposed first production PR scope documented
+- [x] Schema version decision plan documented
+- [x] Before/after snapshot comparison plan documented
+- [ ] Before/after snapshot comparison check
+- [ ] CURRENT_FORTUNE_SCHEMA_VERSION decision
+- [ ] Production today fortune engine improvement
+- [ ] Snapshot comparison after implementation
+
 ## 2026-07-01 Today fortune engine improvement design TODO
 
 - [x] Today fortune engine improvement design added
