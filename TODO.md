@@ -1,5 +1,18 @@
 # TODO
 
+## 2026-07-02 Year/monthly after snapshot comparison TODO
+
+- [x] Year/monthly after snapshot generation
+- [x] Snapshot comparison for year/monthly improvement
+- [x] Comparison result generated
+- [x] Today/manseryeok/saju/zodiac unchanged check generated
+- [x] Monthly entries count preserved check generated
+- [ ] Year/monthly output quality review
+- [ ] Engine accuracy approval
+- [ ] External reference comparison
+- [ ] 음력/윤달 샘플 외부 검증
+- [ ] 태양시 보정 적용 여부
+
 ## 2026-07-02 Doc check src guardrail restore TODO
 
 - [x] Docs-only check scripts src guardrails restored

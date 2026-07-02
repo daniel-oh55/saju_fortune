@@ -1,0 +1,19 @@
+{
+  "comparisonVersion": "year_monthly_fortune_snapshot_comparison_v1",
+  "dateKey": "2026-06-30",
+  "targetYear": 2026,
+  "practicalBaselineSnapshot": "docs/generated/fortune-engine-sample-snapshot-after-today-improvement.json",
+  "afterSnapshot": "docs/generated/fortune-engine-sample-snapshot-after-year-monthly-improvement.json",
+  "sampleCount": 8,
+  "sampleIdsPreserved": true,
+  "todayFortuneUnchanged": true,
+  "manseryeokUnchanged": true,
+  "sajuAnalysisUnchanged": true,
+  "zodiacFortuneUnchanged": true,
+  "yearMonthlyFortuneChanged": true,
+  "monthlyEntriesCountPreserved": true,
+  "targetYearPreserved": true,
+  "engineAccuracyApproval": "Pending",
+  "snapshotComparisonForYearMonthlyImprovement": "Generated",
+  "notes": "Year/monthly changes are intended for comparison and review. Engine accuracy approval remains separate."
+}

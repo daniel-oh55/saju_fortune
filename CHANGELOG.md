@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## Added
+
+- Year/monthly after-improvement snapshot generated
+- Year/monthly before/after snapshot comparison result generated
+
 ## Fixed
 
 - Restored src guardrails for docs-only check scripts after the year/monthly production change PR
