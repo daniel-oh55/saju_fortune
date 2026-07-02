@@ -2,6 +2,11 @@
 
 ## Added
 
+- Zodiac fortune implementation plan document added
+- Planned production scope, practical snapshot baseline, schemaVersion decision plan, and before/after comparison plan documented before production logic changes
+
+## Added
+
 - Zodiac fortune engine improvement design document added
 - Animal-specific tone, category-specific guidance, and output compatibility requirements documented before production logic changes
 
