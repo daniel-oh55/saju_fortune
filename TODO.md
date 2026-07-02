@@ -1,5 +1,20 @@
 # TODO
 
+## 2026-07-02 Zodiac fortune engine improvement design TODO
+
+- [x] Zodiac fortune engine improvement design added
+- [x] Current zodiac fortune baseline documented
+- [x] Animal-specific tone improvement goal documented
+- [x] Category-specific guidance improvement goal documented
+- [x] Output compatibility requirements documented
+- [ ] Zodiac fortune implementation plan
+- [ ] Zodiac before/after snapshot comparison design
+- [ ] Production zodiac fortune engine improvement
+- [ ] Zodiac after snapshot generation
+- [ ] Snapshot comparison for zodiac improvement
+- [ ] Zodiac output quality review
+- [ ] Engine accuracy approval
+
 ## 2026-07-02 Year/monthly output quality review TODO
 
 - [x] Year/monthly output quality review
