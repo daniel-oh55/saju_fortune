@@ -1,5 +1,20 @@
 # TODO
 
+## 2026-07-02 Zodiac first production change TODO
+
+- [x] Production zodiac fortune engine improvement
+- [x] Animal-specific tone added
+- [x] Category-specific guidance improved
+- [x] Detail text composition improved
+- [x] Zodiac category IDs preserved
+- [x] selectedYear and selectedAnimal behavior preserved
+- [x] CURRENT_FORTUNE_SCHEMA_VERSION unchanged
+- [x] schemaVersion unchanged
+- [ ] Zodiac after snapshot generation
+- [ ] Snapshot comparison for zodiac improvement
+- [ ] Zodiac output quality review
+- [ ] Engine accuracy approval
+
 ## 2026-07-02 Zodiac first production scope TODO
 
 - [x] Zodiac first production scope added

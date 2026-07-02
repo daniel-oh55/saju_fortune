@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## Changed
+
+- Improved zodiac fortune animal-specific tone and category text composition
+- Preserved zodiac output shape, category IDs, selectedYear, selectedAnimal, CURRENT_FORTUNE_SCHEMA_VERSION, and schemaVersion
+
 ## Added
 
 - Zodiac first production scope document added

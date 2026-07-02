@@ -1,5 +1,20 @@
 # Zodiac Fortune Implementation Plan
 
+## Zodiac First Production Change
+
+- Zodiac fortune engine improvement: Implemented in first scope
+- Production engine logic change: Zodiac only
+- Zodiac first production change: Implemented
+- Zodiac after snapshot generation: Pending
+- Snapshot comparison for zodiac improvement: Pending
+- Zodiac output quality review: Pending
+- Engine accuracy approval: Pending
+- External reference comparison: Pending
+- 음력/윤달 샘플 외부 검증: Pending
+- 태양시 보정 적용 여부: Pending
+- Today fortune first production improvement: Reviewed
+- Year/monthly fortune first production improvement: Reviewed
+
 ## Zodiac First Production Scope
 
 - Zodiac first production scope: Added
