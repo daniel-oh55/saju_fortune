@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## Fixed
+
+- Restored src guardrails for docs-only check scripts after the year/monthly production change PR
+- Kept year/monthly production change validation scoped to src/domain/fortune/yearFortuneEngine.js
+
 ## Changed
 
 - Improved year/monthly fortune annual narrative relevance and monthly score/text composition

@@ -1,5 +1,14 @@
 # TODO
 
+## 2026-07-02 Doc check src guardrail restore TODO
+
+- [x] Docs-only check scripts src guardrails restored
+- [x] Year/monthly production change check keeps targeted src allowlist
+- [x] Guardrail restore check added
+- [ ] Year/monthly after snapshot generation
+- [ ] Snapshot comparison for year/monthly improvement
+- [ ] Year/monthly output quality review
+
 ## 2026-07-02 Year/monthly first production change TODO
 
 - [x] First year/monthly production change implemented
