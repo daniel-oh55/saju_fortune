@@ -2,6 +2,11 @@
 
 ## Added
 
+- Zodiac snapshot comparison check design document added
+- Zodiac comparison targets, allowed difference policy, and future comparison files documented before production logic changes
+
+## Added
+
 - Zodiac fortune implementation plan document added
 - Planned production scope, practical snapshot baseline, schemaVersion decision plan, and before/after comparison plan documented before production logic changes
 

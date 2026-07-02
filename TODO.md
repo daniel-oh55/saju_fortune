@@ -1,5 +1,19 @@
 # TODO
 
+## 2026-07-02 Zodiac snapshot comparison check design TODO
+
+- [x] Zodiac snapshot comparison check design added
+- [x] Practical baseline documented
+- [x] Future comparison files documented
+- [x] Comparison targets documented
+- [x] Allowed difference policy documented
+- [ ] First zodiac production change scope
+- [ ] Production zodiac fortune engine improvement
+- [ ] Zodiac after snapshot generation
+- [ ] Snapshot comparison for zodiac improvement
+- [ ] Zodiac output quality review
+- [ ] Engine accuracy approval
+
 ## 2026-07-02 Zodiac fortune implementation plan TODO
 
 - [x] Zodiac fortune implementation plan added
