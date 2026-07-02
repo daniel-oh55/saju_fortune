@@ -1,5 +1,14 @@
 # TODO
 
+## 2026-07-02 Zodiac money focus wording fix TODO
+
+- [x] Correct zodiac money focus wording
+- [x] Add guardrail for corrected wording
+- [ ] Zodiac after snapshot generation
+- [ ] Snapshot comparison for zodiac improvement
+- [ ] Zodiac output quality review
+- [ ] Engine accuracy approval
+
 ## 2026-07-02 Zodiac first production change TODO
 
 - [x] Production zodiac fortune engine improvement

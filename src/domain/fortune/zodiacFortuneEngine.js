@@ -118,7 +118,7 @@ const animalTone = {
 
 const categoryFocus = {
   overall: '하루 전체의 리듬과 선택 방향',
-  money: '지출 조건 확인과 작은 예약',
+  money: '지출 조건 확인과 작은 절약',
   relationship: '대화의 거리감과 감정 온도',
   work: '업무 정리와 우선순위 실행',
   health: '컨디션, 수면, 무리하지 않는 루틴',

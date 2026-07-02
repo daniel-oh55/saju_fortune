@@ -1,5 +1,16 @@
 # DEVELOPMENT_LOG
 
+## Zodiac Money Focus Wording Fix
+
+- Corrected zodiac money focus wording
+- Production change limited to zodiac fortune text wording
+- Snapshot JSON files unchanged
+- CURRENT_FORTUNE_SCHEMA_VERSION unchanged
+- schemaVersion unchanged
+- Existing localStorage keys unchanged
+- UI/routing unchanged
+- Android/privacy/Gradle unchanged
+
 ## Zodiac First Production Change
 
 - Production zodiac fortune engine improvement implemented
