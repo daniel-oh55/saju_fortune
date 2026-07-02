@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## Added
+
+- Zodiac output quality review document added
+- Zodiac animal-specific tone, category guidance, particle wording, and selectedYear/selectedAnimal preservation reviewed after implementation
+
 ## Changed
 
 - Regenerated zodiac after-improvement snapshot after category focus particle wording fix

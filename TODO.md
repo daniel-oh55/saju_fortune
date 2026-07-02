@@ -1,5 +1,20 @@
 # TODO
 
+## 2026-07-03 Zodiac output quality review TODO
+
+- [x] Zodiac output quality review
+- [x] Animal-specific tone clarity reviewed
+- [x] Category-specific guidance clarity reviewed
+- [x] Summary/detail readability reviewed
+- [x] Particle wording quality reviewed
+- [x] Money focus wording quality reviewed
+- [x] Zodiac category IDs preserved
+- [x] selectedYear and selectedAnimal preserved
+- [ ] Engine accuracy approval
+- [ ] External reference comparison
+- [ ] 음력/윤달 샘플 외부 검증
+- [ ] 태양시 보정 적용 여부
+
 ## 2026-07-02 Zodiac after snapshot regeneration TODO
 
 - [x] Regenerate zodiac after snapshot after particle fix

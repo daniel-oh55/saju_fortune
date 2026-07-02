@@ -16,7 +16,7 @@ This PR does not change production engine logic. It generates review artifacts f
 | Zodiac after snapshot regenerated after particle fix | Generated | this PR |
 | Zodiac after snapshot generation | Generated | this PR |
 | Snapshot comparison for zodiac improvement | Generated | regenerated in this PR |
-| Zodiac output quality review | Pending | separate follow-up |
+| Zodiac output quality review | Reviewed | completed in this PR |
 | Engine accuracy approval | Pending | not approved in this PR |
 | External reference comparison | Pending | not completed |
 | 음력/윤달 샘플 외부 검증 | Pending | external verification still required |
@@ -50,6 +50,12 @@ This PR does not change production engine logic. It generates review artifacts f
 | Awkward focus particle wording removed | Confirmed | no `선택 방향를`, `작은 절약를`, `우선순위 실행를`, `루틴를` |
 | Engine accuracy approval | Pending | remains separate |
 
+## Previous Review Status
+
+| Item | Status | Note |
+|---|---|---|
+| Zodiac output quality review | Pending | previous status before docs/ZODIAC_OUTPUT_QUALITY_REVIEW.md |
+
 ## Guardrails
 
 - This PR does not change production engine logic.
@@ -81,3 +87,18 @@ This PR does not change production engine logic. It generates review artifacts f
 1. Review zodiac output quality using the generated comparison result.
 2. Keep engine accuracy approval Pending until external verification is completed.
 3. Keep external reference comparison, lunar/leap verification, and solar time policy work in separate PRs.
+
+## Zodiac Output Quality Review
+
+- Zodiac output quality review: Reviewed
+- Zodiac category focus particle fix: Applied
+- Zodiac after snapshot regenerated after particle fix: Generated
+- Snapshot comparison for zodiac improvement: Generated
+- Engine accuracy approval: Pending
+- External reference comparison: Pending
+- 음력/윤달 샘플 외부 검증: Pending
+- 태양시 보정 적용 여부: Pending
+- Zodiac fortune engine improvement: Implemented in first scope
+- Production engine logic change: Zodiac only
+- Today fortune first production improvement: Reviewed
+- Year/monthly fortune first production improvement: Reviewed
