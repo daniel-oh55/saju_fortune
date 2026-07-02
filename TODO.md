@@ -1,5 +1,19 @@
 # TODO
 
+## 2026-07-02 Zodiac after snapshot comparison TODO
+
+- [x] Zodiac after snapshot generation
+- [x] Snapshot comparison for zodiac improvement
+- [x] Comparison result generated
+- [x] Today/year-monthly/manseryeok/saju unchanged check generated
+- [x] Zodiac category IDs preserved check generated
+- [x] selectedYear and selectedAnimal preserved check generated
+- [ ] Zodiac output quality review
+- [ ] Engine accuracy approval
+- [ ] External reference comparison
+- [ ] 음력/윤달 샘플 외부 검증
+- [ ] 태양시 보정 적용 여부
+
 ## 2026-07-02 Zodiac money focus wording fix TODO
 
 - [x] Correct zodiac money focus wording
