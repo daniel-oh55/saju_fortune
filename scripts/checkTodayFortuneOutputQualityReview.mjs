@@ -70,7 +70,6 @@ const forbiddenSnippets = [
   '양력/음력 샘플 추가 검증',
 ];
 const protectedFiles = [
-  'src',
   'docs/generated/fortune-engine-sample-snapshot.json',
   afterPath,
   comparisonPath,

@@ -1,5 +1,21 @@
 # Year Monthly Snapshot Comparison Check Design
 
+## Year Monthly First Production Change
+
+- Year/monthly fortune engine improvement: Implemented in first scope
+- Production engine logic change: Year/monthly only
+- CURRENT_FORTUNE_SCHEMA_VERSION decision: Unchanged for year/monthly-only PR
+- schemaVersion decision: Unchanged because output shape is preserved
+- Year/monthly after snapshot generation: Pending
+- Snapshot comparison for year/monthly improvement: Pending
+- Year/monthly output quality review: Pending
+- Engine accuracy approval: Pending
+- External reference comparison: Pending
+- 음력/윤달 샘플 외부 검증: Pending
+- 태양시 보정 적용 여부: Pending
+- Today fortune first production improvement: Reviewed
+- Zodiac fortune engine improvement: Pending
+
 ## Year Monthly First Production Scope
 
 - Year/monthly first production scope: Added

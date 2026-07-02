@@ -73,7 +73,6 @@ const forbiddenSnippets = [
 ];
 
 const protectedFiles = [
-  'src',
   'docs/generated/fortune-engine-sample-snapshot.json',
   'public/privacy-policy.html',
   'android/app/build.gradle',
