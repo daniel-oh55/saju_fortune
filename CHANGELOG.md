@@ -2,6 +2,11 @@
 
 ## Added
 
+- Zodiac first production scope document added
+- First zodiac production change scope, schemaVersion no-change decision, and snapshot comparison requirements documented before production logic changes
+
+## Added
+
 - Zodiac snapshot comparison check design document added
 - Zodiac comparison targets, allowed difference policy, and future comparison files documented before production logic changes
 

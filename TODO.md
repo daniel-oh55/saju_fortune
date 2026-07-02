@@ -1,5 +1,18 @@
 # TODO
 
+## 2026-07-02 Zodiac first production scope TODO
+
+- [x] Zodiac first production scope added
+- [x] First production PR target file documented
+- [x] Output compatibility requirements documented
+- [x] SchemaVersion no-change decision documented
+- [x] Snapshot comparison requirement documented
+- [ ] Production zodiac fortune engine improvement
+- [ ] Zodiac after snapshot generation
+- [ ] Snapshot comparison for zodiac improvement
+- [ ] Zodiac output quality review
+- [ ] Engine accuracy approval
+
 ## 2026-07-02 Zodiac snapshot comparison check design TODO
 
 - [x] Zodiac snapshot comparison check design added
