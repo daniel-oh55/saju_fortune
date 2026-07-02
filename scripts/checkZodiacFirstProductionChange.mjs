@@ -29,12 +29,19 @@ const requiredEngineSnippets = [
   'advice',
   'clampZodiacScore',
   '지출 조건 확인과 작은 절약',
+  '에 집중해 보세요',
   'hashString',
   'pickBySeed',
 ];
 
 const forbiddenEngineSnippets = [
   '지출 조건 확인과 작은 예약',
+  '선택 방향를',
+  '작은 절약를',
+  '우선순위 실행를',
+  '루틴를',
+  '${focus}를 살펴보세요',
+  'focus}를',
 ];
 
 const requiredRelatedDocSnippets = [

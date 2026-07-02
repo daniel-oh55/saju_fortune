@@ -1,5 +1,17 @@
 # DEVELOPMENT_LOG
 
+## Zodiac Category Focus Particle Fix
+
+- Corrected zodiac category focus particle wording
+- Replaced focus + 를 pattern with focus + 에 집중해 보세요 pattern
+- Production change limited to zodiac fortune text wording
+- Snapshot JSON files unchanged
+- CURRENT_FORTUNE_SCHEMA_VERSION unchanged
+- schemaVersion unchanged
+- Existing localStorage keys unchanged
+- UI/routing unchanged
+- Android/privacy/Gradle unchanged
+
 ## Zodiac After Snapshot Comparison
 
 - Zodiac after snapshot generated
