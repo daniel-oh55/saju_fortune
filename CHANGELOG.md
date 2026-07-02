@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Fixed
+
+- Corrected zodiac category focus particle wording in generated summaries
+
 ## Added
 
 - Zodiac after-improvement snapshot generated

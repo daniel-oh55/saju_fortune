@@ -1,5 +1,14 @@
 # TODO
 
+## 2026-07-02 Zodiac category focus particle fix TODO
+
+- [x] Correct zodiac category focus particle wording
+- [x] Add guardrail for awkward focus particle phrases
+- [ ] Regenerate zodiac after snapshot
+- [ ] Regenerate snapshot comparison for zodiac improvement
+- [ ] Zodiac output quality review
+- [ ] Engine accuracy approval
+
 ## 2026-07-02 Zodiac after snapshot comparison TODO
 
 - [x] Zodiac after snapshot generation

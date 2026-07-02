@@ -192,7 +192,7 @@ function composeZodiacCategorySummary({ categoryId, selectedAnimal, animalKey, s
         ? '차분히 맞춰 가기 좋습니다.'
         : '무리하지 않는 조절이 필요합니다.';
 
-  return `${baseSummary} ${tone}을 바탕으로 ${focus}를 살펴보세요. ${scoreHint} ${advice} ${caution}`;
+  return `${baseSummary} ${tone}을 바탕으로 ${focus}에 집중해 보세요. ${scoreHint} ${advice} ${caution}`;
 }
 
 function composeZodiacDetail({ selectedAnimal, animalKey, categories, seed }) {
