@@ -1,5 +1,36 @@
 # DEVELOPMENT_LOG
 
+## Year Monthly First Production Change
+
+- First year/monthly production change implemented
+- Annual narrative relevance improved
+- Monthly score/text composition improved
+- Monthly entries count preserved
+- Production engine logic changed only for year/monthly fortune
+- Today fortune output logic unchanged
+- Zodiac fortune output logic unchanged
+- Manseryeok logic unchanged
+- Saju analysis logic unchanged
+- CURRENT_FORTUNE_SCHEMA_VERSION unchanged
+- schemaVersion unchanged
+- Existing localStorage keys unchanged
+- Snapshot JSON files unchanged
+- Year/monthly after snapshot generation remains Pending
+- Snapshot comparison for year/monthly improvement remains Pending
+- Year/monthly output quality review remains Pending
+- Engine accuracy approval remains Pending
+- External reference comparison remains Pending
+- 음력/윤달 샘플 외부 검증 remains Pending
+- 태양시 보정 적용 여부 remains Pending
+- Routing unchanged
+- UI/design unchanged
+- public/privacy-policy.html unchanged
+- AndroidManifest.xml/resource unchanged
+- Gradle settings unchanged
+- `.aab` repository commit not added
+- `.zip` repository commit not added
+- Secret actual values not recorded
+
 ## Year Monthly First Production Scope
 
 - Year/monthly first production scope added

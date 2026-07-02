@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## Changed
+
+- Improved year/monthly fortune annual narrative relevance and monthly score/text composition
+- Preserved CURRENT_FORTUNE_SCHEMA_VERSION and schemaVersion because output shape is unchanged
+
 ## Added
 
 - Year/monthly first production scope document added

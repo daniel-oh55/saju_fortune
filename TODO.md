@@ -1,5 +1,18 @@
 # TODO
 
+## 2026-07-02 Year/monthly first production change TODO
+
+- [x] First year/monthly production change implemented
+- [x] Annual narrative relevance improved
+- [x] Monthly score/text composition improved
+- [x] Monthly entries count preserved
+- [x] CURRENT_FORTUNE_SCHEMA_VERSION unchanged
+- [x] schemaVersion unchanged
+- [ ] Year/monthly after snapshot generation
+- [ ] Snapshot comparison for year/monthly improvement
+- [ ] Year/monthly output quality review
+- [ ] Engine accuracy approval
+
 ## 2026-07-02 Year/monthly first production scope TODO
 
 - [x] Year/monthly first production scope added

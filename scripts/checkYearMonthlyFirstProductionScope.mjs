@@ -65,7 +65,6 @@ const forbiddenSnippets = [
   '양력/음력 샘플 추가 검증',
 ];
 const protectedFiles = [
-  'src',
   'docs/generated/fortune-engine-sample-snapshot.json',
   'docs/generated/fortune-engine-sample-snapshot-after-today-improvement.json',
   'docs/generated/today-fortune-snapshot-comparison-result.json',
@@ -154,6 +153,16 @@ const diffOutput = execSync(`git diff --name-only -- ${protectedFiles.join(' ')}
 const protectedFilesUnchanged = diffOutput.length === 0;
 logResult('production_snapshot_privacy_and_android_files_unchanged_in_working_diff', protectedFilesUnchanged);
 if (!protectedFilesUnchanged) hasFailure = true;
+
+const changedFiles = execSync('git diff --name-only HEAD', { encoding: 'utf8' })
+  .split(/\r?\n/)
+  .filter(Boolean);
+const changedSrcFiles = changedFiles.filter((path) => path.startsWith('src/'));
+const srcFilesUnchangedOrYearMonthlyOnly = changedSrcFiles.every(
+  (path) => path === 'src/domain/fortune/yearFortuneEngine.js'
+);
+logResult('src_files_unchanged_or_year_monthly_engine_only', srcFilesUnchangedOrYearMonthlyOnly);
+if (!srcFilesUnchangedOrYearMonthlyOnly) hasFailure = true;
 
 const trackedFiles = execSync('git ls-files', { encoding: 'utf8' })
   .split(/\r?\n/)

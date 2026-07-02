@@ -79,7 +79,6 @@ const forbiddenSnippets = [
 ];
 
 const protectedFiles = [
-  'src',
   'public/privacy-policy.html',
   'android/app/build.gradle',
   'android/app/src/main/AndroidManifest.xml',
