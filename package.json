@@ -72,6 +72,7 @@
     "check:year-monthly-fortune-snapshot-comparison": "node scripts/checkYearMonthlyFortuneSnapshotComparison.mjs",
     "check:year-monthly-after-snapshot-comparison": "node scripts/checkYearMonthlyAfterSnapshotComparison.mjs",
     "check:year-monthly-output-quality-review": "node scripts/checkYearMonthlyOutputQualityReview.mjs",
+    "check:zodiac-fortune-engine-improvement-design": "node scripts/checkZodiacFortuneEngineImprovementDesign.mjs",
     "check:today-fortune-output-quality-review": "node scripts/checkTodayFortuneOutputQualityReview.mjs",
     "check:year-monthly-fortune-engine-improvement-design": "node scripts/checkYearMonthlyFortuneEngineImprovementDesign.mjs",
     "check:year-monthly-fortune-implementation-plan": "node scripts/checkYearMonthlyFortuneImplementationPlan.mjs",

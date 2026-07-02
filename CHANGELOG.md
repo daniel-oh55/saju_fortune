@@ -2,6 +2,11 @@
 
 ## Added
 
+- Zodiac fortune engine improvement design document added
+- Animal-specific tone, category-specific guidance, and output compatibility requirements documented before production logic changes
+
+## Added
+
 - Year/monthly output quality review document added
 - Year/monthly annual narrative, monthly focus labels, reason/advice/caution structure, and 12 monthly entries reviewed after implementation
 
