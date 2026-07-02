@@ -1,0 +1,20 @@
+{
+  "comparisonVersion": "zodiac_fortune_snapshot_comparison_v1",
+  "dateKey": "2026-06-30",
+  "targetYear": 2026,
+  "practicalBaselineSnapshot": "docs/generated/fortune-engine-sample-snapshot-after-year-monthly-improvement.json",
+  "afterSnapshot": "docs/generated/fortune-engine-sample-snapshot-after-zodiac-improvement.json",
+  "sampleCount": 8,
+  "sampleIdsPreserved": true,
+  "todayFortuneUnchanged": true,
+  "yearMonthlyFortuneUnchanged": true,
+  "manseryeokUnchanged": true,
+  "sajuAnalysisUnchanged": true,
+  "zodiacFortuneChanged": true,
+  "zodiacCategoryIdsPreserved": true,
+  "selectedYearPreserved": true,
+  "selectedAnimalPreserved": true,
+  "engineAccuracyApproval": "Pending",
+  "snapshotComparisonForZodiacImprovement": "Generated",
+  "notes": "Zodiac changes are generated for separate output quality review. Engine accuracy approval remains separate."
+}

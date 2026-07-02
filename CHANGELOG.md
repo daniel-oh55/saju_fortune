@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## Added
+
+- Zodiac after-improvement snapshot generated
+- Zodiac before/after snapshot comparison result generated
+
 ## Fixed
 
 - Corrected zodiac money focus wording from 작은 예약 to 작은 절약

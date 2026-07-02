@@ -1,5 +1,19 @@
 # Zodiac Fortune Engine Improvement Design
 
+## Zodiac After Snapshot Comparison
+
+- Zodiac after snapshot generation: Generated
+- Snapshot comparison for zodiac improvement: Generated
+- Zodiac output quality review: Pending
+- Engine accuracy approval: Pending
+- External reference comparison: Pending
+- 음력/윤달 샘플 외부 검증: Pending
+- 태양시 보정 적용 여부: Pending
+- Zodiac fortune engine improvement: Implemented in first scope
+- Production engine logic change: Zodiac only
+- Today fortune first production improvement: Reviewed
+- Year/monthly fortune first production improvement: Reviewed
+
 ## Zodiac First Production Change
 
 - Zodiac fortune engine improvement: Implemented in first scope
