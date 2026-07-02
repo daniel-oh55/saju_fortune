@@ -1,5 +1,20 @@
 # TODO
 
+## 2026-07-02 Zodiac after snapshot regeneration TODO
+
+- [x] Regenerate zodiac after snapshot after particle fix
+- [x] Regenerate snapshot comparison for zodiac improvement
+- [x] Confirm corrected category focus particle wording
+- [x] Confirm awkward focus particle wording removed
+- [x] Confirm today/year-monthly/manseryeok/saju unchanged
+- [x] Confirm zodiac category IDs preserved
+- [x] Confirm selectedYear and selectedAnimal preserved
+- [ ] Zodiac output quality review
+- [ ] Engine accuracy approval
+- [ ] External reference comparison
+- [ ] 음력/윤달 샘플 외부 검증
+- [ ] 태양시 보정 적용 여부
+
 ## 2026-07-02 Zodiac category focus particle fix TODO
 
 - [x] Correct zodiac category focus particle wording

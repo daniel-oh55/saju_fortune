@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## Changed
+
+- Regenerated zodiac after-improvement snapshot after category focus particle wording fix
+- Regenerated zodiac before/after snapshot comparison result
+
 ## Fixed
 
 - Corrected zodiac category focus particle wording in generated summaries

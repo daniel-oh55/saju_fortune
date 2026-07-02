@@ -2,6 +2,8 @@
 
 ## Zodiac After Snapshot Comparison
 
+- Zodiac category focus particle fix: Applied
+- Zodiac after snapshot regenerated after particle fix: Generated
 - Zodiac after snapshot generation: Generated
 - Snapshot comparison for zodiac improvement: Generated
 - Zodiac output quality review: Pending
