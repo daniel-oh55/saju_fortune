@@ -74,6 +74,7 @@
     "check:year-monthly-snapshot-comparison-check-design": "node scripts/checkYearMonthlySnapshotComparisonCheckDesign.mjs",
     "check:year-monthly-first-production-scope": "node scripts/checkYearMonthlyFirstProductionScope.mjs",
     "check:year-monthly-first-production-change": "node scripts/checkYearMonthlyFirstProductionChange.mjs",
+    "check:doc-check-src-guardrails": "node scripts/checkDocCheckSrcGuardrails.mjs",
     "check:today-fortune-first-production-change": "node scripts/checkTodayFortuneFirstProductionChange.mjs",
     "check:today-fortune-first-production-scope": "node scripts/checkTodayFortuneFirstProductionScope.mjs",
     "check:today-fortune-snapshot-comparison-check-design": "node scripts/checkTodayFortuneSnapshotComparisonCheckDesign.mjs",
