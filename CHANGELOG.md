@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Fixed
+
+- Corrected zodiac money focus wording from 작은 예약 to 작은 절약
+
 ## Changed
 
 - Improved zodiac fortune animal-specific tone and category text composition

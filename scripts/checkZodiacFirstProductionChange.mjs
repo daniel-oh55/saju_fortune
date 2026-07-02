@@ -28,8 +28,13 @@ const requiredEngineSnippets = [
   'caution',
   'advice',
   'clampZodiacScore',
+  '지출 조건 확인과 작은 절약',
   'hashString',
   'pickBySeed',
+];
+
+const forbiddenEngineSnippets = [
+  '지출 조건 확인과 작은 예약',
 ];
 
 const requiredRelatedDocSnippets = [
@@ -145,6 +150,12 @@ if (hasFailure) process.exit(1);
 
 const engineSource = fs.readFileSync(enginePath, 'utf8');
 if (!checkIncludes('zodiac_engine_source', engineSource, requiredEngineSnippets)) hasFailure = true;
+
+for (const snippet of forbiddenEngineSnippets) {
+  const absent = !engineSource.includes(snippet);
+  logResult(`zodiac_engine_source_excludes_${labelFromSnippet(snippet)}`, absent);
+  if (!absent) hasFailure = true;
+}
 
 const changedFiles = getChangedFiles();
 const engineChanged = changedFiles.includes(enginePath);
