@@ -1,5 +1,32 @@
 # DEVELOPMENT_LOG
 
+## Year Monthly First Production Scope
+
+- Year/monthly first production scope added
+- First production PR target file documented
+- Output compatibility requirements documented
+- SchemaVersion no-change decision documented
+- Snapshot comparison requirement documented
+- Year/monthly fortune engine improvement remains Pending
+- Production engine logic unchanged
+- Year/monthly fortune output logic unchanged
+- Today fortune output logic unchanged
+- Zodiac fortune output logic unchanged
+- Manseryeok logic unchanged
+- Saju analysis logic unchanged
+- CURRENT_FORTUNE_SCHEMA_VERSION unchanged
+- schemaVersion unchanged
+- Existing localStorage keys unchanged
+- Snapshot JSON files unchanged
+- Routing unchanged
+- UI/design unchanged
+- public/privacy-policy.html unchanged
+- AndroidManifest.xml/resource unchanged
+- Gradle settings unchanged
+- `.aab` repository commit not added
+- `.zip` repository commit not added
+- Secret actual values not recorded
+
 ## Year Monthly Snapshot Comparison Check Design
 
 - Year/monthly snapshot comparison check design added

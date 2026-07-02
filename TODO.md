@@ -1,5 +1,18 @@
 # TODO
 
+## 2026-07-02 Year/monthly first production scope TODO
+
+- [x] Year/monthly first production scope added
+- [x] First production PR target file documented
+- [x] Output compatibility requirements documented
+- [x] SchemaVersion no-change decision documented
+- [x] Snapshot comparison requirement documented
+- [ ] Production year/monthly fortune engine improvement
+- [ ] Year/monthly after snapshot generation
+- [ ] Snapshot comparison for year/monthly improvement
+- [ ] Year/monthly output quality review
+- [ ] Engine accuracy approval
+
 ## 2026-07-02 Year/monthly snapshot comparison check design TODO
 
 - [x] Year/monthly snapshot comparison check design added

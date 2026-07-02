@@ -2,6 +2,8 @@
 
 ## Added
 
+- Year/monthly first production scope document added
+- First year/monthly production change scope, schemaVersion no-change decision, and snapshot comparison requirements documented before production logic changes
 - Year/monthly snapshot comparison check design document added
 - Year/monthly comparison targets, allowed difference policy, and future comparison files documented before production logic changes
 - Year/monthly fortune implementation plan document added
