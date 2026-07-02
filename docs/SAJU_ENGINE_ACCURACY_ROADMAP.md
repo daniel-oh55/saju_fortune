@@ -1,5 +1,19 @@
 # Saju Engine Accuracy Roadmap
 
+## Zodiac First Production Scope
+
+- Zodiac first production scope: Added
+- Zodiac fortune engine improvement: Pending
+- Production engine logic change: Pending
+- Snapshot comparison for zodiac improvement: Pending
+- Zodiac output quality review: Pending
+- Engine accuracy approval: Pending
+- External reference comparison: Pending
+- 음력/윤달 샘플 외부 검증: Pending
+- 태양시 보정 적용 여부: Pending
+- Today fortune first production improvement: Reviewed
+- Year/monthly fortune first production improvement: Reviewed
+
 ## Zodiac Snapshot Comparison Check Design
 
 - Zodiac snapshot comparison check design: Added
