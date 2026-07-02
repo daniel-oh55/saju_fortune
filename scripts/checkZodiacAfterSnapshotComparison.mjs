@@ -14,6 +14,8 @@ const relatedDocs = [
 
 const requiredDocSnippets = [
   '# Zodiac After Snapshot Comparison',
+  'Zodiac category focus particle fix | Applied',
+  'Zodiac after snapshot regenerated after particle fix | Generated',
   'Zodiac after snapshot generation | Generated',
   'Snapshot comparison for zodiac improvement | Generated',
   'Zodiac output quality review | Pending',
@@ -28,6 +30,8 @@ const requiredDocSnippets = [
   'Zodiac category IDs preserved | Confirmed',
   'selectedYear preserved | Confirmed',
   'selectedAnimal preserved | Confirmed',
+  'Corrected category focus particle wording included | Confirmed',
+  'Awkward focus particle wording removed | Confirmed',
   'This PR does not change production engine logic.',
   'Existing baseline snapshot JSON is not regenerated.',
   'Today after snapshot JSON is not regenerated.',
@@ -37,6 +41,8 @@ const requiredDocSnippets = [
 ];
 
 const requiredRelatedDocSnippets = [
+  'Zodiac category focus particle fix: Applied',
+  'Zodiac after snapshot regenerated after particle fix: Generated',
   'Zodiac after snapshot generation: Generated',
   'Snapshot comparison for zodiac improvement: Generated',
   'Zodiac output quality review: Pending',
@@ -59,6 +65,20 @@ const forbiddenSnippets = [
   'External reference comparison: Confirmed',
   '음력/윤달 샘플 외부 검증: Confirmed',
   '태양시 보정 적용 여부: Confirmed',
+];
+
+const requiredAfterSnapshotSnippets = [
+  '에 집중해 보세요',
+  '지출 조건 확인과 작은 절약',
+];
+
+const forbiddenAfterSnapshotSnippets = [
+  '선택 방향를',
+  '작은 절약를',
+  '우선순위 실행를',
+  '루틴를',
+  '${focus}를 살펴보세요',
+  'focus}를',
 ];
 
 const protectedFiles = [
@@ -114,6 +134,7 @@ if (hasFailure) process.exit(1);
 
 const after = JSON.parse(fs.readFileSync(afterPath, 'utf8'));
 const comparison = JSON.parse(fs.readFileSync(resultPath, 'utf8'));
+const afterSource = fs.readFileSync(afterPath, 'utf8');
 
 const afterMetadataValid =
   after.snapshotVersion === 'fortune_engine_sample_snapshot_after_zodiac_improvement_v1' &&
@@ -135,7 +156,7 @@ const comparisonValid =
   comparison.yearMonthlyFortuneUnchanged === true &&
   comparison.manseryeokUnchanged === true &&
   comparison.sajuAnalysisUnchanged === true &&
-  typeof comparison.zodiacFortuneChanged === 'boolean' &&
+  comparison.zodiacFortuneChanged === true &&
   comparison.zodiacCategoryIdsPreserved === true &&
   comparison.selectedYearPreserved === true &&
   comparison.selectedAnimalPreserved === true &&
@@ -145,6 +166,16 @@ const comparisonValid =
 logResult('after_snapshot_metadata_valid', afterMetadataValid);
 logResult('comparison_result_valid', comparisonValid);
 if (!afterMetadataValid || !comparisonValid) hasFailure = true;
+
+if (!checkIncludes('after_snapshot_json', afterSource, requiredAfterSnapshotSnippets)) {
+  hasFailure = true;
+}
+
+for (const snippet of forbiddenAfterSnapshotSnippets) {
+  const absent = !afterSource.includes(snippet);
+  logResult(`forbidden_after_snapshot_snippet_absent_${labelFromSnippet(snippet)}`, absent);
+  if (!absent) hasFailure = true;
+}
 
 const docsToScan = [{ path: docPath, source: fs.readFileSync(docPath, 'utf8') }];
 if (!checkIncludes('zodiac_after_comparison_doc', docsToScan[0].source, requiredDocSnippets)) {

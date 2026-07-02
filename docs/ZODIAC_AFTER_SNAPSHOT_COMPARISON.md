@@ -12,8 +12,10 @@ This PR does not change production engine logic. It generates review artifacts f
 |---|---|---|
 | Zodiac fortune engine improvement | Implemented in first scope | completed in previous PR |
 | Zodiac money focus wording fix | Applied | completed in previous PR |
+| Zodiac category focus particle fix | Applied | completed in previous PR |
+| Zodiac after snapshot regenerated after particle fix | Generated | this PR |
 | Zodiac after snapshot generation | Generated | this PR |
-| Snapshot comparison for zodiac improvement | Generated | this PR |
+| Snapshot comparison for zodiac improvement | Generated | regenerated in this PR |
 | Zodiac output quality review | Pending | separate follow-up |
 | Engine accuracy approval | Pending | not approved in this PR |
 | External reference comparison | Pending | not completed |
@@ -44,6 +46,8 @@ This PR does not change production engine logic. It generates review artifacts f
 | Zodiac category IDs preserved | Confirmed | overall, money, relationship, work, health |
 | selectedYear preserved | Confirmed | same selectedYear as practical baseline |
 | selectedAnimal preserved | Confirmed | same selectedAnimal as practical baseline |
+| Corrected category focus particle wording included | Confirmed | uses `에 집중해 보세요` |
+| Awkward focus particle wording removed | Confirmed | no `선택 방향를`, `작은 절약를`, `우선순위 실행를`, `루틴를` |
 | Engine accuracy approval | Pending | remains separate |
 
 ## Guardrails
