@@ -74,6 +74,7 @@
     "check:year-monthly-after-snapshot-comparison": "node scripts/checkYearMonthlyAfterSnapshotComparison.mjs",
     "check:zodiac-fortune-snapshot-comparison": "node scripts/checkZodiacFortuneSnapshotComparison.mjs",
     "check:zodiac-after-snapshot-comparison": "node scripts/checkZodiacAfterSnapshotComparison.mjs",
+    "check:zodiac-output-quality-review": "node scripts/checkZodiacOutputQualityReview.mjs",
     "check:year-monthly-output-quality-review": "node scripts/checkYearMonthlyOutputQualityReview.mjs",
     "check:zodiac-fortune-engine-improvement-design": "node scripts/checkZodiacFortuneEngineImprovementDesign.mjs",
     "check:zodiac-fortune-implementation-plan": "node scripts/checkZodiacFortuneImplementationPlan.mjs",

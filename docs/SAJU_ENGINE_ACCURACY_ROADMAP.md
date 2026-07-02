@@ -1,5 +1,20 @@
 # Saju Engine Accuracy Roadmap
 
+## Zodiac Output Quality Review
+
+- Zodiac output quality review: Reviewed
+- Zodiac category focus particle fix: Applied
+- Zodiac after snapshot regenerated after particle fix: Generated
+- Snapshot comparison for zodiac improvement: Generated
+- Engine accuracy approval: Pending
+- External reference comparison: Pending
+- 음력/윤달 샘플 외부 검증: Pending
+- 태양시 보정 적용 여부: Pending
+- Zodiac fortune engine improvement: Implemented in first scope
+- Production engine logic change: Zodiac only
+- Today fortune first production improvement: Reviewed
+- Year/monthly fortune first production improvement: Reviewed
+
 ## Zodiac After Snapshot Comparison
 
 - Zodiac category focus particle fix: Applied
