@@ -1,0 +1,130 @@
+# Year Monthly First Production Scope
+
+## Purpose
+
+This document defines the first small production change scope for the 하루풀이 year/monthly fortune engine.
+
+This document is not a production logic change and does not approve final engine accuracy.
+
+## Current Status
+
+| Item | Status | Note |
+|---|---|---|
+| Year/monthly fortune engine improvement design | Confirmed | completed in previous PR |
+| Year/monthly fortune implementation plan | Confirmed | completed in previous PR |
+| Year/monthly snapshot comparison check design | Confirmed | completed in previous PR |
+| Year/monthly first production scope | Added | this document |
+| Year/monthly fortune engine improvement | Pending | not implemented in this PR |
+| Production engine logic change | Pending | not changed in this PR |
+| Snapshot comparison for year/monthly improvement | Pending | future PR |
+| Engine accuracy approval | Pending | not approved in this PR |
+| External reference comparison | Pending | not completed |
+| 음력/윤달 샘플 외부 검증 | Pending | external reference comparison still required |
+| 태양시 보정 적용 여부 | Pending | policy decision required |
+| Today fortune first production improvement | Reviewed | separate completed track |
+| Zodiac fortune engine improvement | Pending | separate track |
+
+## First Production PR Scope
+
+| Area | Decision | Status |
+|---|---|---|
+| Target file | src/domain/fortune/yearFortuneEngine.js | Proposed |
+| Primary change | add small annual/monthly score and text composition adjustment | Proposed |
+| Annual output shape | preserve existing annual output keys | Required |
+| Monthly entries | preserve 12 monthly entries | Required |
+| Monthly output shape | preserve existing monthly output keys | Required |
+| Deterministic behavior | preserve same profile/targetYear stability | Required |
+| Today fortune output | no change | Required |
+| Zodiac fortune output | no change | Required |
+| Manseryeok output | no change | Required |
+| Saju analysis output | no change | Required |
+| Existing localStorage keys | preserve | Required |
+| UI/design | no change | Required |
+
+## Proposed First Logic Change
+
+| Item | Proposed Direction | Status |
+|---|---|---|
+| Annual narrative relevance | add small composition layer using dominant/weak element and targetYear seed | Proposed |
+| Annual score rationale | keep deterministic score but add clearer explanation basis | Proposed |
+| Monthly score rationale | add deterministic month-specific modifier with explanation | Proposed |
+| Monthly text variation | add month focus labels to reduce repetitive wording | Proposed |
+| Monthly advice/caution | add practical advice and mild caution without fear-based wording | Proposed |
+| Output compatibility | keep existing keys and 12 monthly entries | Required |
+
+## Schema Version Decision
+
+| Decision Item | Status | Note |
+|---|---|---|
+| CURRENT_FORTUNE_SCHEMA_VERSION change | Not planned | year/monthly-only PR should not change today fortune cache schema |
+| schemaVersion change | Not planned | output shape change is not planned |
+| Existing localStorage key change | Not planned | requires separate migration plan |
+| Output content change | Planned | annual/monthly text and scores may change |
+| Output shape change | Not planned | first production PR should preserve shape |
+
+## Snapshot Comparison Requirement
+
+| Step | Status | Note |
+|---|---|---|
+| Use practical baseline snapshot | Required | docs/generated/fortune-engine-sample-snapshot-after-today-improvement.json |
+| Generate year/monthly after snapshot | Pending | separate PR after implementation or same implementation PR only if explicitly scoped |
+| Compare sample count | Required | 8 samples preserved |
+| Compare sample IDs | Required | all sample IDs preserved |
+| Compare today fortune output | Required | unchanged from after-today baseline |
+| Compare manseryeok output | Required | unchanged |
+| Compare saju analysis output | Required | unchanged |
+| Compare zodiac fortune output | Required | unchanged |
+| Compare year/monthly output | Required | expected to change with review |
+| Review monthly entries count | Required | 12 monthly entries preserved |
+
+## Implementation PR Guardrails
+
+- Change only src/domain/fortune/yearFortuneEngine.js unless a small helper in the same year/monthly domain is explicitly required.
+- Do not change today fortune output logic.
+- Do not change zodiac fortune output logic.
+- Do not change manseryeok calculation.
+- Do not change saju analysis logic.
+- Do not change routing.
+- Do not change UI/design.
+- Do not change CURRENT_FORTUNE_SCHEMA_VERSION.
+- Do not change schemaVersion.
+- Do not change existing localStorage keys.
+- Preserve 12 monthly entries.
+- Preserve output shape unless explicitly documented.
+- Generate and review year/monthly after snapshot separately.
+- Keep engine accuracy approval Pending.
+- Keep External reference comparison Pending.
+- Keep 음력/윤달 샘플 외부 검증 Pending.
+- Keep 태양시 보정 적용 여부 Pending.
+
+## Guardrails
+
+- This PR defines first year/monthly production change scope only.
+- This PR is not a production logic change.
+- This PR is not final engine accuracy approval.
+- Year/monthly fortune output logic is not changed.
+- Today fortune output logic is not changed.
+- Zodiac fortune output logic is not changed.
+- Saju analysis logic is not changed.
+- Manseryeok logic is not changed.
+- CURRENT_FORTUNE_SCHEMA_VERSION is not changed.
+- schemaVersion is not changed.
+- Existing localStorage keys are not changed.
+- Snapshot JSON files are not regenerated.
+- Routing is not changed.
+- UI/design is not changed.
+- public/privacy-policy.html is not changed.
+- AndroidManifest.xml, Android resource files, and Gradle settings are not changed.
+- `.aab`, `.zip`, `.jks`, and `.keystore` files are not added to the repository.
+- GitHub Secret actual values are not recorded.
+- Play Console input remains separate.
+- AAB upload remains separate.
+- Real device QA remains separate.
+
+## Recommended Next Steps
+
+1. Implement one small year/monthly fortune production improvement.
+2. Keep CURRENT_FORTUNE_SCHEMA_VERSION unchanged for the year/monthly-only PR.
+3. Generate year/monthly after snapshot.
+4. Compare before/after snapshot.
+5. Review year/monthly output quality before wider engine changes.

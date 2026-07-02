@@ -1,5 +1,18 @@
 # Year Monthly Fortune Implementation Plan
 
+## Year Monthly First Production Scope
+
+- Year/monthly first production scope: Added
+- Year/monthly fortune engine improvement: Pending
+- Production engine logic change: Pending
+- Snapshot comparison for year/monthly improvement: Pending
+- Engine accuracy approval: Pending
+- External reference comparison: Pending
+- 음력/윤달 샘플 외부 검증: Pending
+- 태양시 보정 적용 여부: Pending
+- Today fortune first production improvement: Reviewed
+- Zodiac fortune engine improvement: Pending
+
 ## Year Monthly Snapshot Comparison Check Design
 
 - Year/monthly snapshot comparison check design: Added

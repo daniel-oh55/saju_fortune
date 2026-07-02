@@ -1,5 +1,18 @@
 # Year Monthly Snapshot Comparison Check Design
 
+## Year Monthly First Production Scope
+
+- Year/monthly first production scope: Added
+- Year/monthly fortune engine improvement: Pending
+- Production engine logic change: Pending
+- Snapshot comparison for year/monthly improvement: Pending
+- Engine accuracy approval: Pending
+- External reference comparison: Pending
+- 음력/윤달 샘플 외부 검증: Pending
+- 태양시 보정 적용 여부: Pending
+- Today fortune first production improvement: Reviewed
+- Zodiac fortune engine improvement: Pending
+
 ## Purpose
 
 This document defines the before/after snapshot comparison design for reviewing year/monthly fortune engine output changes.
