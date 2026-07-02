@@ -122,6 +122,17 @@ function getStatusFiles() {
     .map((line) => line.slice(3).trim().replace(/^"|"$/g, ''));
 }
 
+function isForbiddenAbsent(source, snippet) {
+  if (
+    (snippet === 'CURRENT_FORTUNE_SCHEMA_VERSION changed' || snippet === 'schemaVersion changed') &&
+    source.includes(`${snippet} | Not planned`)
+  ) {
+    return true;
+  }
+
+  return !source.includes(snippet);
+}
+
 let hasFailure = false;
 
 for (const path of [docPath, ...relatedDocs]) {
@@ -148,13 +159,8 @@ for (const path of relatedDocs) {
 }
 
 for (const snippet of forbiddenSnippets) {
-  const scanTargets =
-    snippet === 'CURRENT_FORTUNE_SCHEMA_VERSION changed' || snippet === 'schemaVersion changed'
-      ? [{ path: docPath, source: doc }]
-      : docsToScan;
-
-  for (const { path, source } of scanTargets) {
-    const absent = !source.includes(snippet);
+  for (const { path, source } of docsToScan) {
+    const absent = isForbiddenAbsent(source, snippet);
     logResult(`forbidden_snippet_absent_${labelFromSnippet(snippet)}_from_${labelFromSnippet(path)}`, absent);
     if (!absent) hasFailure = true;
   }
@@ -171,7 +177,7 @@ const diffOutput = execSync(`git diff --name-only -- ${protectedFiles.join(' ')}
   encoding: 'utf8',
 }).trim();
 const protectedFilesUnchanged = diffOutput.length === 0;
-logResult('protected_files_unchanged_in_working_diff', protectedFilesUnchanged);
+logResult('production_snapshot_privacy_and_android_files_unchanged_in_working_diff', protectedFilesUnchanged);
 if (!protectedFilesUnchanged) hasFailure = true;
 
 const statusFiles = getStatusFiles();
