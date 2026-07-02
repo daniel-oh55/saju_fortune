@@ -1,5 +1,38 @@
 # DEVELOPMENT_LOG
 
+## Zodiac First Production Change
+
+- Production zodiac fortune engine improvement implemented
+- Animal-specific tone added
+- Category-specific guidance improved
+- Detail text composition improved
+- Zodiac category IDs preserved
+- selectedYear and selectedAnimal behavior preserved
+- Production engine logic changed only for zodiac fortune
+- Today fortune output logic unchanged
+- Year/monthly fortune output logic unchanged
+- Manseryeok logic unchanged
+- Saju analysis logic unchanged
+- CURRENT_FORTUNE_SCHEMA_VERSION unchanged
+- schemaVersion unchanged
+- Existing localStorage keys unchanged
+- Snapshot JSON files unchanged
+- Zodiac after snapshot generation remains Pending
+- Snapshot comparison for zodiac improvement remains Pending
+- Zodiac output quality review remains Pending
+- Engine accuracy approval remains Pending
+- External reference comparison remains Pending
+- 음력/윤달 샘플 외부 검증 remains Pending
+- 태양시 보정 적용 여부 remains Pending
+- Routing unchanged
+- UI/design unchanged
+- public/privacy-policy.html unchanged
+- AndroidManifest.xml/resource unchanged
+- Gradle settings unchanged
+- `.aab` repository commit not added
+- `.zip` repository commit not added
+- Secret actual values not recorded
+
 ## Zodiac First Production Scope
 
 - Zodiac first production scope added
