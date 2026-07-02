@@ -1,5 +1,39 @@
 # DEVELOPMENT_LOG
 
+## Year Monthly Output Quality Review
+
+- Year/monthly output quality review completed
+- Annual narrative relevance reviewed
+- Monthly focus label clarity reviewed
+- Monthly score rationale reviewed
+- Reason/advice/caution structure reviewed
+- Monthly entries count preserved
+- Today fortune output unchanged
+- Manseryeok output unchanged
+- Saju analysis output unchanged
+- Zodiac fortune output unchanged
+- Engine accuracy approval remains Pending
+- External reference comparison remains Pending
+- 음력/윤달 샘플 외부 검증 remains Pending
+- 태양시 보정 적용 여부 remains Pending
+- Production engine logic unchanged in this PR
+- CURRENT_FORTUNE_SCHEMA_VERSION unchanged in this PR
+- schemaVersion unchanged in this PR
+- Existing localStorage keys unchanged
+- Existing baseline snapshot JSON unchanged
+- Today after snapshot JSON unchanged
+- Today comparison result JSON unchanged
+- Year/monthly after snapshot JSON unchanged
+- Year/monthly comparison result JSON unchanged
+- Routing unchanged
+- UI/design unchanged
+- public/privacy-policy.html unchanged
+- AndroidManifest.xml/resource unchanged
+- Gradle settings unchanged
+- `.aab` repository commit not added
+- `.zip` repository commit not added
+- Secret actual values not recorded
+
 ## Year Monthly After Snapshot Comparison
 
 - Year/monthly after snapshot generated

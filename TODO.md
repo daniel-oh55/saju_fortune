@@ -1,5 +1,18 @@
 # TODO
 
+## 2026-07-02 Year/monthly output quality review TODO
+
+- [x] Year/monthly output quality review
+- [x] Annual narrative relevance reviewed
+- [x] Monthly focus label clarity reviewed
+- [x] Reason/advice/caution structure reviewed
+- [x] Monthly entries count preserved
+- [ ] Engine accuracy approval
+- [ ] External reference comparison
+- [ ] 음력/윤달 샘플 외부 검증
+- [ ] 태양시 보정 적용 여부
+- [ ] Zodiac fortune engine improvement design
+
 ## 2026-07-02 Year/monthly after snapshot comparison TODO
 
 - [x] Year/monthly after snapshot generation
