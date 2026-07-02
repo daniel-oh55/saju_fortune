@@ -1,5 +1,18 @@
 # Year Monthly After Snapshot Comparison
 
+## Year Monthly Output Quality Review
+
+- Year/monthly output quality review: Reviewed
+- Engine accuracy approval: Pending
+- External reference comparison: Pending
+- 음력/윤달 샘플 외부 검증: Pending
+- 태양시 보정 적용 여부: Pending
+- Year/monthly fortune engine improvement: Implemented in first scope
+- Year/monthly after snapshot generation: Generated
+- Snapshot comparison for year/monthly improvement: Generated
+- Today fortune first production improvement: Reviewed
+- Zodiac fortune engine improvement: Pending
+
 ## Purpose
 
 This document records the after snapshot and before/after comparison result after the first year/monthly fortune production improvement.
