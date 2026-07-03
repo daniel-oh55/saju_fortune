@@ -3,6 +3,7 @@ import FortuneCard from '../components/FortuneCard.jsx';
 import PageTopBar from '../components/PageTopBar.jsx';
 import SavedReadingsSummaryCard from '../components/SavedReadingsSummaryCard.jsx';
 import VisitStreakCard from '../components/VisitStreakCard.jsx';
+import { displayFiveElement } from '../utils/fiveElementsInfo.js';
 
 const QUICK_MENU_PREFS_KEY = 'harupuli_home_quick_menu_prefs';
 const MAX_HOME_QUICK_MENU_ITEMS = 4;
@@ -16,6 +17,10 @@ function formatKoreanDate(dateKey) {
 
   const weekday = WEEKDAY_LABELS[new Date(Date.UTC(year, month - 1, day)).getUTCDay()];
   return `${year}년 ${month}월 ${day}일 ${weekday}`;
+}
+
+function formatElementDisplayText(text) {
+  return String(text || '').replace(/(화|수|목|금|토)(?=\s*(균형|정리|기운)|$)/g, (element) => displayFiveElement(element));
 }
 
 function readQuickMenuPrefs() {
@@ -84,6 +89,7 @@ function HomePage({
   const overall = fortune.categories.find((category) => category.id === 'overall') || fortune.categories[0];
   const timeFortune = getTimeFortune();
   const todayFlowDate = formatKoreanDate(fortune.dateKey);
+  const todayKeyword = formatElementDisplayText(fortune.keyword);
   const todayFortuneCategories = useMemo(() => {
     const categoryMap = new Map(fortune.categories.map((category) => [category.id, category]));
     const orderedCategories = TODAY_FORTUNE_CATEGORY_IDS.map((categoryId) => categoryMap.get(categoryId)).filter(Boolean);
@@ -292,7 +298,7 @@ function HomePage({
         </div>
         <div>
           <span>오늘 키워드</span>
-          <strong>{fortune.keyword}</strong>
+          <strong>{todayKeyword}</strong>
         </div>
       </section>
 

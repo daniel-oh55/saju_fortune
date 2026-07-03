@@ -215,7 +215,7 @@ function SajuInsightPage({
       <section className="saju-five-elements-help-card" aria-labelledby="five-elements-help-title">
         <div>
           <p className="eyebrow">Five Elements</p>
-          <h2 id="five-elements-help-title">화·수·목·금·토 기운 이해하기</h2>
+          <h2 id="five-elements-help-title">화(火)·수(水)·목(木)·금(金)·토(土) 기운 이해하기</h2>
           <p>
             오행은 오늘의 분위기를 이해하기 위한 참고 키워드입니다. 부족하거나 강한 기운을
             단정하기보다, 하루를 균형 있게 보내기 위한 힌트로 활용해 주세요.
