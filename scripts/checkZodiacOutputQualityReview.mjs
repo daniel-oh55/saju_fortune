@@ -46,7 +46,7 @@ const requiredDocSnippets = [
   'Zodiac output quality review | Reviewed',
   'Engine accuracy approval | Pending',
   'External reference comparison | Pending',
-  '| 음력/윤달 샘플 외부 검증| Pending | external reference comparison still required |',
+  '| 음력/윤달 샘플 외부 검증 | Pending | external reference comparison still required |',
   '태양시 보정 적용 여부 | Pending',
   'Zodiac fortune output changed | Confirmed',
   'Zodiac category IDs preserved | Confirmed',
@@ -106,6 +106,7 @@ const forbiddenSnippets = [
 
 const forbiddenDocSnippets = [
   '음력/윤달 샘플 외부 검증 Pending',
+  '| 음력/윤달 샘플 외부 검증| Pending | external reference comparison still required |',
   '| 음력/윤달 샘플 외부 검증 Pending | external reference comparison still required |',
   'The lunar/leap sample verification status row intentionally uses',
   '음력/윤달 샘플 외부 검증Pending',
