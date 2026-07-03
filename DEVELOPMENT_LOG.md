@@ -7455,6 +7455,25 @@
 - `npm run check:content-safety`: 성공
 - `npm run check:share-text`: 성공
 
+## Zodiac Year Variation After Baseline
+
+- Regenerated zodiac year variation baseline after PR #272 wording variation
+- Recorded same-animal birth-year wording variation after production improvement
+- Production fortune logic unchanged in this PR
+- Zodiac generation logic unchanged in this PR
+- src production UI unchanged
+- Generated production JSON unchanged
+- schemaVersion unchanged
+- CURRENT_FORTUNE_SCHEMA_VERSION unchanged
+- Existing localStorage keys unchanged
+- UI/routing unchanged
+- privacy files unchanged
+- Android/Gradle unchanged
+- Total exactDuplicatePairs: 13 -> 0
+- Total repeatedSnippetExamples: 13 -> 0
+- Rabbit exactDuplicatePairs: 1 -> 0
+- Dragon exactDuplicatePairs: 0 -> 0
+
 ## Zodiac Year Variation Baseline
 
 - Added a baseline check for same-animal birth-year fortune variation
