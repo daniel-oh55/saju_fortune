@@ -177,6 +177,7 @@
     "check:zodiac-year-pillar-policy-alignment": "node scripts/checkZodiacYearPillarPolicyAlignment.mjs",
     "check:zodiac-birth-year-display-consistency": "node scripts/checkZodiacBirthYearDisplayConsistency.mjs",
     "check:zodiac-year-variation-baseline": "node scripts/checkZodiacYearVariationBaseline.mjs",
+    "check:zodiac-year-variation-output-review": "node scripts/checkZodiacYearVariationOutputReview.mjs",
     "check:zodiac-year-specific-wording-variation": "node scripts/checkZodiacYearSpecificWordingVariation.mjs",
     "preview": "vite preview"
   },

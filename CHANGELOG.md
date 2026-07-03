@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Added
+
+- Added a zodiac same-animal birth-year wording variation output quality review
+
 ## Fixed
 
 - Corrected the zodiac output quality review Pending row spacing to `음력/윤달 샘플 외부 검증| Pending`

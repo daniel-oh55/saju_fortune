@@ -1,5 +1,25 @@
 # DEVELOPMENT_LOG
 
+## Zodiac Year Variation Output Review
+
+- Added wording quality review for same-animal birth-year variation after PR #272
+- Confirmed after-baseline exact duplicate count improvement from PR #273
+- Reviewed wording quality without changing production logic
+- Production fortune logic unchanged
+- Zodiac generation logic unchanged
+- src production UI unchanged
+- Generated production JSON unchanged
+- schemaVersion unchanged
+- CURRENT_FORTUNE_SCHEMA_VERSION unchanged
+- Existing localStorage keys unchanged
+- UI/routing unchanged
+- privacy files unchanged
+- Android/Gradle unchanged
+- Engine accuracy approval remains Pending
+- External reference comparison remains Pending
+- 음력/윤달 샘플 외부 검증 remains Pending
+- 태양시 보정 적용 여부 remains Pending
+
 ## Zodiac Output Quality Review Pending Spacing Correction
 
 - Corrected docs/ZODIAC_OUTPUT_QUALITY_REVIEW.md row to `음력/윤달 샘플 외부 검증| Pending`
