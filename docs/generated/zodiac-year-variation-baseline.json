@@ -27,23 +27,8 @@
       ],
       "totalPairs": 6,
       "similarPairs": 0,
-      "exactDuplicatePairs": 2,
-      "repeatedSnippetExamples": [
-        {
-          "years": [
-            1972,
-            1984
-          ],
-          "snippet": "쥐의 오늘 흐름은 빠른 판단과 정보 감각이 살아나는 흐름입니다. 강하게 살릴 부분은 관계의 대화의 거리감과 감정 온도이고, 천천히 조절할 부분은 오늘 흐름의 하루 전체의 리듬과 선택 방향입니다. 상대의 반응을 단정하기보다 말의 온도를 부드럽게 맞춰 보"
-        },
-        {
-          "years": [
-            1984,
-            1996
-          ],
-          "snippet": "지출 내역을 가볍게 확인해보세요. 지출 흐름과 예산 범위를 차분히 확인하는 정도가 어울립니다. 빠른 판단과 정보 감각이 살아나는 흐름을 바탕으로 지출 조건 확인과 작은 절약에 집중해 보세요. 흐름이 비교적 선명합니다. 즉흥 지출보다 조건과 잔액을 한 "
-        }
-      ],
+      "exactDuplicatePairs": 0,
+      "repeatedSnippetExamples": [],
       "notes": [
         "Baseline only: duplicate or similar wording is recorded for follow-up production copy improvement.",
         "This check does not fail on current duplicate or similar wording counts."
@@ -67,16 +52,8 @@
       ],
       "totalPairs": 6,
       "similarPairs": 0,
-      "exactDuplicatePairs": 1,
-      "repeatedSnippetExamples": [
-        {
-          "years": [
-            1973,
-            1985
-          ],
-          "snippet": "식사와 휴식 시간을 규칙적으로 챙겨보세요. 컨디션을 살피며 휴식과 수면 리듬을 가볍게 챙겨보세요. 차분한 지속력과 현실적인 선택이 힘을 받는 흐름을 바탕으로 컨디션, 수면, 무리하지 않는 루틴에 집중해 보세요. 흐름이 비교적 선명합니다. 몸의 신호를 "
-        }
-      ],
+      "exactDuplicatePairs": 0,
+      "repeatedSnippetExamples": [],
       "notes": [
         "Baseline only: duplicate or similar wording is recorded for follow-up production copy improvement.",
         "This check does not fail on current duplicate or similar wording counts."
@@ -100,16 +77,8 @@
       ],
       "totalPairs": 6,
       "similarPairs": 0,
-      "exactDuplicatePairs": 1,
-      "repeatedSnippetExamples": [
-        {
-          "years": [
-            1974,
-            2010
-          ],
-          "snippet": "소비 계획을 짧게 적어보면 흐름이 보입니다. 지출 흐름과 예산 범위를 차분히 확인하는 정도가 어울립니다. 추진력과 결단이 필요한 흐름을 바탕으로 지출 조건 확인과 작은 절약에 집중해 보세요. 차분히 맞춰 가기 좋습니다. 작은 예약이나 결제는 기록을 남"
-        }
-      ],
+      "exactDuplicatePairs": 0,
+      "repeatedSnippetExamples": [],
       "notes": [
         "Baseline only: duplicate or similar wording is recorded for follow-up production copy improvement.",
         "This check does not fail on current duplicate or similar wording counts."
@@ -133,16 +102,8 @@
       ],
       "totalPairs": 6,
       "similarPairs": 0,
-      "exactDuplicatePairs": 1,
-      "repeatedSnippetExamples": [
-        {
-          "years": [
-            1999,
-            2011
-          ],
-          "snippet": "공간 정리와 분위기 전환이 어울립니다. 하루의 방향을 크게 바꾸기보다 지금 보이는 흐름을 차분히 살펴보세요. 섬세한 관계 감각과 조율이 어울리는 흐름을 바탕으로 하루 전체의 리듬과 선택 방향에 집중해 보세요. 흐름이 비교적 선명합니다. 먼저 정리하고 "
-        }
-      ],
+      "exactDuplicatePairs": 0,
+      "repeatedSnippetExamples": [],
       "notes": [
         "Baseline only: duplicate or similar wording is recorded for follow-up production copy improvement.",
         "This check does not fail on current duplicate or similar wording counts."
@@ -216,16 +177,8 @@
       ],
       "totalPairs": 6,
       "similarPairs": 0,
-      "exactDuplicatePairs": 1,
-      "repeatedSnippetExamples": [
-        {
-          "years": [
-            1978,
-            1990
-          ],
-          "snippet": "짧은 이동이나 산책이 도움이 됩니다. 하루의 방향을 크게 바꾸기보다 지금 보이는 흐름을 차분히 살펴보세요. 움직임과 실행력이 리듬을 만드는 흐름을 바탕으로 하루 전체의 리듬과 선택 방향에 집중해 보세요. 흐름이 비교적 선명합니다. 먼저 정리하고 움직이"
-        }
-      ],
+      "exactDuplicatePairs": 0,
+      "repeatedSnippetExamples": [],
       "notes": [
         "Baseline only: duplicate or similar wording is recorded for follow-up production copy improvement.",
         "This check does not fail on current duplicate or similar wording counts."
@@ -274,16 +227,8 @@
       ],
       "totalPairs": 6,
       "similarPairs": 0,
-      "exactDuplicatePairs": 1,
-      "repeatedSnippetExamples": [
-        {
-          "years": [
-            1980,
-            2016
-          ],
-          "snippet": "작은 절약 아이디어를 적용해보세요. 지출 흐름과 예산 범위를 차분히 확인하는 정도가 어울립니다. 재치와 응용력이 문제를 푸는 흐름을 바탕으로 지출 조건 확인과 작은 절약에 집중해 보세요. 차분히 맞춰 가기 좋습니다. 즉흥 지출보다 조건과 잔액을 한 번"
-        }
-      ],
+      "exactDuplicatePairs": 0,
+      "repeatedSnippetExamples": [],
       "notes": [
         "Baseline only: duplicate or similar wording is recorded for follow-up production copy improvement.",
         "This check does not fail on current duplicate or similar wording counts."
@@ -307,16 +252,8 @@
       ],
       "totalPairs": 6,
       "similarPairs": 0,
-      "exactDuplicatePairs": 1,
-      "repeatedSnippetExamples": [
-        {
-          "years": [
-            1981,
-            1993
-          ],
-          "snippet": "정리된 말로 설명하기 좋은 날입니다. 하루의 방향을 크게 바꾸기보다 지금 보이는 흐름을 차분히 살펴보세요. 정리와 기준 세우기가 힘이 되는 흐름을 바탕으로 하루 전체의 리듬과 선택 방향에 집중해 보세요. 흐름이 비교적 선명합니다. 큰 방향을 바꾸기보다"
-        }
-      ],
+      "exactDuplicatePairs": 0,
+      "repeatedSnippetExamples": [],
       "notes": [
         "Baseline only: duplicate or similar wording is recorded for follow-up production copy improvement.",
         "This check does not fail on current duplicate or similar wording counts."
@@ -340,37 +277,8 @@
       ],
       "totalPairs": 6,
       "similarPairs": 0,
-      "exactDuplicatePairs": 4,
-      "repeatedSnippetExamples": [
-        {
-          "years": [
-            1982,
-            1994
-          ],
-          "snippet": "하루 마무리 전에 내 역할을 정리해보세요. 바로 할 수 있는 작은 루틴 하나가 하루를 정돈하는 데 도움이 됩니다. 신뢰와 책임감이 관계를 안정시키는 흐름을 바탕으로 업무 정리와 우선순위 실행에 집중해 보세요. 무리하지 않는 조절이 필요합니다. 문서와 "
-        },
-        {
-          "years": [
-            1982,
-            2006
-          ],
-          "snippet": "도움을 주고받는 균형을 살피면 좋습니다. 대화에서는 결론보다 서로의 속도를 맞추는 태도가 도움이 됩니다. 신뢰와 책임감이 관계를 안정시키는 흐름을 바탕으로 대화의 거리감과 감정 온도에 집중해 보세요. 무리하지 않는 조절이 필요합니다. 짧은 안부나 확인"
-        },
-        {
-          "years": [
-            1994,
-            2018
-          ],
-          "snippet": "도움을 주고받는 균형을 살피면 좋습니다. 대화에서는 결론보다 서로의 속도를 맞추는 태도가 도움이 됩니다. 신뢰와 책임감이 관계를 안정시키는 흐름을 바탕으로 대화의 거리감과 감정 온도에 집중해 보세요. 차분히 맞춰 가기 좋습니다. 가까운 사이일수록 설명"
-        },
-        {
-          "years": [
-            2006,
-            2018
-          ],
-          "snippet": "가벼운 산책으로 기분을 환기해보세요. 컨디션을 살피며 휴식과 수면 리듬을 가볍게 챙겨보세요. 신뢰와 책임감이 관계를 안정시키는 흐름을 바탕으로 컨디션, 수면, 무리하지 않는 루틴에 집중해 보세요. 흐름이 비교적 선명합니다. 몸의 신호를 참고하면서 휴식"
-        }
-      ],
+      "exactDuplicatePairs": 0,
+      "repeatedSnippetExamples": [],
       "notes": [
         "Baseline only: duplicate or similar wording is recorded for follow-up production copy improvement.",
         "This check does not fail on current duplicate or similar wording counts."
@@ -394,16 +302,8 @@
       ],
       "totalPairs": 6,
       "similarPairs": 0,
-      "exactDuplicatePairs": 1,
-      "repeatedSnippetExamples": [
-        {
-          "years": [
-            1995,
-            2007
-          ],
-          "snippet": "솔직한 표현에 배려를 더하면 좋습니다. 대화에서는 결론보다 서로의 속도를 맞추는 태도가 도움이 됩니다. 여유와 회복, 꾸준함이 필요한 흐름을 바탕으로 대화의 거리감과 감정 온도에 집중해 보세요. 차분히 맞춰 가기 좋습니다. 상대의 반응을 단정하기보다 "
-        }
-      ],
+      "exactDuplicatePairs": 0,
+      "repeatedSnippetExamples": [],
       "notes": [
         "Baseline only: duplicate or similar wording is recorded for follow-up production copy improvement.",
         "This check does not fail on current duplicate or similar wording counts."

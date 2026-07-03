@@ -2009,6 +2009,10 @@
 
 - 확인 필요
 
+## Changed
+
+- Regenerated the zodiac same-animal birth-year wording variation baseline after year-specific wording improvements
+
 ## Added
 
 - Added a baseline check for zodiac same-animal birth-year wording variation before production improvements

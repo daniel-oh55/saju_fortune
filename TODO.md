@@ -3315,6 +3315,6 @@
 
 - [x] Add same-animal year variation baseline check
 - [x] Keep production logic unchanged
-- [ ] Improve same-animal year-specific wording variation
-- [ ] Regenerate after snapshot after wording variation improvement
+- [x] Improve same-animal year-specific wording variation
+- [x] Regenerate after snapshot after wording variation improvement
 - [ ] Review zodiac year-specific output quality
