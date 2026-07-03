@@ -24,8 +24,6 @@ This document does not approve final engine accuracy.
 | Today fortune first production improvement | Reviewed | unchanged |
 | Year/monthly fortune first production improvement | Reviewed | unchanged |
 
-The lunar/leap sample verification status row intentionally uses `음력/윤달 샘플 외부 검증| Pending`.
-
 ## Review Source
 
 | Source | Status | Note |
