@@ -2048,7 +2048,7 @@ input:disabled {
 
 .saju-element-summary-card {
   display: grid;
-  gap: 14px;
+  gap: 16px;
 }
 
 .saju-element-head h2 {
@@ -2078,7 +2078,7 @@ input:disabled {
 .saju-element-pair-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
+  gap: 12px;
 }
 
 .saju-element-pair-grid > div,
@@ -2089,7 +2089,7 @@ input:disabled {
   min-width: 0;
   border: 0;
   border-radius: 16px;
-  padding: 13px;
+  padding: 14px;
   text-align: left;
   background: #f5fbf8;
 }
@@ -2136,12 +2136,13 @@ input:disabled {
 
 .saju-keyword-section {
   display: grid;
-  gap: 8px;
+  gap: 10px;
 }
 
 .saju-keyword-section:first-of-type {
-  border-top: 1px solid rgba(184, 150, 78, 0.34);
-  padding-top: 13px;
+  border-top: 1px solid rgba(184, 150, 78, 0.42);
+  margin-top: 2px;
+  padding-top: 16px;
 }
 
 .saju-keyword-chips {
@@ -2171,7 +2172,7 @@ input:disabled {
 
 .daily-routine-card {
   display: grid;
-  gap: 14px;
+  gap: 16px;
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(255, 248, 238, 0.9)),
     rgba(255, 255, 255, 0.92);
@@ -2188,6 +2189,8 @@ input:disabled {
 
 .daily-routine-copy {
   margin: 0;
+  border-top: 1px solid rgba(184, 150, 78, 0.18);
+  padding-top: 12px;
   color: #607078;
   font-size: 0.88rem;
   line-height: 1.55;
@@ -2195,17 +2198,18 @@ input:disabled {
 
 .daily-routine-list {
   display: grid;
-  gap: 10px;
+  gap: 12px;
 }
 
 .daily-routine-item {
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 10px;
+  align-items: flex-start;
+  gap: 12px;
   min-width: 0;
   width: 100%;
   border-radius: 16px;
-  padding: 12px;
+  padding: 14px;
   color: inherit;
   text-align: left;
   background: rgba(255, 255, 255, 0.78);
@@ -2246,9 +2250,9 @@ input:disabled {
 }
 
 .daily-routine-item .daily-routine-detail {
-  margin-top: 9px;
+  margin-top: 10px;
   border-top: 1px solid rgba(184, 150, 78, 0.2);
-  padding-top: 9px;
+  padding-top: 10px;
   color: var(--color-muted-blue);
 }
 
