@@ -1,5 +1,26 @@
 # DEVELOPMENT_LOG
 
+## Zodiac Output Quality Review Table Spacing Final V3
+
+- Fixed actual docs/ZODIAC_OUTPUT_QUALITY_REVIEW.md row to `음력/윤달 샘플 외부 검증| Pending`
+- Updated checkZodiacOutputQualityReview guardrail to reject missing-space table row forms
+- Korean zodiac animal labels remain in place
+- Production logic unchanged
+- src unchanged
+- Generated snapshot JSON unchanged
+- Zodiac comparison result JSON unchanged
+- CURRENT_FORTUNE_SCHEMA_VERSION unchanged
+- schemaVersion unchanged
+- Existing localStorage keys unchanged
+- UI/routing unchanged
+- privacy files unchanged
+- AndroidManifest.xml/resource unchanged
+- Gradle settings unchanged
+- Engine accuracy approval remains Pending
+- External reference comparison remains Pending
+- 음력/윤달 샘플 외부 검증 remains Pending
+- 태양시 보정 적용 여부 remains Pending
+
 ## Zodiac Output Quality Review Table Spacing Final V2
 
 - Fixed actual docs/ZODIAC_OUTPUT_QUALITY_REVIEW.md row to `음력/윤달 샘플 외부 검증| Pending`
