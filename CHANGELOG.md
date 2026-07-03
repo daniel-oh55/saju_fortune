@@ -2,6 +2,11 @@
 
 ## Fixed
 
+- Fixed remaining zodiac output quality review table spacing for `음력/윤달 샘플 외부 검증| Pending`
+- Updated zodiac output quality review guardrail to reject the missing-space table separator form
+
+## Fixed
+
 - Corrected zodiac output quality review animal labels and table spacing
 
 ## Added
