@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Fixed
+
+- Corrected zodiac output quality review animal labels and table spacing
+
 ## Added
 
 - Zodiac output quality review document added

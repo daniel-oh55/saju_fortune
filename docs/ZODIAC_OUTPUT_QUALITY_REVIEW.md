@@ -103,18 +103,18 @@ This document does not approve final engine accuracy.
 
 | Animal | Review Status | Expected Tone |
 |---|---|---|
-| rat | Reviewed | quick judgment and information sensitivity |
-| ox | Reviewed | steady persistence and practical choices |
-| tiger | Reviewed | drive and decision-making |
-| rabbit | Reviewed | relational sensitivity and balance |
-| dragon | Reviewed | confidence and expansion |
-| snake | Reviewed | observation and strategic choices |
-| horse | Reviewed | movement and action |
-| goat | Reviewed | consideration and balance |
-| monkey | Reviewed | wit and application |
-| rooster | Reviewed | organization and standards |
-| dog | Reviewed | trust and responsibility |
-| pig | Reviewed | ease, recovery, and generosity |
+| 쥐 | Reviewed | 빠른 판단과 정보 감각 |
+| 소 | Reviewed | 차분한 지속력과 현실적인 선택 |
+| 호랑이 | Reviewed | 추진력과 결단 |
+| 토끼 | Reviewed | 섬세한 관계 감각과 조율 |
+| 용 | Reviewed | 자신감과 확장성 |
+| 뱀 | Reviewed | 관찰력과 전략적인 선택 |
+| 말 | Reviewed | 움직임과 실행력 |
+| 양 | Reviewed | 배려와 균형 감각 |
+| 원숭이 | Reviewed | 재치와 적용력 |
+| 닭 | Reviewed | 정리와 기준 세우기 |
+| 개 | Reviewed | 신뢰와 책임감 |
+| 돼지 | Reviewed | 여유와 회복, 포용 |
 
 ## Wording Quality Checks
 

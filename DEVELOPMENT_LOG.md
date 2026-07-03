@@ -1,5 +1,25 @@
 # DEVELOPMENT_LOG
 
+## Zodiac Output Quality Review Wording Fix
+
+- Fixed 음력/윤달 샘플 외부 검증 table spacing
+- Replaced animal tone review matrix labels with Korean zodiac labels
+- Added guardrail for Korean zodiac labels
+- Production engine logic unchanged
+- Generated snapshot JSON unchanged
+- Zodiac comparison result JSON unchanged
+- CURRENT_FORTUNE_SCHEMA_VERSION unchanged
+- schemaVersion unchanged
+- Existing localStorage keys unchanged
+- UI/routing unchanged
+- public/privacy-policy.html unchanged
+- AndroidManifest.xml/resource unchanged
+- Gradle settings unchanged
+- Engine accuracy approval remains Pending
+- External reference comparison remains Pending
+- 음력/윤달 샘플 외부 검증 remains Pending
+- 태양시 보정 적용 여부 remains Pending
+
 ## Zodiac Output Quality Review
 
 - Zodiac output quality review completed

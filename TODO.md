@@ -1,5 +1,17 @@
 # TODO
 
+## 2026-07-03 Zodiac output quality review wording fix TODO
+
+- [x] Fix 음력/윤달 샘플 외부 검증 table spacing
+- [x] Replace animal tone review matrix with Korean zodiac labels
+- [x] Add guardrail for Korean zodiac labels
+- [x] Keep generated snapshot JSON unchanged
+- [x] Keep production logic unchanged
+- [ ] Engine accuracy approval
+- [ ] External reference comparison
+- [ ] 음력/윤달 샘플 외부 검증
+- [ ] 태양시 보정 적용 여부
+
 ## 2026-07-03 Zodiac output quality review TODO
 
 - [x] Zodiac output quality review

@@ -25,19 +25,19 @@ const expectedSampleIds = [
 ];
 
 const expectedCategoryIds = ['overall', 'money', 'relationship', 'work', 'health'];
-const expectedAnimalKeys = [
-  'rat',
-  'ox',
-  'tiger',
-  'rabbit',
-  'dragon',
-  'snake',
-  'horse',
-  'goat',
-  'monkey',
-  'rooster',
-  'dog',
-  'pig',
+const expectedAnimalLabels = [
+  '쥐',
+  '소',
+  '호랑이',
+  '토끼',
+  '용',
+  '뱀',
+  '말',
+  '양',
+  '원숭이',
+  '닭',
+  '개',
+  '돼지',
 ];
 
 const requiredDocSnippets = [
@@ -102,6 +102,22 @@ const forbiddenSnippets = [
   '태양시 보정 적용 여부: Confirmed',
   '실제 스토어 스크린샷 이미지 시작',
   '양력/음력 샘플 추가 검증',
+];
+
+const forbiddenDocSnippets = [
+  '음력/윤달 샘플 외부 검증 Pending',
+  '| rat | Reviewed',
+  '| ox | Reviewed',
+  '| tiger | Reviewed',
+  '| rabbit | Reviewed',
+  '| dragon | Reviewed',
+  '| snake | Reviewed',
+  '| horse | Reviewed',
+  '| goat | Reviewed',
+  '| monkey | Reviewed',
+  '| rooster | Reviewed',
+  '| dog | Reviewed',
+  '| pig | Reviewed',
 ];
 
 const protectedFiles = [
@@ -169,7 +185,7 @@ const comparison = JSON.parse(fs.readFileSync(resultPath, 'utf8'));
 if (!checkIncludes('zodiac_output_quality_review_doc', doc, requiredDocSnippets)) hasFailure = true;
 if (!checkIncludes('zodiac_output_quality_review_doc_sample_ids', doc, expectedSampleIds)) hasFailure = true;
 if (!checkIncludes('zodiac_output_quality_review_doc_category_ids', doc, expectedCategoryIds)) hasFailure = true;
-if (!checkIncludes('zodiac_output_quality_review_doc_animal_keys', doc, expectedAnimalKeys)) hasFailure = true;
+if (!checkIncludes('zodiac_output_quality_review_doc_animal_labels', doc, expectedAnimalLabels)) hasFailure = true;
 
 const afterMetadataValid =
   after.snapshotVersion === 'fortune_engine_sample_snapshot_after_zodiac_improvement_v1' &&
@@ -233,6 +249,12 @@ for (const snippet of forbiddenSnippets) {
     logResult(`forbidden_snippet_absent_${labelFromSnippet(snippet)}_from_${labelFromSnippet(path)}`, absent);
     if (!absent) hasFailure = true;
   }
+}
+
+for (const snippet of forbiddenDocSnippets) {
+  const absent = !doc.includes(snippet);
+  logResult(`forbidden_doc_snippet_absent_${labelFromSnippet(snippet)}`, absent);
+  if (!absent) hasFailure = true;
 }
 
 const packageJson = fs.readFileSync('package.json', 'utf8');
