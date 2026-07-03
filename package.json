@@ -175,6 +175,7 @@
     "check:zodiac-fortune-profiles": "node scripts/checkZodiacFortuneProfiles.mjs",
     "check:zodiac-fortune-engine-improvement-plan": "node scripts/checkZodiacFortuneEngineImprovementPlan.mjs",
     "check:zodiac-year-pillar-policy-alignment": "node scripts/checkZodiacYearPillarPolicyAlignment.mjs",
+    "check:zodiac-birth-year-display-consistency": "node scripts/checkZodiacBirthYearDisplayConsistency.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
