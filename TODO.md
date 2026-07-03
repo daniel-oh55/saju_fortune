@@ -1,5 +1,17 @@
 # TODO
 
+## 2026-07-03 Zodiac quality review spacing final v2 TODO
+
+- [x] Fix actual docs/ZODIAC_OUTPUT_QUALITY_REVIEW.md table spacing
+- [x] Remove incorrect missing-space requiredDocSnippets
+- [x] Add forbidden guardrail for missing-space table row
+- [x] Keep production logic unchanged
+- [x] Keep generated snapshot JSON unchanged
+- [ ] Engine accuracy approval
+- [ ] External reference comparison
+- [ ] 음력/윤달 샘플 외부 검증
+- [ ] 태양시 보정 적용 여부
+
 ## 2026-07-03 Zodiac output quality review table spacing final fix TODO
 
 - [x] Fix remaining 음력/윤달 샘플 외부 검증 table separator spacing
