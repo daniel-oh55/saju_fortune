@@ -19,7 +19,7 @@ This document does not approve final engine accuracy.
 | Zodiac output quality review | Reviewed | this document |
 | Engine accuracy approval | Pending | not approved in this PR |
 | External reference comparison | Pending | not completed |
-| 음력/윤달 샘플 외부 검증| Pending | external reference comparison still required |
+| 음력/윤달 샘플 외부 검증 | Pending | external reference comparison still required |
 | 태양시 보정 적용 여부 | Pending | policy decision required |
 | Today fortune first production improvement | Reviewed | unchanged |
 | Year/monthly fortune first production improvement | Reviewed | unchanged |
