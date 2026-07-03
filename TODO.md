@@ -3317,4 +3317,4 @@
 - [x] Keep production logic unchanged
 - [x] Improve same-animal year-specific wording variation
 - [x] Regenerate after snapshot after wording variation improvement
-- [ ] Review zodiac year-specific output quality
+- [x] Review zodiac year-specific output quality
