@@ -2,6 +2,11 @@
 
 ## Fixed
 
+- Corrected the actual zodiac output quality review table row to `음력/윤달 샘플 외부 검증| Pending`
+- Updated the zodiac output quality review guardrail so missing-space table separator forms fail
+
+## Fixed
+
 - Fixed remaining zodiac output quality review table spacing for `음력/윤달 샘플 외부 검증| Pending`
 - Updated zodiac output quality review guardrail to reject the missing-space table separator form
 
