@@ -89,22 +89,32 @@ function DailyRoutineCard({ sajuAnalysis, onOpenDetail }) {
       <p className="daily-routine-copy">{balanceHint}</p>
 
       <div className="daily-routine-list">
-        {steps.map((step) => (
-          <button
-            className={`daily-routine-item${activeStepTime === step.time ? ' is-active' : ''}`}
-            key={step.time}
-            type="button"
-            onClick={() => setActiveStepTime((current) => (current === step.time ? '' : step.time))}
-            aria-expanded={activeStepTime === step.time}
-          >
-            <span className="daily-routine-time">{step.time}</span>
-            <div>
-              <strong>{step.title}</strong>
-              <p>{step.text}</p>
-              {activeStepTime === step.time && <p className="daily-routine-detail">{step.detail}</p>}
-            </div>
-          </button>
-        ))}
+        {steps.map((step, index) => {
+          const isActive = activeStepTime === step.time;
+          const detailId = `daily-routine-detail-${index}`;
+
+          return (
+            <button
+              className={`daily-routine-item${isActive ? ' is-active' : ''}`}
+              key={step.time}
+              type="button"
+              onClick={() => setActiveStepTime((current) => (current === step.time ? '' : step.time))}
+              aria-expanded={isActive}
+              aria-controls={detailId}
+            >
+              <span className="daily-routine-time">{step.time}</span>
+              <div>
+                <strong>{step.title}</strong>
+                <p>{step.text}</p>
+                {isActive && (
+                  <p id={detailId} className="daily-routine-detail">
+                    {step.detail}
+                  </p>
+                )}
+              </div>
+            </button>
+          );
+        })}
       </div>
 
       {onOpenDetail && (
