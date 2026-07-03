@@ -32,11 +32,12 @@ function getProfileZodiac(profile, fortune) {
 
 function getInitialState(profile, fortune) {
   const profileZodiac = getProfileZodiac(profile, fortune);
+  const profileZodiacYears = profileZodiac ? getYearsByAnimal(profileZodiac.animal) : [];
 
   if (profileZodiac) {
     return {
       selectedAnimal: profileZodiac.animal,
-      openYears: [profileZodiac.year],
+      openYears: profileZodiacYears.some((item) => item.year === profileZodiac.year) ? [profileZodiac.year] : [],
       hasSupportedBirthYear: true,
     };
   }
@@ -58,11 +59,8 @@ function ZodiacFortunePage({ profile, fortune, onNavigate, onOpenReminderSetting
 
   const years = useMemo(() => {
     const baseYears = getYearsByAnimal(selectedAnimal);
-    if (!profileZodiac || profileZodiac.animal !== selectedAnimal) return baseYears;
-    if (baseYears.some((item) => item.year === profileZodiac.year)) return baseYears;
-
-    return [...baseYears, profileZodiac].sort((a, b) => a.year - b.year);
-  }, [profileZodiac, selectedAnimal]);
+    return baseYears;
+  }, [selectedAnimal]);
 
   const toggleYear = (year) => {
     setOpenYears((current) =>
