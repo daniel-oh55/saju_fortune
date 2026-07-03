@@ -3310,3 +3310,11 @@
 - [ ] 사용자 운세 히스토리 저장
 - [ ] 더 깊은 풀이 리포트 PDF 또는 공유 이미지 생성
 - [ ] 알림 기능
+
+## Zodiac year variation TODO
+
+- [x] Add same-animal year variation baseline check
+- [x] Keep production logic unchanged
+- [ ] Improve same-animal year-specific wording variation
+- [ ] Regenerate after snapshot after wording variation improvement
+- [ ] Review zodiac year-specific output quality

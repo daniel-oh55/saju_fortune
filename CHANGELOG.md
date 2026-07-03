@@ -2008,3 +2008,7 @@
 ### Deployed
 
 - 확인 필요
+
+## Added
+
+- Added a baseline check for zodiac same-animal birth-year wording variation before production improvements

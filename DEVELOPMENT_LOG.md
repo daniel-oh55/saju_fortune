@@ -7454,3 +7454,17 @@
 - `npm run check:android-packaging-readiness`: 성공
 - `npm run check:content-safety`: 성공
 - `npm run check:share-text`: 성공
+
+## Zodiac Year Variation Baseline
+
+- Added a baseline check for same-animal birth-year fortune variation
+- Captured current duplicate/similarity status before production wording changes
+- Production fortune logic unchanged
+- Zodiac generation logic unchanged
+- Generated production JSON unchanged
+- schemaVersion unchanged
+- CURRENT_FORTUNE_SCHEMA_VERSION unchanged
+- Existing localStorage keys unchanged
+- UI/routing unchanged
+- privacy files unchanged
+- Android/Gradle unchanged
