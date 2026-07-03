@@ -62,6 +62,8 @@ function SajuElementSummaryCard({ sajuAnalysis, onOpenDetail }) {
           className="saju-info-button"
           type="button"
           onClick={() => setIsGuideOpen(true)}
+          aria-expanded={isGuideOpen}
+          aria-controls="saju-flow-guide-dialog"
           aria-label="나의 사주 흐름 설명 보기"
         >
           ?
@@ -126,7 +128,13 @@ function SajuElementSummaryCard({ sajuAnalysis, onOpenDetail }) {
 
       {isGuideOpen && (
         <div className="home-modal-backdrop" role="presentation">
-          <section className="home-bottom-sheet" role="dialog" aria-modal="true" aria-labelledby="saju-flow-guide-title">
+          <section
+            id="saju-flow-guide-dialog"
+            className="home-bottom-sheet"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="saju-flow-guide-title"
+          >
             <div className="home-modal-head">
               <div>
                 <p className="eyebrow">Guide</p>
