@@ -168,6 +168,63 @@ const categoryScoreModifier = {
   health: -1,
 };
 
+const yearVariationAngles = [
+  {
+    key: 'organize',
+    summary: '오늘은 할 일을 줄이고 우선순위를 분명히 할수록 흐름을 잡기 쉽습니다.',
+    detail: '여러 일을 동시에 넓히기보다 먼저 정리할 것과 바로 처리할 것을 나눠 보세요.',
+    categoryGuidance: {
+      overall: '선택지를 줄이고 오늘 꼭 필요한 순서부터 정리해 보세요.',
+      money: '지출 전 조건과 금액을 한 번 더 확인해 불필요한 지출을 줄여 보세요.',
+      relationship: '전하려는 말을 짧게 정리한 뒤 부드럽게 건네 보세요.',
+      work: '업무 범위와 마감 순서를 분명히 잡으면 집중이 쉬워집니다.',
+      health: '하루 루틴을 단순하게 정리하고 무리한 일정을 줄여 보세요.',
+    },
+  },
+  {
+    key: 'relationship',
+    summary: '오늘은 말의 온도와 대화의 거리감을 살피면 흐름이 부드러워집니다.',
+    detail: '상대의 반응을 서둘러 판단하기보다 필요한 만큼 설명을 보태는 편이 좋습니다.',
+    categoryGuidance: {
+      overall: '주변 반응을 살피며 속도를 맞추면 하루 흐름이 편안해집니다.',
+      money: '돈과 관련된 약속은 서로 이해한 조건이 같은지 차분히 확인해 보세요.',
+      relationship: '말의 온도를 낮추고 상대가 받아들이기 쉬운 표현을 골라 보세요.',
+      work: '협업이나 요청은 기대하는 범위를 구체적으로 공유해 보세요.',
+      health: '컨디션을 주변 일정에 맞추기보다 내 리듬도 함께 살펴보세요.',
+    },
+  },
+  {
+    key: 'action',
+    summary: '오늘은 작게 시작하고 바로 확인 가능한 행동을 잡는 쪽이 잘 맞습니다.',
+    detail: '크게 결론내기보다 작은 실행을 먼저 해보고 결과를 확인해 보세요.',
+    categoryGuidance: {
+      overall: '작은 실행 하나를 정하고 결과를 보며 다음 선택을 이어가 보세요.',
+      money: '큰 소비보다 작은 항목부터 점검하면 흐름을 보기 쉽습니다.',
+      relationship: '짧은 안부나 확인 메시지처럼 바로 할 수 있는 행동이 도움이 됩니다.',
+      work: '큰 목표를 작은 단계로 나눠 먼저 끝낼 한 가지를 잡아 보세요.',
+      health: '가벼운 움직임이나 짧은 휴식처럼 바로 가능한 루틴부터 챙겨 보세요.',
+    },
+  },
+  {
+    key: 'recover',
+    summary: '오늘은 컨디션과 생활 리듬을 먼저 정돈하면 선택이 차분해집니다.',
+    detail: '속도를 올리기보다 휴식, 식사, 주변 정리처럼 기반을 다지는 흐름이 어울립니다.',
+    categoryGuidance: {
+      overall: '무리한 확장보다 생활 리듬을 고르게 맞추는 데 집중해 보세요.',
+      money: '급한 결정은 잠시 늦추고 필요한 기록부터 정돈해 보세요.',
+      relationship: '피곤할수록 말이 짧아질 수 있으니 여유를 두고 답해 보세요.',
+      work: '집중이 흐려지면 쉬운 정리부터 하며 다시 리듬을 잡아 보세요.',
+      health: '수면, 물, 식사처럼 기본 리듬을 먼저 챙겨 보세요.',
+    },
+  },
+];
+
+function getYearVariationAngle(year) {
+  const numericYear = Number(year);
+  const cycleIndex = Number.isFinite(numericYear) ? Math.max(0, Math.floor((numericYear - 1948) / 12)) : 0;
+  return yearVariationAngles[cycleIndex % yearVariationAngles.length];
+}
+
 function getAnimalTone(selectedAnimal, animalKey) {
   return animalTone[animalKey] || `${selectedAnimal || '선택한 띠'}의 장점을 차분히 살리는 흐름`;
 }
@@ -180,11 +237,12 @@ function getCategoryAdvice(categoryId, seed) {
   return pickBySeed(categoryAdvice[categoryId] || categoryAdvice.overall, seed);
 }
 
-function composeZodiacCategorySummary({ categoryId, selectedAnimal, animalKey, score, seed, baseSummary }) {
+function composeZodiacCategorySummary({ categoryId, selectedAnimal, animalKey, score, seed, baseSummary, yearAngle }) {
   const tone = getAnimalTone(selectedAnimal, animalKey);
   const focus = getZodiacCategoryFocus(categoryId);
   const advice = getCategoryAdvice(categoryId, seed);
   const caution = categoryCaution[categoryId] || categoryCaution.overall;
+  const yearGuidance = yearAngle?.categoryGuidance?.[categoryId] || yearAngle?.categoryGuidance?.overall || '';
   const scoreHint =
     score >= 82
       ? '흐름이 비교적 선명합니다.'
@@ -192,10 +250,10 @@ function composeZodiacCategorySummary({ categoryId, selectedAnimal, animalKey, s
         ? '차분히 맞춰 가기 좋습니다.'
         : '무리하지 않는 조절이 필요합니다.';
 
-  return `${baseSummary} ${tone}을 바탕으로 ${focus}에 집중해 보세요. ${scoreHint} ${advice} ${caution}`;
+  return `${baseSummary} ${tone}을 바탕으로 ${focus}에 집중해 보세요. ${yearGuidance} ${scoreHint} ${advice} ${caution}`;
 }
 
-function composeZodiacDetail({ selectedAnimal, animalKey, categories, seed }) {
+function composeZodiacDetail({ selectedAnimal, animalKey, categories, seed, yearAngle }) {
   const tone = getAnimalTone(selectedAnimal, animalKey);
   const strongest = [...categories].sort((a, b) => b.score - a.score)[0] || categories[0];
   const softest = [...categories].sort((a, b) => a.score - b.score)[0] || categories[0];
@@ -203,8 +261,9 @@ function composeZodiacDetail({ selectedAnimal, animalKey, categories, seed }) {
   const softestFocus = getZodiacCategoryFocus(softest.id);
   const advice = getCategoryAdvice(strongest.id, seed + strongest.score);
   const caution = categoryCaution[softest.id] || categoryCaution.overall;
+  const yearDetail = yearAngle?.detail || '';
 
-  return `${selectedAnimal || '선택한 띠'}의 오늘 흐름은 ${tone}입니다. 강하게 살릴 부분은 ${strongest.label}의 ${strongestFocus}이고, 천천히 조절할 부분은 ${softest.label}의 ${softestFocus}입니다. ${advice} ${caution}`;
+  return `${selectedAnimal || '선택한 띠'}의 오늘 흐름은 ${tone}입니다. ${yearDetail} 강하게 살릴 부분은 ${strongest.label}의 ${strongestFocus}이고, 천천히 조절할 부분은 ${softest.label}의 ${softestFocus}입니다. ${advice} ${caution}`;
 }
 
 function getDateFromDateKey(dateKey) {
@@ -243,6 +302,7 @@ export function createZodiacFortune({ profile, selectedYear, selectedAnimal, sel
   };
   const seed = hashString(`${profile.id}-${dateKey}-${zodiac.year}-${zodiac.animal}`);
   const animalKey = getZodiacAnimalByLabel(zodiac.animal);
+  const yearAngle = getYearVariationAngle(zodiac.year);
   const composition = composeZodiacFortune(animalKey || 'dragon', {
     date: getDateFromDateKey(dateKey),
     variantSeed: seed,
@@ -271,6 +331,7 @@ export function createZodiacFortune({ profile, selectedYear, selectedAnimal, sel
         score,
         seed: categorySeed,
         baseSummary,
+        yearAngle,
       }),
     };
   });
@@ -284,13 +345,14 @@ export function createZodiacFortune({ profile, selectedYear, selectedAnimal, sel
     animal: zodiac.animal,
     icon: zodiac.icon,
     score,
-    summary: `${zodiac.year}년 ${zodiac.animal}띠의 오늘은 ${composition.summary}`,
+    summary: `${zodiac.year}년 ${zodiac.animal}띠의 오늘은 ${composition.summary} ${yearAngle.summary}`,
     detail:
       `${composeZodiacDetail({
         selectedAnimal: zodiac.animal,
         animalKey,
         categories,
         seed,
+        yearAngle,
       })} ${composition.caution}`,
     categories,
   };
