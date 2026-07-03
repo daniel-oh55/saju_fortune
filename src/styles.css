@@ -1083,6 +1083,41 @@ textarea:focus {
   font-size: 1rem;
 }
 
+.saju-zodiac-reference {
+  display: grid;
+  gap: 9px;
+  border: 1px solid rgba(184, 150, 78, 0.2);
+  border-radius: 17px;
+  padding: 13px;
+  background: rgba(255, 253, 248, 0.9);
+}
+
+.saju-zodiac-reference div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.saju-zodiac-reference span {
+  color: #697a80;
+  font-size: 0.8rem;
+  font-weight: 900;
+}
+
+.saju-zodiac-reference strong {
+  color: #2f4f4d;
+  font-size: 1.02rem;
+  line-height: 1.35;
+}
+
+.saju-zodiac-reference p {
+  margin: 0;
+  color: #607078;
+  font-size: 0.84rem;
+  line-height: 1.5;
+}
+
 .saju-basis-note {
   display: grid;
   gap: 6px;

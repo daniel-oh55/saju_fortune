@@ -1,3 +1,5 @@
+import { getZodiacByYearPillar } from '../domain/fortune/zodiacFortuneEngine.js';
+
 function isLateNightBirthTime(birthTime, birthTimeUnknown) {
   if (birthTimeUnknown) return false;
   return /^23:\d{2}$/.test(birthTime || '');
@@ -34,6 +36,7 @@ function SajuCalculationBasisCard({ profile, fortune }) {
   }
 
   const isLateNight = isLateNightBirthTime(profile.birthTime, profile.birthTimeUnknown);
+  const yearPillarZodiac = getZodiacByYearPillar(pillars?.year);
 
   return (
     <section className="saju-basis-card">
@@ -87,6 +90,20 @@ function SajuCalculationBasisCard({ profile, fortune }) {
           </div>
         </div>
       )}
+
+      <div className="saju-zodiac-reference">
+        <div>
+          <span>앱 기준 띠</span>
+          <strong>{yearPillarZodiac?.animal ? `${yearPillarZodiac.animal}띠` : '표시 예정'}</strong>
+        </div>
+        <p>
+          양력/음력 생일과 절기 기준에 따라 일반적으로 알고 있는 띠와 다를 수 있어요. 하루풀이는 입력한 생년월일을
+          바탕으로 앱의 사주 계산 기준에 따른 참고값을 보여드립니다.
+        </p>
+        {!yearPillarZodiac?.animal && pillars?.year && (
+          <p>현재는 계산된 연주 {formatPillar(pillars.year)} 정보를 먼저 참고해 주세요.</p>
+        )}
+      </div>
 
       <div className="saju-basis-note">
         <p>이 정보는 입력한 생년월일과 선택한 시간 기준을 바탕으로 계산한 참고용 사주 기준입니다.</p>
