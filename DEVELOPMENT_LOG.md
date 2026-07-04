@@ -1,5 +1,26 @@
 # DEVELOPMENT_LOG
 
+## Home Quick Menu QA Checklist
+
+- Added QA checklist for home quick menu customization
+- Documented localStorage key and storage contract
+- Documented manual QA steps for save, restore, max 4, min 1, and fallback behavior
+- Production fortune logic unchanged
+- Zodiac fortune engine unchanged
+- src production UI unchanged
+- Generated JSON unchanged
+- docs/generated unchanged
+- schemaVersion unchanged
+- CURRENT_FORTUNE_SCHEMA_VERSION unchanged
+- Existing localStorage keys unchanged
+- Routing unchanged
+- privacy files unchanged
+- Android/Gradle unchanged
+- Android device QA remains Pending
+- APK download/install/app launch remain Pending
+- Google Play Console input remains Pending
+- release build/signing/AAB remain Pending
+
 ## Zodiac Year Variation Output Review
 
 - Added wording quality review for same-animal birth-year variation after PR #272

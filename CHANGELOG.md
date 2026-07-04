@@ -2,6 +2,10 @@
 
 ## Added
 
+- Added a QA checklist for home quick menu customization storage and fallback behavior
+
+## Added
+
 - Added a zodiac same-animal birth-year wording variation output quality review
 
 ## Fixed
