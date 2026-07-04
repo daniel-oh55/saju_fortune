@@ -213,6 +213,8 @@ function HomePage({
               setIsQuickMenuEditorOpen(true);
             }}
             aria-label="빠른 메뉴 편집"
+            aria-expanded={isQuickMenuEditorOpen}
+            aria-controls="quick-menu-editor-dialog"
           >
             편집
           </button>
@@ -229,7 +231,13 @@ function HomePage({
 
       {isQuickMenuEditorOpen && (
         <div className="home-modal-backdrop" role="presentation">
-          <section className="home-bottom-sheet" role="dialog" aria-modal="true" aria-labelledby="quick-menu-editor-title">
+          <section
+            id="quick-menu-editor-dialog"
+            className="home-bottom-sheet"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="quick-menu-editor-title"
+          >
             <div className="home-modal-head">
               <div>
                 <p className="eyebrow">Quick Menu</p>
