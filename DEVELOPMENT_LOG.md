@@ -1,5 +1,22 @@
 # DEVELOPMENT_LOG
 
+## Android Debug APK QA Checklist
+
+- Added Android Debug APK manual QA checklist
+- Documented APK download, install, launch, and device QA steps as Pending
+- Documented Google Play Console, release build, signing, and AAB as Pending
+- Production fortune logic unchanged
+- Zodiac fortune engine unchanged
+- src production UI unchanged
+- Generated JSON unchanged
+- docs/generated unchanged
+- schemaVersion unchanged
+- CURRENT_FORTUNE_SCHEMA_VERSION unchanged
+- Existing localStorage keys unchanged
+- Routing unchanged
+- privacy files unchanged
+- Android/Gradle unchanged
+
 ## Home Quick Menu QA Checklist
 
 - Added QA checklist for home quick menu customization
