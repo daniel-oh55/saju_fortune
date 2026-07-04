@@ -168,6 +168,7 @@
     "check:saju-insight-reward-unlock": "node scripts/checkSajuInsightRewardUnlockRegression.mjs",
     "check:saju-engine-accuracy-roadmap": "node scripts/checkSajuEngineAccuracyRoadmap.mjs",
     "check:share-text": "node scripts/checkShareTextBuilderRegression.mjs",
+    "check:home-quick-menu-prefs": "node scripts/checkHomeQuickMenuPrefs.mjs",
     "check:splash-png-export": "node scripts/checkSplashPngExportReadiness.mjs",
     "check:visit-streak": "node scripts/checkVisitStreakRegression.mjs",
     "check:zodiac-fortune-sample-qa": "node scripts/checkZodiacFortuneSampleQa.mjs",
