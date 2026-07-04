@@ -1,5 +1,18 @@
 # TODO
 
+## Android Debug APK QA TODO
+
+- [x] Add Android Debug APK QA checklist
+- [ ] Download latest debug APK artifact
+- [ ] Extract APK from artifact zip
+- [ ] Install APK on Android test device
+- [ ] Launch app on Android test device
+- [ ] Complete Android device QA
+- [ ] Confirm Google Play Console inputs
+- [ ] Prepare release build
+- [ ] Configure signing
+- [ ] Generate AAB
+
 ## Home quick menu QA TODO
 
 - [x] Add quick menu customization guardrail check

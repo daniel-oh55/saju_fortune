@@ -2,6 +2,10 @@
 
 ## Added
 
+- Added an Android Debug APK manual QA checklist
+
+## Added
+
 - Added a QA checklist for home quick menu customization storage and fallback behavior
 
 ## Added
