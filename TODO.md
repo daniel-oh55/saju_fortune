@@ -1,5 +1,18 @@
 # TODO
 
+## Home quick menu QA TODO
+
+- [x] Add quick menu customization guardrail check
+- [x] Add quick menu QA checklist
+- [ ] Perform actual APK download
+- [ ] Perform actual APK install
+- [ ] Perform actual app launch test
+- [ ] Perform Android device QA
+- [ ] Confirm Google Play Console inputs
+- [ ] Prepare release build
+- [ ] Configure signing
+- [ ] Generate AAB
+
 ## 2026-07-03 Zodiac quality review pending spacing correction TODO
 
 - [x] Correct docs/ZODIAC_OUTPUT_QUALITY_REVIEW.md Pending row spacing
