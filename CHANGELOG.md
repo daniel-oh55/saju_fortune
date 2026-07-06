@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Changed
+
+- Deduplicated five elements guidance cards
+
 ## Fixed
 
 - Completed Seoul district options for birth region selection
