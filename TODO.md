@@ -1,5 +1,14 @@
 # TODO
 
+## Scroll to top navigation TODO
+
+- [x] Add shared scroll-to-top helper for page navigation
+- [x] Apply scroll-to-top to bottom navigation
+- [x] Apply scroll-to-top to home quick menu navigation
+- [x] Apply scroll-to-top to major CTA navigation paths
+- [x] Add regression check for scroll-to-top navigation
+- [ ] Re-test menu navigation scroll position on Android device after PR #284
+
 ## Today fortune detail back navigation TODO
 
 - [x] Add history state for today fortune detail view
@@ -18,7 +27,7 @@
 - [x] Record OS information
 - [x] Collect detailed UI/UX improvement items
 - [ ] Re-test today fortune detail back navigation behavior after PR #283
-- [ ] Scroll to top on menu navigation
+- [ ] Re-test scroll to top on menu navigation after PR #284
 - [ ] Update birth region district data
 - [ ] Deduplicate five elements guidance cards
 - [ ] Move zodiac explanation cards below zodiac cards
