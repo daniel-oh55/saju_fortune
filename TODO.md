@@ -1,5 +1,11 @@
 # TODO
 
+## Zodiac explanation card order TODO
+
+- [x] Move zodiac explanation cards below zodiac cards
+- [x] Add regression check for zodiac explanation card order
+- [ ] Re-test zodiac explanation card order on Android device
+
 ## Five elements guidance TODO
 
 - [x] Deduplicate five elements guidance cards
@@ -42,7 +48,7 @@
 - [ ] Re-test scroll to top on menu navigation after PR #284
 - [ ] Re-test birth region district options after PR #285
 - [ ] Re-test five elements guidance card deduplication after PR #286
-- [ ] Move zodiac explanation cards below zodiac cards
+- [ ] Re-test zodiac explanation card order after PR #287
 - [ ] Add morning/lunch/evening fortune display on home
 - [ ] Add saved reading share flow
 - [ ] Add lightweight startup loading screen

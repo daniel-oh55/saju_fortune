@@ -1,5 +1,16 @@
 # DEVELOPMENT_LOG
 
+## Zodiac Explanation Card Order
+
+- Moved zodiac explanation cards below the zodiac card grid
+- Kept zodiac fortune logic unchanged
+- Kept generated JSON/docs/generated unchanged
+- schemaVersion unchanged
+- CURRENT_FORTUNE_SCHEMA_VERSION unchanged
+- Existing localStorage keys unchanged
+- Android/Gradle unchanged
+- Android re-test remains Pending
+
 ## Five Elements Guidance Deduplication
 
 - Deduplicated overlapping five elements guidance cards
