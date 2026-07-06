@@ -1,5 +1,11 @@
 # TODO
 
+## Birth region district options TODO
+
+- [x] Complete Seoul district options
+- [x] Add regression check for Seoul district options
+- [ ] Re-test birth region district options on Android device
+
 ## Scroll to top navigation TODO
 
 - [x] Add shared scroll-to-top helper for page navigation
@@ -28,7 +34,7 @@
 - [x] Collect detailed UI/UX improvement items
 - [ ] Re-test today fortune detail back navigation behavior after PR #283
 - [ ] Re-test scroll to top on menu navigation after PR #284
-- [ ] Update birth region district data
+- [ ] Re-test birth region district options after PR #285
 - [ ] Deduplicate five elements guidance cards
 - [ ] Move zodiac explanation cards below zodiac cards
 - [ ] Add morning/lunch/evening fortune display on home

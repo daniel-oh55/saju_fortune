@@ -1,5 +1,22 @@
 # DEVELOPMENT_LOG
 
+## Birth Region District Options Fix
+
+- Completed Seoul district options for birth region selection
+- Added regression check for Seoul district options
+- Existing profile storage shape unchanged
+- Existing localStorage keys unchanged
+- schemaVersion unchanged
+- CURRENT_FORTUNE_SCHEMA_VERSION unchanged
+- Production fortune logic unchanged
+- Zodiac fortune engine unchanged
+- Generated JSON unchanged
+- docs/generated unchanged
+- Routing unchanged
+- privacy files unchanged
+- Android/Gradle unchanged
+- Android re-test remains Pending
+
 ## Scroll To Top Navigation Fix
 
 - Added shared scroll-to-top handling for app page navigation

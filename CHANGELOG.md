@@ -2,6 +2,10 @@
 
 ## Fixed
 
+- Completed Seoul district options for birth region selection
+
+## Fixed
+
 - Fixed menu navigation so destination pages start at the top of the screen
 
 ## Fixed
