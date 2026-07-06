@@ -8,29 +8,6 @@ const ELEMENT_MEANINGS = {
   토: { label: '토(土)', plain: '균형을 잡고 기반을 다지는 기운', action: '식사, 휴식, 주변 정리처럼 기본 리듬을 하나 챙겨보세요.' },
 };
 
-const FIVE_ELEMENT_GUIDE_ITEMS = [
-  {
-    label: '화(火)',
-    text: '추진력과 표현의 기운이에요. 말, 행동, 열정처럼 밖으로 드러나는 흐름을 뜻해요.',
-  },
-  {
-    label: '수(水)',
-    text: '생각을 정리하고 흐름을 살피는 기운이에요. 감정, 휴식, 관찰처럼 안쪽을 돌아보는 흐름을 뜻해요.',
-  },
-  {
-    label: '목(木)',
-    text: '성장과 시작의 기운이에요. 계획 세우기, 배움, 새롭게 시작하는 움직임과 잘 어울려요.',
-  },
-  {
-    label: '금(金)',
-    text: '기준을 세우고 정돈하는 기운이에요. 선택, 정리, 마무리, 원칙을 세우는 흐름과 관련이 있어요.',
-  },
-  {
-    label: '토(土)',
-    text: '균형과 기반의 기운이에요. 중심 잡기, 생활 리듬, 관계와 일의 균형을 살피는 흐름을 뜻해요.',
-  },
-];
-
 function takeItems(items, count = 3) {
   return Array.isArray(items) ? items.filter(Boolean).slice(0, count) : [];
 }
@@ -139,22 +116,6 @@ function DailyRoutineCard({ sajuAnalysis, onOpenDetail }) {
           );
         })}
       </div>
-
-      <section className="daily-routine-element-guide" aria-labelledby="daily-routine-element-guide-title">
-        <div>
-          <p className="eyebrow">Five Elements</p>
-          <h3 id="daily-routine-element-guide-title">오행을 쉽게 보면</h3>
-          <p>오늘의 방향을 정리하는 참고용 힌트로 가볍게 살펴보세요.</p>
-        </div>
-        <dl>
-          {FIVE_ELEMENT_GUIDE_ITEMS.map((item) => (
-            <div key={item.label}>
-              <dt>{item.label}</dt>
-              <dd>{item.text}</dd>
-            </div>
-          ))}
-        </dl>
-      </section>
 
       {onOpenDetail && (
         <button className="ghost-button full-width" type="button" onClick={onOpenDetail}>

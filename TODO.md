@@ -1,5 +1,11 @@
 # TODO
 
+## Five elements guidance TODO
+
+- [x] Deduplicate five elements guidance cards
+- [x] Add regression check for five elements guidance deduplication
+- [ ] Re-test five elements guidance on Android device
+
 ## Birth region district options TODO
 
 - [x] Complete Seoul district options
@@ -35,7 +41,7 @@
 - [ ] Re-test today fortune detail back navigation behavior after PR #283
 - [ ] Re-test scroll to top on menu navigation after PR #284
 - [ ] Re-test birth region district options after PR #285
-- [ ] Deduplicate five elements guidance cards
+- [ ] Re-test five elements guidance card deduplication after PR #286
 - [ ] Move zodiac explanation cards below zodiac cards
 - [ ] Add morning/lunch/evening fortune display on home
 - [ ] Add saved reading share flow

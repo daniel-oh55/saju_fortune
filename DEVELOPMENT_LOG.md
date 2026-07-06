@@ -1,5 +1,21 @@
 # DEVELOPMENT_LOG
 
+## Five Elements Guidance Deduplication
+
+- Deduplicated overlapping five elements guidance cards
+- Removed the repeated five elements guide block from the daily routine card
+- Kept five elements explanation available through routine detail copy and saju element help
+- Added regression check for five elements guidance deduplication
+- Production fortune logic unchanged
+- Zodiac fortune engine unchanged
+- Generated JSON unchanged
+- docs/generated unchanged
+- schemaVersion unchanged
+- CURRENT_FORTUNE_SCHEMA_VERSION unchanged
+- Existing localStorage keys unchanged
+- Android/Gradle unchanged
+- Android re-test remains Pending
+
 ## Birth Region District Options Fix
 
 - Completed Seoul district options for birth region selection
