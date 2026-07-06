@@ -1,5 +1,12 @@
 # TODO
 
+## Today fortune detail back navigation TODO
+
+- [x] Add history state for today fortune detail view
+- [x] Close today fortune detail on Android/browser back
+- [x] Add regression check for back navigation handling
+- [ ] Re-test today fortune detail back navigation on Android device
+
 ## Android Debug APK QA Result TODO
 
 - [x] Download latest debug APK artifact
@@ -10,7 +17,7 @@
 - [x] Record test device model
 - [x] Record OS information
 - [x] Collect detailed UI/UX improvement items
-- [ ] Fix today fortune detail back navigation behavior
+- [ ] Re-test today fortune detail back navigation behavior after PR #283
 - [ ] Scroll to top on menu navigation
 - [ ] Update birth region district data
 - [ ] Deduplicate five elements guidance cards

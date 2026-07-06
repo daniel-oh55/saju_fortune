@@ -172,6 +172,7 @@
     "check:home-quick-menu-qa-checklist": "node scripts/checkHomeQuickMenuQaChecklist.mjs",
     "check:android-debug-apk-qa-checklist": "node scripts/checkAndroidDebugApkQaChecklist.mjs",
     "check:android-debug-apk-qa-result": "node scripts/checkAndroidDebugApkQaResult.mjs",
+    "check:today-fortune-back-navigation": "node scripts/checkTodayFortuneBackNavigation.mjs",
     "check:splash-png-export": "node scripts/checkSplashPngExportReadiness.mjs",
     "check:visit-streak": "node scripts/checkVisitStreakRegression.mjs",
     "check:zodiac-fortune-sample-qa": "node scripts/checkZodiacFortuneSampleQa.mjs",

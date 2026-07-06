@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import BottomNav from './components/BottomNav.jsx';
 import ConsentBanner from './components/ConsentBanner.jsx';
 import ConsentSettingsPanel from './components/ConsentSettingsPanel.jsx';
@@ -87,6 +87,9 @@ function App() {
   const [dailyReminderDraft, setDailyReminderDraft] = useState(() => loadDailyReminderSettings());
   const [isReminderSettingsOpen, setIsReminderSettingsOpen] = useState(false);
   const [reminderSettingsMessage, setReminderSettingsMessage] = useState('');
+  const activePageRef = useRef(activePage);
+  const detailReturnPageRef = useRef('home');
+  const detailHistoryPushedRef = useRef(false);
 
   const fortune = useMemo(() => {
     if (!profile) return null;
@@ -108,6 +111,42 @@ function App() {
   }, [activePage, profile]);
 
   useEffect(() => {
+    activePageRef.current = activePage;
+  }, [activePage]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return undefined;
+
+    const handlePopState = () => {
+      if (activePageRef.current !== 'fortune' || !detailHistoryPushedRef.current) return;
+
+      detailHistoryPushedRef.current = false;
+      setActivePage(detailReturnPageRef.current || 'home');
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    if (activePage !== 'fortune') {
+      detailHistoryPushedRef.current = false;
+      return;
+    }
+
+    if (detailHistoryPushedRef.current) return;
+
+    window.history.pushState(
+      { ...(window.history.state || {}), harupuliTodayFortuneDetail: true },
+      '',
+      window.location.href,
+    );
+    detailHistoryPushedRef.current = true;
+  }, [activePage]);
+
+  useEffect(() => {
     if (fortune?.id) {
       setUnlockedDetails(loadRewardUnlocks(fortune.id));
     }
@@ -127,8 +166,26 @@ function App() {
   };
 
   const handleOpenDetail = (categoryId) => {
+    if (activePage !== 'fortune') {
+      detailReturnPageRef.current = activePage === 'onboarding' || activePage === 'profileEdit' ? 'home' : activePage;
+    }
+
     setSelectedCategory(categoryId);
     setActivePage('fortune');
+  };
+
+  const handleCloseFortuneDetail = () => {
+    if (
+      typeof window !== 'undefined' &&
+      detailHistoryPushedRef.current &&
+      window.history.state?.harupuliTodayFortuneDetail
+    ) {
+      window.history.back();
+      return;
+    }
+
+    detailHistoryPushedRef.current = false;
+    setActivePage(detailReturnPageRef.current || 'home');
   };
 
   const handleUnlockDetail = (categoryId) => {
@@ -282,6 +339,7 @@ function App() {
             consentPreferences={consentPreferences}
             onOpenConsentSettings={handleOpenConsentSettings}
             onSelectCategory={setSelectedCategory}
+            onClose={handleCloseFortuneDetail}
             onUnlockDetail={handleUnlockDetail}
             onSaveReading={handleSaveReading}
             onRemoveSavedReading={handleRemoveSavedReading}
