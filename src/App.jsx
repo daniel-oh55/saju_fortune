@@ -48,6 +48,23 @@ import {
 const todayKey = getKoreaDateKey();
 const REQUIRED_FORTUNE_CATEGORY_IDS = ['overall', 'money', 'love', 'work', 'study', 'health'];
 
+function scrollToPageTop() {
+  if (typeof window === 'undefined') return;
+
+  const applyScroll = () => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  };
+
+  if (typeof window.requestAnimationFrame === 'function') {
+    window.requestAnimationFrame(applyScroll);
+    return;
+  }
+
+  window.setTimeout(applyScroll, 0);
+}
+
 function hasRequiredFortuneCategories(fortune) {
   if (!Array.isArray(fortune?.categories)) return false;
 
@@ -163,6 +180,12 @@ function App() {
     saveProfile(nextProfile);
     setProfile(nextProfile);
     setActivePage(hadProfile ? 'settings' : 'home');
+    scrollToPageTop();
+  };
+
+  const handleNavigate = (page) => {
+    setActivePage(page);
+    scrollToPageTop();
   };
 
   const handleOpenDetail = (categoryId) => {
@@ -172,6 +195,9 @@ function App() {
 
     setSelectedCategory(categoryId);
     setActivePage('fortune');
+    if (activePage !== 'fortune') {
+      scrollToPageTop();
+    }
   };
 
   const handleCloseFortuneDetail = () => {
@@ -209,6 +235,7 @@ function App() {
     setProfile(null);
     setUnlockedDetails({});
     setActivePage('onboarding');
+    scrollToPageTop();
   };
 
   const handleAcceptAllConsent = () => {
@@ -247,7 +274,7 @@ function App() {
   };
 
   const handleOpenPrivacyInfoFromConsent = () => {
-    setActivePage('privacyInfo');
+    handleNavigate('privacyInfo');
     setIsConsentSettingsOpen(false);
   };
 
@@ -325,7 +352,7 @@ function App() {
             savedReadings={savedReadings}
             visitStreak={visitStreak}
             onOpenDetail={handleOpenDetail}
-            onNavigate={setActivePage}
+            onNavigate={handleNavigate}
             onOpenReminderSettings={handleOpenReminderSettings}
             isReminderEnabled={dailyReminderSettings.enabled}
           />
@@ -349,7 +376,7 @@ function App() {
           <YearFortunePage
             profile={profile}
             fortune={fortune}
-            onNavigate={setActivePage}
+            onNavigate={handleNavigate}
             onOpenReminderSettings={handleOpenReminderSettings}
             isReminderEnabled={dailyReminderSettings.enabled}
           />
@@ -358,7 +385,7 @@ function App() {
           <ZodiacFortunePage
             profile={profile}
             fortune={fortune}
-            onNavigate={setActivePage}
+            onNavigate={handleNavigate}
             onOpenReminderSettings={handleOpenReminderSettings}
             isReminderEnabled={dailyReminderSettings.enabled}
           />
@@ -374,7 +401,7 @@ function App() {
             onOpenConsentSettings={handleOpenConsentSettings}
             onSaveReading={handleSaveReading}
             onRemoveSavedReading={handleRemoveSavedReading}
-            onNavigate={setActivePage}
+            onNavigate={handleNavigate}
             onOpenReminderSettings={handleOpenReminderSettings}
             isReminderEnabled={dailyReminderSettings.enabled}
           />
@@ -383,28 +410,28 @@ function App() {
           <SavedReadingsPage
             savedReadings={savedReadings}
             onRemoveSavedReading={handleRemoveSavedReading}
-            onNavigate={setActivePage}
+            onNavigate={handleNavigate}
           />
         )}
         {activePage === 'ai' && <AiConsultPage profile={profile} fortune={fortune} />}
         {activePage === 'compatibility' && <CompatibilityPage profile={profile} />}
         {activePage === 'premium' && <PremiumPage />}
         {activePage === 'privacyInfo' && (
-          <PrivacyInfoPage onNavigate={setActivePage} consentPreferences={consentPreferences} />
+          <PrivacyInfoPage onNavigate={handleNavigate} consentPreferences={consentPreferences} />
         )}
         {activePage === 'settings' && (
           <SettingsPage
             profile={profile}
             fortune={fortune}
             consentPreferences={consentPreferences}
-            onNavigate={setActivePage}
+            onNavigate={handleNavigate}
             onOpenConsentSettings={handleOpenConsentSettings}
-            onEditProfile={() => setActivePage('profileEdit')}
+            onEditProfile={() => handleNavigate('profileEdit')}
             onReset={handleReset}
           />
         )}
       </main>
-      <BottomNav activePage={activePage} onNavigate={setActivePage} />
+      <BottomNav activePage={activePage} onNavigate={handleNavigate} />
       {isReminderSettingsOpen && (
         <DailyReminderSettingsPanel
           draft={dailyReminderDraft}

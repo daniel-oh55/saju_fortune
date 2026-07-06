@@ -2,6 +2,10 @@
 
 ## Fixed
 
+- Fixed menu navigation so destination pages start at the top of the screen
+
+## Fixed
+
 - Fixed today fortune detail back navigation so system back closes the detail view first
 
 ## Added

@@ -1,5 +1,23 @@
 # DEVELOPMENT_LOG
 
+## Scroll To Top Navigation Fix
+
+- Added shared scroll-to-top handling for app page navigation
+- Applied scroll-to-top to bottom navigation, home quick menu navigation, and major CTA navigation paths
+- Kept today fortune detail category switching separate from page navigation
+- Kept PR #283 today fortune detail back navigation behavior unchanged
+- Production fortune logic unchanged
+- Zodiac fortune engine unchanged
+- Generated JSON unchanged
+- docs/generated unchanged
+- schemaVersion unchanged
+- CURRENT_FORTUNE_SCHEMA_VERSION unchanged
+- Existing localStorage keys unchanged
+- Routing structure unchanged
+- privacy files unchanged
+- Android/Gradle unchanged
+- Android re-test remains Pending
+
 ## Today Fortune Detail Back Navigation Fix
 
 - Added browser and Android system back handling for today fortune detail state
