@@ -1,5 +1,23 @@
 # DEVELOPMENT_LOG
 
+## Today Fortune Detail Back Navigation Fix
+
+- Added browser and Android system back handling for today fortune detail state
+- Detail page now closes back to the previous app page instead of letting Android exit the app first
+- Added a small close button using the same close handler
+- Added regression check for today fortune back navigation
+- Production fortune logic unchanged
+- Zodiac fortune engine unchanged
+- Generated JSON unchanged
+- docs/generated unchanged
+- schemaVersion unchanged
+- CURRENT_FORTUNE_SCHEMA_VERSION unchanged
+- Existing localStorage keys unchanged
+- Routing structure unchanged
+- privacy files unchanged
+- Android/Gradle unchanged
+- Android re-test remains Pending
+
 ## Android Debug APK QA Result
 
 - Recorded actual Android Debug APK download/install/launch result

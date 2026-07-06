@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Fixed
+
+- Fixed today fortune detail back navigation so system back closes the detail view first
+
 ## Added
 
 - Added Android Debug APK QA result documentation after successful manual install and launch

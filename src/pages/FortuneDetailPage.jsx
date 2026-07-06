@@ -17,6 +17,7 @@ function FortuneDetailPage({
   onRemoveSavedReading,
   consentPreferences,
   onOpenConsentSettings,
+  onClose,
 }) {
   const category = fortune.categories.find((item) => item.id === selectedCategory) || fortune.categories[0];
   const isUnlocked = Boolean(unlockedDetails[category.id]?.unlocked);
@@ -33,6 +34,9 @@ function FortuneDetailPage({
           <h1>오늘운세</h1>
           <p>오늘의 키워드는 {fortune.keyword}입니다.</p>
         </div>
+        <button className="ghost-button" type="button" onClick={onClose}>
+          오늘운세로 돌아가기
+        </button>
       </section>
 
       <div className="category-tabs">
