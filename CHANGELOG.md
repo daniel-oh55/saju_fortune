@@ -2,6 +2,10 @@
 
 ## Added
 
+- Added Android Debug APK QA result documentation after successful manual install and launch
+
+## Added
+
 - Added an Android Debug APK manual QA checklist
 
 ## Added
