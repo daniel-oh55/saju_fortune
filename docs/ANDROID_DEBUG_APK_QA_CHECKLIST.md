@@ -5,10 +5,8 @@
 - Review target: Android Debug APK manual QA preparation
 - Build type: debug APK artifact from GitHub Actions
 - This document is a QA checklist only
-- This document does not confirm actual APK download
-- This document does not confirm actual APK install
-- This document does not confirm actual app launch
-- This document does not confirm Android device QA
+- This document references completed APK download, install, and launch confirmation from the QA result
+- This document records Android device QA as completed with follow-up issues
 - This document does not confirm Google Play Console input
 - This document does not confirm release build
 - This document does not confirm signing setup
@@ -21,15 +19,15 @@
 |---|---|---|
 | Android Debug Build workflow | Ready for QA | GitHub Actions creates debug APK artifact |
 | Debug APK artifact | Ready for QA | download required before manual test |
-| APK download | Pending | not completed in this PR |
-| APK install | Pending | not completed in this PR |
-| App launch test | Pending | not completed in this PR |
-| Android device QA | Pending | not completed in this PR |
-| Home screen QA | Pending | not completed in this PR |
+| APK download | Completed | artifact was downloaded manually |
+| APK install | Completed | debug APK was installed on Android device |
+| App launch test | Completed | app launched successfully |
+| Android device QA | Completed with follow-up issues | no blocking launch issue observed, but improvements remain |
+| Home screen QA | Completed with follow-up issues | improvement items recorded in QA result |
 | Today flow QA | Pending | not completed in this PR |
-| Zodiac fortune QA | Pending | not completed in this PR |
-| My info QA | Pending | not completed in this PR |
-| Quick menu customization QA | Pending | not completed in this PR |
+| Zodiac fortune QA | Completed with follow-up issues | layout improvement remains |
+| My info QA | Completed with follow-up issues | birth region data improvement remains |
+| Quick menu customization QA | Completed with follow-up issues | scroll position improvement remains |
 | Google Play Console input | Pending | not completed in this PR |
 | release build | Pending | not completed in this PR |
 | signing setup | Pending | not completed in this PR |

@@ -1,5 +1,29 @@
 # TODO
 
+## Android Debug APK QA Result TODO
+
+- [x] Download latest debug APK artifact
+- [x] Extract APK from artifact zip
+- [x] Install APK on Android test device
+- [x] Launch app on Android test device
+- [x] Record Android Debug APK QA result
+- [x] Record test device model
+- [x] Record OS information
+- [x] Collect detailed UI/UX improvement items
+- [ ] Fix today fortune detail back navigation behavior
+- [ ] Scroll to top on menu navigation
+- [ ] Update birth region district data
+- [ ] Deduplicate five elements guidance cards
+- [ ] Move zodiac explanation cards below zodiac cards
+- [ ] Add morning/lunch/evening fortune display on home
+- [ ] Add saved reading share flow
+- [ ] Add lightweight startup loading screen
+- [ ] Prepare app icon assets
+- [ ] Confirm Google Play Console inputs
+- [ ] Prepare release build
+- [ ] Configure signing
+- [ ] Generate AAB
+
 ## Android Debug APK QA TODO
 
 - [x] Add Android Debug APK QA checklist

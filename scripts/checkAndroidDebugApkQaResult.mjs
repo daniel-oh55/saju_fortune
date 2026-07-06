@@ -1,54 +1,38 @@
 import fs from 'node:fs';
 import { execSync } from 'node:child_process';
 
-const docPath = 'docs/ANDROID_DEBUG_APK_QA_CHECKLIST.md';
+const resultDocPath = 'docs/ANDROID_DEBUG_APK_QA_RESULT.md';
+const checklistDocPath = 'docs/ANDROID_DEBUG_APK_QA_CHECKLIST.md';
 const packagePath = 'package.json';
 const protectedFiles = ['src', 'docs/generated', 'android', 'public/privacy-policy.html'];
 
-const requiredDocSnippets = [
-  '# Android Debug APK QA Checklist',
-  'Review target: Android Debug APK manual QA preparation',
-  'Build type: debug APK artifact from GitHub Actions',
-  'This document is a QA checklist only',
-  'This document references completed APK download, install, and launch confirmation from the QA result',
-  'This document records Android device QA as completed with follow-up issues',
-  'This document does not confirm Google Play Console input',
-  'This document does not confirm release build',
-  'This document does not confirm signing setup',
-  'This document does not confirm AAB generation',
-  'This document does not change production logic',
-  'Android Debug Build workflow | Ready for QA',
-  'Debug APK artifact | Ready for QA',
+const requiredResultDocSnippets = [
+  '# Android Debug APK QA Result',
+  'Artifact name: `harupuli-debug-apk`',
+  'Workflow run number: `#210`',
+  'Samsung Galaxy S23 Ultra',
+  'One UI 8.0',
+  'Test date | 2026-07-06',
   'APK download | Completed',
   'APK install | Completed',
   'App launch test | Completed',
-  'Android device QA | Completed with follow-up issues',
-  'Home screen QA | Completed with follow-up issues',
-  'Today flow QA | Pending',
-  'Zodiac fortune QA | Completed with follow-up issues',
-  'My info QA | Completed with follow-up issues',
-  'Quick menu customization QA | Completed with follow-up issues',
+  'Basic Android smoke QA | Completed with follow-up issues',
   'Google Play Console input | Pending',
   'release build | Pending',
   'signing setup | Pending',
   'AAB generation | Pending',
-  'Download latest `harupuli-debug-apk` artifact from GitHub Actions',
-  'Extract APK from artifact zip',
-  'Install APK on Android test device',
-  'Launch app successfully',
-  'Confirm app does not crash on first launch',
-  'Confirm home screen renders correctly',
-  'Confirm bottom navigation works',
-  'Confirm quick menu customization works',
-  'Confirm quick menu localStorage restore works after app restart',
-  'Confirm share/save related UI does not crash',
-  'Confirm no unexpected permission prompt appears',
-  'Confirm no login/payment/ad SDK flow appears',
-  'Confirm existing profile/fortune localStorage data is preserved',
-  'Confirm `harupuli_home_quick_menu_prefs` is independent from profile/fortune storage',
-  'Confirm invalid quick menu saved value falls back safely',
-  'Confirm app works after clearing app data',
-  'Confirm no schemaVersion migration is triggered by quick menu settings',
+  'This result does not replace full release QA',
+  'This result does not confirm Play Console readiness',
+  'This result does not confirm release build readiness',
+  'Update birth region district data',
+  'Fix detail back navigation behavior',
+  'Scroll to top on menu navigation',
+  'Add morning/lunch/evening fortune section',
+  'Add lightweight startup loading screen',
+  'Prepare app icon assets in separate PR',
+  'Deduplicate five elements guidance cards',
+  'Add saved reading share flow',
+  'Move zodiac explanation cards below zodiac cards',
   'production fortune logic unchanged',
   'zodiac fortune engine unchanged',
   'src production UI unchanged',
@@ -57,19 +41,35 @@ const requiredDocSnippets = [
   'schemaVersion unchanged',
   'CURRENT_FORTUNE_SCHEMA_VERSION unchanged',
   'existing localStorage keys unchanged',
+  'no new localStorage key added',
   'routing unchanged',
   'privacy files unchanged',
   'Android/Gradle unchanged',
-  'release build not added',
-  'signing setup not added',
-  'AAB not generated',
 ];
 
-const forbiddenDocSnippets = [
+const requiredChecklistDocSnippets = [
+  'APK download | Completed',
+  'APK install | Completed',
+  'App launch test | Completed',
+  'Android device QA | Completed with follow-up issues',
+  'Home screen QA | Completed with follow-up issues',
+  'Zodiac fortune QA | Completed with follow-up issues',
+  'My info QA | Completed with follow-up issues',
+  'Quick menu customization QA | Completed with follow-up issues',
+  'Google Play Console input | Pending',
+  'release build | Pending',
+  'signing setup | Pending',
+  'AAB generation | Pending',
+];
+
+const forbiddenResultDocSnippets = [
   'Google Play Console input | Completed',
   'release build | Completed',
   'signing setup | Completed',
   'AAB generation | Completed',
+  'Full release QA | Completed',
+  'Play Console readiness | Completed',
+  'release build readiness | Completed',
 ];
 
 function logResult(label, passed, detail = '') {
@@ -90,7 +90,7 @@ function pathIsProtected(path) {
 
 let hasFailure = false;
 
-for (const path of [docPath, packagePath]) {
+for (const path of [resultDocPath, checklistDocPath, packagePath]) {
   const exists = fs.existsSync(path);
   logResult(`${labelFromSnippet(path)}_exists`, exists);
   if (!exists) hasFailure = true;
@@ -98,23 +98,30 @@ for (const path of [docPath, packagePath]) {
 
 if (hasFailure) process.exit(1);
 
-const doc = fs.readFileSync(docPath, 'utf8');
+const resultDoc = fs.readFileSync(resultDocPath, 'utf8');
+const checklistDoc = fs.readFileSync(checklistDocPath, 'utf8');
 const packageSource = fs.readFileSync(packagePath, 'utf8');
 
-for (const snippet of requiredDocSnippets) {
-  const found = doc.includes(snippet);
-  logResult(`qa_doc_includes_${labelFromSnippet(snippet)}`, found);
+for (const snippet of requiredResultDocSnippets) {
+  const found = resultDoc.includes(snippet);
+  logResult(`qa_result_doc_includes_${labelFromSnippet(snippet)}`, found);
   if (!found) hasFailure = true;
 }
 
-for (const snippet of forbiddenDocSnippets) {
-  const absent = !doc.includes(snippet);
-  logResult(`qa_doc_forbidden_absent_${labelFromSnippet(snippet)}`, absent);
+for (const snippet of requiredChecklistDocSnippets) {
+  const found = checklistDoc.includes(snippet);
+  logResult(`qa_checklist_doc_includes_${labelFromSnippet(snippet)}`, found);
+  if (!found) hasFailure = true;
+}
+
+for (const snippet of forbiddenResultDocSnippets) {
+  const absent = !resultDoc.includes(snippet);
+  logResult(`qa_result_doc_forbidden_absent_${labelFromSnippet(snippet)}`, absent);
   if (!absent) hasFailure = true;
 }
 
 const packageScriptRegistered = packageSource.includes(
-  '"check:android-debug-apk-qa-checklist": "node scripts/checkAndroidDebugApkQaChecklist.mjs"',
+  '"check:android-debug-apk-qa-result": "node scripts/checkAndroidDebugApkQaResult.mjs"',
 );
 logResult('package_script_registered', packageScriptRegistered);
 if (!packageScriptRegistered) hasFailure = true;
@@ -146,8 +153,8 @@ logResult('artifact_zip_and_keystore_files_not_added_to_repository', artifactFil
 if (!artifactFilesAbsent) hasFailure = true;
 
 if (hasFailure) {
-  console.error('Android Debug APK QA checklist check failed');
+  console.error('Android Debug APK QA result check failed');
   process.exit(1);
 }
 
-console.log('Android Debug APK QA checklist check passed');
+console.log('Android Debug APK QA result check passed');
