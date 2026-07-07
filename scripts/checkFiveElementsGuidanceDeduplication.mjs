@@ -32,7 +32,9 @@ const allowedChangedFiles = new Set([
   'TODO.md',
   'package.json',
   'scripts/checkFiveElementsGuidanceDeduplication.mjs',
+  'scripts/checkZodiacExplanationCardOrder.mjs',
   dailyRoutinePath,
+  'src/pages/ZodiacFortunePage.jsx',
   'src/styles.css',
 ]);
 

@@ -2,6 +2,10 @@
 
 ## Changed
 
+- Moved zodiac explanation cards below the zodiac card grid
+
+## Changed
+
 - Deduplicated five elements guidance cards
 
 ## Fixed

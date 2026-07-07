@@ -95,6 +95,20 @@ function ZodiacFortunePage({ profile, fortune, onNavigate, onOpenReminderSetting
         </div>
       </section>
 
+      <section className="zodiac-animal-grid" aria-label="띠 선택">
+        {zodiacAnimals.map((item) => (
+          <button
+            className={selectedAnimal === item.animal ? 'is-active' : ''}
+            key={item.animal}
+            type="button"
+            onClick={() => handleSelectAnimal(item.animal)}
+          >
+            <span>{item.icon}</span>
+            <strong>{item.animal}</strong>
+          </button>
+        ))}
+      </section>
+
       <section className="zodiac-notice-card">
         띠는 입력한 생년월일을 바탕으로 계산된 사주 연주의 지지를 우선해 표시합니다. 사주
         연주는 절기 기준에 따라 일반 출생연도 띠와 다를 수 있습니다.
@@ -119,20 +133,6 @@ function ZodiacFortunePage({ profile, fortune, onNavigate, onOpenReminderSetting
           연도를 직접 선택해보세요.
         </section>
       )}
-
-      <section className="zodiac-animal-grid" aria-label="띠 선택">
-        {zodiacAnimals.map((item) => (
-          <button
-            className={selectedAnimal === item.animal ? 'is-active' : ''}
-            key={item.animal}
-            type="button"
-            onClick={() => handleSelectAnimal(item.animal)}
-          >
-            <span>{item.icon}</span>
-            <strong>{item.animal}</strong>
-          </button>
-        ))}
-      </section>
 
       <section className="zodiac-year-list">
         <div className="section-title-row">
