@@ -1,5 +1,24 @@
 # DEVELOPMENT_LOG
 
+## Birth Region Expansion Policy
+
+- Defined policy for expanding birth region options beyond Seoul
+- Documented Korean nationwide region selection strategy
+- Documented overseas birth region selection strategy
+- Kept 태양시 보정 적용 여부 as Pending
+- Kept 음력/윤달 샘플 외부 검증 as Pending
+- Production fortune logic unchanged
+- src unchanged
+- src/utils/profileRegionMetaStorage.js unchanged
+- generated JSON unchanged
+- docs/generated unchanged
+- schemaVersion unchanged
+- CURRENT_FORTUNE_SCHEMA_VERSION unchanged
+- Existing localStorage keys unchanged
+- No new localStorage key added
+- Android/Gradle unchanged
+- package-lock.json unchanged
+
 ## Native Android Back Button QA Result
 
 - Android Debug Build #218 was tested on Samsung Galaxy S23 Ultra / One UI 8.0

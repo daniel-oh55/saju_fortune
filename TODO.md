@@ -1,5 +1,15 @@
 # TODO
 
+## Birth region expansion TODO
+
+- [x] Define nationwide birth region expansion policy
+- [x] Define overseas birth region selection policy
+- [ ] Add Korean nationwide city/district data
+- [ ] Add overseas birth region input UI
+- [ ] Re-test birth region selection on Android device
+- [ ] Review 태양시 보정 적용 여부
+- [ ] Complete 음력/윤달 샘플 외부 검증
+
 ## Native Android back button TODO
 
 - [x] Add official Capacitor App plugin dependency
