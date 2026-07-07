@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Changed
+
+- Recorded Android Debug Build #221 Korean birth region QA result
+
 ## Fixed
 
 - Completed Korean birth region data coverage for nationwide selection

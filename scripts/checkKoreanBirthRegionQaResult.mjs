@@ -1,52 +1,65 @@
 import fs from 'node:fs';
 import { execSync } from 'node:child_process';
 
-const docPath = 'docs/BIRTH_REGION_EXPANSION_POLICY.md';
+const docPath = 'docs/KOREAN_BIRTH_REGION_QA_RESULT.md';
 const packagePath = 'package.json';
 
 const requiredDocSnippets = [
-  '# Birth Region Expansion Policy',
-  'Current implementation is localStorage-based',
-  'No server DB',
-  'No login',
-  'No external geocoding API',
-  'No analytics SDK',
-  'Seoul district list was expanded to 25 districts in PR #285',
-  'Other Korean regions still need expansion',
-  'Overseas birth region selection policy is not implemented yet',
-  'Actual production data update remains Pending',
-  'Android QA for final region selection remains Pending',
-  '대한민국',
-  '서울특별시',
-  '부산광역시',
-  '대구광역시',
-  '인천광역시',
-  '광주광역시',
-  '대전광역시',
-  '울산광역시',
-  '세종특별자치시',
-  '경기도',
-  '강원특별자치도',
-  '충청북도',
-  '충청남도',
-  '전북특별자치도',
-  '전라남도',
-  '경상북도',
-  '경상남도',
-  '제주특별자치도',
-  '시/군',
-  '시/군/구',
+  '# Korean Birth Region QA Result',
+  'Android Debug Build #221',
+  '`harupuli-debug-apk`',
+  'Branch: `fix/complete-korean-birth-region-data`',
+  'Related PR: #292',
+  'Samsung Galaxy S23 Ultra',
+  'One UI 8.0',
+  'Android Debug APK',
+  'user-confirmed real device test',
+  '17 province/metropolitan-city options',
+  'Seoul 25 districts',
+  'Busan districts/count',
+  '16개',
+  'Daegu Gunwi-gun',
+  '군위군',
+  '9개',
+  'Incheon key districts/count',
+  '미추홀구',
+  '강화군',
+  '옹진군',
+  '10개',
+  'Sejong option',
+  'Gyeonggi cities/count',
+  '31개',
+  'Gangwon cities/count',
+  '18개',
+  'Jeonbuk cities/count',
+  '14개',
+  'Jeju city options',
   '제주시',
   '서귀포시',
-  '해외',
-  'direct input',
-  '직접',
+  'Save selected region',
+  'Save selected region | Completed',
+  'Persist selected region after app restart',
+  'Persist selected region after app restart | Completed',
+  'In-app top-left back button',
+  'In-app top-left back button | Completed',
+  'Home screen Android back exit',
+  'Home screen Android back exit | Completed',
+  'Additional issues',
+  'Additional issues | Completed | 없음',
+  'Overseas birth region input UI',
+  'Overseas birth region input UI | Pending',
   '태양시 보정 적용 여부',
+  '태양시 보정 적용 여부 | Pending',
   '음력/윤달 샘플 외부 검증',
-  'Pending',
-  'src unchanged',
-  'src/utils/profileRegionMetaStorage.js` unchanged',
+  '음력/윤달 샘플 외부 검증 | Pending',
+  'Full regression smoke QA | Pending',
+  'Google Play Console input | Pending',
+  'Release build | Pending',
+  'signing setup | Pending',
+  'AAB generation | Pending',
   'production fortune logic unchanged',
+  'src unchanged',
+  'src/utils/profileRegionMetaStorage.js unchanged',
   'generated JSON unchanged',
   'docs/generated unchanged',
   'schemaVersion unchanged',
@@ -55,54 +68,71 @@ const requiredDocSnippets = [
   'no new localStorage key added',
   'profile storage object shape unchanged',
   'Android native source unchanged',
+  'AndroidManifest.xml unchanged',
   'Gradle unchanged',
   'package-lock.json unchanged',
+  'Capacitor dependencies unchanged',
 ];
 
 const requiredTodoSnippets = [
-  '## Birth region expansion TODO',
-  '- [x] Define nationwide birth region expansion policy',
-  '- [x] Define overseas birth region selection policy',
-  '- [x] Add Korean nationwide city/district data',
+  '## Korean birth region data TODO',
+  '- [x] Re-test Korean birth region selection on Android device',
+  '- [x] Confirm selected region save on Android device',
+  '- [x] Confirm selected region persistence after app restart',
   '- [ ] Add overseas birth region input UI',
-  '- [ ] Re-test birth region selection on Android device',
   '- [ ] Review 태양시 보정 적용 여부',
   '- [ ] Complete 음력/윤달 샘플 외부 검증',
+  '- [x] Re-test in-app top-left back button after PR #289',
+  '- [x] Re-test home screen exit behavior after PR #289',
+  '- [ ] Full Android smoke QA after PR #289 remains Pending unless separately confirmed',
 ];
 
 const requiredLogSnippets = [
-  '## Birth Region Expansion Policy',
-  'Defined policy for expanding birth region options beyond Seoul',
-  'Documented Korean nationwide region selection strategy',
-  'Documented overseas birth region selection strategy',
-  'Kept 태양시 보정 적용 여부 as Pending',
-  'Kept 음력/윤달 샘플 외부 검증 as Pending',
+  '## Korean Birth Region Data QA Result',
+  'Android Debug Build #221 was tested on Samsung Galaxy S23 Ultra / One UI 8.0',
+  'Korean 17 province/metropolitan-city selection was confirmed on device',
+  'Seoul 25 district coverage was confirmed on device',
+  'Busan, Daegu, Incheon, Sejong, Gyeonggi, Gangwon, Jeonbuk, and Jeju representative checks were confirmed on device',
+  'Region save behavior was confirmed on device',
+  'Region persistence after app restart was confirmed on device',
+  'In-app top-left back button was confirmed on device',
+  'Home screen Android back exit behavior was confirmed on device',
+  'No additional issue was reported in this targeted QA',
+  'Overseas birth region input UI remains Pending',
+  '태양시 보정 적용 여부 remains Pending',
+  '음력/윤달 샘플 외부 검증 remains Pending',
+  'Full Android smoke QA remains Pending unless separately confirmed',
+  'Production fortune logic unchanged',
+  'src unchanged',
+  'profileRegionMetaStorage.js unchanged',
+  'Generated JSON unchanged',
+  'docs/generated unchanged',
+  'schemaVersion unchanged',
+  'CURRENT_FORTUNE_SCHEMA_VERSION unchanged',
+  'Existing localStorage keys unchanged',
+  'Android/Gradle unchanged',
+  'Release build/signing/AAB remain Pending',
 ];
 
-const requiredChangelogSnippets = [
-  'Documented birth region expansion policy for Korean nationwide and overseas selections',
-];
+const requiredChangelogSnippets = ['Recorded Android Debug Build #221 Korean birth region QA result'];
 
-const forbiddenDocSnippets = [
+const forbiddenSnippets = [
+  '태양시 보정 적용 여부 | Completed',
   '태양시 보정 적용 여부 | Confirmed',
+  '태양시 보정 적용 여부: Completed',
   '태양시 보정 적용 여부: Confirmed',
+  '음력/윤달 샘플 외부 검증 | Completed',
   '음력/윤달 샘플 외부 검증 | Confirmed',
+  '음력/윤달 샘플 외부 검증: Completed',
   '음력/윤달 샘플 외부 검증: Confirmed',
   '양력/음력 샘플 추가 검증',
-  '태양시 보정 적용 여무',
+  'Full regression smoke QA | Completed',
+  'Google Play Console input | Completed',
+  'Release build | Completed',
+  'AAB generation | Completed',
   '@capacitor/ios',
   'serviceWorker',
   'workbox',
-];
-
-const protectedFiles = [
-  'src/domain',
-  'src/utils/fortuneEngine.js',
-  'src/domain/fortune/zodiacFortuneEngine.js',
-  'docs/generated',
-  'android',
-  'public/privacy-policy.html',
-  'package-lock.json',
 ];
 
 const allowedChangedFiles = new Set([
@@ -110,19 +140,24 @@ const allowedChangedFiles = new Set([
   'DEVELOPMENT_LOG.md',
   'TODO.md',
   docPath,
-  'docs/KOREAN_BIRTH_REGION_QA_RESULT.md',
   packagePath,
   'scripts/checkAppWideBackNavigation.mjs',
   'scripts/checkBirthRegionExpansionPolicy.mjs',
-  'scripts/checkBirthRegionDistrictOptions.mjs',
+  'scripts/checkFiveElementsGuidanceDeduplication.mjs',
   'scripts/checkKoreanBirthRegionData.mjs',
   'scripts/checkKoreanBirthRegionQaResult.mjs',
-  'scripts/checkFiveElementsGuidanceDeduplication.mjs',
   'scripts/checkNativeAndroidBackButton.mjs',
   'scripts/checkNativeAndroidBackQaResult.mjs',
   'scripts/checkZodiacExplanationCardOrder.mjs',
-  'src/utils/profileRegionMetaStorage.js',
 ]);
+
+const protectedFiles = [
+  'src',
+  'docs/generated',
+  'android',
+  'public/privacy-policy.html',
+  'package-lock.json',
+];
 
 function logResult(label, passed, detail = '') {
   console.log(`${label}: ${passed ? 'pass' : 'fail'}${detail ? ` - ${detail}` : ''}`);
@@ -179,14 +214,14 @@ for (const snippet of requiredChangelogSnippets) {
   if (!found) hasFailure = true;
 }
 
-for (const snippet of forbiddenDocSnippets) {
+for (const snippet of forbiddenSnippets) {
   const absent = !doc.includes(snippet);
-  logResult(`doc_forbidden_absent_${labelFromSnippet(snippet)}`, absent);
+  logResult(`forbidden_absent_${labelFromSnippet(snippet)}`, absent);
   if (!absent) hasFailure = true;
 }
 
 const packageScriptRegistered = packageSource.includes(
-  '"check:birth-region-expansion-policy": "node scripts/checkBirthRegionExpansionPolicy.mjs"',
+  '"check:korean-birth-region-qa-result": "node scripts/checkKoreanBirthRegionQaResult.mjs"',
 );
 logResult('package_script_registered', packageScriptRegistered);
 if (!packageScriptRegistered) hasFailure = true;
@@ -203,20 +238,12 @@ for (const file of new Set(changedFiles)) {
   if (!allowed) hasFailure = true;
 }
 
-const diffOutput = execSync(`git diff --name-only -- ${protectedFiles.join(' ')}`, {
+const protectedDiff = execSync(`git diff --name-only -- ${protectedFiles.join(' ')}`, {
   encoding: 'utf8',
 }).trim();
-const protectedFilesUnchanged = diffOutput.length === 0;
-logResult('engine_generated_android_privacy_package_lock_unchanged_in_working_diff', protectedFilesUnchanged);
+const protectedFilesUnchanged = protectedDiff.length === 0;
+logResult('src_generated_android_privacy_package_lock_unchanged_in_working_diff', protectedFilesUnchanged);
 if (!protectedFilesUnchanged) hasFailure = true;
-
-const profileRegionMetaStorageUnchanged =
-  execSync('git diff --name-only -- src/utils/profileRegionMetaStorage.js', { encoding: 'utf8' }).trim().length === 0;
-logResult(
-  'profile_region_meta_storage_unchanged_or_allowed_for_korean_region_data',
-  true,
-  profileRegionMetaStorageUnchanged ? 'unchanged' : 'allowed production data update',
-);
 
 const statusFiles = execSync('git status --short --untracked-files=all', { encoding: 'utf8' })
   .split(/\r?\n/)
@@ -238,8 +265,8 @@ logResult('artifact_zip_and_keystore_files_not_added_to_repository', artifactFil
 if (!artifactFilesAbsent) hasFailure = true;
 
 if (hasFailure) {
-  console.error('Birth region expansion policy check failed');
+  console.error('Korean birth region QA result check failed');
   process.exit(1);
 }
 
-console.log('Birth region expansion policy check passed');
+console.log('Korean birth region QA result check passed');

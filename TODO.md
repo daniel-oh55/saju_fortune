@@ -5,7 +5,9 @@
 - [x] Add Korean 17 province/metropolitan-city region data
 - [x] Preserve Seoul 25 district coverage
 - [x] Add regression check for Korean birth region data
-- [ ] Re-test Korean birth region selection on Android device
+- [x] Re-test Korean birth region selection on Android device
+- [x] Confirm selected region save on Android device
+- [x] Confirm selected region persistence after app restart
 - [ ] Add overseas birth region input UI
 - [ ] Review 태양시 보정 적용 여부
 - [ ] Complete 음력/윤달 샘플 외부 검증
@@ -31,9 +33,9 @@
 - [x] Add native Android back button guardrail
 - [x] Re-test native Android system back button after PR #289
 - [x] Native Android system back confirmed on Android Debug Build #218
-- [ ] Re-test in-app top-left back button after PR #289
-- [ ] Re-test home screen exit behavior after PR #289
-- [ ] Record full Android smoke QA after PR #289 if needed
+- [x] Re-test in-app top-left back button after PR #289
+- [x] Re-test home screen exit behavior after PR #289
+- [ ] Full Android smoke QA after PR #289 remains Pending unless separately confirmed
 
 ## App-wide Android back navigation TODO
 
