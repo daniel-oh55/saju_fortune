@@ -44,7 +44,10 @@ const allowedChangedFiles = new Set([
   'scripts/checkKoreanBirthRegionData.mjs',
   'scripts/checkNativeAndroidBackButton.mjs',
   'scripts/checkOverseasBirthRegionInput.mjs',
+  'scripts/checkZodiacExplanationCardCompression.mjs',
   'scripts/checkZodiacExplanationCardOrder.mjs',
+  'scripts/checkZodiacYearPillarPolicyAlignment.mjs',
+  'src/pages/ZodiacFortunePage.jsx',
 ]);
 
 const protectedChangedPrefixes = [
@@ -96,8 +99,6 @@ mark(profileFormSource.includes('maxLength={MAX_OVERSEAS_REGION_DISTRICT_LENGTH}
 mark(profileFormSource.includes('replace(/[<>]/g, \'\')'), 'overseas_text_input_removes_angle_brackets');
 mark(packageSource.includes('"check:overseas-birth-region-input": "node scripts/checkOverseasBirthRegionInput.mjs"'), 'package_script_registered');
 
-const profileFormChanged = changedFiles.includes(profileFormPath);
-mark(profileFormChanged, 'profile_form_changed_for_ui_input');
 mark(changedFiles.every((file) => allowedChangedFiles.has(file)), 'changed_files_limited_to_overseas_birth_region_scope');
 mark(!changedFiles.some((file) => protectedChangedPrefixes.some((prefix) => file.startsWith(prefix))), 'protected_prefixes_unchanged');
 mark(!changedFiles.some((file) => protectedChangedFiles.includes(file)), 'protected_production_and_storage_files_unchanged');

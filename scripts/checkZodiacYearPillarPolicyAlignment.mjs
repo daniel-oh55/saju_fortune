@@ -12,8 +12,8 @@ const requiredSnippets = [
   ['birth_year_animal_field_exists', 'birthYearAnimal'],
   ['saju_year_pillar_animal_field_exists', 'sajuYearPillarAnimal'],
   ['difference_flag_exists', 'isDifferentFromBirthYearAnimal'],
-  ['saju_priority_notice_exists', '사주 연주의 지지를 우선'],
-  ['birth_year_reference_notice_exists', '일반적인 출생연도 기준 참고 목록'],
+  ['saju_priority_notice_exists', '사주 기준 띠 흐름을 안내합니다'],
+  ['birth_year_reference_notice_exists', '일반적인 출생연도 기준 띠와 다르게 보일 수 있으며'],
   ['difference_notice_birth_year_exists', '일반 출생연도 기준으로는'],
   ['difference_notice_saju_year_exists', '사주 연주 기준으로는'],
 ];

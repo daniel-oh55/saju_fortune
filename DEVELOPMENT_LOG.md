@@ -1,5 +1,22 @@
 # DEVELOPMENT_LOG
 
+## Zodiac Explanation Card Compression
+
+- Compressed zodiac explanation cards from three cards to two cards
+- Preserved the explanation card position below the zodiac grid
+- Preserved app-standard zodiac display guidance
+- Preserved year-specific zodiac explanation guidance
+- Production fortune logic unchanged
+- Zodiac fortune engine unchanged
+- Generated JSON unchanged
+- docs/generated unchanged
+- schemaVersion unchanged
+- CURRENT_FORTUNE_SCHEMA_VERSION unchanged
+- Existing localStorage keys unchanged
+- Birth region UI unchanged
+- Overseas birth region Android QA remains Pending
+- Android/Gradle unchanged
+
 ## Overseas Birth Region Input
 
 - Added overseas birth region option to profile region selection

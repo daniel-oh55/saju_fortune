@@ -37,6 +37,8 @@ const allowedChangedFiles = new Set([
   'scripts/checkOverseasBirthRegionInput.mjs',
   'scripts/checkTodayFortuneBackNavigation.mjs',
   'scripts/checkZodiacExplanationCardOrder.mjs',
+  'scripts/checkZodiacExplanationCardCompression.mjs',
+  'scripts/checkZodiacYearPillarPolicyAlignment.mjs',
   'scripts/checkZodiacYearVariationOutputReview.mjs',
   'src/App.jsx',
   'src/components/ProfileForm.jsx',
@@ -46,10 +48,12 @@ const allowedChangedFiles = new Set([
 ]);
 
 const requiredNoticeSnippets = [
-  '띠는 입력한 생년월일을 바탕으로 계산된 사주 연주의 지지를 우선해 표시합니다.',
-  '아래 연도별 띠 목록은 일반적인 출생연도 기준 참고 목록입니다.',
-  '입력하신 생년월일은 일반 출생연도 기준으로는',
-  '프로필의 출생연도가 지원 범위 밖이면 기본 띠가 먼저 표시됩니다.',
+  '앱 기준 띠 안내',
+  '하루풀이는 입력한 생년월일을 바탕으로 사주 기준 띠 흐름을 안내합니다.',
+  '1~2월 출생자는 절기 기준에 따라',
+  '연도별 목록 안내',
+  '연도별 목록은 참고용',
+  '입력한 생년월일 정보가 함께 반영됩니다.',
 ];
 
 const forbiddenChangedPathSnippets = [
@@ -89,6 +93,7 @@ const yearListIndex = pageSource.indexOf('className="zodiac-year-list"');
 logResult('zodiac_page_exists', fs.existsSync(pagePath), pagePath);
 logResult('animal_grid_exists', animalGridIndex !== -1);
 logResult('notice_cards_exist', firstNoticeIndex !== -1);
+logResult('notice_card_count_is_2', (pageSource.match(/className="zodiac-notice-card"/g) || []).length === 2);
 logResult('year_list_exists', yearListIndex !== -1);
 logResult(
   'animal_grid_renders_before_notice_cards',
@@ -121,6 +126,10 @@ for (const snippet of forbiddenCodeDiffSnippets) {
 logResult(
   'package_script_registered',
   packageSource.includes('"check:zodiac-explanation-card-order": "node scripts/checkZodiacExplanationCardOrder.mjs"'),
+);
+logResult(
+  'compression_package_script_registered',
+  packageSource.includes('"check:zodiac-explanation-card-compression": "node scripts/checkZodiacExplanationCardCompression.mjs"'),
 );
 
 if (hasFailure) {
