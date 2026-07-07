@@ -9,8 +9,11 @@
 - [x] Preserve today fortune detail back priority
 - [x] Preserve scroll-to-top navigation behavior
 - [x] Add native Android back button guardrail
-- [ ] Re-test native Android back button after PR #289
-- [ ] Re-test in-app back button after PR #289
+- [x] Re-test native Android system back button after PR #289
+- [x] Native Android system back confirmed on Android Debug Build #218
+- [ ] Re-test in-app top-left back button after PR #289
+- [ ] Re-test home screen exit behavior after PR #289
+- [ ] Record full Android smoke QA after PR #289 if needed
 
 ## App-wide Android back navigation TODO
 
@@ -18,7 +21,9 @@
 - [x] Preserve today fortune detail back handling
 - [x] Preserve scroll-to-top navigation behavior
 - [x] Add regression check for app-wide back navigation
-- [ ] Re-test native Android back button after PR #289
+- [x] Re-test native Android system back button after PR #289
+- [ ] Re-test in-app top-left back button after PR #289
+- [ ] Re-test home screen exit behavior after PR #289
 
 ## Zodiac explanation card order TODO
 
@@ -65,7 +70,10 @@
 - [x] Record OS information
 - [x] Collect detailed UI/UX improvement items
 - [ ] Re-test today fortune detail back navigation behavior after PR #283
-- [ ] Re-test native Android back button after PR #289
+- [x] Re-test native Android system back button after PR #289
+- [ ] Re-test in-app top-left back button after PR #289
+- [ ] Re-test home screen exit behavior after PR #289
+- [ ] Record full Android smoke QA after PR #289 if needed
 - [ ] Re-test scroll to top on menu navigation after PR #284
 - [ ] Re-test birth region district options after PR #285
 - [ ] Re-test five elements guidance card deduplication after PR #286
