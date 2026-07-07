@@ -63,7 +63,7 @@ const requiredTodoSnippets = [
   '## Birth region expansion TODO',
   '- [x] Define nationwide birth region expansion policy',
   '- [x] Define overseas birth region selection policy',
-  '- [ ] Add Korean nationwide city/district data',
+  '- [x] Add Korean nationwide city/district data',
   '- [ ] Add overseas birth region input UI',
   '- [ ] Re-test birth region selection on Android device',
   '- [ ] Review 태양시 보정 적용 여부',
@@ -96,7 +96,9 @@ const forbiddenDocSnippets = [
 ];
 
 const protectedFiles = [
-  'src',
+  'src/domain',
+  'src/utils/fortuneEngine.js',
+  'src/domain/fortune/zodiacFortuneEngine.js',
   'docs/generated',
   'android',
   'public/privacy-policy.html',
@@ -111,10 +113,13 @@ const allowedChangedFiles = new Set([
   packagePath,
   'scripts/checkAppWideBackNavigation.mjs',
   'scripts/checkBirthRegionExpansionPolicy.mjs',
+  'scripts/checkBirthRegionDistrictOptions.mjs',
+  'scripts/checkKoreanBirthRegionData.mjs',
   'scripts/checkFiveElementsGuidanceDeduplication.mjs',
   'scripts/checkNativeAndroidBackButton.mjs',
   'scripts/checkNativeAndroidBackQaResult.mjs',
   'scripts/checkZodiacExplanationCardOrder.mjs',
+  'src/utils/profileRegionMetaStorage.js',
 ]);
 
 function logResult(label, passed, detail = '') {
@@ -200,13 +205,12 @@ const diffOutput = execSync(`git diff --name-only -- ${protectedFiles.join(' ')}
   encoding: 'utf8',
 }).trim();
 const protectedFilesUnchanged = diffOutput.length === 0;
-logResult('src_generated_android_privacy_package_lock_unchanged_in_working_diff', protectedFilesUnchanged);
+logResult('engine_generated_android_privacy_package_lock_unchanged_in_working_diff', protectedFilesUnchanged);
 if (!protectedFilesUnchanged) hasFailure = true;
 
 const profileRegionMetaStorageUnchanged =
   execSync('git diff --name-only -- src/utils/profileRegionMetaStorage.js', { encoding: 'utf8' }).trim().length === 0;
-logResult('profile_region_meta_storage_unchanged', profileRegionMetaStorageUnchanged);
-if (!profileRegionMetaStorageUnchanged) hasFailure = true;
+logResult('profile_region_meta_storage_update_allowed_for_korean_region_data', !profileRegionMetaStorageUnchanged);
 
 const statusFiles = execSync('git status --short --untracked-files=all', { encoding: 'utf8' })
   .split(/\r?\n/)

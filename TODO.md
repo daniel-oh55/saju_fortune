@@ -1,10 +1,20 @@
 # TODO
 
+## Korean birth region data TODO
+
+- [x] Add Korean 17 province/metropolitan-city region data
+- [x] Preserve Seoul 25 district coverage
+- [x] Add regression check for Korean birth region data
+- [ ] Re-test Korean birth region selection on Android device
+- [ ] Add overseas birth region input UI
+- [ ] Review 태양시 보정 적용 여부
+- [ ] Complete 음력/윤달 샘플 외부 검증
+
 ## Birth region expansion TODO
 
 - [x] Define nationwide birth region expansion policy
 - [x] Define overseas birth region selection policy
-- [ ] Add Korean nationwide city/district data
+- [x] Add Korean nationwide city/district data
 - [ ] Add overseas birth region input UI
 - [ ] Re-test birth region selection on Android device
 - [ ] Review 태양시 보정 적용 여부

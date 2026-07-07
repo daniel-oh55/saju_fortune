@@ -1,5 +1,21 @@
 # DEVELOPMENT_LOG
 
+## Korean Birth Region Data Expansion
+
+- Added Korean nationwide birth region data for 17 province/metropolitan-city level options
+- Preserved Seoul 25 district coverage
+- Kept overseas birth region UI as Pending
+- Kept 태양시 보정 적용 여부 as Pending
+- Kept 음력/윤달 샘플 외부 검증 as Pending
+- Production fortune logic unchanged
+- schemaVersion unchanged
+- CURRENT_FORTUNE_SCHEMA_VERSION unchanged
+- Existing localStorage keys unchanged
+- Generated JSON unchanged
+- docs/generated unchanged
+- Android/Gradle unchanged
+- Android re-test remains Pending
+
 ## Birth Region Expansion Policy
 
 - Defined policy for expanding birth region options beyond Seoul
