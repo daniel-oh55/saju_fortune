@@ -1,5 +1,31 @@
 # DEVELOPMENT_LOG
 
+## Korean Birth Region Data QA Result
+
+- Android Debug Build #221 was tested on Samsung Galaxy S23 Ultra / One UI 8.0
+- Korean 17 province/metropolitan-city selection was confirmed on device
+- Seoul 25 district coverage was confirmed on device
+- Busan, Daegu, Incheon, Sejong, Gyeonggi, Gangwon, Jeonbuk, and Jeju representative checks were confirmed on device
+- Region save behavior was confirmed on device
+- Region persistence after app restart was confirmed on device
+- In-app top-left back button was confirmed on device
+- Home screen Android back exit behavior was confirmed on device
+- No additional issue was reported in this targeted QA
+- Overseas birth region input UI remains Pending
+- 태양시 보정 적용 여부 remains Pending
+- 음력/윤달 샘플 외부 검증 remains Pending
+- Full Android smoke QA remains Pending unless separately confirmed
+- Production fortune logic unchanged
+- src unchanged
+- profileRegionMetaStorage.js unchanged
+- Generated JSON unchanged
+- docs/generated unchanged
+- schemaVersion unchanged
+- CURRENT_FORTUNE_SCHEMA_VERSION unchanged
+- Existing localStorage keys unchanged
+- Android/Gradle unchanged
+- Release build/signing/AAB remain Pending
+
 ## Korean Birth Region Data Expansion
 
 - Added Korean nationwide birth region data for 17 province/metropolitan-city level options

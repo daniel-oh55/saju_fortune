@@ -180,6 +180,7 @@
     "check:birth-region-district-options": "node scripts/checkBirthRegionDistrictOptions.mjs",
     "check:birth-region-expansion-policy": "node scripts/checkBirthRegionExpansionPolicy.mjs",
     "check:korean-birth-region-data": "node scripts/checkKoreanBirthRegionData.mjs",
+    "check:korean-birth-region-qa-result": "node scripts/checkKoreanBirthRegionQaResult.mjs",
     "check:five-elements-guidance-deduplication": "node scripts/checkFiveElementsGuidanceDeduplication.mjs",
     "check:zodiac-explanation-card-order": "node scripts/checkZodiacExplanationCardOrder.mjs",
     "check:splash-png-export": "node scripts/checkSplashPngExportReadiness.mjs",
