@@ -226,7 +226,10 @@ const allowedChangedFiles = new Set([
   'scripts/checkKoreanBirthRegionQaResult.mjs',
   'scripts/checkZodiacExplanationCardOrder.mjs',
   'scripts/checkNativeAndroidBackQaResult.mjs',
+  'scripts/checkOverseasBirthRegionInput.mjs',
   regionSourcePath,
+  'src/components/ProfileForm.jsx',
+  'src/styles.css',
   'scripts/checkBirthRegionDistrictOptions.mjs',
   'scripts/checkBirthRegionExpansionPolicy.mjs',
   'scripts/checkKoreanBirthRegionData.mjs',
@@ -284,7 +287,13 @@ mark(
 mark(regionSource.includes('province:') && regionSource.includes('district:'), 'profile_region_object_shape_preserved');
 mark(!regionSource.includes('schemaVersion'), 'schema_version_not_added_to_region_meta');
 mark(!regionSource.includes('CURRENT_FORTUNE_SCHEMA_VERSION'), 'fortune_schema_version_not_changed_in_region_meta');
-mark(!regionSource.includes('해외') && !regionSource.includes('직접'), 'overseas_or_direct_input_ui_not_added');
+mark(regionModule.OVERSEAS_REGION_PROVINCE === '해외', 'overseas_region_special_option_declared');
+mark(!actualProvinces.includes('해외'), 'overseas_region_not_counted_as_domestic_province');
+mark(
+  Array.isArray(regionModule.PROFILE_REGION_SELECT_OPTIONS) &&
+    regionModule.PROFILE_REGION_SELECT_OPTIONS.includes('해외'),
+  'overseas_region_available_only_in_select_options',
+);
 
 mark(actualProvinces.length === 17, 'korean_province_count_is_17', String(actualProvinces.length));
 mark(!hasDuplicates(actualProvinces), 'province_names_have_no_duplicates');
