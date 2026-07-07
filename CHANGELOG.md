@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Changed
+
+- Recorded Android Debug Build #218 native back button QA result
+
 ## Fixed
 
 - Fixed native Android back button handling for internal app pages
