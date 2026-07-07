@@ -7,7 +7,10 @@
 - [x] Preserve profile region `{ province, district }` shape
 - [x] Preserve existing profile region localStorage key
 - [x] Add regression check for overseas birth region input
-- [ ] Re-test overseas birth region input on Android device
+- [x] Re-test overseas birth region input on Android device
+- [x] Confirm overseas birth region save on Android device
+- [x] Confirm overseas birth region persistence after app restart
+- [x] Confirm overseas-to-domestic region switching on Android device
 - [ ] Review 태양시 보정 적용 여부
 - [ ] Complete 음력/윤달 샘플 외부 검증
 
@@ -63,7 +66,7 @@
 - [x] Move zodiac explanation cards below zodiac cards
 - [x] Compress zodiac explanation cards from three cards to two cards
 - [x] Add regression check for zodiac explanation card order
-- [ ] Re-test zodiac explanation card order on Android device
+- [x] Re-test zodiac explanation card layout on Android device
 
 ## Five elements guidance TODO
 
