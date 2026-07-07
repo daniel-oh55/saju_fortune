@@ -1,5 +1,14 @@
 # TODO
 
+## Solar time correction TODO
+
+- [x] Document 태양시 보정 적용 여부 policy
+- [ ] Complete external review for 태양시 보정 적용 여부
+- [ ] Complete 음력/윤달 샘플 외부 검증
+- [ ] Decide whether solar time correction remains disabled for MVP
+- [ ] Prepare calculation regression baseline before any solar time correction implementation
+- [ ] Re-test Android after any future calculation logic change
+
 ## Overseas birth region input TODO
 
 - [x] Add overseas birth region option
@@ -11,7 +20,8 @@
 - [x] Confirm overseas birth region save on Android device
 - [x] Confirm overseas birth region persistence after app restart
 - [x] Confirm overseas-to-domestic region switching on Android device
-- [ ] Review 태양시 보정 적용 여부
+- [x] Document 태양시 보정 적용 여부 policy
+- [ ] Decide 태양시 보정 적용 여부 after external verification
 - [ ] Complete 음력/윤달 샘플 외부 검증
 
 ## Korean birth region data TODO
@@ -23,7 +33,8 @@
 - [x] Confirm selected region save on Android device
 - [x] Confirm selected region persistence after app restart
 - [x] Add overseas birth region input UI
-- [ ] Review 태양시 보정 적용 여부
+- [x] Document 태양시 보정 적용 여부 policy
+- [ ] Decide 태양시 보정 적용 여부 after external verification
 - [ ] Complete 음력/윤달 샘플 외부 검증
 
 ## Birth region expansion TODO
@@ -33,7 +44,9 @@
 - [x] Add Korean nationwide city/district data
 - [x] Add overseas birth region input UI
 - [ ] Re-test birth region selection on Android device
+- [x] Document 태양시 보정 적용 여부 policy
 - [ ] Review 태양시 보정 적용 여부
+- [ ] Decide 태양시 보정 적용 여부 after external verification
 - [ ] Complete 음력/윤달 샘플 외부 검증
 
 ## Native Android back button TODO

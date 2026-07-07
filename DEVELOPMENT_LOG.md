@@ -1,5 +1,25 @@
 # DEVELOPMENT_LOG
 
+## Solar Time Correction Policy
+
+- Documented 태양시 보정 적용 여부 policy
+- Kept solar time correction as Pending / Not implemented
+- Kept current production calculation behavior unchanged
+- Confirmed birth region values remain profile/input UX data only
+- Kept domestic and overseas region values out of production calculation logic
+- Kept 음력/윤달 샘플 외부 검증 as Pending
+- No timezone conversion added
+- No longitude/latitude handling added
+- No geocoding API added
+- No external API added
+- Production fortune logic unchanged
+- Generated JSON unchanged
+- docs/generated unchanged
+- schemaVersion unchanged
+- CURRENT_FORTUNE_SCHEMA_VERSION unchanged
+- Existing localStorage keys unchanged
+- Android/Gradle unchanged
+
 ## Overseas Region And Zodiac QA Result
 
 - Android Debug Build #224 was tested on Samsung Galaxy S23 Ultra / One UI 8.0

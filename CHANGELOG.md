@@ -2,6 +2,10 @@
 
 ## Changed
 
+- Documented solar time correction policy and kept implementation Pending
+
+## Changed
+
 - Recorded Android Debug Build #224 overseas region and zodiac explanation QA result
 
 ## Changed
