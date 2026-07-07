@@ -47,6 +47,9 @@ import {
 
 const todayKey = getKoreaDateKey();
 const REQUIRED_FORTUNE_CATEGORY_IDS = ['overall', 'money', 'love', 'work', 'study', 'health'];
+const APP_HISTORY_MARKER = 'harupuliAppHistory';
+const APP_HISTORY_PAGE_KEY = 'harupuliAppPage';
+const TODAY_FORTUNE_DETAIL_HISTORY_MARKER = 'harupuliTodayFortuneDetail';
 
 function scrollToPageTop() {
   if (typeof window === 'undefined') return;
@@ -82,6 +85,22 @@ function isValidCachedFortune(cached, profile, dateKey) {
   );
 }
 
+function createAppHistoryState(page, extraState = {}) {
+  const currentState = typeof window !== 'undefined' ? window.history.state || {} : {};
+  const { [TODAY_FORTUNE_DETAIL_HISTORY_MARKER]: _detailState, ...baseState } = currentState;
+
+  return {
+    ...baseState,
+    [APP_HISTORY_MARKER]: true,
+    [APP_HISTORY_PAGE_KEY]: page,
+    ...extraState,
+  };
+}
+
+function isAppHistoryState(state) {
+  return Boolean(state?.[APP_HISTORY_MARKER] && state?.[APP_HISTORY_PAGE_KEY]);
+}
+
 function App() {
   const isManseryeokDebug =
     typeof window !== 'undefined' &&
@@ -107,6 +126,7 @@ function App() {
   const activePageRef = useRef(activePage);
   const detailReturnPageRef = useRef('home');
   const detailHistoryPushedRef = useRef(false);
+  const appHistoryInitializedRef = useRef(false);
 
   const fortune = useMemo(() => {
     if (!profile) return null;
@@ -123,7 +143,7 @@ function App() {
 
   useEffect(() => {
     if (profile && activePage === 'onboarding') {
-      setActivePage('home');
+      navigateToAppPage('home', { replaceHistory: true });
     }
   }, [activePage, profile]);
 
@@ -134,34 +154,46 @@ function App() {
   useEffect(() => {
     if (typeof window === 'undefined') return undefined;
 
-    const handlePopState = () => {
-      if (activePageRef.current !== 'fortune' || !detailHistoryPushedRef.current) return;
+    if (!appHistoryInitializedRef.current) {
+      window.history.replaceState(createAppHistoryState(activePageRef.current), '', window.location.href);
+      appHistoryInitializedRef.current = true;
+    }
 
-      detailHistoryPushedRef.current = false;
-      setActivePage(detailReturnPageRef.current || 'home');
+    const handlePopState = (event) => {
+      const nextState = event.state;
+
+      if (activePageRef.current === 'fortune' && detailHistoryPushedRef.current) {
+        detailHistoryPushedRef.current = false;
+        const returnPage = isAppHistoryState(nextState)
+          ? nextState[APP_HISTORY_PAGE_KEY]
+          : detailReturnPageRef.current || 'home';
+        activePageRef.current = returnPage;
+        setActivePage(returnPage);
+        scrollToPageTop();
+        return;
+      }
+
+      if (isAppHistoryState(nextState)) {
+        const nextPage = nextState[APP_HISTORY_PAGE_KEY];
+        detailHistoryPushedRef.current = Boolean(nextState[TODAY_FORTUNE_DETAIL_HISTORY_MARKER]);
+        activePageRef.current = nextPage;
+        setActivePage(nextPage);
+        scrollToPageTop();
+        return;
+      }
+
+      if (activePageRef.current !== 'home') {
+        detailHistoryPushedRef.current = false;
+        activePageRef.current = 'home';
+        setActivePage('home');
+        window.history.replaceState(createAppHistoryState('home'), '', window.location.href);
+        scrollToPageTop();
+      }
     };
 
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-
-    if (activePage !== 'fortune') {
-      detailHistoryPushedRef.current = false;
-      return;
-    }
-
-    if (detailHistoryPushedRef.current) return;
-
-    window.history.pushState(
-      { ...(window.history.state || {}), harupuliTodayFortuneDetail: true },
-      '',
-      window.location.href,
-    );
-    detailHistoryPushedRef.current = true;
-  }, [activePage]);
 
   useEffect(() => {
     if (fortune?.id) {
@@ -179,23 +211,60 @@ function App() {
     const hadProfile = Boolean(profile);
     saveProfile(nextProfile);
     setProfile(nextProfile);
-    setActivePage(hadProfile ? 'settings' : 'home');
-    scrollToPageTop();
+    navigateToAppPage(hadProfile ? 'settings' : 'home', { replaceHistory: true });
+  };
+
+  const navigateToAppPage = (page, { pushHistory = true, replaceHistory = false, scroll = true } = {}) => {
+    const currentPage = activePageRef.current;
+    const isSamePage = currentPage === page;
+
+    if (isSamePage) {
+      if (scroll) scrollToPageTop();
+      return;
+    }
+
+    if (typeof window !== 'undefined') {
+      const nextState = createAppHistoryState(page);
+      if (replaceHistory) {
+        window.history.replaceState(nextState, '', window.location.href);
+      } else if (pushHistory) {
+        window.history.pushState(nextState, '', window.location.href);
+      }
+    }
+
+    if (page !== 'fortune') {
+      detailHistoryPushedRef.current = false;
+    }
+
+    activePageRef.current = page;
+    setActivePage(page);
+    if (scroll) scrollToPageTop();
   };
 
   const handleNavigate = (page) => {
-    setActivePage(page);
-    scrollToPageTop();
+    navigateToAppPage(page);
   };
 
   const handleOpenDetail = (categoryId) => {
-    if (activePage !== 'fortune') {
-      detailReturnPageRef.current = activePage === 'onboarding' || activePage === 'profileEdit' ? 'home' : activePage;
+    const currentPage = activePageRef.current;
+
+    if (currentPage !== 'fortune') {
+      detailReturnPageRef.current = currentPage === 'onboarding' || currentPage === 'profileEdit' ? 'home' : currentPage;
     }
 
     setSelectedCategory(categoryId);
-    setActivePage('fortune');
-    if (activePage !== 'fortune') {
+
+    if (currentPage !== 'fortune') {
+      if (typeof window !== 'undefined') {
+        window.history.pushState(
+          createAppHistoryState('fortune', { [TODAY_FORTUNE_DETAIL_HISTORY_MARKER]: true }),
+          '',
+          window.location.href,
+        );
+      }
+      detailHistoryPushedRef.current = true;
+      activePageRef.current = 'fortune';
+      setActivePage('fortune');
       scrollToPageTop();
     }
   };
@@ -204,14 +273,14 @@ function App() {
     if (
       typeof window !== 'undefined' &&
       detailHistoryPushedRef.current &&
-      window.history.state?.harupuliTodayFortuneDetail
+      window.history.state?.[TODAY_FORTUNE_DETAIL_HISTORY_MARKER]
     ) {
       window.history.back();
       return;
     }
 
     detailHistoryPushedRef.current = false;
-    setActivePage(detailReturnPageRef.current || 'home');
+    navigateToAppPage(detailReturnPageRef.current || 'home', { replaceHistory: true });
   };
 
   const handleUnlockDetail = (categoryId) => {
@@ -234,8 +303,7 @@ function App() {
     clearAppData();
     setProfile(null);
     setUnlockedDetails({});
-    setActivePage('onboarding');
-    scrollToPageTop();
+    navigateToAppPage('onboarding', { replaceHistory: true });
   };
 
   const handleAcceptAllConsent = () => {

@@ -22,8 +22,11 @@ const allowedChangedFiles = new Set([
   'DEVELOPMENT_LOG.md',
   'TODO.md',
   'package.json',
+  'scripts/checkAppWideBackNavigation.mjs',
   'scripts/checkFiveElementsGuidanceDeduplication.mjs',
+  'scripts/checkTodayFortuneBackNavigation.mjs',
   'scripts/checkZodiacExplanationCardOrder.mjs',
+  'src/App.jsx',
   pagePath,
 ]);
 

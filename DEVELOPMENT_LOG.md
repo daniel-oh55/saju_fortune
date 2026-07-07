@@ -1,5 +1,21 @@
 # DEVELOPMENT_LOG
 
+## App-wide Android Back Navigation Fix
+
+- Added app-wide back navigation handling for activePage transitions
+- Android system back now returns to previous app page before exiting
+- Today fortune detail back handling preserved
+- Scroll-to-top navigation behavior preserved
+- Production fortune logic unchanged
+- Zodiac fortune engine unchanged
+- Generated JSON unchanged
+- docs/generated unchanged
+- schemaVersion unchanged
+- CURRENT_FORTUNE_SCHEMA_VERSION unchanged
+- Existing localStorage keys unchanged
+- Android/Gradle unchanged
+- Android re-test remains Pending
+
 ## Zodiac Explanation Card Order
 
 - Moved zodiac explanation cards below the zodiac card grid
