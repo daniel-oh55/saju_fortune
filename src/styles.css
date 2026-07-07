@@ -228,6 +228,25 @@ p {
   grid-template-columns: 1fr 1fr;
 }
 
+.profile-region-picker.overseas {
+  grid-template-columns: 0.9fr 1.35fr;
+}
+
+.profile-overseas-region-field {
+  display: grid;
+  gap: 6px;
+}
+
+.profile-overseas-region-field span {
+  color: rgba(49, 74, 102, 0.78);
+  font-size: 0.76rem;
+  font-weight: 800;
+}
+
+.profile-field-card .profile-field-error {
+  color: #9f3f32;
+}
+
 .profile-field-card input,
 .profile-field-card select {
   min-height: 46px;

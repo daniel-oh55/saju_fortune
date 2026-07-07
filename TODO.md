@@ -1,5 +1,16 @@
 # TODO
 
+## Overseas birth region input TODO
+
+- [x] Add overseas birth region option
+- [x] Add overseas city/region direct input
+- [x] Preserve profile region `{ province, district }` shape
+- [x] Preserve existing profile region localStorage key
+- [x] Add regression check for overseas birth region input
+- [ ] Re-test overseas birth region input on Android device
+- [ ] Review 태양시 보정 적용 여부
+- [ ] Complete 음력/윤달 샘플 외부 검증
+
 ## Korean birth region data TODO
 
 - [x] Add Korean 17 province/metropolitan-city region data
@@ -8,7 +19,7 @@
 - [x] Re-test Korean birth region selection on Android device
 - [x] Confirm selected region save on Android device
 - [x] Confirm selected region persistence after app restart
-- [ ] Add overseas birth region input UI
+- [x] Add overseas birth region input UI
 - [ ] Review 태양시 보정 적용 여부
 - [ ] Complete 음력/윤달 샘플 외부 검증
 
@@ -17,7 +28,7 @@
 - [x] Define nationwide birth region expansion policy
 - [x] Define overseas birth region selection policy
 - [x] Add Korean nationwide city/district data
-- [ ] Add overseas birth region input UI
+- [x] Add overseas birth region input UI
 - [ ] Re-test birth region selection on Android device
 - [ ] Review 태양시 보정 적용 여부
 - [ ] Complete 음력/윤달 샘플 외부 검증

@@ -1,5 +1,23 @@
 # DEVELOPMENT_LOG
 
+## Overseas Birth Region Input
+
+- Added overseas birth region option to profile region selection
+- Added direct city/region input for overseas birth region
+- Preserved existing profile region shape `{ province, district }`
+- Preserved existing localStorage key `harupuli_profile_region_meta_v1`
+- Kept domestic Korean 17 province/metropolitan-city data unchanged
+- Kept 태양시 보정 적용 여부 as Pending
+- Kept 음력/윤달 샘플 외부 검증 as Pending
+- Did not add geocoding API, timezone conversion, latitude/longitude handling, or overseas city DB
+- Production fortune logic unchanged
+- Generated JSON unchanged
+- docs/generated unchanged
+- schemaVersion unchanged
+- CURRENT_FORTUNE_SCHEMA_VERSION unchanged
+- Android/Gradle unchanged
+- Android re-test remains Pending
+
 ## Korean Birth Region Data QA Result
 
 - Android Debug Build #221 was tested on Samsung Galaxy S23 Ultra / One UI 8.0

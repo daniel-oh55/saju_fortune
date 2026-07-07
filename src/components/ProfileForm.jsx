@@ -2,8 +2,11 @@ import { useState } from 'react';
 import { buildProfileId } from '../utils/fortuneEngine.js';
 import {
   getDistrictsByProvince,
+  isOverseasRegionProvince,
   loadProfileRegionMeta,
-  PROFILE_REGION_PROVINCES,
+  MAX_OVERSEAS_REGION_DISTRICT_LENGTH,
+  normalizeProfileRegionMeta,
+  PROFILE_REGION_SELECT_OPTIONS,
   saveProfileRegionMeta,
 } from '../utils/profileRegionMetaStorage.js';
 
@@ -79,10 +82,12 @@ const MINUTES = Array.from({ length: 60 }, (_, index) => pad2(index));
 function ProfileForm({ initialProfile, onSave }) {
   const [form, setForm] = useState(() => normalizeInitialProfile(initialProfile));
   const [regionMeta, setRegionMeta] = useState(() => loadProfileRegionMeta());
+  const [regionError, setRegionError] = useState('');
   const dateParts = splitDate(form.birthDate);
   const days = Array.from({ length: getDaysInMonth(dateParts.year, dateParts.month) }, (_, index) => pad2(index + 1));
   const timeParts = splitTime(form.birthTime || '08:00');
-  const districts = getDistrictsByProvince(regionMeta.province);
+  const isOverseasRegion = isOverseasRegionProvince(regionMeta.province);
+  const districts = isOverseasRegion ? [] : getDistrictsByProvince(regionMeta.province);
 
   const updateField = (field, value) => {
     setForm((current) => ({ ...current, [field]: value }));
@@ -103,12 +108,37 @@ function ProfileForm({ initialProfile, onSave }) {
   };
 
   const updateRegionProvince = (province) => {
+    setRegionError('');
+
+    if (isOverseasRegionProvince(province)) {
+      setRegionMeta((current) => ({
+        province,
+        district: isOverseasRegionProvince(current.province) ? current.district : '',
+      }));
+      return;
+    }
+
     const nextDistrict = getDistrictsByProvince(province)[0];
     setRegionMeta({ province, district: nextDistrict });
   };
 
+  const updateOverseasRegionDistrict = (value) => {
+    setRegionError('');
+    setRegionMeta((current) => ({
+      ...current,
+      district: value.replace(/[<>]/g, '').slice(0, MAX_OVERSEAS_REGION_DISTRICT_LENGTH),
+    }));
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    const nextRegionMeta = normalizeProfileRegionMeta(regionMeta);
+    if (isOverseasRegionProvince(nextRegionMeta.province) && !nextRegionMeta.district) {
+      setRegionError('해외 도시/지역명을 입력해 주세요.');
+      return;
+    }
+    setRegionError('');
 
     const normalizedForm = {
       ...form,
@@ -127,7 +157,7 @@ function ProfileForm({ initialProfile, onSave }) {
     };
 
     onSave(profile);
-    saveProfileRegionMeta(regionMeta);
+    saveProfileRegionMeta(nextRegionMeta);
   };
 
   return (
@@ -310,21 +340,38 @@ function ProfileForm({ initialProfile, onSave }) {
 
       <div className="profile-field-card">
         <span>출생지역</span>
-        <div className="profile-picker-row profile-region-picker">
+        <div className={`profile-picker-row profile-region-picker${isOverseasRegion ? ' overseas' : ''}`}>
           <select value={regionMeta.province} onChange={(event) => updateRegionProvince(event.target.value)}>
-            {PROFILE_REGION_PROVINCES.map((province) => (
+            {PROFILE_REGION_SELECT_OPTIONS.map((province) => (
               <option key={province} value={province}>{province}</option>
             ))}
           </select>
-          <select
-            value={regionMeta.district}
-            onChange={(event) => setRegionMeta((current) => ({ ...current, district: event.target.value }))}
-          >
-            {districts.map((district) => (
-              <option key={district} value={district}>{district}</option>
-            ))}
-          </select>
+          {isOverseasRegion ? (
+            <label className="profile-overseas-region-field">
+              <span>해외 도시/지역</span>
+              <input
+                aria-label="해외 도시/지역"
+                maxLength={MAX_OVERSEAS_REGION_DISTRICT_LENGTH}
+                placeholder="예: Los Angeles, Tokyo, Vancouver"
+                value={regionMeta.district}
+                onChange={(event) => updateOverseasRegionDistrict(event.target.value)}
+              />
+            </label>
+          ) : (
+            <select
+              value={regionMeta.district}
+              onChange={(event) => setRegionMeta((current) => ({ ...current, district: event.target.value }))}
+            >
+              {districts.map((district) => (
+                <option key={district} value={district}>{district}</option>
+              ))}
+            </select>
+          )}
         </div>
+        {isOverseasRegion && (
+          <small>해외 출생지는 우선 도시/지역명만 저장하며 태양시 보정 적용 여부는 추후 검토 예정입니다.</small>
+        )}
+        {regionError && <small className="profile-field-error">{regionError}</small>}
         <small>출생지역은 입력 UI용으로만 저장되며 현재 계산 로직에는 사용하지 않습니다.</small>
       </div>
 

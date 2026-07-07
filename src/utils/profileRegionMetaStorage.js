@@ -1,4 +1,6 @@
 export const PROFILE_REGION_META_KEY = 'harupuli_profile_region_meta_v1';
+export const OVERSEAS_REGION_PROVINCE = '해외';
+export const MAX_OVERSEAS_REGION_DISTRICT_LENGTH = 80;
 
 const DEFAULT_PROFILE_REGION_META = {
   province: '서울특별시',
@@ -216,12 +218,32 @@ const REGION_DISTRICTS = {
 };
 
 export const PROFILE_REGION_PROVINCES = Object.keys(REGION_DISTRICTS);
+export const PROFILE_REGION_SELECT_OPTIONS = [...PROFILE_REGION_PROVINCES, OVERSEAS_REGION_PROVINCE];
+
+export function isOverseasRegionProvince(province) {
+  return province === OVERSEAS_REGION_PROVINCE;
+}
+
+export function normalizeOverseasRegionDistrict(value) {
+  return String(value || '')
+    .replace(/[<>]/g, '')
+    .trim()
+    .slice(0, MAX_OVERSEAS_REGION_DISTRICT_LENGTH);
+}
 
 export function getDistrictsByProvince(province) {
+  if (isOverseasRegionProvince(province)) return [];
   return REGION_DISTRICTS[province] || REGION_DISTRICTS[DEFAULT_PROFILE_REGION_META.province];
 }
 
-function normalizeProfileRegionMeta(value) {
+export function normalizeProfileRegionMeta(value) {
+  if (isOverseasRegionProvince(value?.province)) {
+    return {
+      province: OVERSEAS_REGION_PROVINCE,
+      district: normalizeOverseasRegionDistrict(value?.district),
+    };
+  }
+
   const province = PROFILE_REGION_PROVINCES.includes(value?.province)
     ? value.province
     : DEFAULT_PROFILE_REGION_META.province;

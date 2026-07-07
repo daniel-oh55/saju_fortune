@@ -37,6 +37,8 @@ const allowedChangedFiles = new Set([
   'scripts/checkTodayFortuneBackNavigation.mjs',
   'scripts/checkZodiacYearVariationOutputReview.mjs',
   'scripts/checkZodiacExplanationCardOrder.mjs',
+  'scripts/checkOverseasBirthRegionInput.mjs',
+  'src/components/ProfileForm.jsx',
   'src/utils/profileRegionMetaStorage.js',
   appPath,
   stylesPath,

@@ -64,7 +64,7 @@ const requiredTodoSnippets = [
   '- [x] Define nationwide birth region expansion policy',
   '- [x] Define overseas birth region selection policy',
   '- [x] Add Korean nationwide city/district data',
-  '- [ ] Add overseas birth region input UI',
+  '- [x] Add overseas birth region input UI',
   '- [ ] Re-test birth region selection on Android device',
   '- [ ] Review 태양시 보정 적용 여부',
   '- [ ] Complete 음력/윤달 샘플 외부 검증',
@@ -120,7 +120,10 @@ const allowedChangedFiles = new Set([
   'scripts/checkFiveElementsGuidanceDeduplication.mjs',
   'scripts/checkNativeAndroidBackButton.mjs',
   'scripts/checkNativeAndroidBackQaResult.mjs',
+  'scripts/checkOverseasBirthRegionInput.mjs',
   'scripts/checkZodiacExplanationCardOrder.mjs',
+  'src/components/ProfileForm.jsx',
+  'src/styles.css',
   'src/utils/profileRegionMetaStorage.js',
 ]);
 

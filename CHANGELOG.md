@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Added
+
+- Added overseas birth region direct input for profile region selection
+
 ## Changed
 
 - Recorded Android Debug Build #221 Korean birth region QA result
