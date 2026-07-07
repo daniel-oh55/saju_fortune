@@ -2,6 +2,10 @@
 
 ## Changed
 
+- Documented birth region expansion policy for Korean nationwide and overseas selections
+
+## Changed
+
 - Recorded Android Debug Build #218 native back button QA result
 
 ## Fixed

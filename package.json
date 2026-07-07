@@ -178,6 +178,7 @@
     "check:native-android-back-qa-result": "node scripts/checkNativeAndroidBackQaResult.mjs",
     "check:scroll-to-top-navigation": "node scripts/checkScrollToTopNavigation.mjs",
     "check:birth-region-district-options": "node scripts/checkBirthRegionDistrictOptions.mjs",
+    "check:birth-region-expansion-policy": "node scripts/checkBirthRegionExpansionPolicy.mjs",
     "check:five-elements-guidance-deduplication": "node scripts/checkFiveElementsGuidanceDeduplication.mjs",
     "check:zodiac-explanation-card-order": "node scripts/checkZodiacExplanationCardOrder.mjs",
     "check:splash-png-export": "node scripts/checkSplashPngExportReadiness.mjs",
