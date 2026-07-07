@@ -1,5 +1,36 @@
 # DEVELOPMENT_LOG
 
+## Overseas Region And Zodiac QA Result
+
+- Android Debug Build #224 was tested on Samsung Galaxy S23 Ultra / One UI 8.0
+- Overseas birth region option was confirmed on device
+- Overseas city/region direct input was confirmed on device
+- Empty overseas input validation was confirmed on device
+- Overseas region save behavior was confirmed on device
+- Overseas region persistence after app restart was confirmed on device
+- Overseas-to-domestic region switching was confirmed on device
+- Zodiac explanation cards were confirmed as compressed to two cards
+- Zodiac explanation cards remained below the zodiac grid and above the year list
+- 1~2월 절기 기준 안내 was confirmed on device
+- Year-list reference guidance was confirmed on device
+- No additional issue was reported in this targeted QA
+- Full Android smoke QA remains Pending unless separately confirmed
+- 태양시 보정 적용 여부 remains Pending
+- 음력/윤달 샘플 외부 검증 remains Pending
+- Production fortune logic unchanged
+- Zodiac fortune engine unchanged
+- src unchanged
+- ProfileForm.jsx unchanged
+- profileRegionMetaStorage.js unchanged
+- ZodiacFortunePage.jsx unchanged
+- Generated JSON unchanged
+- docs/generated unchanged
+- schemaVersion unchanged
+- CURRENT_FORTUNE_SCHEMA_VERSION unchanged
+- Existing localStorage keys unchanged
+- Android/Gradle unchanged
+- Release build/signing/AAB remain Pending
+
 ## Zodiac Explanation Card Compression
 
 - Compressed zodiac explanation cards from three cards to two cards

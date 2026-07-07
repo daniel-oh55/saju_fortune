@@ -2,6 +2,10 @@
 
 ## Changed
 
+- Recorded Android Debug Build #224 overseas region and zodiac explanation QA result
+
+## Changed
+
 - Compressed zodiac explanation cards from three cards to two cards
 
 ## Added
