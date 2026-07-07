@@ -1,12 +1,24 @@
 # TODO
 
+## Native Android back button TODO
+
+- [x] Add official Capacitor App plugin dependency
+- [x] Add native Android back button listener
+- [x] Share back handling between native Android back and in-app back button
+- [x] Add in-app back button for non-home screens
+- [x] Preserve today fortune detail back priority
+- [x] Preserve scroll-to-top navigation behavior
+- [x] Add native Android back button guardrail
+- [ ] Re-test native Android back button after PR #289
+- [ ] Re-test in-app back button after PR #289
+
 ## App-wide Android back navigation TODO
 
 - [x] Add app-wide activePage back navigation handling
 - [x] Preserve today fortune detail back handling
 - [x] Preserve scroll-to-top navigation behavior
 - [x] Add regression check for app-wide back navigation
-- [ ] Re-test app-wide Android back navigation on Android device
+- [ ] Re-test native Android back button after PR #289
 
 ## Zodiac explanation card order TODO
 
@@ -53,7 +65,7 @@
 - [x] Record OS information
 - [x] Collect detailed UI/UX improvement items
 - [ ] Re-test today fortune detail back navigation behavior after PR #283
-- [ ] Re-test app-wide Android back navigation after PR #288
+- [ ] Re-test native Android back button after PR #289
 - [ ] Re-test scroll to top on menu navigation after PR #284
 - [ ] Re-test birth region district options after PR #285
 - [ ] Re-test five elements guidance card deduplication after PR #286

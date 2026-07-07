@@ -23,9 +23,12 @@ const requiredAppSnippets = [
   "window.removeEventListener('popstate', handlePopState)",
   'window.history.pushState',
   'harupuliTodayFortuneDetail',
-  'window.history.back()',
+  'const handleAppBack = ({ allowExit = false } = {}) =>',
+  "currentPage === 'fortune' && detailHistoryPushedRef.current",
+  'navigateToAppPage(returnPage, { replaceHistory: true, replaceStack: true })',
   'createAppHistoryState(\'fortune\', { [TODAY_FORTUNE_DETAIL_HISTORY_MARKER]: true })',
   'handleCloseFortuneDetail',
+  'handleAppBack()',
   'onClose={handleCloseFortuneDetail}',
 ];
 

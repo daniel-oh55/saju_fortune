@@ -2,26 +2,15 @@ import fs from 'node:fs';
 import { execSync } from 'node:child_process';
 
 const appPath = 'src/App.jsx';
+const stylesPath = 'src/styles.css';
 const packagePath = 'package.json';
 const packageLockPath = 'package-lock.json';
+
 const appSource = fs.readFileSync(appPath, 'utf8');
+const stylesSource = fs.readFileSync(stylesPath, 'utf8');
 const packageSource = fs.readFileSync(packagePath, 'utf8');
-const diffOutput = [
-  execSync('git diff -- .', { encoding: 'utf8' }),
-  execSync('git diff --cached -- .', { encoding: 'utf8' }),
-].join('\n');
-const guardedDiffOutput = [
-  execSync(
-    `git diff -- ${appPath} ${packagePath} ${packageLockPath} scripts/checkTodayFortuneBackNavigation.mjs scripts/checkNativeAndroidBackButton.mjs`,
-    { encoding: 'utf8' },
-  ),
-  execSync(
-    `git diff --cached -- ${appPath} ${packagePath} ${packageLockPath} scripts/checkTodayFortuneBackNavigation.mjs scripts/checkNativeAndroidBackButton.mjs`,
-    {
-      encoding: 'utf8',
-    },
-  ),
-].join('\n');
+const packageLockSource = fs.readFileSync(packageLockPath, 'utf8');
+
 const changedFiles = [
   ...execSync('git diff --name-only -- .', { encoding: 'utf8' }).split(/\r?\n/),
   ...execSync('git diff --cached --name-only -- .', { encoding: 'utf8' }).split(/\r?\n/),
@@ -32,61 +21,72 @@ const allowedChangedFiles = new Set([
   'CHANGELOG.md',
   'DEVELOPMENT_LOG.md',
   'TODO.md',
-  'package.json',
-  'package-lock.json',
-  'scripts/checkAppWideBackNavigation.mjs',
+  packagePath,
+  packageLockPath,
   'scripts/checkBrandCopyConsistency.mjs',
+  'scripts/checkAppWideBackNavigation.mjs',
   'scripts/checkFiveElementsGuidanceDeduplication.mjs',
   'scripts/checkNativeAndroidBackButton.mjs',
   'scripts/checkTodayFortuneBackNavigation.mjs',
-  'scripts/checkZodiacExplanationCardOrder.mjs',
   'scripts/checkZodiacYearVariationOutputReview.mjs',
+  'scripts/checkZodiacExplanationCardOrder.mjs',
   appPath,
-  'src/styles.css',
+  stylesPath,
 ]);
 
 const requiredAppSnippets = [
-  "const APP_HISTORY_MARKER = 'harupuliAppHistory'",
-  "const APP_HISTORY_PAGE_KEY = 'harupuliAppPage'",
-  "const TODAY_FORTUNE_DETAIL_HISTORY_MARKER = 'harupuliTodayFortuneDetail'",
-  'function createAppHistoryState(page, extraState = {})',
-  'function isAppHistoryState(state)',
-  'appHistoryInitializedRef',
-  'window.history.replaceState(createAppHistoryState(activePageRef.current)',
-  'window.history.pushState(nextState',
-  'window.history.pushState(\n          createAppHistoryState(\'fortune\', { [TODAY_FORTUNE_DETAIL_HISTORY_MARKER]: true })',
-  'const handlePopState = (event) =>',
-  "activePageRef.current === 'fortune' && detailHistoryPushedRef.current",
-  'isAppHistoryState(nextState)',
-  "activePageRef.current !== 'home'",
-  'window.history.replaceState(createAppHistoryState(\'home\')',
+  "import { App as CapacitorApp } from '@capacitor/app'",
+  "import { Capacitor } from '@capacitor/core'",
   'const appPageStackRef = useRef([activePage])',
   'const handleAppBackRef = useRef(null)',
   'const handleAppBack = ({ allowExit = false } = {}) =>',
+  "currentPage === 'fortune' && detailHistoryPushedRef.current",
+  'Capacitor.isNativePlatform()',
   "CapacitorApp.addListener('backButton'",
+  'handleAppBackRef.current?.({ allowExit: true })',
   'CapacitorApp.exitApp()',
-  'const navigateToAppPage = (',
-  'const handleNavigate = (page) =>',
-  'scrollToPageTop()',
+  "activePage !== 'home' && activePage !== 'onboarding'",
+  'aria-label="이전 화면으로 돌아가기"',
+  'onClick={() => handleAppBack()}',
+  'handleCloseFortuneDetail',
   'onClose={handleCloseFortuneDetail}',
+  'scrollToPageTop()',
+];
+
+const requiredStyleSnippets = [
+  '.app-back-button',
+  'width: 42px',
+  'height: 42px',
+  'border-radius: 999px',
+  ':focus-visible',
 ];
 
 const forbiddenPackageSnippets = [
   '"@capacitor/ios"',
+  '"lucide-react"',
+  '"react-icons"',
   'serviceWorker',
   'workbox',
 ];
 
 const forbiddenChangedPathSnippets = [
-  'src/domain/',
-  'docs/generated/',
   'android/',
+  'docs/generated/',
   'public/privacy-policy.html',
+  'src/domain/',
+  'src/utils/fortuneEngine.js',
   '.aab',
   '.zip',
   '.jks',
   '.keystore',
 ];
+
+const guardedDiffOutput = [
+  execSync(`git diff -- ${appPath} ${stylesPath} ${packagePath} ${packageLockPath}`, { encoding: 'utf8' }),
+  execSync(`git diff --cached -- ${appPath} ${stylesPath} ${packagePath} ${packageLockPath}`, {
+    encoding: 'utf8',
+  }),
+].join('\n');
 
 const forbiddenDiffSnippets = [
   'CURRENT_FORTUNE_SCHEMA_VERSION =',
@@ -94,6 +94,9 @@ const forbiddenDiffSnippets = [
   'localStorage.setItem',
   'localStorage.getItem',
   'localStorage.removeItem',
+  '@capacitor/ios',
+  'serviceWorker',
+  'workbox',
 ];
 
 let hasFailure = false;
@@ -103,13 +106,24 @@ function logResult(label, passed, detail = '') {
   if (!passed) hasFailure = true;
 }
 
-for (const path of [appPath, packagePath]) {
+for (const path of [appPath, stylesPath, packagePath, packageLockPath]) {
   logResult(`${path}_exists`, fs.existsSync(path));
 }
 
 for (const snippet of requiredAppSnippets) {
   logResult(`app_includes_${snippet.slice(0, 80).replaceAll(/\s+/g, '_')}`, appSource.includes(snippet));
 }
+
+for (const snippet of requiredStyleSnippets) {
+  logResult(`styles_include_${snippet}`, stylesSource.includes(snippet));
+}
+
+logResult('package_includes_capacitor_app_dependency', packageSource.includes('"@capacitor/app"'));
+logResult('package_lock_includes_capacitor_app', packageLockSource.includes('node_modules/@capacitor/app'));
+logResult(
+  'package_script_registered',
+  packageSource.includes('"check:native-android-back-button": "node scripts/checkNativeAndroidBackButton.mjs"'),
+);
 
 for (const snippet of forbiddenPackageSnippets) {
   logResult(`package_excludes_${snippet}`, !packageSource.includes(snippet));
@@ -130,14 +144,9 @@ for (const snippet of forbiddenDiffSnippets) {
   logResult(`diff_excludes_${snippet}`, !guardedDiffOutput.includes(snippet));
 }
 
-logResult(
-  'package_script_registered',
-  packageSource.includes('"check:app-wide-back-navigation": "node scripts/checkAppWideBackNavigation.mjs"'),
-);
-
 if (hasFailure) {
-  console.error('App-wide back navigation check failed');
+  console.error('Native Android back button check failed');
   process.exit(1);
 }
 
-console.log('App-wide back navigation check passed');
+console.log('Native Android back button check passed');

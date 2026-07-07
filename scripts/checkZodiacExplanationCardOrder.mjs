@@ -22,11 +22,16 @@ const allowedChangedFiles = new Set([
   'DEVELOPMENT_LOG.md',
   'TODO.md',
   'package.json',
+  'package-lock.json',
   'scripts/checkAppWideBackNavigation.mjs',
+  'scripts/checkBrandCopyConsistency.mjs',
   'scripts/checkFiveElementsGuidanceDeduplication.mjs',
+  'scripts/checkNativeAndroidBackButton.mjs',
   'scripts/checkTodayFortuneBackNavigation.mjs',
   'scripts/checkZodiacExplanationCardOrder.mjs',
+  'scripts/checkZodiacYearVariationOutputReview.mjs',
   'src/App.jsx',
+  'src/styles.css',
   pagePath,
 ]);
 

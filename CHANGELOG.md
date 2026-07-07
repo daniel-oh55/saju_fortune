@@ -2,6 +2,11 @@
 
 ## Fixed
 
+- Fixed native Android back button handling for internal app pages
+- Added in-app back button for non-home screens
+
+## Fixed
+
 - Fixed app-wide Android back navigation for internal app pages
 
 ## Changed
