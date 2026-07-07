@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Changed
+
+- Compressed zodiac explanation cards from three cards to two cards
+
 ## Added
 
 - Added overseas birth region direct input for profile region selection

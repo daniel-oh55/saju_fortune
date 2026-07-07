@@ -61,6 +61,7 @@
 ## Zodiac explanation card order TODO
 
 - [x] Move zodiac explanation cards below zodiac cards
+- [x] Compress zodiac explanation cards from three cards to two cards
 - [x] Add regression check for zodiac explanation card order
 - [ ] Re-test zodiac explanation card order on Android device
 

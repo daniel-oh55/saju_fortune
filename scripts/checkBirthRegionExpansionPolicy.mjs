@@ -121,8 +121,11 @@ const allowedChangedFiles = new Set([
   'scripts/checkNativeAndroidBackButton.mjs',
   'scripts/checkNativeAndroidBackQaResult.mjs',
   'scripts/checkOverseasBirthRegionInput.mjs',
+  'scripts/checkZodiacExplanationCardCompression.mjs',
   'scripts/checkZodiacExplanationCardOrder.mjs',
+  'scripts/checkZodiacYearPillarPolicyAlignment.mjs',
   'src/components/ProfileForm.jsx',
+  'src/pages/ZodiacFortunePage.jsx',
   'src/styles.css',
   'src/utils/profileRegionMetaStorage.js',
 ]);

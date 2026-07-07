@@ -110,29 +110,24 @@ function ZodiacFortunePage({ profile, fortune, onNavigate, onOpenReminderSetting
       </section>
 
       <section className="zodiac-notice-card">
-        띠는 입력한 생년월일을 바탕으로 계산된 사주 연주의 지지를 우선해 표시합니다. 사주
-        연주는 절기 기준에 따라 일반 출생연도 띠와 다를 수 있습니다.
+        <strong>앱 기준 띠 안내</strong>
+        <p>
+          하루풀이는 입력한 생년월일을 바탕으로 사주 기준 띠 흐름을 안내합니다. 일반적인 출생연도 기준 띠와 다르게 보일 수 있으며,
+          특히 1~2월 출생자는 절기 기준에 따라 차이가 날 수 있습니다.
+          {profileZodiac?.isDifferentFromBirthYearAnimal &&
+            ` 입력하신 생년월일은 일반 출생연도 기준으로는 ${profileZodiac.birthYearAnimal}띠에 가깝지만, 현재 앱의 사주 연주 기준으로는 ${profileZodiac.sajuYearPillarAnimal}띠 흐름을 우선 표시합니다.`}
+        </p>
       </section>
 
       <section className="zodiac-notice-card">
-        아래 연도별 띠 목록은 일반적인 출생연도 기준 참고 목록입니다. 개인 사주 흐름의
-        연주는 생년월일과 절기 기준에 따라 다르게 표시될 수 있습니다.
+        <strong>연도별 목록 안내</strong>
+        <p>
+          같은 띠라도 태어난 연도에 따라 해석의 결이 달라질 수 있습니다. 연도별 목록은 참고용이며, 실제 개인 풀이에는
+          입력한 생년월일 정보가 함께 반영됩니다.
+          {!initialState.hasSupportedBirthYear &&
+            ' 프로필의 출생연도가 지원 범위 밖이면 기본 띠가 먼저 표시되니, 아래에서 원하는 띠와 연도를 직접 선택해보세요.'}
+        </p>
       </section>
-
-      {profileZodiac?.isDifferentFromBirthYearAnimal && (
-        <section className="zodiac-notice-card">
-          입력하신 생년월일은 일반 출생연도 기준으로는 {profileZodiac.birthYearAnimal}띠에
-          가깝지만, 현재 앱의 사주 연주 기준으로는 {profileZodiac.sajuYearPillarAnimal}띠
-          흐름을 우선 표시합니다.
-        </section>
-      )}
-
-      {!initialState.hasSupportedBirthYear && (
-        <section className="zodiac-notice-card">
-          프로필의 출생연도가 지원 범위 밖이면 기본 띠가 먼저 표시됩니다. 아래에서 원하는 띠와
-          연도를 직접 선택해보세요.
-        </section>
-      )}
 
       <section className="zodiac-year-list">
         <div className="section-title-row">
