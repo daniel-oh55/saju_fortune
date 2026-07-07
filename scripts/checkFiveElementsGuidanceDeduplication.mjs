@@ -38,6 +38,7 @@ const allowedChangedFiles = new Set([
   'scripts/checkBirthRegionExpansionPolicy.mjs',
   'scripts/checkBrandCopyConsistency.mjs',
   'scripts/checkFiveElementsGuidanceDeduplication.mjs',
+  'scripts/checkKoreanBirthRegionData.mjs',
   'scripts/checkNativeAndroidBackButton.mjs',
   'scripts/checkNativeAndroidBackQaResult.mjs',
   'scripts/checkTodayFortuneBackNavigation.mjs',
@@ -47,6 +48,7 @@ const allowedChangedFiles = new Set([
   'src/App.jsx',
   'src/pages/ZodiacFortunePage.jsx',
   'src/styles.css',
+  'src/utils/profileRegionMetaStorage.js',
 ]);
 
 const requiredDailyRoutineSnippets = [

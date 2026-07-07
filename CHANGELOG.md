@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Fixed
+
+- Completed Korean birth region data coverage for nationwide selection
+
 ## Changed
 
 - Documented birth region expansion policy for Korean nationwide and overseas selections

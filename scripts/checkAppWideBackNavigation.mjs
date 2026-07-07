@@ -38,6 +38,7 @@ const allowedChangedFiles = new Set([
   'package-lock.json',
   'scripts/checkAppWideBackNavigation.mjs',
   'scripts/checkBirthRegionExpansionPolicy.mjs',
+  'scripts/checkKoreanBirthRegionData.mjs',
   'scripts/checkBrandCopyConsistency.mjs',
   'scripts/checkFiveElementsGuidanceDeduplication.mjs',
   'scripts/checkNativeAndroidBackButton.mjs',
@@ -46,6 +47,7 @@ const allowedChangedFiles = new Set([
   'scripts/checkZodiacExplanationCardOrder.mjs',
   'scripts/checkZodiacYearVariationOutputReview.mjs',
   appPath,
+  'src/utils/profileRegionMetaStorage.js',
   'src/styles.css',
 ]);
 

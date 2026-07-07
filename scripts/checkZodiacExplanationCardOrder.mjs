@@ -29,6 +29,7 @@ const allowedChangedFiles = new Set([
   'scripts/checkBirthRegionExpansionPolicy.mjs',
   'scripts/checkBrandCopyConsistency.mjs',
   'scripts/checkFiveElementsGuidanceDeduplication.mjs',
+  'scripts/checkKoreanBirthRegionData.mjs',
   'scripts/checkNativeAndroidBackButton.mjs',
   'scripts/checkNativeAndroidBackQaResult.mjs',
   'scripts/checkTodayFortuneBackNavigation.mjs',
@@ -36,6 +37,7 @@ const allowedChangedFiles = new Set([
   'scripts/checkZodiacYearVariationOutputReview.mjs',
   'src/App.jsx',
   'src/styles.css',
+  'src/utils/profileRegionMetaStorage.js',
   pagePath,
 ]);
 
