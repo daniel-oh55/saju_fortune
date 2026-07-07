@@ -31,9 +31,12 @@ const allowedChangedFiles = new Set([
   'DEVELOPMENT_LOG.md',
   'TODO.md',
   'package.json',
+  'scripts/checkAppWideBackNavigation.mjs',
   'scripts/checkFiveElementsGuidanceDeduplication.mjs',
+  'scripts/checkTodayFortuneBackNavigation.mjs',
   'scripts/checkZodiacExplanationCardOrder.mjs',
   dailyRoutinePath,
+  'src/App.jsx',
   'src/pages/ZodiacFortunePage.jsx',
   'src/styles.css',
 ]);

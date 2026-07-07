@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Fixed
+
+- Fixed app-wide Android back navigation for internal app pages
+
 ## Changed
 
 - Moved zodiac explanation cards below the zodiac card grid

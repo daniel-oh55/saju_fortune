@@ -1,5 +1,13 @@
 # TODO
 
+## App-wide Android back navigation TODO
+
+- [x] Add app-wide activePage back navigation handling
+- [x] Preserve today fortune detail back handling
+- [x] Preserve scroll-to-top navigation behavior
+- [x] Add regression check for app-wide back navigation
+- [ ] Re-test app-wide Android back navigation on Android device
+
 ## Zodiac explanation card order TODO
 
 - [x] Move zodiac explanation cards below zodiac cards
@@ -45,6 +53,7 @@
 - [x] Record OS information
 - [x] Collect detailed UI/UX improvement items
 - [ ] Re-test today fortune detail back navigation behavior after PR #283
+- [ ] Re-test app-wide Android back navigation after PR #288
 - [ ] Re-test scroll to top on menu navigation after PR #284
 - [ ] Re-test birth region district options after PR #285
 - [ ] Re-test five elements guidance card deduplication after PR #286
