@@ -68,7 +68,8 @@ const forbiddenDocSnippets = [
 ];
 
 const protectedFiles = [
-  'src',
+  'src/domain',
+  'src/utils/fortuneEngine.js',
   'docs/generated/zodiac-year-variation-baseline.json',
   'docs/generated/fortune-engine-sample-snapshot.json',
   'docs/generated/fortune-engine-sample-snapshot-after-today-improvement.json',

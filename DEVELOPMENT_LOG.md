@@ -1,5 +1,26 @@
 # DEVELOPMENT_LOG
 
+## Native Android Back Button Fix
+
+- Added official Capacitor App plugin dependency for native Android back button handling
+- Added app-level native Android back button listener
+- Shared the same back handler between native Android back and the in-app back button
+- Added a small top-left in-app back button for non-home screens
+- Today fortune detail back priority preserved
+- Scroll-to-top navigation behavior preserved
+- Production fortune logic unchanged
+- Zodiac fortune engine unchanged
+- Generated JSON unchanged
+- docs/generated unchanged
+- schemaVersion unchanged
+- CURRENT_FORTUNE_SCHEMA_VERSION unchanged
+- Existing localStorage keys unchanged
+- Routing structure unchanged
+- privacy files unchanged
+- Android native files unchanged
+- Gradle unchanged
+- Android re-test remains Pending
+
 ## App-wide Android Back Navigation Fix
 
 - Added app-wide back navigation handling for activePage transitions

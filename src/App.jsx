@@ -1,4 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { App as CapacitorApp } from '@capacitor/app';
+import { Capacitor } from '@capacitor/core';
 import BottomNav from './components/BottomNav.jsx';
 import ConsentBanner from './components/ConsentBanner.jsx';
 import ConsentSettingsPanel from './components/ConsentSettingsPanel.jsx';
@@ -127,6 +129,8 @@ function App() {
   const detailReturnPageRef = useRef('home');
   const detailHistoryPushedRef = useRef(false);
   const appHistoryInitializedRef = useRef(false);
+  const appPageStackRef = useRef([activePage]);
+  const handleAppBackRef = useRef(null);
 
   const fortune = useMemo(() => {
     if (!profile) return null;
@@ -141,6 +145,71 @@ function App() {
     return created;
   }, [profile]);
 
+  const syncAppPageStack = (page, { replaceStack = false, resetStack = false } = {}) => {
+    if (resetStack || page === 'home' || page === 'onboarding') {
+      appPageStackRef.current = [page];
+      return;
+    }
+
+    const stack = [...appPageStackRef.current];
+    const currentStackPage = stack[stack.length - 1];
+
+    if (replaceStack) {
+      if (stack.length === 0) {
+        appPageStackRef.current = [page];
+        return;
+      }
+
+      stack[stack.length - 1] = page;
+      appPageStackRef.current = stack;
+      return;
+    }
+
+    if (currentStackPage !== page) {
+      stack.push(page);
+    }
+
+    appPageStackRef.current = stack.length > 0 ? stack : [page];
+  };
+
+  const getPreviousAppPage = (fallbackPage = 'home') => {
+    const stack = [...appPageStackRef.current];
+
+    if (stack.length > 1) {
+      stack.pop();
+      const previousPage = stack[stack.length - 1] || fallbackPage;
+      appPageStackRef.current = stack;
+      return previousPage;
+    }
+
+    appPageStackRef.current = [fallbackPage];
+    return fallbackPage;
+  };
+
+  const handleAppBack = ({ allowExit = false } = {}) => {
+    const currentPage = activePageRef.current;
+
+    if (currentPage === 'fortune' && detailHistoryPushedRef.current) {
+      detailHistoryPushedRef.current = false;
+      const returnPage = getPreviousAppPage(detailReturnPageRef.current || 'home');
+      navigateToAppPage(returnPage, { replaceHistory: true, replaceStack: true });
+      return true;
+    }
+
+    if (currentPage !== 'home') {
+      detailHistoryPushedRef.current = false;
+      const previousPage = getPreviousAppPage('home');
+      navigateToAppPage(previousPage, { replaceHistory: true, replaceStack: true });
+      return true;
+    }
+
+    if (allowExit && Capacitor.isNativePlatform()) {
+      CapacitorApp.exitApp();
+    }
+
+    return false;
+  };
+
   useEffect(() => {
     if (profile && activePage === 'onboarding') {
       navigateToAppPage('home', { replaceHistory: true });
@@ -150,6 +219,33 @@ function App() {
   useEffect(() => {
     activePageRef.current = activePage;
   }, [activePage]);
+
+  useEffect(() => {
+    handleAppBackRef.current = handleAppBack;
+  });
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || !Capacitor.isNativePlatform()) return undefined;
+
+    let backButtonListener = null;
+    let isMounted = true;
+
+    CapacitorApp.addListener('backButton', () => {
+      handleAppBackRef.current?.({ allowExit: true });
+    }).then((listener) => {
+      if (!isMounted) {
+        listener.remove();
+        return;
+      }
+
+      backButtonListener = listener;
+    });
+
+    return () => {
+      isMounted = false;
+      backButtonListener?.remove();
+    };
+  }, []);
 
   useEffect(() => {
     if (typeof window === 'undefined') return undefined;
@@ -167,6 +263,7 @@ function App() {
         const returnPage = isAppHistoryState(nextState)
           ? nextState[APP_HISTORY_PAGE_KEY]
           : detailReturnPageRef.current || 'home';
+        syncAppPageStack(returnPage, { replaceStack: true });
         activePageRef.current = returnPage;
         setActivePage(returnPage);
         scrollToPageTop();
@@ -176,6 +273,7 @@ function App() {
       if (isAppHistoryState(nextState)) {
         const nextPage = nextState[APP_HISTORY_PAGE_KEY];
         detailHistoryPushedRef.current = Boolean(nextState[TODAY_FORTUNE_DETAIL_HISTORY_MARKER]);
+        syncAppPageStack(nextPage, { replaceStack: true });
         activePageRef.current = nextPage;
         setActivePage(nextPage);
         scrollToPageTop();
@@ -184,6 +282,7 @@ function App() {
 
       if (activePageRef.current !== 'home') {
         detailHistoryPushedRef.current = false;
+        syncAppPageStack('home', { resetStack: true });
         activePageRef.current = 'home';
         setActivePage('home');
         window.history.replaceState(createAppHistoryState('home'), '', window.location.href);
@@ -214,11 +313,17 @@ function App() {
     navigateToAppPage(hadProfile ? 'settings' : 'home', { replaceHistory: true });
   };
 
-  const navigateToAppPage = (page, { pushHistory = true, replaceHistory = false, scroll = true } = {}) => {
+  const navigateToAppPage = (
+    page,
+    { pushHistory = true, replaceHistory = false, scroll = true, replaceStack = false, resetStack = false } = {},
+  ) => {
     const currentPage = activePageRef.current;
     const isSamePage = currentPage === page;
 
     if (isSamePage) {
+      if (replaceStack || resetStack) {
+        syncAppPageStack(page, { replaceStack, resetStack });
+      }
       if (scroll) scrollToPageTop();
       return;
     }
@@ -236,6 +341,7 @@ function App() {
       detailHistoryPushedRef.current = false;
     }
 
+    syncAppPageStack(page, { replaceStack, resetStack });
     activePageRef.current = page;
     setActivePage(page);
     if (scroll) scrollToPageTop();
@@ -255,6 +361,7 @@ function App() {
     setSelectedCategory(categoryId);
 
     if (currentPage !== 'fortune') {
+      syncAppPageStack('fortune');
       if (typeof window !== 'undefined') {
         window.history.pushState(
           createAppHistoryState('fortune', { [TODAY_FORTUNE_DETAIL_HISTORY_MARKER]: true }),
@@ -270,17 +377,7 @@ function App() {
   };
 
   const handleCloseFortuneDetail = () => {
-    if (
-      typeof window !== 'undefined' &&
-      detailHistoryPushedRef.current &&
-      window.history.state?.[TODAY_FORTUNE_DETAIL_HISTORY_MARKER]
-    ) {
-      window.history.back();
-      return;
-    }
-
-    detailHistoryPushedRef.current = false;
-    navigateToAppPage(detailReturnPageRef.current || 'home', { replaceHistory: true });
+    handleAppBack();
   };
 
   const handleUnlockDetail = (categoryId) => {
@@ -400,6 +497,7 @@ function App() {
       )}
     </>
   );
+  const shouldShowAppBackButton = activePage !== 'home' && activePage !== 'onboarding';
 
   if (!profile || activePage === 'onboarding' || activePage === 'profileEdit') {
     return (
@@ -412,6 +510,16 @@ function App() {
 
   return (
     <div className="app-shell">
+      {shouldShowAppBackButton && (
+        <button
+          className="app-back-button"
+          type="button"
+          aria-label="이전 화면으로 돌아가기"
+          onClick={() => handleAppBack()}
+        >
+          <span aria-hidden="true">‹</span>
+        </button>
+      )}
       <main className="app-main">
         {activePage === 'home' && (
           <HomePage

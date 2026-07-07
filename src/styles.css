@@ -68,6 +68,35 @@ button {
   padding: 22px 18px 96px;
 }
 
+.app-back-button {
+  position: sticky;
+  top: 10px;
+  z-index: 30;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  margin: 12px 0 -4px 14px;
+  border: 1px solid rgba(184, 150, 78, 0.32);
+  border-radius: 999px;
+  color: var(--color-deep-navy);
+  background: rgba(255, 253, 248, 0.94);
+  box-shadow: 0 12px 26px rgba(34, 52, 71, 0.12);
+}
+
+.app-back-button span {
+  display: block;
+  font-size: 1.7rem;
+  font-weight: 700;
+  line-height: 1;
+  transform: translateY(-1px);
+}
+
+.app-back-button:focus-visible {
+  outline: 3px solid rgba(184, 150, 78, 0.38);
+  outline-offset: 2px;
+}
+
 .page-stack,
 .onboarding-page {
   display: flex;

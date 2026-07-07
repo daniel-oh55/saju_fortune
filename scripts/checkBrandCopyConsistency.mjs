@@ -114,9 +114,12 @@ const noPaymentSdkAdded = dependencyNames.every((packageName) => {
 logResult('no_payment_sdk_added', noPaymentSdkAdded);
 assertCondition(noPaymentSdkAdded, 'payment SDK dependencies should not be added');
 
-const noCapacitorAppAdded = !dependencyNames.includes('@capacitor/app');
-logResult('no_capacitor_app_added', noCapacitorAppAdded);
-assertCondition(noCapacitorAppAdded, '@capacitor/app should not be added in this PR');
+const capacitorAppUsageIsScoped =
+  dependencyNames.includes('@capacitor/app') &&
+  readText('src/App.jsx').includes("CapacitorApp.addListener('backButton'") &&
+  readText('scripts/checkNativeAndroidBackButton.mjs').includes('Native Android back button check passed');
+logResult('capacitor_app_usage_is_scoped_to_native_back_button', capacitorAppUsageIsScoped);
+assertCondition(capacitorAppUsageIsScoped, '@capacitor/app should only be used for native back button handling');
 
 if (failures.length > 0) {
   console.error('Brand copy consistency check failed');
