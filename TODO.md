@@ -9,7 +9,7 @@
 - [ ] Apply app icon to Android resources after asset finalization
 - [ ] Add saved reading share feature
 - [ ] Review KakaoTalk/SMS sharing path
-- [ ] Change 내정보 CTA copy to '저장하고 하루풀이 시작하기'
+- [x] Change 내정보 CTA copy to '저장하고 하루풀이 시작하기'
 
 ## Calculation regression baseline generator TODO
 

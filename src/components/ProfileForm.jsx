@@ -376,7 +376,7 @@ function ProfileForm({ initialProfile, onSave }) {
       </div>
 
       <button className="primary-button full-width" type="submit">
-        하루풀이 시작하기
+        저장하고 하루풀이 시작하기
       </button>
     </form>
   );

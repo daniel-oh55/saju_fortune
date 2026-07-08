@@ -1,5 +1,22 @@
 # DEVELOPMENT_LOG
 
+## Profile CTA Copy Update
+
+- Updated 내정보 CTA copy from '하루풀이 시작하기' to '저장하고 하루풀이 시작하기'
+- Kept change as copy-only UI update
+- No profile save logic changes
+- No routing changes
+- No localStorage key changes
+- No schemaVersion changes
+- No CURRENT_FORTUNE_SCHEMA_VERSION changes
+- No production fortune logic changes
+- No generated JSON changes
+- No docs/generated changes
+- No Android/Gradle changes
+- No icon asset changes
+- No loading screen implementation
+- No sharing feature implementation
+
 ## Pre-release UX Improvement Backlog
 
 - Documented pre-release UX improvement backlog
