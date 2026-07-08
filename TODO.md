@@ -1,8 +1,21 @@
 # TODO
 
+## Calculation regression baseline snapshot design TODO
+
+- [x] Document calculation regression baseline snapshot design
+- [ ] Finalize candidate snapshot path
+- [ ] Generate calculation regression baseline snapshot
+- [ ] Record LUNAR-001 baseline result
+- [ ] Record LEAP-001 baseline result
+- [ ] Record BOUNDARY-001 baseline result
+- [ ] Record BOUNDARY-002 baseline result
+- [ ] Compare external verification result with baseline
+- [ ] Re-test Android after any future calculation logic change
+
 ## Calculation regression baseline TODO
 
 - [x] Document calculation regression baseline checklist
+- [x] Document calculation regression baseline snapshot design
 - [ ] Generate calculation regression baseline snapshot
 - [ ] Record LUNAR-001 baseline result
 - [ ] Record LEAP-001 baseline result
@@ -15,6 +28,7 @@
 
 - [x] Document lunar/leap verification result template
 - [x] Document calculation regression baseline checklist
+- [x] Document calculation regression baseline snapshot design
 - [ ] Finalize external reference source for 음력/윤달 샘플 외부 검증
 - [ ] Record source name/version/access date
 - [ ] Record LUNAR-001 verification result
@@ -28,6 +42,7 @@
 - [x] Document lunar/leap sample case plan
 - [x] Document verification result template
 - [x] Document calculation regression baseline checklist
+- [x] Document calculation regression baseline snapshot design
 - [ ] Finalize external reference source for 음력/윤달 샘플 외부 검증
 - [ ] Select actual LUNAR-001 sample date
 - [ ] Select actual LEAP-001 sample date
@@ -42,6 +57,7 @@
 - [x] Document sample case plan
 - [x] Document verification result template
 - [x] Document calculation regression baseline checklist
+- [x] Document calculation regression baseline snapshot design
 - [ ] Finalize external reference source for 음력/윤달 샘플 외부 검증
 - [ ] Record source name/version/access date
 - [ ] Prepare representative lunar birth sample
@@ -57,6 +73,7 @@
 - [x] Document sample case plan
 - [x] Document verification result template
 - [x] Document calculation regression baseline checklist
+- [x] Document calculation regression baseline snapshot design
 - [ ] Select external reference source for 음력/윤달 샘플 외부 검증
 - [ ] Finalize external reference source for 음력/윤달 샘플 외부 검증
 - [ ] Prepare representative lunar birth sample

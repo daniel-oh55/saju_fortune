@@ -2,6 +2,10 @@
 
 ## Changed
 
+- Documented calculation regression baseline snapshot design and kept snapshot generation Not started
+
+## Changed
+
 - Added calculation regression baseline checklist and kept baseline generation Pending
 
 ## Changed
