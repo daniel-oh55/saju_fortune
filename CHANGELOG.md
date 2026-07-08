@@ -2,6 +2,10 @@
 
 ## Changed
 
+- Updated profile start CTA copy to '저장하고 하루풀이 시작하기'
+
+## Changed
+
 - Documented pre-release UX improvement backlog and kept implementation Pending
 
 ## Changed
