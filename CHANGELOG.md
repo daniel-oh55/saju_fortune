@@ -2,6 +2,10 @@
 
 ## Changed
 
+- Added calculation regression baseline checklist and kept baseline generation Pending
+
+## Changed
+
 - Added lunar leap verification result template and kept sample values Pending
 
 ## Changed

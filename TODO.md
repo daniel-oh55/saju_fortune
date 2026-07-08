@@ -1,8 +1,20 @@
 # TODO
 
+## Calculation regression baseline TODO
+
+- [x] Document calculation regression baseline checklist
+- [ ] Generate calculation regression baseline snapshot
+- [ ] Record LUNAR-001 baseline result
+- [ ] Record LEAP-001 baseline result
+- [ ] Record BOUNDARY-001 baseline result
+- [ ] Record BOUNDARY-002 baseline result
+- [ ] Compare external verification result with baseline
+- [ ] Re-test Android after any future calculation logic change
+
 ## Lunar leap verification result template TODO
 
 - [x] Document lunar/leap verification result template
+- [x] Document calculation regression baseline checklist
 - [ ] Finalize external reference source for 음력/윤달 샘플 외부 검증
 - [ ] Record source name/version/access date
 - [ ] Record LUNAR-001 verification result
@@ -15,6 +27,7 @@
 
 - [x] Document lunar/leap sample case plan
 - [x] Document verification result template
+- [x] Document calculation regression baseline checklist
 - [ ] Finalize external reference source for 음력/윤달 샘플 외부 검증
 - [ ] Select actual LUNAR-001 sample date
 - [ ] Select actual LEAP-001 sample date
@@ -28,6 +41,7 @@
 - [x] Document lunar/leap reference source selection policy
 - [x] Document sample case plan
 - [x] Document verification result template
+- [x] Document calculation regression baseline checklist
 - [ ] Finalize external reference source for 음력/윤달 샘플 외부 검증
 - [ ] Record source name/version/access date
 - [ ] Prepare representative lunar birth sample
@@ -42,6 +56,7 @@
 - [x] Document reference source selection policy
 - [x] Document sample case plan
 - [x] Document verification result template
+- [x] Document calculation regression baseline checklist
 - [ ] Select external reference source for 음력/윤달 샘플 외부 검증
 - [ ] Finalize external reference source for 음력/윤달 샘플 외부 검증
 - [ ] Prepare representative lunar birth sample
