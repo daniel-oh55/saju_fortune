@@ -1,5 +1,25 @@
 # DEVELOPMENT_LOG
 
+## Lunar Leap Reference Source Policy
+
+- Documented lunar/leap reference source selection policy
+- Kept reference source selection as Pending
+- Kept 음력/윤달 샘플 외부 검증 as Pending
+- Kept actual external verification as Pending
+- Did not record sample expected values
+- Did not record sample comparison result
+- Kept current production calculation behavior unchanged
+- Kept 태양시 보정 적용 여부 as Pending
+- Kept solar time correction implementation as Not implemented
+- No production fortune logic changes
+- No generated JSON changes
+- No docs/generated changes
+- No schemaVersion changes
+- No CURRENT_FORTUNE_SCHEMA_VERSION changes
+- Existing localStorage keys unchanged
+- No external API added
+- Android/Gradle unchanged
+
 ## Lunar Leap External Verification Checklist
 
 - Added 음력/윤달 샘플 외부 검증 checklist

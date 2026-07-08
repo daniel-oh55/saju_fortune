@@ -2,6 +2,10 @@
 
 ## Changed
 
+- Documented lunar leap reference source policy and kept source selection Pending
+
+## Changed
+
 - Added lunar leap external verification checklist and kept all verification items Pending
 
 ## Changed
