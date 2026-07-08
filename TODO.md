@@ -1,5 +1,16 @@
 # TODO
 
+## Pre-release UX improvement TODO
+
+- [x] Document pre-release UX improvement backlog
+- [ ] Show morning, lunch, and evening fortune cards on the home screen
+- [ ] Add short app loading screen
+- [ ] Create app icon asset
+- [ ] Apply app icon to Android resources after asset finalization
+- [ ] Add saved reading share feature
+- [ ] Review KakaoTalk/SMS sharing path
+- [ ] Change 내정보 CTA copy to '저장하고 하루풀이 시작하기'
+
 ## Calculation regression baseline generator TODO
 
 - [x] Add calculation regression baseline generator scaffold
