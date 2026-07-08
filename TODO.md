@@ -1,9 +1,22 @@
 # TODO
 
+## Lunar leap reference source TODO
+
+- [x] Document lunar/leap reference source selection policy
+- [ ] Finalize external reference source for 음력/윤달 샘플 외부 검증
+- [ ] Record source name/version/access date
+- [ ] Prepare representative lunar birth sample
+- [ ] Prepare representative leap month sample
+- [ ] Prepare boundary sample
+- [ ] Record external verification result
+- [ ] Prepare calculation regression baseline before any implementation
+
 ## Lunar leap external verification TODO
 
 - [x] Add 음력/윤달 샘플 외부 검증 checklist
+- [x] Document reference source selection policy
 - [ ] Select external reference source for 음력/윤달 샘플 외부 검증
+- [ ] Finalize external reference source for 음력/윤달 샘플 외부 검증
 - [ ] Prepare representative lunar birth sample
 - [ ] Prepare representative leap month sample
 - [ ] Prepare boundary sample
