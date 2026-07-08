@@ -192,6 +192,7 @@
     "check:lunar-leap-sample-case-plan": "node scripts/checkLunarLeapSampleCasePlan.mjs",
     "check:lunar-leap-verification-result-template": "node scripts/checkLunarLeapVerificationResultTemplate.mjs",
     "check:calculation-regression-baseline-checklist": "node scripts/checkCalculationRegressionBaselineChecklist.mjs",
+    "check:calculation-regression-baseline-snapshot-design": "node scripts/checkCalculationRegressionBaselineSnapshotDesign.mjs",
     "check:splash-png-export": "node scripts/checkSplashPngExportReadiness.mjs",
     "check:visit-streak": "node scripts/checkVisitStreakRegression.mjs",
     "check:zodiac-fortune-sample-qa": "node scripts/checkZodiacFortuneSampleQa.mjs",
