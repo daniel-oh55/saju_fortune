@@ -187,6 +187,7 @@
     "check:zodiac-explanation-card-compression": "node scripts/checkZodiacExplanationCardCompression.mjs",
     "check:overseas-region-zodiac-qa-result": "node scripts/checkOverseasRegionZodiacQaResult.mjs",
     "check:solar-time-external-verification-checklist": "node scripts/checkSolarTimeExternalVerificationChecklist.mjs",
+    "check:lunar-leap-external-verification-checklist": "node scripts/checkLunarLeapExternalVerificationChecklist.mjs",
     "check:splash-png-export": "node scripts/checkSplashPngExportReadiness.mjs",
     "check:visit-streak": "node scripts/checkVisitStreakRegression.mjs",
     "check:zodiac-fortune-sample-qa": "node scripts/checkZodiacFortuneSampleQa.mjs",

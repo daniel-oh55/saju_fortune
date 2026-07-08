@@ -1,5 +1,23 @@
 # DEVELOPMENT_LOG
 
+## Lunar Leap External Verification Checklist
+
+- Added 음력/윤달 샘플 외부 검증 checklist
+- Kept all verification items as Pending
+- Kept actual external verification as Pending
+- Kept lunar/leap sample result recording as Not completed
+- Kept current production calculation behavior unchanged
+- Kept 태양시 보정 적용 여부 as Pending
+- Kept solar time correction implementation as Not implemented
+- No production fortune logic changes
+- No generated JSON changes
+- No docs/generated changes
+- No schemaVersion changes
+- No CURRENT_FORTUNE_SCHEMA_VERSION changes
+- Existing localStorage keys unchanged
+- No external API added
+- Android/Gradle unchanged
+
 ## Solar Time External Verification Checklist
 
 - Added 태양시 보정 적용 여부 external verification checklist
