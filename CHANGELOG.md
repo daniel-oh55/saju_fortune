@@ -2,6 +2,10 @@
 
 ## Changed
 
+- Added morning, lunch, and evening fortune cards to the home screen
+
+## Changed
+
 - Updated profile start CTA copy to '저장하고 하루풀이 시작하기'
 
 ## Changed
