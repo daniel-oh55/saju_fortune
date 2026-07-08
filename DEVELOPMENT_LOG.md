@@ -1,5 +1,24 @@
 # DEVELOPMENT_LOG
 
+## Calculation Regression Baseline Checklist
+
+- Documented calculation regression baseline checklist
+- Kept calculation regression baseline as Pending
+- Kept baseline snapshot generation as Not started
+- Kept baseline result recording as Not started
+- Kept 음력/윤달 샘플 외부 검증 as Pending
+- Kept 태양시 보정 적용 여부 as Pending
+- Kept current production calculation behavior unchanged
+- Kept solar time correction implementation as Not implemented
+- No production fortune logic changes
+- No generated JSON changes
+- No docs/generated changes
+- No schemaVersion changes
+- No CURRENT_FORTUNE_SCHEMA_VERSION changes
+- Existing localStorage keys unchanged
+- No external API added
+- Android/Gradle unchanged
+
 ## Lunar Leap Verification Result Template
 
 - Documented lunar/leap verification result template
