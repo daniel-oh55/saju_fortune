@@ -2,6 +2,10 @@
 
 ## Changed
 
+- Documented pre-release UX improvement backlog and kept implementation Pending
+
+## Changed
+
 - Added calculation regression baseline generator scaffold and kept snapshot generation Not started
 
 ## Changed

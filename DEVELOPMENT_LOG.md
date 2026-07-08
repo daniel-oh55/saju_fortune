@@ -1,5 +1,22 @@
 # DEVELOPMENT_LOG
 
+## Pre-release UX Improvement Backlog
+
+- Documented pre-release UX improvement backlog
+- Kept all UX improvement items as Pending
+- Added home morning/lunch/evening fortune display as Pending
+- Added short app loading screen as Pending
+- Added app icon asset creation as Pending
+- Added Android icon resource integration as Pending
+- Added saved reading share feature as Pending
+- Added KakaoTalk/SMS sharing review as Pending
+- Added 내정보 CTA copy update as Pending
+- No src changes
+- No Android/Gradle changes
+- No icon assets added
+- No sharing SDK added
+- No package-lock changes
+
 ## Calculation Regression Baseline Generator Scaffold
 
 - Added calculation regression baseline generator scaffold
