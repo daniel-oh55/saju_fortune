@@ -1,5 +1,16 @@
 # TODO
 
+## Lunar leap external verification TODO
+
+- [x] Add 음력/윤달 샘플 외부 검증 checklist
+- [ ] Select external reference source for 음력/윤달 샘플 외부 검증
+- [ ] Prepare representative lunar birth sample
+- [ ] Prepare representative leap month sample
+- [ ] Prepare boundary sample
+- [ ] Record external verification result
+- [ ] Prepare calculation regression baseline before any implementation
+- [ ] Re-test Android after any future calculation logic change
+
 ## Solar time external verification TODO
 
 - [x] Add 태양시 보정 적용 여부 external verification checklist

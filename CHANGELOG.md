@@ -2,6 +2,10 @@
 
 ## Changed
 
+- Added lunar leap external verification checklist and kept all verification items Pending
+
+## Changed
+
 - Added solar time external verification checklist and kept all verification items Pending
 
 ## Changed
