@@ -2,6 +2,10 @@
 
 ## Changed
 
+- Added lunar leap sample case plan and kept sample values Pending
+
+## Changed
+
 - Documented lunar leap reference source policy and kept source selection Pending
 
 ## Changed

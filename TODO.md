@@ -1,8 +1,20 @@
 # TODO
 
+## Lunar leap sample case plan TODO
+
+- [x] Document lunar/leap sample case plan
+- [ ] Finalize external reference source for 음력/윤달 샘플 외부 검증
+- [ ] Select actual LUNAR-001 sample date
+- [ ] Select actual LEAP-001 sample date
+- [ ] Select actual BOUNDARY-001 sample date
+- [ ] Select actual BOUNDARY-002 sample date
+- [ ] Record external verification result
+- [ ] Prepare calculation regression baseline before any implementation
+
 ## Lunar leap reference source TODO
 
 - [x] Document lunar/leap reference source selection policy
+- [x] Document sample case plan
 - [ ] Finalize external reference source for 음력/윤달 샘플 외부 검증
 - [ ] Record source name/version/access date
 - [ ] Prepare representative lunar birth sample
@@ -15,6 +27,7 @@
 
 - [x] Add 음력/윤달 샘플 외부 검증 checklist
 - [x] Document reference source selection policy
+- [x] Document sample case plan
 - [ ] Select external reference source for 음력/윤달 샘플 외부 검증
 - [ ] Finalize external reference source for 음력/윤달 샘플 외부 검증
 - [ ] Prepare representative lunar birth sample
