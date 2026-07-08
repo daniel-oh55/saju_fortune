@@ -1,5 +1,26 @@
 # DEVELOPMENT_LOG
 
+## Solar Time External Verification Checklist
+
+- Added 태양시 보정 적용 여부 external verification checklist
+- Kept all verification items as Pending
+- Kept solar time correction implementation as Not implemented
+- Kept current production calculation behavior unchanged
+- Kept birth region values as profile/input UX data only
+- Kept 음력/윤달 샘플 외부 검증 as Pending
+- No region-to-longitude dataset added
+- No timezone conversion added
+- No longitude/latitude handling added
+- No geocoding API added
+- No external API added
+- Production fortune logic unchanged
+- Generated JSON unchanged
+- docs/generated unchanged
+- schemaVersion unchanged
+- CURRENT_FORTUNE_SCHEMA_VERSION unchanged
+- Existing localStorage keys unchanged
+- Android/Gradle unchanged
+
 ## Solar Time Correction Policy
 
 - Documented 태양시 보정 적용 여부 policy

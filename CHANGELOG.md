@@ -2,6 +2,10 @@
 
 ## Changed
 
+- Added solar time external verification checklist and kept all verification items Pending
+
+## Changed
+
 - Documented solar time correction policy and kept implementation Pending
 
 ## Changed

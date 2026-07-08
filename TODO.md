@@ -1,8 +1,20 @@
 # TODO
 
+## Solar time external verification TODO
+
+- [x] Add 태양시 보정 적용 여부 external verification checklist
+- [ ] Complete 태양시 보정 적용 여부 external review
+- [ ] Review region-to-longitude data source
+- [ ] Validate domestic sample date/time cases
+- [ ] Review overseas timezone/longitude policy
+- [ ] Complete 음력/윤달 샘플 외부 검증
+- [ ] Prepare calculation regression baseline before implementation
+- [ ] Decide 태양시 보정 적용 여부 after external verification
+
 ## Solar time correction TODO
 
 - [x] Document 태양시 보정 적용 여부 policy
+- [x] Add 태양시 보정 적용 여부 external verification checklist
 - [ ] Complete external review for 태양시 보정 적용 여부
 - [ ] Complete 음력/윤달 샘플 외부 검증
 - [ ] Decide whether solar time correction remains disabled for MVP
