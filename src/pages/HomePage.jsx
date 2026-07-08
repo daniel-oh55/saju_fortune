@@ -39,39 +39,29 @@ function writeQuickMenuPrefs(menuIds) {
   window.localStorage.setItem(QUICK_MENU_PREFS_KEY, JSON.stringify(menuIds));
 }
 
-function getTimeFortune() {
-  const hour = new Date().getHours();
+const HOME_TIME_SLOT_FORTUNES = [
+  {
+    id: 'morning',
+    label: '아침운세',
+    title: '천천히 시동을 걸기 좋은 시간',
+    text: '해야 할 일을 작게 나누어두면 하루가 차분하고 편안하게 시작됩니다.',
+  },
+  {
+    id: 'lunch',
+    label: '점심운세',
+    title: '정리와 확인에 어울리는 시간',
+    text: '중요한 메시지나 약속을 한 번 더 확인하면 안정감이 커집니다.',
+  },
+  {
+    id: 'evening',
+    label: '저녁운세',
+    title: '속도를 낮추고 균형을 챙길 시간',
+    text: '가벼운 정리와 짧은 휴식이 내일의 리듬을 편안하게 만듭니다.',
+  },
+];
 
-  if (hour < 12) {
-    return {
-      label: '아침',
-      title: '천천히 시동을 걸기 좋은 시간',
-      text: '해야 할 일을 작게 나누어두면 하루가 차분하고 편안하게 시작됩니다.',
-    };
-  }
-
-  if (hour < 18) {
-    return {
-      label: '오후',
-      title: '정리와 확인에 어울리는 시간',
-      text: '중요한 메시지나 약속을 한 번 더 확인하면 안정감이 커집니다.',
-    };
-  }
-
-  if (hour < 22) {
-    return {
-      label: '저녁',
-      title: '속도를 낮추고 균형을 챙길 시간',
-      text: '가벼운 정리와 짧은 휴식이 내일의 리듬을 편안하게 만듭니다.',
-    };
-  }
-
-  return {
-    label: '밤',
-    title: '마음을 차분히 가라앉힐 시간',
-    text: '오늘 해낸 일을 하나 떠올리며 하루를 부드럽게 마무리해보세요.',
-  };
-}
+const HOME_TIME_SLOT_FALLBACK_TITLE = '오늘의 흐름을 살펴보세요';
+const HOME_TIME_SLOT_FALLBACK_TEXT = '잠시 후 다시 확인해주세요.';
 
 function HomePage({
   fortune,
@@ -87,7 +77,6 @@ function HomePage({
   const [isQuickMenuEditorOpen, setIsQuickMenuEditorOpen] = useState(false);
   const [quickMenuMessage, setQuickMenuMessage] = useState('');
   const overall = fortune.categories.find((category) => category.id === 'overall') || fortune.categories[0];
-  const timeFortune = getTimeFortune();
   const todayFlowDate = formatKoreanDate(fortune.dateKey);
   const todayKeyword = formatElementDisplayText(fortune.keyword);
   const todayFortuneCategories = useMemo(() => {
@@ -287,11 +276,17 @@ function HomePage({
         onOpenSavedReadings={() => onNavigate('savedReadings')}
       />
 
-      <section className="time-fortune-card">
-        <div>
-          <p className="eyebrow">{timeFortune.label} 운세</p>
-          <h2>{timeFortune.title}</h2>
-          <p>{timeFortune.text}</p>
+      <section className="time-fortune-card home-time-slot-card">
+        <p className="eyebrow">오늘의 시간대 운세</p>
+        <p className="home-time-slot-subtext">아침, 점심, 저녁의 흐름을 한눈에 살펴보세요.</p>
+        <div className="home-time-slot-grid">
+          {HOME_TIME_SLOT_FORTUNES.map((slot) => (
+            <div key={slot.id} className="home-time-slot-item">
+              <span className="home-time-slot-label">{slot.label}</span>
+              <strong className="home-time-slot-title">{slot.title || HOME_TIME_SLOT_FALLBACK_TITLE}</strong>
+              <p className="home-time-slot-text">{slot.text || HOME_TIME_SLOT_FALLBACK_TEXT}</p>
+            </div>
+          ))}
         </div>
       </section>
 

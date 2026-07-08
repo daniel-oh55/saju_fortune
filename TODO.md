@@ -3,7 +3,7 @@
 ## Pre-release UX improvement TODO
 
 - [x] Document pre-release UX improvement backlog
-- [ ] Show morning, lunch, and evening fortune cards on the home screen
+- [x] Show morning, lunch, and evening fortune cards on the home screen
 - [ ] Add short app loading screen
 - [ ] Create app icon asset
 - [ ] Apply app icon to Android resources after asset finalization

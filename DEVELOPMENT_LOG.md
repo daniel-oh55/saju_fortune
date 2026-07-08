@@ -1,5 +1,23 @@
 # DEVELOPMENT_LOG
 
+## Home Time-slot Fortune Cards
+
+- Added home display for morning, lunch, and evening fortune cards
+- Marked UX-001 as completed in pre-release UX improvement TODO
+- Kept change as home UI-only update
+- No production fortune logic changes
+- No fortune result generation changes
+- No routing changes
+- No localStorage key changes
+- No schemaVersion changes
+- No CURRENT_FORTUNE_SCHEMA_VERSION changes
+- No generated JSON changes
+- No docs/generated changes
+- No Android/Gradle changes
+- No icon asset changes
+- No loading screen implementation
+- No sharing feature implementation
+
 ## Profile CTA Copy Update
 
 - Updated 내정보 CTA copy from '하루풀이 시작하기' to '저장하고 하루풀이 시작하기'
