@@ -190,6 +190,7 @@
     "check:lunar-leap-external-verification-checklist": "node scripts/checkLunarLeapExternalVerificationChecklist.mjs",
     "check:lunar-leap-reference-source-policy": "node scripts/checkLunarLeapReferenceSourcePolicy.mjs",
     "check:lunar-leap-sample-case-plan": "node scripts/checkLunarLeapSampleCasePlan.mjs",
+    "check:lunar-leap-verification-result-template": "node scripts/checkLunarLeapVerificationResultTemplate.mjs",
     "check:splash-png-export": "node scripts/checkSplashPngExportReadiness.mjs",
     "check:visit-streak": "node scripts/checkVisitStreakRegression.mjs",
     "check:zodiac-fortune-sample-qa": "node scripts/checkZodiacFortuneSampleQa.mjs",
