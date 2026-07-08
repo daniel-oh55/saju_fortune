@@ -1,5 +1,24 @@
 # DEVELOPMENT_LOG
 
+## Calculation Regression Baseline Generator Scaffold
+
+- Added calculation regression baseline generator scaffold
+- Kept baseline snapshot generation as Not started
+- Generator does not import src/ or production calculation logic
+- Generator does not call external API
+- Generator does not write files by default
+- Kept 음력/윤달 샘플 외부 검증 as Pending
+- Kept 태양시 보정 적용 여부 as Pending
+- Kept current production calculation behavior unchanged
+- No production fortune logic changes
+- No generated JSON changes
+- No docs/generated changes
+- No schemaVersion changes
+- No CURRENT_FORTUNE_SCHEMA_VERSION changes
+- Existing localStorage keys unchanged
+- No external API added
+- Android/Gradle unchanged
+
 ## Calculation Regression Baseline Snapshot Design
 
 - Documented calculation regression baseline snapshot design

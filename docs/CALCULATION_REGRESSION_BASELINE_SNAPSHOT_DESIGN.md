@@ -4,6 +4,7 @@
 
 - Current status: Pending
 - Baseline snapshot design: Documented
+- Generator scaffold: Added (candidate-only, no file writes)
 - Baseline snapshot generation: Not started
 - Baseline snapshot files: Not created
 - Baseline result recording: Not started
@@ -73,6 +74,13 @@ This document defines the candidate structure for a future calculation regressio
 
 This shape is documented as a candidate reference only. No file matching this shape is created in this PR.
 
+## Generator Scaffold
+
+- scripts/generateCalculationRegressionBaselineSnapshot.mjs builds the candidate-only object above in memory and prints it with `node scripts/generateCalculationRegressionBaselineSnapshot.mjs`.
+- The scaffold does not import `src/` or any production calculation module.
+- The scaffold does not call any external API.
+- The scaffold does not write any file by default; passing `--write` exits with an error because file generation is deferred to a future PR.
+
 ## Do Not Record Yet
 
 - Do not generate baseline snapshot files
@@ -97,6 +105,7 @@ This shape is documented as a candidate reference only. No file matching this sh
 ## Follow-up PRs
 
 - Future PR: finalize candidate snapshot path
+- Future PR: implement snapshot file writing in generator
 - Future PR: generate calculation regression baseline snapshot
 - Future PR: record LUNAR-001 baseline result
 - Future PR: record LEAP-001 baseline result

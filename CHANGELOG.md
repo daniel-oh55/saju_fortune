@@ -2,6 +2,10 @@
 
 ## Changed
 
+- Added calculation regression baseline generator scaffold and kept snapshot generation Not started
+
+## Changed
+
 - Documented calculation regression baseline snapshot design and kept snapshot generation Not started
 
 ## Changed

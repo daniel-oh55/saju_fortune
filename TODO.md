@@ -1,8 +1,22 @@
 # TODO
 
+## Calculation regression baseline generator TODO
+
+- [x] Add calculation regression baseline generator scaffold
+- [ ] Finalize candidate snapshot path
+- [ ] Implement snapshot file writing
+- [ ] Generate calculation regression baseline snapshot
+- [ ] Record LUNAR-001 baseline result
+- [ ] Record LEAP-001 baseline result
+- [ ] Record BOUNDARY-001 baseline result
+- [ ] Record BOUNDARY-002 baseline result
+- [ ] Compare external verification result with baseline
+- [ ] Re-test Android after any future calculation logic change
+
 ## Calculation regression baseline snapshot design TODO
 
 - [x] Document calculation regression baseline snapshot design
+- [x] Add calculation regression baseline generator scaffold
 - [ ] Finalize candidate snapshot path
 - [ ] Generate calculation regression baseline snapshot
 - [ ] Record LUNAR-001 baseline result
@@ -16,6 +30,7 @@
 
 - [x] Document calculation regression baseline checklist
 - [x] Document calculation regression baseline snapshot design
+- [x] Add calculation regression baseline generator scaffold
 - [ ] Generate calculation regression baseline snapshot
 - [ ] Record LUNAR-001 baseline result
 - [ ] Record LEAP-001 baseline result
