@@ -2,6 +2,17 @@
 
 ## Docs
 
+- Fixed share QA status consistency between TODO and Android QA documents.
+- Kept Android share sheet actual opening as Pending/Not opened.
+- Kept share text sensitive-field paste verification as Pending.
+- Kept clipboard fallback verification as Completed.
+
+## Checks
+
+- Updated share QA check scripts to match corrected QA statuses.
+
+## Docs
+
 - Corrected saved reading share Android QA result to reflect clipboard fallback path instead of Android share sheet opening.
 - Documented Android layout QA result for saved reading share/delete buttons after PR #322.
 - Documented Android layout QA result for fortune save/copy buttons after PR #322.
