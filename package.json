@@ -198,6 +198,7 @@
     "check:pre-release-ux-improvement-backlog": "node scripts/checkPreReleaseUxImprovementBacklog.mjs",
     "check:profile-cta-copy-update": "node scripts/checkProfileCtaCopyUpdate.mjs",
     "check:home-time-slot-fortune-cards": "node scripts/checkHomeTimeSlotFortuneCards.mjs",
+    "check:short-app-loading-screen": "node scripts/checkShortAppLoadingScreen.mjs",
     "check:splash-png-export": "node scripts/checkSplashPngExportReadiness.mjs",
     "check:visit-streak": "node scripts/checkVisitStreakRegression.mjs",
     "check:zodiac-fortune-sample-qa": "node scripts/checkZodiacFortuneSampleQa.mjs",

@@ -2,6 +2,10 @@
 
 ## Changed
 
+- Added short React app loading screen
+
+## Changed
+
 - Added morning, lunch, and evening fortune cards to the home screen
 
 ## Changed
