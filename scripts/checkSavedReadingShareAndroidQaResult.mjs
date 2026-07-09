@@ -27,9 +27,8 @@ const changelogSource = read(changelogPath);
 const requiredSnippets = [
   'Saved Reading Share Android QA Result',
   'Related PR: #319',
-  'Feature: Saved reading text share',
-  'QA target: Android debug APK real-device QA',
-  'Current QA status: Pending',
+  'Android Debug Build run: #249',
+  'Current QA status: Completed for installed APK share sheet path',
   'PR type: docs/check-only',
   '저장한 풀이 화면에 `공유하기` 버튼 표시',
   'Android share sheet',
@@ -43,7 +42,29 @@ const requiredSnippets = [
   '실제 Google Play/App Store URL 미포함',
   '사용자가 공유창을 취소한 경우에는 강제로 복사 fallback을 실행하지 않고 취소 상태를 표시',
   'Android QA checklist',
-  'Pending',
+  'Android Debug Build artifact prepared | Completed',
+  'APK install | Completed',
+  'App launch after install | Completed',
+  'Saved readings screen open | Completed',
+  'Share button visible | Completed',
+  'Android share sheet opens | Completed',
+  'Share cancel handling | Completed',
+  'Clipboard fallback behavior | Pending',
+  'Share text excludes birthDate | Completed',
+  'Share text excludes birthTime | Completed',
+  'Share text excludes birthPlace | Completed',
+  'Share text excludes gender | Completed',
+  'Share text excludes name | Completed',
+  'Share text excludes real store URLs | Completed',
+  'App remains stable after share/cancel | Completed',
+  'Actual external share send | Not performed',
+  'Kakao SDK integration | Not started',
+  'SMS permission/native integration | Not started',
+  'Share image generation | Pending',
+  'Release build | Not started',
+  'Signing setup | Not started',
+  'AAB generation | Not started',
+  'Google Play Console actual input | Pending',
   'No src changes',
   'No saved reading share code changes',
   'No share button UI changes',
@@ -70,26 +91,24 @@ for (const snippet of requiredSnippets) {
 }
 
 const forbiddenSnippets = [
-  'Saved reading share Android real-device QA | Completed',
-  'Android share sheet actual verification | Completed',
-  'Clipboard fallback actual verification | Completed',
-  'Share text actual verification | Completed',
-  'APK install | Completed',
-  'App launch after install | Completed',
-  'Share button visible | Completed',
-  'Android share sheet opens | Completed',
   'Clipboard fallback behavior | Completed',
-  '실제 공유창 확인 완료',
-  '실제 APK 설치 완료',
-  '실제 앱 실행 완료',
-  'clipboard fallback 실제 확인 완료',
-  '공유 문구 실제 확인 완료',
+  'Actual external share send | Completed',
   'Kakao SDK integration | Completed',
   'SMS permission/native integration | Completed',
+  'Share image generation | Completed',
+  'AndroidManifest.xml update for sharing | Completed',
   'Release build | Completed',
   'Signing setup | Completed',
   'AAB generation | Completed',
   'Google Play Console actual input | Completed',
+  '실제 외부 공유 발송 완료',
+  'Kakao SDK 연동 완료',
+  'SMS 권한 추가 완료',
+  'AndroidManifest.xml 공유 변경 완료',
+  'release build 완료',
+  'signing 설정 완료',
+  'AAB 생성 완료',
+  'Google Play Console 입력 완료',
 ];
 for (const snippet of forbiddenSnippets) {
   mark(!resultDoc.includes(snippet), `result_doc_forbidden_absent_${snippet}`);
@@ -98,16 +117,17 @@ for (const snippet of forbiddenSnippets) {
 const requiredTodoCompletedSnippets = [
   '- [x] 저장한 풀이 텍스트 공유 Android QA 결과 문서 템플릿 추가',
   '- [x] Saved reading share Android QA result 검증 스크립트 추가',
+  '- [x] 저장한 풀이 텍스트 공유 Android 실제 기기 QA',
+  '- [x] Android share sheet 실제 확인',
+  '- [x] 공유 문구 개인정보 제외 실제 확인',
 ];
 for (const snippet of requiredTodoCompletedSnippets) {
   mark(todoSource.includes(snippet), `todo_includes_completed_${snippet}`);
 }
 
 const requiredTodoPendingSnippets = [
-  '- [ ] 저장한 풀이 텍스트 공유 Android 실제 기기 QA',
-  '- [ ] Android share sheet 실제 확인',
   '- [ ] Clipboard fallback 실제 확인',
-  '- [ ] 공유 문구 개인정보 제외 실제 확인',
+  '- [ ] 실제 외부 공유 발송 확인',
   '- [ ] Kakao SDK 연동 검토',
   '- [ ] SMS permission/native integration 검토',
   '- [ ] 공유 이미지 생성 기능 검토',
@@ -121,10 +141,10 @@ for (const snippet of requiredTodoPendingSnippets) {
   mark(todoSource.includes(snippet), `todo_includes_pending_${snippet}`);
 }
 
-mark(developmentLogSource.includes('## Saved Reading Share Android QA Result'), 'development_log_has_section');
+mark(developmentLogSource.includes('## Saved Reading Share Android QA Complete'), 'development_log_has_section');
 mark(
-  changelogSource.includes('Added saved reading share Android QA result template.'),
-  'changelog_records_qa_result_template',
+  changelogSource.includes('Recorded Android real-device QA result for saved reading text share.'),
+  'changelog_records_qa_result',
 );
 
 const failed = checks.filter((check) => !check.condition);

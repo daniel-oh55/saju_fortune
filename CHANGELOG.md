@@ -2,6 +2,18 @@
 
 ## Docs
 
+- Recorded Android real-device QA result for saved reading text share.
+- Confirmed saved reading share button visibility and Android share sheet behavior.
+- Confirmed share cancel handling and app stability after share/cancel.
+- Confirmed safe share text excludes sensitive birth profile fields and real store URLs.
+- Kept clipboard fallback actual verification, external share send, Kakao SDK, SMS permission/native integration, release build, signing, AAB generation, and Google Play Console input as Pending/Not started or Not performed.
+
+## Checks
+
+- Updated saved reading share Android QA result check script for the actual QA result.
+
+## Docs
+
 - Added saved reading share Android QA result template.
 - Documented expected Android share sheet, clipboard fallback, share cancel, and safe share text verification items.
 - Kept actual Android APK install, app launch, share sheet verification, clipboard fallback verification, release build, signing, AAB generation, and Google Play Console input as Pending/Not started.
