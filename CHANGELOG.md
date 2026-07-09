@@ -2,6 +2,16 @@
 
 ## Docs
 
+- Added Google Play Store listing draft for launch preparation.
+- Drafted Store title candidates, short description candidates, full description, content caution statements, keyword/tone notes, and store asset readiness.
+- Kept Store listing final text, Google Play Console input, 개인정보 처리방침 URL, 문의처 이메일/지원 연락처, Google Play 데이터 보안 양식, 실제 스토어 스크린샷 이미지 제작, release build, signing, and AAB generation as Pending/Not started.
+
+## Checks
+
+- Added Google Play store listing draft check script.
+
+## Docs
+
 - Added Google Play Data safety draft for launch preparation.
 - Recorded current localStorage-only, no server DB, no login, no actual ad/payment/analytics SDK baseline.
 - Kept Google Play 데이터 보안 양식, Google Play Console input, 개인정보 처리방침 URL, 문의처 이메일/지원 연락처, 시행일, 제공자 정보, release build, signing, and AAB generation as Pending/Not started.

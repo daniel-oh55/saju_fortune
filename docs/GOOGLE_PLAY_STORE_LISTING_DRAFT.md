@@ -1,237 +1,171 @@
-# GOOGLE_PLAY_STORE_LISTING_DRAFT
+# Google Play Store Listing Draft
 
-## 샘플 프로필 화면 QA 결과
+- Status: Draft
+- Google Play Console input: Pending
+- Store listing final text: Pending
+- 개인정보 처리방침 URL: Pending
+- 문의처 이메일/지원 연락처: Pending
+- 실제 스토어 스크린샷 이미지 제작: Pending
+- This document is not the finalized Google Play Store listing.
 
-- 스토어 등록 정보에 사용할 스크린샷 제작 전 샘플 프로필 화면 QA 결과를 확인해야 합니다.
-- 문서 경로는 `docs/STORE_SCREENSHOT_SAMPLE_PROFILE_SCREEN_QA_RESULT.md`입니다.
-- 실제 Google Play Console 업로드는 후속 단계입니다.
+## 1. Scope
 
-## 스토어 스크린샷 캡처 QA
+- Purpose: Draft Google Play Store listing text for launch preparation
+- PR type: docs/check-only
+- App name: 하루풀이
+- Related launch readiness PR: #327
+- Related privacy policy draft PR: #329
+- Related data safety draft PR: #331
+- Current Google Play Console input status: Pending
+- Current release build status: Not started
+- Current AAB generation status: Not started
+- No production code changes
+- No Android native/resource changes
 
-- Google Play 스토어 등록 전 스크린샷 캡처 QA 결과를 확인해야 합니다.
-- 문서 경로는 `docs/STORE_SCREENSHOT_CAPTURE_QA_RESULT.md`입니다.
-- 실제 스크린샷 업로드는 후속 단계입니다.
+## 2. App positioning draft
 
-## 데이터 보안 양식 입력 준비
+- 하루풀이는 오늘의 운세와 사주 흐름을 차분하게 확인할 수 있는 개인 맞춤 운세 다이어리 앱입니다.
+- 점집 느낌보다 개인 맞춤 인사이트 앱에 가까운 톤을 지향합니다.
+- 고요한 밤의 운세 다이어리 콘셉트를 유지합니다.
+- 오늘운세, 나의 사주 흐름, 띠별운세, 2026 운세 등으로 확장 가능한 구조입니다.
+- 운세 결과는 참고용 콘텐츠이며 중요한 결정의 유일한 근거로 사용하지 않도록 안내합니다.
 
-- 스토어 등록 정보와 데이터 보안 양식 응답이 충돌하지 않아야 합니다.
-- 데이터 보안 양식 입력 준비 문서는 `docs/GOOGLE_PLAY_DATA_SAFETY_INPUT_READINESS.md`입니다.
-- 실제 Console 입력은 후속 단계입니다.
+## 3. Store title candidates
 
-## 개인정보 처리방침 문의처
+| Candidate | Status | Note |
+| --- | --- | --- |
+| 하루풀이 | Candidate | 앱 기본 이름 |
+| 하루풀이 - 오늘운세와 사주 다이어리 | Candidate | 설명형 제목 |
+| 하루풀이 오늘운세 | Candidate | 검색 친화 후보 |
 
-- 개인정보 처리방침 문의처 확정 준비 문서는 `docs/PRIVACY_POLICY_CONTACT_READINESS.md`입니다.
-- 스토어 등록 정보의 개발자 연락처와 개인정보 처리방침 문의처가 충돌하지 않아야 합니다.
+주의:
 
-## 개인정보 처리방침 URL 입력 준비
+- 최종 Store title은 Pending으로 유지하세요.
 
-- Google Play Console 개인정보 처리방침 URL 입력 준비 문서를 추가했습니다.
-- 문서 경로는 `docs/GOOGLE_PLAY_PRIVACY_URL_INPUT_READINESS.md`입니다.
-- 실제 URL 확인 전에는 Console 입력을 진행하지 않습니다.
+## 4. Short description draft candidates
 
-## 개인정보 처리방침 live URL 확인 결과
+1. 오늘의 운세와 나의 사주 흐름을 차분하게 확인하는 운세 다이어리
+2. 하루의 흐름을 살펴보는 오늘운세·사주 다이어리 앱
+3. 나의 하루를 조용히 돌아보는 오늘운세와 사주 풀이
 
-- Google Play Console 입력 전 실제 `/privacy/` URL 확인 결과를 기록해야 합니다.
-- 결과 문서는 `docs/PRIVACY_POLICY_LIVE_URL_RESULT.md`입니다.
-- 현재 입력은 미진행 상태입니다.
+주의:
 
-## 개인정보 처리방침 build output 확인
+- 최종 short description은 Pending으로 유지하세요.
 
-- Google Play Console 입력 전 `dist/privacy/index.html` 생성 여부를 확인해야 합니다.
-- 확인 문서는 `docs/PRIVACY_POLICY_BUILD_OUTPUT_VERIFICATION.md`입니다.
-- 실제 Vercel URL 확인은 후속 단계입니다.
+## 5. Full description draft
 
-## 개인정보 처리방침 URL 확인 연계
+하루풀이는 오늘의 운세와 나의 사주 흐름을 차분하게 확인할 수 있는 운세 다이어리 앱입니다.
 
-- Google Play Console 입력 전 `/privacy/` 공개 URL 접근 여부를 확인해야 합니다.
-- 확인 문서는 `docs/PRIVACY_POLICY_URL_VERIFICATION.md`입니다.
-- 실제 Google Play Console 입력은 후속 단계입니다.
-
-## 개인정보 처리방침 페이지 브랜드명 확인
-
-- Google Play 스토어 등록 정보의 앱 이름은 `하루풀이`입니다.
-- 공개 개인정보 처리방침 페이지에서도 동일하게 `하루풀이`를 사용해야 합니다.
-- 제출 전 스토어 등록 정보, 개인정보 처리방침 URL, 앱 내 개인정보 안내의 서비스명 일치 여부를 확인합니다.
-
-## 공개 개인정보 처리방침 페이지 연결
-
-- Google Play 제출 때 사용할 공개 개인정보 처리방침 후보 페이지를 추가했습니다.
-- 정적 페이지 경로는 `public/privacy/index.html`입니다.
-- 실제 Google Play Console 입력 전 Vercel 배포 URL을 확인해야 합니다.
-
-## 스크린샷 샘플 프로필 기준
-
-- Google Play 스크린샷에는 테스트용 샘플 프로필만 사용합니다.
-- 기준 문서는 `docs/STORE_SCREENSHOT_SAMPLE_PROFILE.md`입니다.
-- 실제 사용자 개인정보가 노출되지 않도록 주의합니다.
-
-## 스크린샷 샘플 문구 정합성
-
-- 스토어 스크린샷 샘플 프로필 문서에서 기능명은 `저장한 풀이`로 통일합니다.
-- 스크린샷 홍보 문구는 참고용 콘텐츠 고지와 충돌하지 않아야 합니다.
-- `투자하면 성공합니다.`처럼 단정적이고 위험한 표현은 피해야 할 문구로 관리합니다.
-
-이 문서는 하루풀이 Android 앱의 Google Play 스토어 등록 정보 초안을 정리한 문서입니다.
-
-이번 PR은 스토어 등록 문구 준비가 목적이며, production 로직, Android native code, release build, signing, 실제 광고 SDK는 변경하지 않습니다.
-
-## 개인정보 처리방침 URL 준비
-
-- Google Play 제출 전 개인정보 처리방침 URL 준비 문서를 추가합니다.
-- 문서 경로는 `docs/PRIVACY_POLICY_URL_READINESS.md`입니다.
-- 실제 제출 전 외부에서 접근 가능한 HTTPS URL이 필요합니다.
-- 실제 광고 SDK, 결제 SDK, 로그인, 서버 DB 기능이 추가되면 개인정보 처리방침과 데이터 보안 양식을 갱신해야 합니다.
-
-## Google Play 데이터 보안 양식 초안
-
-- 데이터 보안 양식 초안 문서는 `docs/GOOGLE_PLAY_DATA_SAFETY_DRAFT.md`입니다.
-- 실제 Google Play Console 입력은 아직 진행하지 않습니다.
-- 실제 광고 SDK, 결제 SDK, 로그인, 서버 DB, 외부 분석 SDK가 연결되면 해당 문서와 개인정보 처리방침을 갱신해야 합니다.
-
-## 스크린샷 준비 문서
-
-- Google Play 스크린샷 준비 문서를 추가합니다.
-- 문서 경로는 `docs/GOOGLE_PLAY_SCREENSHOT_READINESS.md`입니다.
-- 실제 스크린샷 이미지는 아직 생성하지 않습니다.
-- 스토어 설명 문구와 스크린샷 문구는 참고용 콘텐츠 고지와 충돌하지 않아야 합니다.
-
-## 1. 목적
-
-- Google Play 등록에 필요한 앱 설명과 고지 문구를 사전에 준비합니다.
-- 하루풀이의 현재 MVP 기능과 제한사항을 스토어 문구에 맞게 정리합니다.
-- 실제 제출 전 QA, 개인정보 처리방침 URL, release build/signing, 광고 SDK 연동 상태를 별도로 확인합니다.
-
-## 2. 앱 기본 정보 초안
-
-- 앱 이름 후보: 하루풀이
-- 짧은 설명 후보:
-  - 오늘의 운세와 사주 흐름을 따뜻한 조언으로 확인하는 하루 운세 앱
-- 카테고리 후보:
-  - Lifestyle
-  - Entertainment
-- 콘텐츠 성격:
-  - 운세/사주 기반 참고용 콘텐츠
-  - 생활 조언형 콘텐츠
-  - 의학, 법률, 투자, 진로 결정에 대한 전문 자문 아님
-
-## 3. 긴 설명 초안
-
-하루풀이는 생년월일과 태어난 시간 정보를 바탕으로 오늘의 운세, 사주 흐름, 일상 조언을 확인할 수 있는 운세 앱입니다.
-
-총운, 재물운, 연애운, 직장운, 건강운, 학업운 등 하루의 여러 흐름을 카드 형태로 정리하고, 사용자가 매일 부담 없이 확인할 수 있도록 구성했습니다.
-
-하루풀이는 단정적이거나 불안을 조장하는 예언보다, 오늘 하루를 더 차분하게 보내기 위한 참고용 조언을 제공합니다.
+복잡하거나 부담스러운 표현보다, 하루를 조용히 돌아보고 필요한 힌트를 얻을 수 있는 구성에 집중했습니다.
 
 주요 기능:
-
 - 오늘의 운세 확인
-- 총운, 재물운, 연애운, 직장운, 건강운, 학업운 요약
-- 사주 흐름 기반 요약
-- 오늘의 루틴 제안
-- 저장한 풀이 보관
-- 방문 streak 확인
-- 광고 시청 후 상세 콘텐츠 unlock 준비
-- 개인정보 안내 및 동의 설정
+- 나의 사주 흐름 보기
+- 2026 운세 확인
+- 띠별운세 확인
+- 저장한 풀이 다시 보기
+- 저장한 풀이 복사 및 공유용 문구 확인
 
-본 앱의 운세와 사주 결과는 오락 및 참고용 콘텐츠입니다.
-의학, 법률, 투자, 진로, 심리 상담 등 중요한 결정에 대한 전문적인 자문을 대체하지 않습니다.
+하루풀이는 이런 분께 어울립니다.
+- 매일 짧게 오늘의 흐름을 확인하고 싶은 분
+- 사주와 운세를 너무 무겁지 않게 보고 싶은 분
+- 나의 성향과 하루의 기운을 차분히 정리하고 싶은 분
+- 개인 맞춤 운세 다이어리처럼 운세를 기록하고 싶은 분
 
-## 4. 주요 기능 목록
+안내:
+- 하루풀이의 운세 콘텐츠는 참고용입니다.
+- 중요한 의사결정, 의료, 법률, 투자, 안전과 관련된 판단은 전문가의 조언을 우선해 주세요.
+- 현재 앱은 서버 DB와 로그인 기능을 사용하지 않는 구조를 기준으로 준비 중입니다.
 
-- 오늘의 운세
-- 카테고리별 운세
-- 사주 요약
-- 사주 인사이트
-- 오늘의 루틴
-- 저장한 풀이
-- 방문 streak
-- 광고 보상형 상세 콘텐츠 후보
-- 개인정보/동의 설정 안내
+## 6. Content caution statements
 
-## 5. 참고용 고지 문구
+- 운세 결과는 참고용 콘텐츠입니다.
+- 중요한 의사결정의 유일한 근거로 사용하지 마세요.
+- 의료, 법률, 투자, 안전 관련 판단은 전문가의 조언을 우선하세요.
+- 과도한 불안감을 유발하는 단정적 표현은 지양합니다.
+- 사주/운세 결과를 절대적 예언으로 표현하지 않습니다.
 
-하루풀이에서 제공하는 운세와 사주 결과는 오락 및 참고용 콘텐츠입니다.
-의학, 법률, 투자, 진로, 심리 상담 등 전문적인 자문을 대체하지 않습니다.
-중요한 결정은 반드시 관련 전문가와 충분히 상담한 뒤 판단해 주세요.
+## 7. Keyword and tone notes
 
-## 6. 개인정보 및 데이터 저장 고지 초안
+| Keyword/tone area | Draft note |
+| --- | --- |
+| Primary keywords | 오늘운세, 사주, 운세, 띠별운세, 2026운세 |
+| Tone | 차분한, 개인 맞춤, 운세 다이어리, 참고용 |
+| Avoid | 절대적 예언, 투자 보장, 건강 진단, 공포 유도, 결제 압박 |
+| Design concept | 고요한 밤의 운세 다이어리 |
 
-현재 MVP는 서버 데이터베이스 없이 브라우저 또는 앱 WebView의 localStorage를 중심으로 정보를 저장합니다.
+## 8. Store asset readiness
 
-저장될 수 있는 정보:
+| Item | Status | Note |
+| --- | --- | --- |
+| Store title final input | Pending | Not entered in Console |
+| Short description final input | Pending | Not entered in Console |
+| Full description final input | Pending | Not entered in Console |
+| 실제 스토어 스크린샷 이미지 제작 | Pending | Actual screenshots not completed |
+| Feature graphic | Pending | Not finalized |
+| App icon upload to Google Play | Pending | Console upload not done |
+| Privacy policy URL | Pending | Actual URL not finalized |
+| Support contact | Pending | Actual contact not finalized |
 
-- 사용자가 입력한 프로필 정보
-- 오늘의 운세 cache
-- 사주 분석 cache
-- 보상 unlock 상태
-- 동의 설정
-- 저장한 풀이
-- 방문 streak
+## 9. Not included in this PR
 
-현재 MVP에서 아직 사용하지 않는 항목:
+- No src changes
+- No CSS changes
+- No production UI changes
+- No AndroidManifest.xml changes
+- No Android native code changes
+- No Android resource changes
+- No Gradle changes
+- No Capacitor config changes
+- No release build
+- No signing setup
+- No keystore file added
+- No AAB generation
+- No Google Play Console input
+- No Store listing finalization
+- No 개인정보 처리방침 URL finalization
+- No 문의처 이메일/지원 연락처 finalization
+- No Google Play 데이터 보안 양식 completion
+- No 실제 스토어 스크린샷 이미지 제작 completion
+- No actual ad SDK
+- No actual payment SDK
+- No login
+- No server DB
+- No external analytics SDK
+- No production fortune logic changes
+- No routing changes
+- No schemaVersion changes
+- No CURRENT_FORTUNE_SCHEMA_VERSION changes
+- No existing localStorage key changes
 
-- 로그인 계정
-- 서버 DB 저장
-- 실제 결제 SDK
-- 실제 광고 SDK
-- 외부 분석 SDK
+## 10. Remaining Pending / Not started items
 
-실제 광고 SDK, 분석 SDK, 로그인, 결제 기능을 연결하기 전에는 개인정보 처리방침과 Google Play 데이터 보안 양식을 별도로 갱신해야 합니다.
+| Item | Status |
+| --- | --- |
+| Store listing final text | Pending |
+| Google Play Console actual input | Pending |
+| 개인정보 처리방침 URL 확정 | Pending |
+| 문의처 이메일/지원 연락처 확정 | Pending |
+| Google Play 데이터 보안 양식 최종 입력 | Pending |
+| 실제 스토어 스크린샷 이미지 제작 계획 수립 | Pending |
+| 실제 스토어 스크린샷 이미지 제작 | Pending |
+| Feature graphic finalization | Pending |
+| Release build | Not started |
+| Signing setup | Not started |
+| AAB generation | Not started |
 
-## 7. 광고 포함 여부 초안
+## 11. Recommended next sequence
 
-현재 앱에는 실제 광고 SDK가 아직 연결되어 있지 않습니다.
-다만 향후 보상형 광고, 배너 광고, 전면 광고 등을 연결할 수 있도록 UI와 구조를 준비하고 있습니다.
+1. Store listing 문구 후보 검토
+2. 실제 스토어 스크린샷 이미지 제작 계획 수립
+3. 개인정보 처리방침 URL/문의처 확정
+4. 앱 내부 개인정보 처리방침 링크 또는 안내 위치 검토
+5. Google Play 데이터 보안 양식 최종 답변 검토
+6. release build/signing/AAB 준비 문서화
 
-Google Play 제출 시 실제 광고 SDK가 연결된 경우:
+## 12. Conclusion
 
-- Contains ads 표시 필요
-- 광고 SDK 데이터 수집 항목 확인 필요
-- 광고 개인화 동의 UX 확인 필요
-- 개인정보 처리방침 갱신 필요
-
-## 8. 스크린샷 후보
-
-- 온보딩/프로필 입력 화면
-- 홈 화면
-- 오늘의 운세 카드 화면
-- 운세 상세 화면
-- 사주 인사이트 화면
-- 저장한 풀이 화면
-- 개인정보 안내/설정 화면
-
-## 9. 스토어 제출 전 체크리스트
-
-- Android 실제 기기 QA 완료
-- icon/splash 실제 표시 QA 완료
-- WebView localStorage QA 완료
-- back button QA 완료
-- 개인정보 처리방침 URL 준비
-- 앱 스크린샷 준비
-- 앱 아이콘 최종 확인
-- release build 준비
-- signing 준비
-- AAB 생성
-- Google Play 데이터 보안 양식 준비
-- 광고 SDK 연결 여부 확정
-- 실제 광고 SDK 연결 시 Contains ads 선언
-
-## 10. 현재 보류 항목
-
-- Google Play 실제 등록 미진행
-- release build 미진행
-- signing 미진행
-- AAB 생성 미진행
-- 실제 광고 SDK 미연동
-- 실제 결제 SDK 미연동
-- 개인정보 처리방침 URL 미확정
-- Android 실제 기기 QA Blocked
-- iOS 프로젝트 미생성
-
-## 11. 다음 단계
-
-- 개인정보 처리방침 URL 준비
-- Google Play 데이터 보안 양식 초안
-- 스토어 스크린샷 준비
-- Android 실제 QA 재시도
-- release build/signing 준비
+- This PR adds a draft Store listing text only.
+- Store listing final text and Google Play Console input remain Pending.
+- 개인정보 처리방침 URL, 문의처 이메일/지원 연락처, Google Play 데이터 보안 양식, and 실제 스토어 스크린샷 이미지 제작 remain Pending.
+- No production code, Android packaging, release build, signing, AAB, or Console input changes are included.

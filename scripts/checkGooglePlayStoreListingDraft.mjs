@@ -5,133 +5,144 @@ import { fileURLToPath } from 'node:url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const projectRoot = path.resolve(__dirname, '..');
-const failures = [];
 
-function readText(relativePath) {
-  return fs.readFileSync(path.join(projectRoot, relativePath), 'utf8');
-}
+const draftDocPath = 'docs/GOOGLE_PLAY_STORE_LISTING_DRAFT.md';
+const todoPath = 'TODO.md';
+const developmentLogPath = 'DEVELOPMENT_LOG.md';
+const changelogPath = 'CHANGELOG.md';
 
-function fileExists(relativePath) {
-  return fs.existsSync(path.join(projectRoot, relativePath));
-}
+const read = (relativePath) => fs.readFileSync(path.join(projectRoot, relativePath), 'utf8');
 
-function assertCondition(condition, message) {
-  if (!condition) failures.push(message);
-}
-
-function logResult(sampleId, isPass) {
-  console.log(`sampleId: ${sampleId}`);
-  console.log(`result: ${isPass ? 'pass' : 'fail'}`);
-  console.log('');
-}
-
-function includesAny(text, patterns) {
-  return patterns.some((pattern) => text.includes(pattern));
-}
-
-const storeListingDocPath = 'docs/GOOGLE_PLAY_STORE_LISTING_DRAFT.md';
-const storeListingDocExists = fileExists(storeListingDocPath);
-logResult('store_listing_doc_exists', storeListingDocExists);
-assertCondition(storeListingDocExists, 'docs/GOOGLE_PLAY_STORE_LISTING_DRAFT.md should exist');
-
-const doc = storeListingDocExists ? readText(storeListingDocPath) : '';
-
-const docChecks = [
-  ['doc_mentions_app_name', doc.includes('하루풀이'), 'store listing draft should mention 하루풀이'],
-  [
-    'doc_mentions_short_description',
-    includesAny(doc, ['짧은 설명', '오늘의 운세와 사주 흐름']),
-    'store listing draft should include short description',
-  ],
-  [
-    'doc_mentions_long_description',
-    includesAny(doc, ['긴 설명', '주요 기능']),
-    'store listing draft should include long description',
-  ],
-  [
-    'doc_mentions_reference_notice',
-    includesAny(doc, ['참고용', '전문적인 자문을 대체하지 않습니다']),
-    'store listing draft should include reference notice',
-  ],
-  [
-    'doc_mentions_privacy',
-    includesAny(doc, ['개인정보', 'localStorage']),
-    'store listing draft should mention privacy or localStorage',
-  ],
-  [
-    'doc_mentions_ads',
-    includesAny(doc, ['광고', 'Contains ads']),
-    'store listing draft should mention ads or Contains ads',
-  ],
-  [
-    'doc_mentions_screenshots',
-    doc.includes('스크린샷'),
-    'store listing draft should mention screenshots',
-  ],
-  [
-    'doc_mentions_pre_submit_checklist',
-    includesAny(doc, ['스토어 제출 전 체크리스트', '제출 전 체크리스트']),
-    'store listing draft should mention pre-submit checklist',
-  ],
-  [
-    'doc_mentions_release_signing_not_done',
-    includesAny(doc, ['release build 미진행', 'signing 미진행']),
-    'store listing draft should mention release build or signing not done',
-  ],
-  [
-    'doc_mentions_real_ad_sdk_not_added',
-    includesAny(doc, ['실제 광고 SDK 미연동', '실제 광고 SDK가 아직 연결되어 있지 않습니다']),
-    'store listing draft should mention real ad SDK is not added',
-  ],
-];
-
-for (const [id, pass, message] of docChecks) {
-  logResult(id, pass);
-  assertCondition(pass, message);
-}
-
-const noIosProjectCreated = !fileExists('ios');
-logResult('no_ios_project_created', noIosProjectCreated);
-assertCondition(noIosProjectCreated, 'ios folder should not exist');
-
-const serviceWorkerPaths = ['public/service-worker.js', 'public/sw.js', 'src/service-worker.js', 'src/sw.js'];
-const noServiceWorkerAdded = serviceWorkerPaths.every((relativePath) => !fileExists(relativePath));
-logResult('no_service_worker_added', noServiceWorkerAdded);
-assertCondition(noServiceWorkerAdded, 'service worker files should not be added');
-
-const packageJson = JSON.parse(readText('package.json'));
-const allDependencies = {
-  ...(packageJson.dependencies || {}),
-  ...(packageJson.devDependencies || {}),
+const checks = [];
+const mark = (condition, label) => {
+  checks.push({ condition: Boolean(condition), label });
 };
-const dependencyNames = Object.keys(allDependencies);
 
-const realAdSdkMarkers = ['google-ads', 'admob', 'adsense', 'applovin', 'unity-ads', 'google-mobile-ads'];
-const noRealAdSdkAdded = dependencyNames.every((packageName) => {
-  const normalizedName = packageName.toLowerCase();
-  return realAdSdkMarkers.every((marker) => !normalizedName.includes(marker));
-});
-logResult('no_real_ad_sdk_added', noRealAdSdkAdded);
-assertCondition(noRealAdSdkAdded, 'real ad SDK dependencies should not be added');
-
-const paymentSdkMarkers = ['billing', 'purchase', 'revenuecat', 'iamport', 'tosspayments'];
-const noPaymentSdkAdded = dependencyNames.every((packageName) => {
-  const normalizedName = packageName.toLowerCase();
-  return paymentSdkMarkers.every((marker) => !normalizedName.includes(marker));
-});
-logResult('no_payment_sdk_added', noPaymentSdkAdded);
-assertCondition(noPaymentSdkAdded, 'payment SDK dependencies should not be added');
-
-const noCapacitorAppAdded = !dependencyNames.includes('@capacitor/app');
-logResult('no_capacitor_app_added', noCapacitorAppAdded);
-assertCondition(noCapacitorAppAdded, '@capacitor/app should not be added in this PR');
-
-if (failures.length > 0) {
+mark(fs.existsSync(path.join(projectRoot, draftDocPath)), 'draft_doc_exists');
+if (!fs.existsSync(path.join(projectRoot, draftDocPath))) {
   console.error('Google Play store listing draft check failed');
-  for (const failure of failures) {
-    console.error(`- ${failure}`);
-  }
-  process.exitCode = 1;
-} else {
-  console.log('Google Play store listing draft check passed');
+  console.error('- draft_doc_exists');
+  process.exit(1);
 }
+
+const draftDoc = read(draftDocPath);
+const todoSource = read(todoPath);
+const developmentLogSource = read(developmentLogPath);
+const changelogSource = read(changelogPath);
+
+const requiredDocSnippets = [
+  'Google Play Store Listing Draft',
+  'Status: Draft',
+  'Google Play Console input: Pending',
+  'Store listing final text: Pending',
+  '개인정보 처리방침 URL: Pending',
+  '문의처 이메일/지원 연락처: Pending',
+  '실제 스토어 스크린샷 이미지 제작: Pending',
+  'This document is not the finalized Google Play Store listing.',
+  'Purpose: Draft Google Play Store listing text for launch preparation',
+  'PR type: docs/check-only',
+  'App name: 하루풀이',
+  'Related launch readiness PR: #327',
+  'Related privacy policy draft PR: #329',
+  'Related data safety draft PR: #331',
+  'App positioning draft',
+  'Store title candidates',
+  'Short description draft candidates',
+  'Full description draft',
+  'Content caution statements',
+  'Keyword and tone notes',
+  'Store asset readiness',
+  '운세 결과는 참고용 콘텐츠입니다.',
+  '의료, 법률, 투자, 안전 관련 판단은 전문가의 조언을 우선하세요.',
+  '고요한 밤의 운세 다이어리',
+  'No src changes',
+  'No CSS changes',
+  'No production UI changes',
+  'No AndroidManifest.xml changes',
+  'No Android native code changes',
+  'No Android resource changes',
+  'No Gradle changes',
+  'No Capacitor config changes',
+  'No release build',
+  'No signing setup',
+  'No keystore file added',
+  'No AAB generation',
+  'No Google Play Console input',
+  'No Store listing finalization',
+  'No 개인정보 처리방침 URL finalization',
+  'No 문의처 이메일/지원 연락처 finalization',
+  'No Google Play 데이터 보안 양식 completion',
+  'No 실제 스토어 스크린샷 이미지 제작 completion',
+  'No production fortune logic changes',
+  'No routing changes',
+  'No schemaVersion changes',
+  'No CURRENT_FORTUNE_SCHEMA_VERSION changes',
+  'No existing localStorage key changes',
+  'Recommended next sequence',
+];
+for (const snippet of requiredDocSnippets) {
+  mark(draftDoc.includes(snippet), `draft_doc_includes_${snippet}`);
+}
+
+const forbiddenSnippets = [
+  'Store listing final text | Completed',
+  'Google Play Console actual input | Completed',
+  '개인정보 처리방침 URL | Completed',
+  '문의처 이메일/지원 연락처 확정 | Completed',
+  'Google Play 데이터 보안 양식 | Completed',
+  'Google Play 데이터 보안 양식 최종 입력 | Completed',
+  '실제 스토어 스크린샷 이미지 제작 | Completed',
+  '실제 스토어 스크린샷 이미지 시작',
+  'Release build | Completed',
+  'Signing setup | Completed',
+  'AAB generation | Completed',
+  '서양식 보정 적용 여부',
+  '양력/음력 샘플 추가 검증',
+  'Google Play Console 입력 완료',
+  'Store listing 최종 확정',
+  '실제 스토어 스크린샷 이미지 완료',
+  'release build 완료',
+  'signing 설정 완료',
+  'AAB 생성 완료',
+];
+mark(!forbiddenSnippets.some((snippet) => draftDoc.includes(snippet)), 'draft_doc_no_forbidden_snippets');
+
+const requiredTodoCompletedSnippets = [
+  '- [x] Store listing 문구 초안 정리',
+  '- [x] Google Play store listing draft 검증 스크립트 추가',
+];
+for (const snippet of requiredTodoCompletedSnippets) {
+  mark(todoSource.includes(snippet), `todo_includes_completed_${snippet}`);
+}
+
+const requiredTodoPendingSnippets = [
+  '- [ ] Store listing 최종 문구 확정',
+  '- [ ] Google Play Console 실제 입력',
+  '- [ ] 개인정보 처리방침 URL 확정',
+  '- [ ] 문의처 이메일/지원 연락처 확정',
+  '- [ ] Google Play 데이터 보안 양식 최종 입력',
+  '- [ ] 실제 스토어 스크린샷 이미지 제작 계획 수립',
+  '- [ ] 실제 스토어 스크린샷 이미지 제작',
+  '- [ ] release build 준비',
+  '- [ ] signing 설정 준비',
+  '- [ ] AAB 생성',
+];
+for (const snippet of requiredTodoPendingSnippets) {
+  mark(todoSource.includes(snippet), `todo_includes_pending_${snippet}`);
+}
+
+mark(developmentLogSource.includes('## Google Play Store Listing Draft'), 'development_log_has_section');
+mark(
+  changelogSource.includes('Added Google Play Store listing draft for launch preparation.'),
+  'changelog_records_draft_doc',
+);
+
+const failed = checks.filter((check) => !check.condition);
+
+if (failed.length > 0) {
+  console.error('Google Play store listing draft check failed');
+  failed.forEach((check) => console.error(`- ${check.label}`));
+  process.exit(1);
+}
+
+console.log('Google Play store listing draft check passed');
