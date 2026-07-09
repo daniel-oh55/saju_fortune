@@ -214,6 +214,7 @@
     "check:share-fallback-layout-android-qa-result": "node scripts/checkShareFallbackLayoutAndroidQaResult.mjs",
     "check:capacitor-share-readiness": "node scripts/checkCapacitorShareReadiness.mjs",
     "check:google-play-launch-readiness-status": "node scripts/checkGooglePlayLaunchReadinessStatus.mjs",
+    "check:privacy-policy-draft": "node scripts/checkPrivacyPolicyDraft.mjs",
     "check:splash-png-export": "node scripts/checkSplashPngExportReadiness.mjs",
     "check:visit-streak": "node scripts/checkVisitStreakRegression.mjs",
     "check:zodiac-fortune-sample-qa": "node scripts/checkZodiacFortuneSampleQa.mjs",
