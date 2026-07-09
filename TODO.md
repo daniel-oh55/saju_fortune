@@ -42,8 +42,12 @@
 - [x] 저장한 풀이 공유/삭제 버튼 layout Android QA 결과 문서화
 - [x] 운세 결과 풀이 저장/복사 버튼 layout Android QA 결과 문서화
 - [x] Share fallback layout Android QA result 검증 스크립트 추가
+- [x] @capacitor/share 도입 여부 검토 문서화
+- [x] Capacitor Share readiness 검증 스크립트 추가
 - [ ] Android share sheet 실제 확인 재검토
 - [ ] @capacitor/share 도입 여부 검토
+- [ ] @capacitor/share 구현 검토
+- [ ] Native Android share sheet 실제 확인
 - [ ] Kakao SDK 연동 검토
 - [ ] SMS permission/native integration 검토
 - [ ] 공유 이미지 생성 기능 검토

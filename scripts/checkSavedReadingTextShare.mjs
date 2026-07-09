@@ -59,7 +59,7 @@ const forbiddenPatterns = [
   { label: 'android_intent', pattern: /\bIntent\b/ },
   { label: 'capacitor_share_package', pattern: /@capacitor\/share/i },
   { label: 'capacitor_share_import', pattern: /Share from '@capacitor/ },
-  { label: 'capacitor_share_class', pattern: /CapacitorShare/ },
+  { label: 'capacitor_share_class', pattern: /CapacitorShare(?!Readiness)/ },
   { label: 'play_google_link', pattern: /play\.google\.com/ },
   { label: 'apple_app_store_link', pattern: /apps\.apple\.com/ },
 ];

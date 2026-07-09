@@ -212,6 +212,7 @@
     "check:saved-reading-share-android-qa-result": "node scripts/checkSavedReadingShareAndroidQaResult.mjs",
     "check:share-copy-action-button-layout": "node scripts/checkShareCopyActionButtonLayout.mjs",
     "check:share-fallback-layout-android-qa-result": "node scripts/checkShareFallbackLayoutAndroidQaResult.mjs",
+    "check:capacitor-share-readiness": "node scripts/checkCapacitorShareReadiness.mjs",
     "check:splash-png-export": "node scripts/checkSplashPngExportReadiness.mjs",
     "check:visit-streak": "node scripts/checkVisitStreakRegression.mjs",
     "check:zodiac-fortune-sample-qa": "node scripts/checkZodiacFortuneSampleQa.mjs",
