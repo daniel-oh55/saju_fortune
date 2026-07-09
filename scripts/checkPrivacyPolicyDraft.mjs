@@ -6,7 +6,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const projectRoot = path.resolve(__dirname, '..');
 
-const readinessDocPath = 'docs/PRIVACY_POLICY_CONTACT_READINESS.md';
+const draftDocPath = 'docs/PRIVACY_POLICY_DRAFT.md';
 const todoPath = 'TODO.md';
 const developmentLogPath = 'DEVELOPMENT_LOG.md';
 const changelogPath = 'CHANGELOG.md';
@@ -18,35 +18,48 @@ const mark = (condition, label) => {
   checks.push({ condition: Boolean(condition), label });
 };
 
-mark(fs.existsSync(path.join(projectRoot, readinessDocPath)), 'readiness_doc_exists');
-if (!fs.existsSync(path.join(projectRoot, readinessDocPath))) {
-  console.error('Privacy policy and support contact readiness check failed');
-  console.error('- readiness_doc_exists');
+mark(fs.existsSync(path.join(projectRoot, draftDocPath)), 'draft_doc_exists');
+if (!fs.existsSync(path.join(projectRoot, draftDocPath))) {
+  console.error('Privacy policy draft check failed');
+  console.error('- draft_doc_exists');
   process.exit(1);
 }
 
-const readinessDoc = read(readinessDocPath);
+const draftDoc = read(draftDocPath);
 const todoSource = read(todoPath);
 const developmentLogSource = read(developmentLogPath);
 const changelogSource = read(changelogPath);
 
 const requiredDocSnippets = [
-  'Privacy Policy and Support Contact Readiness',
-  'Purpose: Document privacy policy URL and support contact readiness for Google Play launch preparation',
-  'PR type: docs/check-only',
-  'App name: 하루풀이',
-  'Related readiness PR: #327',
-  'Current privacy policy URL status: Pending',
-  'Current support contact status: Pending',
-  'Current Google Play Console input status: Pending',
-  'localStorage',
-  'Clipboard fallback share',
-  'Actual external share send',
-  'Not performed',
-  '개인정보 처리방침 URL',
-  'Pending',
-  '문의처 이메일/지원 연락처 확정',
-  'Google Play 데이터 보안 양식',
+  'Privacy Policy Draft',
+  'Status: Draft',
+  'This document is not the finalized public privacy policy.',
+  '개인정보 처리방침 URL: Pending',
+  '문의처 이메일/지원 연락처: Pending',
+  'Google Play Console input: Pending',
+  'App internal privacy policy link/text: Pending',
+  '총칙',
+  '수집 또는 처리하는 정보',
+  '정보의 이용 목적',
+  '정보의 저장 방식',
+  '제3자 제공 및 외부 전송',
+  '공유 기능 관련 안내',
+  '개인정보의 보관 및 삭제',
+  '이용자의 권리 및 문의',
+  '아동의 개인정보',
+  '개인정보 처리방침의 변경',
+  '시행일',
+  '문의처',
+  '[문의처 이메일 확정 필요]',
+  '[개인정보 처리방침 URL 확정 필요]',
+  '[시행일 확정 필요]',
+  '[제공자 정보 확정 필요]',
+  '서버 DB 없음',
+  '로그인 없음',
+  '실제 광고 SDK 없음',
+  '실제 결제 SDK 없음',
+  '외부 분석 SDK 없음',
+  'localStorage 중심 저장 구조',
   'No src changes',
   'No CSS changes',
   'No production UI changes',
@@ -70,16 +83,17 @@ const requiredDocSnippets = [
   'No schemaVersion changes',
   'No CURRENT_FORTUNE_SCHEMA_VERSION changes',
   'No existing localStorage key changes',
-  'Recommended next sequence',
 ];
 for (const snippet of requiredDocSnippets) {
-  mark(readinessDoc.includes(snippet), `readiness_doc_includes_${snippet}`);
+  mark(draftDoc.includes(snippet), `draft_doc_includes_${snippet}`);
 }
 
 const forbiddenSnippets = [
+  'Status: Final',
   '개인정보 처리방침 URL | Completed',
   '문의처 이메일/지원 연락처 확정 | Completed',
-  'Google Play 데이터 보안 양식 | Completed',
+  '시행일 확정 | Completed',
+  '제공자 정보 확정 | Completed',
   'Google Play Console actual input | Completed',
   'Release build | Completed',
   'Signing setup | Completed',
@@ -90,17 +104,17 @@ const forbiddenSnippets = [
   '양력/음력 샘플 추가 검증',
   '개인정보 처리방침 URL 완료',
   '문의처 확정 완료',
-  'Google Play 데이터 보안 양식 완료',
+  '시행일 확정 완료',
   'Google Play Console 입력 완료',
   'release build 완료',
   'signing 설정 완료',
   'AAB 생성 완료',
 ];
-mark(!forbiddenSnippets.some((snippet) => readinessDoc.includes(snippet)), 'readiness_doc_no_forbidden_snippets');
+mark(!forbiddenSnippets.some((snippet) => draftDoc.includes(snippet)), 'draft_doc_no_forbidden_snippets');
 
 const requiredTodoCompletedSnippets = [
-  '- [x] 개인정보 처리방침/문의처 준비 상태 문서화',
-  '- [x] Privacy policy and support contact readiness 검증 스크립트 추가',
+  '- [x] 개인정보 처리방침 문서 초안 작성',
+  '- [x] Privacy policy draft 검증 스크립트 추가',
 ];
 for (const snippet of requiredTodoCompletedSnippets) {
   mark(todoSource.includes(snippet), `todo_includes_completed_${snippet}`);
@@ -109,6 +123,8 @@ for (const snippet of requiredTodoCompletedSnippets) {
 const requiredTodoPendingSnippets = [
   '- [ ] 개인정보 처리방침 URL 확정',
   '- [ ] 문의처 이메일/지원 연락처 확정',
+  '- [ ] 시행일 확정',
+  '- [ ] 제공자 정보 확정',
   '- [ ] 앱 내부 개인정보 처리방침 링크 또는 안내 위치 검토',
   '- [ ] Google Play 데이터 보안 양식 초안 문서화',
   '- [ ] Store listing 문구 초안 정리',
@@ -122,23 +138,18 @@ for (const snippet of requiredTodoPendingSnippets) {
   mark(todoSource.includes(snippet), `todo_includes_pending_${snippet}`);
 }
 
+mark(developmentLogSource.includes('## Privacy Policy Draft'), 'development_log_has_section');
 mark(
-  developmentLogSource.includes('## Privacy Policy and Support Contact Readiness'),
-  'development_log_has_section',
-);
-mark(
-  changelogSource.includes(
-    'Documented privacy policy and support contact readiness for Google Play launch preparation.',
-  ),
-  'changelog_records_readiness_doc',
+  changelogSource.includes('Added draft privacy policy for Google Play launch preparation.'),
+  'changelog_records_draft_doc',
 );
 
 const failed = checks.filter((check) => !check.condition);
 
 if (failed.length > 0) {
-  console.error('Privacy policy and support contact readiness check failed');
+  console.error('Privacy policy draft check failed');
   failed.forEach((check) => console.error(`- ${check.label}`));
   process.exit(1);
 }
 
-console.log('Privacy policy and support contact readiness check passed');
+console.log('Privacy policy draft check passed');

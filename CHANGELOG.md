@@ -2,6 +2,15 @@
 
 ## Docs
 
+- Added draft privacy policy for Google Play launch preparation.
+- Kept 개인정보 처리방침 URL, 문의처 이메일/지원 연락처, 시행일, 제공자 정보, app internal privacy policy link/text, Google Play Console input, release build, signing, and AAB generation as Pending/Not started.
+
+## Checks
+
+- Added privacy policy draft check script.
+
+## Docs
+
 - Documented privacy policy and support contact readiness for Google Play launch preparation.
 - Recorded 개인정보 처리방침 URL, 문의처 이메일/지원 연락처, app internal privacy policy link/text, Google Play 데이터 보안 양식, release build, signing, AAB generation, and Google Play Console input as Pending/Not started.
 

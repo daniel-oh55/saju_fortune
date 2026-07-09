@@ -69,9 +69,12 @@
 - [x] Google Play launch readiness status 검증 스크립트 추가
 - [x] 개인정보 처리방침/문의처 준비 상태 문서화
 - [x] Privacy policy and support contact readiness 검증 스크립트 추가
-- [ ] 개인정보 처리방침 문서 초안 작성
+- [x] 개인정보 처리방침 문서 초안 작성
+- [x] Privacy policy draft 검증 스크립트 추가
 - [ ] 개인정보 처리방침 URL 확정
 - [ ] 문의처 이메일/지원 연락처 확정
+- [ ] 시행일 확정
+- [ ] 제공자 정보 확정
 - [ ] 앱 내부 개인정보 처리방침 링크 또는 안내 위치 검토
 - [ ] Google Play 데이터 보안 양식 초안 문서화
 - [ ] Store listing 문구 초안 정리

@@ -1,181 +1,146 @@
-# PRIVACY_POLICY_DRAFT
+# Privacy Policy Draft
 
-## 문의처 확정 준비
+- Status: Draft
+- This document is not the finalized public privacy policy.
+- 개인정보 처리방침 URL: Pending
+- 문의처 이메일/지원 연락처: Pending
+- Google Play Console input: Pending
+- App internal privacy policy link/text: Pending
 
-- 개인정보 처리방침 문의처 확정 준비 문서를 추가했습니다.
-- 문서 경로는 `docs/PRIVACY_POLICY_CONTACT_READINESS.md`입니다.
-- 실제 문의처는 아직 미확정입니다.
-- 실제 문의처가 확정되기 전까지 공개 페이지와 앱 내부 안내에 임의 연락처를 반영하지 않습니다.
+## 1. 개인정보 처리방침 초안
 
-## build output 확인 연계
+### 1. 총칙
 
-- 공개 개인정보 처리방침 페이지가 build output에 포함되는지 확인해야 합니다.
-- 확인 문서는 `docs/PRIVACY_POLICY_BUILD_OUTPUT_VERIFICATION.md`입니다.
-- build output과 초안 문서 내용이 충돌하지 않아야 합니다.
+하루풀이(이하 "앱")는 사용자가 입력한 정보를 바탕으로 사주/운세 풀이를 참고용으로 제공합니다. 본 문서는 개인정보 처리방침의 초안이며, 실제 서비스 공개 전 최종 검토를 거쳐 확정됩니다.
 
-## 공개 URL 확인 연계
+### 2. 수집 또는 처리하는 정보
 
-- 공개 개인정보 처리방침 URL 확인 문서는 `docs/PRIVACY_POLICY_URL_VERIFICATION.md`입니다.
-- 실제 배포 URL이 확정되면 본 문서와 공개 페이지의 내용 일치 여부를 확인해야 합니다.
-- 문의처는 Google Play 제출 전 확정해야 합니다.
+앱은 사용자가 입력한 생년월일, 출생시간, 성별, 출생지 등을 운세 풀이 생성에 사용할 수 있습니다. 앱은 현재 서버 DB를 사용하지 않으며, 로그인 기능을 사용하지 않습니다.
 
-## 브랜드명 정합성 확인
+### 3. 정보의 이용 목적
 
-- 공개 개인정보 처리방침 후보 페이지의 서비스명 표기는 `하루풀이` 기준으로 맞췄습니다.
-- Google Play 제출 전 앱 이름과 개인정보 처리방침 문서의 서비스명이 일치해야 합니다.
+입력된 정보는 오늘운세, 사주 흐름 해석 등 운세 풀이 결과 생성 목적으로만 사용됩니다.
 
-## 공개 페이지 scaffold 연결
+### 4. 정보의 저장 방식
 
-- 공개 개인정보 처리방침 후보 페이지는 `public/privacy/index.html`입니다.
-- Google Play 제출 전 실제 배포 URL과 본 문서의 내용이 일치하는지 확인해야 합니다.
-- 실제 광고 SDK, 결제 SDK, 로그인, 서버 DB가 추가되면 공개 페이지도 함께 갱신해야 합니다.
+현재 저장한 풀이 등 앱 내 저장 정보는 기기 내 localStorage를 중심으로 저장됩니다. 앱 삭제, 브라우저/WebView 데이터 삭제, 또는 앱 내 삭제 기능 사용 시 저장 정보가 삭제될 수 있습니다.
 
-## Google Play 데이터 보안 양식 연계
+### 5. 제3자 제공 및 외부 전송
 
-- Google Play 데이터 보안 양식 초안 문서는 `docs/GOOGLE_PLAY_DATA_SAFETY_DRAFT.md`입니다.
-- 개인정보 처리방침 문구와 데이터 보안 양식 입력 내용이 충돌하지 않아야 합니다.
-- 실제 Google Play 제출 전 공개 URL과 데이터 보안 양식을 다시 대조해야 합니다.
+앱은 현재 실제 광고 SDK를 사용하지 않습니다. 앱은 현재 실제 결제 SDK를 사용하지 않습니다. 앱은 현재 외부 분석 SDK를 사용하지 않습니다. 사용자가 입력한 정보는 현재 서버로 전송되지 않습니다.
 
-## URL 공개 준비 상태
+### 6. 공유 기능 관련 안내
 
-- 개인정보 처리방침 URL 준비 문서는 `docs/PRIVACY_POLICY_URL_READINESS.md`입니다.
-- 현재 문서는 초안이며, 실제 외부 공개 URL은 아직 확정되지 않았습니다.
-- Google Play 제출 전 공개 URL과 앱 내부 PrivacyInfoPage 내용 일치 여부를 확인해야 합니다.
+저장한 풀이 공유 기능은 사용자가 직접 공유 또는 복사 버튼을 누를 때만 실행됩니다. 실제 외부 앱으로 공유하는 경우, 해당 외부 앱의 정책이 적용될 수 있습니다.
 
-## Android 앱 배포 전 확인 메모
+### 7. 개인정보의 보관 및 삭제
 
-- Android 앱 배포 전 개인정보 처리방침 URL이 필요합니다.
-- 앱 삭제/재설치 시 localStorage 기반 데이터가 삭제될 수 있음을 안내해야 합니다.
-- 광고 SDK 도입 시 광고/분석 동의 문구를 재검토해야 합니다.
+localStorage에 저장된 정보는 사용자가 앱 내 삭제 기능, 브라우저/WebView 데이터 삭제, 또는 앱 삭제를 통해 삭제할 수 있습니다.
 
-## 15. 동의 상태 저장 유틸
+### 8. 이용자의 권리 및 문의
 
-- MVP에서는 향후 광고/분석 SDK 도입에 대비해 consent preferences 저장 유틸을 준비합니다.
-- localStorage key는 `harupuli_consent_preferences_v1`입니다.
-- 현재 동의 배너 UI가 추가되어 선택 상태를 브라우저에 저장합니다.
-- 실제 광고/분석 SDK는 아직 연결되어 있지 않습니다.
-- 실제 SDK 도입 시 동의 배너 UX와 함께 재검토합니다.
+이용자는 저장된 정보의 열람, 삭제를 요청할 수 있습니다. 문의는 [문의처 이메일 확정 필요]로 접수할 수 있습니다.
 
-## 동의 배너 UI 계획
+### 9. 아동의 개인정보
 
-- 실제 광고 SDK 또는 분석 SDK가 도입되기 전 동의 배너 UI 구현 계획을 검토합니다.
-- 현재 MVP에서는 실제 동의 배너 UI를 구현하지 않습니다.
-- 동의 배너 UI 초안은 `docs/CONSENT_BANNER_UI_PLAN.md`를 참고합니다.
+앱은 만 14세 미만 아동의 개인정보를 의도적으로 수집하지 않습니다.
 
-이 문서는 하루풀이 MVP 기준의 개인정보 처리방침 초안입니다.
-법률 검토를 완료한 최종 문서가 아니며, 실제 서비스 공개 전 최신 법령과 광고/분석 SDK 정책을 기준으로 별도 검토가 필요합니다.
+### 10. 개인정보 처리방침의 변경
 
-## 1. 서비스 개요
+개인정보 처리방침이 변경될 경우 앱 공지 또는 문서 업데이트로 안내합니다.
 
-- 하루풀이는 사용자가 입력한 프로필 정보를 바탕으로 오늘운세와 사주 흐름을 참고용으로 보여주는 웹앱입니다.
-- 현재 MVP는 서버/DB 없이 브라우저 `localStorage` 중심으로 동작합니다.
-- 실제 광고 SDK는 아직 연결되어 있지 않습니다.
-- 실제 분석 SDK는 아직 연결되어 있지 않습니다.
-- 실제 결제 기능은 아직 연결되어 있지 않습니다.
+### 11. 시행일
 
-## 2. 처리하는 정보
+본 개인정보 처리방침의 시행일은 [시행일 확정 필요]입니다.
 
-현재 앱에서 사용할 수 있는 정보 항목은 다음과 같습니다.
+### 12. 문의처
 
-- 이름 또는 닉네임
-- 생년월일
-- 출생시간 또는 출생시간 모름 여부
-- 성별
-- 양력/음력 선택
-- 윤달 여부
-- 23시 이후 자시 기준 선택
-- 오늘운세 생성 결과
-- 사주 흐름 해석 결과
-- 광고 해금 상태
-- 저장한 풀이 목록
-- 공유용 텍스트 생성 내용
-- 방문 streak 정보
+- 제공자: [제공자 정보 확정 필요]
+- 문의처: [문의처 이메일 확정 필요]
+- 개인정보 처리방침 URL: [개인정보 처리방침 URL 확정 필요]
 
-위 항목은 현재 코드 기준의 초안이며, 실제 서비스 공개 전 구현 범위와 정책에 맞춰 다시 검토해야 합니다.
+## 2. Draft placeholders
 
-## 3. 저장 위치
+| Placeholder | Status | Note |
+| --- | --- | --- |
+| [문의처 이메일 확정 필요] | Pending | 실제 문의처 이메일/지원 연락처 미확정 |
+| [개인정보 처리방침 URL 확정 필요] | Pending | 공개 URL 미확정 |
+| [시행일 확정 필요] | Pending | 실제 시행일 미확정 |
+| [제공자 정보 확정 필요] | Pending | 실제 제공자/사업자 표시 정보 미확정 |
 
-현재 MVP 기준으로 대부분의 데이터는 사용자의 브라우저 `localStorage`에 저장됩니다.
+## 3. Draft-safe statements
 
-- `aiTodayFortune.profile`: 프로필 입력 정보
-- `aiTodayFortune.todayFortune`: 오늘운세 및 사주 분석 결과 캐시
-- `aiTodayFortune.rewardUnlocks`: 광고 해금 상태
-- `harupuli_saved_readings_v1`: 저장한 풀이 목록
-- `harupuli_visit_streak_v1`: 방문 streak 정보
+- 서버 DB 없음
+- 로그인 없음
+- 실제 광고 SDK 없음
+- 실제 결제 SDK 없음
+- 외부 분석 SDK 없음
+- localStorage 중심 저장 구조
+- 실제 외부 공유 발송은 사용자의 선택과 외부 앱 동작에 따름
+- Google Play Console 입력은 Pending
+- 개인정보 처리방침 URL은 Pending
+- 문의처 이메일/지원 연락처는 Pending
 
-현재 MVP는 위 정보를 서버 DB로 전송하거나 저장하지 않습니다. 사용자가 브라우저 저장소를 삭제하거나 앱 초기화를 실행하면 저장된 정보가 삭제될 수 있습니다.
+## 4. Not included in this PR
 
-## 4. 이용 목적
+- No src changes
+- No CSS changes
+- No production UI changes
+- No app privacy policy link UI
+- No AndroidManifest.xml changes
+- No Android native code changes
+- No Android resource changes
+- No Gradle changes
+- No Capacitor config changes
+- No release build
+- No signing setup
+- No keystore file added
+- No AAB generation
+- No Google Play Console input
+- No 개인정보 처리방침 URL finalization
+- No 문의처 이메일/지원 연락처 finalization
+- No Google Play 데이터 보안 양식 completion
+- No 실제 스토어 스크린샷 이미지 제작 completion
+- No actual ad SDK
+- No actual payment SDK
+- No login
+- No server DB
+- No external analytics SDK
+- No production fortune logic changes
+- No routing changes
+- No schemaVersion changes
+- No CURRENT_FORTUNE_SCHEMA_VERSION changes
+- No existing localStorage key changes
 
-정보는 다음 목적을 위해 사용됩니다.
+## 5. Remaining Pending / Not started items
 
-- 오늘운세 생성
-- 사주 흐름 해석 표시
-- 사용자 설정 유지
-- 광고 해금 상태 유지
-- 저장한 풀이 다시 보기
-- 연속 방문 streak 표시
-- 공유용 텍스트 생성
+| Item | Status |
+| --- | --- |
+| 개인정보 처리방침 URL 확정 | Pending |
+| 문의처 이메일/지원 연락처 확정 | Pending |
+| 시행일 확정 | Pending |
+| 제공자 정보 확정 | Pending |
+| App internal privacy policy link/text | Pending |
+| Google Play 데이터 보안 양식 초안 문서화 | Pending |
+| Google Play Console actual input | Pending |
+| Store listing 문구 초안 정리 | Pending |
+| 실제 스토어 스크린샷 이미지 제작 계획 수립 | Pending |
+| Release build | Not started |
+| Signing setup | Not started |
+| AAB generation | Not started |
 
-## 5. 저장하지 않는 정보
+## 6. Recommended next sequence
 
-현재 구현 기준으로 다음 항목은 별도 저장 대상에서 제외합니다.
+1. 문의처 이메일/지원 연락처 후보 결정
+2. 문의처 수신 가능 여부 확인
+3. 제공자 정보와 시행일 확정
+4. 개인정보 처리방침 공개 URL 확정
+5. 앱 내부 개인정보 처리방침 링크 또는 안내 위치 검토
+6. Google Play 데이터 보안 양식 초안 문서화
 
-- 저장한 풀이에는 생년월일, 출생시간, 성별, 양력/음력 원본 설정, 23시 이후 자시 정책을 포함하지 않습니다.
-- 공유용 텍스트에는 생년월일, 출생시간, 성별, 양력/음력 원본 설정, 23시 이후 자시 정책을 포함하지 않습니다.
-- visit streak에는 운세 내용, 생년월일, 출생시간, 성별, 사주 정보를 저장하지 않습니다.
-- 현재 mock 광고 provider는 실제 광고 SDK가 아니며 광고 사업자에게 데이터를 전송하지 않습니다.
+## 7. Conclusion
 
-## 6. 제3자 제공 및 외부 전송
-
-현재 MVP 기준:
-
-- 서버 또는 제3자에게 개인정보를 전송하지 않습니다.
-- 실제 광고 SDK, 분석 SDK, 로그인, DB, 결제 기능이 도입되면 해당 항목은 반드시 재검토해야 합니다.
-- 실제 SDK 도입 시 provider의 개인정보 처리방침, 쿠키/광고 식별자 사용 여부, 이용자 동의 UX를 확인해야 합니다.
-
-## 7. 보관 및 삭제
-
-- `localStorage` 데이터는 사용자의 브라우저에 보관됩니다.
-- 사용자는 브라우저 저장소 삭제 또는 앱 초기화를 통해 데이터를 삭제할 수 있습니다.
-- 향후 서버 저장 기능이 생기면 별도 보관 기간과 삭제 요청 절차를 정의해야 합니다.
-
-## 8. 광고 및 쿠키
-
-현재 MVP 기준:
-
-- 실제 광고 SDK는 연결되어 있지 않습니다.
-- 보상형 광고는 mock provider로만 동작합니다.
-- 실제 광고 SDK 도입 시 쿠키, 광고 식별자, 맞춤형 광고, 사용자 동의 UX를 검토해야 합니다.
-- 광고 provider에는 생년월일, 출생시간, 성별, 사주 정보 등을 직접 전달하지 않는 것을 원칙으로 합니다.
-
-## 9. 민감정보 처리 원칙
-
-- 생년월일, 출생시간, 성별 등은 사주/운세 계산에 사용될 수 있으므로 조심스럽게 다룹니다.
-- 해당 정보는 광고 SDK나 공유 텍스트에 직접 전달하지 않습니다.
-- 향후 서버 저장 또는 계정 기능이 생기면 보안, 암호화, 접근 권한, 삭제 요청 절차를 별도로 검토합니다.
-
-## 10. 사용자 권리
-
-초안 수준의 정책입니다.
-
-- 사용자는 브라우저 저장소 삭제 또는 앱 초기화를 통해 저장된 정보를 삭제할 수 있습니다.
-- 향후 계정/서버 저장 기능이 추가되면 열람, 정정, 삭제, 처리정지 요청 절차를 마련해야 합니다.
-
-## 11. 변경 고지
-
-- 개인정보 처리방침이 변경될 경우 앱 공지 또는 문서 업데이트로 안내합니다.
-- 실제 서비스 공개 전 최종 버전의 개인정보 처리방침은 별도로 확정합니다.
-
-## 12. 쿠키 및 동의 UX 검토
-
-- 현재 MVP에는 실제 광고 SDK와 분석 SDK가 연결되어 있지 않습니다.
-- 향후 실제 광고 SDK 또는 분석 SDK가 도입될 경우 쿠키, 광고 식별자, 맞춤형 광고, 분석 이벤트 수집 여부를 검토해야 합니다.
-- 동의 배너 또는 동의 설정 화면이 필요한지 별도로 검토합니다.
-- 자세한 동의 UX 초안은 `docs/COOKIE_AD_CONSENT_UX.md`를 참고합니다.
-
-## 13. 앱 안 개인정보 안내 페이지
-
-- MVP에서는 별도 페이지 `PrivacyInfoPage`를 통해 사용자가 현재 저장되는 정보와 저장하지 않는 정보를 확인할 수 있습니다.
-- 이 페이지는 최종 개인정보 처리방침이 아니라 사용자 친화적인 안내 페이지입니다.
-- 실제 서비스 공개 전 법률 검토를 거친 최종 개인정보 처리방침은 별도로 확정해야 합니다.
+- This PR adds a draft privacy policy only.
+- 개인정보 처리방침 URL, 문의처 이메일/지원 연락처, 시행일, and 제공자 정보 remain Pending.
+- Google Play Console input remains Pending.
+- No production code, Android packaging, release build, signing, AAB, or Console input changes are included.
