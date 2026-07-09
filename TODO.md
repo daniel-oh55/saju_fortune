@@ -12,6 +12,7 @@
 - [x] Change 내정보 CTA copy to '저장하고 하루풀이 시작하기'
 - [x] Adjust home morning/lunch/evening fortune cards to vertical layout
 - [x] Record APK QA result for home time-slot vertical layout
+- [x] Document app icon design brief
 
 ## Calculation regression baseline generator TODO
 
