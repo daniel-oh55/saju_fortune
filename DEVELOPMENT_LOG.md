@@ -1,5 +1,23 @@
 # DEVELOPMENT_LOG
 
+## Provided App Icon Candidate Update
+
+- Replaced the primary app icon candidate with the user-provided image
+- Recorded assets/app-icon/source/harupuli-icon-source.png as the current primary candidate
+- Kept assets/app-icon/harupuli-icon-candidate.svg as previous candidate reference
+- Kept final icon decision as Pending
+- Kept Android icon resource integration as Pending
+- Kept Google Play icon upload as Pending
+- Kept release build as Not started
+- Kept signing setup as Not started
+- Kept AAB generation as Not started
+- No src changes
+- No Android/Gradle changes
+- No Android resource changes
+- No AndroidManifest.xml changes
+- No production UI changes
+- No sharing feature implementation
+
 ## App Icon Candidate Asset
 
 - Added app icon candidate asset
