@@ -9,9 +9,20 @@
 - [x] Replace app icon candidate with provided image
 - [x] Finalize app icon asset
 - [x] Apply app icon to Android resources after asset finalization
-- [ ] Record Android launcher icon real-device QA result
+- [x] Record Android launcher icon real-device QA result
+- [x] Android launcher icon APK QA 결과 문서화
+- [x] Android Debug Build run #245 기반 런처 아이콘 실제 기기 확인 결과 기록
+- [x] Android launcher icon APK QA result 검증 스크립트 추가
 - [ ] Add saved reading share feature
 - [ ] Review KakaoTalk/SMS sharing path
+- [ ] 저장한 풀이 공유 기능 검토
+- [ ] KakaoTalk/SMS 공유 경로 검토
+- [ ] Google Play icon upload
+- [ ] Google Play Console 실제 입력
+- [ ] Google Play Console 스크린샷 업로드
+- [ ] release build 준비
+- [ ] signing 설정 준비
+- [ ] AAB 생성
 - [x] Change 내정보 CTA copy to '저장하고 하루풀이 시작하기'
 - [x] Adjust home morning/lunch/evening fortune cards to vertical layout
 - [x] Record APK QA result for home time-slot vertical layout
