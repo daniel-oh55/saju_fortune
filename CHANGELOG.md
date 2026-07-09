@@ -2,6 +2,10 @@
 
 ## Changed
 
+- Documented app icon design brief and kept icon asset creation Pending
+
+## Changed
+
 - Recorded APK QA result for home time-slot vertical layout
 
 ## Changed
