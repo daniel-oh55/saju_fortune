@@ -1,5 +1,23 @@
 # DEVELOPMENT_LOG
 
+## Home Time-slot Cards Vertical Layout
+
+- Adjusted home morning, lunch, and evening fortune cards to vertical layout
+- Kept change as home UI/CSS-only update
+- Kept 아침운세, 점심운세, 저녁운세 all visible together
+- No production fortune logic changes
+- No fortune result generation changes
+- No routing changes
+- No localStorage key changes
+- No schemaVersion changes
+- No CURRENT_FORTUNE_SCHEMA_VERSION changes
+- No generated JSON changes
+- No docs/generated changes
+- No Android/Gradle changes
+- No icon asset changes
+- No loading screen logic changes
+- No sharing feature implementation
+
 ## Short App Loading Screen
 
 - Added short React app loading screen

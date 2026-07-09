@@ -2,6 +2,10 @@
 
 ## Changed
 
+- Adjusted home time-slot fortune cards to vertical layout
+
+## Changed
+
 - Added short React app loading screen
 
 ## Changed
