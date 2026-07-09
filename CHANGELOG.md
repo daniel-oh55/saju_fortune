@@ -2,6 +2,17 @@
 
 ## Docs
 
+- Documented saved reading share readiness before implementation.
+- Compared Web Share API, copy-to-clipboard fallback, and direct KakaoTalk/SMS integration.
+- Recommended text-based Web Share API sharing with copy fallback as the first MVP candidate.
+- Kept direct KakaoTalk/SMS integration, Kakao SDK, SMS permission, share image generation, release build, signing, and AAB generation as Pending/Not started.
+
+## Checks
+
+- Added saved reading share readiness check script.
+
+## Docs
+
 - Documented Android launcher icon APK QA result after PR #316.
 - Recorded Android Debug Build run #245 as the QA reference.
 - Recorded real-device launcher/app drawer icon verification result.
