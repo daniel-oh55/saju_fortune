@@ -2,6 +2,16 @@
 
 ## Docs
 
+- Documented current Google Play launch readiness status.
+- Recorded release build, signing setup, AAB generation, Google Play Console input, 개인정보 처리방침 URL, 문의처, Google Play 데이터 보안 양식, and 실제 스토어 스크린샷 이미지 제작 as Pending/Not started.
+- Recorded 태양시 보정 적용 여부 and 음력/윤달 샘플 외부 검증 as Pending.
+
+## Checks
+
+- Added Google Play launch readiness status check script.
+
+## Docs
+
 - Documented Capacitor Share readiness after Android WebView share fallback QA.
 - Compared current Web Share API plus clipboard fallback, future `@capacitor/share`, and direct KakaoTalk/SMS integration.
 - Kept `@capacitor/share` implementation, native Android share sheet verification, external share send, Kakao SDK, SMS permission/native integration, release build, signing, AAB generation, and Google Play Console input as Pending/Not started or Not performed.
