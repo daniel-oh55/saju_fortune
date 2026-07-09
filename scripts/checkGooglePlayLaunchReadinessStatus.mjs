@@ -118,7 +118,6 @@ for (const snippet of requiredTodoCompletedSnippets) {
 const requiredTodoPendingSnippets = [
   '- [ ] 개인정보 처리방침 URL 확정',
   '- [ ] 문의처 이메일/지원 연락처 확정',
-  '- [ ] Google Play 데이터 보안 양식 초안 문서화',
   '- [ ] Store listing 문구 초안 정리',
   '- [ ] 실제 스토어 스크린샷 이미지 제작 계획 수립',
   '- [ ] release build 준비',

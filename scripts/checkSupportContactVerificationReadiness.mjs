@@ -129,7 +129,6 @@ const requiredTodoPendingSnippets = [
   '- [ ] 시행일 확정',
   '- [ ] 제공자 정보 확정',
   '- [ ] 앱 내부 개인정보 처리방침 링크 또는 안내 위치 검토',
-  '- [ ] Google Play 데이터 보안 양식 초안 문서화',
   '- [ ] Google Play Console 실제 입력',
   '- [ ] release build 준비',
   '- [ ] signing 설정 준비',

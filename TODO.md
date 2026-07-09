@@ -73,6 +73,8 @@
 - [x] Privacy policy draft 검증 스크립트 추가
 - [x] 문의처 후보/수신 가능 여부 확인 절차 문서화
 - [x] Support contact verification readiness 검증 스크립트 추가
+- [x] Google Play 데이터 보안 양식 초안 문서화
+- [x] Google Play data safety draft 검증 스크립트 추가
 - [ ] 문의처 이메일/지원 연락처 후보 선정
 - [ ] 개인정보 처리방침 URL 확정
 - [ ] 문의처 이메일/지원 연락처 확정
@@ -82,7 +84,7 @@
 - [ ] 시행일 확정
 - [ ] 제공자 정보 확정
 - [ ] 앱 내부 개인정보 처리방침 링크 또는 안내 위치 검토
-- [ ] Google Play 데이터 보안 양식 초안 문서화
+- [ ] Google Play 데이터 보안 양식 최종 입력
 - [ ] Store listing 문구 초안 정리
 - [ ] 실제 스토어 스크린샷 이미지 제작 계획 수립
 - [ ] release build 준비
