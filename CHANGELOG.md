@@ -1,5 +1,24 @@
 # CHANGELOG
 
+## Added
+
+- Added minimum saved reading text sharing using Web Share API when available.
+- Added copy-to-clipboard fallback for unsupported sharing environments.
+- Added safe saved reading share text generation.
+
+## Checks
+
+- Added saved reading text share check script.
+
+## Unchanged
+
+- No Kakao SDK integration.
+- No SMS permission/native integration.
+- No AndroidManifest.xml changes.
+- No Android native/resource changes.
+- No production fortune logic changes.
+- No schemaVersion or localStorage key changes.
+
 ## Docs
 
 - Documented saved reading share readiness before implementation.
