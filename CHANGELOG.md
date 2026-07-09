@@ -1,5 +1,26 @@
 # CHANGELOG
 
+## Fixed
+
+- Stabilized saved reading share/delete action button layout when share status text is shown.
+- Stabilized fortune result save/copy action button layout when copy status text is shown.
+
+## Unchanged
+
+- No Web Share API behavior change.
+- No clipboard fallback behavior change.
+- No Kakao SDK integration.
+- No SMS permission/native integration.
+- No @capacitor/share integration.
+- No AndroidManifest.xml changes.
+- No Android native/resource changes.
+- No production fortune logic changes.
+- No schemaVersion or localStorage key changes.
+
+## Checks
+
+- Added share/copy action button layout check script.
+
 ## Docs
 
 - Recorded Android real-device QA result for saved reading text share.

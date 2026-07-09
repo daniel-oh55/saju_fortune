@@ -57,10 +57,16 @@ function SavedReadingsPage({ savedReadings, onRemoveSavedReading, onNavigate }) 
 
               <div className="saved-reading-actions">
                 <span>{formatSavedAt(item.savedAt)} 저장</span>
-                <SavedReadingShareButton reading={item} />
-                <button type="button" onClick={() => onRemoveSavedReading(item.id)}>
-                  삭제
-                </button>
+                <div className="saved-reading-action-row">
+                  <SavedReadingShareButton reading={item} />
+                  <button
+                    className="saved-reading-delete-button"
+                    type="button"
+                    onClick={() => onRemoveSavedReading(item.id)}
+                  >
+                    삭제
+                  </button>
+                </div>
               </div>
             </article>
           ))}
