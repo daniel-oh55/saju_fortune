@@ -134,6 +134,52 @@ button {
   background: linear-gradient(135deg, var(--color-deep-navy), var(--color-navy-muted));
 }
 
+.app-loading-screen {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 24px;
+  background: var(--color-ivory);
+  text-align: center;
+}
+
+.app-loading-badge {
+  margin-bottom: 6px;
+  animation: app-loading-pulse 1.4s ease-in-out infinite;
+}
+
+.app-loading-title {
+  margin: 0;
+  color: var(--color-deep-navy);
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.app-loading-text {
+  margin: 0;
+  color: var(--color-warm-gold);
+  font-size: 0.86rem;
+}
+
+@keyframes app-loading-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-loading-badge {
+    animation: none;
+  }
+}
+
 .eyebrow {
   margin: 0 0 8px;
   color: #55706d;

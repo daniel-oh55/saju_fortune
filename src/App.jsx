@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { App as CapacitorApp } from '@capacitor/app';
 import { Capacitor } from '@capacitor/core';
+import AppLoadingScreen from './components/AppLoadingScreen.jsx';
 import BottomNav from './components/BottomNav.jsx';
 import ConsentBanner from './components/ConsentBanner.jsx';
 import ConsentSettingsPanel from './components/ConsentSettingsPanel.jsx';
@@ -52,6 +53,7 @@ const REQUIRED_FORTUNE_CATEGORY_IDS = ['overall', 'money', 'love', 'work', 'stud
 const APP_HISTORY_MARKER = 'harupuliAppHistory';
 const APP_HISTORY_PAGE_KEY = 'harupuliAppPage';
 const TODAY_FORTUNE_DETAIL_HISTORY_MARKER = 'harupuliTodayFortuneDetail';
+const APP_LOADING_DURATION_MS = 700;
 
 function scrollToPageTop() {
   if (typeof window === 'undefined') return;
@@ -125,12 +127,18 @@ function App() {
   const [dailyReminderDraft, setDailyReminderDraft] = useState(() => loadDailyReminderSettings());
   const [isReminderSettingsOpen, setIsReminderSettingsOpen] = useState(false);
   const [reminderSettingsMessage, setReminderSettingsMessage] = useState('');
+  const [isAppLoading, setIsAppLoading] = useState(true);
   const activePageRef = useRef(activePage);
   const detailReturnPageRef = useRef('home');
   const detailHistoryPushedRef = useRef(false);
   const appHistoryInitializedRef = useRef(false);
   const appPageStackRef = useRef([activePage]);
   const handleAppBackRef = useRef(null);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => setIsAppLoading(false), APP_LOADING_DURATION_MS);
+    return () => window.clearTimeout(timer);
+  }, []);
 
   const fortune = useMemo(() => {
     if (!profile) return null;
@@ -497,6 +505,10 @@ function App() {
       )}
     </>
   );
+  if (isAppLoading) {
+    return <AppLoadingScreen />;
+  }
+
   const shouldShowAppBackButton = activePage !== 'home' && activePage !== 'onboarding';
 
   if (!profile || activePage === 'onboarding' || activePage === 'profileEdit') {

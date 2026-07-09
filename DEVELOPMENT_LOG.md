@@ -1,5 +1,24 @@
 # DEVELOPMENT_LOG
 
+## Short App Loading Screen
+
+- Added short React app loading screen
+- Marked UX-002 as completed in pre-release UX improvement TODO
+- Kept change as React UI-only update
+- Did not change Android native splash screen
+- Did not change Android resources
+- No production fortune logic changes
+- No fortune result generation changes
+- No routing changes
+- No localStorage key changes
+- No schemaVersion changes
+- No CURRENT_FORTUNE_SCHEMA_VERSION changes
+- No generated JSON changes
+- No docs/generated changes
+- No Android/Gradle changes
+- No icon asset changes
+- No sharing feature implementation
+
 ## Home Time-slot Fortune Cards
 
 - Added home display for morning, lunch, and evening fortune cards
