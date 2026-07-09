@@ -70,7 +70,7 @@ const scopedImplementationFiles = [
 ];
 const forbiddenPatterns = [
   { label: 'capacitor_share_package', pattern: /@capacitor\/share/i },
-  { label: 'capacitor_share_class', pattern: /CapacitorShare/ },
+  { label: 'capacitor_share_class', pattern: /CapacitorShare(?!Readiness)/ },
   { label: 'kakao_any_case', pattern: /kakao/i },
   { label: 'send_sms_permission_constant', pattern: /android\.permission\.SEND_SMS/ },
   { label: 'action_sendto', pattern: /ACTION_SENDTO/ },

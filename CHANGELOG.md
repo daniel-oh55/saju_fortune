@@ -2,6 +2,16 @@
 
 ## Docs
 
+- Documented Capacitor Share readiness after Android WebView share fallback QA.
+- Compared current Web Share API plus clipboard fallback, future `@capacitor/share`, and direct KakaoTalk/SMS integration.
+- Kept `@capacitor/share` implementation, native Android share sheet verification, external share send, Kakao SDK, SMS permission/native integration, release build, signing, AAB generation, and Google Play Console input as Pending/Not started or Not performed.
+
+## Checks
+
+- Added Capacitor Share readiness check script.
+
+## Docs
+
 - Recorded Android clipboard fallback share text paste QA result.
 - Confirmed pasted share text excludes sensitive birth profile fields and real store URLs.
 - Kept Android share sheet actual opening, external share send, Kakao SDK, SMS permission/native integration, @capacitor/share, release build, signing, AAB generation, and Google Play Console input as Pending/Not started or Not performed.
