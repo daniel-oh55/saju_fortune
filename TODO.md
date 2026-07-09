@@ -8,7 +8,8 @@
 - [x] Create app icon asset candidate
 - [x] Replace app icon candidate with provided image
 - [x] Finalize app icon asset
-- [ ] Apply app icon to Android resources after asset finalization
+- [x] Apply app icon to Android resources after asset finalization
+- [ ] Record Android launcher icon real-device QA result
 - [ ] Add saved reading share feature
 - [ ] Review KakaoTalk/SMS sharing path
 - [x] Change 내정보 CTA copy to '저장하고 하루풀이 시작하기'

@@ -2,6 +2,10 @@
 
 ## Changed
 
+- Applied the selected app icon to Android launcher resources
+
+## Changed
+
 - Finalized the provided image as the app icon candidate while keeping Android resource integration Pending
 
 ## Changed

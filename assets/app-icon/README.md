@@ -5,10 +5,11 @@
 - Previous candidate: assets/app-icon/harupuli-icon-candidate.svg
 - Current selected concept: provided-image-based mountain icon
 - Final icon decision: Completed
-- Android resource integration: Pending
+- Android resource integration: Completed
 - Google Play icon upload: Pending
 - Release build: Not started
 - Signing setup: Not started
 - AAB generation: Not started
 - Real-device launcher QA: Pending
+- Android resource integration PR: #316
 - Do not claim Android launcher icon is applied until Android resource integration and launcher QA are completed.
