@@ -32,6 +32,15 @@ const requiredSavedReadingShareDocSnippets = [
   'Android share sheet not opened',
   'Android share sheet opens | Not opened',
   'Clipboard fallback behavior | Completed',
+  'Share cancel handling | Not applicable',
+  'Actual external share send | Not performed',
+  'Share text actual verification | Completed',
+  'Share text excludes birthDate | Completed',
+  'Share text excludes birthTime | Completed',
+  'Share text excludes birthPlace | Completed',
+  'Share text excludes gender | Completed',
+  'Share text excludes name | Completed',
+  'Share text excludes real store URLs | Completed',
   'No src changes',
   'No AndroidManifest.xml changes',
   'No release build',
@@ -91,6 +100,7 @@ const requiredTodoCompletedSnippets = [
   '- [x] Android share sheet 미표시 및 clipboard fallback 실제 결과 정정',
   '- [x] Android share sheet 미표시 실제 확인',
   '- [x] Clipboard fallback 실제 확인',
+  '- [x] 공유 문구 개인정보 제외 실제 확인',
   '- [x] 저장한 풀이 공유/삭제 버튼 layout Android QA 결과 문서화',
   '- [x] 운세 결과 풀이 저장/복사 버튼 layout Android QA 결과 문서화',
 ];
@@ -100,7 +110,6 @@ for (const snippet of requiredTodoCompletedSnippets) {
 
 const requiredTodoPendingSnippets = [
   '- [ ] Android share sheet 실제 표시 확인',
-  '- [ ] 공유 문구 개인정보 제외 실제 확인',
   '- [ ] 실제 외부 공유 발송 확인',
   '- [ ] Kakao SDK 연동 검토',
   '- [ ] SMS permission/native integration 검토',

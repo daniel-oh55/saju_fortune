@@ -2,6 +2,16 @@
 
 ## Docs
 
+- Recorded Android clipboard fallback share text paste QA result.
+- Confirmed pasted share text excludes sensitive birth profile fields and real store URLs.
+- Kept Android share sheet actual opening, external share send, Kakao SDK, SMS permission/native integration, @capacitor/share, release build, signing, AAB generation, and Google Play Console input as Pending/Not started or Not performed.
+
+## Checks
+
+- Updated share QA check scripts for completed share text paste verification.
+
+## Docs
+
 - Fixed share QA status consistency between TODO and Android QA documents.
 - Kept Android share sheet actual opening as Pending/Not opened.
 - Kept share text sensitive-field paste verification as Pending.
