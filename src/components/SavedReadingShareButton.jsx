@@ -22,6 +22,7 @@ function SavedReadingShareButton({ reading }) {
   return (
     <div className="saved-reading-share-wrap">
       <button
+        className="saved-reading-share-button"
         type="button"
         onClick={handleShare}
         aria-label="저장한 풀이 공유하기"

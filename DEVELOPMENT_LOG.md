@@ -1,5 +1,38 @@
 # DEVELOPMENT_LOG
 
+## Share Copy Action Button Layout
+
+- PR 목적: 공유/복사 상태 메시지 표시 시 액션 버튼 크기 흔들림 수정
+- 저장한 풀이 화면에서 `공유하기` 상태 메시지 표시 시 `삭제` 버튼 크기 유지
+- 운세 결과 화면에서 `복사` 상태 표시 시 `풀이 저장` 버튼 크기 유지
+- 공유 기능 로직 변경 없음
+- 복사 기능 로직 변경 없음
+- Web Share API 동작 변경 없음
+- clipboard fallback 동작 변경 없음
+- Kakao SDK 연동 없음
+- SMS permission/native integration 없음
+- @capacitor/share 추가 없음
+- AndroidManifest.xml 변경 없음
+- Android native code 변경 없음
+- Android resource 변경 없음
+- Gradle 변경 없음
+- Capacitor config 변경 없음
+- production 계산 로직 변경 없음
+- 사주/운세 결과 생성 로직 변경 없음
+- routing 변경 없음
+- schemaVersion 변경 없음
+- CURRENT_FORTUNE_SCHEMA_VERSION 변경 없음
+- 기존 localStorage key 변경 없음
+- release build 미진행
+- signing 미진행
+- AAB 생성 미진행
+- Google Play Console 입력 없음
+- npm run build 결과: 성공
+- npm run check:share-copy-action-button-layout 결과: 통과
+- npm run check:saved-reading-text-share 결과: 통과
+- npm run check:content-safety 결과: 통과
+- npm run check:share-text 결과: 통과
+
 ## Saved Reading Share Android QA Complete
 
 - PR 목적: 저장한 풀이 텍스트 공유 기능 Android 실제 기기 QA 결과 문서화
