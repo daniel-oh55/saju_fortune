@@ -2,6 +2,10 @@
 
 ## Changed
 
+- Finalized the provided image as the app icon candidate while keeping Android resource integration Pending
+
+## Changed
+
 - Replaced the primary app icon candidate with the provided image and kept Android resource integration Pending
 
 ## Changed
