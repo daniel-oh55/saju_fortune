@@ -2,6 +2,10 @@
 
 ## Changed
 
+- Recorded APK QA result for home time-slot vertical layout
+
+## Changed
+
 - Adjusted home time-slot fortune cards to vertical layout
 
 ## Changed

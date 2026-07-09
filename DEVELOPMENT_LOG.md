@@ -1,5 +1,21 @@
 # DEVELOPMENT_LOG
 
+## Home Time-slot Vertical APK QA Result
+
+- Recorded Android APK QA result for PR #310
+- Confirmed 아침운세, 점심운세, and 저녁운세 cards are stacked vertically on the home screen
+- Confirmed the three time-slot cards remain visible together
+- No additional issue was reported from this QA check
+- No src changes
+- No production fortune logic changes
+- No fortune result generation changes
+- No routing changes
+- No localStorage key changes
+- No schemaVersion changes
+- No Android/Gradle changes
+- No icon asset changes
+- No sharing feature implementation
+
 ## Home Time-slot Cards Vertical Layout
 
 - Adjusted home morning, lunch, and evening fortune cards to vertical layout
