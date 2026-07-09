@@ -2183,8 +2183,8 @@ input:disabled {
 
 .home-time-slot-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 8px;
+  grid-template-columns: 1fr;
+  gap: 10px;
 }
 
 .home-time-slot-item {
@@ -2193,9 +2193,9 @@ input:disabled {
   gap: 4px;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-soft);
-  padding: 12px 10px;
+  padding: 12px 14px;
   background: var(--color-card-soft);
-  text-align: center;
+  text-align: left;
 }
 
 .home-time-slot-label {
@@ -3865,8 +3865,7 @@ input:disabled {
   }
 
   .lucky-grid,
-  .month-grid,
-  .home-time-slot-grid {
+  .month-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
