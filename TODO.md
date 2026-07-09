@@ -24,9 +24,15 @@
 - [x] Web Share API 기반 공유 시도 추가
 - [x] 공유 문구 복사 fallback 추가
 - [x] Saved reading text share 검증 스크립트 추가
+- [x] 저장한 풀이 텍스트 공유 Android QA 결과 문서 템플릿 추가
+- [x] Saved reading share Android QA result 검증 스크립트 추가
 - [ ] 저장한 풀이 공유 기능 구현
 - [ ] Web Share API 기반 공유 기능 검토
 - [ ] 공유 문구 복사 fallback 구현 검토
+- [ ] 저장한 풀이 텍스트 공유 Android 실제 기기 QA
+- [ ] Android share sheet 실제 확인
+- [ ] Clipboard fallback 실제 확인
+- [ ] 공유 문구 개인정보 제외 실제 확인
 - [ ] Kakao SDK 연동 검토
 - [ ] SMS permission/native integration 검토
 - [ ] 공유 이미지 생성 기능 검토

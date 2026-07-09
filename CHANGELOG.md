@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## Docs
+
+- Added saved reading share Android QA result template.
+- Documented expected Android share sheet, clipboard fallback, share cancel, and safe share text verification items.
+- Kept actual Android APK install, app launch, share sheet verification, clipboard fallback verification, release build, signing, AAB generation, and Google Play Console input as Pending/Not started.
+
+## Checks
+
+- Added saved reading share Android QA result check script.
+
 ## Added
 
 - Added minimum saved reading text sharing using Web Share API when available.
