@@ -20,6 +20,10 @@
 - [x] 저장한 풀이 공유 기능 구현 전 검토 문서화
 - [x] Web Share API / 복사 fallback / KakaoTalk/SMS 직접 연동 후보 비교 문서화
 - [x] Saved reading share readiness 검증 스크립트 추가
+- [x] 저장한 풀이 텍스트 공유 기능 최소 구현
+- [x] Web Share API 기반 공유 시도 추가
+- [x] 공유 문구 복사 fallback 추가
+- [x] Saved reading text share 검증 스크립트 추가
 - [ ] 저장한 풀이 공유 기능 구현
 - [ ] Web Share API 기반 공유 기능 검토
 - [ ] 공유 문구 복사 fallback 구현 검토

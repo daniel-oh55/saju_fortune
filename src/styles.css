@@ -2653,6 +2653,18 @@ input:disabled {
   cursor: pointer;
 }
 
+.saved-reading-share-wrap {
+  display: grid;
+  gap: 6px;
+}
+
+.saved-reading-share-status {
+  color: var(--color-navy-muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+  line-height: 1.4;
+}
+
 .saju-insight-page {
   padding-bottom: 14px;
 }

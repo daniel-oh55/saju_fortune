@@ -59,3 +59,60 @@ export function buildSavedReadingShareText(item) {
 이 내용은 참고용 해석입니다.
   `);
 }
+
+async function copyShareTextToClipboard(text) {
+  if (globalThis.navigator?.clipboard?.writeText) {
+    await globalThis.navigator.clipboard.writeText(text);
+    return;
+  }
+
+  const documentRef = globalThis.document;
+  if (!documentRef?.createElement || !documentRef?.execCommand) {
+    throw new Error('clipboard_unavailable');
+  }
+
+  const textarea = documentRef.createElement('textarea');
+  textarea.value = text;
+  textarea.setAttribute('readonly', '');
+  textarea.style.position = 'fixed';
+  textarea.style.left = '-9999px';
+  documentRef.body.appendChild(textarea);
+  textarea.select();
+
+  const isCopied = documentRef.execCommand('copy');
+  documentRef.body.removeChild(textarea);
+
+  if (!isCopied) {
+    throw new Error('copy_failed');
+  }
+}
+
+export async function shareSavedReadingText(item) {
+  const text = buildSavedReadingShareText(item);
+  const canUseWebShare = typeof globalThis.navigator?.share === 'function';
+
+  if (canUseWebShare) {
+    try {
+      await globalThis.navigator.share({ text, title: '하루풀이' });
+      return { status: 'shared', text };
+    } catch (error) {
+      if (error?.name === 'AbortError') {
+        return { status: 'cancelled', text };
+      }
+    }
+
+    try {
+      await copyShareTextToClipboard(text);
+      return { status: 'copied_after_share_failure', text };
+    } catch {
+      return { status: 'copy_failed', text };
+    }
+  }
+
+  try {
+    await copyShareTextToClipboard(text);
+    return { status: 'copied_unsupported', text };
+  } catch {
+    return { status: 'copy_failed', text };
+  }
+}
