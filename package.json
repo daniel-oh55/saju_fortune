@@ -205,6 +205,7 @@
     "check:app-icon-candidate-asset": "node scripts/checkAppIconCandidateAsset.mjs",
     "check:provided-app-icon-candidate-asset": "node scripts/checkProvidedAppIconCandidateAsset.mjs",
     "check:finalize-provided-app-icon-candidate": "node scripts/checkFinalizeProvidedAppIconCandidate.mjs",
+    "check:android-app-icon-resource": "node scripts/checkAndroidAppIconResource.mjs",
     "check:splash-png-export": "node scripts/checkSplashPngExportReadiness.mjs",
     "check:visit-streak": "node scripts/checkVisitStreakRegression.mjs",
     "check:zodiac-fortune-sample-qa": "node scripts/checkZodiacFortuneSampleQa.mjs",

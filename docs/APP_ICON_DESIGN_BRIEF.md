@@ -62,7 +62,7 @@
 - Previous candidate asset path: assets/app-icon/harupuli-icon-candidate.svg
 - Asset creation status: Final candidate selected
 - Final icon decision: Completed
-- Android icon resource integration: Pending
+- Android icon resource integration: Completed
 - Google Play icon upload: Pending
 - Real-device launcher QA: Pending
 - Release build: Not started
@@ -73,8 +73,8 @@
 ## Required Asset Plan
 
 - Source master icon: Completed
-- Android adaptive icon foreground: Pending
-- Android adaptive icon background: Pending
+- Android adaptive icon foreground: Completed
+- Android adaptive icon background: Completed
 - Google Play 512x512 icon: Pending
 - Launcher icon preview: Pending
 - Small-size legibility check: Pending
