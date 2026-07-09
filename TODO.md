@@ -31,12 +31,16 @@
 - [ ] 공유 문구 복사 fallback 구현 검토
 - [x] 저장한 풀이 텍스트 공유 Android 실제 기기 QA
 - [x] Android share sheet 실제 확인
-- [ ] Clipboard fallback 실제 확인
+- [x] Clipboard fallback 실제 확인
 - [x] 공유 문구 개인정보 제외 실제 확인
 - [ ] 실제 외부 공유 발송 확인
 - [x] 저장한 풀이 공유/삭제 버튼 크기 흔들림 수정
 - [x] 운세 결과 풀이 저장/복사 버튼 크기 흔들림 수정
 - [x] Share/copy action button layout 검증 스크립트 추가
+- [x] Android share sheet 미표시 및 clipboard fallback 실제 결과 정정
+- [x] 저장한 풀이 공유/삭제 버튼 layout Android QA 결과 문서화
+- [x] 운세 결과 풀이 저장/복사 버튼 layout Android QA 결과 문서화
+- [x] Share fallback layout Android QA result 검증 스크립트 추가
 - [ ] Android share sheet 실제 확인 재검토
 - [ ] @capacitor/share 도입 여부 검토
 - [ ] Kakao SDK 연동 검토
