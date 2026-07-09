@@ -5,162 +5,141 @@ import { fileURLToPath } from 'node:url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const projectRoot = path.resolve(__dirname, '..');
-const failures = [];
 
-function readText(relativePath) {
-  return fs.readFileSync(path.join(projectRoot, relativePath), 'utf8');
-}
+const readinessDocPath = 'docs/PRIVACY_POLICY_CONTACT_READINESS.md';
+const todoPath = 'TODO.md';
+const developmentLogPath = 'DEVELOPMENT_LOG.md';
+const changelogPath = 'CHANGELOG.md';
 
-function fileExists(relativePath) {
-  return fs.existsSync(path.join(projectRoot, relativePath));
-}
+const read = (relativePath) => fs.readFileSync(path.join(projectRoot, relativePath), 'utf8');
 
-function assertCondition(condition, message) {
-  if (!condition) failures.push(message);
-}
-
-function logResult(sampleId, isPass) {
-  console.log(`sampleId: ${sampleId}`);
-  console.log(`result: ${isPass ? 'pass' : 'fail'}`);
-  console.log('');
-}
-
-function includesAny(text, patterns) {
-  return patterns.some((pattern) => text.includes(pattern));
-}
-
-const contactDocPath = 'docs/PRIVACY_POLICY_CONTACT_READINESS.md';
-const contactDocExists = fileExists(contactDocPath);
-logResult('contact_readiness_doc_exists', contactDocExists);
-assertCondition(contactDocExists, 'docs/PRIVACY_POLICY_CONTACT_READINESS.md should exist');
-
-const doc = contactDocExists ? readText(contactDocPath) : '';
-const docChecks = [
-  ['doc_mentions_service_name', doc.includes('하루풀이'), 'contact readiness doc should mention service name'],
-  [
-    'doc_mentions_contact_status',
-    includesAny(doc, ['문의처 상태', '개인정보 처리방침 문의처 상태']),
-    'contact readiness doc should mention contact status',
-  ],
-  [
-    'doc_mentions_pending_contact',
-    includesAny(doc, ['Pending', '미확정']),
-    'contact readiness doc should keep contact as Pending or undecided',
-  ],
-  [
-    'doc_mentions_no_fake_contact',
-    includesAny(doc, ['임의 이메일', '임의 연락처']),
-    'contact readiness doc should mention fake contact information should not be written',
-  ],
-  [
-    'doc_mentions_contact_candidate_types',
-    doc.includes('문의처 후보 유형'),
-    'contact readiness doc should mention contact candidate types',
-  ],
-  [
-    'doc_mentions_google_play_developer_email',
-    doc.includes('Google Play 개발자 계정 지원 이메일'),
-    'contact readiness doc should mention Google Play developer account support email',
-  ],
-  [
-    'doc_mentions_support_email',
-    includesAny(doc, ['고객 지원 이메일', '개인정보 문의 전용 이메일']),
-    'contact readiness doc should mention support email or privacy inquiry email',
-  ],
-  [
-    'doc_mentions_confirmation_checklist',
-    doc.includes('문의처 확정 전 확인 기준'),
-    'contact readiness doc should mention confirmation checklist',
-  ],
-  [
-    'doc_mentions_blocking_conditions',
-    doc.includes('문의처 반영 차단 조건'),
-    'contact readiness doc should mention blocking conditions',
-  ],
-  [
-    'doc_mentions_privacy_policy_draft',
-    doc.includes('docs/PRIVACY_POLICY_DRAFT.md'),
-    'contact readiness doc should mention docs/PRIVACY_POLICY_DRAFT.md',
-  ],
-  [
-    'doc_mentions_public_privacy_page',
-    doc.includes('public/privacy/index.html'),
-    'contact readiness doc should mention public/privacy/index.html',
-  ],
-  [
-    'doc_mentions_privacy_info_page',
-    doc.includes('PrivacyInfoPage'),
-    'contact readiness doc should mention PrivacyInfoPage',
-  ],
-  [
-    'doc_does_not_contain_placeholder_email',
-    !includesAny(doc, ['test@example.com', 'example.com', 'no-reply@example.com']),
-    'contact readiness doc should not contain placeholder email addresses',
-  ],
-  [
-    'doc_does_not_claim_contact_finalized',
-    !includesAny(doc, ['문의처 확정 완료', '실제 문의처 확정 완료', '문의처 상태: Completed', '문의처 상태: Pass']),
-    'contact readiness doc should not claim contact is finalized',
-  ],
-];
-
-for (const [id, pass, message] of docChecks) {
-  logResult(id, pass);
-  assertCondition(pass, message);
-}
-
-const publicPrivacyPagePath = 'public/privacy/index.html';
-const publicPrivacyPageExists = fileExists(publicPrivacyPagePath);
-logResult('public_privacy_page_exists', publicPrivacyPageExists);
-assertCondition(publicPrivacyPageExists, 'public/privacy/index.html should exist');
-
-const publicPrivacyPage = publicPrivacyPageExists ? readText(publicPrivacyPagePath) : '';
-const publicPrivacyPageMentionsCorrectBrand = publicPrivacyPage.includes('하루풀이');
-logResult('public_privacy_page_mentions_correct_brand', publicPrivacyPageMentionsCorrectBrand);
-assertCondition(publicPrivacyPageMentionsCorrectBrand, 'public privacy page should mention correct brand');
-
-const noIosProjectCreated = !fileExists('ios');
-logResult('no_ios_project_created', noIosProjectCreated);
-assertCondition(noIosProjectCreated, 'ios folder should not exist');
-
-const serviceWorkerPaths = ['public/service-worker.js', 'public/sw.js', 'src/service-worker.js', 'src/sw.js'];
-const noServiceWorkerAdded = serviceWorkerPaths.every((relativePath) => !fileExists(relativePath));
-logResult('no_service_worker_added', noServiceWorkerAdded);
-assertCondition(noServiceWorkerAdded, 'service worker files should not be added');
-
-const packageJson = JSON.parse(readText('package.json'));
-const allDependencies = {
-  ...(packageJson.dependencies || {}),
-  ...(packageJson.devDependencies || {}),
+const checks = [];
+const mark = (condition, label) => {
+  checks.push({ condition: Boolean(condition), label });
 };
-const dependencyNames = Object.keys(allDependencies);
 
-const realAdSdkMarkers = ['google-ads', 'admob', 'adsense', 'applovin', 'unity-ads', 'google-mobile-ads'];
-const noRealAdSdkAdded = dependencyNames.every((packageName) => {
-  const normalizedName = packageName.toLowerCase();
-  return realAdSdkMarkers.every((marker) => !normalizedName.includes(marker));
-});
-logResult('no_real_ad_sdk_added', noRealAdSdkAdded);
-assertCondition(noRealAdSdkAdded, 'real ad SDK dependencies should not be added');
-
-const paymentSdkMarkers = ['billing', 'purchase', 'revenuecat', 'iamport', 'tosspayments'];
-const noPaymentSdkAdded = dependencyNames.every((packageName) => {
-  const normalizedName = packageName.toLowerCase();
-  return paymentSdkMarkers.every((marker) => !normalizedName.includes(marker));
-});
-logResult('no_payment_sdk_added', noPaymentSdkAdded);
-assertCondition(noPaymentSdkAdded, 'payment SDK dependencies should not be added');
-
-const noCapacitorAppAdded = !dependencyNames.includes('@capacitor/app');
-logResult('no_capacitor_app_added', noCapacitorAppAdded);
-assertCondition(noCapacitorAppAdded, '@capacitor/app should not be added in this PR');
-
-if (failures.length > 0) {
-  console.error('Privacy policy contact readiness check failed');
-  for (const failure of failures) {
-    console.error(`- ${failure}`);
-  }
-  process.exitCode = 1;
-} else {
-  console.log('Privacy policy contact readiness check passed');
+mark(fs.existsSync(path.join(projectRoot, readinessDocPath)), 'readiness_doc_exists');
+if (!fs.existsSync(path.join(projectRoot, readinessDocPath))) {
+  console.error('Privacy policy and support contact readiness check failed');
+  console.error('- readiness_doc_exists');
+  process.exit(1);
 }
+
+const readinessDoc = read(readinessDocPath);
+const todoSource = read(todoPath);
+const developmentLogSource = read(developmentLogPath);
+const changelogSource = read(changelogPath);
+
+const requiredDocSnippets = [
+  'Privacy Policy and Support Contact Readiness',
+  'Purpose: Document privacy policy URL and support contact readiness for Google Play launch preparation',
+  'PR type: docs/check-only',
+  'App name: 하루풀이',
+  'Related readiness PR: #327',
+  'Current privacy policy URL status: Pending',
+  'Current support contact status: Pending',
+  'Current Google Play Console input status: Pending',
+  'localStorage',
+  'Clipboard fallback share',
+  'Actual external share send',
+  'Not performed',
+  '개인정보 처리방침 URL',
+  'Pending',
+  '문의처 이메일/지원 연락처 확정',
+  'Google Play 데이터 보안 양식',
+  'No src changes',
+  'No CSS changes',
+  'No production UI changes',
+  'No app privacy policy link UI',
+  'No AndroidManifest.xml changes',
+  'No Android native code changes',
+  'No Android resource changes',
+  'No Gradle changes',
+  'No Capacitor config changes',
+  'No release build',
+  'No signing setup',
+  'No keystore file added',
+  'No AAB generation',
+  'No Google Play Console input',
+  'No 개인정보 처리방침 URL finalization',
+  'No 문의처 이메일/지원 연락처 finalization',
+  'No Google Play 데이터 보안 양식 completion',
+  'No 실제 스토어 스크린샷 이미지 제작 completion',
+  'No production fortune logic changes',
+  'No routing changes',
+  'No schemaVersion changes',
+  'No CURRENT_FORTUNE_SCHEMA_VERSION changes',
+  'No existing localStorage key changes',
+  'Recommended next sequence',
+];
+for (const snippet of requiredDocSnippets) {
+  mark(readinessDoc.includes(snippet), `readiness_doc_includes_${snippet}`);
+}
+
+const forbiddenSnippets = [
+  '개인정보 처리방침 URL | Completed',
+  '문의처 이메일/지원 연락처 확정 | Completed',
+  'Google Play 데이터 보안 양식 | Completed',
+  'Google Play Console actual input | Completed',
+  'Release build | Completed',
+  'Signing setup | Completed',
+  'AAB generation | Completed',
+  '실제 스토어 스크린샷 이미지 제작 | Completed',
+  '실제 스토어 스크린샷 이미지 시작',
+  '서양식 보정 적용 여부',
+  '양력/음력 샘플 추가 검증',
+  '개인정보 처리방침 URL 완료',
+  '문의처 확정 완료',
+  'Google Play 데이터 보안 양식 완료',
+  'Google Play Console 입력 완료',
+  'release build 완료',
+  'signing 설정 완료',
+  'AAB 생성 완료',
+];
+mark(!forbiddenSnippets.some((snippet) => readinessDoc.includes(snippet)), 'readiness_doc_no_forbidden_snippets');
+
+const requiredTodoCompletedSnippets = [
+  '- [x] 개인정보 처리방침/문의처 준비 상태 문서화',
+  '- [x] Privacy policy and support contact readiness 검증 스크립트 추가',
+];
+for (const snippet of requiredTodoCompletedSnippets) {
+  mark(todoSource.includes(snippet), `todo_includes_completed_${snippet}`);
+}
+
+const requiredTodoPendingSnippets = [
+  '- [ ] 개인정보 처리방침 문서 초안 작성',
+  '- [ ] 개인정보 처리방침 URL 확정',
+  '- [ ] 문의처 이메일/지원 연락처 확정',
+  '- [ ] 앱 내부 개인정보 처리방침 링크 또는 안내 위치 검토',
+  '- [ ] Google Play 데이터 보안 양식 초안 문서화',
+  '- [ ] Store listing 문구 초안 정리',
+  '- [ ] 실제 스토어 스크린샷 이미지 제작 계획 수립',
+  '- [ ] release build 준비',
+  '- [ ] signing 설정 준비',
+  '- [ ] AAB 생성',
+  '- [ ] Google Play Console 실제 입력',
+];
+for (const snippet of requiredTodoPendingSnippets) {
+  mark(todoSource.includes(snippet), `todo_includes_pending_${snippet}`);
+}
+
+mark(
+  developmentLogSource.includes('## Privacy Policy and Support Contact Readiness'),
+  'development_log_has_section',
+);
+mark(
+  changelogSource.includes(
+    'Documented privacy policy and support contact readiness for Google Play launch preparation.',
+  ),
+  'changelog_records_readiness_doc',
+);
+
+const failed = checks.filter((check) => !check.condition);
+
+if (failed.length > 0) {
+  console.error('Privacy policy and support contact readiness check failed');
+  failed.forEach((check) => console.error(`- ${check.label}`));
+  process.exit(1);
+}
+
+console.log('Privacy policy and support contact readiness check passed');

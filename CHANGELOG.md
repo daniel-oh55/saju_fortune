@@ -2,6 +2,15 @@
 
 ## Docs
 
+- Documented privacy policy and support contact readiness for Google Play launch preparation.
+- Recorded 개인정보 처리방침 URL, 문의처 이메일/지원 연락처, app internal privacy policy link/text, Google Play 데이터 보안 양식, release build, signing, AAB generation, and Google Play Console input as Pending/Not started.
+
+## Checks
+
+- Added privacy policy and support contact readiness check script.
+
+## Docs
+
 - Documented current Google Play launch readiness status.
 - Recorded release build, signing setup, AAB generation, Google Play Console input, 개인정보 처리방침 URL, 문의처, Google Play 데이터 보안 양식, and 실제 스토어 스크린샷 이미지 제작 as Pending/Not started.
 - Recorded 태양시 보정 적용 여부 and 음력/윤달 샘플 외부 검증 as Pending.

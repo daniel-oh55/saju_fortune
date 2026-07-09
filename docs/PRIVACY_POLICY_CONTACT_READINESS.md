@@ -1,82 +1,143 @@
-# PRIVACY_POLICY_CONTACT_READINESS
+# Privacy Policy and Support Contact Readiness
 
-## 데이터 보안 양식 입력 전 문의처 확인
+## 1. Scope
 
-- Google Play 데이터 보안 양식 최종 입력 전 개인정보 문의처 상태를 확인해야 합니다.
-- 데이터 보안 양식 입력 준비 문서는 `docs/GOOGLE_PLAY_DATA_SAFETY_INPUT_READINESS.md`입니다.
-- 실제 문의처가 미확정이면 최종 입력은 보류합니다.
+- Purpose: Document privacy policy URL and support contact readiness for Google Play launch preparation
+- PR type: docs/check-only
+- App name: 하루풀이
+- Related readiness PR: #327
+- Current privacy policy URL status: Pending
+- Current support contact status: Pending
+- Current Google Play Console input status: Pending
+- No production code changes
+- No app UI link changes
+- No Android native/resource changes
 
-이 문서는 하루풀이 개인정보 처리방침에 사용할 문의처 확정 준비 상태를 정리하기 위한 문서입니다.
-이번 PR은 문의처 확정 준비 문서화가 목적이며, 실제 문의처 입력, Google Play Console 입력, release build, signing, AAB 생성, production 앱 로직 변경은 진행하지 않습니다.
+## 2. Current data handling baseline
 
-## 1. 목적
+| Item | Status | Note |
+| --- | --- | --- |
+| Server DB | Not used | No backend DB |
+| Login | Not used | No account system |
+| Actual ad SDK | Not used | No real ad SDK |
+| Actual payment SDK | Not used | No real payment SDK |
+| External analytics SDK | Not used | No external analytics SDK |
+| Saved data storage | localStorage | User-entered/saved reading data remains on device |
+| User profile input | In app | Used for fortune reading generation |
+| Saved readings | In app | Stored locally |
+| Clipboard fallback share | Completed | Share text copy path confirmed |
+| Actual external share send | Not performed | No external send QA performed |
 
-- Google Play 제출 전 개인정보 처리방침 문의처 확정 기준을 정리합니다.
-- 공개 개인정보 처리방침 페이지와 개인정보 처리방침 초안에 사용할 문의처 상태를 관리합니다.
-- 실제 문의처가 아직 제공되지 않은 경우 Pending 상태로 유지합니다.
-- 임의 이메일 주소나 임의 연락처를 작성하지 않습니다.
+## 3. Privacy policy readiness checklist
 
-## 2. 현재 상태
+| Item | Status | Note |
+| --- | --- | --- |
+| 개인정보 처리방침 문서 초안 | Pending | Draft not finalized in this PR |
+| 개인정보 처리방침 URL | Pending | Actual public URL not finalized |
+| Publicly accessible URL check | Pending | No actual URL checked |
+| Non-PDF URL check | Pending | No actual URL checked |
+| App name included in policy | Pending | Draft/final document not finalized |
+| Developer information included | Pending | Actual developer info not finalized |
+| Privacy point of contact included | Pending | Actual contact not finalized |
+| Data collection/use/share description | Pending | Draft not finalized |
+| Data retention/deletion policy | Pending | Draft not finalized |
+| App internal policy link/text | Pending | No app UI change in this PR |
+| Play Console privacy policy field input | Pending | No Console input in this PR |
 
-- 서비스명: 하루풀이
-- 개인정보 처리방침 원본 파일: `public/privacy/index.html`
-- 개인정보 처리방침 초안 문서: `docs/PRIVACY_POLICY_DRAFT.md`
-- 실제 Vercel URL: 미확정
-- 실제 URL 확인 상태: Pending
-- Google Play Console 입력 상태: Not started
-- 개인정보 처리방침 문의처 상태: Pending
-- 실제 문의처: 미확정
+## 4. Support contact readiness checklist
 
-## 3. 문의처 후보 유형
+| Item | Status | Note |
+| --- | --- | --- |
+| 문의처 이메일/지원 연락처 확정 | Pending | Actual contact not finalized |
+| Support email inbox access check | Pending | Not checked in this PR |
+| Support response owner | Pending | Not assigned/finalized |
+| Google Play developer contact field input | Pending | No Console input in this PR |
+| Store listing support contact consistency | Pending | Not finalized |
 
-- Google Play 개발자 계정 지원 이메일
-- 운영자 또는 회사 대표 이메일
-- 개인정보 문의 전용 이메일
-- 고객 지원 이메일
-- 도메인 기반 이메일 주소
+## 5. Recommended privacy policy draft sections
 
-주의:
+- 제목: 개인정보 처리방침
+- 앱 이름 및 제공자 정보
+- 수집 또는 처리하는 정보
+- localStorage 저장 정보 설명
+- 서버 DB/로그인/광고 SDK/결제 SDK/외부 분석 SDK 미사용 설명
+- 사주/운세 정보 입력 및 저장 방식
+- 공유 기능 사용 시 사용자가 직접 공유하는 문구 설명
+- 개인정보의 이용 목적
+- 개인정보의 제3자 제공 여부
+- 개인정보의 보관 및 삭제
+- 이용자 문의처
+- 시행일
+- 변경 고지 방식
 
-- Gmail, 개인 이메일, 임시 이메일을 사용할 경우 운영 정책상 적절한지 별도 확인이 필요합니다.
-- 실제 제출 전 문의 수신 가능 여부를 반드시 확인해야 합니다.
+## 6. Current draft-safe statements
 
-## 4. 문의처 확정 전 확인 기준
+- 하루풀이는 현재 서버 DB와 로그인 기능을 사용하지 않습니다.
+- 사용자가 입력한 사주/운세 관련 정보와 저장한 풀이는 기기 내 localStorage를 중심으로 저장됩니다.
+- 현재 실제 광고 SDK, 결제 SDK, 외부 분석 SDK는 사용하지 않습니다.
+- 저장한 풀이 공유 기능은 사용자가 직접 공유 또는 복사 동작을 수행할 때만 실행됩니다.
+- 실제 외부 공유 발송은 사용자의 선택과 외부 앱 동작에 따릅니다.
+- 문의처와 개인정보 처리방침 URL은 출시 전 확정 예정입니다.
 
-- 실제 수신 가능한 이메일인지 확인
-- Google Play 개발자 계정 정보와 충돌하지 않는지 확인
-- 개인정보 처리방침 초안과 공개 페이지에 동일하게 반영 가능한지 확인
-- 앱 내부 PrivacyInfoPage와 충돌하지 않는지 확인
-- 데이터 삭제 요청 또는 개인정보 문의를 받을 수 있는지 확인
-- 운영자가 정기적으로 확인할 수 있는 메일함인지 확인
-- 실제 URL 확인 후 공개 페이지에 반영할 수 있는지 확인
+## 7. Not included in this PR
 
-## 5. 문의처 반영 차단 조건
+- No src changes
+- No CSS changes
+- No production UI changes
+- No app privacy policy link UI
+- No AndroidManifest.xml changes
+- No Android native code changes
+- No Android resource changes
+- No Gradle changes
+- No Capacitor config changes
+- No release build
+- No signing setup
+- No keystore file added
+- No AAB generation
+- No Google Play Console input
+- No 개인정보 처리방침 URL finalization
+- No 문의처 이메일/지원 연락처 finalization
+- No Google Play 데이터 보안 양식 completion
+- No 실제 스토어 스크린샷 이미지 제작 completion
+- No actual ad SDK
+- No actual payment SDK
+- No login
+- No server DB
+- No external analytics SDK
+- No production fortune logic changes
+- No routing changes
+- No schemaVersion changes
+- No CURRENT_FORTUNE_SCHEMA_VERSION changes
+- No existing localStorage key changes
 
-아래 조건 중 하나라도 해당하면 문의처를 공개 페이지에 반영하지 않습니다.
+## 8. Remaining Pending / Not started items
 
-- 실제 수신 가능 여부가 확인되지 않은 경우
-- 임의로 생성한 이메일인 경우
-- 운영자가 확인하지 않는 이메일인 경우
-- Google Play 개발자 계정 정보와 충돌하는 경우
-- 개인정보 삭제 요청을 받을 수 없는 경우
-- 사용자가 문의를 보내도 응답할 수 없는 경우
+| Item | Status |
+| --- | --- |
+| 개인정보 처리방침 문서 초안 | Pending |
+| 개인정보 처리방침 URL 확정 | Pending |
+| 문의처 이메일/지원 연락처 확정 | Pending |
+| App internal privacy policy link/text | Pending |
+| Google Play 데이터 보안 양식 초안 문서화 | Pending |
+| Google Play Console actual input | Pending |
+| Store listing 문구 초안 정리 | Pending |
+| 실제 스토어 스크린샷 이미지 제작 계획 수립 | Pending |
+| Release build | Not started |
+| Signing setup | Not started |
+| AAB generation | Not started |
 
-## 6. 현재 보류 항목
+## 9. Recommended next sequence
 
-- 실제 문의처 미확정
-- 실제 Vercel URL 확인 미진행
-- Google Play Console 개인정보 처리방침 URL 입력 미진행
-- Google Play 데이터 보안 양식 최종 입력 미진행
-- `public/privacy/index.html` 문의처 실제값 반영 미진행
-- PrivacyInfoPage 문의처 실제값 반영 미진행
-- release build 미진행
-- signing 미진행
-- AAB 생성 미진행
+1. 개인정보 처리방침 초안 작성
+2. 문의처 이메일/지원 연락처 확정
+3. 개인정보 처리방침 공개 URL 확정
+4. 앱 내부 개인정보 처리방침 링크 또는 안내 위치 검토
+5. Google Play 데이터 보안 양식 초안 문서화
+6. Store listing 문구 초안 정리
 
-## 7. 다음 단계
+## 10. Conclusion
 
-- 실제 문의처 후보 결정
-- 문의처 수신 가능 여부 확인
-- 개인정보 처리방침 초안과 공개 페이지에 문의처 반영
-- Vercel `/privacy/` 실제 URL 확인
-- Google Play Console 개인정보 처리방침 URL 입력 준비
+- This PR documents readiness only.
+- 개인정보 처리방침 URL and 문의처 이메일/지원 연락처 remain Pending.
+- Google Play Console input remains Pending.
+- No production code, Android packaging, release build, signing, AAB, or Console input changes are included.
