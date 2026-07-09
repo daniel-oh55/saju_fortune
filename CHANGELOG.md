@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## Docs
+
+- Corrected saved reading share Android QA result to reflect clipboard fallback path instead of Android share sheet opening.
+- Documented Android layout QA result for saved reading share/delete buttons after PR #322.
+- Documented Android layout QA result for fortune save/copy buttons after PR #322.
+- Kept external share send, Kakao SDK, SMS permission/native integration, @capacitor/share, release build, signing, AAB generation, and Google Play Console input as Pending/Not started or Not performed.
+
+## Checks
+
+- Added share fallback layout Android QA result check script.
+
 ## Fixed
 
 - Stabilized saved reading share/delete action button layout when share status text is shown.

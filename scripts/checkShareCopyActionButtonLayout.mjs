@@ -100,7 +100,6 @@ for (const snippet of requiredTodoCompletedSnippets) {
 
 const requiredTodoPendingSnippets = [
   '- [ ] Android share sheet 실제 확인 재검토',
-  '- [ ] Clipboard fallback 실제 확인',
   '- [ ] 실제 외부 공유 발송 확인',
   '- [ ] Kakao SDK 연동 검토',
   '- [ ] SMS permission/native integration 검토',
