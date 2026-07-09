@@ -2,6 +2,16 @@
 
 ## Docs
 
+- Added Google Play Data safety draft for launch preparation.
+- Recorded current localStorage-only, no server DB, no login, no actual ad/payment/analytics SDK baseline.
+- Kept Google Play 데이터 보안 양식, Google Play Console input, 개인정보 처리방침 URL, 문의처 이메일/지원 연락처, 시행일, 제공자 정보, release build, signing, and AAB generation as Pending/Not started.
+
+## Checks
+
+- Added Google Play data safety draft check script.
+
+## Docs
+
 - Documented support contact verification readiness for Google Play launch preparation.
 - Kept 문의처 이메일/지원 연락처, inbox access check, test email send/receive check, privacy policy draft contact update, 개인정보 처리방침 URL, 시행일, 제공자 정보, Google Play Console input, release build, signing, and AAB generation as Pending/Not started.
 
