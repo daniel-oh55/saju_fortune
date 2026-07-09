@@ -11,6 +11,7 @@
 - [ ] Review KakaoTalk/SMS sharing path
 - [x] Change 내정보 CTA copy to '저장하고 하루풀이 시작하기'
 - [x] Adjust home morning/lunch/evening fortune cards to vertical layout
+- [x] Record APK QA result for home time-slot vertical layout
 
 ## Calculation regression baseline generator TODO
 

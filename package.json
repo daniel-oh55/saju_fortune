@@ -200,6 +200,7 @@
     "check:home-time-slot-fortune-cards": "node scripts/checkHomeTimeSlotFortuneCards.mjs",
     "check:short-app-loading-screen": "node scripts/checkShortAppLoadingScreen.mjs",
     "check:home-time-slot-cards-vertical": "node scripts/checkHomeTimeSlotCardsVertical.mjs",
+    "check:home-time-slot-vertical-apk-qa-result": "node scripts/checkHomeTimeSlotVerticalApkQaResult.mjs",
     "check:splash-png-export": "node scripts/checkSplashPngExportReadiness.mjs",
     "check:visit-streak": "node scripts/checkVisitStreakRegression.mjs",
     "check:zodiac-fortune-sample-qa": "node scripts/checkZodiacFortuneSampleQa.mjs",
