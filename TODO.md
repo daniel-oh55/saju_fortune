@@ -5,7 +5,8 @@
 - [x] Document pre-release UX improvement backlog
 - [x] Show morning, lunch, and evening fortune cards on the home screen
 - [x] Add short app loading screen
-- [ ] Create app icon asset
+- [x] Create app icon asset candidate
+- [ ] Finalize app icon asset
 - [ ] Apply app icon to Android resources after asset finalization
 - [ ] Add saved reading share feature
 - [ ] Review KakaoTalk/SMS sharing path

@@ -55,6 +55,19 @@
 | ICON-003 | Night mountain | Minimal navy mountain silhouette with moon/star accent | Pending |
 | ICON-004 | Daily flow mark | Abstract moon-orbit line and small star in calm diary style | Pending |
 
+## Selected Candidate Asset
+
+- Selected candidate: ICON-003 Night mountain
+- Candidate asset path: assets/app-icon/harupuli-icon-candidate.svg
+- Asset creation status: Candidate added
+- Final icon decision: Pending
+- Android icon resource integration: Pending
+- Google Play icon upload: Pending
+- Real-device launcher QA: Pending
+- Release build: Not started
+- Signing setup: Not started
+- AAB generation: Not started
+
 ## Required Asset Plan
 
 - Source master icon: Pending

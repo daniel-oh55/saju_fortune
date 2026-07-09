@@ -1,5 +1,23 @@
 # DEVELOPMENT_LOG
 
+## App Icon Candidate Asset
+
+- Added app icon candidate asset
+- Selected ICON-003 Night mountain as first candidate
+- Added assets/app-icon/harupuli-icon-candidate.svg
+- Kept final icon decision as Pending
+- Kept Android icon resource integration as Pending
+- Kept Google Play icon upload as Pending
+- Kept release build as Not started
+- Kept signing setup as Not started
+- Kept AAB generation as Not started
+- No src changes
+- No Android/Gradle changes
+- No Android resource changes
+- No AndroidManifest.xml changes
+- No production UI changes
+- No sharing feature implementation
+
 ## App Icon Design Brief
 
 - Documented app icon design brief

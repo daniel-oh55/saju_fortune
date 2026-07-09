@@ -2,6 +2,10 @@
 
 ## Changed
 
+- Added first app icon candidate asset and kept Android resource integration Pending
+
+## Changed
+
 - Documented app icon design brief and kept icon asset creation Pending
 
 ## Changed
