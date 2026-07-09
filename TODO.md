@@ -63,6 +63,22 @@
 - [x] Record APK QA result for home time-slot vertical layout
 - [x] Document app icon design brief
 
+## 2026-07-09 Google Play Launch Readiness Status TODO
+
+- [x] Google Play 출시 준비 상태 문서화
+- [x] Google Play launch readiness status 검증 스크립트 추가
+- [ ] 개인정보 처리방침 URL 확정
+- [ ] 문의처 이메일/지원 연락처 확정
+- [ ] Google Play 데이터 보안 양식 초안 문서화
+- [ ] Store listing 문구 초안 정리
+- [ ] 실제 스토어 스크린샷 이미지 제작 계획 수립
+- [ ] release build 준비
+- [ ] signing 설정 준비
+- [ ] AAB 생성
+- [ ] Google Play Console 실제 입력
+- [ ] 태양시 보정 적용 여부
+- [ ] 음력/윤달 샘플 외부 검증
+
 ## Calculation regression baseline generator TODO
 
 - [x] Add calculation regression baseline generator scaffold
