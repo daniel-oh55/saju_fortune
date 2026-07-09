@@ -27,7 +27,7 @@ const changelogSource = read(changelogPath);
 const requiredSnippets = [
   'Saved Reading Share Android QA Result',
   'Related PR: #319',
-  'Android Debug Build run: #251',
+  'Android Debug Build run: #253',
   'Current QA status: Completed for clipboard fallback path; Android share sheet not opened in tested WebView environment',
   'PR type: docs/check-only',
   '저장한 풀이 화면에 `공유하기` 버튼 표시',
@@ -50,7 +50,13 @@ const requiredSnippets = [
   'Android share sheet opens | Not opened',
   'Clipboard fallback behavior | Completed',
   'Share cancel handling | Not applicable',
-  'Share text actual verification | Pending',
+  'Share text actual verification | Completed',
+  'Share text excludes birthDate | Completed',
+  'Share text excludes birthTime | Completed',
+  'Share text excludes birthPlace | Completed',
+  'Share text excludes gender | Completed',
+  'Share text excludes name | Completed',
+  'Share text excludes real store URLs | Completed',
   'App remains stable after fallback | Completed',
   'Actual external share send | Not performed',
   'Kakao SDK integration | Not started',
@@ -115,6 +121,7 @@ const requiredTodoCompletedSnippets = [
   '- [x] 저장한 풀이 텍스트 공유 Android 실제 기기 QA',
   '- [x] Android share sheet 미표시 실제 확인',
   '- [x] Clipboard fallback 실제 확인',
+  '- [x] 공유 문구 개인정보 제외 실제 확인',
 ];
 for (const snippet of requiredTodoCompletedSnippets) {
   mark(todoSource.includes(snippet), `todo_includes_completed_${snippet}`);
@@ -122,7 +129,6 @@ for (const snippet of requiredTodoCompletedSnippets) {
 
 const requiredTodoPendingSnippets = [
   '- [ ] Android share sheet 실제 표시 확인',
-  '- [ ] 공유 문구 개인정보 제외 실제 확인',
   '- [ ] 실제 외부 공유 발송 확인',
   '- [ ] Kakao SDK 연동 검토',
   '- [ ] SMS permission/native integration 검토',
