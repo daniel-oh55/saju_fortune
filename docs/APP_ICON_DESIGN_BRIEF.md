@@ -58,10 +58,10 @@
 ## Selected Candidate Asset
 
 - Selected candidate: provided-image-based mountain icon
-- Primary candidate asset path: assets/app-icon/source/harupuli-icon-source.png
+- Final selected candidate path: assets/app-icon/source/harupuli-icon-source.png
 - Previous candidate asset path: assets/app-icon/harupuli-icon-candidate.svg
-- Asset creation status: Candidate updated
-- Final icon decision: Pending
+- Asset creation status: Final candidate selected
+- Final icon decision: Completed
 - Android icon resource integration: Pending
 - Google Play icon upload: Pending
 - Real-device launcher QA: Pending
@@ -72,7 +72,7 @@
 
 ## Required Asset Plan
 
-- Source master icon: Pending
+- Source master icon: Completed
 - Android adaptive icon foreground: Pending
 - Android adaptive icon background: Pending
 - Google Play 512x512 icon: Pending
