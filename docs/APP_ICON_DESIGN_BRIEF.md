@@ -57,9 +57,10 @@
 
 ## Selected Candidate Asset
 
-- Selected candidate: ICON-003 Night mountain
-- Candidate asset path: assets/app-icon/harupuli-icon-candidate.svg
-- Asset creation status: Candidate added
+- Selected candidate: provided-image-based mountain icon
+- Primary candidate asset path: assets/app-icon/source/harupuli-icon-source.png
+- Previous candidate asset path: assets/app-icon/harupuli-icon-candidate.svg
+- Asset creation status: Candidate updated
 - Final icon decision: Pending
 - Android icon resource integration: Pending
 - Google Play icon upload: Pending
@@ -67,6 +68,7 @@
 - Release build: Not started
 - Signing setup: Not started
 - AAB generation: Not started
+- Candidate note: warm ivory background, deep navy layered mountain silhouette, warm gold sun accent, calm diary-like premium fortune app tone
 
 ## Required Asset Plan
 
