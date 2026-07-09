@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## Docs
+
+- Documented Android launcher icon APK QA result after PR #316.
+- Recorded Android Debug Build run #245 as the QA reference.
+- Recorded real-device launcher/app drawer icon verification result.
+- Kept Google Play icon upload, release build, signing setup, and AAB generation as Pending/Not started.
+
+## Checks
+
+- Added Android launcher icon APK QA result check script.
+
 ## Changed
 
 - Applied the selected app icon to Android launcher resources
