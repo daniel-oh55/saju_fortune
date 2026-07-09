@@ -2,6 +2,15 @@
 
 ## Docs
 
+- Documented support contact verification readiness for Google Play launch preparation.
+- Kept 문의처 이메일/지원 연락처, inbox access check, test email send/receive check, privacy policy draft contact update, 개인정보 처리방침 URL, 시행일, 제공자 정보, Google Play Console input, release build, signing, and AAB generation as Pending/Not started.
+
+## Checks
+
+- Added support contact verification readiness check script.
+
+## Docs
+
 - Added draft privacy policy for Google Play launch preparation.
 - Kept 개인정보 처리방침 URL, 문의처 이메일/지원 연락처, 시행일, 제공자 정보, app internal privacy policy link/text, Google Play Console input, release build, signing, and AAB generation as Pending/Not started.
 

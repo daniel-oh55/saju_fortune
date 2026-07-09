@@ -71,8 +71,14 @@
 - [x] Privacy policy and support contact readiness 검증 스크립트 추가
 - [x] 개인정보 처리방침 문서 초안 작성
 - [x] Privacy policy draft 검증 스크립트 추가
+- [x] 문의처 후보/수신 가능 여부 확인 절차 문서화
+- [x] Support contact verification readiness 검증 스크립트 추가
+- [ ] 문의처 이메일/지원 연락처 후보 선정
 - [ ] 개인정보 처리방침 URL 확정
 - [ ] 문의처 이메일/지원 연락처 확정
+- [ ] 문의처 수신 가능 여부 확인
+- [ ] 테스트 메일 송수신 확인
+- [ ] 개인정보 처리방침 초안 문의처 반영
 - [ ] 시행일 확정
 - [ ] 제공자 정보 확정
 - [ ] 앱 내부 개인정보 처리방침 링크 또는 안내 위치 검토
