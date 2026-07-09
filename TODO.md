@@ -17,6 +17,16 @@
 - [ ] Review KakaoTalk/SMS sharing path
 - [ ] 저장한 풀이 공유 기능 검토
 - [ ] KakaoTalk/SMS 공유 경로 검토
+- [x] 저장한 풀이 공유 기능 구현 전 검토 문서화
+- [x] Web Share API / 복사 fallback / KakaoTalk/SMS 직접 연동 후보 비교 문서화
+- [x] Saved reading share readiness 검증 스크립트 추가
+- [ ] 저장한 풀이 공유 기능 구현
+- [ ] Web Share API 기반 공유 기능 검토
+- [ ] 공유 문구 복사 fallback 구현 검토
+- [ ] Kakao SDK 연동 검토
+- [ ] SMS permission/native integration 검토
+- [ ] 공유 이미지 생성 기능 검토
+- [ ] AndroidManifest.xml 공유 관련 변경 필요 여부 검토
 - [ ] Google Play icon upload
 - [ ] Google Play Console 실제 입력
 - [ ] Google Play Console 스크린샷 업로드
