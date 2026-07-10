@@ -117,6 +117,8 @@
 - [x] Privacy URL/support contact finalization checklist 검증 스크립트 추가
 - [x] 개인정보 처리방침 URL/문의처 후보 선정 및 검증 계획 문서화
 - [x] Privacy URL/support contact candidate plan 검증 스크립트 추가
+- [x] Google Play 데이터 보안 양식 최종 답변 검토 문서화
+- [x] Google Play data safety final review 검증 스크립트 추가
 - [ ] Store screenshot upload
 - [x] 캡처 기기와 캡처 기준 APK 확인
 - [x] Capture APK download

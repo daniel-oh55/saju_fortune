@@ -2,6 +2,16 @@
 
 ## Docs
 
+- Added Google Play Data safety final review for launch preparation.
+- Reviewed Data safety answer baseline based on the current app state: localStorage 중심, no server DB, no login, no actual ad/payment/analytics SDK.
+- Kept Google Play 데이터 보안 양식 최종 입력, Google Play Console input, 개인정보 처리방침 URL, 문의처 이메일/지원 연락처, Store screenshot upload, release build, signing, and AAB generation as Pending/Not started.
+
+## Checks
+
+- Added Google Play data safety final review check script.
+
+## Docs
+
 - Added privacy URL and support contact candidate plan for Google Play launch preparation.
 - Documented candidate selection and verification planning for 개인정보 처리방침 URL and 문의처 이메일/지원 연락처.
 - Kept 개인정보 처리방침 URL, 문의처 이메일/지원 연락처, Google Play 데이터 보안 양식, Store screenshot upload, Google Play Console input, release build, signing, and AAB generation as Pending/Not started.
