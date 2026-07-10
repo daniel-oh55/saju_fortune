@@ -110,6 +110,8 @@
 - [x] Store screenshot image QA result 검증 스크립트 추가
 - [x] Store listing final text check consistency after finalization
 - [x] Store listing final text regression checks verified
+- [x] APK launch QA result check consistency after store listing finalization
+- [x] APK launch QA result regression check verified
 - [ ] Store screenshot upload
 - [x] 캡처 기기와 캡처 기준 APK 확인
 - [x] Capture APK download

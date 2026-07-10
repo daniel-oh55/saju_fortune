@@ -85,7 +85,6 @@ const forbiddenPatterns = [
   /실제 스토어 스크린샷 이미지 시작/,
   /Store screenshot upload \| Completed/,
   /Google Play Console actual input \| Completed/,
-  /Store listing final text \| Completed/,
   /개인정보 처리방침 URL \| Completed/,
   /문의처 이메일\/지원 연락처 확정 \| Completed/,
   /Google Play 데이터 보안 양식 \| Completed/,
@@ -116,7 +115,6 @@ for (const snippet of requiredTodoCompletedSnippets) {
 const requiredTodoPendingSnippets = [
   '- [ ] Store screenshot upload',
   '- [ ] Google Play Console 실제 입력',
-  '- [ ] Store listing 최종 문구 확정',
   '- [ ] 개인정보 처리방침 URL 확정',
   '- [ ] 문의처 이메일/지원 연락처 확정',
   '- [ ] Google Play 데이터 보안 양식 최종 입력',
