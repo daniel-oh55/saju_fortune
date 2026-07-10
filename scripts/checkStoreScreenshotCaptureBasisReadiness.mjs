@@ -124,8 +124,6 @@ for (const snippet of requiredTodoCompletedSnippets) {
 }
 
 const requiredTodoPendingSnippets = [
-  '- [ ] 캡처 기기와 캡처 기준 APK 확인',
-  '- [ ] Debug APK 설치 및 앱 실행 확인',
   '- [ ] 실제 스토어 스크린샷 이미지 제작',
   '- [ ] Store screenshot upload',
   '- [ ] Google Play Console 실제 입력',

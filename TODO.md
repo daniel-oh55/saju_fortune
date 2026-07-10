@@ -87,6 +87,8 @@
 - [x] Store screenshot capture basis readiness 검증 스크립트 추가
 - [x] 스토어 스크린샷용 Debug APK 설치/앱 실행 QA 템플릿 문서화
 - [x] Store screenshot APK launch QA template 검증 스크립트 추가
+- [x] 스토어 스크린샷용 Debug APK 설치/앱 실행 QA 결과 문서화
+- [x] Store screenshot APK launch QA result 검증 스크립트 추가
 - [ ] 문의처 이메일/지원 연락처 후보 선정
 - [ ] 개인정보 처리방침 URL 확정
 - [ ] 문의처 이메일/지원 연락처 확정
@@ -99,10 +101,11 @@
 - [ ] Google Play 데이터 보안 양식 최종 입력
 - [ ] Store listing 최종 문구 확정
 - [ ] 실제 스토어 스크린샷 이미지 제작
+- [ ] Screenshot image export
 - [ ] Store screenshot upload
-- [ ] 캡처 기기와 캡처 기준 APK 확인
-- [ ] Capture APK download
-- [ ] Debug APK 설치 및 앱 실행 확인
+- [x] 캡처 기기와 캡처 기준 APK 확인
+- [x] Capture APK download
+- [x] Debug APK 설치 및 앱 실행 확인
 - [ ] release build 준비
 - [ ] signing 설정 준비
 - [ ] AAB 생성
