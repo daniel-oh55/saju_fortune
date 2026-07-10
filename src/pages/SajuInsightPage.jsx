@@ -8,6 +8,11 @@ import SaveReadingButton from '../components/SaveReadingButton.jsx';
 import SajuCalculationBasisCard from '../components/SajuCalculationBasisCard.jsx';
 import SajuElementSummaryCard from '../components/SajuElementSummaryCard.jsx';
 import ScoreDonut from '../components/ScoreDonut.jsx';
+import fireElementImage from '../assets/five-elements/fire-element.png';
+import waterElementImage from '../assets/five-elements/water-element.png';
+import woodElementImage from '../assets/five-elements/wood-element.png';
+import metalElementImage from '../assets/five-elements/metal-element.png';
+import earthElementImage from '../assets/five-elements/earth-element.png';
 import { REWARDED_AD_PLACEMENTS } from '../config/rewardedAdPlacements.js';
 import {
   displayFiveElement,
@@ -16,6 +21,14 @@ import {
   FIVE_ELEMENT_ORDER,
 } from '../utils/fiveElementsInfo.js';
 import { buildSajuInsightShareText } from '../utils/shareTextBuilder.js';
+
+const FIVE_ELEMENT_IMAGES = {
+  화: fireElementImage,
+  수: waterElementImage,
+  목: woodElementImage,
+  금: metalElementImage,
+  토: earthElementImage,
+};
 
 const SAJU_INSIGHT_DEEP_UNLOCK_KEY = 'sajuInsightDeepDive';
 const WEEKDAY_LABELS = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
@@ -226,6 +239,13 @@ function SajuInsightPage({
             const info = FIVE_ELEMENT_INFO[element];
             return (
               <article key={element}>
+                <img
+                  className="saju-five-elements-icon"
+                  src={FIVE_ELEMENT_IMAGES[element]}
+                  alt=""
+                  aria-hidden="true"
+                  loading="lazy"
+                />
                 <strong>{info.label}</strong>
                 <span>{info.summary}</span>
               </article>
