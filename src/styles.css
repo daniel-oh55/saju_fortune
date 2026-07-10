@@ -2189,14 +2189,34 @@ input:disabled {
 }
 
 .home-time-slot-item {
+  position: relative;
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
   gap: 4px;
+  min-height: 132px;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-soft);
-  padding: 12px 14px;
-  background: var(--color-card-soft);
+  padding: 14px 16px;
+  background-color: var(--color-card-soft);
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
   text-align: left;
+  isolation: isolate;
+}
+
+.home-time-slot-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(180deg, rgba(20, 28, 41, 0.18) 0%, rgba(20, 28, 41, 0.78) 100%);
+}
+
+.home-time-slot-item > * {
+  position: relative;
+  z-index: 1;
 }
 
 .home-time-slot-label {
@@ -2206,13 +2226,13 @@ input:disabled {
 }
 
 .home-time-slot-title {
-  color: var(--color-deep-navy);
+  color: #fdfaf4;
   font-size: 0.86rem;
   line-height: 1.3;
 }
 
 .home-time-slot-text {
-  color: var(--color-muted);
+  color: rgba(253, 250, 244, 0.86);
   font-size: 0.76rem;
   line-height: 1.35;
 }
@@ -3197,8 +3217,8 @@ input:disabled {
 .zodiac-animal-grid button {
   display: grid;
   place-items: center;
-  gap: 7px;
-  min-height: 84px;
+  gap: 6px;
+  min-height: 92px;
   border: 1px solid rgba(184, 150, 78, 0.16);
   border-radius: 18px;
   color: #35464d;
@@ -3214,7 +3234,8 @@ input:disabled {
 }
 
 .zodiac-animal-grid span {
-  font-size: 1.25rem;
+  font-size: 1.7rem;
+  line-height: 1;
 }
 
 .zodiac-animal-grid strong {
@@ -3476,13 +3497,19 @@ input:disabled {
   color: #338f8b;
 }
 
-.lucky-grid {
+.home-hint-subtext {
+  margin: 2px 0 12px;
+  color: var(--color-muted);
+  font-size: 0.86rem;
+}
+
+.home-hint-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 8px;
 }
 
-.lucky-grid div {
+.home-hint-item {
   border: 1px solid rgba(89, 120, 118, 0.14);
   border-radius: 18px;
   padding: 14px 10px;
@@ -3490,7 +3517,7 @@ input:disabled {
   background: rgba(255, 255, 255, 0.92);
 }
 
-.lucky-grid span {
+.home-hint-label {
   display: block;
   margin-bottom: 6px;
   color: #697a80;
@@ -3498,7 +3525,7 @@ input:disabled {
   font-weight: 900;
 }
 
-.lucky-grid strong {
+.home-hint-value {
   color: #243039;
   font-size: 0.92rem;
 }
@@ -3888,7 +3915,7 @@ input:disabled {
     flex-direction: column;
   }
 
-  .lucky-grid,
+  .home-hint-grid,
   .month-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -4037,7 +4064,11 @@ input:disabled {
   }
 
   .zodiac-animal-grid button {
-    min-height: 72px;
+    min-height: 80px;
+  }
+
+  .zodiac-animal-grid span {
+    font-size: 1.5rem;
   }
 }
 

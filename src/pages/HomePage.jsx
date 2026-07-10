@@ -4,6 +4,9 @@ import PageTopBar from '../components/PageTopBar.jsx';
 import SavedReadingsSummaryCard from '../components/SavedReadingsSummaryCard.jsx';
 import VisitStreakCard from '../components/VisitStreakCard.jsx';
 import { displayFiveElement } from '../utils/fiveElementsInfo.js';
+import morningFortuneBg from '../assets/fortune-time/morning-fortune-bg.png';
+import noonFortuneBg from '../assets/fortune-time/noon-fortune-bg.png';
+import eveningFortuneBg from '../assets/fortune-time/evening-fortune-bg.png';
 
 const QUICK_MENU_PREFS_KEY = 'harupuli_home_quick_menu_prefs';
 const MAX_HOME_QUICK_MENU_ITEMS = 4;
@@ -45,18 +48,21 @@ const HOME_TIME_SLOT_FORTUNES = [
     label: '아침운세',
     title: '천천히 시동을 걸기 좋은 시간',
     text: '해야 할 일을 작게 나누어두면 하루가 차분하고 편안하게 시작됩니다.',
+    bg: morningFortuneBg,
   },
   {
     id: 'lunch',
     label: '점심운세',
     title: '정리와 확인에 어울리는 시간',
     text: '중요한 메시지나 약속을 한 번 더 확인하면 안정감이 커집니다.',
+    bg: noonFortuneBg,
   },
   {
     id: 'evening',
     label: '저녁운세',
     title: '속도를 낮추고 균형을 챙길 시간',
     text: '가벼운 정리와 짧은 휴식이 내일의 리듬을 편안하게 만듭니다.',
+    bg: eveningFortuneBg,
   },
 ];
 
@@ -281,7 +287,11 @@ function HomePage({
         <p className="home-time-slot-subtext">아침, 점심, 저녁의 흐름을 한눈에 살펴보세요.</p>
         <div className="home-time-slot-grid">
           {HOME_TIME_SLOT_FORTUNES.map((slot) => (
-            <div key={slot.id} className="home-time-slot-item">
+            <div
+              key={slot.id}
+              className="home-time-slot-item"
+              style={slot.bg ? { backgroundImage: `url(${slot.bg})` } : undefined}
+            >
               <span className="home-time-slot-label">{slot.label}</span>
               <strong className="home-time-slot-title">{slot.title || HOME_TIME_SLOT_FALLBACK_TITLE}</strong>
               <p className="home-time-slot-text">{slot.text || HOME_TIME_SLOT_FALLBACK_TEXT}</p>
@@ -290,18 +300,22 @@ function HomePage({
         </div>
       </section>
 
-      <section className="lucky-grid">
-        <div>
-          <span>행운 색상</span>
-          <strong>{overall.luckyColor}</strong>
-        </div>
-        <div>
-          <span>행운 아이템</span>
-          <strong>{overall.luckyItem}</strong>
-        </div>
-        <div>
-          <span>오늘 키워드</span>
-          <strong>{todayKeyword}</strong>
+      <section className="time-fortune-card home-today-hint-card">
+        <p className="eyebrow">오늘의 힌트</p>
+        <p className="home-hint-subtext">행운 색상, 행운 아이템, 오늘 키워드를 한곳에서 확인해보세요.</p>
+        <div className="home-hint-grid">
+          <div className="home-hint-item">
+            <span className="home-hint-label">행운 색상</span>
+            <strong className="home-hint-value">{overall.luckyColor}</strong>
+          </div>
+          <div className="home-hint-item">
+            <span className="home-hint-label">행운 아이템</span>
+            <strong className="home-hint-value">{overall.luckyItem}</strong>
+          </div>
+          <div className="home-hint-item">
+            <span className="home-hint-label">오늘 키워드</span>
+            <strong className="home-hint-value">{todayKeyword}</strong>
+          </div>
         </div>
       </section>
 

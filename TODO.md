@@ -147,6 +147,12 @@
 - [x] 시행일 확정
 - [x] 제공자 정보 확정
 - [x] Privacy policy final values confirmation 검증 스크립트 추가
+- [x] 출시 전 홈 화면 UI polish 1차
+- [x] 오늘의 시간대 운세 카드 배경 이미지 적용
+- [x] 오늘의 힌트 카드 통합
+- [x] 띠별운세 동물 이미지 크기 확대
+- [ ] 오늘흐름 오행 이미지 추가
+- [ ] 디자인 변경 후 Android 실제 기기 또는 에뮬레이터 화면 QA
 - [ ] 디자인 변경 후 실제 스토어 스크린샷 이미지 제작
 - [ ] Store screenshot upload
 - [x] 캡처 기기와 캡처 기준 APK 확인
