@@ -1,5 +1,21 @@
 # CHANGELOG
 
+## Fixed
+
+- Applied PR #362 and PR #363 UI polish changes to main.
+- Restored home fortune time background images and 오늘의 힌트 card on the main branch.
+- Restored zodiac animal image size polish on the main branch.
+
+## Pending
+
+- 오늘흐름 오행 이미지 추가
+- 디자인 변경 후 Android 화면 QA
+- 디자인 변경 후 실제 스토어 스크린샷 이미지 제작
+- Store screenshot upload
+- Google Play Console input
+- Google Play 데이터 보안 양식 최종 입력
+- release build, signing setup, and AAB generation
+
 ## UI
 
 - Increased zodiac animal image size slightly for better visibility.
