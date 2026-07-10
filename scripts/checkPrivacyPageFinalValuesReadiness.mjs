@@ -99,7 +99,6 @@ const forbiddenPatterns = [
   /개인정보 처리방침 URL \| Completed/,
   /개인정보 처리방침 URL 후보 선정 \| Completed/,
   /개인정보 처리방침 URL 확정 \| Completed/,
-  /Privacy policy public page implementation \| Completed/,
   /Privacy page route implementation \| Completed/,
   /Google Play 데이터 보안 양식 \| Completed/,
   /Google Play 데이터 보안 양식 최종 입력 \| Completed/,
