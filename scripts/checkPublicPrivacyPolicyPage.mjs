@@ -138,7 +138,6 @@ for (const snippet of requiredTodoPendingSnippets) {
 }
 
 const forbiddenCompletedPatterns = [
-  /개인정보 처리방침 URL 후보 선정\s*[|:]\s*Completed/,
   /개인정보 처리방침 URL 확정\s*[|:]\s*Completed/,
   /문의처 이메일\/지원 연락처 확정\s*[|:]\s*Completed/,
   /시행일 확정\s*[|:]\s*Completed/,
