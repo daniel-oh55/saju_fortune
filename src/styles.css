@@ -3217,8 +3217,8 @@ input:disabled {
 .zodiac-animal-grid button {
   display: grid;
   place-items: center;
-  gap: 7px;
-  min-height: 84px;
+  gap: 6px;
+  min-height: 92px;
   border: 1px solid rgba(184, 150, 78, 0.16);
   border-radius: 18px;
   color: #35464d;
@@ -3234,7 +3234,8 @@ input:disabled {
 }
 
 .zodiac-animal-grid span {
-  font-size: 1.25rem;
+  font-size: 1.7rem;
+  line-height: 1;
 }
 
 .zodiac-animal-grid strong {
@@ -4063,7 +4064,11 @@ input:disabled {
   }
 
   .zodiac-animal-grid button {
-    min-height: 72px;
+    min-height: 80px;
+  }
+
+  .zodiac-animal-grid span {
+    font-size: 1.5rem;
   }
 }
 
