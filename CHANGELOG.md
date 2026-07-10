@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Checks
+
+- Added static privacy policy page verification check.
+- Aligned privacy checks after adding public/privacy-policy/index.html.
+- Kept 개인정보 처리방침 URL, final support contact verification, Google Play Console input, Store screenshot upload, Google Play 데이터 보안 양식 최종 입력, release build, signing setup, and AAB generation as Pending/Not started.
+
 ## Public
 
 - Added static privacy policy page for Google Play launch preparation.

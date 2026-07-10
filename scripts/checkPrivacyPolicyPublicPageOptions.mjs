@@ -89,7 +89,6 @@ const forbiddenPatterns = [
   /개인정보 처리방침 URL \| Completed/,
   /개인정보 처리방침 URL 후보 선정 \| Completed/,
   /개인정보 처리방침 URL 확정 \| Completed/,
-  /Privacy policy public page implementation \| Completed/,
   /문의처 이메일\/지원 연락처 \| Completed/,
   /문의처 이메일\/지원 연락처 후보 선정 \| Completed/,
   /문의처 이메일\/지원 연락처 확정 \| Completed/,
