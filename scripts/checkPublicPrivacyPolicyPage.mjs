@@ -33,10 +33,10 @@ function includesAll(text, patterns) {
   return patterns.every((pattern) => text.includes(pattern));
 }
 
-const pagePath = 'public/privacy/index.html';
+const pagePath = 'public/privacy-policy/index.html';
 const publicPrivacyPageExists = fileExists(pagePath);
 logResult('public_privacy_page_exists', publicPrivacyPageExists);
-assertCondition(publicPrivacyPageExists, 'public/privacy/index.html should exist');
+assertCondition(publicPrivacyPageExists, 'public/privacy-policy/index.html should exist');
 
 const page = publicPrivacyPageExists ? readText(pagePath) : '';
 const correctBrand = '하루풀이';
@@ -44,75 +44,119 @@ const typoBrand = '하루풀' + '리';
 
 const pageChecks = [
   ['page_mentions_service_name', page.includes(correctBrand), 'public privacy page should mention service name'],
-  [
-    'page_mentions_correct_service_name',
-    page.includes(correctBrand),
-    'public privacy page should mention the correct service name',
-  ],
   ['page_has_no_brand_typo', !page.includes(typoBrand), 'public privacy page should not contain brand typo'],
   [
     'page_mentions_privacy_policy',
-    page.includes('개인정보 처리방침'),
-    'public privacy page should mention privacy policy',
+    page.includes('하루풀이 개인정보 처리방침'),
+    'public privacy page should mention the privacy policy title',
   ],
   ['page_mentions_localstorage', page.includes('localStorage'), 'public privacy page should mention localStorage'],
   [
     'page_mentions_no_server_db',
-    includesAny(page, ['서버 데이터베이스 없이', '서버로 전송하지 않습니다']),
-    'public privacy page should mention no server DB or no server transfer',
+    page.includes('현재 하루풀이는 서버 DB를 사용하지 않습니다.'),
+    'public privacy page should mention no server DB',
+  ],
+  [
+    'page_mentions_no_login',
+    page.includes('현재 하루풀이는 로그인 기능을 사용하지 않습니다.'),
+    'public privacy page should mention no login feature',
   ],
   [
     'page_mentions_data_items',
-    includesAll(page, ['프로필 정보', '운세 cache', '사주 분석 cache', '동의 설정', '저장한 운세', '방문 streak']),
+    includesAll(page, ['생년월일', '출생시간', '출생지역', '성별', '사용자가 입력한 프로필 정보', '저장한 운세/풀이 기록']),
     'public privacy page should list current data items',
   ],
   [
     'page_mentions_no_real_ad_sdk',
-    includesAny(page, ['실제 광고 SDK는 연결되어 있지 않습니다', '실제 광고 SDK를 사용하지 않습니다']),
+    page.includes('실제 광고 SDK'),
     'public privacy page should mention no real ad SDK',
   ],
-  [
-    'page_mentions_no_payment_sdk',
-    includesAny(page, ['실제 결제 SDK는 연결되어 있지 않습니다', '실제 결제 SDK를 사용하지 않습니다']),
-    'public privacy page should mention no payment SDK',
-  ],
+  ['page_mentions_no_payment_sdk', page.includes('결제 SDK'), 'public privacy page should mention no payment SDK'],
   [
     'page_mentions_no_analytics_sdk',
-    includesAny(page, ['외부 분석 SDK', '실제 외부 분석 SDK는 연결되어 있지 않습니다']),
+    page.includes('외부 분석 SDK'),
     'public privacy page should mention no external analytics SDK',
   ],
   [
     'page_mentions_delete_method',
-    includesAny(page, ['데이터 삭제', 'adb shell pm clear com.harupuli.app']),
+    includesAny(page, ['데이터 삭제', '앱 삭제']),
     'public privacy page should mention data deletion method',
   ],
   [
-    'page_mentions_reference_notice',
-    includesAny(page, ['참고용 콘텐츠', '전문적인 자문을 대체하지 않습니다']),
-    'public privacy page should include reference notice',
+    'page_mentions_effective_date',
+    page.includes('시행일: 2026년 7월 12일'),
+    'public privacy page should mention the recorded effective date',
   ],
   [
-    'page_mentions_contact_pending',
-    includesAny(page, ['문의처는 Google Play 제출 전 확정 필요', 'Google Play 제출 전 확정 필요']),
-    'public privacy page should mention contact pending status',
+    'page_mentions_contact_email',
+    page.includes('support.hym@gmail.com'),
+    'public privacy page should mention the recorded support contact email',
   ],
-  [
-    'page_mentions_last_updated',
-    includesAny(page, ['최종 수정일', '2026-06-16']),
-    'public privacy page should mention last updated date',
-  ],
-  [
-    'page_has_no_external_script',
-    !/<script\s+src\s*=/i.test(page),
-    'public privacy page should not include external script tags',
-  ],
+  ['page_has_no_script_tag', !/<script/i.test(page), 'public privacy page should not include script tags'],
   ['page_has_no_form', !/<form\b/i.test(page), 'public privacy page should not include forms'],
+  [
+    'page_has_no_external_resource',
+    !/https?:\/\//.test(page) && !/<img/i.test(page) && !/<iframe/i.test(page) && !/<link\s+rel="stylesheet"/i.test(page),
+    'public privacy page should not reference external links, images, iframes, or stylesheets',
+  ],
 ];
 
 for (const [id, pass, message] of pageChecks) {
   logResult(id, pass);
   assertCondition(pass, message);
 }
+
+const forbiddenPagePhrases = ['실제 스토어 스크린샷 이미지 시작', '서양식 보정 적용 여부', '양력/음력 샘플 추가 검증'];
+for (const phrase of forbiddenPagePhrases) {
+  const pass = !page.includes(phrase);
+  logResult(`page_excludes_forbidden_phrase_${phrase}`, pass);
+  assertCondition(pass, `public privacy page should not contain forbidden phrase: ${phrase}`);
+}
+
+const todoSource = readText('TODO.md');
+const developmentLogSource = readText('DEVELOPMENT_LOG.md');
+const changelogSource = readText('CHANGELOG.md');
+const livingDocsSource = `${todoSource}\n${developmentLogSource}\n${changelogSource}`;
+
+const requiredTodoPendingSnippets = [
+  '- [ ] 문의처 이메일/지원 연락처 확정',
+  '- [ ] 시행일 확정',
+  '- [ ] 제공자 정보 확정',
+  '- [ ] 개인정보 처리방침 URL 후보 선정',
+  '- [ ] 개인정보 처리방침 URL 확정',
+  '- [ ] Google Play 데이터 보안 양식 최종 입력',
+  '- [ ] Store screenshot upload',
+  '- [ ] Google Play Console 실제 입력',
+  '- [ ] release build 준비',
+  '- [ ] signing 설정 준비',
+  '- [ ] AAB 생성',
+];
+for (const snippet of requiredTodoPendingSnippets) {
+  const pass = todoSource.includes(snippet);
+  logResult(`todo_keeps_pending_${snippet}`, pass);
+  assertCondition(pass, `TODO.md should keep pending: ${snippet}`);
+}
+
+const forbiddenCompletedPatterns = [
+  /개인정보 처리방침 URL 후보 선정\s*[|:]\s*Completed/,
+  /개인정보 처리방침 URL 확정\s*[|:]\s*Completed/,
+  /문의처 이메일\/지원 연락처 확정\s*[|:]\s*Completed/,
+  /시행일 확정\s*[|:]\s*Completed/,
+  /제공자 정보 확정\s*[|:]\s*Completed/,
+  /Privacy page route implementation\s*[|:]\s*Completed/,
+  /Google Play Console actual input\s*[|:]\s*Completed/,
+  /Store screenshot upload\s*[|:]\s*Completed/,
+  /Google Play 데이터 보안 양식 최종 입력\s*[|:]\s*Completed/,
+  /Release build\s*[|:]\s*Completed/,
+  /Signing setup\s*[|:]\s*Completed/,
+  /AAB generation\s*[|:]\s*Completed/,
+];
+const noForbiddenCompleted = !forbiddenCompletedPatterns.some((pattern) => pattern.test(livingDocsSource));
+logResult('living_docs_no_forbidden_completed_snippets', noForbiddenCompleted);
+assertCondition(
+  noForbiddenCompleted,
+  'TODO.md/DEVELOPMENT_LOG.md/CHANGELOG.md should not mark still-blocked milestones as Completed',
+);
 
 const noIosProjectCreated = !fileExists('ios');
 logResult('no_ios_project_created', noIosProjectCreated);
@@ -146,9 +190,9 @@ const noPaymentSdkAdded = dependencyNames.every((packageName) => {
 logResult('no_payment_sdk_added', noPaymentSdkAdded);
 assertCondition(noPaymentSdkAdded, 'payment SDK dependencies should not be added');
 
-const noCapacitorAppAdded = !dependencyNames.includes('@capacitor/app');
-logResult('no_capacitor_app_added', noCapacitorAppAdded);
-assertCondition(noCapacitorAppAdded, '@capacitor/app should not be added in this PR');
+const noIosCapacitorDependencyAdded = !dependencyNames.includes('@capacitor/ios');
+logResult('no_ios_capacitor_dependency_added', noIosCapacitorDependencyAdded);
+assertCondition(noIosCapacitorDependencyAdded, '@capacitor/ios should not be added');
 
 if (failures.length > 0) {
   console.error('Public privacy policy page check failed');

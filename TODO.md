@@ -137,6 +137,7 @@
 - [x] Privacy page candidate values record 검증 스크립트 추가
 - [x] 개인정보 처리방침 정적 공개 페이지 추가
 - [x] Static privacy policy page 검증 스크립트 추가
+- [x] Legacy public privacy policy page check 정합성 보정
 - [ ] Store screenshot upload
 - [x] 캡처 기기와 캡처 기준 APK 확인
 - [x] Capture APK download
