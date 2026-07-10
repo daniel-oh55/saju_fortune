@@ -81,11 +81,9 @@ for (const snippet of requiredDocSnippets) {
 }
 
 const forbiddenPatterns = [
-  /실제 스토어 스크린샷 이미지 제작 \| Completed/,
   /실제 스토어 스크린샷 이미지 제작 완료(?!가 아닙니다)/,
   /실제 스토어 스크린샷 이미지 시작/,
   /Store screenshot upload \| Completed/,
-  /Screenshot image export \| Completed/,
   /Google Play Console actual input \| Completed/,
   /Store listing final text \| Completed/,
   /개인정보 처리방침 URL \| Completed/,
@@ -116,8 +114,6 @@ for (const snippet of requiredTodoCompletedSnippets) {
 }
 
 const requiredTodoPendingSnippets = [
-  '- [ ] 실제 스토어 스크린샷 이미지 제작',
-  '- [ ] Screenshot image export',
   '- [ ] Store screenshot upload',
   '- [ ] Google Play Console 실제 입력',
   '- [ ] Store listing 최종 문구 확정',

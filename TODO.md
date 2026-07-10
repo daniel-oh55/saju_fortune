@@ -103,6 +103,8 @@
 - [x] 실제 스토어 스크린샷 이미지 제작
 - [x] Screenshot image export
 - [x] Store screenshot image production result 검증 스크립트 추가
+- [x] Store screenshot APK launch QA result check consistency after image production
+- [x] Store screenshot check consistency regression verified
 - [ ] Store screenshot upload
 - [x] 캡처 기기와 캡처 기준 APK 확인
 - [x] Capture APK download
