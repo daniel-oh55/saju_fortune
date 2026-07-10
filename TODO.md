@@ -112,6 +112,8 @@
 - [x] Store listing final text regression checks verified
 - [x] APK launch QA result check consistency after store listing finalization
 - [x] APK launch QA result regression check verified
+- [x] 개인정보 처리방침 URL/문의처 확정 전 체크리스트 문서화
+- [x] Privacy URL/support contact finalization checklist 검증 스크립트 추가
 - [ ] Store screenshot upload
 - [x] 캡처 기기와 캡처 기준 APK 확인
 - [x] Capture APK download
