@@ -127,7 +127,6 @@ const requiredTodoPendingSnippets = [
   '- [ ] 시행일 확정',
   '- [ ] 제공자 정보 확정',
   '- [ ] 앱 내부 개인정보 처리방침 링크 또는 안내 위치 검토',
-  '- [ ] 실제 스토어 스크린샷 이미지 제작 계획 수립',
   '- [ ] release build 준비',
   '- [ ] signing 설정 준비',
   '- [ ] AAB 생성',

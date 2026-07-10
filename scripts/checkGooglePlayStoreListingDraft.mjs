@@ -121,7 +121,6 @@ const requiredTodoPendingSnippets = [
   '- [ ] 개인정보 처리방침 URL 확정',
   '- [ ] 문의처 이메일/지원 연락처 확정',
   '- [ ] Google Play 데이터 보안 양식 최종 입력',
-  '- [ ] 실제 스토어 스크린샷 이미지 제작 계획 수립',
   '- [ ] 실제 스토어 스크린샷 이미지 제작',
   '- [ ] release build 준비',
   '- [ ] signing 설정 준비',
