@@ -131,6 +131,8 @@
 - [x] App-hosted privacy page implementation plan 검증 스크립트 추가
 - [x] 개인정보 처리방침 페이지 최종값 준비 항목 문서화
 - [x] Privacy page final values readiness 검증 스크립트 추가
+- [x] 개인정보 처리방침 페이지 최종값 후보 기록 기준 문서화
+- [x] Privacy page final value candidates 검증 스크립트 추가
 - [ ] Store screenshot upload
 - [x] 캡처 기기와 캡처 기준 APK 확인
 - [x] Capture APK download
