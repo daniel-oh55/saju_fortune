@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## Docs
+
+- Recorded store screenshot image QA result for Google Play launch preparation.
+- Verified six screenshot file paths, PNG naming, planned screen mapping, and privacy/content-safety notes.
+- Kept Store screenshot upload, Google Play Console input, Store listing final text, 개인정보 처리방침 URL, 문의처 이메일/지원 연락처, Google Play 데이터 보안 양식, release build, signing, and AAB generation as Pending/Not started.
+
+## Checks
+
+- Added store screenshot image QA result check script.
+
 ## Fix
 
 - Aligned store screenshot APK launch QA result check with the post-image-production TODO state.
