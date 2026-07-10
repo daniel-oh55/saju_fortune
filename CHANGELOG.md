@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## Docs
+
+- Recorded main-branch browser QA result for UI polish changes.
+- Kept Android actual device QA, Store screenshot upload, Google Play Console input, Google Play 데이터 보안 양식 최종 입력, release build, signing setup, and AAB generation as Pending/Not started.
+
+## Checks
+
+- Added UI polish main browser QA record check.
+
 ## UI
 
 - Brightened the home morning, noon, and evening fortune card backgrounds with a lighter ivory/cream overlay tone.
