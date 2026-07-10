@@ -1,5 +1,20 @@
 # CHANGELOG
 
+## UI
+
+- Added background images to the morning, noon, and evening fortune time cards on the home screen.
+- Combined lucky color, lucky item, and today keyword into a single 오늘의 힌트 card.
+- Kept fortune result generation logic, routing, schemaVersion, and existing localStorage keys unchanged.
+
+## Pending
+
+- 디자인 변경 후 Android 화면 QA
+- 디자인 변경 후 실제 스토어 스크린샷 이미지 제작
+- Store screenshot upload
+- Google Play Console input
+- Google Play 데이터 보안 양식 최종 입력
+- release build, signing setup, and AAB generation
+
 ## Docs
 
 - Confirmed final privacy policy URL, support contact, effective date, and provider information for Google Play launch preparation.
