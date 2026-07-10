@@ -138,10 +138,6 @@ for (const snippet of requiredTodoPendingSnippets) {
 }
 
 const forbiddenCompletedPatterns = [
-  /개인정보 처리방침 URL 확정\s*[|:]\s*Completed/,
-  /문의처 이메일\/지원 연락처 확정\s*[|:]\s*Completed/,
-  /시행일 확정\s*[|:]\s*Completed/,
-  /제공자 정보 확정\s*[|:]\s*Completed/,
   /Privacy page route implementation\s*[|:]\s*Completed/,
   /Google Play Console actual input\s*[|:]\s*Completed/,
   /Store screenshot upload\s*[|:]\s*Completed/,

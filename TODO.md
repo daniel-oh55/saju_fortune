@@ -142,6 +142,12 @@
 - [x] Privacy policy URL candidate record 검증 스크립트 추가
 - [x] 개인정보 처리방침 URL 후보 검증 결과 기록
 - [x] Privacy policy URL verification record 검증 스크립트 추가
+- [x] 개인정보 처리방침 URL 확정
+- [x] 문의처 이메일/지원 연락처 확정
+- [x] 시행일 확정
+- [x] 제공자 정보 확정
+- [x] Privacy policy final values confirmation 검증 스크립트 추가
+- [ ] 디자인 변경 후 실제 스토어 스크린샷 이미지 제작
 - [ ] Store screenshot upload
 - [x] 캡처 기기와 캡처 기준 APK 확인
 - [x] Capture APK download
