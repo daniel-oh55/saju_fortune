@@ -221,6 +221,7 @@
     "check:store-screenshot-production-plan": "node scripts/checkStoreScreenshotProductionPlan.mjs",
     "check:store-screenshot-capture-copy-readiness": "node scripts/checkStoreScreenshotCaptureCopyReadiness.mjs",
     "check:store-screenshot-capture-basis-readiness": "node scripts/checkStoreScreenshotCaptureBasisReadiness.mjs",
+    "check:store-screenshot-apk-launch-qa-template": "node scripts/checkStoreScreenshotApkLaunchQaTemplate.mjs",
     "check:splash-png-export": "node scripts/checkSplashPngExportReadiness.mjs",
     "check:visit-streak": "node scripts/checkVisitStreakRegression.mjs",
     "check:zodiac-fortune-sample-qa": "node scripts/checkZodiacFortuneSampleQa.mjs",
