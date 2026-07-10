@@ -135,6 +135,7 @@
 - [x] Privacy page final value candidates 검증 스크립트 추가
 - [x] 개인정보 처리방침 페이지 최종값 후보 기록
 - [x] Privacy page candidate values record 검증 스크립트 추가
+- [x] 개인정보 처리방침 정적 공개 페이지 추가
 - [ ] Store screenshot upload
 - [x] 캡처 기기와 캡처 기준 APK 확인
 - [x] Capture APK download
