@@ -1,5 +1,44 @@
 # DEVELOPMENT_LOG
 
+## Home Fortune Time And Hint UI Polish
+
+- PR 목적: 출시 전 홈 화면 UI polish 1차
+- Status: Production UI polish
+- 오늘의 시간대 운세 카드 배경 이미지 적용: Completed
+- 오늘의 힌트 카드 통합: Completed
+- 띠별운세 동물 이미지 크기 확대: Not included
+- 오늘흐름 오행 이미지 추가: Not included
+- 행운색상/행운아이템/오늘키워드 값별 개별 이미지 매핑: Not included
+- 디자인 변경 후 Android 화면 QA: Pending
+- 디자인 변경 후 실제 스토어 스크린샷 이미지 제작: Pending
+- Store screenshot upload: Pending
+- Google Play Console actual input: Pending
+- Google Play 데이터 보안 양식 최종 입력: Pending
+- Release build: Not started
+- Signing setup: Not started
+- AAB generation: Not started
+- 운세 계산 로직 변경 없음
+- 운세 결과 생성 로직 변경 없음
+- 오늘의 시간대 운세 값 생성 방식 변경 없음
+- 행운색상/행운아이템/오늘키워드 값 생성 방식 변경 없음
+- routing 변경 없음
+- schemaVersion 변경 없음
+- CURRENT_FORTUNE_SCHEMA_VERSION 변경 없음
+- 기존 localStorage key 변경 없음
+- AndroidManifest.xml 변경 없음
+- Android native/resource 변경 없음
+- Gradle 변경 없음
+- Capacitor config 변경 없음
+- Google Play Console 입력 없음
+- Store screenshot upload 없음
+- release build 생성 없음
+- signing 설정 변경 없음
+- keystore 파일 추가 없음
+- AAB 생성 없음
+- npm run build 결과: 성공
+- npm run check:content-safety 결과: 통과
+- npm run check:share-text 결과: 통과
+
 ## Privacy Policy Final Values Confirmation
 
 - PR 목적: 개인정보 처리방침 최종값 확정
