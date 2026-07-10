@@ -2,6 +2,16 @@
 
 ## Docs
 
+- Added privacy page final values readiness checklist for Google Play launch preparation.
+- Documented required final values before privacy page implementation, including 문의처 이메일/지원 연락처, 시행일, 제공자 정보, and 개인정보 처리방침 URL.
+- Kept 문의처 이메일/지원 연락처, 시행일, 제공자 정보, 개인정보 처리방침 URL, privacy page implementation, Google Play Console input, Store screenshot upload, Google Play 데이터 보안 양식 최종 입력, actual versionName/versionCode changes, release build, signing setup, and AAB generation as Pending/Not started.
+
+## Checks
+
+- Added privacy page final values readiness check script.
+
+## Docs
+
 - Added app-hosted privacy page implementation plan for Google Play launch preparation.
 - Documented planned /privacy-policy path, content requirements, verification plan, and blockers before actual route/page work.
 - Kept 개인정보 처리방침 URL, 문의처 이메일/지원 연락처, Google Play Console input, Store screenshot upload, Google Play 데이터 보안 양식 최종 입력, actual versionName/versionCode changes, release build, signing setup, and AAB generation as Pending/Not started.
