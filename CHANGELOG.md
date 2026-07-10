@@ -2,6 +2,16 @@
 
 ## Docs
 
+- Recorded privacy policy URL verification results for Google Play launch preparation.
+- Kept privacy policy URL finalization and Google Play Console input as Pending.
+- Kept final support contact verification, Store screenshot upload, Google Play 데이터 보안 양식 최종 입력, release build, signing setup, and AAB generation as Pending/Not started.
+
+## Checks
+
+- Added privacy policy URL verification record check.
+
+## Docs
+
 - Recorded privacy policy URL candidate for Google Play launch preparation.
 - Kept privacy policy URL finalization and Google Play Console input as Pending.
 - Kept final support contact verification, Store screenshot upload, Google Play 데이터 보안 양식 최종 입력, release build, signing setup, and AAB generation as Pending/Not started.

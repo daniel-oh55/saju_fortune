@@ -250,6 +250,7 @@
     "check:privacy-page-candidate-values-record": "node scripts/checkPrivacyPageCandidateValuesRecord.mjs",
     "check:static-privacy-policy-page": "node scripts/checkStaticPrivacyPolicyPage.mjs",
     "check:privacy-policy-url-candidate-record": "node scripts/checkPrivacyPolicyUrlCandidateRecord.mjs",
+    "check:privacy-policy-url-verification-record": "node scripts/checkPrivacyPolicyUrlVerificationRecord.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
