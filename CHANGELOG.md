@@ -2,6 +2,16 @@
 
 ## Docs
 
+- Documented store screenshot sample profile for Google Play launch preparation.
+- Added synthetic sample profile values, privacy rules, planned screenshot usage, copy safety rules, and validation checklist.
+- Kept 실제 스토어 스크린샷 이미지 제작, Store screenshot upload, Google Play Console input, Store listing final text, 개인정보 처리방침 URL, 문의처 이메일/지원 연락처, Google Play 데이터 보안 양식, release build, signing, and AAB generation as Pending/Not started.
+
+## Checks
+
+- Added store screenshot sample profile check script.
+
+## Docs
+
 - Documented store screenshot production plan for Google Play launch preparation.
 - Planned screenshot set, sample data plan, copy guidelines, and device/capture planning.
 - Kept 실제 스토어 스크린샷 이미지 제작, Store screenshot upload, Google Play Console input, Store listing final text, 개인정보 처리방침 URL, 문의처 이메일/지원 연락처, Google Play 데이터 보안 양식, release build, signing, and AAB generation as Pending/Not started.
