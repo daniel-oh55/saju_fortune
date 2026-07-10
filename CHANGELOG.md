@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## Fix
+
+- Aligned store screenshot image QA and production result checks with the post-store-listing-finalization TODO state.
+- Allowed Store listing final text to remain Completed after PR #342 while keeping Store screenshot upload, Google Play Console input, 개인정보 처리방침 URL, 문의처 이메일/지원 연락처, Google Play 데이터 보안 양식, release build, signing, and AAB generation as Pending/Not started.
+
+## Checks
+
+- Updated store screenshot image QA result check to avoid stale Store listing final text Pending requirements.
+- Updated store screenshot image production result check to avoid stale Store listing final text Pending requirements.
+
 ## Docs
 
 - Finalized Google Play Store listing text for launch preparation.
