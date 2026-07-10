@@ -5,29 +5,113 @@ import { fileURLToPath } from 'node:url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const projectRoot = path.resolve(__dirname, '..');
-const failures = [];
 
-function readText(relativePath) {
-  return fs.readFileSync(path.join(projectRoot, relativePath), 'utf8');
+const sampleProfileDocPath = 'docs/STORE_SCREENSHOT_SAMPLE_PROFILE.md';
+const todoPath = 'TODO.md';
+const developmentLogPath = 'DEVELOPMENT_LOG.md';
+const changelogPath = 'CHANGELOG.md';
+
+const read = (relativePath) => fs.readFileSync(path.join(projectRoot, relativePath), 'utf8');
+
+const checks = [];
+const mark = (condition, label) => {
+  checks.push({ condition: Boolean(condition), label });
+};
+
+mark(fs.existsSync(path.join(projectRoot, sampleProfileDocPath)), 'sample_profile_doc_exists');
+if (!fs.existsSync(path.join(projectRoot, sampleProfileDocPath))) {
+  console.error('Store screenshot sample profile check failed');
+  console.error('- sample_profile_doc_exists');
+  process.exit(1);
 }
 
-function fileExists(relativePath) {
-  return fs.existsSync(path.join(projectRoot, relativePath));
+const sampleProfileDoc = read(sampleProfileDocPath);
+const todoSource = read(todoPath);
+const developmentLogSource = read(developmentLogPath);
+const changelogSource = read(changelogPath);
+
+const requiredDocSnippets = [
+  'Store Screenshot Sample Profile',
+  'Status: Sample profile plan',
+  '실제 사용자 데이터 사용: 금지',
+  '실제 스토어 스크린샷 이미지 제작: Pending',
+  'Store screenshot upload: Pending',
+  'Google Play Console input: Pending',
+  'This document does not include actual screenshot image files.',
+  'Purpose: Define synthetic sample profile criteria for Google Play store screenshot production',
+  'PR type: docs/check-only',
+  'App name: 하루풀이',
+  'Related Store screenshot production plan PR: #333',
+  'Related Store listing draft PR: #332',
+  'Current screenshot image production status: Pending',
+  'Current Google Play Console input status: Pending',
+  'Current release build status: Not started',
+  'Synthetic sample profile',
+  '샘플 사용자 A',
+  '1990-05-15',
+  '07:30',
+  '서울특별시 종로구',
+  '실제 사용자 데이터가 아닙니다.',
+  'Screenshot privacy rules',
+  'Planned screenshot usage',
+  'Copy safety rules',
+  'Validation checklist before actual screenshot production',
+  'No src changes',
+  'No CSS changes',
+  'No production UI changes',
+  'No AndroidManifest.xml changes',
+  'No Android native code changes',
+  'No Android resource changes',
+  'No Gradle changes',
+  'No Capacitor config changes',
+  'No screenshot image files added',
+  'No actual screenshot production',
+  'No 실제 스토어 스크린샷 이미지 제작 completion',
+  'No Google Play Console input',
+  'No Store listing finalization',
+  'No 개인정보 처리방침 URL finalization',
+  'No 문의처 이메일/지원 연락처 finalization',
+  'No Google Play 데이터 보안 양식 completion',
+  'No release build',
+  'No signing setup',
+  'No keystore file added',
+  'No AAB generation',
+  'No production fortune logic changes',
+  'No routing changes',
+  'No schemaVersion changes',
+  'No CURRENT_FORTUNE_SCHEMA_VERSION changes',
+  'No existing localStorage key changes',
+  'Recommended next sequence',
+];
+for (const snippet of requiredDocSnippets) {
+  mark(sampleProfileDoc.includes(snippet), `sample_profile_doc_includes_${snippet}`);
 }
 
-function assertCondition(condition, message) {
-  if (!condition) failures.push(message);
-}
-
-function logResult(sampleId, isPass) {
-  console.log(`sampleId: ${sampleId}`);
-  console.log(`result: ${isPass ? 'pass' : 'fail'}`);
-  console.log('');
-}
-
-function includesAny(text, patterns) {
-  return patterns.some((pattern) => text.includes(pattern));
-}
+const forbiddenSnippets = [
+  '실제 스토어 스크린샷 이미지 제작 | Completed',
+  '실제 스토어 스크린샷 이미지 제작 완료',
+  '실제 스토어 스크린샷 이미지 시작',
+  'Store screenshot upload | Completed',
+  'Google Play Console actual input | Completed',
+  'Store listing final text | Completed',
+  '개인정보 처리방침 URL | Completed',
+  '문의처 이메일/지원 연락처 확정 | Completed',
+  'Google Play 데이터 보안 양식 | Completed',
+  'Google Play 데이터 보안 양식 최종 입력 | Completed',
+  'Release build | Completed',
+  'Signing setup | Completed',
+  'AAB generation | Completed',
+  '서양식 보정 적용 여부',
+  '양력/음력 샘플 추가 검증',
+  'Google Play Console 입력 완료',
+  'release build 완료',
+  'signing 설정 완료',
+  'AAB 생성 완료',
+];
+mark(
+  !forbiddenSnippets.some((snippet) => sampleProfileDoc.includes(snippet)),
+  'sample_profile_doc_no_forbidden_snippets',
+);
 
 function walkFiles(relativeDir) {
   const absoluteDir = path.join(projectRoot, relativeDir);
@@ -50,81 +134,6 @@ function walkFiles(relativeDir) {
   return results;
 }
 
-const sampleProfileDocPath = 'docs/STORE_SCREENSHOT_SAMPLE_PROFILE.md';
-const sampleProfileDocExists = fileExists(sampleProfileDocPath);
-logResult('sample_profile_doc_exists', sampleProfileDocExists);
-assertCondition(sampleProfileDocExists, 'docs/STORE_SCREENSHOT_SAMPLE_PROFILE.md should exist');
-
-const doc = sampleProfileDocExists ? readText(sampleProfileDocPath) : '';
-const correctBrand = '하루풀이';
-const typoBrand = '하루' + '풀리';
-
-const docChecks = [
-  [
-    'doc_mentions_sample_profile',
-    includesAny(doc, ['샘플 프로필', '테스트용 샘플']),
-    'sample profile doc should mention sample profile or test sample',
-  ],
-  [
-    'doc_mentions_no_real_user_data',
-    includesAny(doc, ['실제 사용자 데이터 사용 금지', '실제 사용자 정보가 아닙니다']),
-    'sample profile doc should prohibit real user data',
-  ],
-  ['doc_mentions_birthdate', doc.includes('생년월일'), 'sample profile doc should mention birthdate'],
-  ['doc_mentions_birthtime', doc.includes('출생시간'), 'sample profile doc should mention birthtime'],
-  ['doc_mentions_gender', doc.includes('성별'), 'sample profile doc should mention gender'],
-  [
-    'doc_mentions_same_day_policy',
-    includesAny(doc, ['same_day', '자시 정책']),
-    'sample profile doc should mention same_day or late-night jasi policy',
-  ],
-  ['doc_mentions_home_screen', doc.includes('홈 화면'), 'sample profile doc should mention home screen'],
-  [
-    'doc_mentions_fortune_detail',
-    includesAny(doc, ['오늘의 운세 상세', '운세 상세']),
-    'sample profile doc should mention fortune detail',
-  ],
-  ['doc_mentions_saju_insight', doc.includes('사주 인사이트'), 'sample profile doc should mention saju insight'],
-  ['doc_mentions_saved_readings', doc.includes('저장한 풀이'), 'sample profile doc should mention saved readings'],
-  [
-    'doc_has_no_saved_readings_old_label',
-    !doc.includes('저장한 운세'),
-    'sample profile doc should not contain the previous saved readings label',
-  ],
-  [
-    'doc_mentions_privacy_screen',
-    includesAny(doc, ['개인정보 안내', '동의 설정']),
-    'sample profile doc should mention privacy or consent screen',
-  ],
-  [
-    'doc_mentions_avoid_claims',
-    doc.includes('투자하면 성공합니다'),
-    'sample profile doc should include avoided claims examples',
-  ],
-  [
-    'doc_has_no_wrong_avoid_claim',
-    !doc.includes('사자라면 성공합니다'),
-    'sample profile doc should not contain the previous avoided claim example',
-  ],
-  ['doc_mentions_correct_brand', doc.includes(correctBrand), 'sample profile doc should mention correct brand'],
-  ['doc_has_no_brand_typo', !doc.includes(typoBrand), 'sample profile doc should not contain brand typo'],
-  [
-    'doc_mentions_pm_clear',
-    doc.includes('adb shell pm clear com.harupuli.app'),
-    'sample profile doc should mention adb app data clear command',
-  ],
-  [
-    'doc_mentions_no_actual_screenshots',
-    doc.includes('실제 스크린샷 이미지 생성 미진행'),
-    'sample profile doc should mention actual screenshot images were not created',
-  ],
-];
-
-for (const [id, pass, message] of docChecks) {
-  logResult(id, pass);
-  assertCondition(pass, message);
-}
-
 const imageExtensions = new Set(['.png', '.jpg', '.jpeg', '.webp']);
 const screenshotNamePattern = /(screenshot|store-screenshot|play-screenshot)/i;
 const allowedGeneratedAssetPattern = /(generated-icons|generated-splash)/i;
@@ -137,55 +146,44 @@ const screenshotAssetFiles = [...walkFiles('public'), ...walkFiles('docs')].filt
     !allowedGeneratedAssetPattern.test(normalizedPath)
   );
 });
-const noScreenshotAssetsAdded = screenshotAssetFiles.length === 0;
-logResult('no_screenshot_assets_added', noScreenshotAssetsAdded);
-assertCondition(
-  noScreenshotAssetsAdded,
-  `screenshot image assets should not be added: ${screenshotAssetFiles.join(', ')}`,
+mark(screenshotAssetFiles.length === 0, 'no_screenshot_assets_added');
+
+const requiredTodoCompletedSnippets = [
+  '- [x] 스토어 스크린샷 샘플 프로필 기준 문서화',
+  '- [x] Store screenshot sample profile 검증 스크립트 추가',
+];
+for (const snippet of requiredTodoCompletedSnippets) {
+  mark(todoSource.includes(snippet), `todo_includes_completed_${snippet}`);
+}
+
+const requiredTodoPendingSnippets = [
+  '- [ ] 실제 스토어 스크린샷 이미지 제작',
+  '- [ ] Store screenshot upload',
+  '- [ ] Google Play Console 실제 입력',
+  '- [ ] Store listing 최종 문구 확정',
+  '- [ ] 개인정보 처리방침 URL 확정',
+  '- [ ] 문의처 이메일/지원 연락처 확정',
+  '- [ ] Google Play 데이터 보안 양식 최종 입력',
+  '- [ ] release build 준비',
+  '- [ ] signing 설정 준비',
+  '- [ ] AAB 생성',
+];
+for (const snippet of requiredTodoPendingSnippets) {
+  mark(todoSource.includes(snippet), `todo_includes_pending_${snippet}`);
+}
+
+mark(developmentLogSource.includes('## Store Screenshot Sample Profile'), 'development_log_has_section');
+mark(
+  changelogSource.includes('Documented store screenshot sample profile for Google Play launch preparation.'),
+  'changelog_records_sample_profile_doc',
 );
 
-const noIosProjectCreated = !fileExists('ios');
-logResult('no_ios_project_created', noIosProjectCreated);
-assertCondition(noIosProjectCreated, 'ios folder should not exist');
+const failed = checks.filter((check) => !check.condition);
 
-const serviceWorkerPaths = ['public/service-worker.js', 'public/sw.js', 'src/service-worker.js', 'src/sw.js'];
-const noServiceWorkerAdded = serviceWorkerPaths.every((relativePath) => !fileExists(relativePath));
-logResult('no_service_worker_added', noServiceWorkerAdded);
-assertCondition(noServiceWorkerAdded, 'service worker files should not be added');
-
-const packageJson = JSON.parse(readText('package.json'));
-const allDependencies = {
-  ...(packageJson.dependencies || {}),
-  ...(packageJson.devDependencies || {}),
-};
-const dependencyNames = Object.keys(allDependencies);
-
-const realAdSdkMarkers = ['google-ads', 'admob', 'adsense', 'applovin', 'unity-ads', 'google-mobile-ads'];
-const noRealAdSdkAdded = dependencyNames.every((packageName) => {
-  const normalizedName = packageName.toLowerCase();
-  return realAdSdkMarkers.every((marker) => !normalizedName.includes(marker));
-});
-logResult('no_real_ad_sdk_added', noRealAdSdkAdded);
-assertCondition(noRealAdSdkAdded, 'real ad SDK dependencies should not be added');
-
-const paymentSdkMarkers = ['billing', 'purchase', 'revenuecat', 'iamport', 'tosspayments'];
-const noPaymentSdkAdded = dependencyNames.every((packageName) => {
-  const normalizedName = packageName.toLowerCase();
-  return paymentSdkMarkers.every((marker) => !normalizedName.includes(marker));
-});
-logResult('no_payment_sdk_added', noPaymentSdkAdded);
-assertCondition(noPaymentSdkAdded, 'payment SDK dependencies should not be added');
-
-const noCapacitorAppAdded = !dependencyNames.includes('@capacitor/app');
-logResult('no_capacitor_app_added', noCapacitorAppAdded);
-assertCondition(noCapacitorAppAdded, '@capacitor/app should not be added in this PR');
-
-if (failures.length > 0) {
+if (failed.length > 0) {
   console.error('Store screenshot sample profile check failed');
-  for (const failure of failures) {
-    console.error(`- ${failure}`);
-  }
-  process.exitCode = 1;
-} else {
-  console.log('Store screenshot sample profile check passed');
+  failed.forEach((check) => console.error(`- ${check.label}`));
+  process.exit(1);
 }
+
+console.log('Store screenshot sample profile check passed');

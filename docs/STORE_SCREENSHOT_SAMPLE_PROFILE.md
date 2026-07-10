@@ -1,158 +1,160 @@
-# STORE_SCREENSHOT_SAMPLE_PROFILE
+# Store Screenshot Sample Profile
 
-## 샘플 프로필 화면 QA 결과 연계
+- Status: Sample profile plan
+- 실제 사용자 데이터 사용: 금지
+- 실제 스토어 스크린샷 이미지 제작: Pending
+- Store screenshot upload: Pending
+- Google Play Console input: Pending
+- This document does not include actual screenshot image files.
 
-- 샘플 프로필 실제 입력 및 주요 화면 확인 결과 문서를 추가했습니다.
-- 문서 경로는 `docs/STORE_SCREENSHOT_SAMPLE_PROFILE_SCREEN_QA_RESULT.md`입니다.
-- 기능명은 `저장한 풀이`로 유지합니다.
-- 이전 기능명은 사용하지 않습니다.
-- 금지 문구 예시는 `투자하면 성공합니다` 기준으로 점검합니다.
-- 이전 오기는 사용하지 않습니다.
+## 1. Scope
 
-## 실제 캡처 QA 결과 연계
+- Purpose: Define synthetic sample profile criteria for Google Play store screenshot production
+- PR type: docs/check-only
+- App name: 하루풀이
+- Related Store screenshot production plan PR: #333
+- Related Store listing draft PR: #332
+- Current screenshot image production status: Pending
+- Current Google Play Console input status: Pending
+- Current release build status: Not started
+- No production code changes
+- No Android native/resource changes
+- No screenshot image files added
 
-- 샘플 프로필을 실제 화면에 입력하기 전 캡처 QA 결과 문서를 확인합니다.
-- 문서 경로는 `docs/STORE_SCREENSHOT_CAPTURE_QA_RESULT.md`입니다.
-- 기능명은 `저장한 풀이`로 유지합니다.
-- 피해야 할 문구 예시는 `투자하면 성공합니다.` 기준으로 점검합니다.
+## 2. Synthetic sample profile
 
-이 문서는 하루풀이 Google Play 스토어 스크린샷과 Android QA에 사용할 테스트용 샘플 프로필 기준을 정리한 문서입니다.
-이번 PR은 샘플 프로필 기준 문서화가 목적이며, 실제 사용자 데이터, production 코드, Android native/resource, 스크린샷 이미지는 변경하지 않습니다.
+| Field | Sample value | Status | Note |
+| --- | --- | --- | --- |
+| Profile label | 샘플 사용자 A | Planned | 실제 사용자 이름 아님 |
+| Birth date | 1990-05-15 | Planned | 실제 사용자 생년월일 아님 |
+| Birth time | 07:30 | Planned | 실제 사용자 출생시간 아님 |
+| Birth place | 서울특별시 종로구 | Planned | 테스트용 지역값 |
+| Gender | 여성 | Planned | 테스트용 선택값 |
+| Calendar type | 양력 | Planned | 테스트용 선택값 |
+| Leap month | 해당 없음 | Planned | 테스트용 선택값 |
 
-## 1. 목적
+주의:
 
-- 스토어 스크린샷에 실제 사용자의 개인정보가 노출되지 않도록 테스트용 샘플 프로필 기준을 정리합니다.
-- 홈 화면, 오늘의 운세 상세, 사주 인사이트, 저장한 풀이, 개인정보 안내 화면을 촬영할 때 사용할 안전한 샘플 데이터를 정의합니다.
-- 샘플 데이터는 실제 사용자를 식별할 수 없는 가짜 데이터로만 사용합니다.
+- 위 값은 실제 사용자 데이터가 아닙니다.
+- 실제 사용자 이름, 실제 생년월일, 실제 출생시간, 실제 출생지, 실제 연락처를 스크린샷에 사용하지 않습니다.
+- 앱에서 이름 입력이 필요하지 않은 경우 Profile label은 문서상 구분용으로만 사용합니다.
 
-## 2. 기본 원칙
+## 3. Screenshot privacy rules
 
 - 실제 사용자 데이터 사용 금지
-- 실제 생년월일, 실제 출생시간, 실제 성별 조합 사용 금지
-- 테스트용 샘플 프로필만 사용
-- 스크린샷에 생년월일과 출생시간이 직접 노출되지 않도록 주의
-- 저장한 풀이 화면에는 민감 입력값이 노출되지 않아야 함
-- 공유 문구와 저장 문구에도 실제 개인정보가 포함되지 않아야 함
-- 운세 문구는 참고용 콘텐츠임을 해치지 않아야 함
-- 단정적 예언, 불안 조장, 결제 압박 문구 사용 금지
+- 실제 사용자 이름 노출 금지
+- 실제 생년월일 노출 금지
+- 실제 출생시간 노출 금지
+- 실제 출생지 노출 금지
+- 실제 연락처 노출 금지
+- 실제 이메일 주소 노출 금지
+- 실제 결제/광고/계정 정보처럼 보이는 정보 노출 금지
+- 저장한 풀이 화면에는 민감한 원본 프로필 정보가 과도하게 노출되지 않도록 확인
+- 공유 문구는 개인정보 제외 QA 결과와 충돌하지 않아야 함
 
-## 3. 권장 샘플 프로필
+## 4. Planned screenshot usage
 
-| 구분 | 값 |
-| --- | --- |
-| 샘플 이름 | 하루 샘플 |
-| 생년월일 | 1994-06-15 |
-| 출생시간 | 09:30 |
-| 성별 | 여성 |
-| 양력/음력 | 양력 |
-| 윤달 여부 | 해당 없음 |
-| 23시 이후 자시 정책 | same_day |
-| 사용 목적 | 스토어 스크린샷 및 QA용 가짜 샘플 |
-
-주의:
-
-- 위 정보는 실제 사용자를 식별할 수 없는 테스트용 샘플입니다.
-- 스토어 스크린샷에서는 생년월일과 출생시간이 직접 드러나는 화면을 피합니다.
-- 필요한 화면 촬영 시 프로필 입력 화면은 제외하거나 값을 가립니다.
-
-## 4. 대체 샘플 프로필
-
-| 구분 | 샘플 A | 샘플 B |
-| --- | --- | --- |
-| 생년월일 | 1992-03-21 | 1996-11-08 |
-| 출생시간 | 14:20 | 모름 |
-| 성별 | 남성 | 여성 |
-| 양력/음력 | 양력 | 양력 |
-| 사용 목적 | UI 확인 | 출생시간 모름 상태 확인 |
-
-주의:
-
-- 대체 샘플도 실제 사용자 정보가 아닙니다.
-- 스크린샷 최종 세트에는 하나의 대표 샘플을 우선 사용합니다.
-
-## 5. 스크린샷 화면별 샘플 데이터 기준
-
-| 화면 | 사용할 샘플 | 노출 가능 항목 | 노출 금지 항목 |
+| Screenshot | Planned screen | Sample profile use | Status |
 | --- | --- | --- | --- |
-| 홈 화면 | 하루 샘플 | 오늘의 운세 요약, 사주 요약, 루틴 | 생년월일, 출생시간 |
-| 오늘의 운세 상세 | 하루 샘플 | 총운/재물/연애/직장/건강/학업 요약 | 실제 개인정보 |
-| 사주 인사이트 | 하루 샘플 | 오행 요약, 강점/주의점 | 생년월일, 출생시간 |
-| 저장한 풀이 | 하루 샘플 | 운세 제목, 날짜, 카테고리 | 프로필 원본 정보 |
-| 개인정보 안내 | 샘플 불필요 | localStorage 안내, 동의 설정 | 실제 사용자 정보 |
-| 동의 설정 | 샘플 불필요 | 선택 동의 UI | 실제 SDK 연결처럼 보이는 문구 |
-| 방문 streak/루틴 | 하루 샘플 | streak, 루틴 | 실제 방문 기록 |
+| 1 | 홈 화면 | 샘플 사용자 A 기준 홈 상태 | Planned |
+| 2 | 오늘운세 결과 | 샘플 사용자 A 기준 오늘운세 결과 | Planned |
+| 3 | 나의 사주 흐름 | 샘플 사용자 A 기준 사주 흐름 | Planned |
+| 4 | 2026 운세 | 샘플 사용자 A 기준 2026 운세 | Planned |
+| 5 | 띠별운세 | 샘플 연도/띠 기준 화면 | Planned |
+| 6 | 저장한 풀이 | 샘플 저장 풀이 화면 | Planned |
 
-## 6. 샘플 운세 문구 기준
+주의:
 
-사용 가능 문구:
+- 실제 스토어 스크린샷 이미지 제작은 Pending으로 유지하세요.
+- 실제 이미지 파일은 이번 PR에 추가하지 마세요.
 
-- 오늘의 흐름을 차분하게 확인하세요.
-- 작은 루틴이 하루를 안정적으로 만들어 줍니다.
-- 중요한 결정은 충분히 생각한 뒤 진행하세요.
-- 참고용 조언으로 가볍게 확인해 보세요.
+## 5. Copy safety rules
 
-피해야 할 문구:
+- 참고용 콘텐츠임을 유지
+- "반드시", "무조건", "100%", "성공 보장", "불행 확정" 같은 단정 표현 사용 금지
+- 의료, 법률, 투자, 안전 관련 판단 유도 금지
+- 결제 압박 문구 사용 금지
+- 과도한 불안감을 유발하는 문구 사용 금지
+- Store listing draft의 차분한 톤과 일치해야 함
+- 운세 결과를 절대적 예언으로 표현하지 않음
 
-- 반드시 성공합니다.
-- 돈이 들어옵니다.
-- 그 사람과 이어져야 합니다.
-- 병이 낫습니다.
-- 투자하면 성공합니다.
-- 합격이 확정됩니다.
-- 운명이 정해져 있습니다.
+## 6. Validation checklist before actual screenshot production
 
-## 7. 개인정보 안내 화면 촬영 기준
+| Item | Status | Note |
+| --- | --- | --- |
+| Sample profile values selected | Completed | Synthetic values documented |
+| Actual user data excluded | Planned | 실제 제작 전 재확인 필요 |
+| Screenshot target screens confirmed | Pending | 실제 제작 전 최종 확인 |
+| Screenshot copy reviewed | Pending | 실제 제작 전 최종 확인 |
+| Screenshot resolution validation | Pending | Google Play 요구사항 확인 필요 |
+| Screenshot crop/safe-area check | Pending | 실제 제작 시 확인 |
+| Final image export | Pending | 실제 이미지 제작 전 |
+| Google Play upload | Pending | Console 입력 없음 |
 
-- localStorage 중심 저장 구조가 보이면 좋습니다.
-- 실제 서버 DB, 실제 광고 SDK, 실제 결제 SDK가 아직 없다는 상태와 충돌하지 않아야 합니다.
-- 사용자가 동의 설정을 관리할 수 있다는 점을 보여줄 수 있습니다.
-- 너무 긴 문단보다 카드형 안내가 보이는 구간을 우선 촬영합니다.
+## 7. Not included in this PR
 
-## 8. 저장한 풀이 화면 촬영 기준
+- No src changes
+- No CSS changes
+- No production UI changes
+- No AndroidManifest.xml changes
+- No Android native code changes
+- No Android resource changes
+- No Gradle changes
+- No Capacitor config changes
+- No screenshot image files added
+- No actual screenshot production
+- No 실제 스토어 스크린샷 이미지 제작 completion
+- No Google Play Console input
+- No Store listing finalization
+- No 개인정보 처리방침 URL finalization
+- No 문의처 이메일/지원 연락처 finalization
+- No Google Play 데이터 보안 양식 completion
+- No release build
+- No signing setup
+- No keystore file added
+- No AAB generation
+- No actual ad SDK
+- No actual payment SDK
+- No login
+- No server DB
+- No external analytics SDK
+- No production fortune logic changes
+- No routing changes
+- No schemaVersion changes
+- No CURRENT_FORTUNE_SCHEMA_VERSION changes
+- No existing localStorage key changes
 
-- 저장한 풀이 목록에는 생년월일, 출생시간, 성별 등 원본 프로필 정보가 노출되지 않아야 합니다.
-- 운세 제목, 날짜, 카테고리, 요약 정도만 보이는 상태가 적절합니다.
-- 실제 사용자 기록이 아닌 샘플 저장 데이터만 사용합니다.
+## 8. Remaining Pending / Not started items
 
-## 9. 실제 촬영 전 체크리스트
+| Item | Status |
+| --- | --- |
+| 실제 스토어 스크린샷 이미지 제작 | Pending |
+| Store screenshot upload | Pending |
+| Google Play Console actual input | Pending |
+| Store listing final text | Pending |
+| 개인정보 처리방침 URL 확정 | Pending |
+| 문의처 이메일/지원 연락처 확정 | Pending |
+| Google Play 데이터 보안 양식 최종 입력 | Pending |
+| Screenshot target screens finalization | Pending |
+| Screenshot copy finalization | Pending |
+| Screenshot resolution validation | Pending |
+| Release build | Not started |
+| Signing setup | Not started |
+| AAB generation | Not started |
 
-- 테스트용 샘플 프로필 입력
-- 실제 사용자 데이터 제거
-- 앱 데이터 초기화 필요 시 `adb shell pm clear com.harupuli.app`
-- 스토어 스크린샷 후보 화면 확인
-- 생년월일/출생시간 노출 여부 확인
-- 민감 정보 노출 여부 확인
-- 참고용 콘텐츠와 충돌하는 문구 여부 확인
-- 광고/결제 SDK가 실제 연결된 것처럼 보이지 않는지 확인
-- 개인정보 처리방침 URL 준비 상태 확인
-- 데이터 보안 양식 초안과 충돌 없음 확인
-- 저장한 풀이 기능명 표기 확인
-- 투자하면 성공합니다처럼 단정적인 투자 표현이 사용 금지 예시로만 관리되는지 확인
+## 9. Recommended next sequence
 
-## 10. 현재 보류 항목
+1. 캡처할 화면 목록 최종 확인
+2. 스크린샷 문구 후보 최종 검토
+3. Android debug APK 또는 캡처 기준 빌드 확인
+4. 실제 스토어 스크린샷 이미지 제작
+5. 제작된 이미지 QA
+6. Store listing 최종 문구 확정
+7. Google Play Console 입력은 최종값 확정 후 진행
 
-- 실제 스크린샷 이미지 생성 미진행
-- 테스트용 샘플 프로필을 앱에 내장하지 않음
-- production 데이터 변경 없음
-- Google Play Console 업로드 미진행
-- 개인정보 처리방침 외부 URL 미배포
-- release build 미진행
-- signing 미진행
-- AAB 생성 미진행
-- 실제 광고 SDK 미연동
-- 실제 결제 SDK 미연동
-- Android 실제 기기 QA Blocked
+## 10. Conclusion
 
-## 11. 다음 단계
-
-- Android 실제 기기 또는 에뮬레이터 준비
-- 샘플 프로필로 앱 화면 확인
-- 스토어 스크린샷 후보 화면 촬영
-- 필요 시 민감정보 가림 처리
-- Google Play 등록 정보와 함께 최종 검토
-
-## 12. 표기 검토 메모
-
-- 서비스명 표기는 `하루풀이`로 통일합니다.
-- 기능명 표기는 `저장한 풀이`로 통일합니다.
-- 피해야 할 문구 예시는 `투자하면 성공합니다.` 기준으로 관리합니다.
+- This PR documents the synthetic sample profile for store screenshot production only.
+- 실제 스토어 스크린샷 이미지 제작 remains Pending.
+- Google Play Console input, Store listing final text, 개인정보 처리방침 URL, 문의처 이메일/지원 연락처, and Google Play 데이터 보안 양식 remain Pending.
+- No production code, Android packaging, release build, signing, AAB, or Console input changes are included.
