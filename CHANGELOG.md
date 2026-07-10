@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## Public
+
+- Added static privacy policy page for Google Play launch preparation.
+- Added public privacy policy content under public/privacy-policy/index.html.
+- Included user-provided candidate values for support contact, effective date, and provider information.
+- Kept 개인정보 처리방침 URL, final support contact verification, Google Play Console input, Store screenshot upload, Google Play 데이터 보안 양식 최종 입력, release build, signing setup, and AAB generation as Pending/Not started.
+
 ## Docs
 
 - Added privacy page candidate values record for Google Play launch preparation.
