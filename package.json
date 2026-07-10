@@ -224,6 +224,7 @@
     "check:store-screenshot-apk-launch-qa-template": "node scripts/checkStoreScreenshotApkLaunchQaTemplate.mjs",
     "check:store-screenshot-apk-launch-qa-result": "node scripts/checkStoreScreenshotApkLaunchQaResult.mjs",
     "check:store-screenshot-image-production-result": "node scripts/checkStoreScreenshotImageProductionResult.mjs",
+    "check:store-screenshot-image-qa-result": "node scripts/checkStoreScreenshotImageQaResult.mjs",
     "check:splash-png-export": "node scripts/checkSplashPngExportReadiness.mjs",
     "check:visit-streak": "node scripts/checkVisitStreakRegression.mjs",
     "check:zodiac-fortune-sample-qa": "node scripts/checkZodiacFortuneSampleQa.mjs",
