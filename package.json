@@ -239,6 +239,7 @@
     "check:zodiac-year-specific-wording-variation": "node scripts/checkZodiacYearSpecificWordingVariation.mjs",
     "check:privacy-url-support-contact-finalization-checklist": "node scripts/checkPrivacyUrlSupportContactFinalizationChecklist.mjs",
     "check:privacy-url-support-contact-candidate-plan": "node scripts/checkPrivacyUrlSupportContactCandidatePlan.mjs",
+    "check:google-play-data-safety-final-review": "node scripts/checkGooglePlayDataSafetyFinalReview.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
