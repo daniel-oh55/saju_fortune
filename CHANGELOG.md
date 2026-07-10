@@ -2,6 +2,16 @@
 
 ## Docs
 
+- Recorded store screenshot image production result for Google Play launch preparation.
+- Added six Android store screenshot image files under store-assets/screenshots/android.
+- Kept Store screenshot upload, Google Play Console input, Store listing final text, 개인정보 처리방침 URL, 문의처 이메일/지원 연락처, Google Play 데이터 보안 양식, release build, signing, and AAB generation as Pending/Not started.
+
+## Checks
+
+- Added store screenshot image production result check script.
+
+## Docs
+
 - Recorded store screenshot APK launch QA result for Google Play launch preparation.
 - Confirmed Debug APK download, install, app launch, home screen visibility, target screen reachability, and no real user data usage before screenshot production.
 - Kept 실제 스토어 스크린샷 이미지 제작, Screenshot image export, Store screenshot upload, Google Play Console input, Store listing final text, 개인정보 처리방침 URL, 문의처 이메일/지원 연락처, Google Play 데이터 보안 양식, release build, signing, and AAB generation as Pending/Not started.
