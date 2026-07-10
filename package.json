@@ -247,6 +247,7 @@
     "check:app-hosted-privacy-page-implementation-plan": "node scripts/checkAppHostedPrivacyPageImplementationPlan.mjs",
     "check:privacy-page-final-values-readiness": "node scripts/checkPrivacyPageFinalValuesReadiness.mjs",
     "check:privacy-page-final-value-candidates": "node scripts/checkPrivacyPageFinalValueCandidates.mjs",
+    "check:privacy-page-candidate-values-record": "node scripts/checkPrivacyPageCandidateValuesRecord.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
