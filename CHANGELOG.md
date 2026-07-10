@@ -2,6 +2,15 @@
 
 ## Docs
 
+- Added store screenshot APK launch QA template for Google Play launch preparation.
+- Recorded Android Debug Build run #265 as successful while keeping APK download, APK install, app launch, 실제 스토어 스크린샷 이미지 제작, Store screenshot upload, Google Play Console input, Store listing final text, 개인정보 처리방침 URL, 문의처 이메일/지원 연락처, Google Play 데이터 보안 양식, release build, signing, and AAB generation as Pending/Not started.
+
+## Checks
+
+- Added store screenshot APK launch QA template check script.
+
+## Docs
+
 - Documented store screenshot capture basis readiness for Google Play launch preparation.
 - Recorded capture device and Android Debug APK basis as candidates before actual screenshot production.
 - Kept actual APK install for screenshot capture, app launch for screenshot capture, 실제 스토어 스크린샷 이미지 제작, Store screenshot upload, Google Play Console input, Store listing final text, 개인정보 처리방침 URL, 문의처 이메일/지원 연락처, Google Play 데이터 보안 양식, release build, signing, and AAB generation as Pending/Not started.
