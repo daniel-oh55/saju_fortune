@@ -1,5 +1,41 @@
 # DEVELOPMENT_LOG
 
+## Five Element Metal Notation Alignment
+
+- PR 목적: 오행 금(金) 표기 정합성 보정
+- Status: Docs/check-only
+- 오행 표기 기준: 화(火), 수(水), 목(木), 금(金), 토(土)
+- 금(金) 표기 보정: Completed
+- 오늘흐름 오행 이미지 추가 상태: Maintained
+- production UI 변경 없음
+- src 변경 없음
+- CSS 파일 변경 없음
+- 이미지 파일 변경 없음
+- 오행 계산 로직 변경 없음
+- 오행 표시 값 생성 방식 변경 없음
+- 운세 계산 로직 변경 없음
+- 운세 결과 생성 로직 변경 없음
+- routing 변경 없음
+- schemaVersion 변경 없음
+- CURRENT_FORTUNE_SCHEMA_VERSION 변경 없음
+- 기존 localStorage key 변경 없음
+- AndroidManifest.xml 변경 없음
+- Android native/resource 변경 없음
+- Gradle 변경 없음
+- Capacitor config 변경 없음
+- Google Play Console 입력 없음
+- Store screenshot upload 없음
+- Google Play 데이터 보안 양식 최종 입력 없음
+- release build 생성 없음
+- signing 설정 변경 없음
+- keystore 파일 추가 없음
+- AAB 생성 없음
+- Android 실제 기기 또는 에뮬레이터 화면 QA: Pending
+- 디자인 변경 후 실제 스토어 스크린샷 이미지 제작: Pending
+- npm run build 결과: 성공
+- npm run check:content-safety 결과: 통과
+- npm run check:share-text 결과: 통과
+
 ## Five Element Image UI Polish
 
 - PR 목적: 오늘흐름 오행 이미지 추가
@@ -8,7 +44,7 @@
 - 화(火) 이미지 적용: Completed
 - 수(水) 이미지 적용: Completed
 - 목(木) 이미지 적용: Completed
-- 금(金) 이미지 적용: Completed
+- 금(金) 이미지 적용: Completed
 - 토(土) 이미지 적용: Completed
 - 오행 계산 로직 변경 없음
 - 오행 표시 값 생성 방식 변경 없음
