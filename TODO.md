@@ -83,6 +83,8 @@
 - [x] Store screenshot sample profile 검증 스크립트 추가
 - [x] 스토어 스크린샷 캡처 화면/문구 최종 확인 문서화
 - [x] Store screenshot capture/copy readiness 검증 스크립트 추가
+- [x] 스토어 스크린샷 캡처 기기/APK 기준 확인 문서화
+- [x] Store screenshot capture basis readiness 검증 스크립트 추가
 - [ ] 문의처 이메일/지원 연락처 후보 선정
 - [ ] 개인정보 처리방침 URL 확정
 - [ ] 문의처 이메일/지원 연락처 확정
@@ -97,6 +99,7 @@
 - [ ] 실제 스토어 스크린샷 이미지 제작
 - [ ] Store screenshot upload
 - [ ] 캡처 기기와 캡처 기준 APK 확인
+- [ ] Debug APK 설치 및 앱 실행 확인
 - [ ] release build 준비
 - [ ] signing 설정 준비
 - [ ] AAB 생성
