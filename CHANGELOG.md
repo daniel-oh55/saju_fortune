@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## Fix
+
+- Aligned store screenshot APK launch QA result check with the post-image-production TODO state.
+- Allowed 실제 스토어 스크린샷 이미지 제작 and Screenshot image export to remain Completed after PR #339 while keeping Store screenshot upload, Google Play Console input, Store listing final text, 개인정보 처리방침 URL, 문의처 이메일/지원 연락처, Google Play 데이터 보안 양식, release build, signing, and AAB generation as Pending/Not started.
+
+## Checks
+
+- Updated store screenshot APK launch QA result check to avoid stale Pending requirements after image production.
+
 ## Docs
 
 - Recorded store screenshot image production result for Google Play launch preparation.
