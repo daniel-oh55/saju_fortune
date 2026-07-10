@@ -249,6 +249,7 @@
     "check:privacy-page-final-value-candidates": "node scripts/checkPrivacyPageFinalValueCandidates.mjs",
     "check:privacy-page-candidate-values-record": "node scripts/checkPrivacyPageCandidateValuesRecord.mjs",
     "check:static-privacy-policy-page": "node scripts/checkStaticPrivacyPolicyPage.mjs",
+    "check:privacy-policy-url-candidate-record": "node scripts/checkPrivacyPolicyUrlCandidateRecord.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
