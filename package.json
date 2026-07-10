@@ -241,6 +241,7 @@
     "check:privacy-url-support-contact-candidate-plan": "node scripts/checkPrivacyUrlSupportContactCandidatePlan.mjs",
     "check:google-play-data-safety-final-review": "node scripts/checkGooglePlayDataSafetyFinalReview.mjs",
     "check:release-signing-aab-readiness-checklist": "node scripts/checkReleaseSigningAabReadinessChecklist.mjs",
+    "check:release-signing-aab-execution-plan": "node scripts/checkReleaseSigningAabExecutionPlan.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
