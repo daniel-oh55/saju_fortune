@@ -243,6 +243,7 @@
     "check:release-signing-aab-readiness-checklist": "node scripts/checkReleaseSigningAabReadinessChecklist.mjs",
     "check:release-signing-aab-execution-plan": "node scripts/checkReleaseSigningAabExecutionPlan.mjs",
     "check:android-versioning-policy": "node scripts/checkAndroidVersioningPolicy.mjs",
+    "check:privacy-policy-public-page-options": "node scripts/checkPrivacyPolicyPublicPageOptions.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

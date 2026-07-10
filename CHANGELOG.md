@@ -2,6 +2,16 @@
 
 ## Docs
 
+- Added privacy policy public page options for Google Play launch preparation.
+- Documented candidate approaches for providing a public privacy policy URL before final URL selection.
+- Kept 개인정보 처리방침 URL, 문의처 이메일/지원 연락처, Google Play Console input, Store screenshot upload, Google Play 데이터 보안 양식 최종 입력, actual versionName/versionCode changes, release build, signing setup, and AAB generation as Pending/Not started.
+
+## Checks
+
+- Added privacy policy public page options check script.
+
+## Docs
+
 - Added Android versioning policy for Google Play launch preparation.
 - Documented candidate versionName/versionCode policy before actual Android release configuration.
 - Kept actual versionName/versionCode changes, release build, signing setup, keystore file addition, AAB generation, Google Play Console input, Store screenshot upload, 개인정보 처리방침 URL, 문의처 이메일/지원 연락처, and Google Play 데이터 보안 양식 최종 입력 as Pending/Not started.
