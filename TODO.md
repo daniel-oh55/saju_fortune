@@ -89,6 +89,7 @@
 - [x] Store screenshot APK launch QA template 검증 스크립트 추가
 - [x] 스토어 스크린샷용 Debug APK 설치/앱 실행 QA 결과 문서화
 - [x] Store screenshot APK launch QA result 검증 스크립트 추가
+- [ ] 개인정보 처리방침 URL 후보 선정
 - [ ] 문의처 이메일/지원 연락처 후보 선정
 - [ ] 개인정보 처리방침 URL 확정
 - [ ] 문의처 이메일/지원 연락처 확정
@@ -114,6 +115,8 @@
 - [x] APK launch QA result regression check verified
 - [x] 개인정보 처리방침 URL/문의처 확정 전 체크리스트 문서화
 - [x] Privacy URL/support contact finalization checklist 검증 스크립트 추가
+- [x] 개인정보 처리방침 URL/문의처 후보 선정 및 검증 계획 문서화
+- [x] Privacy URL/support contact candidate plan 검증 스크립트 추가
 - [ ] Store screenshot upload
 - [x] 캡처 기기와 캡처 기준 APK 확인
 - [x] Capture APK download

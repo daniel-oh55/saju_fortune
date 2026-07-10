@@ -238,6 +238,7 @@
     "check:zodiac-year-variation-output-review": "node scripts/checkZodiacYearVariationOutputReview.mjs",
     "check:zodiac-year-specific-wording-variation": "node scripts/checkZodiacYearSpecificWordingVariation.mjs",
     "check:privacy-url-support-contact-finalization-checklist": "node scripts/checkPrivacyUrlSupportContactFinalizationChecklist.mjs",
+    "check:privacy-url-support-contact-candidate-plan": "node scripts/checkPrivacyUrlSupportContactCandidatePlan.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

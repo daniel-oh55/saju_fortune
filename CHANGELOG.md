@@ -2,6 +2,16 @@
 
 ## Docs
 
+- Added privacy URL and support contact candidate plan for Google Play launch preparation.
+- Documented candidate selection and verification planning for 개인정보 처리방침 URL and 문의처 이메일/지원 연락처.
+- Kept 개인정보 처리방침 URL, 문의처 이메일/지원 연락처, Google Play 데이터 보안 양식, Store screenshot upload, Google Play Console input, release build, signing, and AAB generation as Pending/Not started.
+
+## Checks
+
+- Added privacy URL/support contact candidate plan check script.
+
+## Docs
+
 - Added privacy URL and support contact finalization checklist for Google Play launch preparation.
 - Documented required final values before Console input, including 개인정보 처리방침 URL, 문의처 이메일/지원 연락처, 시행일, 제공자 정보, and Google Play 데이터 보안 양식 최종 입력.
 - Kept 개인정보 처리방침 URL, 문의처 이메일/지원 연락처, Google Play 데이터 보안 양식, Store screenshot upload, Google Play Console input, release build, signing, and AAB generation as Pending/Not started.
