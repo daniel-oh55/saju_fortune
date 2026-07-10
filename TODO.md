@@ -123,6 +123,8 @@
 - [x] Release signing AAB readiness checklist 검증 스크립트 추가
 - [x] release build/signing/AAB 실행 방식 후보 문서화
 - [x] Release signing AAB execution plan 검증 스크립트 추가
+- [x] Android versionName/versionCode 정책 문서화
+- [x] Android versioning policy 검증 스크립트 추가
 - [ ] Store screenshot upload
 - [x] 캡처 기기와 캡처 기준 APK 확인
 - [x] Capture APK download
