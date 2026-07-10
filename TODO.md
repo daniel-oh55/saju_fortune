@@ -3760,3 +3760,15 @@
 - [x] Improve same-animal year-specific wording variation
 - [x] Regenerate after snapshot after wording variation improvement
 - [x] Review zodiac year-specific output quality
+
+## Five Element Image UI Polish TODO
+
+- [x] 오늘흐름 오행 이미지 추가
+- [ ] Android 실제 기기 또는 에뮬레이터 화면 QA
+- [ ] 디자인 변경 후 실제 스토어 스크린샷 이미지 제작
+- [ ] Store screenshot upload
+- [ ] Google Play Console 실제 입력
+- [ ] Google Play 데이터 보안 양식 최종 입력
+- [ ] release build 준비
+- [ ] signing 설정 준비
+- [ ] AAB 생성
