@@ -1,5 +1,44 @@
 # DEVELOPMENT_LOG
 
+## Store Screenshot Capture and Copy Readiness
+
+- PR 목적: Google Play 실제 스토어 스크린샷 이미지 제작 전 캡처 화면/문구 최종 확인 문서화
+- Status: Readiness only
+- 캡처 화면 목록: 준비 완료
+- 스크린샷 문구 후보: 준비 완료
+- 샘플 프로필 기준: PR #334 기준
+- 실제 스토어 스크린샷 이미지 제작: Pending
+- Store screenshot upload: Pending
+- Google Play Console actual input: Pending
+- Store listing final text: Pending
+- 개인정보 처리방침 URL: Pending
+- 문의처 이메일/지원 연락처: Pending
+- Google Play 데이터 보안 양식 최종 입력: Pending
+- 캡처 기기와 캡처 기준 APK 확인: Pending
+- release build: Not started
+- signing setup: Not started
+- AAB generation: Not started
+- src 변경 없음
+- CSS 변경 없음
+- production UI 변경 없음
+- AndroidManifest.xml 변경 없음
+- Android native/resource 변경 없음
+- Gradle 변경 없음
+- Capacitor config 변경 없음
+- screenshot image files 추가 없음
+- 실제 스토어 스크린샷 이미지 제작 없음
+- Google Play Console 입력 없음
+- production 계산 로직 변경 없음
+- routing 변경 없음
+- schemaVersion 변경 없음
+- CURRENT_FORTUNE_SCHEMA_VERSION 변경 없음
+- 기존 localStorage key 변경 없음
+- npm run build 결과: 성공
+- npm run check:store-screenshot-capture-copy-readiness 결과: 통과
+- npm run check:store-screenshot-sample-profile 결과: 통과
+- npm run check:content-safety 결과: 통과
+- npm run check:share-text 결과: 통과
+
 ## Store Screenshot Sample Profile
 
 - PR 목적: Google Play 실제 스토어 스크린샷 이미지 제작 전 샘플 프로필 기준 문서화
