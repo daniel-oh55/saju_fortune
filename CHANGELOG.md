@@ -2,6 +2,22 @@
 
 ## UI
 
+- Increased zodiac animal image size slightly for better visibility.
+- Kept zodiac fortune result generation logic, animal mapping, routing, schemaVersion, and existing localStorage keys unchanged.
+- Did not add or replace image files.
+
+## Pending
+
+- 오늘흐름 오행 이미지 추가
+- 디자인 변경 후 Android 화면 QA
+- 디자인 변경 후 실제 스토어 스크린샷 이미지 제작
+- Store screenshot upload
+- Google Play Console input
+- Google Play 데이터 보안 양식 최종 입력
+- release build, signing setup, and AAB generation
+
+## UI
+
 - Added background images to the morning, noon, and evening fortune time cards on the home screen.
 - Combined lucky color, lucky item, and today keyword into a single 오늘의 힌트 card.
 - Kept fortune result generation logic, routing, schemaVersion, and existing localStorage keys unchanged.
