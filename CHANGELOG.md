@@ -1,5 +1,21 @@
 # CHANGELOG
 
+## UI
+
+- Brightened the home morning, noon, and evening fortune card backgrounds with a lighter ivory/cream overlay tone.
+- Kept the time fortune background images, 오늘의 힌트 card structure, and zodiac image size polish intact.
+- Kept fortune result generation logic, routing, schemaVersion, and existing localStorage keys unchanged.
+
+## Pending
+
+- 오늘흐름 오행 이미지 추가
+- 디자인 변경 후 Android 화면 QA
+- 디자인 변경 후 실제 스토어 스크린샷 이미지 제작
+- Store screenshot upload
+- Google Play Console input
+- Google Play 데이터 보안 양식 최종 입력
+- release build, signing setup, and AAB generation
+
 ## Fixed
 
 - Applied PR #362 and PR #363 UI polish changes to main.
