@@ -2,6 +2,16 @@
 
 ## Docs
 
+- Added privacy page candidate values record for Google Play launch preparation.
+- Recorded user-provided candidate values for 문의처 이메일/지원 연락처, 시행일, and 제공자 정보 before privacy page implementation.
+- Kept candidate values as pending final verification and kept 개인정보 처리방침 URL, privacy page implementation, Google Play Console input, Store screenshot upload, Google Play 데이터 보안 양식 최종 입력, actual versionName/versionCode changes, release build, signing setup, and AAB generation as Pending/Not started.
+
+## Checks
+
+- Added privacy page candidate values record check script.
+
+## Docs
+
 - Added privacy page final value candidate recording criteria for Google Play launch preparation.
 - Documented candidate recording rules before finalizing 문의처 이메일/지원 연락처, 시행일, 제공자 정보, and 개인정보 처리방침 URL.
 - Kept actual candidate values, final values, privacy page implementation, Google Play Console input, Store screenshot upload, Google Play 데이터 보안 양식 최종 입력, actual versionName/versionCode changes, release build, signing setup, and AAB generation as Pending/Not started.
