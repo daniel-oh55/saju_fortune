@@ -2,6 +2,16 @@
 
 ## Docs
 
+- Added release signing AAB execution plan for Google Play launch preparation.
+- Documented candidate approaches for local signing, GitHub Secrets signing, candidate command flow, credential handling, and versioning before actual release work.
+- Kept release build, signing setup, keystore file addition, AAB generation, Google Play Console input, Store screenshot upload, 개인정보 처리방침 URL, 문의처 이메일/지원 연락처, and Google Play 데이터 보안 양식 최종 입력 as Pending/Not started.
+
+## Checks
+
+- Added release signing AAB execution plan check script.
+
+## Docs
+
 - Added release signing AAB readiness checklist for Google Play launch preparation.
 - Documented release build, signing setup, keystore handling, and AAB generation readiness before actual release work.
 - Kept release build, signing setup, AAB generation, Google Play Console input, Store screenshot upload, 개인정보 처리방침 URL, 문의처 이메일/지원 연락처, and Google Play 데이터 보안 양식 최종 입력 as Pending/Not started.
