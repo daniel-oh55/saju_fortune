@@ -99,7 +99,8 @@
 - [ ] 제공자 정보 확정
 - [ ] 앱 내부 개인정보 처리방침 링크 또는 안내 위치 검토
 - [ ] Google Play 데이터 보안 양식 최종 입력
-- [ ] Store listing 최종 문구 확정
+- [x] Store listing 최종 문구 확정
+- [x] Google Play store listing final text 검증 스크립트 추가
 - [x] 실제 스토어 스크린샷 이미지 제작
 - [x] Screenshot image export
 - [x] Store screenshot image production result 검증 스크립트 추가

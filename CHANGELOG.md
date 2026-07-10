@@ -2,6 +2,16 @@
 
 ## Docs
 
+- Finalized Google Play Store listing text for launch preparation.
+- Confirmed app title, short description, full description, and caution statements in repository documents.
+- Kept Google Play Console input, Store screenshot upload, 개인정보 처리방침 URL, 문의처 이메일/지원 연락처, Google Play 데이터 보안 양식, release build, signing, and AAB generation as Pending/Not started.
+
+## Checks
+
+- Added Google Play store listing final text check script.
+
+## Docs
+
 - Recorded store screenshot image QA result for Google Play launch preparation.
 - Verified six screenshot file paths, PNG naming, planned screen mapping, and privacy/content-safety notes.
 - Kept Store screenshot upload, Google Play Console input, Store listing final text, 개인정보 처리방침 URL, 문의처 이메일/지원 연락처, Google Play 데이터 보안 양식, release build, signing, and AAB generation as Pending/Not started.

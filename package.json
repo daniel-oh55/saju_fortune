@@ -218,6 +218,7 @@
     "check:support-contact-verification-readiness": "node scripts/checkSupportContactVerificationReadiness.mjs",
     "check:google-play-data-safety-draft": "node scripts/checkGooglePlayDataSafetyDraft.mjs",
     "check:google-play-store-listing-draft": "node scripts/checkGooglePlayStoreListingDraft.mjs",
+    "check:google-play-store-listing-final-text": "node scripts/checkGooglePlayStoreListingFinalText.mjs",
     "check:store-screenshot-production-plan": "node scripts/checkStoreScreenshotProductionPlan.mjs",
     "check:store-screenshot-capture-copy-readiness": "node scripts/checkStoreScreenshotCaptureCopyReadiness.mjs",
     "check:store-screenshot-capture-basis-readiness": "node scripts/checkStoreScreenshotCaptureBasisReadiness.mjs",
