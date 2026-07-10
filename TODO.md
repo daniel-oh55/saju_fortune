@@ -127,6 +127,8 @@
 - [x] Android versioning policy 검증 스크립트 추가
 - [x] 개인정보 처리방침 공개 페이지 방식 후보 문서화
 - [x] Privacy policy public page options 검증 스크립트 추가
+- [x] App-hosted privacy page 구현 계획 문서화
+- [x] App-hosted privacy page implementation plan 검증 스크립트 추가
 - [ ] Store screenshot upload
 - [x] 캡처 기기와 캡처 기준 APK 확인
 - [x] Capture APK download
