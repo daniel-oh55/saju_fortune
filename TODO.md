@@ -3784,3 +3784,17 @@
 - [ ] release build 준비
 - [ ] signing 설정 준비
 - [ ] AAB 생성
+
+## Small Text Readability Polish TODO
+
+- [x] 작은 글자 가독성 개선
+- [ ] 운세 문구 스타일 가이드 정리
+- [ ] 오늘운세 문구 실생활형 개선
+- [ ] Android 실제 기기 또는 에뮬레이터 화면 QA
+- [ ] 디자인 변경 후 실제 스토어 스크린샷 이미지 제작
+- [ ] Store screenshot upload
+- [ ] Google Play Console 실제 입력
+- [ ] Google Play 데이터 보안 양식 최종 입력
+- [ ] release build 준비
+- [ ] signing 설정 준비
+- [ ] AAB 생성

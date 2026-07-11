@@ -815,9 +815,9 @@ textarea:focus {
 .fortune-result-card .ad-box.inline-cta p {
   margin: 0;
   color: rgba(75, 85, 107, 0.76);
-  font-size: 0.84rem;
+  font-size: 0.87rem;
   font-weight: 700;
-  line-height: 1.45;
+  line-height: 1.5;
 }
 
 .fortune-result-card .ad-box.inline-cta .primary-button {
@@ -1758,8 +1758,8 @@ input:disabled {
 .year-score-panel p {
   border-left: 1px solid rgba(184, 150, 78, 0.28);
   padding-left: 14px;
-  font-size: 0.86rem;
-  line-height: 1.55;
+  font-size: 0.9rem;
+  line-height: 1.58;
 }
 
 .year-score-card {
@@ -1835,7 +1835,7 @@ input:disabled {
 
 .month-grid div {
   position: relative;
-  min-height: 84px;
+  min-height: 90px;
   border-radius: 16px;
   padding: 10px;
   background: linear-gradient(135deg, rgba(245, 251, 248, 0.96), rgba(255, 253, 248, 0.92));
@@ -1853,8 +1853,8 @@ input:disabled {
 
 .month-grid p {
   margin: 4px 0 0;
-  font-size: 0.76rem;
-  line-height: 1.35;
+  font-size: 0.82rem;
+  line-height: 1.42;
 }
 
 .month-grid i {
@@ -2315,8 +2315,8 @@ input:disabled {
 .saju-element-guide {
   margin: 0;
   color: #607078;
-  font-size: 0.88rem;
-  line-height: 1.55;
+  font-size: 0.9rem;
+  line-height: 1.58;
 }
 
 .saju-balance-hint {
@@ -2758,7 +2758,7 @@ input:disabled {
 .saju-five-elements-help-card p {
   margin: 0;
   color: #607078;
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   line-height: 1.58;
 }
 
@@ -2793,8 +2793,8 @@ input:disabled {
 
 .saju-five-elements-list span {
   color: #607078;
-  font-size: 0.78rem;
-  line-height: 1.35;
+  font-size: 0.84rem;
+  line-height: 1.42;
 }
 
 .content-access-notice {
@@ -2850,8 +2850,8 @@ input:disabled {
 .content-access-notice p {
   margin: 4px 0 0;
   color: #607078;
-  font-size: 0.84rem;
-  line-height: 1.55;
+  font-size: 0.87rem;
+  line-height: 1.58;
 }
 
 .content-safety-notice {
@@ -2880,8 +2880,8 @@ input:disabled {
 .content-safety-notice p {
   margin: 0;
   color: #607078;
-  font-size: 0.82rem;
-  line-height: 1.55;
+  font-size: 0.86rem;
+  line-height: 1.58;
 }
 
 .privacy-info-link-card,
@@ -3057,8 +3057,8 @@ input:disabled {
 .saju-life-guide-card p {
   margin: 0;
   color: #607078;
-  font-size: 0.88rem;
-  line-height: 1.58;
+  font-size: 0.92rem;
+  line-height: 1.6;
 }
 
 .saju-life-guide-chips {
@@ -3090,8 +3090,8 @@ input:disabled {
 .saju-insight-note p {
   margin: 0;
   color: #607078;
-  font-size: 0.86rem;
-  line-height: 1.55;
+  font-size: 0.9rem;
+  line-height: 1.58;
 }
 
 .saju-insight-locked {
@@ -3201,15 +3201,15 @@ input:disabled {
   padding: 14px;
   color: #607078;
   background: rgba(255, 253, 248, 0.86);
-  font-size: 0.9rem;
-  line-height: 1.5;
+  font-size: 0.92rem;
+  line-height: 1.55;
 }
 
 .zodiac-notice-card strong {
   display: block;
   margin-bottom: 6px;
   color: #35464d;
-  font-size: 0.92rem;
+  font-size: 0.94rem;
 }
 
 .zodiac-notice-card p {
@@ -4542,11 +4542,11 @@ input:disabled {
 
 .home-today-fortune-grid .fortune-card p {
   display: -webkit-box;
-  min-height: 3.9em;
+  min-height: 4.2em;
   overflow: hidden;
   color: var(--color-muted-blue);
-  font-size: 0.8rem;
-  line-height: 1.3;
+  font-size: 0.85rem;
+  line-height: 1.4;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
 }
@@ -4926,7 +4926,7 @@ input:disabled {
   }
 
   .home-today-fortune-grid .fortune-card p {
-    font-size: 0.76rem;
+    font-size: 0.8rem;
   }
 }
 
