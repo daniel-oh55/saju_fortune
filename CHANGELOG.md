@@ -1,5 +1,22 @@
 # CHANGELOG
 
+## UI
+
+- Improved readability for selected small text areas across key fortune screens.
+- Kept fortune copy/content, fortune result generation logic, routing, schemaVersion, and existing localStorage keys unchanged.
+- Kept store screenshot copy improvements out of scope.
+
+## Pending
+
+- 운세 문구 스타일 가이드 정리
+- 오늘운세 문구 실생활형 개선
+- Android actual device or emulator UI QA
+- 디자인 변경 후 실제 스토어 스크린샷 이미지 제작
+- Store screenshot upload
+- Google Play Console input
+- Google Play 데이터 보안 양식 최종 입력
+- release build, signing setup, and AAB generation
+
 ## Docs
 
 - Aligned five element metal notation to 금(金).
