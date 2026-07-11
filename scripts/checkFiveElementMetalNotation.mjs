@@ -19,16 +19,23 @@ const wrongPhrases = [
   '양력/음력 샘플 추가 검증',
 ];
 
-const sectionHeadingByFile = {
-  'CHANGELOG.md': '## Docs',
+// CHANGELOG.md reuses generic heading labels ("## Docs", "## UI", ...) across every PR,
+// so anchoring on the heading text breaks as soon as a later PR adds its own "## Docs"
+// section above this one. Anchor on unique content instead, then expand outward to the
+// enclosing "## " section. DEVELOPMENT_LOG.md/TODO.md headings are PR-specific and don't
+// collide, so a plain heading lookup is fine for those.
+const sectionAnchorByFile = {
+  'CHANGELOG.md': 'Aligned five element metal notation to',
   'DEVELOPMENT_LOG.md': '## Five Element Metal Notation Alignment',
   'TODO.md': '## Five Element Metal Notation Alignment TODO',
 };
 
-function sectionText(markdown, heading) {
-  const start = markdown.indexOf(heading);
-  if (start === -1) return '';
-  const nextHeading = markdown.indexOf('\n## ', start + heading.length);
+function sectionText(markdown, anchor) {
+  const anchorIndex = markdown.indexOf(anchor);
+  if (anchorIndex === -1) return '';
+  const headingStart = markdown.lastIndexOf('\n## ', anchorIndex);
+  const start = headingStart === -1 ? 0 : headingStart + 1;
+  const nextHeading = markdown.indexOf('\n## ', anchorIndex);
   return nextHeading === -1 ? markdown.slice(start) : markdown.slice(start, nextHeading);
 }
 
@@ -40,12 +47,12 @@ function logResult(name, passed, detail = '') {
   if (!passed) hasFailure = true;
 }
 
-for (const [file, heading] of Object.entries(sectionHeadingByFile)) {
+for (const [file, anchor] of Object.entries(sectionAnchorByFile)) {
   const content = fs.readFileSync(file, 'utf8');
 
   logResult(`${file}_excludes_wrong_metal_notation_anywhere`, !content.includes(wrongMetalNotation));
 
-  const section = sectionText(content, heading);
+  const section = sectionText(content, anchor);
   logResult(`${file}_has_metal_notation_alignment_section`, section.length > 0);
   logResult(`${file}_section_contains_correct_metal_notation`, section.includes(correctMetalNotation));
 
