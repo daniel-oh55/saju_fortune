@@ -3772,3 +3772,15 @@
 - [ ] release build 준비
 - [ ] signing 설정 준비
 - [ ] AAB 생성
+
+## Five Element Metal Notation Alignment TODO
+
+- [x] 오행 금(金) 표기 정합성 보정
+- [ ] Android 실제 기기 또는 에뮬레이터 화면 QA
+- [ ] 디자인 변경 후 실제 스토어 스크린샷 이미지 제작
+- [ ] Store screenshot upload
+- [ ] Google Play Console 실제 입력
+- [ ] Google Play 데이터 보안 양식 최종 입력
+- [ ] release build 준비
+- [ ] signing 설정 준비
+- [ ] AAB 생성

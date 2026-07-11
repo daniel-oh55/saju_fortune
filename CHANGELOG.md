@@ -1,8 +1,22 @@
 # CHANGELOG
 
+## Docs
+
+- Aligned five element metal notation to 금(金).
+- Kept five element images, five element logic, fortune result generation logic, routing, schemaVersion, and existing localStorage keys unchanged.
+
+## Pending
+
+- Android actual device or emulator UI QA
+- 디자인 변경 후 실제 스토어 스크린샷 이미지 제작
+- Store screenshot upload
+- Google Play Console input
+- Google Play 데이터 보안 양식 최종 입력
+- release build, signing setup, and AAB generation
+
 ## UI
 
-- Added five element images for 화(火), 수(水), 목(木), 금(金), and 토(土) in the today flow UI.
+- Added five element images for 화(火), 수(水), 목(木), 금(金), and 토(土) in the today flow UI.
 - Kept five element calculation logic, fortune result generation logic, routing, schemaVersion, and existing localStorage keys unchanged.
 
 ## Pending
