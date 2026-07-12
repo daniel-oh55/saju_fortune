@@ -1,5 +1,20 @@
 # CHANGELOG
 
+## Copy
+
+- Improved today fortune copy to be more practical and easier to apply to daily life.
+- Kept store screenshot copy improvements, 2026 monthly fortune copy, zodiac fortune copy, and AI 상담형 문체 out of scope.
+- Kept fortune calculation logic, result generation logic, routing, schemaVersion, and existing localStorage keys unchanged.
+
+## Pending
+
+- Android actual device or emulator UI QA
+- 디자인 변경 후 실제 스토어 스크린샷 이미지 제작
+- Store screenshot upload
+- Google Play Console input
+- Google Play 데이터 보안 양식 최종 입력
+- release build, signing setup, and AAB generation
+
 ## Docs
 
 - Added fortune copy style guide before practical today fortune copy improvement.
