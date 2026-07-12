@@ -148,6 +148,7 @@
     "check:late-night-jasi-policy": "node scripts/checkLateNightJasiPolicyRegression.mjs",
     "check:content-safety": "node scripts/checkContentSafetyCopyRegression.mjs",
     "check:five-element-metal-notation": "node scripts/checkFiveElementMetalNotation.mjs",
+    "check:fortune-copy-style-guide": "node scripts/checkFortuneCopyStyleGuide.mjs",
     "check:manseryeok-jasi-boundary": "node scripts/checkManseryeokJasiBoundaryHypothesis.mjs",
     "check:manseryeok-external-sample-verification": "node scripts/checkManseryeokExternalSampleVerification.mjs",
     "check:manseryeok-current-sample-snapshot": "node scripts/checkManseryeokCurrentSampleSnapshot.mjs",
