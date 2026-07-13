@@ -20,5 +20,8 @@ Thumbs.db
 # Android signing keys
 *.jks
 *.keystore
+*.p12
+*.pem
+keystore.properties
 android/app/keystore/
 android/keystore/
