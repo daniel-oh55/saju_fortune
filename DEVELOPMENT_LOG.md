@@ -1,5 +1,46 @@
 # DEVELOPMENT_LOG
 
+## Store Screenshot Production Guide
+
+- PR 목적: 실제 스토어 스크린샷 이미지 제작 기준 정리
+- Status: Docs/check-only
+- 실제 스토어 스크린샷 이미지 제작 기준 정리: Completed
+- 실제 스토어 스크린샷 이미지 제작: Pending
+- Store screenshot upload: Pending
+- Google Play Console actual input: Pending
+- Google Play 데이터 보안 양식 최종 입력: Pending
+- Release build: Not started
+- Signing setup: Not started
+- AAB generation: Not started
+- production UI 변경 없음
+- src 변경 없음
+- CSS 파일 변경 없음
+- 이미지 파일 변경 없음
+- AndroidManifest.xml 변경 없음
+- Android native/resource 변경 없음
+- Gradle 변경 없음
+- Capacitor config 변경 없음
+- 운세 문구/content 변경 없음
+- 운세 계산 로직 변경 없음
+- routing 변경 없음
+- schemaVersion 변경 없음
+- CURRENT_FORTUNE_SCHEMA_VERSION 변경 없음
+- 기존 localStorage key 변경 없음
+- Google Play Console 입력 없음
+- Store screenshot upload 없음
+- release build 생성 없음
+- signing 설정 변경 없음
+- keystore 파일 추가 없음
+- AAB 생성 없음
+- npm run build 결과: 성공
+- npm run check:store-screenshot-production-guide 결과: 통과
+- npm run check:startup-loading-v2-android-qa-record 결과: 통과
+- npm run check:android-ui-copy-qa-record 결과: 통과
+- npm run check:fortune-copy-style-guide 결과: 통과
+- npm run check:five-element-metal-notation 결과: 통과
+- npm run check:content-safety 결과: 통과
+- npm run check:share-text 결과: 통과
+
 ## Startup Loading V2 Android QA Record
 
 - PR 목적: 초기 로딩 화면 2차 개선 Android 실제 기기 또는 에뮬레이터 QA 기록
