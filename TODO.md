@@ -3884,3 +3884,16 @@
 - [ ] release build 준비
 - [ ] signing 설정 준비
 - [ ] AAB 생성
+
+## Store Screenshot Assets TODO
+
+- [x] 기존 생성 스토어 스크린샷 이미지 asset 등록
+- [x] 실제 스토어 스크린샷 이미지 제작
+- [x] store screenshot assets 검증 스크립트 추가
+- [ ] Store screenshot file QA
+- [ ] Store screenshot upload
+- [ ] Google Play Console 실제 입력
+- [ ] Google Play 데이터 보안 양식 최종 입력
+- [ ] release build 준비
+- [ ] signing 설정 준비
+- [ ] AAB 생성
