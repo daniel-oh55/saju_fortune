@@ -267,6 +267,7 @@
     "check:google-play-visual-asset-upload-record": "node scripts/checkGooglePlayVisualAssetUploadRecord.mjs",
     "check:google-play-console-input-record": "node scripts/checkGooglePlayConsoleInputRecord.mjs",
     "check:google-play-data-safety-input-record": "node scripts/checkGooglePlayDataSafetyInputRecord.mjs",
+    "check:release-build-signing-aab-prep": "node scripts/checkReleaseBuildSigningAabPrep.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

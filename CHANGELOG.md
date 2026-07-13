@@ -2,6 +2,25 @@
 
 ## Docs
 
+- Added release build, signing setup, and AAB preparation checklist.
+- Kept release build, signing setup, keystore file, AAB generation, Google Play AAB upload, and app submission/review request out of scope.
+
+## Checks
+
+- Added release build signing AAB preparation check.
+
+## Pending
+
+- Release build strategy
+- Signing setup
+- Keystore file
+- AAB generation
+- Release AAB verification
+- Google Play AAB upload
+- App submission/review request
+
+## Docs
+
 - Recorded Google Play 데이터 보안 양식 최종 입력 completion.
 - Kept app submission/review request, release build, signing setup, and AAB generation out of scope.
 

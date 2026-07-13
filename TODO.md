@@ -1,5 +1,17 @@
 # TODO
 
+## Release Build Signing AAB Preparation TODO
+
+- [x] release build/signing/AAB 준비 문서화
+- [x] release build signing AAB preparation 검증 스크립트 추가
+- [ ] Release build strategy
+- [ ] signing 설정 준비
+- [ ] keystore 생성/보관 정책 확정
+- [ ] AAB 생성
+- [ ] Release AAB verification
+- [ ] Google Play AAB upload
+- [ ] App submission/review request
+
 ## Google Play Data Safety Input Record TODO
 
 - [x] Google Play 데이터 보안 양식 최종 입력
