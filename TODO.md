@@ -3824,3 +3824,15 @@
 - [ ] release build 준비
 - [ ] signing 설정 준비
 - [ ] AAB 생성
+
+## Android UI And Copy QA Record TODO
+
+- [x] Android 실제 기기 또는 에뮬레이터 UI/copy QA 기록
+- [x] Android UI and copy QA record 검증 스크립트 추가
+- [ ] 디자인 변경 후 실제 스토어 스크린샷 이미지 제작
+- [ ] Store screenshot upload
+- [ ] Google Play Console 실제 입력
+- [ ] Google Play 데이터 보안 양식 최종 입력
+- [ ] release build 준비
+- [ ] signing 설정 준비
+- [ ] AAB 생성

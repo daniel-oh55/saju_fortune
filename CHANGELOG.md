@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## Docs
+
+- Recorded Android actual device or emulator UI/copy QA result after practical today fortune copy improvement.
+- Kept Store screenshot upload, Google Play Console input, Google Play 데이터 보안 양식 최종 입력, release build, signing setup, and AAB generation as Pending/Not started.
+
+## Checks
+
+- Added Android UI and copy QA record check.
+
 ## Copy
 
 - Improved today fortune copy to be more practical and easier to apply to daily life.
