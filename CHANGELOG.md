@@ -2,6 +2,23 @@
 
 ## Docs
 
+- Added store screenshot production guide before creating actual store screenshot image files.
+- Kept actual store screenshot image production, Store screenshot upload, Google Play Console input, release build, signing setup, and AAB generation out of scope.
+
+## Checks
+
+- Added store screenshot production guide check.
+
+## Pending
+
+- 실제 스토어 스크린샷 이미지 제작
+- Store screenshot upload
+- Google Play Console input
+- Google Play 데이터 보안 양식 최종 입력
+- release build, signing setup, and AAB generation
+
+## Docs
+
 - Recorded startup loading screen v2 Android actual device or emulator QA result.
 - Kept Store screenshot upload, Google Play Console input, Google Play 데이터 보안 양식 최종 입력, release build, signing setup, and AAB generation as Pending/Not started.
 
