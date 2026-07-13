@@ -1,5 +1,17 @@
 # TODO
 
+## Release AAB Generation Record TODO
+
+- [x] GitHub Secrets final input
+- [x] Release AAB workflow
+- [x] Release build
+- [x] AAB generation
+- [x] Release AAB verification
+- [x] release AAB generation completion 기록
+- [x] release AAB generation record 검증 스크립트 추가
+- [ ] Google Play AAB upload
+- [ ] App submission/review request
+
 ## Release AAB Workflow Readiness TODO
 
 - [x] release AAB workflow readiness 문서화
