@@ -2,6 +2,22 @@
 
 ## Docs
 
+- Recorded Store screenshot upload completion.
+- Kept full Google Play Console input, Google Play 데이터 보안 양식 최종 입력, app submission/review request, release build, signing setup, and AAB generation out of scope.
+
+## Checks
+
+- Added store screenshot upload completion record check.
+
+## Pending
+
+- Google Play Console input
+- Google Play 데이터 보안 양식 최종 입력
+- App submission/review request
+- release build, signing setup, and AAB generation
+
+## Docs
+
 - Added store screenshot upload preparation checklist.
 - Kept Store screenshot upload and Google Play Console input out of scope.
 
