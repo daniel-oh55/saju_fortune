@@ -1,5 +1,22 @@
 # CHANGELOG
 
+## Docs
+
+- Recorded release AAB workflow readiness.
+
+## Checks
+
+- Added release AAB workflow readiness check.
+
+## Pending
+
+- GitHub Secrets final input
+- Release build
+- AAB generation
+- Release AAB verification
+- Google Play AAB upload
+- App submission/review request
+
 ## Android
 
 - Added release signing configuration using external signing values.
