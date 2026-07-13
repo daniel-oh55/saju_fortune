@@ -1,5 +1,39 @@
 # DEVELOPMENT_LOG
 
+## Release AAB Generation Record
+
+- PR 목적: release AAB generation completion 기록
+- Status: Docs/check-only
+- GitHub Secrets final input: Completed
+- Release AAB workflow: Completed
+- Release build: Completed
+- AAB generation: Completed
+- Release AAB verification: Completed
+- Google Play AAB upload: Not started
+- App submission/review request: Pending
+- AAB committed to repo: NO
+- 실제 keystore 파일 추가 없음
+- signing credentials 추가 없음
+- committed secrets 없음
+- Google Play AAB upload 없음
+- app submission/review request 없음
+- production UI 변경 없음
+- src 변경 없음
+- CSS 파일 변경 없음
+- AndroidManifest.xml 변경 없음
+- Android native/resource 변경 없음
+- 운세 문구/content 변경 없음
+- 운세 계산 로직 변경 없음
+- routing 변경 없음
+- schemaVersion 변경 없음
+- CURRENT_FORTUNE_SCHEMA_VERSION 변경 없음
+- 기존 localStorage key 변경 없음
+- 참고: Android Release AAB workflow run id 28310971077 (2026-06-28, success), artifact harupuli-release-aab, AAB 파일명 app-release.aab, jarsigner 결과 jar verified.
+- npm run build 결과
+- npm run check:release-aab-generation-record 결과
+- npm run check:release-aab-workflow-readiness 결과
+- npm run check:release-signing-config 결과
+
 ## Release AAB Workflow Readiness
 
 - PR 목적: release AAB workflow readiness 문서화

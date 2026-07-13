@@ -2,6 +2,19 @@
 
 ## Docs
 
+- Recorded release AAB generation and verification completion.
+
+## Checks
+
+- Added release AAB generation record check.
+
+## Pending
+
+- Google Play AAB upload
+- App submission/review request
+
+## Docs
+
 - Recorded release AAB workflow readiness.
 
 ## Checks

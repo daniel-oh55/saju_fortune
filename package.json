@@ -270,6 +270,7 @@
     "check:release-build-signing-aab-prep": "node scripts/checkReleaseBuildSigningAabPrep.mjs",
     "check:release-signing-config": "node scripts/checkReleaseSigningConfig.mjs",
     "check:release-aab-workflow-readiness": "node scripts/checkReleaseAabWorkflowReadiness.mjs",
+    "check:release-aab-generation-record": "node scripts/checkReleaseAabGenerationRecord.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
