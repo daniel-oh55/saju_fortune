@@ -1,0 +1,270 @@
+import fs from 'node:fs';
+
+const docPath = 'docs/GOOGLE_PLAY_VISUAL_ASSET_UPLOAD_RECORD.md';
+const appIconFile = 'store-assets/google-play/visual/app-icon-512.png';
+const featureGraphicFile = 'store-assets/google-play/visual/feature-graphic-1024x500.png';
+
+const requiredDocSnippets = [
+  '# Google Play Visual Asset Upload Record',
+  'Status: Google Play visual asset upload recorded',
+  'App icon final asset: Completed',
+  'Feature graphic final asset: Completed',
+  'App icon final upload: Completed',
+  'Feature graphic final upload: Completed',
+  'Google Play Console input: Partial visual assets and screenshots only',
+  'Google Play Console actual input: Pending',
+  'Google Play 데이터 보안 양식 최종 입력: Pending',
+  'App submission/review request: Pending',
+  'Release build: Not started',
+  'Signing setup: Not started',
+  'AAB generation: Not started',
+  'Purpose: Record manual Google Play app icon and feature graphic upload completion',
+  'PR type: docs/check-only',
+  'App icon and feature graphic were uploaded manually in Google Play Console',
+  'This PR records visual asset upload completion only',
+  'This PR does not modify visual asset files',
+  'This PR does not complete full Google Play Console input',
+  'This PR does not complete Google Play 데이터 보안 양식 최종 입력',
+  'This PR does not submit the app for review',
+  'This PR does not create release build/signing/AAB',
+  'This PR does not change production UI or app logic',
+  '## 2. Uploaded visual assets',
+  '| App icon | store-assets/google-play/visual/app-icon-512.png | YES | Uploaded |',
+  '| Feature graphic | store-assets/google-play/visual/feature-graphic-1024x500.png | YES | Uploaded |',
+  'Google Play Console app listing visual asset section was accessed',
+  'App icon was uploaded manually',
+  'Feature graphic was uploaded manually',
+  'Google Play Console visual asset upload is completed',
+  'The upload was saved as a draft in Google Play Console; it was not submitted for review',
+  'Google Play Console full listing input is not completed in this PR',
+  'Google Play 데이터 보안 양식 최종 입력 is not completed in this PR',
+  'App submission/review request is not completed in this PR',
+  'No image file changes',
+  'No new screenshot capture',
+  'No new image generation',
+  'No image redesign',
+  'No full Google Play Console input completion',
+  'No Google Play 데이터 보안 양식 최종 입력',
+  'No app submission/review request',
+  'No release build',
+  'No signing setup',
+  'No keystore file added',
+  'No AAB generation',
+  'No src changes',
+  'No CSS changes',
+  'No AndroidManifest.xml changes',
+  'No Android native/resource changes',
+  'No Gradle changes',
+  'No Capacitor config changes',
+  'No fortune copy/content changes',
+  'No fortune calculation logic changes',
+  'No routing changes',
+  'No schemaVersion changes',
+  'No CURRENT_FORTUNE_SCHEMA_VERSION changes',
+  'No existing localStorage key changes',
+  '| Google Play Console actual input | Pending |',
+  '| Google Play 데이터 보안 양식 최종 입력 | Pending |',
+  '| App content rating / questionnaire | Pending |',
+  '| Target audience / content settings | Pending |',
+  '| App submission/review request | Pending |',
+  '| Release build | Not started |',
+  '| Signing setup | Not started |',
+  '| AAB generation | Not started |',
+  'This PR records Google Play visual asset upload completion only.',
+  'No production code, image file, Android packaging, signing, AAB, or full Console input changes are included.',
+];
+
+const wrongPhrases = [
+  '\u{AE08}(\u{91D1})',
+  '실제 스토어 스크린샷 이미지 시작',
+  '서양식 보정 적용 여부',
+  '양력/음력 샘플 추가 검증',
+  'Google Play Console input: Completed',
+  'Google Play Console input | Completed',
+  'Google Play Console actual input: Completed',
+  'Google Play Console actual input | Completed',
+  'Google Play Console 입력 완료',
+  'full Google Play Console input completed',
+  'Google Play 데이터 보안 양식 최종 입력: Completed',
+  'Google Play 데이터 보안 양식 최종 입력 | Completed',
+  'App submission/review request: Completed',
+  'App submission/review request | Completed',
+  'app submission 완료',
+  'Release build: Completed',
+  'Release build | Completed',
+  'release build 완료',
+  'Signing setup: Completed',
+  'Signing setup | Completed',
+  'signing 설정 완료',
+  'AAB generation: Completed',
+  'AAB generation | Completed',
+  'AAB 생성 완료',
+];
+
+const requiredTodoSnippets = [
+  '- [x] App icon final upload',
+  '- [x] Feature graphic final upload',
+  '- [x] Google Play visual asset upload 완료 기록',
+  '- [x] google play visual asset upload record 검증 스크립트 추가',
+];
+
+const pendingTodoSnippets = [
+  '- [ ] Google Play Console 실제 입력',
+  '- [ ] Google Play 데이터 보안 양식 최종 입력',
+  '- [ ] App content rating / questionnaire',
+  '- [ ] Target audience / content settings',
+  '- [ ] App submission/review request',
+  '- [ ] release build 준비',
+  '- [ ] signing 설정 준비',
+  '- [ ] AAB 생성',
+];
+
+const requiredDevLogSnippets = [
+  '## Google Play Visual Asset Upload Record',
+  'PR 목적: Google Play app icon and feature graphic upload 완료 기록',
+  'Status: Docs/check-only',
+  'App icon final asset: Completed',
+  'Feature graphic final asset: Completed',
+  'App icon final upload: Completed',
+  'Feature graphic final upload: Completed',
+  'Google Play Console input: Partial visual assets and screenshots only',
+  'Google Play Console actual input: Pending',
+  'Google Play 데이터 보안 양식 최종 입력: Pending',
+  'App content rating / questionnaire: Pending',
+  'Target audience / content settings: Pending',
+  'App submission/review request: Pending',
+  'Release build: Not started',
+  'Signing setup: Not started',
+  'AAB generation: Not started',
+  '이미지 파일 변경 없음',
+  '새 캡처 없음',
+  '새 이미지 생성 없음',
+  '이미지 재디자인 없음',
+  'production UI 변경 없음',
+  'src 변경 없음',
+  'CSS 파일 변경 없음',
+  'AndroidManifest.xml 변경 없음',
+  'Android native/resource 변경 없음',
+  'Gradle 변경 없음',
+  'Capacitor config 변경 없음',
+  '운세 문구/content 변경 없음',
+  '운세 계산 로직 변경 없음',
+  'routing 변경 없음',
+  'schemaVersion 변경 없음',
+  'CURRENT_FORTUNE_SCHEMA_VERSION 변경 없음',
+  '기존 localStorage key 변경 없음',
+  'full Google Play Console input 완료 없음',
+  'Google Play 데이터 보안 양식 최종 입력 없음',
+  'app submission/review request 없음',
+  'release build 생성 없음',
+  'signing 설정 변경 없음',
+  'keystore 파일 추가 없음',
+  'AAB 생성 없음',
+];
+
+const requiredChangelogSnippets = [
+  'Recorded Google Play app icon and feature graphic upload completion.',
+  'Kept full Google Play Console input, Google Play 데이터 보안 양식 최종 입력, app submission/review request, release build, signing setup, and AAB generation out of scope.',
+  'Added Google Play visual asset upload record check.',
+];
+
+const requiredPackageJsonSnippets = [
+  '"check:google-play-visual-asset-upload-record": "node scripts/checkGooglePlayVisualAssetUploadRecord.mjs"',
+];
+
+let hasFailure = false;
+
+function logResult(name, passed, detail = '') {
+  const status = passed ? 'PASS' : 'FAIL';
+  console.log(`[${status}] ${name}${detail ? ` - ${detail}` : ''}`);
+  if (!passed) hasFailure = true;
+}
+
+function labelFromSnippet(snippet) {
+  return snippet
+    .replaceAll(/\s+/g, '_')
+    .replaceAll(/[^\p{L}\p{N}_/-]/gu, '')
+    .slice(0, 80);
+}
+
+for (const file of [appIconFile, featureGraphicFile]) {
+  const exists = fs.existsSync(file);
+  logResult(`visual_asset_exists_${labelFromSnippet(file)}`, exists);
+  if (exists) {
+    const buffer = fs.readFileSync(file);
+    logResult(`visual_asset_not_empty_${labelFromSnippet(file)}`, buffer.length > 0, `${buffer.length} bytes`);
+  }
+}
+
+logResult('doc_exists', fs.existsSync(docPath));
+if (!fs.existsSync(docPath)) {
+  console.error('Google Play visual asset upload record check failed.');
+  process.exit(1);
+}
+
+const doc = fs.readFileSync(docPath, 'utf8');
+const todo = fs.readFileSync('TODO.md', 'utf8');
+const devLog = fs.readFileSync('DEVELOPMENT_LOG.md', 'utf8');
+const changelog = fs.readFileSync('CHANGELOG.md', 'utf8');
+const packageJson = fs.readFileSync('package.json', 'utf8');
+
+function sectionText(markdown, heading) {
+  const start = markdown.indexOf(heading);
+  if (start === -1) return '';
+  const nextHeading = markdown.indexOf('\n## ', start + heading.length);
+  return nextHeading === -1 ? markdown.slice(start) : markdown.slice(start, nextHeading);
+}
+
+for (const snippet of requiredDocSnippets) {
+  logResult(`doc_includes_${labelFromSnippet(snippet)}`, doc.includes(snippet));
+}
+
+// docs/GOOGLE_PLAY_VISUAL_ASSET_UPLOAD_RECORD.md and CHANGELOG.md have no history of
+// legitimately referencing these wrong phrases, so a whole-file scan is safe for them.
+// TODO.md and DEVELOPMENT_LOG.md are running logs with legitimate past mentions (e.g.
+// documenting that a check for these phrases exists), so their scan is scoped to this
+// PR's section only.
+const todoSection = sectionText(todo, '## Google Play Visual Asset Upload Record TODO');
+const devLogSection = sectionText(devLog, '## Google Play Visual Asset Upload Record');
+
+logResult('todo_has_section', todoSection.length > 0);
+logResult('dev_log_has_section', devLogSection.length > 0);
+
+for (const file of [
+  ['doc', doc],
+  ['todo_section', todoSection],
+  ['dev_log_section', devLogSection],
+  ['changelog', changelog],
+]) {
+  const [label, content] = file;
+  for (const phrase of wrongPhrases) {
+    logResult(`${label}_excludes_${labelFromSnippet(phrase)}`, !content.includes(phrase));
+  }
+}
+
+for (const snippet of requiredTodoSnippets) {
+  logResult(`todo_includes_${labelFromSnippet(snippet)}`, todo.includes(snippet));
+}
+
+for (const snippet of pendingTodoSnippets) {
+  logResult(`todo_keeps_pending_${labelFromSnippet(snippet)}`, todo.includes(snippet));
+}
+
+for (const snippet of requiredDevLogSnippets) {
+  logResult(`dev_log_includes_${labelFromSnippet(snippet)}`, devLog.includes(snippet));
+}
+
+for (const snippet of requiredChangelogSnippets) {
+  logResult(`changelog_includes_${labelFromSnippet(snippet)}`, changelog.includes(snippet));
+}
+
+for (const snippet of requiredPackageJsonSnippets) {
+  logResult(`package_json_includes_${labelFromSnippet(snippet)}`, packageJson.includes(snippet));
+}
+
+if (hasFailure) {
+  console.error('Google Play visual asset upload record check failed.');
+  process.exit(1);
+}
+
+console.log('Google Play visual asset upload record check passed');

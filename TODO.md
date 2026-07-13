@@ -1,5 +1,20 @@
 # TODO
 
+## Google Play Visual Asset Upload Record TODO
+
+- [x] App icon final upload
+- [x] Feature graphic final upload
+- [x] Google Play visual asset upload 완료 기록
+- [x] google play visual asset upload record 검증 스크립트 추가
+- [ ] Google Play Console 실제 입력
+- [ ] Google Play 데이터 보안 양식 최종 입력
+- [ ] App content rating / questionnaire
+- [ ] Target audience / content settings
+- [ ] App submission/review request
+- [ ] release build 준비
+- [ ] signing 설정 준비
+- [ ] AAB 생성
+
 ## Google Play Visual Assets TODO
 
 - [x] App icon final asset 등록

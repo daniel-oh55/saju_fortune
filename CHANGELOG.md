@@ -1,5 +1,23 @@
 # CHANGELOG
 
+## Docs
+
+- Recorded Google Play app icon and feature graphic upload completion.
+- Kept full Google Play Console input, Google Play 데이터 보안 양식 최종 입력, app submission/review request, release build, signing setup, and AAB generation out of scope.
+
+## Checks
+
+- Added Google Play visual asset upload record check.
+
+## Pending
+
+- Google Play Console input
+- Google Play 데이터 보안 양식 최종 입력
+- App content rating / questionnaire
+- Target audience / content settings
+- App submission/review request
+- release build, signing setup, and AAB generation
+
 ## Assets
 
 - Added final Google Play app icon and feature graphic assets.
