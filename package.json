@@ -153,6 +153,7 @@
     "check:startup-loading-v2-android-qa-record": "node scripts/checkStartupLoadingV2AndroidQaRecord.mjs",
     "check:store-screenshot-production-guide": "node scripts/checkStoreScreenshotProductionGuide.mjs",
     "check:store-screenshot-assets": "node scripts/checkStoreScreenshotAssets.mjs",
+    "check:store-screenshot-file-qa-record": "node scripts/checkStoreScreenshotFileQaRecord.mjs",
     "check:manseryeok-jasi-boundary": "node scripts/checkManseryeokJasiBoundaryHypothesis.mjs",
     "check:manseryeok-external-sample-verification": "node scripts/checkManseryeokExternalSampleVerification.mjs",
     "check:manseryeok-current-sample-snapshot": "node scripts/checkManseryeokCurrentSampleSnapshot.mjs",

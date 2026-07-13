@@ -1,5 +1,16 @@
 # TODO
 
+## Store Screenshot File QA Record TODO
+
+- [x] Store screenshot file QA 기록
+- [x] store screenshot file QA record 검증 스크립트 추가
+- [ ] Store screenshot upload
+- [ ] Google Play Console 실제 입력
+- [ ] Google Play 데이터 보안 양식 최종 입력
+- [ ] release build 준비
+- [ ] signing 설정 준비
+- [ ] AAB 생성
+
 ## Pre-release UX improvement TODO
 
 - [x] Document pre-release UX improvement backlog
