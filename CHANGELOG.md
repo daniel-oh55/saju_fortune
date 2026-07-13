@@ -2,6 +2,22 @@
 
 ## UI
 
+- Refined the React startup loading screen with a provided illustrated landscape background.
+- Added a handwriting-style “하루풀이” motion treatment in the sky area.
+- Extended the React loading display duration to about 2 seconds.
+- Kept Android native splash resources unchanged.
+
+## Pending
+
+- 초기 로딩 화면 2차 개선 Android actual device or emulator QA
+- 디자인 변경 후 실제 스토어 스크린샷 이미지 제작
+- Store screenshot upload
+- Google Play Console input
+- Google Play 데이터 보안 양식 최종 입력
+- release build, signing setup, and AAB generation
+
+## UI
+
 - Polished the React startup loading screen with a calmer landscape-inspired scene.
 - Added subtle mountain, sun, cloud, and bird motion styling without changing Android native splash resources.
 - Kept fortune copy/content, fortune logic, routing, schemaVersion, and existing localStorage keys unchanged.

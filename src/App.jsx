@@ -53,7 +53,7 @@ const REQUIRED_FORTUNE_CATEGORY_IDS = ['overall', 'money', 'love', 'work', 'stud
 const APP_HISTORY_MARKER = 'harupuliAppHistory';
 const APP_HISTORY_PAGE_KEY = 'harupuliAppPage';
 const TODAY_FORTUNE_DETAIL_HISTORY_MARKER = 'harupuliTodayFortuneDetail';
-const APP_LOADING_DURATION_MS = 700;
+const APP_LOADING_DURATION_MS = 2000;
 
 function scrollToPageTop() {
   if (typeof window === 'undefined') return;

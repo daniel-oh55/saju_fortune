@@ -144,150 +144,67 @@ button {
   justify-content: center;
   gap: 10px;
   padding: 24px;
-  background: linear-gradient(180deg, var(--color-card) 0%, var(--color-ivory) 62%, var(--color-card-soft) 100%);
+  background-color: var(--color-ivory);
   text-align: center;
-  animation: app-loading-fade-in 0.5s ease-out;
+  animation: app-loading-fade-in 0.6s ease-out;
 }
 
-.app-loading-scene {
+.app-loading-backdrop {
   position: absolute;
   inset: 0;
-  overflow: hidden;
+  background-image: url('./assets/loading/startup-loading-scene.png');
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover;
 }
 
-.app-loading-sun {
+.app-loading-brand-svg {
   position: absolute;
-  top: 16%;
-  left: 50%;
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  transform: translateX(-50%);
-  background: radial-gradient(circle at 38% 32%, #fff6e2, var(--color-warm-gold) 72%);
-  box-shadow: 0 0 34px rgba(184, 150, 78, 0.32);
-  animation: app-loading-sun-glow 3.2s ease-in-out infinite;
+  top: 13%;
+  left: 9%;
+  width: min(64%, 232px);
+  height: auto;
+  overflow: visible;
 }
 
-.app-loading-cloud {
-  position: absolute;
-  width: 64px;
-  height: 18px;
-  border-radius: 999px;
-  background: rgba(255, 253, 248, 0.96);
-  box-shadow:
-    0 2px 5px rgba(75, 85, 107, 0.1),
-    16px -9px 0 -2px rgba(255, 253, 248, 0.9),
-    -14px -4px 0 -4px rgba(255, 253, 248, 0.86);
-}
-
-.app-loading-cloud-a {
-  top: 28%;
-  left: 16%;
-  animation: app-loading-drift-right 9s ease-in-out infinite;
-}
-
-.app-loading-cloud-b {
-  top: 20%;
-  right: 14%;
-  width: 48px;
-  animation: app-loading-drift-left 11s ease-in-out infinite;
-}
-
-.app-loading-bird {
-  position: absolute;
-  width: 16px;
-  height: 8px;
-}
-
-.app-loading-bird::before,
-.app-loading-bird::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  width: 9px;
-  height: 9px;
-  border-top: 2px solid var(--color-deep-navy);
-  border-radius: 50%;
-}
-
-.app-loading-bird::before {
-  left: 0;
-  transform: rotate(35deg);
-}
-
-.app-loading-bird::after {
-  right: 0;
-  transform: rotate(-35deg);
-}
-
-.app-loading-bird-a {
-  top: 34%;
-  left: 30%;
-  animation: app-loading-bird-fly 6.5s ease-in-out infinite;
-}
-
-.app-loading-bird-b {
-  top: 30%;
-  left: 38%;
-  animation: app-loading-bird-fly 7.5s ease-in-out infinite 0.6s;
-}
-
-.app-loading-bird-c {
-  top: 40%;
-  right: 28%;
-  animation: app-loading-bird-fly 8.2s ease-in-out infinite 1.1s;
-}
-
-.app-loading-mountain {
-  position: absolute;
-  bottom: 0;
-  left: -5%;
-  width: 110%;
-  height: 34%;
-}
-
-.app-loading-mountain-back {
-  bottom: 6%;
-  background: var(--color-navy-muted);
-  opacity: 0.5;
-  clip-path: polygon(0% 100%, 12% 46%, 26% 68%, 40% 30%, 55% 62%, 70% 38%, 84% 66%, 100% 44%, 100% 100%);
-}
-
-.app-loading-mountain-front {
-  height: 26%;
-  background: var(--color-deep-navy);
-  opacity: 1;
-  clip-path: polygon(0% 100%, 18% 52%, 34% 74%, 50% 36%, 66% 70%, 82% 48%, 100% 72%, 100% 100%);
+.app-loading-brand-text {
+  font-family: Georgia, "Times New Roman", "Noto Serif KR", serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 34px;
+  letter-spacing: 1px;
+  fill: transparent;
+  stroke: var(--color-deep-navy);
+  stroke-width: 1.2px;
+  stroke-dasharray: 900;
+  stroke-dashoffset: 900;
+  filter: drop-shadow(0 1px 2px rgba(184, 150, 78, 0.28));
+  animation:
+    app-loading-brand-draw 1.2s 0.25s ease-out forwards,
+    app-loading-brand-fill 0.5s 1.35s ease-out forwards;
 }
 
 .app-loading-content {
   position: relative;
   z-index: 1;
-}
-
-.app-loading-badge {
-  margin-bottom: 6px;
-  animation: app-loading-pulse 1.4s ease-in-out infinite;
-}
-
-.app-loading-title {
-  margin: 0;
-  color: var(--color-deep-navy);
-  font-size: 1.05rem;
-  font-weight: 800;
+  padding: 14px 20px;
+  border-radius: 999px;
+  background: rgba(255, 253, 248, 0.76);
+  box-shadow: 0 8px 20px rgba(75, 85, 107, 0.08);
 }
 
 .app-loading-text {
-  margin: 6px 0 0;
-  color: var(--color-warm-gold);
+  margin: 0;
+  color: var(--color-deep-navy);
   font-size: 0.86rem;
+  font-weight: 700;
 }
 
 .app-loading-dots {
   display: flex;
   justify-content: center;
   gap: 6px;
-  margin-top: 14px;
+  margin-top: 10px;
 }
 
 .app-loading-dots span {
@@ -316,53 +233,15 @@ button {
   }
 }
 
-@keyframes app-loading-pulse {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.6;
+@keyframes app-loading-brand-draw {
+  to {
+    stroke-dashoffset: 0;
   }
 }
 
-@keyframes app-loading-sun-glow {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.86;
-  }
-}
-
-@keyframes app-loading-drift-right {
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-  50% {
-    transform: translateX(10px);
-  }
-}
-
-@keyframes app-loading-drift-left {
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-  50% {
-    transform: translateX(-10px);
-  }
-}
-
-@keyframes app-loading-bird-fly {
-  0%,
-  100% {
-    transform: translate(0, 0);
-  }
-  50% {
-    transform: translate(14px, -6px);
+@keyframes app-loading-brand-fill {
+  to {
+    fill: var(--color-deep-navy);
   }
 }
 
@@ -383,13 +262,12 @@ button {
     animation: none;
   }
 
-  .app-loading-badge,
-  .app-loading-sun,
-  .app-loading-cloud-a,
-  .app-loading-cloud-b,
-  .app-loading-bird-a,
-  .app-loading-bird-b,
-  .app-loading-bird-c,
+  .app-loading-brand-text {
+    animation: none;
+    fill: var(--color-deep-navy);
+    stroke-dashoffset: 0;
+  }
+
   .app-loading-dots span {
     animation: none;
   }
