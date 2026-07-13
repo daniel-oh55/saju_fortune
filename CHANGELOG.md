@@ -1,5 +1,26 @@
 # CHANGELOG
 
+## Android
+
+- Added release signing configuration using external signing values.
+
+## Docs
+
+- Recorded release signing configuration and security notes.
+
+## Checks
+
+- Added release signing configuration check.
+
+## Pending
+
+- Keystore creation outside repository
+- Release build
+- AAB generation
+- Release AAB verification
+- Google Play AAB upload
+- App submission/review request
+
 ## Docs
 
 - Added release build, signing setup, and AAB preparation checklist.

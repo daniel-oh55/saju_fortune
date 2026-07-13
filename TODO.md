@@ -1,5 +1,16 @@
 # TODO
 
+## Release Signing Config TODO
+
+- [x] release signing configuration 추가
+- [x] release signing configuration 검증 스크립트 추가
+- [ ] Keystore creation outside repository
+- [ ] Release build
+- [ ] AAB generation
+- [ ] Release AAB verification
+- [ ] Google Play AAB upload
+- [ ] App submission/review request
+
 ## Release Build Signing AAB Preparation TODO
 
 - [x] release build/signing/AAB 준비 문서화
