@@ -3836,3 +3836,15 @@
 - [ ] release build 준비
 - [ ] signing 설정 준비
 - [ ] AAB 생성
+
+## Startup Loading Screen Polish TODO
+
+- [x] 초기 로딩 화면 디자인 개선
+- [ ] 초기 로딩 화면 Android 실제 기기 또는 에뮬레이터 QA
+- [ ] 디자인 변경 후 실제 스토어 스크린샷 이미지 제작
+- [ ] Store screenshot upload
+- [ ] Google Play Console 실제 입력
+- [ ] Google Play 데이터 보안 양식 최종 입력
+- [ ] release build 준비
+- [ ] signing 설정 준비
+- [ ] AAB 생성
