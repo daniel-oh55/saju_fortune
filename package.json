@@ -263,6 +263,7 @@
     "check:privacy-policy-final-values-confirmation": "node scripts/checkPrivacyPolicyFinalValuesConfirmation.mjs",
     "check:ui-polish-main-browser-qa-record": "node scripts/checkUiPolishMainBrowserQaRecord.mjs",
     "check:google-play-console-input-prep": "node scripts/checkGooglePlayConsoleInputPrep.mjs",
+    "check:google-play-visual-assets": "node scripts/checkGooglePlayVisualAssets.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
