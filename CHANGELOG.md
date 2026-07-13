@@ -1,5 +1,28 @@
 # CHANGELOG
 
+## Assets
+
+- Added final Google Play app icon and feature graphic assets.
+
+## Docs
+
+- Recorded Google Play visual asset readiness.
+
+## Checks
+
+- Added Google Play visual assets check.
+
+## Pending
+
+- App icon final upload
+- Feature graphic final upload
+- Google Play Console input
+- Google Play 데이터 보안 양식 최종 입력
+- App content rating / questionnaire
+- Target audience / content settings
+- App submission/review request
+- release build, signing setup, and AAB generation
+
 ## Docs
 
 - Added Google Play Console input preparation checklist after Store screenshot upload completion.
