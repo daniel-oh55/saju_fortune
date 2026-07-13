@@ -1,5 +1,21 @@
 # CHANGELOG
 
+## Docs
+
+- Recorded store screenshot file QA for 6 existing generated Google Play screenshot assets.
+- Kept existing screenshot image files unchanged.
+
+## Checks
+
+- Added store screenshot file QA record check.
+
+## Pending
+
+- Store screenshot upload
+- Google Play Console input
+- Google Play 데이터 보안 양식 최종 입력
+- release build, signing setup, and AAB generation
+
 ## Assets
 
 - Added 6 existing generated Google Play store screenshot image files as final screenshot assets.
