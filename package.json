@@ -269,6 +269,7 @@
     "check:google-play-data-safety-input-record": "node scripts/checkGooglePlayDataSafetyInputRecord.mjs",
     "check:release-build-signing-aab-prep": "node scripts/checkReleaseBuildSigningAabPrep.mjs",
     "check:release-signing-config": "node scripts/checkReleaseSigningConfig.mjs",
+    "check:release-aab-workflow-readiness": "node scripts/checkReleaseAabWorkflowReadiness.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

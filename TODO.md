@@ -1,5 +1,16 @@
 # TODO
 
+## Release AAB Workflow Readiness TODO
+
+- [x] release AAB workflow readiness 문서화
+- [x] release AAB workflow readiness 검증 스크립트 추가
+- [ ] GitHub Secrets final input
+- [ ] Release build
+- [ ] AAB generation
+- [ ] Release AAB verification
+- [ ] Google Play AAB upload
+- [ ] App submission/review request
+
 ## Release Signing Config TODO
 
 - [x] release signing configuration 추가

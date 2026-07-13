@@ -1,5 +1,41 @@
 # DEVELOPMENT_LOG
 
+## Release AAB Workflow Readiness
+
+- PR 목적: release AAB workflow readiness 문서화
+- Status: Docs/check-only
+- Release signing config: Completed
+- Keystore file: Not committed
+- Signing credentials: Not committed
+- Release AAB workflow: Existing workflow recorded
+- Release build: Pending manual workflow run
+- AAB generation: Pending manual workflow run
+- Release AAB verification: Not started
+- Google Play AAB upload: Not started
+- App submission/review request: Pending
+- production UI 변경 없음
+- src 변경 없음
+- CSS 파일 변경 없음
+- AndroidManifest.xml 변경 없음
+- Android native/resource 변경 없음
+- 운세 문구/content 변경 없음
+- 운세 계산 로직 변경 없음
+- routing 변경 없음
+- schemaVersion 변경 없음
+- CURRENT_FORTUNE_SCHEMA_VERSION 변경 없음
+- 기존 localStorage key 변경 없음
+- 실제 keystore 파일 추가 없음
+- signing credentials 추가 없음
+- release build 완료 없음
+- AAB generation 완료 없음
+- Google Play AAB upload 없음
+- app submission/review request 없음
+- 참고: .github/workflows/android-release-aab.yml은 이미 존재하고 workflow_dispatch, npm ci/build, cap sync, bundleRelease, ANDROID_KEYSTORE_BASE64 등 GitHub Secrets, jarsigner 검증, artifact upload를 모두 포함하고 있어 이번 PR에서 workflow 파일은 수정하지 않음
+- npm run build 결과
+- npm run check:release-aab-workflow-readiness 결과
+- npm run check:release-signing-config 결과
+- npm run check:release-build-signing-aab-prep 결과
+
 ## Release Signing Config
 
 - PR 목적: Android release signing configuration 추가
