@@ -265,6 +265,7 @@
     "check:google-play-console-input-prep": "node scripts/checkGooglePlayConsoleInputPrep.mjs",
     "check:google-play-visual-assets": "node scripts/checkGooglePlayVisualAssets.mjs",
     "check:google-play-visual-asset-upload-record": "node scripts/checkGooglePlayVisualAssetUploadRecord.mjs",
+    "check:google-play-console-input-record": "node scripts/checkGooglePlayConsoleInputRecord.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

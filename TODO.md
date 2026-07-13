@@ -1,5 +1,16 @@
 # TODO
 
+## Google Play Console Input Record TODO
+
+- [x] Google Play Console 실제 입력
+- [x] Google Play Console 실제 입력 완료 기록
+- [x] google play console input record 검증 스크립트 추가
+- [ ] Google Play 데이터 보안 양식 최종 입력
+- [ ] App submission/review request
+- [ ] release build 준비
+- [ ] signing 설정 준비
+- [ ] AAB 생성
+
 ## Google Play Visual Asset Upload Record TODO
 
 - [x] App icon final upload
