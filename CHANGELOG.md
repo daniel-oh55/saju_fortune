@@ -2,6 +2,20 @@
 
 ## Docs
 
+- Recorded Google Play 데이터 보안 양식 최종 입력 completion.
+- Kept app submission/review request, release build, signing setup, and AAB generation out of scope.
+
+## Checks
+
+- Added Google Play data safety input record check.
+
+## Pending
+
+- App submission/review request
+- release build, signing setup, and AAB generation
+
+## Docs
+
 - Recorded Google Play Console actual input completion.
 - Kept Google Play 데이터 보안 양식 최종 입력, app submission/review request, release build, signing setup, and AAB generation out of scope.
 
