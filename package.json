@@ -262,6 +262,7 @@
     "check:privacy-policy-url-verification-record": "node scripts/checkPrivacyPolicyUrlVerificationRecord.mjs",
     "check:privacy-policy-final-values-confirmation": "node scripts/checkPrivacyPolicyFinalValuesConfirmation.mjs",
     "check:ui-polish-main-browser-qa-record": "node scripts/checkUiPolishMainBrowserQaRecord.mjs",
+    "check:google-play-console-input-prep": "node scripts/checkGooglePlayConsoleInputPrep.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

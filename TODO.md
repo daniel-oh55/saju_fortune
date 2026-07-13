@@ -1,5 +1,20 @@
 # TODO
 
+## Google Play Console Input Preparation TODO
+
+- [x] Google Play Console 실제 입력 준비 문서화
+- [x] google play console input preparation 검증 스크립트 추가
+- [ ] App icon final upload
+- [ ] Feature graphic final upload
+- [ ] Google Play Console 실제 입력
+- [ ] Google Play 데이터 보안 양식 최종 입력
+- [ ] App content rating / questionnaire
+- [ ] Target audience / content settings
+- [ ] App submission/review request
+- [ ] release build 준비
+- [ ] signing 설정 준비
+- [ ] AAB 생성
+
 ## Store Screenshot Upload Completion Record TODO
 
 - [x] Store screenshot upload
