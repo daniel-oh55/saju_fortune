@@ -1,5 +1,20 @@
 # CHANGELOG
 
+## UI
+
+- Polished the React startup loading screen with a calmer landscape-inspired scene.
+- Added subtle mountain, sun, cloud, and bird motion styling without changing Android native splash resources.
+- Kept fortune copy/content, fortune logic, routing, schemaVersion, and existing localStorage keys unchanged.
+
+## Pending
+
+- 초기 로딩 화면 Android actual device or emulator QA
+- 디자인 변경 후 실제 스토어 스크린샷 이미지 제작
+- Store screenshot upload
+- Google Play Console input
+- Google Play 데이터 보안 양식 최종 입력
+- release build, signing setup, and AAB generation
+
 ## Docs
 
 - Recorded Android actual device or emulator UI/copy QA result after practical today fortune copy improvement.
