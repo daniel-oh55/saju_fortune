@@ -4542,13 +4542,13 @@ input:disabled {
 
 .home-today-fortune-grid .fortune-card p {
   display: -webkit-box;
-  min-height: 4.2em;
+  min-height: 5.6em;
   overflow: hidden;
   color: var(--color-muted-blue);
   font-size: 0.85rem;
   line-height: 1.4;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 4;
 }
 
 .home-today-fortune-grid .score-row {

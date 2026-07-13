@@ -1,5 +1,46 @@
 # DEVELOPMENT_LOG
 
+## Practical Today Fortune Copy Polish
+
+- PR 목적: 오늘운세 문구 실생활형 개선
+- Status: Production copy/content polish
+- 오늘운세 문구 실생활형 개선: Completed
+- 운세 문구 스타일 가이드 기준 반영: Completed
+- 스토어 스크린샷 문구 개선: Not included
+- 2026년 월별 운세 문구 개선: Not included
+- 띠별운세 문구 개선: Not included
+- AI 상담형 문체 적용: Not included
+- 운세 계산 로직 변경 없음
+- 운세 결과 생성 로직 변경 없음
+- 결과 분기 조건 변경 없음
+- fortune score 계산 변경 없음
+- 오행 계산 로직 변경 없음
+- 오행 표시 값 생성 방식 변경 없음
+- routing 변경 없음
+- schemaVersion 변경 없음
+- CURRENT_FORTUNE_SCHEMA_VERSION 변경 없음
+- 기존 localStorage key 변경 없음
+- AndroidManifest.xml 변경 없음
+- Android native/resource 변경 없음
+- Gradle 변경 없음
+- Capacitor config 변경 없음
+- 이미지 파일 변경 없음
+- Google Play Console 입력 없음
+- Store screenshot upload 없음
+- Google Play 데이터 보안 양식 최종 입력 없음
+- release build 생성 없음
+- signing 설정 변경 없음
+- keystore 파일 추가 없음
+- AAB 생성 없음
+- Android 실제 기기 또는 에뮬레이터 화면 QA: Pending
+- 디자인 변경 후 실제 스토어 스크린샷 이미지 제작: Pending
+- npm run build 결과: 성공
+- npm run check:fortune-copy-style-guide 결과: 통과
+- npm run check:five-element-metal-notation 결과: 통과
+- npm run check:content-safety 결과: 통과
+- npm run check:share-text 결과: 통과
+- 그외 비고: 홈 오늘운세 카드 본문(.home-today-fortune-grid .fortune-card p) 줄범위를 3줄에서 4줄로 확장(min-height 4.2em to 5.6em, -webkit-line-clamp 3 to 4). PR #369에서 이미 6개 중 5개 카드가 사전에 클립되고 있었음을 Playwright로 확인하여 최소한으로 조정.
+
 ## Fortune Copy Style Guide
 
 - PR 목적: 운세 문구 스타일 가이드 정리
