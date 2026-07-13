@@ -1,5 +1,17 @@
 # TODO
 
+## Store Screenshot Upload Preparation TODO
+
+- [x] Store screenshot upload 준비 문서화
+- [x] store screenshot upload preparation 검증 스크립트 추가
+- [ ] Store screenshot upload
+- [ ] Store screenshot upload 완료 기록
+- [ ] Google Play Console 실제 입력
+- [ ] Google Play 데이터 보안 양식 최종 입력
+- [ ] release build 준비
+- [ ] signing 설정 준비
+- [ ] AAB 생성
+
 ## Store Screenshot File QA Record TODO
 
 - [x] Store screenshot file QA 기록
