@@ -150,6 +150,7 @@
     "check:five-element-metal-notation": "node scripts/checkFiveElementMetalNotation.mjs",
     "check:fortune-copy-style-guide": "node scripts/checkFortuneCopyStyleGuide.mjs",
     "check:android-ui-copy-qa-record": "node scripts/checkAndroidUiCopyQaRecord.mjs",
+    "check:startup-loading-v2-android-qa-record": "node scripts/checkStartupLoadingV2AndroidQaRecord.mjs",
     "check:manseryeok-jasi-boundary": "node scripts/checkManseryeokJasiBoundaryHypothesis.mjs",
     "check:manseryeok-external-sample-verification": "node scripts/checkManseryeokExternalSampleVerification.mjs",
     "check:manseryeok-current-sample-snapshot": "node scripts/checkManseryeokCurrentSampleSnapshot.mjs",

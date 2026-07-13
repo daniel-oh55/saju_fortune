@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## Docs
+
+- Recorded startup loading screen v2 Android actual device or emulator QA result.
+- Kept Store screenshot upload, Google Play Console input, Google Play 데이터 보안 양식 최종 입력, release build, signing setup, and AAB generation as Pending/Not started.
+
+## Checks
+
+- Added startup loading v2 Android QA record check.
+
 ## UI
 
 - Refined the React startup loading screen with a provided illustrated landscape background.
