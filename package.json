@@ -264,6 +264,7 @@
     "check:ui-polish-main-browser-qa-record": "node scripts/checkUiPolishMainBrowserQaRecord.mjs",
     "check:google-play-console-input-prep": "node scripts/checkGooglePlayConsoleInputPrep.mjs",
     "check:google-play-visual-assets": "node scripts/checkGooglePlayVisualAssets.mjs",
+    "check:google-play-visual-asset-upload-record": "node scripts/checkGooglePlayVisualAssetUploadRecord.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
