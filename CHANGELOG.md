@@ -2,6 +2,18 @@
 
 ## Docs
 
+- Recorded final pre-submission review completion.
+
+## Checks
+
+- Added final pre-submission review check.
+
+## Pending
+
+- App submission/review request
+
+## Docs
+
 - Recorded Google Play AAB upload completion.
 
 ## Checks

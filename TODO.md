@@ -1,5 +1,12 @@
 # TODO
 
+## Final Pre-Submission Review TODO
+
+- [x] Final pre-submission review
+- [x] final pre-submission review record 작성
+- [x] final pre-submission review 검증 스크립트 추가
+- [ ] App submission/review request
+
 ## Google Play AAB Upload Record TODO
 
 - [x] Google Play AAB upload
