@@ -273,6 +273,7 @@
     "check:release-aab-generation-record": "node scripts/checkReleaseAabGenerationRecord.mjs",
     "check:google-play-aab-upload-record": "node scripts/checkGooglePlayAabUploadRecord.mjs",
     "check:final-pre-submission-review": "node scripts/checkFinalPreSubmissionReview.mjs",
+    "check:google-play-submission-record": "node scripts/checkGooglePlaySubmissionRecord.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
