@@ -1,5 +1,15 @@
 # TODO
 
+## Release AAB Generation Finalization TODO
+
+- [x] Release AAB workflow success 확인
+- [x] Release AAB artifact 생성 확인
+- [x] AAB 파일명 확인
+- [x] Release AAB verification 확인
+- [x] release AAB artifact 다운로드 가능 확인
+- [ ] Google Play AAB upload
+- [ ] App submission/review request
+
 ## Release AAB Generation Record TODO
 
 - [x] GitHub Secrets final input
