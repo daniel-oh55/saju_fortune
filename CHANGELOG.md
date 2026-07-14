@@ -2,6 +2,20 @@
 
 ## Docs
 
+- Recorded Google Play app submission/review request completion.
+
+## Checks
+
+- Added Google Play submission record check.
+
+## Pending
+
+- Google Play review result
+- Production release live
+- Post-review release verification
+
+## Docs
+
 - Recorded final pre-submission review completion.
 
 ## Checks

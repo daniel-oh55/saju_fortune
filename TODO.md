@@ -1,5 +1,14 @@
 # TODO
 
+## Google Play Submission Record TODO
+
+- [x] App submission/review request
+- [x] Google Play submission record 작성
+- [x] Google Play submission record 검증 스크립트 추가
+- [ ] Google Play review result
+- [ ] Production release live
+- [ ] Post-review release verification
+
 ## Final Pre-Submission Review TODO
 
 - [x] Final pre-submission review
