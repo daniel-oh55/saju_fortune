@@ -272,6 +272,7 @@
     "check:release-aab-workflow-readiness": "node scripts/checkReleaseAabWorkflowReadiness.mjs",
     "check:release-aab-generation-record": "node scripts/checkReleaseAabGenerationRecord.mjs",
     "check:google-play-aab-upload-record": "node scripts/checkGooglePlayAabUploadRecord.mjs",
+    "check:final-pre-submission-review": "node scripts/checkFinalPreSubmissionReview.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
