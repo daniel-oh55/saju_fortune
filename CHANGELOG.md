@@ -2,6 +2,19 @@
 
 ## Docs
 
+- Recorded Google Play AAB upload completion.
+
+## Checks
+
+- Added Google Play AAB upload record check.
+
+## Pending
+
+- Final pre-submission review
+- App submission/review request
+
+## Docs
+
 - Finalized release AAB generation record with actual Android Release AAB #9 success confirmation.
 
 ## Pending
