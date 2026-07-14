@@ -271,6 +271,7 @@
     "check:release-signing-config": "node scripts/checkReleaseSigningConfig.mjs",
     "check:release-aab-workflow-readiness": "node scripts/checkReleaseAabWorkflowReadiness.mjs",
     "check:release-aab-generation-record": "node scripts/checkReleaseAabGenerationRecord.mjs",
+    "check:google-play-aab-upload-record": "node scripts/checkGooglePlayAabUploadRecord.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

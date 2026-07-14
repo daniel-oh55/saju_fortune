@@ -1,5 +1,13 @@
 # TODO
 
+## Google Play AAB Upload Record TODO
+
+- [x] Google Play AAB upload
+- [x] Google Play AAB upload completion 기록
+- [x] Google Play AAB upload record 검증 스크립트 추가
+- [ ] Final pre-submission review
+- [ ] App submission/review request
+
 ## Release AAB Generation Finalization TODO
 
 - [x] Release AAB workflow success 확인
