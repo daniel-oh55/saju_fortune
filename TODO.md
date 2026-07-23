@@ -1,5 +1,20 @@
 # TODO
 
+## Google Play Release Live Record TODO
+
+- [x] Google Play review result
+- [x] Production release live
+- [x] Post-review release verification
+- [x] Google Play Store page access verification
+- [x] Google Play Store install verification
+- [x] Google Play release live record 작성
+- [x] Google Play release live record 검증 스크립트 추가
+- [ ] Future updates
+- [ ] Post-launch monitoring
+- [ ] Post-install functional QA
+- [ ] Detailed Android device QA
+- [ ] First update planning
+
 ## Google Play Submission Record TODO
 
 - [x] App submission/review request

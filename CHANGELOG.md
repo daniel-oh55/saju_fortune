@@ -2,6 +2,21 @@
 
 ## Docs
 
+- Recorded Google Play review completion, production release live status, and Store installation verification.
+
+## Checks
+
+- Added Google Play release live record check.
+
+## Pending
+
+- Future updates
+- Post-launch monitoring
+- Post-install functional QA
+- Detailed Android device QA
+
+## Docs
+
 - Recorded Google Play app submission/review request completion.
 
 ## Checks
