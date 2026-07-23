@@ -1,5 +1,23 @@
 # TODO
 
+## Post-Launch Monitoring Readiness TODO
+
+- [x] Post-launch monitoring plan
+- [x] Post-launch monitoring checklist readiness
+- [x] Post-launch monitoring readiness 문서 작성
+- [x] Post-launch monitoring readiness 검증 스크립트 추가
+- [ ] Post-launch monitoring execution
+- [ ] Initial post-launch monitoring review
+- [ ] Android vitals review
+- [ ] Crash and ANR review
+- [ ] App statistics review
+- [ ] Ratings and reviews review
+- [ ] Policy status review
+- [ ] Support inquiry review
+- [ ] Post-install functional QA
+- [ ] Detailed Android device QA
+- [ ] First update planning
+
 ## Google Play Release Live Record TODO
 
 - [x] Google Play review result
