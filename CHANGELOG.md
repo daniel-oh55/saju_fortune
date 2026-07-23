@@ -2,6 +2,26 @@
 
 ## Docs
 
+- Added the Google Play post-launch monitoring plan and readiness checklist.
+
+## Checks
+
+- Added the post-launch monitoring readiness check.
+
+## Pending
+
+- Post-launch monitoring execution
+- Initial post-launch monitoring review
+- Android vitals review
+- Crash and ANR review
+- App statistics review
+- Ratings and reviews review
+- Post-install functional QA
+- Detailed Android device QA
+- First update planning
+
+## Docs
+
 - Recorded Google Play review completion, production release live status, and Store installation verification.
 
 ## Checks
