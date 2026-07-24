@@ -276,6 +276,7 @@
     "check:google-play-submission-record": "node scripts/checkGooglePlaySubmissionRecord.mjs",
     "check:google-play-release-live-record": "node scripts/checkGooglePlayReleaseLiveRecord.mjs",
     "check:post-launch-monitoring-readiness": "node scripts/checkPostLaunchMonitoringReadiness.mjs",
+    "check:post-launch-monitoring-initial-review": "node scripts/checkPostLaunchMonitoringInitialReview.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
