@@ -4514,8 +4514,7 @@ input:disabled {
 
 .home-score-diary-card,
 .home-trust-card,
-.recent-reading-card,
-.home-ad-placeholder {
+.recent-reading-card {
   border: 1px solid rgba(184, 150, 78, 0.2);
   border-radius: var(--radius-card);
   background:
@@ -4926,27 +4925,6 @@ input:disabled {
 
 .recent-reading-card p {
   margin-bottom: 0;
-}
-
-.home-ad-placeholder {
-  display: grid;
-  gap: 6px;
-  padding: 16px;
-  border-style: dashed;
-  text-align: center;
-  background: rgba(255, 253, 248, 0.68);
-  box-shadow: none;
-}
-
-.home-ad-placeholder span {
-  color: var(--color-warm-gold);
-  font-size: 0.78rem;
-  font-weight: 900;
-}
-
-.home-ad-placeholder p {
-  margin-bottom: 0;
-  font-size: 0.86rem;
 }
 
 .home-diary-theme .today-summary-card,
