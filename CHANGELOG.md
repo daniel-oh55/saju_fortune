@@ -1,5 +1,24 @@
 # CHANGELOG
 
+## UI
+
+- Hid the empty advertisement placeholder on the home screen while no real advertising integration exists.
+- Removed the empty advertisement label, dashed placeholder border, fixed padding, and the resulting empty spacing.
+- Relied on the existing home layout gap so adjacent cards keep natural spacing after removal.
+- Kept the existing rewarded advertisement structure intact for a future conditional advertisement component.
+
+## Pending
+
+- AdMob integration planning
+- AdMob SDK integration
+- Actual advertisement serving
+- app-ads.txt publication
+- Privacy policy advertising update
+- Google Play data safety advertising update
+- Advertising consent implementation
+- Android advertising QA
+- First update release
+
 ## Docs
 
 - Recorded the initial manual Google Play post-launch monitoring review.

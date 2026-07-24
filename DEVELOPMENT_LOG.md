@@ -1,5 +1,39 @@
 # DEVELOPMENT_LOG
 
+## Hide Empty Advertisement Placeholders
+
+- PR 목적: 실제 광고 SDK/데이터가 없는 상태에서 사용자에게 보이는 빈 광고 placeholder 숨김
+- Status: UI-only
+- Verification date: 2026-07-24
+- 대상: 홈 화면의 빈 광고 placeholder (`home-ad-placeholder`)
+- 빈 placeholder 박스 렌더링 제거: Completed
+- "광고 영역" 라벨 및 점선 placeholder 테두리 제거: Completed
+- 광고 placeholder로 인한 고정 padding/불필요한 여백 제거: Completed
+- 제거 후 간격 처리: 홈 레이아웃의 flex gap(16px)이 인접 카드 간격을 자연스럽게 유지
+- 미래 광고 연동 구조 유지: 기존 리워드 광고 컴포넌트(AdRewardBox/RewardAdModal) 구조 그대로 보존
+- Empty advertisement placeholder UX implementation: Completed
+- Empty advertisement label removal: Completed
+- Empty advertisement spacing cleanup: Completed
+- AdMob integration planning: Pending
+- AdMob SDK integration: Pending
+- Actual advertisement serving: Pending
+- app-ads.txt publication: Pending
+- Privacy policy advertising update: Pending
+- Google Play data safety advertising update: Pending
+- Advertising consent implementation: Pending
+- Android advertising QA: Pending
+- First update release: Pending
+- AdMob/광고 SDK 추가 없음
+- 실제 광고 단위 ID/App ID/provider placement ID 추가 없음
+- AndroidManifest.xml/Android resource/Gradle/Capacitor config 변경 없음
+- dependency/package-lock 변경 없음
+- 운세 계산 로직 변경 없음
+- 운세 문구/콘텐츠 변경 없음
+- routing 변경 없음
+- schemaVersion / CURRENT_FORTUNE_SCHEMA_VERSION 변경 없음
+- 기존 localStorage key 변경 없음
+- 변경 파일: src/pages/HomePage.jsx, src/styles.css (+ 문서)
+
 ## Post-Launch Monitoring Initial Review
 
 - PR 목적: 초기 출시 후 모니터링 실제 확인 결과 기록

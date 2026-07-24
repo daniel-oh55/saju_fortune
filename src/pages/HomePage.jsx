@@ -319,11 +319,6 @@ function HomePage({
         </div>
       </section>
 
-      <section className="home-ad-placeholder" aria-label="광고 영역">
-        <span>광고 영역</span>
-        <p>향후 광고가 표시될 수 있습니다.</p>
-      </section>
-
       <section className="home-trust-card">
         <span aria-hidden="true">✦</span>
         <div>
