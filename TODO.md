@@ -1,5 +1,30 @@
 # TODO
 
+## Post-Launch Monitoring Initial Review TODO
+
+- [x] Post-launch monitoring execution
+- [x] Initial post-launch monitoring review
+- [x] Policy status review
+- [x] User-perceived crash rate review
+- [x] User-perceived ANR rate review
+- [x] Slow cold start review
+- [x] Ratings review
+- [x] Written reviews review
+- [x] App statistics review
+- [x] Support inquiry review
+- [x] First update consideration review
+- [x] Initial monitoring review document
+- [x] Initial monitoring review validation script
+- [ ] Future recurring monitoring
+- [ ] Post-install functional QA
+- [ ] Detailed Android device QA
+- [ ] R8 optimization implementation
+- [ ] Empty advertisement placeholder UX implementation
+- [ ] AdMob integration planning
+- [ ] AdMob SDK integration
+- [ ] Actual advertisement serving
+- [ ] First update planning
+
 ## Post-Launch Monitoring Readiness TODO
 
 - [x] Post-launch monitoring plan

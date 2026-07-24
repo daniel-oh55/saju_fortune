@@ -2,13 +2,27 @@
 
 ## Docs
 
+- Recorded the initial manual Google Play post-launch monitoring review.
+- Recorded policy status, Android vitals, ratings, reviews, app statistics, and support inquiry observations.
+- Recorded R8 and the empty advertisement placeholder as non-blocking future update candidates.
 - Added the Google Play post-launch monitoring plan and readiness checklist.
 
 ## Checks
 
+- Added the initial post-launch monitoring review check.
 - Added the post-launch monitoring readiness check.
 
 ## Pending
+
+- Future recurring monitoring
+- Post-install functional QA
+- Detailed Android device QA
+- R8 optimization implementation
+- Empty advertisement placeholder UX implementation
+- AdMob integration planning
+- First update planning
+
+### Historical readiness state recorded by PR #395
 
 - Post-launch monitoring execution
 - Initial post-launch monitoring review
