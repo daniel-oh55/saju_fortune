@@ -1,5 +1,53 @@
 # DEVELOPMENT_LOG
 
+## AdMob Integration Readiness Plan
+
+- PR 목적: 실제 광고 SDK 도입 전 현재 상태, UX 원칙, 정책 영향, Android QA와 출시 게이트 기록
+- Status: Docs/check-only
+- Verification date: 2026-07-25
+- AdMob account creation: Completed
+- Payment profile submission: Completed
+- AdMob account verification: In progress
+- AdMob app registration: Completed
+- Google Play linking: Completed
+- Package verification: Completed (`com.harupuli.app`)
+- app-ads.txt production deployment: Completed
+- Live URL verification: Completed
+- AdMob app-ads.txt verification: Pending
+- AdMob app verification: Pending
+- App readiness review: Pending
+- Ad units: 0
+- AdMob SDK integration: Not started
+- Actual advertisement serving: Pending
+- 최초 광고 범위 후보: 콘텐츠 흐름 안에서 주요 운세 또는 결과 콘텐츠 뒤에 반응형 배너 1개
+- 빈 광고 fallback 원칙: 실제 로드 전 DOM/native view와 고정 여백을 표시하지 않음
+- 실패 광고 원칙: load failure, no-fill, offline, 동의 불가 상태에 빈 박스를 남기지 않음
+- 테스트 광고 원칙: 개발·QA는 Google 공식 테스트 광고만 사용하고 실제 ID와 테스트 기기 ID를 커밋하지 않음
+- UMP 계획: 동의 정보 업데이트, 필요 시 양식 표시, 광고 요청 가능 상태 확인, 개인정보 옵션 재진입점 순서
+- 개인정보처리방침 영향: 광고 목적, 식별자 처리 가능성, 맞춤/비맞춤 광고, 동의 변경, Google·파트너 처리 검토 Pending
+- Data safety 영향: SDK·버전 확정 후 공식 데이터 공개 문서와 merged manifest 기준으로 재검토 Pending
+- Android QA 계획: debug/실기기/동의/성공/실패/no-fill/offline/회전/복귀/route/safe-area 회귀 계획 기록
+- 후속 PR 계획: 정책 변경안, 구현 접근 검토, 테스트 SDK·UMP, 실기기 QA, release configuration, 내부 테스트, 출시 준비
+- production 코드 변경 없음
+- src/CSS 변경 없음
+- Android/Gradle/Capacitor 변경 없음
+- 개인정보처리방침 실제 변경 없음
+- dependency/package-lock 변경 없음
+- 실제 ID 또는 개인정보 추가 없음
+- npm ci 결과: PASS (158 packages added, 159 packages audited)
+- vulnerability audit 결과: 4 vulnerabilities (3 high, 1 critical); dependency/lockfile 변경 금지 범위이므로 이 PR에서 수정하지 않음
+- npm run build 결과: PASS
+- 기존 대형 chunk 경고: 있음 (`index` JavaScript chunk 664.02 kB); 기존 비차단 경고
+- npm run check:admob-integration-readiness-plan 결과: PASS
+- npm run check:post-launch-monitoring-initial-review 결과: PASS
+- npm run check:post-launch-monitoring-readiness 결과: PASS
+- npm run check:content-safety 결과: PASS
+- npm run check:share-text 결과: PASS
+- npm run check:doc-check-src-guardrails 결과: PASS
+- 기존 consent/rewarded-ad 회귀 검사 9개 결과: PASS
+- PR #397에서 완료된 empty advertisement placeholder 상태와 기존 post-launch initial-review checker의 stale expectation 동기화
+- production 변경이 아닌 기존 검증 기준선 정합성 수정
+
 ## Hide Empty Advertisement Placeholders
 
 - PR 목적: 실제 광고 SDK/데이터가 없는 상태에서 사용자에게 보이는 빈 광고 placeholder 숨김

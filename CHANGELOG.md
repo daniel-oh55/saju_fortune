@@ -53,6 +53,34 @@
 - Detailed Android device QA
 - First update planning
 
+<!-- ADMOB_INTEGRATION_READINESS_CHANGELOG_START -->
+
+## Docs
+
+- Added the AdMob integration readiness plan.
+- Recorded the current AdMob account, app verification, and app readiness states.
+- Defined initial advertising scope, consent, privacy, Data safety, Android QA, and release gates.
+
+## Checks
+
+- Added the AdMob integration readiness plan validation check.
+- Aligned the post-launch initial-review check with the completed empty advertisement placeholder state recorded by PR #397.
+
+## Pending
+
+- AdMob account verification
+- app-ads.txt verification
+- AdMob app verification
+- App readiness review
+- Initial ad placement finalization
+- Privacy policy and Data safety updates
+- AdMob and UMP SDK integration
+- Android advertising QA
+- Actual advertisement serving
+- First advertising update release
+
+<!-- ADMOB_INTEGRATION_READINESS_CHANGELOG_END -->
+
 ## Docs
 
 - Recorded Google Play review completion, production release live status, and Store installation verification.

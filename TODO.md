@@ -1,5 +1,36 @@
 # TODO
 
+## AdMob Integration Readiness Plan TODO
+
+- [x] AdMob integration readiness planning
+- [x] Current AdMob state separation
+- [x] Initial advertising scope candidate
+- [x] Empty and failed ad behavior principles
+- [x] Test-ad policy planning
+- [x] Consent and privacy flow planning
+- [x] Data safety impact planning
+- [x] Advertising ID and manifest impact planning
+- [x] Android advertising QA planning
+- [x] First advertising update release gates
+- [x] Readiness plan document
+- [x] Readiness plan validation script
+- [ ] AdMob account verification
+- [ ] AdMob app-ads.txt verification
+- [ ] AdMob app verification
+- [ ] AdMob app readiness review
+- [ ] Initial ad placement finalization
+- [ ] Implementation approach selection
+- [ ] Ad unit creation
+- [ ] AdMob Privacy & Messaging configuration
+- [ ] Privacy policy advertising update
+- [ ] Google Play Data safety update
+- [ ] AdMob SDK integration
+- [ ] UMP SDK integration
+- [ ] Official test ad verification
+- [ ] Android advertising QA
+- [ ] Actual advertisement serving
+- [ ] First advertising update release
+
 ## Empty Advertisement Placeholder UX TODO
 
 - [x] Empty advertisement placeholder UX implementation
