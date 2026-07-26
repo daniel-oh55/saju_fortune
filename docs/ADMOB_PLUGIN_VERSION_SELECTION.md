@@ -92,7 +92,9 @@ with this repository. The later implementation PR must install the exact plugin
 version without a caret and must replace the plugin's floating
 `playServicesAdsVersion` default with an exact, officially supported version
 after dependency-tree verification. The plugin's default is not approval to
-ship that floating version.
+ship that floating version. This floating Mobile Ads dependency is an
+implementation blocker until the exact version override and resolved Gradle
+dependency tree verification both pass.
 
 ## UMP and privacy options support
 
@@ -101,7 +103,7 @@ Plugin API names are not identical to the underlying Google UMP native API:
 | Required concept | Plugin 8.0.0 API/result | Underlying UMP concept |
 | --- | --- | --- |
 | Refresh consent information | `requestConsentInfo(options)` | `requestConsentInfoUpdate()` |
-| Show required consent form | inspect availability, then `showConsentForm()` | load/show required form |
+| Show required consent form | inspect `isConsentFormAvailable`, then `showConsentForm()` | `loadAndShowConsentFormIfRequired()`; not an identical single plugin API |
 | Ad request eligibility | returned `canRequestAds` | `ConsentInformation.canRequestAds()` |
 | Privacy-options requirement | returned `privacyOptionsRequirementStatus` | native requirement status |
 | Re-enter privacy options | `showPrivacyOptionsForm()` | native privacy-options form |
@@ -142,7 +144,8 @@ privacy-options UI, and targeted tests/checks.
 
 ## Manifest and Advertising ID impact
 
-Google requires the Mobile Ads App ID metadata; omitting it can crash startup.
+Google requires the `com.google.android.gms.ads.APPLICATION_ID` Mobile Ads App
+ID metadata; omitting it can crash startup.
 Mobile Ads 20.4.0 and later declares `AD_ID` in the library manifest, so it can
 appear through manifest merging even when absent from the app source manifest.
 The implementation PR must inspect the generated debug and release merged

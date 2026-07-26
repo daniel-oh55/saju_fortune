@@ -22,8 +22,12 @@ const errors = []
 const requireText = (content, text, label) => {
   if (!content.includes(text)) errors.push(`${label}: missing required text: ${text}`)
 }
+const requireTexts = (content, texts, label) => {
+  for (const text of texts) requireText(content, text, label)
+}
 
 const document = read(documentPath)
+const normalizedDocument = document.replace(/\s+/gu, ' ')
 const packageJson = JSON.parse(read('package.json'))
 const basePackageJson = JSON.parse(git('show', 'origin/main:package.json'))
 const changedFiles = new Set([
@@ -92,7 +96,7 @@ const requiredSections = [
   'Pending work',
 ]
 for (const section of requiredSections) requireText(document, `## ${section}`, documentPath)
-for (const status of [
+requireTexts(normalizedDocument, [
   'Plugin selection: Completed',
   'Plugin installation: Not started',
   'Mobile Ads SDK integration: Not started',
@@ -104,8 +108,8 @@ for (const status of [
   'Ad units: 0',
   'Actual ad requests: No data',
   'Actual ad serving: Pending',
-]) requireText(document, status, documentPath)
-for (const evidence of [
+], documentPath)
+requireTexts(normalizedDocument, [
   '@capacitor-community/admob@8.0.0',
   '`@capacitor/core ^8.0.0`',
   'Capacitor core | 8.4.0',
@@ -114,10 +118,88 @@ for (const evidence of [
   'npmjs.com/package/@capacitor-community/admob',
   'github.com/capacitor-community/admob',
   'developers.google.com/admob/android/privacy',
-]) requireText(document, evidence, documentPath)
+], documentPath)
 if (!/Selected exact version: `@capacitor-community\/admob@\d+\.\d+\.\d+`/u.test(document)) {
   errors.push(`${documentPath}: exact plugin version is not recorded`)
 }
+
+if (document.includes('\uFFFD')) {
+  errors.push(`${documentPath}: Unicode replacement character found`)
+}
+const mojibakePrivacyOptionsLabel =
+  '\u5A9B\uC496\uC524?\uBEA3\uB0AB \u8ADB?\u8351\uC88F\uAD8E ?\u317C\uC819'
+if (document.includes(mojibakePrivacyOptionsLabel)) {
+  errors.push(`${documentPath}: mojibake privacy-options label found`)
+}
+requireText(document, '개인정보 및 쿠키 설정', documentPath)
+
+requireTexts(normalizedDocument, [
+  'play-services-ads',
+  '24.9.+',
+  'floating Mobile Ads dependency',
+  'exact version override',
+  'resolved Gradle dependency tree verification',
+  'implementation blocker',
+  'The Mobile Ads dependency remains floating.',
+], `${documentPath}: floating dependency guard`)
+
+requireTexts(normalizedDocument, [
+  'Plugin API names are not identical to the underlying Google UMP native API',
+  'requestConsentInfo',
+  'requestConsentInfoUpdate',
+  'showConsentForm',
+  'loadAndShowConsentFormIfRequired',
+  'showPrivacyOptionsForm',
+  'resetConsentInfo',
+  'canRequestAds',
+  'privacyOptionsRequirementStatus',
+  'isConsentFormAvailable',
+  'debugGeography',
+  'testDeviceIdentifiers',
+  '`requestConsentInfo()` must run each app session.',
+  'A form error is not consent.',
+  'Reset, debug geography, and test device identifiers are test-only.',
+], `${documentPath}: UMP API mapping guard`)
+
+requireTexts(normalizedDocument, [
+  'Do not request any ad until the fresh consent update/form path reports `canRequestAds`.',
+  'Block duplicate initialization and duplicate requests.',
+  'duplicate-call guards',
+  'Debug geography or reset behavior can enter a release build.',
+], `${documentPath}: consent gate guard`)
+
+for (const [label, pattern] of [
+  ['ads without consent', /ads? (?:can|may) be requested without (?:fresh )?consent/iu],
+  [
+    'optional canRequestAds gate',
+    /canRequestAds (?:check|gate) (?:is )?(?:optional|unnecessary|not required)/iu,
+  ],
+  [
+    'form error treated as consent',
+    /form error (?:is|means|counts as|should be treated as) consent/iu,
+  ],
+]) {
+  if (pattern.test(normalizedDocument)) errors.push(`${documentPath}: forbidden claim: ${label}`)
+}
+
+requireTexts(normalizedDocument, [
+  'com.google.android.gms.ads.APPLICATION_ID',
+  'AD_ID',
+  'debug and release merged',
+  'dependency tree',
+  'Advertising ID declaration',
+  'Data safety',
+  'This PR adds neither metadata nor permission.',
+], `${documentPath}: manifest and Advertising ID guard`)
+
+requireTexts(normalizedDocument, [
+  "Google's official demo/test units",
+  "plugin's explicit test mode",
+  'Do not commit a production App ID, ad unit ID, or test-device identifier.',
+  'official test-ad QA',
+  'Never click a live ad during development.',
+  'Remove debug geography and device configuration from release builds.',
+], `${documentPath}: official test-ad guard`)
 
 const diff = git('diff', '--unified=0', 'origin/main', '--', ...allowedFiles)
 const forbiddenSecrets = [
@@ -127,7 +209,7 @@ const forbiddenSecrets = [
 for (const [label, pattern] of forbiddenSecrets) {
   if (pattern.test(diff)) errors.push(`added content: ${label} is forbidden`)
 }
-if (/\b(?:Plugin installation|Mobile Ads SDK integration|UMP integration|Android native configuration): Completed\b/u.test(document)) {
+if (/\b(?:Plugin installation|Mobile Ads SDK integration|UMP integration|Android native configuration|Official test-ad QA|Actual ad serving): Completed\b/u.test(document)) {
   errors.push(`${documentPath}: implementation completion is forbidden`)
 }
 
