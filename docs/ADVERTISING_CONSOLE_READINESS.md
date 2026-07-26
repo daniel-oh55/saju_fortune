@@ -252,10 +252,17 @@ Candidate locations for a future production entry point:
 - The existing privacy information screen
 - A settings area
 
-Candidate user-facing labels:
+Official guide-aligned consent revocation label:
 
-- 개인정보 및 광고 설정
-- 개인정보 및 쿠키 설정
+- `개인정보 및 쿠키 설정` is the consent revocation and privacy-options
+  re-entry label aligned with Google's "Privacy and cookie settings" guidance.
+
+Broader general settings title candidate:
+
+- `개인정보 및 광고 설정` may be considered only as the title of a broader
+  general settings screen.
+- `개인정보 및 광고 설정` is not an equivalent candidate for the officially
+  aligned UMP consent revocation entry point.
 
 Requirements:
 
@@ -269,6 +276,10 @@ Requirements:
 - Avoid visual emphasis that makes the control look like an advertisement.
 - Preserve the existing localStorage structure until an implementation PR
   explicitly designs a compatible migration.
+- Production UI implementation belongs to a follow-up PR; the current status
+  remains `Consent revocation UI: Not started`.
+- Verify the actual message and re-entry behavior for users in the EEA, UK, and
+  Switzerland only after UMP implementation and Android QA.
 
 Consent revocation UI: Not started
 
@@ -352,3 +363,4 @@ fields, SDK versions, APIs, and guidance can change.
 | Set up UMP SDK | https://developers.google.com/admob/android/privacy | 2026-07-26 | Consent update, form, privacy options, request gate, testing | Planned UMP sequence and official API names | Required for exact selected UMP version |
 | About Privacy & messaging | https://support.google.com/admob/answer/10107561 | 2026-07-26 | Available regulations and message management | Console message preparation scope | Required |
 | Guidelines for using Privacy & messaging | https://support.google.com/admob/answer/12226986 | 2026-07-26 | Message configuration and publication guidance | Console review, publication and user-choice planning | Required |
+| Add a consent revocation link to your app | https://support.google.com/admob/answer/10113915 | 2026-07-26 | In-app revocation link requirement | EEA, UK, and Switzerland users must be able to reopen the consent message and revoke a previous decision through an in-app menu link. | Required |

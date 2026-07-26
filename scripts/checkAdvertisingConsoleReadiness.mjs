@@ -49,6 +49,10 @@ const developmentLog = readProjectFile('DEVELOPMENT_LOG.md')
 const changelog = readProjectFile('CHANGELOG.md')
 const packageJsonText = readProjectFile('package.json')
 
+if (readiness.includes('\uFFFD')) {
+  errors.push('readiness document contains Unicode replacement characters')
+}
+
 const changedFiles = new Set([
   ...gitLines('diff', '--name-only', 'origin/main...HEAD'),
   ...gitLines('diff', '--name-only', '--cached'),
@@ -176,6 +180,7 @@ const forbiddenCompletionClaims = [
   ['Actual advertisement serving', 'Completed'],
   ['First advertising update release', 'Completed'],
   ['Store-installed production version link verification', 'Completed'],
+  ['Consent revocation UI', 'Completed'],
 ].map(([subject, state]) => `${subject}: ${state}`)
 
 for (const claim of forbiddenCompletionClaims) {
@@ -222,6 +227,7 @@ const officialUrls = [
   'developers.google.com/admob/android/privacy',
   'support.google.com/admob/answer/10107561',
   'support.google.com/admob/answer/12226986',
+  'support.google.com/admob/answer/10113915',
 ]
 for (const url of officialUrls) requireText(readiness, url, readinessPath)
 requireText(readiness, '2026-07-26', readinessPath)
@@ -254,6 +260,37 @@ for (const api of [
 }
 requireText(readiness, '`reset()` is testing only', readinessPath)
 requireText(readiness, 'Production use is prohibited', readinessPath)
+
+const revocationSection = extractHeadingSection(
+  readiness,
+  '## Privacy options and revocation UI requirement',
+)
+const normalizedRevocationSection = revocationSection.replace(/\s+/gu, ' ')
+for (const text of [
+  'Official guide-aligned consent revocation label',
+  '개인정보 및 쿠키 설정',
+  'Broader general settings title candidate',
+  '개인정보 및 광고 설정',
+  'is not an equivalent candidate for the officially aligned UMP consent revocation entry point',
+  'Consent revocation UI: Not started',
+]) {
+  requireText(
+    normalizedRevocationSection,
+    text,
+    'Privacy options and revocation UI requirement',
+  )
+}
+const candidateLabelList = revocationSection.match(
+  /Candidate user-facing labels:\s*\n((?:- .+\n?)+)/u,
+)?.[1]
+if (
+  candidateLabelList?.includes('개인정보 및 광고 설정') &&
+  candidateLabelList.includes('개인정보 및 쿠키 설정')
+) {
+  errors.push(
+    'Privacy options and revocation UI requirement: consent labels are presented as equivalent revocation candidates',
+  )
+}
 
 const consoleSection = extractHeadingSection(
   readiness,
