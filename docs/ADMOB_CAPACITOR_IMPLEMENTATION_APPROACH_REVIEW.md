@@ -165,7 +165,7 @@ The first advertising update must keep the existing rewarded mock contract and m
 - Test safety: Google official demo ad units or registered test devices; Android emulators are automatically test devices.
 - `AD_ID`: Legacy `20.4.0+` declares `com.google.android.gms.permission.AD_ID` in the SDK manifest, so the implementation PR must inspect the merged manifest and align Play Console/Data safety decisions.
 - Hardware acceleration: required for video ads in banner views.
-- Release state: supported, but Google labels the Legacy SDK maintenance mode and directs new work toward GMA Next-Gen.
+- Release state: Google currently lists both Legacy `v25.x` and `v24.x` as Supported and provides a migration path from the supported Legacy SDK to GMA Next-Gen.
 
 Sources: [Legacy setup](https://developers.google.com/admob/android/quick-start), [release notes](https://developers.google.com/admob/android/rel-notes), [deprecation schedule](https://developers.google.com/admob/android/deprecation), [banner guide](https://developers.google.com/admob/android/banner), [inline adaptive guide](https://developers.google.com/admob/android/banner/inline-adaptive), [test ads](https://developers.google.com/admob/android/test-ads).
 
@@ -220,6 +220,7 @@ Sources: [UMP setup](https://developers.google.com/admob/android/privacy), [UMP 
 
 - Android uses Google Mobile Ads Legacy, not Next-Gen.
 - Default Legacy version in the published `8.0.0` Android source: `24.9.+`.
+- The concern is not that Legacy `24.9.x` is already unsupported. Plugin `8.0.0` defaults to the floating `24.9.+` dependency instead of the reviewed current `25.4.0` release, and exact `25.4.0` override compatibility remains an implementation-PR gate.
 - Default UMP version: `4.0.0`.
 - Android defaults match the project baseline: min 24, compile/target 36, AGP 8.13.0 and Java 21.
 - Plugin adds Kotlin Gradle support and defaults Kotlin to `2.2.20`; the current app does not otherwise use Kotlin.
@@ -388,7 +389,7 @@ Scores are 1–5. Weighted total is `score × weight`; maximum is 500. The matri
 | Criterion | Weight | Candidate A | Candidate B | Candidate C |
 | --- | ---: | --- | --- | --- |
 | Capacitor version compatibility | 15 | 5 — v8 package matches Capacitor 8 | 5 — v8 peer range accepts Capacitor 8 | 5 — built against the current app |
-| Android SDK compatibility | 10 | 4 — Android baseline fits, but Legacy default is 24.9.x in maintenance mode | 2 — baseline fits, but plugin ships old beta while Google stable is 1.3.0 | 5 — exact current Legacy or Next-Gen version can be selected |
+| Android SDK compatibility | 10 | 4 — Android baseline fits, but the plugin defaults to the floating 24.9.+ Legacy dependency instead of the reviewed current 25.4.0 release | 2 — baseline fits, but plugin ships old beta while Google stable is 1.3.0 | 5 — exact current Legacy or Next-Gen version can be selected |
 | UMP and privacy options support | 15 | 5 — UMP 4.0.0, `canRequestAds` and privacy options exposed | 1 — no UMP bridge or privacy-options API | 5 — direct official UMP mapping is possible |
 | True inline adaptive support | 15 | 1 — anchored overlay only | 1 — anchored WebView sibling only | 5 — possible with custom native/DOM coordination |
 | Banner lifecycle and event support | 10 | 5 — load/fail/size plus hide/resume/remove/destroy | 2 — useful events and hide, but no public remove/destroy contract | 5 — can design the complete contract |
@@ -399,7 +400,7 @@ Scores are 1–5. Weighted total is `score × weight`; maximum is 500. The matri
 | Android QA burden | 5 | 3 — anchored layout and Android 15/16 issue require focused QA | 2 — SDK pin, UMP and cleanup require broader QA | 1 — widest route/scroll/lifecycle matrix |
 | **Weighted total** | **100** | **395/500 (79/100)** | **245/500 (49/100)** | **420/500 (84/100)** |
 
-Candidate C scores highly on achievable capability, especially true inline, but the score does not price schedule and ownership risk strongly enough to make it the default.
+Candidate C's 420/500 score is a capability ceiling, not current implementation readiness. Its lifecycle and test-safety scores assume the planned custom controls are implemented and verified successfully. Blocking gates, ownership cost and implementation proof override the score. Candidate A remains the lower-risk first anchored-banner candidate.
 
 ## 10. Blocking gates
 

@@ -89,6 +89,9 @@ const requiredReviewText = [
   'Technical recommendation: Completed',
   'Final implementation approval: Pending',
   'Plugin installation: Not started',
+  'Legacy `v25.x` and `v24.x` as Supported',
+  'floating `24.9.+` dependency instead of the reviewed current `25.4.0` release',
+  'exact `25.4.0` override compatibility remains an implementation-PR gate',
   'Inline Adaptive vs Anchored Native Banner',
   '@capacitor-community/admob',
   '@capgo/capacitor-admob',
@@ -98,6 +101,9 @@ const requiredReviewText = [
   'Test configuration design: Completed',
   'Actual configuration implementation: Pending',
   'Actual advertisement serving: Pending',
+  "Candidate C's 420/500 score is a capability ceiling, not current implementation readiness",
+  'lifecycle and test-safety scores assume the planned custom controls are implemented and verified successfully',
+  'Candidate A remains the lower-risk first anchored-banner candidate',
 ]
 for (const text of requiredReviewText) {
   requireText(review, text, paths.review)
@@ -176,6 +182,9 @@ const requiredDevelopmentLogText = [
   'No dependency or package-lock changes',
   'No actual IDs or personal information',
   'Test results',
+  'Legacy support status',
+  'Candidate A SDK risk',
+  'Score interpretation',
 ]
 for (const text of requiredDevelopmentLogText) {
   requireText(
@@ -287,19 +296,85 @@ for (const [label, content] of newContent) {
   }
 }
 
+const reviewCheckScriptName =
+  'check:admob-capacitor-implementation-approach-review'
 const expectedScript =
   'node scripts/checkAdMobCapacitorImplementationApproachReview.mjs'
+const dependencySectionNames = [
+  'dependencies',
+  'devDependencies',
+  'optionalDependencies',
+  'peerDependencies',
+]
+let packageJson
+let basePackageJson
+
 try {
-  const packageJson = JSON.parse(packageJsonText)
-  if (
-    packageJson.scripts?.[
-      'check:admob-capacitor-implementation-approach-review'
-    ] !== expectedScript
-  ) {
-    errors.push('package.json: missing or incorrect AdMob review check script')
-  }
+  packageJson = JSON.parse(packageJsonText)
 } catch (error) {
   errors.push(`package.json: invalid JSON (${error.message})`)
+}
+
+try {
+  const basePackageJsonText = execFileSync(
+    'git',
+    ['show', 'origin/main:package.json'],
+    {
+      cwd: projectRoot,
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'pipe'],
+    },
+  )
+  basePackageJson = JSON.parse(basePackageJsonText)
+} catch (error) {
+  errors.push(
+    `package.json: could not read origin/main:package.json (${error.message})`,
+  )
+}
+
+if (packageJson && basePackageJson) {
+  for (const sectionName of dependencySectionNames) {
+    if (
+      JSON.stringify(packageJson[sectionName]) !==
+      JSON.stringify(basePackageJson[sectionName])
+    ) {
+      errors.push(
+        'package.json: dependency sections changed in docs/check-only PR',
+      )
+      break
+    }
+  }
+
+  const baseScripts = basePackageJson.scripts ?? {}
+  const currentScripts = packageJson.scripts ?? {}
+  const addedScriptNames = Object.keys(currentScripts).filter(
+    (scriptName) =>
+      !Object.prototype.hasOwnProperty.call(baseScripts, scriptName),
+  )
+
+  if (
+    addedScriptNames.length !== 1 ||
+    addedScriptNames[0] !== reviewCheckScriptName
+  ) {
+    errors.push(
+      `package.json: only ${reviewCheckScriptName} may be added to scripts`,
+    )
+  }
+
+  for (const [scriptName, scriptCommand] of Object.entries(baseScripts)) {
+    if (
+      !Object.prototype.hasOwnProperty.call(currentScripts, scriptName) ||
+      currentScripts[scriptName] !== scriptCommand
+    ) {
+      errors.push(
+        `package.json: existing script changed or removed: ${scriptName}`,
+      )
+    }
+  }
+
+  if (currentScripts[reviewCheckScriptName] !== expectedScript) {
+    errors.push('package.json: missing or incorrect AdMob review check script')
+  }
 }
 
 const allowedChangedFiles = new Set([

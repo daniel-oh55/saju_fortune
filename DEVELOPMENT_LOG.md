@@ -9,8 +9,11 @@
 - Existing rewarded architecture: `rewardedAdService`, provider loader, placement configuration/resolver, mock provider, and unavailable SDK adapter were reviewed; the mock flow and unlock storage remain unchanged.
 - Candidates reviewed: `@capacitor-community/admob` 8.0.0, `@capgo/capacitor-admob` 8.1.12, and a local Capacitor native bridge.
 - SDK review: Google Mobile Ads Legacy 25.4.0, GMA Next-Gen 1.3.0, and UMP 4.0.0 were reviewed against official guidance and the current Android baseline.
+- Legacy support status: Google currently lists Legacy v25.x and v24.x as Supported and provides a migration path from the supported Legacy SDK to GMA Next-Gen.
+- Candidate A SDK risk: Legacy 24.9.x is not already unsupported; the risk is plugin 8.0.0's floating `24.9.+` default instead of the reviewed current `25.4.0` release, with exact `25.4.0` override compatibility still gated for the implementation PR.
 - Banner distinction: neither reviewed plugin provides true inline WebView content; both use an anchored native banner or native sibling/overlay behavior.
 - Evaluation scores: community plugin 395/500, Capgo plugin 245/500, local bridge 420/500; scores support the decision but do not replace blocking gates.
+- Score interpretation: Candidate C's 420/500 is a capability ceiling, not current implementation readiness; its lifecycle and test-safety scores assume the planned custom controls are implemented and verified successfully, while blocking gates, ownership cost, and implementation proof override the score. Candidate A remains the lower-risk first anchored-banner candidate.
 - Blocking gates: final placement behavior, exact plugin and Google SDK versions, Legacy versus Next-Gen choice, UMP ownership, test/release ID separation, lifecycle cleanup, and Android 15/16 navigation and safe-area QA remain pending.
 - Recommended candidate: conditionally prefer `@capacitor-community/admob` for the first route-scoped anchored banner.
 - Recommendation conditions: accept anchored rather than true inline behavior, pin exact compatible versions, integrate UMP, enforce test safeguards, and pass lifecycle plus Android 15/16 device QA.
