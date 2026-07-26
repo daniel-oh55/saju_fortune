@@ -1,5 +1,40 @@
 # DEVELOPMENT_LOG
 
+## Privacy Policy Production Verification
+
+- Verification date: 2026-07-26
+- Status: Docs/check-only
+- Website deployment source: `daniel-oh55/hym-lounge-website`, PR #3, merged and locally cleaned up.
+- Production privacy policy: `https://hymlounge.com/harupuli/privacy/`; HTTPS and public HTTP 200 after redirect to the `www` host.
+- Production app-ads.txt: `https://hymlounge.com/app-ads.txt`; HTTPS, root-path public HTTP 200, one publisher record, and app-ads.txt content unchanged from the verified deployment state.
+- Policy dates: first effective date 2026-07-13 and final modified date 2026-07-26.
+- Current public contact: `hym.lounge@gmail.com`.
+- App link investigation: `src/pages/SettingsPage.jsx` opens the internal `privacyInfo` view rendered by `src/pages/PrivacyInfoPage.jsx`; the production URL is not defined or opened.
+- App privacy policy URL match: Pending; a follow-up production UI PR is required.
+- Open behavior: neither an external browser nor a separate WebView URL is used; Capacitor Android and web both render the internal React page, with no external-link error fallback.
+- Shared link structure: no terms-of-use external-link structure was found in `src`.
+- Production policy review: conditional AdMob wording, Google LLC/provider disclosure, candidate data categories and purposes, core-feature availability, external-provider retention/deletion, and the Google privacy-policy link were confirmed.
+- Desktop rendering: Completed at 1440 px with no blocking visual issue observed.
+- Mobile rendering: Completed at 390 px with horizontal clipping observed in the title and policy-card content; no website/CSS change was made here.
+- Legal wording confirmation: Pending.
+- Privacy contact unification: Pending.
+- Google Mobile Ads SDK integration: Not started.
+- UMP SDK integration: Not started.
+- Ad units: 0.
+- Actual advertisement requests: No data.
+- Actual advertisement serving: Pending.
+- Tests:
+  - `npm ci`: PASS; 158 packages installed.
+  - `npm audit`: BLOCKED; the npm registry audit endpoint returned a compressed response that the installed npm client could not parse as JSON. No dependency or lockfile remediation was attempted.
+  - `npm run build`: PASS; the existing 664.02 kB JavaScript chunk warning remains.
+  - `npm run check:privacy-policy-production-verification`: PASS.
+  - Previous AdMob documentation checks: privacy/Data safety/consent and integration readiness PASS; the Capacitor implementation approach check FAILS because its PR-specific allowlist rejects this PR's new check script, document, and package script.
+  - Monitoring checks: FAIL because the legacy checks assume their historical changelog entry is the first `## Docs` section; this PR adds the requested new changelog section at the top.
+  - Content safety, share text, and document source guardrails: PASS.
+  - Existing privacy-policy link/page checks were run. Four legacy checks FAIL on the already-present `@capacitor/app` dependency, and the public-page check FAILS because its global historical-doc scan rejects milestones completed by later PRs.
+  - `git diff --check`: PASS.
+- Changed files: `CHANGELOG.md`, `DEVELOPMENT_LOG.md`, `TODO.md`, `docs/PRIVACY_POLICY_PRODUCTION_VERIFICATION.md`, `package.json`, and `scripts/checkPrivacyPolicyProductionVerification.mjs`.
+
 ## AdMob Capacitor Implementation Approach Review
 
 - Verification date: 2026-07-26
