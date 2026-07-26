@@ -1,5 +1,35 @@
 # TODO
 
+## Privacy Policy Production Verification TODO
+
+- [x] Website privacy policy update PR merge
+- [x] Website local cleanup
+- [x] Production privacy policy deployment
+- [x] Production privacy policy live verification
+- [x] Production app-ads.txt live verification
+- [x] Privacy policy dates verification
+- [x] Conditional advertising disclosure verification
+- [x] Google privacy-policy external-link verification
+- [x] Desktop and mobile rendering verification
+- [x] App privacy policy URL investigation
+- [ ] App privacy policy URL match
+- [ ] Mobile privacy-policy page overflow correction
+- [x] Validation script
+- [ ] Privacy contact unification
+- [ ] Legal wording confirmation
+- [ ] Google Play Data safety update
+- [ ] Advertising ID decision
+- [ ] AdMob Privacy & Messaging configuration
+- [ ] Consent revocation UI
+- [ ] Mobile Ads integration
+- [ ] UMP integration
+- [ ] Official test-ad verification
+- [ ] Android advertising QA
+- [ ] Ad unit creation
+- [ ] Production ad configuration
+- [ ] Actual advertisement serving
+- [ ] First advertising update release
+
 ## AdMob Capacitor Implementation Approach Review TODO
 
 - [x] Current Capacitor and Android baseline investigation

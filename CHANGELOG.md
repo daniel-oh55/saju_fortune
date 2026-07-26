@@ -1,5 +1,36 @@
 # CHANGELOG
 
+<!-- PRIVACY_POLICY_PRODUCTION_VERIFICATION_CHANGELOG_START -->
+## Docs
+
+- Recorded the production deployment of the updated Harupuli privacy policy.
+- Recorded live verification of the privacy policy and app-ads.txt URLs.
+- Recorded the app privacy-policy URL investigation and match result.
+- Preserved legal wording and privacy-contact confirmation as Pending.
+
+## Checks
+
+- Added the privacy-policy production verification check.
+
+## Pending
+
+- Privacy contact unification
+- Legal wording confirmation
+- Google Play Data safety update
+- Advertising ID decision
+- AdMob Privacy & Messaging configuration
+- Consent revocation UI
+- Mobile Ads and UMP integration
+- Test-ad verification
+- Android advertising QA
+- Ad unit creation
+- Production ad configuration
+- App production privacy-policy link
+- Mobile privacy-policy page overflow correction
+- Actual advertisement serving
+- First advertising update release
+<!-- PRIVACY_POLICY_PRODUCTION_VERIFICATION_CHANGELOG_END -->
+
 <!-- ADMOB_CAPACITOR_IMPLEMENTATION_APPROACH_REVIEW_CHANGELOG_START -->
 ## Docs
 

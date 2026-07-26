@@ -280,6 +280,7 @@
     "check:admob-integration-readiness-plan": "node scripts/checkAdMobIntegrationReadinessPlan.mjs",
     "check:admob-privacy-data-safety-consent-plan": "node scripts/checkAdMobPrivacyDataSafetyConsentPlan.mjs",
     "check:admob-capacitor-implementation-approach-review": "node scripts/checkAdMobCapacitorImplementationApproachReview.mjs",
+    "check:privacy-policy-production-verification": "node scripts/checkPrivacyPolicyProductionVerification.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

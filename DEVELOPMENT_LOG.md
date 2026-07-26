@@ -1,5 +1,97 @@
 # DEVELOPMENT_LOG
 
+## Privacy Policy Production Verification
+
+- Verification date: 2026-07-26
+- Status: Docs/check-only
+- Website deployment source: `daniel-oh55/hym-lounge-website`, PR #3, merged and locally cleaned up.
+- Production privacy policy: `https://hymlounge.com/harupuli/privacy/`; HTTPS and public HTTP 200 after redirect to the `www` host.
+- Production app-ads.txt: `https://hymlounge.com/app-ads.txt`; HTTPS, root-path public HTTP 200, one publisher record, and app-ads.txt content unchanged from the verified deployment state.
+- Policy dates: first effective date 2026-07-13 and final modified date 2026-07-26.
+- Current public contact: `hym.lounge@gmail.com`.
+- App link investigation: `src/pages/SettingsPage.jsx` opens the internal `privacyInfo` view rendered by `src/pages/PrivacyInfoPage.jsx`; the production URL is not defined or opened.
+- App privacy policy URL match: Pending; a follow-up production UI PR is required.
+- Open behavior: neither an external browser nor a separate WebView URL is used; Capacitor Android and web both render the internal React page, with no external-link error fallback.
+- Shared link structure: no terms-of-use external-link structure was found in `src`.
+- Production policy review: conditional AdMob wording, Google LLC/provider disclosure, candidate data categories and purposes, core-feature availability, external-provider retention/deletion, and the Google privacy-policy link were confirmed.
+- Desktop rendering: Completed at 1440 px with no blocking visual issue observed.
+- Mobile rendering: Completed at 390 px with horizontal clipping observed in the title and policy-card content; no website/CSS change was made here.
+- Mobile privacy-policy page overflow correction: Pending; this is follow-up work in the website repository.
+- Legal wording confirmation: Pending.
+- Privacy contact unification: Pending.
+- Google Play Data safety update: Pending.
+- Advertising ID decision: Pending.
+- AdMob Privacy & Messaging configuration: Pending.
+- Consent revocation UI: Not started.
+- Google Mobile Ads SDK integration: Not started.
+- UMP SDK integration: Not started.
+- Ad units: 0.
+- Actual advertisement requests: No data.
+- Actual advertisement serving: Pending.
+- First advertising update release: Pending.
+- Tests:
+  - `npm ci`: PASS; 158 packages installed.
+  - `npm run build`: PASS; the existing 664.02 kB JavaScript chunk warning remains.
+  - `npm run check:privacy-policy-production-verification`: PASS.
+  - Content safety, share text, and document source guardrails: PASS.
+  - `git diff --check`: PASS.
+- Non-passing check details:
+  - Command: `npm audit`
+    - Result: BLOCKED
+    - Classification: external npm registry or client parsing issue
+    - Cause: The npm registry audit endpoint returned a compressed response that the installed npm client could not parse as JSON. No dependency or lockfile remediation was attempted.
+    - Product regression: No
+    - Reproduced on origin/main: Not independently verified
+  - Command: `npm run check:admob-capacitor-implementation-approach-review`
+    - Result: FAIL
+    - Classification: PR-scoped allowlist incompatibility
+    - Cause: The PR #400 checker permits only its own added package script and file allowlist; PR #401 adds `check:privacy-policy-production-verification`, its new document, and its new checker, so this is a PR-scoped compatibility failure rather than a generic baseline failure.
+    - Product regression: No
+    - Reproduced on origin/main: Yes; independently executed against `origin/main`, where the PR-scoped checker also exits 1 because its expected PR #400 diff is no longer the active diff.
+  - Command: `npm run check:post-launch-monitoring-readiness`
+    - Result: FAIL
+    - Classification: historical changelog-position assumption
+    - Cause: The checker reads the first `## Docs` block as its historical entry. PR #401 adds a new top CHANGELOG section, so the current failure is a PR-scoped compatibility failure caused by the position assumption.
+    - Product regression: No
+    - Reproduced on origin/main: Yes; independently executed against `origin/main` with exit 1.
+  - Command: `npm run check:post-launch-monitoring-initial-review`
+    - Result: FAIL
+    - Classification: historical changelog-position assumption
+    - Cause: The checker reads the first `## Docs` block as its historical entry. PR #401 adds a new top CHANGELOG section, so the current failure is a PR-scoped compatibility failure caused by the position assumption.
+    - Product regression: No
+    - Reproduced on origin/main: Yes; independently executed against `origin/main` with exit 1.
+  - Command: `npm run check:privacy-policy-build-output`
+    - Result: FAIL
+    - Classification: existing dependency-policy mismatch
+    - Cause: The historical checker requires `@capacitor/app` to be absent, but the dependency is already present and unchanged in `origin/main`.
+    - Product regression: No
+    - Reproduced on origin/main: Yes; independently executed against `origin/main` with exit 1.
+  - Command: `npm run check:privacy-policy-live-url-result`
+    - Result: FAIL
+    - Classification: existing dependency-policy mismatch
+    - Cause: The historical checker requires `@capacitor/app` to be absent, but the dependency is already present and unchanged in `origin/main`.
+    - Product regression: No
+    - Reproduced on origin/main: Yes; independently executed against `origin/main` with exit 1.
+  - Command: `npm run check:privacy-policy-url-readiness`
+    - Result: FAIL
+    - Classification: existing dependency-policy mismatch
+    - Cause: The historical checker requires `@capacitor/app` to be absent, but the dependency is already present and unchanged in `origin/main`.
+    - Product regression: No
+    - Reproduced on origin/main: Yes; independently executed against `origin/main` with exit 1.
+  - Command: `npm run check:privacy-policy-url-verification`
+    - Result: FAIL
+    - Classification: existing dependency-policy mismatch
+    - Cause: The historical checker requires `@capacitor/app` to be absent, but the dependency is already present and unchanged in `origin/main`.
+    - Product regression: No
+    - Reproduced on origin/main: Yes; independently executed against `origin/main` with exit 1.
+  - Command: `npm run check:public-privacy-policy-page`
+    - Result: FAIL
+    - Classification: historical document-state assumption
+    - Cause: The checker scans all of `TODO.md`, `DEVELOPMENT_LOG.md`, and `CHANGELOG.md` and rejects milestones that were legitimately completed by later PRs.
+    - Product regression: No
+    - Reproduced on origin/main: Yes; independently executed against `origin/main` with exit 1.
+- Changed files: `CHANGELOG.md`, `DEVELOPMENT_LOG.md`, `TODO.md`, `docs/PRIVACY_POLICY_PRODUCTION_VERIFICATION.md`, `package.json`, and `scripts/checkPrivacyPolicyProductionVerification.mjs`.
+
 ## AdMob Capacitor Implementation Approach Review
 
 - Verification date: 2026-07-26
