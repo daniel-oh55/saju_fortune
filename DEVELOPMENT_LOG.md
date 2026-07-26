@@ -1,5 +1,66 @@
 # DEVELOPMENT_LOG
 
+## AdMob Privacy, Data Safety, and Consent Plan
+
+- PR 목적: AdMob 앱 승인과 앱 단위 광고 게재 제한 해제 결과를 기록하고 광고 SDK 도입 전 정책·동의·데이터 보안 변경안 설계
+- Verification date: 2026-07-26
+- Status: Docs/check-only
+- AdMob app verification: Completed
+- App readiness review: Completed — Approved
+- App-level ad serving limit: Lifted
+- AdMob account verification: In progress
+- Ad units: 0
+- Google Mobile Ads SDK integration: Not started
+- UMP SDK integration: Not started
+- Actual advertisement requests: No data
+- Actual advertisement serving: Pending
+- app-ads.txt verification: Completed
+- Privacy baseline investigation: Completed
+- production 개인정보처리방침 위치: `public/privacy-policy/index.html`
+- 앱 내부 개인정보 안내: `src/pages/PrivacyInfoPage.jsx`의 `privacyInfo` 라우트
+- HYM LOUNGE 개인정보처리방침 URL 참조: 저장소에서 찾지 못함; 별도 `app-ads.txt` URL만 확인
+- 현재 Data safety 기준: `docs/GOOGLE_PLAY_DATA_SAFETY_INPUT_RECORD.md`; 광고 SDK가 없던 앱 버전의 Console 입력 기록
+- 현재 수집·공유 기준: localStorage 중심, 서버 DB·로그인·광고/분석/결제 SDK 전송 없음
+- 기존 consent 구조: `harupuli_consent_preferences_v1`에 앱 내부 사전 선택 저장; UMP 법적 광고 동의와 동일하지 않음
+- 기존 rewarded-ad 구조: mock provider가 기본이며 SDK adapter는 `sdk_unavailable` scaffold
+- 실제 광고 SDK: 없음
+- 실제 광고 요청: 없음
+- 광고 SDK 데이터 유형 후보: Approximate location, App interactions, Diagnostics, Device or other IDs
+- Data safety response draft: Completed
+- Data safety final answers: Pending
+- Play Console Data safety submission: Pending
+- Advertising ID collection decision: Pending
+- AD_ID merged manifest review: Pending
+- Privacy policy change draft: Completed
+- Legal wording review: Pending
+- Consent flow design: Completed
+- UMP integration 및 Privacy & Messaging configuration: Pending
+- consent failure fallback: 핵심 운세 기능 유지, 광고 미요청, 빈 광고 UI 미표시
+- 개인정보 옵션 진입점 후보: `내정보 → 개인정보 및 광고 설정`
+- Target audience/Families status confirmation: Pending
+- AdMob 및 Google Play 수동 Console 작업: Pending
+- implementation 및 첫 광고 포함 release gates: 기록 완료, 실제 수행 항목은 Pending
+- 후속 PR 계획: 구현 접근 검토, production 정책, Data safety, 테스트 광고·UMP, Android QA, release configuration, 내부 테스트, 출시 준비
+- production privacy policy 변경 없음
+- src/CSS 변경 없음
+- Android/Gradle/Capacitor 변경 없음
+- dependency/package-lock 변경 없음
+- 운세 로직·routing·schemaVersion·기존 localStorage key 변경 없음
+- 실제 ID 또는 개인정보 추가 없음
+- npm ci 결과: PASS (158 packages added, 159 packages audited)
+- vulnerability audit 결과: 4 vulnerabilities (3 high, 1 critical); dependency/lockfile 변경 금지 범위이므로 이 PR에서 수정하지 않음
+- npm run build 결과: PASS
+- 기존 대형 chunk 경고: 있음 (`index` JavaScript chunk 664.02 kB); 기존 비차단 경고
+- npm run check:admob-privacy-data-safety-consent-plan 결과: PASS
+- npm run check:admob-integration-readiness-plan 결과: PASS
+- npm run check:post-launch-monitoring-initial-review 결과: PASS
+- npm run check:post-launch-monitoring-readiness 결과: PASS
+- npm run check:content-safety 결과: PASS
+- npm run check:share-text 결과: PASS
+- npm run check:doc-check-src-guardrails 결과: PASS
+- 기존 consent/rewarded-ad 회귀 검사 9개 결과: PASS
+- git diff --check 결과: PASS
+
 ## AdMob Integration Readiness Plan
 
 - PR 목적: 실제 광고 SDK 도입 전 현재 상태, UX 원칙, 정책 영향, Android QA와 출시 게이트 기록
