@@ -1,5 +1,40 @@
 # TODO
 
+## AdMob Privacy, Data Safety, and Consent Plan TODO
+
+- [x] AdMob app approval result recording
+- [x] App-level ad serving limit result recording
+- [x] Privacy baseline investigation
+- [x] Mobile Ads SDK data disclosure candidate
+- [x] Google Play Data safety response draft
+- [x] Advertising ID decision gate
+- [x] Privacy policy advertising change draft
+- [x] UMP consent flow design
+- [x] Consent fallback principles
+- [x] Privacy options entry point candidate
+- [x] Target audience and Families review plan
+- [x] Implementation and release gates
+- [x] Validation script
+- [ ] AdMob account verification
+- [ ] Ad unit creation
+- [ ] Exact SDK version selection
+- [ ] Implementation approach selection
+- [ ] Advertising ID collection decision
+- [ ] Merged manifest AD_ID review
+- [ ] AdMob Privacy & Messaging configuration
+- [ ] Privacy policy legal wording review
+- [ ] Privacy policy production deployment
+- [ ] Google Play Data safety final answers
+- [ ] Google Play Data safety submission
+- [ ] Target audience and Families status confirmation
+- [ ] Google Mobile Ads SDK integration
+- [ ] UMP SDK integration
+- [ ] Privacy options UI implementation
+- [ ] Official test ad verification
+- [ ] Consent Android QA
+- [ ] Actual advertisement serving
+- [ ] First advertising update release
+
 ## AdMob Integration Readiness Plan TODO
 
 - [x] AdMob integration readiness planning

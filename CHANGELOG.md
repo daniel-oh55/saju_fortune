@@ -1,5 +1,30 @@
 # CHANGELOG
 
+## Docs
+
+- Recorded the completed AdMob app verification and approval result.
+- Added the AdMob privacy, Data safety, and consent plan.
+- Added privacy policy change candidates, Data safety response candidates, UMP flow, Advertising ID gates, and release requirements.
+
+## Checks
+
+- Added the AdMob privacy, Data safety, and consent plan validation check.
+
+## Pending
+
+- AdMob account verification
+- Ad unit creation
+- SDK version and implementation selection
+- Advertising ID decision
+- Privacy & Messaging configuration
+- Privacy policy production update
+- Google Play Data safety submission
+- Target audience and Families status confirmation
+- Google Mobile Ads and UMP SDK integration
+- Android consent and advertising QA
+- Actual advertisement serving
+- First advertising update release
+
 ## UI
 
 - Hid the empty advertisement placeholder on the home screen while no real advertising integration exists.
@@ -19,7 +44,7 @@
 - Android advertising QA
 - First update release
 
-## Docs
+## Historical Docs
 
 - Recorded the initial manual Google Play post-launch monitoring review.
 - Recorded policy status, Android vitals, ratings, reviews, app statistics, and support inquiry observations.
