@@ -1,5 +1,33 @@
 # CHANGELOG
 
+## Advertising Console Readiness
+
+### Added
+
+- Added a pre-implementation readiness document for Google Play Data safety, Advertising ID, AdMob Privacy & Messaging, and UMP.
+- Added a current-production versus planned-advertising-update data handling worksheet.
+- Added a future Console execution checklist.
+- Recorded the user-confirmed Galaxy S23 Ultra Debug APK privacy-policy external-browser QA result.
+
+### Checks
+
+- Added a targeted advertising-console-readiness check.
+- Verified that this PR does not modify production source, Android native files, dependencies, lockfiles, ad identifiers, or Console configuration.
+
+### Pending
+
+- Store-installed production version privacy-link verification
+- Final Advertising ID decision
+- Google Play Data safety Console update
+- AdMob Privacy & Messaging configuration
+- Consent revocation UI
+- Mobile Ads and UMP integration
+- Official test-ad verification
+- Android advertising QA
+- Ad unit creation
+- Actual advertisement serving
+- First advertising update release
+
 <!-- PRIVACY_POLICY_EXTERNAL_LINK_CHANGELOG_START -->
 ## Changed
 

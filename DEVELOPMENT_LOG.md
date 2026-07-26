@@ -1,5 +1,57 @@
 # DEVELOPMENT_LOG
 
+## Advertising Console Readiness
+
+- Work date: 2026-07-26
+- PR type: docs/check-only
+- Starting main HEAD: `547467a3ec3b04068dab4d730deeead86dd91c06`
+- PR #402 merge verification: Merged; merge commit equals the starting `main` HEAD.
+- PR #402 Android Debug APK QA result: User-confirmed external-browser and Android back-to-app behavior succeeded.
+- QA device: Galaxy S23 Ultra
+- QA build type: Android Debug APK
+- QA verification source: User-confirmed manual QA
+- QA verification date: 2026-07-26
+- QA boundary: This was not a Google Play store-installed updated version; advertising and consent flow were not tested.
+- Android device external-browser QA: Completed
+- Store-installed production version link verification: Pending
+- Current production advertising state: no Mobile Ads SDK, UMP SDK, ad unit, actual request, or actual serving in the repository baseline.
+- Current AD_ID inspection result: no source manifest permission, direct API use, Google Mobile Ads dependency, AdMob App ID, or ad unit ID found. After `npm ci`, web build, and Capacitor sync in an ASCII-path temporary `origin/main` worktree, `:app:processDebugMainManifest` passed and the generated debug merged manifest contained neither `AD_ID` nor the AdMob App ID metadata.
+- Data safety current/planned split: current repository behavior is recorded separately from a draft based on the future exact SDK.
+- Advertising ID decision: Pending
+- Google Play Data safety update: Pending
+- AdMob Privacy & Messaging configuration: Pending
+- UMP SDK integration: Not started
+- Consent revocation UI: Not started
+- AdMob account verification: In progress
+- Ad units: 0
+- Google Mobile Ads SDK integration: Not started
+- Actual advertisement requests: No data
+- Actual advertisement serving: Pending
+- First advertising update release: Pending
+- Official source review date: 2026-07-26
+- New readiness document: `docs/ADVERTISING_CONSOLE_READINESS.md`
+- New check script: `scripts/checkAdvertisingConsoleReadiness.mjs`
+- Changed files: `CHANGELOG.md`, `DEVELOPMENT_LOG.md`, `TODO.md`, `docs/ADVERTISING_CONSOLE_READINESS.md`, `package.json`, and `scripts/checkAdvertisingConsoleReadiness.mjs`.
+- Tests:
+  - `npm ci`: PASS; 158 packages installed.
+  - `npm audit`: FAIL; 4 existing lockfile findings (3 high and 1 critical) in `brace-expansion`, `postcss`, `tar`, and `vite`. Dependencies and `package-lock.json` were not changed.
+  - `npm run build`: PASS; the existing 664.45 kB large-chunk warning remains.
+  - `npm run check:advertising-console-readiness`: PASS.
+  - `npm run check:content-safety`: PASS.
+  - `npm run check:share-text`: PASS.
+  - `npm run check:doc-check-src-guardrails`: PASS.
+  - `npm run check:admob-integration-readiness-plan`: PASS.
+  - `npm run check:admob-privacy-data-safety-consent-plan`: PASS.
+  - `npm run check:admob-capacitor-implementation-approach-review`: FAIL; its historical PR allowlist rejects the new package script and the two new readiness files. It also fails on a clean `origin/main`.
+  - `npm run check:privacy-policy-production-verification`: FAIL; its historical PR allowlist expects its own document/check files to be the active diff and rejects this PR's new script/files. It also fails on a clean `origin/main`.
+  - `npm run check:privacy-policy-external-link`: FAIL; its historical PR allowlist rejects this PR's package script and two new files. It passes on clean `origin/main`, so this is an expected cross-PR allowlist incompatibility rather than a product regression.
+  - Temporary ASCII-path `origin/main` Android verification: PASS after `npm ci`, `npm run build`, `npx cap sync android`, and `gradlew.bat :app:processDebugMainManifest`; generated debug merged manifest had `AD_ID=False` and `ADMOB_APP_ID=False`.
+  - `git diff --check`: PASS.
+- Unchanged production scope: `src`, `public`, Android native files, Capacitor and Vite configuration, dependencies, lockfile, routing, storage, schema, fortune logic, advertising identifiers, website policy, and app-ads.txt.
+- Actual Console actions: None
+- Actual SDK actions: None
+- Actual advertising requests: No data
+
 ## Privacy Policy External Link
 
 - Work date: 2026-07-26

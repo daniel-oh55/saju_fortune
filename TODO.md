@@ -1,5 +1,41 @@
 # TODO
 
+## Advertising Console Readiness TODO
+
+- [x] Current repository advertising dependency inventory
+- [x] Current manifest Advertising ID inspection
+- [x] Current production versus planned update separation
+- [x] Google Play Data safety readiness worksheet
+- [x] Advertising ID decision options documented
+- [x] AdMob Privacy & Messaging readiness checklist
+- [x] Planned UMP consent flow documented
+- [x] Console execution checklist
+- [x] PR #402 Android Debug APK privacy-link QA result recorded
+- [x] Advertising console readiness check
+- [x] Build
+- [ ] Store-installed production version privacy-link verification
+- [ ] Mobile privacy-policy page overflow correction
+- [ ] Privacy contact unification
+- [ ] Legal wording confirmation
+- [ ] Final Advertising ID decision
+- [ ] Google Play Data safety Console update
+- [ ] Google Play Advertising ID declaration
+- [ ] AdMob Privacy & Messaging configuration
+- [ ] AdMob consent message creation
+- [ ] AdMob consent message publication
+- [ ] Consent revocation UI
+- [ ] Google Mobile Ads SDK integration
+- [ ] UMP SDK integration
+- [ ] Official test-ad verification
+- [ ] Android advertising QA
+- [ ] Ad unit creation
+- [ ] Production ad configuration
+- [ ] Release AAB generation
+- [ ] Google Play advertising update upload
+- [ ] Store-installed advertising update verification
+- [ ] Actual advertisement serving
+- [ ] First advertising update release
+
 ## Privacy Policy External Link TODO
 
 - [x] Existing privacy information screen investigation
