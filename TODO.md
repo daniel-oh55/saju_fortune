@@ -1,5 +1,31 @@
 # TODO
 
+## AdMob Plugin Version Selection TODO
+
+- [x] Current Capacitor and Android baseline investigation
+- [x] Plugin candidate comparison
+- [x] Exact compatible version selection
+- [x] Android impact analysis
+- [x] UMP and privacy-options API confirmation
+- [x] Test-ad strategy
+- [x] Implementation PR entry and blocking conditions
+- [x] Targeted check
+- [x] Build
+- [ ] Plugin installation
+- [ ] Android native configuration
+- [ ] Mobile Ads SDK integration
+- [ ] UMP integration
+- [ ] Privacy options UI
+- [ ] Privacy policy advertising update
+- [ ] European regulations message publication
+- [ ] Google Play Data safety update
+- [ ] Advertising ID declaration
+- [ ] Official test-ad QA
+- [ ] Production ad unit creation
+- [ ] Actual ad requests
+- [ ] Actual ad serving
+- [ ] First advertising update release
+
 ## Advertising Console Readiness TODO
 
 - [x] Current repository advertising dependency inventory
