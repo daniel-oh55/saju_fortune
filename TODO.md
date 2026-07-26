@@ -1,5 +1,31 @@
 # TODO
 
+## Privacy Policy External Link TODO
+
+- [x] Existing privacy information screen investigation
+- [x] Production privacy-policy URL source match
+- [x] External privacy-policy link implementation
+- [x] Web click verification
+- [x] Build
+- [x] Privacy-policy external-link check
+- [ ] Android device external-browser QA
+- [ ] Store-installed production version link verification
+- [ ] Mobile privacy-policy page overflow correction
+- [ ] Privacy contact unification
+- [ ] Legal wording confirmation
+- [ ] Google Play Data safety update
+- [ ] Advertising ID decision
+- [ ] AdMob Privacy & Messaging configuration
+- [ ] Consent revocation UI
+- [ ] Mobile Ads integration
+- [ ] UMP integration
+- [ ] Official test-ad verification
+- [ ] Android advertising QA
+- [ ] Ad unit creation
+- [ ] Production ad configuration
+- [ ] Actual advertisement serving
+- [ ] First advertising update release
+
 ## Privacy Policy Production Verification TODO
 
 - [x] Website privacy policy update PR merge

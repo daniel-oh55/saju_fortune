@@ -1,5 +1,27 @@
 # CHANGELOG
 
+<!-- PRIVACY_POLICY_EXTERNAL_LINK_CHANGELOG_START -->
+## Changed
+
+- Added a link from the in-app privacy information screen to the production Harupuli privacy policy.
+- Preserved the existing in-app privacy summary.
+- Kept Android device and store-installed-version verification Pending.
+
+## Checks
+
+- Added targeted verification for the production privacy-policy external link.
+
+## Pending
+
+- Android device external-browser QA
+- Store-installed production version link verification
+- Mobile privacy-policy page overflow correction
+- Privacy contact and legal wording confirmation
+- Google Play Data safety and Advertising ID decisions
+- Mobile Ads and UMP integration
+- Actual advertisement serving
+<!-- PRIVACY_POLICY_EXTERNAL_LINK_CHANGELOG_END -->
+
 <!-- PRIVACY_POLICY_PRODUCTION_VERIFICATION_CHANGELOG_START -->
 ## Docs
 

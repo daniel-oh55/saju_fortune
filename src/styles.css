@@ -3044,6 +3044,26 @@ input:disabled {
   font-size: 0.95rem;
 }
 
+.privacy-policy-external-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: start;
+  min-height: 46px;
+  border: 1px solid rgba(34, 52, 71, 0.12);
+  border-radius: 18px;
+  padding: 0 16px;
+  color: var(--color-deep-navy);
+  background: rgba(255, 253, 248, 0.86);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.privacy-policy-external-link:focus-visible {
+  outline: 3px solid rgba(184, 150, 78, 0.38);
+  outline-offset: 2px;
+}
+
 .privacy-info-card-list {
   display: flex;
   flex-wrap: wrap;

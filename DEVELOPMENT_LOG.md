@@ -1,5 +1,33 @@
 # DEVELOPMENT_LOG
 
+## Privacy Policy External Link
+
+- Work date: 2026-07-26
+- PR type: production UI
+- Existing component: `src/pages/PrivacyInfoPage.jsx`
+- Existing menu and view: `src/pages/SettingsPage.jsx` opens the internal `privacyInfo` view rendered by `src/App.jsx`.
+- Production URL: `https://hymlounge.com/harupuli/privacy/`
+- Implementation: semantic anchor added to the existing in-app privacy information screen.
+- External-link security: `target="_blank"` with `rel="noopener noreferrer"`.
+- Web behavior verification: Completed in local Chrome at a 390 x 844 mobile viewport. The label and existing privacy content remained visible, keyboard focus worked, the link opened the production URL in a separate page context, the source app view remained unchanged, back navigation returned to 내정보, and no horizontal overflow was introduced.
+- Production URL response: HTTP 200 after redirect to `https://www.hymlounge.com/harupuli/privacy/`.
+- Android device external-browser QA: Pending.
+- Store-installed production version link verification: Pending.
+- Existing in-app privacy summary: Preserved.
+- Changed files: `src/pages/PrivacyInfoPage.jsx`, `src/styles.css`, `scripts/checkPrivacyPolicyExternalLink.mjs`, `package.json`, `TODO.md`, `DEVELOPMENT_LOG.md`, and `CHANGELOG.md`.
+- Tests:
+  - `npm ci`: PASS; 158 packages installed.
+  - `npm audit`: FAIL; 4 existing dependency findings (3 high and 1 critical). No dependency or lockfile changes were made.
+  - `npm run build`: PASS; the existing large-chunk warning remains.
+  - `npm run check:privacy-policy-external-link`: PASS.
+  - `npm run check:content-safety`: PASS.
+  - `npm run check:share-text`: PASS.
+  - `npm run check:doc-check-src-guardrails`: PASS.
+  - Local Chrome mobile-view web click verification: PASS.
+  - `git diff --check`: PASS.
+- Unchanged scope: fortune calculation and result generation, routing, schema and storage, Android native files, Capacitor and Vite configuration, dependencies and lockfile, advertising and UMP, Google Play and AdMob Console, website privacy-policy content and layout, and app-ads.txt.
+- Mobile privacy-policy page overflow correction: Pending in the separate website repository.
+
 ## Privacy Policy Production Verification
 
 - Verification date: 2026-07-26
