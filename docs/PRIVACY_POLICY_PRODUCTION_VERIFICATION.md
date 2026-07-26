@@ -28,6 +28,7 @@ PR type: docs/check-only
 - Actual advertisement requests: No data
 - Actual advertisement serving: Pending
 - First advertising update release: Pending
+- Mobile privacy-policy page overflow correction: Pending
 
 ## Production privacy policy verification
 
@@ -117,6 +118,12 @@ Relevant source paths and behavior:
 
 The internal guide is not treated as proof of an external link match. No app
 link code, routing, UI, or fallback behavior is changed in this PR.
+
+## Test result interpretation
+
+- Required PR #401 verification, build, content-safety, share-text, and document source-guardrail checks: PASS.
+- Compatibility and historical-assumption checks with non-passing results: recorded individually in `DEVELOPMENT_LOG.md`.
+- A non-passing compatibility or historical-assumption check is not reported as an overall test pass.
 
 ## Status interpretation rules
 

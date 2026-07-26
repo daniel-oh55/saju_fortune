@@ -13,6 +13,7 @@
 - [x] Desktop and mobile rendering verification
 - [x] App privacy policy URL investigation
 - [ ] App privacy policy URL match
+- [ ] Mobile privacy-policy page overflow correction
 - [x] Validation script
 - [ ] Privacy contact unification
 - [ ] Legal wording confirmation
