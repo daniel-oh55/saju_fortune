@@ -53,7 +53,7 @@ const requiredTodoSnippets = [
   '- [ ] Post-install functional QA',
   '- [ ] Detailed Android device QA',
   '- [ ] R8 optimization implementation',
-  '- [ ] Empty advertisement placeholder UX implementation',
+  '- [x] Empty advertisement placeholder UX implementation',
   '- [ ] AdMob integration planning',
   '- [ ] AdMob SDK integration',
   '- [ ] Actual advertisement serving',
