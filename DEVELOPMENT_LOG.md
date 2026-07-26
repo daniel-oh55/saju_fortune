@@ -1,5 +1,58 @@
 # DEVELOPMENT_LOG
 
+## AdMob Plugin Version Selection
+
+- Work date: 2026-07-26
+- PR type: docs/check-only
+- Starting main HEAD: `1139911e6d61a0eb2474e81a22728161d1303a09`
+- PR #403 verification: Merged; its merge commit equals the starting `main` HEAD.
+- Capacitor baseline: core, Android, and CLI 8.4.0; React 18.3.1; Vite 6.4.2; CI Node 22.
+- Android SDK baseline: min 24, compile 36, target 36; AGP 8.13.0; Gradle 8.14.3; CI JDK 21; Java source/target 21.
+- Kotlin baseline: no app Kotlin source or app Kotlin plugin; the selected plugin uses Kotlin 2.2.20 internally.
+- Candidate comparison: plugin 8.0.0 versus stable prior majors 7.2.0 and 6.2.0.
+- Selected exact version: `@capacitor-community/admob@8.0.0`.
+- Compatibility evidence: plugin dependency `@capacitor/core ^8.0.0`, Node 22+, Android SDK 24/36, AGP 8.13.0, and Java 21 align with the project.
+- Android SDK dependency: plugin default `play-services-ads` is floating `24.9.+`; an exact supported override and dependency-tree verification are implementation blockers.
+- UMP support: plugin explicitly includes UMP 4.0.0 and exposes consent information, `canRequestAds`, test geography, and test-device options.
+- Privacy options support: requirement status and `showPrivacyOptionsForm()` are exposed.
+- Expected implementation scope: exact dependency and lockfile, Capacitor sync, manifest App ID metadata, Android resource/injection strategy, exact Gradle versions, app adapter/coordinator, privacy-options UI, and checks.
+- Manifest/Advertising ID: App ID metadata is required; Mobile Ads can merge `AD_ID` from its library manifest, so debug/release merged manifests and Play declarations must be rechecked.
+- Test-ad strategy: official demo/test ads or plugin test mode only; no production ID, committed test-device ID, debug geography in release, or request before `canRequestAds`.
+- Google Play production targeted countries/regions: 1.
+- Targeted country: South Korea.
+- Verification source: User-provided Google Play Console screenshot.
+- Verification date: 2026-07-26.
+- No country/region setting was changed.
+- United States is not currently targeted.
+- EEA, UK, and Switzerland are not currently targeted.
+- European regulations message remains Draft because display can depend on the user's current region.
+- Plugin selection: Completed
+- Plugin installation: Not started
+- Mobile Ads SDK integration: Not started
+- UMP integration: Not started
+- Android native configuration: Not started
+- European regulations message: Draft
+- European regulations message publication: Not started
+- US state regulations message: Not started
+- Ad units: 0
+- Actual ad requests: No data
+- Actual ad serving: Pending
+- Completed documentation: baseline, candidates, exact selection, Android impact, UMP/privacy options, test strategy, entry gates, blocking conditions, and rollback.
+- Pending: plugin/native/Mobile Ads/UMP/privacy UI implementation, policy and Data safety updates, European message publication, Advertising ID declaration, official test QA, production units, requests, serving, and first advertising release.
+- Actual Console changes: None
+- Actual dependency or SDK changes: None
+- Actual Android native changes: None
+- Tests:
+  - `npm ci`: PASS; 158 packages installed.
+  - `npm audit`: FAIL; 4 existing lockfile findings (3 high and 1 critical) in `brace-expansion`, `postcss`, `tar`, and `vite`. Dependencies and `package-lock.json` were not changed.
+  - `npm run build`: PASS; the existing 664.45 kB large-chunk warning remains.
+  - `npm run check:admob-plugin-version-selection`: PASS.
+  - `npm run check:advertising-console-readiness`: FAIL; the PR #403 checker requires its own document/check files to be the active diff and rejects this PR's new package script and files. It also fails on clean `origin/main` because no PR #403 diff is active. This is a historical PR-scoped allowlist incompatibility, not a product regression.
+  - `npm run check:content-safety`: PASS.
+  - `npm run check:share-text`: PASS.
+  - `npm run check:doc-check-src-guardrails`: PASS.
+  - `git diff --check`: PASS.
+
 ## Advertising Console Readiness
 
 - Work date: 2026-07-26

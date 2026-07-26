@@ -1,5 +1,30 @@
 # CHANGELOG
 
+## AdMob Plugin Version Selection
+
+### Docs
+
+- Recorded the current Capacitor and Android baseline.
+- Compared the compatible AdMob plugin major with stable prior majors.
+- Selected exact baseline `@capacitor-community/admob@8.0.0` for a later implementation PR.
+- Documented UMP, privacy options, Android native, manifest, Advertising ID, consent-flow, and official test-ad impacts.
+- Recorded that Google Play production currently targets South Korea only while the European regulations message remains Draft.
+
+### Checks
+
+- Added a targeted docs/check-only scope and version-selection check.
+- Kept dependencies, lockfile, production source, Android native files, configuration, identifiers, and Consoles unchanged.
+
+### Pending
+
+- Plugin installation and Android native configuration
+- Mobile Ads and UMP integration
+- Privacy options UI and privacy-policy advertising update
+- European regulations message publication
+- Data safety and Advertising ID updates
+- Official test-ad QA and production ad units
+- Actual ad requests, serving, and first advertising update release
+
 ## Advertising Console Readiness
 
 ### Added
