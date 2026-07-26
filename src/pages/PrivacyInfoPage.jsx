@@ -135,6 +135,19 @@ function PrivacyInfoPage({ onNavigate, consentPreferences }) {
       </section>
 
       <section className="privacy-info-section">
+        <h2>전체 개인정보처리방침</h2>
+        <p>최신 개인정보처리방침 전문은 웹페이지에서 확인할 수 있습니다.</p>
+        <a
+          className="privacy-policy-external-link"
+          href="https://hymlounge.com/harupuli/privacy/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          전체 개인정보처리방침 보기
+        </a>
+      </section>
+
+      <section className="privacy-info-section">
         <h2>참고 문서</h2>
         <div className="privacy-info-card-list">
           {referenceDocs.map((docName) => (
