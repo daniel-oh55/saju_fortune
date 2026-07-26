@@ -1,7 +1,7 @@
 # AdMob Integration Readiness Plan
 
 - Status: AdMob integration readiness plan recorded
-- Verification date: 2026-07-25
+- Verification date: 2026-07-26
 - PR type: docs/check-only
 - AdMob account creation: Completed
 - Payment profile submission: Completed
@@ -88,7 +88,7 @@
 
 ### Initial release candidate
 
-- 광고 형식 후보: 반응형 배너 1개
+- 광고 형식 후보: 인라인 적응형 배너(inline adaptive banner) 1개
 - 표시 방식 후보: 콘텐츠 흐름 안의 inline 배너
 - 배치 후보: 주요 운세 또는 결과 콘텐츠가 끝난 뒤
 - 긴 핵심 콘텐츠 문단 사이에는 배치하지 않는다.
@@ -232,7 +232,7 @@ Capacitor 앱에서 SDK를 연결하는 방법은 다음 후보를 비교한 뒤
 - 현재 Capacitor 버전 호환성
 - Android target SDK 호환성
 - UMP 지원
-- 반응형 배너 지원
+- 인라인 적응형 배너(inline adaptive banner) 지원
 - 광고 lifecycle 처리
 - 테스트 기기 지원
 - Ad Inspector 지원

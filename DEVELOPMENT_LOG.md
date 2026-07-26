@@ -4,7 +4,7 @@
 
 - PR 목적: 실제 광고 SDK 도입 전 현재 상태, UX 원칙, 정책 영향, Android QA와 출시 게이트 기록
 - Status: Docs/check-only
-- Verification date: 2026-07-25
+- Verification date: 2026-07-26
 - AdMob account creation: Completed
 - Payment profile submission: Completed
 - AdMob account verification: In progress
@@ -19,7 +19,7 @@
 - Ad units: 0
 - AdMob SDK integration: Not started
 - Actual advertisement serving: Pending
-- 최초 광고 범위 후보: 콘텐츠 흐름 안에서 주요 운세 또는 결과 콘텐츠 뒤에 반응형 배너 1개
+- 광고 형식 후보: 인라인 적응형 배너(inline adaptive banner) 1개
 - 빈 광고 fallback 원칙: 실제 로드 전 DOM/native view와 고정 여백을 표시하지 않음
 - 실패 광고 원칙: load failure, no-fill, offline, 동의 불가 상태에 빈 박스를 남기지 않음
 - 테스트 광고 원칙: 개발·QA는 Google 공식 테스트 광고만 사용하고 실제 ID와 테스트 기기 ID를 커밋하지 않음

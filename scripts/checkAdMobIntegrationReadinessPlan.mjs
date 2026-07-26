@@ -11,7 +11,7 @@ const requiredFiles = [
 
 const requiredDocSnippets = [
   '# AdMob Integration Readiness Plan',
-  'Verification date: 2026-07-25',
+  'Verification date: 2026-07-26',
   'PR type: docs/check-only',
   'AdMob account verification: In progress',
   'AdMob app registration: Completed',
@@ -26,6 +26,7 @@ const requiredDocSnippets = [
   'AdMob SDK integration: Not started',
   'UMP SDK integration: Not started',
   'Actual advertisement serving: Pending',
+  '인라인 적응형 배너',
   'Initial ad format and placement',
   'Empty and failed ad behavior',
   'Development and test-ad policy',
@@ -71,7 +72,7 @@ const requiredTodoSnippets = [
 
 const requiredDevLogSnippets = [
   'Status: Docs/check-only',
-  'Verification date: 2026-07-25',
+  'Verification date: 2026-07-26',
   'AdMob account verification: In progress',
   'AdMob app registration: Completed',
   'Google Play linking: Completed',
@@ -83,6 +84,7 @@ const requiredDevLogSnippets = [
   'Ad units: 0',
   'AdMob SDK integration: Not started',
   'Actual advertisement serving: Pending',
+  '인라인 적응형 배너',
   'npm run build 결과',
   'npm run check:admob-integration-readiness-plan 결과',
   'npm run check:post-launch-monitoring-initial-review 결과',
@@ -125,6 +127,11 @@ const forbiddenClaims = [
   'All advertising work completed',
   'Ads are live',
   'Production ads enabled',
+];
+
+const deprecatedBannerTerms = [
+  '반응형 배너',
+  '반응형 인라인 배너',
 ];
 
 let hasFailure = false;
@@ -200,6 +207,15 @@ for (const [scopeName, scopeText] of [
   ['dev_log_section', devLogSection],
 ]) {
   for (const phrase of forbiddenClaims) {
+    logResult(`${scopeName}_excludes_${labelFromSnippet(phrase)}`, !scopeText.includes(phrase));
+  }
+}
+
+for (const [scopeName, scopeText] of [
+  ['doc', doc],
+  ['dev_log_section', devLogSection],
+]) {
+  for (const phrase of deprecatedBannerTerms) {
     logResult(`${scopeName}_excludes_${labelFromSnippet(phrase)}`, !scopeText.includes(phrase));
   }
 }
