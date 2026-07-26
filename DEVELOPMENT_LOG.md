@@ -1,5 +1,40 @@
 # DEVELOPMENT_LOG
 
+## AdMob Capacitor Implementation Approach Review
+
+- Verification date: 2026-07-26
+- Status: Docs/check-only
+- Capacitor baseline: core/android/CLI `8.4.0`, app plugin `8.1.0`, React `18.3.1`, and Vite `6.4.2` from the lockfile.
+- Android SDK baseline: min SDK 24, compile SDK 36, target SDK 36, AGP 8.13.0, Gradle 8.14.3, Java 21 project baseline, and no app Kotlin source.
+- Existing rewarded architecture: `rewardedAdService`, provider loader, placement configuration/resolver, mock provider, and unavailable SDK adapter were reviewed; the mock flow and unlock storage remain unchanged.
+- Candidates reviewed: `@capacitor-community/admob` 8.0.0, `@capgo/capacitor-admob` 8.1.12, and a local Capacitor native bridge.
+- SDK review: Google Mobile Ads Legacy 25.4.0, GMA Next-Gen 1.3.0, and UMP 4.0.0 were reviewed against official guidance and the current Android baseline.
+- Banner distinction: neither reviewed plugin provides true inline WebView content; both use an anchored native banner or native sibling/overlay behavior.
+- Evaluation scores: community plugin 395/500, Capgo plugin 245/500, local bridge 420/500; scores support the decision but do not replace blocking gates.
+- Blocking gates: final placement behavior, exact plugin and Google SDK versions, Legacy versus Next-Gen choice, UMP ownership, test/release ID separation, lifecycle cleanup, and Android 15/16 navigation and safe-area QA remain pending.
+- Recommended candidate: conditionally prefer `@capacitor-community/admob` for the first route-scoped anchored banner.
+- Recommendation conditions: accept anchored rather than true inline behavior, pin exact compatible versions, integrate UMP, enforce test safeguards, and pass lifecycle plus Android 15/16 device QA.
+- Fallback: use a project-owned local native bridge if true inline behavior is mandatory or plugin lifecycle constraints fail validation.
+- Test configuration: use Google official demo units or locally injected test-device configuration, UMP debug configuration only in non-release builds, and fail release checks if test configuration remains.
+- Production configuration: inject real identifiers outside repository documentation, keep production requests disabled until account and internal-test gates pass, and prevent production identifiers from appearing in logs.
+- Expected change files: a follow-up implementation may affect package files, Android manifest/resources/Gradle, Capacitor generated state, a native bridge if selected, the JavaScript adapter/service, privacy options UI, and focused checks.
+- Risks and mitigations: major-version mismatch, SDK mixing, consent ordering, duplicate listeners, orphaned banners, navigation overlap, empty failed-ad space, test configuration leakage, AD_ID/Data safety mismatch, R8 differences, and rewarded regressions each have recorded gates or QA controls.
+- Follow-up PRs: proposed sequence covers production privacy copy, Console inputs, test-mode integration, privacy options and banner QA, production configuration, release AAB/internal testing, and first advertising update preparation; PR numbers may change.
+- No SDK or plugin installation was performed.
+- No Android changes were made.
+- No dependency or package-lock changes were made.
+- No actual IDs or personal information were added.
+- Test results:
+  - `npm ci`: PASS (158 packages added, 159 packages audited).
+  - Vulnerability audit: 4 known findings (3 high, 1 critical); no dependency or lockfile remediation was made in this docs/check-only PR.
+  - `npm run build`: PASS; the existing `index` JavaScript chunk warning remains at 664.02 kB.
+  - New AdMob Capacitor implementation approach check: PASS.
+  - Existing AdMob privacy and integration readiness checks: PASS.
+  - Post-launch monitoring initial-review and readiness checks: PASS.
+  - Content safety, share text, and doc/src guardrail checks: PASS.
+  - Consent storage and banner-state checks: PASS.
+  - Rewarded service, consent gate, outcomes, placements, resolver, provider adapter, and SDK adapter checks: PASS.
+
 ## AdMob Privacy, Data Safety, and Consent Plan
 
 - PR 목적: AdMob 앱 승인과 앱 단위 광고 게재 제한 해제 결과를 기록하고 광고 SDK 도입 전 정책·동의·데이터 보안 변경안 설계

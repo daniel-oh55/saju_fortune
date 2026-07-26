@@ -1,17 +1,35 @@
 # CHANGELOG
 
+<!-- ADMOB_CAPACITOR_IMPLEMENTATION_APPROACH_REVIEW_CHANGELOG_START -->
 ## Docs
 
+- Added the AdMob Capacitor implementation approach review.
+- Compared maintained Capacitor AdMob plugins and a local native bridge.
+- Recorded the Google Mobile Ads Legacy, Next-Gen, and UMP compatibility review.
+- Distinguished true inline adaptive banners from anchored native banners.
+- Recorded the technical recommendation, conditions, fallback, and expected Android scope.
 - Recorded the completed AdMob app verification and approval result.
 - Added the AdMob privacy, Data safety, and consent plan.
 - Added privacy policy change candidates, Data safety response candidates, UMP flow, Advertising ID gates, and release requirements.
 
 ## Checks
 
+- Added the AdMob Capacitor implementation approach validation check.
 - Added the AdMob privacy, Data safety, and consent plan validation check.
 
 ## Pending
 
+- Final implementation approval
+- Initial banner placement finalization
+- Exact plugin and SDK version approval
+- Plugin and SDK integration
+- AndroidManifest and Gradle updates
+- Capacitor sync
+- Official test-ad verification
+- Android advertising QA
+- Production ad configuration
+- Actual advertisement serving
+- First advertising update release
 - AdMob account verification
 - Ad unit creation
 - SDK version and implementation selection
@@ -24,6 +42,7 @@
 - Android consent and advertising QA
 - Actual advertisement serving
 - First advertising update release
+<!-- ADMOB_CAPACITOR_IMPLEMENTATION_APPROACH_REVIEW_CHANGELOG_END -->
 
 ## UI
 

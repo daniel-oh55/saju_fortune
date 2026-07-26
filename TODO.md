@@ -1,5 +1,39 @@
 # TODO
 
+## AdMob Capacitor Implementation Approach Review TODO
+
+- [x] Current Capacitor and Android baseline investigation
+- [x] Existing rewarded-ad architecture investigation
+- [x] Google Mobile Ads Legacy review
+- [x] GMA Next-Gen review
+- [x] UMP SDK review
+- [x] Capacitor community AdMob plugin review
+- [x] Capgo AdMob plugin review
+- [x] Local native bridge review
+- [x] Inline versus anchored banner distinction
+- [x] Candidate comparison matrix
+- [x] Technical recommendation
+- [x] Test and production configuration design
+- [x] Android expected change scope
+- [x] Risk and mitigation review
+- [x] Validation script
+- [ ] Final implementation approval
+- [ ] Initial placement finalization
+- [ ] Exact plugin version approval
+- [ ] Exact Google SDK version approval
+- [ ] Plugin installation
+- [ ] Google Mobile Ads SDK integration
+- [ ] UMP SDK integration
+- [ ] AndroidManifest update
+- [ ] Gradle update
+- [ ] Capacitor sync
+- [ ] Privacy options UI implementation
+- [ ] Official test ad verification
+- [ ] Android advertising QA
+- [ ] Production ad configuration
+- [ ] Actual advertisement serving
+- [ ] First advertising update release
+
 ## AdMob Privacy, Data Safety, and Consent Plan TODO
 
 - [x] AdMob app approval result recording

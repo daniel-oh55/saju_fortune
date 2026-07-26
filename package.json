@@ -279,6 +279,7 @@
     "check:post-launch-monitoring-initial-review": "node scripts/checkPostLaunchMonitoringInitialReview.mjs",
     "check:admob-integration-readiness-plan": "node scripts/checkAdMobIntegrationReadinessPlan.mjs",
     "check:admob-privacy-data-safety-consent-plan": "node scripts/checkAdMobPrivacyDataSafetyConsentPlan.mjs",
+    "check:admob-capacitor-implementation-approach-review": "node scripts/checkAdMobCapacitorImplementationApproachReview.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
