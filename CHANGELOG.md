@@ -1,5 +1,34 @@
 # CHANGELOG
 
+## PR #407 - AdMob Runtime Consent Coordinator
+
+### Added
+
+- Added a native-Android-only runtime consent coordinator.
+- Added consent-information request and unconditional consent-form resolution.
+- Added the latest form-result `canRequestAds` gate before one Mobile Ads
+  initialization attempt.
+- Added fail-closed state handling, immutable snapshots, subscriptions, and
+  web/non-Android no-op behavior.
+- Added a targeted creation/post-merge checker with behavioral coverage.
+- Started consent bootstrap without blocking the existing React render.
+
+### Unchanged
+
+- Existing rewarded-ad providers and ad request/load/show behavior
+- Ad unit IDs, test-device identifiers, and debug geography
+- Privacy-options UI and `showPrivacyOptionsForm`
+- Existing storage keys, storage schema, and fortune logic
+- Android native files, public assets, and build configuration
+
+### Pending
+
+- Android device installation and runtime QA
+- ADB logcat verification
+- Conditional privacy-options UI
+- Rewarded-ad SDK provider and official test-ad request
+- Advertising Console and Google Play updates
+
 ## PR #406 - AdMob Runtime Consent Bootstrap Contract
 
 ### Added

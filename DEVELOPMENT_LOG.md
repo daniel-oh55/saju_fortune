@@ -1,5 +1,56 @@
 # DEVELOPMENT_LOG
 
+## PR #407 - AdMob Runtime Consent Coordinator
+
+- Work date: 2026-07-27
+- PR type: production runtime consent/init coordinator
+- Starting main HEAD: `36040299b12333b8a288a472dc83c55772395932`
+- Branch: `feat/admob-runtime-consent-coordinator`
+- Runtime consent bootstrap implementation: Completed
+- Native Android platform gate: Completed
+- Consent information request code: Completed
+- Unconditional consent form resolution code: Completed
+- Latest form-result `canRequestAds` gate code: Completed
+- Single-flight bootstrap Promise: Completed
+- Initialize-once guard: Completed
+- Fail-closed error handling: Completed
+- Immutable snapshot and subscription API: Completed
+- Web/non-Android zero-call no-op: Completed
+- React render: Non-blocking
+- Dynamic AdMob plugin load: Native Android sequence only
+- Existing rewarded-ad providers: Unchanged
+- Existing storage keys and schema: Unchanged
+- Ad unit IDs and test-device identifiers: Not added
+- Ad request/show implementation: Not started
+- Conditional privacy-options UI: Not started
+- Android device QA: Not performed
+- ADB logcat verification: Not performed
+- AdMob and Google Play Consoles: Unchanged
+
+Local verification:
+
+- `npm ci`: Pass; npm reported 4 dependency audit findings (3 high, 1
+  critical). No automatic dependency fix was applied.
+- `npm run build`: Pass with the existing large-chunk warning.
+- `npm run check:admob-runtime-consent-coordinator`: Pass in creation mode.
+- `npm run check:admob-runtime-consent-bootstrap-contract`: Pass in post-merge
+  mode.
+- `npm run check:content-safety`: Pass.
+- `npm run check:share-text`: Pass.
+- `npm run check:doc-check-src-guardrails`: Pass.
+- Targeted checker negative verification: 30/30 expected outcomes; all 29
+  forbidden mutations were blocked and the post-merge fixture passed.
+- `npx cap sync android`: Pass. Generated Gradle line-ending-only working-tree
+  changes were restored, leaving Android source unchanged.
+- `gradlew.bat clean`: Pass from an ASCII-only temporary junction because the
+  repository's Windows path contains non-ASCII characters.
+- `gradlew.bat assembleDebug`: Blocked because no Android SDK path is available
+  through `ANDROID_HOME`, `ANDROID_SDK_ROOT`, `android/local.properties`, or the
+  standard user SDK directory.
+- `gradlew.bat :app:processDebugMainManifest`: Not run because the same Android
+  SDK prerequisite blocked the preceding Debug assembly.
+- Android Debug Build: Not completed in this local environment.
+
 ## PR #406 - AdMob Runtime Consent Bootstrap Contract
 
 - Work date: 2026-07-27

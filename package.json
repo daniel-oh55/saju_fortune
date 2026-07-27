@@ -284,6 +284,7 @@
     "check:admob-plugin-version-selection": "node scripts/checkAdmobPluginVersionSelection.mjs",
     "check:admob-plugin-install-baseline": "node scripts/checkAdmobPluginInstallBaseline.mjs",
     "check:admob-runtime-consent-bootstrap-contract": "node scripts/checkAdmobRuntimeConsentBootstrapContract.mjs",
+    "check:admob-runtime-consent-coordinator": "node scripts/checkAdmobRuntimeConsentCoordinator.mjs",
     "check:privacy-policy-production-verification": "node scripts/checkPrivacyPolicyProductionVerification.mjs",
     "check:privacy-policy-external-link": "node scripts/checkPrivacyPolicyExternalLink.mjs",
     "preview": "vite preview"
