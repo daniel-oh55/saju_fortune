@@ -188,6 +188,71 @@ if (process.argv.includes('--negative-self-test')) {
       () => writeFileSync(resolve(root, unexpectedPath), 'negative probe\n', 'utf8'),
       'unexpected changed file',
     ],
+    [
+      'initial snapshot hydration removal',
+      () =>
+        replace(
+          documentPath,
+          'App state initializes from\ngetAdmobRuntimeConsentSnapshot',
+          'App state starts from a default value',
+        ),
+      'App state initializes from getAdmobRuntimeConsentSnapshot',
+    ],
+    [
+      'effect snapshot resynchronization removal',
+      () =>
+        replace(
+          documentPath,
+          'App effect re-reads current snapshot',
+          'App effect keeps the render-time value',
+        ),
+      'App effect re-reads current snapshot',
+    ],
+    [
+      'future snapshot subscription removal',
+      () =>
+        replace(
+          documentPath,
+          'App subscribes for\nfuture snapshots',
+          'App ignores future snapshots',
+        ),
+      'App subscribes for future snapshots',
+    ],
+    [
+      'subscribe-only implementation contract',
+      () => append(documentPath, '\nApp uses subscribe only\n'),
+      'forbidden contract meaning',
+    ],
+    [
+      'App bootstrap restart contract',
+      () => append(documentPath, '\nApp starts bootstrap again to obtain the snapshot\n'),
+      'forbidden contract meaning',
+    ],
+    [
+      'localStorage runtime snapshot contract',
+      () => append(documentPath, '\nlocalStorage supplies the AdMob runtime snapshot\n'),
+      'forbidden contract meaning',
+    ],
+    [
+      'late-subscriber test plan removal',
+      () =>
+        replace(
+          documentPath,
+          'bootstrap completes before App mount (late subscriber)',
+          'bootstrap timing smoke test',
+        ),
+      'bootstrap completes before App mount (late subscriber)',
+    ],
+    [
+      'StrictMode subscription cleanup verification removal',
+      () =>
+        replace(
+          documentPath,
+          'React StrictMode effect re-registration leaves no duplicate listener',
+          'React development mode smoke test',
+        ),
+      'React StrictMode effect re-registration leaves no duplicate listener',
+    ],
   ]
   let passed = 0
   for (const [name, mutate, expected] of cases) {
@@ -327,6 +392,7 @@ const requiredSections = [
   'UI state model',
   'Error handling and fail-closed behavior',
   'Native and web behavior',
+  'Initial snapshot hydration and late subscribers',
   'Production implementation file plan',
   'Test plan',
   'Android device QA plan',
@@ -371,6 +437,14 @@ for (const text of [
   'Ad request/load/show implementation: Not started',
   'privacy-options UI implementation remains Pending',
   'APK installation and device QA are Not performed',
+  'App state initializes from getAdmobRuntimeConsentSnapshot',
+  'App effect re-reads current snapshot',
+  'App subscribes for future snapshots',
+  'Late subscribers must not miss completed bootstrap state',
+  'subscribe does not replay current snapshot',
+  'Bootstrap is not restarted from App',
+  'bootstrap completes before App mount (late subscriber)',
+  'React StrictMode effect re-registration leaves no duplicate listener',
 ]) {
   requireText(compactDocument, text)
 }
@@ -384,6 +458,11 @@ const forbiddenContractMeanings = [
   'keep adGateOpen true after revocation',
   'privacy-options UI implementation: Completed',
   'Actual ad request/load/show: Completed',
+  'App uses subscribe only',
+  'App waits for the next publish',
+  'App starts bootstrap again to obtain the snapshot',
+  'localStorage supplies the AdMob runtime snapshot',
+  'subscribe automatically replays the current snapshot',
 ]
 for (const meaning of forbiddenContractMeanings) {
   if (compactDocument.includes(meaning)) {

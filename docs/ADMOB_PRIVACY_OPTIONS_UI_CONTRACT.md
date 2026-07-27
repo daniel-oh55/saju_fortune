@@ -349,6 +349,63 @@ Web, Vercel, PWA, iOS, and every non-Android runtime:
 Although the plugin package contains a Web implementation, the app must not
 use its mock-returning consent methods for this feature.
 
+## Initial snapshot hydration and late subscribers
+
+`src/main.jsx` calls `bootstrapAdmobRuntimeConsent()` before React render. The
+coordinator's `subscribe(listener)` API only registers the listener; subscribe
+does not replay current snapshot. App state initializes from
+getAdmobRuntimeConsentSnapshot, because relying exclusively on the
+subscription would miss a bootstrap result that was published before mount.
+
+The production `App.jsx` contract is:
+
+```jsx
+const [admobSnapshot, setAdmobSnapshot] = useState(
+  () => getAdmobRuntimeConsentSnapshot(),
+)
+
+useEffect(() => {
+  setAdmobSnapshot(getAdmobRuntimeConsentSnapshot())
+
+  return subscribeAdmobRuntimeConsent((nextSnapshot) => {
+    setAdmobSnapshot(nextSnapshot)
+  })
+}, [])
+```
+
+App effect re-reads current snapshot before registering the subscription so a
+change between render and effect registration is synchronized. These
+operations are consecutive synchronous effect statements, so a publish cannot
+interleave between the re-read and listener registration. App subscribes for
+future snapshots after that re-read and returns the coordinator unsubscribe
+function as the effect cleanup.
+
+SettingsPage visibility is derived from this hydrated `admobSnapshot`, not
+from a default React value or persisted state. Late subscribers must not miss
+completed bootstrap state. Bootstrap is not restarted from App, and
+localStorage does not supply the AdMob runtime snapshot. The App must not reset
+the coordinator or assume that a subscription automatically replays an
+earlier publish.
+
+The required late-subscriber outcomes are:
+
+- If bootstrap reaches `ready` before App mount, the lazy state initializer
+  reads that snapshot and the entry is visible when its requirement is
+  `REQUIRED`.
+- If bootstrap reaches `consent-denied-or-unresolved` before App mount, the
+  initializer reads that state. A verified `REQUIRED` requirement may expose
+  the entry, while `adGateOpen` remains `false`.
+- If bootstrap reaches `failed` before App mount without a verified
+  requirement, the entry remains hidden. If the snapshot preserves an earlier
+  completed and verified `REQUIRED` requirement, the entry remains visible
+  under the normal visibility expression while `adGateOpen` remains `false`.
+- If bootstrap publishes after App mount, the subscriber receives the latest
+  snapshot and immediately updates the derived UI.
+
+Changing `subscribe` to emit the current snapshot immediately is an
+alternative API design, but it is not selected for this implementation. The
+selected contract remains App-side snapshot reads plus subscription.
+
 ## Production implementation file plan
 
 The next production PR should be limited to these candidates:
@@ -356,8 +413,12 @@ The next production PR should be limited to these candidates:
 - `src/services/admobRuntimeConsentCoordinator.js`: add a dedicated
   single-flight privacy-options action, refresh path, snapshot fields, and gate
   reconciliation while reusing initialize-once.
-- `src/App.jsx`: subscribe to the coordinator snapshot and pass the action and
-  derived state to Settings.
+- `src/App.jsx`: import `getAdmobRuntimeConsentSnapshot` and
+  `subscribeAdmobRuntimeConsent`; hydrate current state with a lazy `useState`
+  initializer; re-read the latest snapshot in the effect; subscribe for future
+  snapshots; return the subscription cleanup; and pass the action and derived
+  state to Settings. Do not restart bootstrap. App props, routing, and storage
+  remain unchanged.
 - `src/pages/SettingsPage.jsx`: add the conditional canonical button and
   pending/status presentation.
 - `src/pages/PrivacyInfoPage.jsx`: correct the stale advertising SDK status
@@ -379,6 +440,16 @@ the existing bootstrap entry remains correct.
 
 The production implementation PR must test:
 
+- bootstrap completes before App mount (late subscriber);
+- the lazy `useState` initializer reads the current snapshot;
+- the effect re-reads the current snapshot;
+- the subscription receives future publishes without assuming past replay;
+- mount-before-render `REQUIRED` shows the entry;
+- mount-before-render `NOT_REQUIRED` hides the entry;
+- mount-before-render Web no-op hides the entry;
+- a snapshot change between render and effect registration is synchronized;
+- component unmount invokes the subscription cleanup;
+- React StrictMode effect re-registration leaves no duplicate listener;
 - native Android + `REQUIRED` visible state;
 - all hidden platform/status cases;
 - stale-status re-check before the call;

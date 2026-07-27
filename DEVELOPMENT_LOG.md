@@ -17,6 +17,10 @@
 - Consent revocation: close `adGateOpen`; do not invent SDK teardown
 - Consent grant: reuse initialize-once; open gate only after resolved init
 - Duplicate protection: dedicated single-flight action Promise
+- Initial snapshot hydration: App-side lazy getSnapshot plus subscription
+- Render/effect race: effect re-read before future-update subscription
+- Late-subscriber and React StrictMode cleanup contract: Completed
+- App bootstrap restart and localStorage runtime hydration: Prohibited
 - Refresh failure: fail closed with `adGateOpen: false`
 - Production UI implementation entry: Ready within documented scope
 - Privacy-options UI implementation: Pending
@@ -39,7 +43,7 @@ Local verification:
 - `npm run check:content-safety`: Pass.
 - `npm run check:share-text`: Pass.
 - `npm run check:doc-check-src-guardrails`: Pass.
-- Targeted checker negative verification: 28/28 expected outcomes; all 27
+- Targeted checker negative verification: 36/36 expected outcomes; all 35
   forbidden mutations were blocked and the post-merge-mode fixture passed.
 - `git diff --check`: Pass.
 - APK installation and device QA are Not performed.
