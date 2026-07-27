@@ -405,7 +405,8 @@ function SajuInsightPage({
               isUnlocked={false}
               consentPreferences={consentPreferences}
               onOpenConsentSettings={onOpenConsentSettings}
-              onUnlock={() => onUnlockDetail(SAJU_INSIGHT_DEEP_UNLOCK_KEY)}
+              onUnlock={(rewardResult) =>
+                onUnlockDetail(SAJU_INSIGHT_DEEP_UNLOCK_KEY, rewardResult)}
               buttonLabel="광고 보고 심화 해석 보기"
             />
           )}

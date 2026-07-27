@@ -12,4 +12,8 @@ export const REWARDED_AD_OUTCOME = {
   NO_REWARD: 'no_reward',
   SDK_UNAVAILABLE: 'sdk_unavailable',
   ADS_CONSENT_REQUIRED: 'ads_consent_required',
+  AD_GATE_CLOSED: 'ad_gate_closed',
+  SHOW_FAILED: 'show_failed',
+  TIMEOUT: 'timeout',
+  UNEXPECTED_ERROR: 'unexpected_error',
 };

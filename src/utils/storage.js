@@ -31,9 +31,11 @@ export function loadRewardUnlocks(fortuneId) {
   return allUnlocks[fortuneId] || {};
 }
 
-export function saveRewardUnlock(fortuneId, categoryId) {
+export function saveRewardUnlock(fortuneId, categoryId, rewardType = 'mock_rewarded_ad') {
   const allUnlocks = safeParse(localStorage.getItem(UNLOCKS_KEY)) || {};
   const todayUnlocks = allUnlocks[fortuneId] || {};
+  const safeRewardType =
+    rewardType === 'sdk_rewarded_ad' ? 'sdk_rewarded_ad' : 'mock_rewarded_ad';
 
   const nextUnlocks = {
     ...allUnlocks,
@@ -42,7 +44,7 @@ export function saveRewardUnlock(fortuneId, categoryId) {
       [categoryId]: {
         unlocked: true,
         unlockedAt: new Date().toISOString(),
-        rewardType: 'mock_rewarded_ad',
+        rewardType: safeRewardType,
       },
     },
   };

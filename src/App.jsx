@@ -143,6 +143,7 @@ function App() {
   const appHistoryInitializedRef = useRef(false);
   const appPageStackRef = useRef([activePage]);
   const handleAppBackRef = useRef(null);
+  const persistedRewardKeysRef = useRef(new Set());
 
   useEffect(() => {
     const timer = window.setTimeout(() => setIsAppLoading(false), APP_LOADING_DURATION_MS);
@@ -405,12 +406,28 @@ function App() {
     handleAppBack();
   };
 
-  const handleUnlockDetail = (categoryId) => {
-    if (!fortune?.id) return;
+  const handleUnlockDetail = (categoryId, rewardResult) => {
+    if (!fortune?.id || !categoryId) return;
 
-    // 실제 광고 SDK 연동 전까지는 mock_rewarded_ad 상태를 저장합니다.
-    const nextUnlocks = saveRewardUnlock(fortune.id, categoryId);
-    setUnlockedDetails(nextUnlocks);
+    const persistenceKey = `${fortune.id}:${categoryId}`;
+    if (
+      unlockedDetails[categoryId]?.unlocked ||
+      persistedRewardKeysRef.current.has(persistenceKey)
+    ) {
+      return;
+    }
+    persistedRewardKeysRef.current.add(persistenceKey);
+
+    const rewardType =
+      rewardResult?.provider === 'sdk_rewarded_ad'
+        ? 'sdk_rewarded_ad'
+        : 'mock_rewarded_ad';
+    try {
+      const nextUnlocks = saveRewardUnlock(fortune.id, categoryId, rewardType);
+      setUnlockedDetails(nextUnlocks);
+    } catch {
+      persistedRewardKeysRef.current.delete(persistenceKey);
+    }
   };
 
   const handleSaveReading = (item) => {

@@ -12265,3 +12265,58 @@ Remaining implementation and QA:
 - Repeated early-dismiss and reproducible `FailedToShow` Android QA with ADB
   logcat.
 - Production ad unit configuration and live-ad readiness work.
+
+# 2026-07-27 AdMob Official Test Rewarded Provider
+
+## Work completed
+
+- Started from merged `main` HEAD
+  `73be1eb50406f1de1987d0164cc29506f228e584`.
+- Added the centrally configured Google official Android rewarded demo ID.
+  It is valid only for explicit SDK, enabled, `official_test`, and `debug`
+  configuration. Release and production modes fail closed.
+- Implemented native Android AdMob module loading after configuration,
+  platform, local-consent, and runtime-gate checks.
+- Added fresh local-consent and runtime-gate reads before prepare and before
+  show, with no SDK-to-mock fallback or automatic retry.
+- Added one dedicated same-Promise single-flight, one prepare and show per
+  action, authoritative resolved-show reward validation, and exactly-once
+  result handling.
+- Observed FailedToLoad, Showed, FailedToShow, Dismissed, and Rewarded events.
+  Rewarded remains diagnostic; only a valid resolved show Promise authorizes
+  an unlock.
+- Added individual listener-handle cleanup and bounded load, show-start,
+  lifecycle, dismiss-reward-grace, and cleanup deadlines.
+- App-level timeout and listener removal do not cancel, resolve, or reject the
+  native Android PluginCall. Late results are ignored by settlement guards.
+- Preserved the mock two-second UI and added a separate SDK UI that requires a
+  user button tap, has no fake countdown or auto-run, and identifies the
+  Google official test ad.
+- Passed sanitized reward results through pages and App, saving
+  `sdk_rewarded_ad` only for verified SDK results. The existing
+  `aiTodayFortune.rewardUnlocks` key and stored object shape remain unchanged.
+- Updated current-state privacy copy without claiming production serving,
+  revenue, or completed Android device QA.
+- Added `Android Rewarded Test Build`, producing
+  `harupuli-rewarded-test-apk` separately from the unchanged standard
+  `harupuli-debug-apk` workflow.
+- Added a creation/post-merge production and behavioral checker with an
+  in-memory negative mutation self-test. The checker covers 68 behavioral
+  scenarios, 60 static invariants, and 60 detected negative mutations.
+- `npm ci`, the default mock `npm run build`, rewarded provider/contract,
+  privacy-options, runtime-consent, content-safety, share-text, and doc/src
+  guardrail checks passed.
+- `npx cap sync android` passed and left no tracked Android diff.
+- Local `assembleDebug` reached Android SDK discovery after a command-only
+  non-ASCII-path override, then was blocked because this workstation has no
+  configured Android SDK location. No Android project property was changed.
+- `npm ci` reported the existing audit status of 3 high and 1 critical
+  vulnerability; dependencies and `package-lock.json` were not changed.
+
+## Not performed
+
+- Galaxy S23 Ultra request, load, fullscreen show, Test Ad label, reward,
+  early-dismiss, repeated-dismiss, offline, and ADB logcat verification
+- GitHub Actions workflow execution and artifact inspection
+- Production ad unit configuration or production ad request/load/show
+- Release signing, AAB generation, Play upload, or console changes

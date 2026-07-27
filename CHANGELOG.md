@@ -1,5 +1,35 @@
 # CHANGELOG
 
+## PR #411 - AdMob Official Test Rewarded Provider
+
+### Added
+
+- Added the native Android Google official rewarded test-ad provider with
+  official-test/debug-only configuration and fail-closed production mode.
+- Added local app consent and latest AdMob runtime dual gates, including
+  pre-prepare and pre-show rechecks.
+- Added same-Promise single-flight, authoritative reward validation,
+  exactly-once settlement, individual listener cleanup, and bounded app-level
+  timeouts.
+- Added separate mock/SDK modal behavior and persisted verified SDK unlocks as
+  `sdk_rewarded_ad` without changing the existing storage key or shape.
+- Added a dedicated rewarded-test Android Debug APK workflow and production/
+  behavioral checker with negative mutation coverage.
+
+### Unchanged
+
+- The default Web, Vercel, and standard Android Debug provider remains mock.
+- Production ad unit IDs, production ad request/load/show, test-device IDs,
+  debug geography, native Android sources, dependencies, lockfile, routing,
+  schema, fortune calculations, and existing storage keys remain unchanged.
+
+### Pending
+
+- Galaxy S23 Ultra request/load/fullscreen/reward and early-dismiss QA
+- ADB logcat listener-accumulation and offline/failure-path device QA
+- Production ad unit, production serving, disclosure, signing, AAB, and Play
+  release work
+
 ## PR #410 - AdMob Rewarded Ad Provider Contract
 
 ### Added

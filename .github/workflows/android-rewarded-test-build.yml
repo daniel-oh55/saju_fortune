@@ -1,0 +1,69 @@
+name: Android Rewarded Test Build
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  android-rewarded-test-build:
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      github.head_ref == 'feat/admob-official-test-rewarded-provider'
+    runs-on: ubuntu-latest
+    env:
+      VITE_REWARDED_AD_PROVIDER: sdk
+      VITE_REWARDED_AD_SDK_ENABLED: "true"
+      VITE_REWARDED_AD_MODE: official_test
+      VITE_REWARDED_AD_BUILD_TARGET: debug
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check rewarded test provider
+        run: npm run check:admob-rewarded-provider
+
+      - name: Build rewarded test web app
+        run: npm run build
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Sync Android project
+        run: npx cap sync android
+
+      - name: Verify Java environment
+        run: |
+          java -version
+          javac -version
+          echo "JAVA_HOME=$JAVA_HOME"
+
+      - name: Make Gradle wrapper executable
+        run: chmod +x android/gradlew
+
+      - name: Verify Gradle wrapper
+        working-directory: android
+        run: ./gradlew --version
+
+      - name: Build Android rewarded test APK
+        working-directory: android
+        run: ./gradlew assembleDebug --stacktrace
+
+      - name: Upload rewarded test APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: harupuli-rewarded-test-apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
