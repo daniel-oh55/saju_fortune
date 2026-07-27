@@ -1,5 +1,25 @@
 # TODO
 
+## PR #408 - AdMob Privacy Options UI Contract TODO
+
+- [x] Verify merged PR #407 baseline at the expected main HEAD
+- [x] Inspect the current coordinator, Settings, privacy, and local consent flow
+- [x] Inspect plugin v8.0.0 declarations and Android consent implementation
+- [x] Define native Android and `REQUIRED` entry visibility
+- [x] Select Settings as the single canonical entry point
+- [x] Separate local data-use preferences from Google UMP choices
+- [x] Select post-form consent-information refresh without a second form
+- [x] Define revocation, grant, initialize-once, and fail-closed behavior
+- [x] Define single-flight interaction and UI state
+- [x] Define production implementation files and Android QA plan
+- [x] Add targeted creation/post-merge contract checker
+- [ ] Implement 개인정보 및 쿠키 설정 UI
+- [ ] Implement runtime privacy-options call and post-form refresh
+- [ ] Complete Android privacy-options device QA, offline QA, and ADB logcat
+- [ ] Implement rewarded-ad SDK provider and official test-ad request
+- [ ] Create ad units and implement actual ad request/load/show
+- [ ] Update required Google Play disclosures
+
 ## PR #407 - AdMob Runtime Consent Coordinator TODO
 
 - [x] Verify merged PR #406 baseline at the expected main HEAD

@@ -1,5 +1,35 @@
 # CHANGELOG
 
+## PR #408 - AdMob Privacy Options UI Contract
+
+### Added
+
+- Defined the native-Android `REQUIRED` visibility contract for the
+  conditional `개인정보 및 쿠키 설정` entry point.
+- Selected Settings as the single canonical location and separated Google UMP
+  choices from the existing local data-use preferences.
+- Selected post-form consent-information refresh, initialize-once
+  reconciliation, single-flight interaction, and fail-closed behavior.
+- Recorded the installed plugin v8.0.0 TypeScript and Android implementation
+  evidence.
+- Added a targeted creation/post-merge contract checker.
+
+### Unchanged
+
+- Production UI and `src`, `public`, Android, iOS, and workflow files
+- Runtime privacy-options and post-form refresh calls
+- Existing consent storage keys, preferences, and schema
+- Dependencies and lockfile
+- Ad unit IDs and ad request/load/show behavior
+- AdMob and Google Play Consoles
+
+### Pending
+
+- Conditional privacy-options UI and runtime action
+- Post-form runtime refresh and Android device QA
+- Rewarded-ad SDK provider, official test-ad request, and actual ad serving
+- Required advertising and Google Play disclosure updates
+
 ## PR #407 - AdMob Runtime Consent Coordinator
 
 ### Added

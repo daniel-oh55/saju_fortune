@@ -1,5 +1,54 @@
 # DEVELOPMENT_LOG
 
+## PR #408 - AdMob Privacy Options UI Contract
+
+- Work date: 2026-07-27
+- PR type: docs/check-only
+- Starting main HEAD: `60f44f6e89ed388b80fabbc4e9a6bc6408e075d9`
+- Branch: `docs/admob-privacy-options-ui-contract`
+- Privacy-options UI contract investigation: Completed
+- Installed plugin v8.0.0 source review: Completed
+- `showPrivacyOptionsForm` result: `Promise<void>`; no consent payload
+- Post-form refresh design: `requestConsentInfo` then snapshot reconciliation
+- Secondary consent form after refresh: Prohibited
+- Canonical UI location: conditional Settings menu entry
+- Visibility: native Android and `REQUIRED` only
+- Local app consent versus Google UMP boundary: Completed
+- Consent revocation: close `adGateOpen`; do not invent SDK teardown
+- Consent grant: reuse initialize-once; open gate only after resolved init
+- Duplicate protection: dedicated single-flight action Promise
+- Initial snapshot hydration: App-side lazy getSnapshot plus subscription
+- Render/effect race: effect re-read before future-update subscription
+- Late-subscriber and React StrictMode cleanup contract: Completed
+- App bootstrap restart and localStorage runtime hydration: Prohibited
+- Refresh failure: fail closed with `adGateOpen: false`
+- Production UI implementation entry: Ready within documented scope
+- Privacy-options UI implementation: Pending
+- Runtime privacy-options and refresh calls: Not added
+- Ad request/load/show implementation: Not started
+- Android privacy-options device QA: Not performed
+- Production `src`, `public`, and native Android files: Unchanged
+- Dependencies and package lock: Unchanged
+- Consoles: Unchanged
+
+Local verification:
+
+- `npm ci`: Pass; npm reported 4 dependency audit findings (3 high, 1
+  critical). No automatic dependency fix was applied.
+- `npm run build`: Pass with the existing large-chunk warning.
+- `npm run check:admob-privacy-options-ui-contract`: Pass in creation mode.
+- `npm run check:admob-runtime-consent-coordinator`: Pass in post-merge mode.
+- `npm run check:admob-runtime-consent-bootstrap-contract`: Pass in post-merge
+  mode.
+- `npm run check:content-safety`: Pass.
+- `npm run check:share-text`: Pass.
+- `npm run check:doc-check-src-guardrails`: Pass.
+- Targeted checker negative verification: 36/36 expected outcomes; all 35
+  forbidden mutations were blocked and the post-merge-mode fixture passed.
+- `git diff --check`: Pass.
+- APK installation and device QA are Not performed.
+- GitHub Actions and Vercel: Pending; no success is claimed locally.
+
 ## PR #407 - AdMob Runtime Consent Coordinator
 
 - Work date: 2026-07-27
