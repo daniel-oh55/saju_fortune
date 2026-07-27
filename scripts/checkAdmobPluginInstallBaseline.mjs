@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url'
 
 const root = resolve(fileURLToPath(new URL('..', import.meta.url)))
 const documentPath = 'docs/ADMOB_PLUGIN_INSTALL_BASELINE.md'
+const qaDocumentPath = 'docs/ADMOB_PLUGIN_INSTALL_QA_RUN345.md'
 const manifestPath = 'android/app/src/main/AndroidManifest.xml'
 const stringsPath = 'android/app/src/main/res/values/strings.xml'
 const checkerPath = 'scripts/checkAdmobPluginInstallBaseline.mjs'
@@ -15,6 +16,7 @@ const allowedFiles = new Set([
   'DEVELOPMENT_LOG.md',
   'TODO.md',
   documentPath,
+  qaDocumentPath,
   'package.json',
   'package-lock.json',
   checkerPath,
@@ -70,6 +72,9 @@ const packageJson = JSON.parse(read('package.json'))
 const basePackageJson = JSON.parse(git('show', 'origin/main:package.json'))
 if (packageJson.dependencies?.['@capacitor-community/admob'] !== '8.0.0') {
   errors.push('package.json: @capacitor-community/admob must be exact 8.0.0')
+}
+if (/^[~^]/u.test(packageJson.dependencies?.['@capacitor-community/admob'] ?? '')) {
+  errors.push('package.json: floating AdMob plugin range is forbidden')
 }
 const currentDependencies = { ...packageJson.dependencies }
 delete currentDependencies['@capacitor-community/admob']
@@ -155,7 +160,9 @@ for (const permission of [
 }
 
 const document = read(documentPath)
+const qaDocument = read(qaDocumentPath)
 const normalizedDocument = document.replace(/\s+/gu, ' ')
+const normalizedQaDocument = qaDocument.replace(/\s+/gu, ' ')
 for (const section of [
   'Purpose and scope', 'Starting baseline', 'Installed package', 'Package-lock verification',
   'Android plugin registration', 'Exact Android dependency pins', 'Resolved dependency tree',
@@ -169,9 +176,18 @@ for (const section of [
 for (const text of [
   'AdMob plugin dependency installation: Completed',
   'AdMob App ID configuration: Completed',
-  'Debug merged manifest App ID verification: Pending',
+  'Debug Gradle build after App ID configuration: Completed',
+  'Debug merged manifest App ID verification: Completed',
+  'Debug APK artifact generation: Completed',
+  'Debug APK artifact download: Completed',
+  'Debug APK installation: Completed',
+  'Android app launch QA after App ID configuration: Completed',
+  'Android startup smoke QA: Pass',
+  'ADB logcat verification: Not performed',
+  'Full Android regression QA: Not completed',
   'Mobile Ads SDK runtime initialization: Not started',
   'UMP consent flow integration: Not started',
+  'Android advertising QA: Not started',
   'Production ad units: 0',
   'Actual ad requests: No data',
   'Actual ad serving: Pending',
@@ -181,28 +197,63 @@ for (const text of [
 ]) {
   requireText(normalizedDocument, text, documentPath)
 }
+for (const staleText of [
+  'Debug merged manifest App ID verification: Pending',
+  'Debug APK installation: Not started',
+  'Android app launch QA after App ID configuration: Not started',
+]) {
+  if (normalizedDocument.includes(staleText)) {
+    errors.push(`${documentPath}: stale status remains: ${staleText}`)
+  }
+}
 if (document.split('Mobile Ads SDK runtime initialization: Not started').length - 1 !== 2) {
   errors.push(`${documentPath}: runtime initialization Not started must be recorded twice`)
+}
+
+for (const text of [
+  'Workflow run: `#345`',
+  'Workflow run ID: `30230115096`',
+  'Workflow conclusion: Success',
+  'Artifact ID: `8639819148`',
+  'sha256:4290933add6503a9fe55c8ca02514660fa7f3936b9529f9d06503dfaa196bb26',
+  'Test device: Galaxy S23 Ultra',
+  'Debug APK artifact download: Completed',
+  'APK installation: Completed',
+  'App launch: Completed',
+  'Home screen display: Normal',
+  'Immediate force close: Not observed',
+  '`Missing application ID` error: Not observed during actual device launch',
+  'ADB logcat verification: Not performed',
+  'Full Android regression QA: Not completed',
+  'Mobile Ads runtime initialization: Not started',
+  'Android advertising QA: Not started',
+  'Actual ad requests: No data',
+  'Actual ad serving: Pending',
+]) {
+  requireText(normalizedQaDocument, text, qaDocumentPath)
 }
 for (const forbiddenClaim of [
   'Mobile Ads SDK integration: Completed', 'UMP integration: Completed',
   'Advertising ID declaration: Completed', 'Data safety: Completed',
-  'Official test-ad QA: Completed', 'Actual ad serving: Completed',
-  'Release signing: Completed', 'AAB generation: Completed',
+  'Official test-ad QA: Completed', 'Android advertising QA: Completed',
+  'Actual ad serving: Completed', 'Release signing: Completed',
+  'AAB generation: Completed', 'ADB logcat verification: Completed',
+  'Full Android regression QA: Completed',
 ]) {
-  if (normalizedDocument.includes(forbiddenClaim)) {
-    errors.push(`${documentPath}: forbidden completion claim: ${forbiddenClaim}`)
+  if (normalizedDocument.includes(forbiddenClaim) || normalizedQaDocument.includes(forbiddenClaim)) {
+    errors.push(`documentation: forbidden completion claim: ${forbiddenClaim}`)
   }
 }
 
 const textFiles = [...allowedFiles].filter((path) => /\.(?:md|json|mjs|gradle|xml)$/u.test(path))
-for (const path of textFiles) {
-  if (read(path).includes('\uFFFD')) errors.push(`${path}: Unicode replacement character found`)
-}
 const privacyLabel = '개인정보 및 쿠키 설정'
 const knownMojibake = '媛쒖씤?뺣낫 諛?荑좏궎 ?ㅼ젙'
+for (const path of textFiles) {
+  const content = read(path)
+  if (content.includes('\uFFFD')) errors.push(`${path}: Unicode replacement character found`)
+  if (content.includes(knownMojibake)) errors.push(`${path}: mojibake privacy-options label found`)
+}
 if (!document.includes(privacyLabel)) errors.push(`${documentPath}: approved privacy-options label is missing`)
-if (document.includes(knownMojibake)) errors.push(`${documentPath}: mojibake privacy-options label found`)
 
 const changedContent = [...changedFiles]
   .filter((path) => allowedFiles.has(path))
