@@ -1,5 +1,26 @@
 # TODO
 
+## PR #407 - AdMob Runtime Consent Coordinator TODO
+
+- [x] Verify merged PR #406 baseline at the expected main HEAD
+- [x] Add native Android platform gate
+- [x] Add consent information request
+- [x] Resolve the consent form after every successful information response
+- [x] Gate initialization on the latest form-result `canRequestAds`
+- [x] Add a single-flight bootstrap Promise
+- [x] Add an initialize-once guard
+- [x] Add fail-closed error states
+- [x] Add immutable snapshot and subscription APIs
+- [x] Add web/non-Android zero-call no-op behavior
+- [x] Wire non-blocking bootstrap from `src/main.jsx`
+- [x] Add targeted creation/post-merge behavioral checker
+- [ ] Install and run on an Android device
+- [ ] Verify runtime behavior with ADB logcat
+- [ ] Implement conditional privacy-options UI in a separate PR
+- [ ] Implement rewarded-ad SDK provider and official test-ad request
+- [ ] Complete Android advertising QA
+- [ ] Update AdMob and Google Play Console declarations when applicable
+
 ## PR #406 - AdMob Runtime Consent Bootstrap Contract TODO
 
 - [x] Verify starting `main` and merged PR #405 baseline
