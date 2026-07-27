@@ -13,15 +13,15 @@ const notStoredItems = [
 ];
 
 const externalTransferItems = [
-  '현재 MVP 기준 서버/DB 전송 없음',
-  '실제 광고 SDK 없음',
-  '실제 분석 SDK 없음',
-  '실제 결제 SDK 없음',
-  'mock rewarded ad provider만 사용',
+  '하루풀이 자체 서버/DB로 프로필을 전송하지 않음',
+  'Android 앱의 Google UMP는 동의 상태 확인을 위해 Google 서비스와 통신할 수 있음',
+  '외부 분석 SDK는 아직 연결되지 않음',
+  '실제 결제 SDK는 아직 연결되지 않음',
+  '기존 rewarded provider는 mock이며 실제 광고를 요청하지 않음',
 ];
 
 const reviewNeededItems = [
-  '실제 광고 SDK 도입',
+  'production 광고 단위 ID 및 실제 광고 요청 기능 도입',
   '분석 SDK 도입',
   '로그인 기능 도입',
   '서버/DB 저장 도입',
@@ -73,15 +73,17 @@ function PrivacyInfoPage({ onNavigate, consentPreferences }) {
         <strong>MVP 기준 안내</strong>
         <p>
           현재 저장되는 정보는 서버가 아니라 사용자의 브라우저 localStorage에 보관됩니다.
-          실제 광고, 분석, 결제 SDK는 아직 연결되어 있지 않습니다.
+          Android 앱에는 AdMob SDK와 Google UMP 동의 확인 절차가 연결되어 있지만, production
+          광고 단위 ID와 광고 request/load/show 기능은 아직 구현되지 않아 실제 광고 송출은
+          이루어지지 않습니다.
         </p>
       </section>
 
       <section className="privacy-info-section">
         <h2>데이터 사용 동의 상태</h2>
         <p>
-          현재 MVP에서는 실제 광고/분석 SDK가 연결되어 있지 않습니다. 동의 상태는 향후 SDK 도입에
-          대비해 브라우저에 저장됩니다.
+          아래 상태는 하루풀이 앱 내부의 데이터 사용 선택이며 Google UMP 개인정보 선택과는
+          별도입니다. Google UMP의 runtime 동의 상태를 브라우저 저장소에 보관하지 않습니다.
         </p>
         {consentPreferences ? (
           <div className="consent-status-list">
@@ -116,7 +118,7 @@ function PrivacyInfoPage({ onNavigate, consentPreferences }) {
         />
         <InfoSection
           title="외부 전송"
-          description="현재 MVP는 서버나 외부 SDK로 개인정보를 전송하지 않습니다."
+          description="프로필은 하루풀이 자체 서버/DB로 전송하지 않습니다. 다만 Android 앱의 Google UMP는 동의 상태 확인을 위해 Google 서비스와 통신할 수 있습니다."
           items={externalTransferItems}
         />
         <InfoSection

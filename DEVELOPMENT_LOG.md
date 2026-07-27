@@ -1,5 +1,64 @@
 # DEVELOPMENT_LOG
 
+## PR #409 - AdMob Privacy Options Settings UI
+
+- Work date: 2026-07-27
+- PR type: production privacy-options UI and runtime action
+- Starting main HEAD: `7b89c90cff8593218165a56f4529e4cedcd40412`
+- Branch: `feat/admob-privacy-options-settings-ui`
+- Conditional Settings entry: Completed
+- Visibility: native Android, completed consent information, and `REQUIRED`
+- `showPrivacyOptionsForm` runtime action: Completed
+- Post-form `requestConsentInfo` refresh: Completed
+- Refresh-time secondary consent form: Not added
+- Privacy action single-flight and Promise identity: Completed
+- Bootstrap/action serialization: Completed
+- Consent revocation gate reconciliation: Completed
+- Consent grant initialize-once reconciliation: Completed
+- Form, refresh, and initialize failure handling: Fail closed
+- App lazy snapshot hydration and effect resynchronization: Completed
+- Subscription cleanup and React StrictMode compatibility: Completed
+- Privacy copy alignment: Completed
+- Local app consent and Google UMP choices: Kept separate
+- Existing localStorage keys and schema: Unchanged
+- Rewarded-ad providers: Unchanged
+- Ad unit IDs, test-device identifiers, and debug geography: Not added
+- Ad request/load/show implementation: Not added
+- Android privacy-options device QA: Pending
+- Post-dismiss refresh device verification: Pending
+- Offline QA and ADB logcat verification: Pending
+- Google Play disclosure update: Pending
+- Release build, signing, signed APK, AAB, and Play upload: Pending
+- AdMob and Google Play Consoles: Unchanged
+
+Local verification:
+
+- `npm ci`: Pass; npm reported 4 dependency audit findings (3 high, 1
+  critical). No automatic dependency fix was applied.
+- `npm run build`: Pass with the existing large-chunk warning.
+- `npm run check:admob-privacy-options-ui`: Pass in creation mode.
+- `npm run check:admob-privacy-options-ui -- --negative-self-test`: Pass;
+  46/46 expected outcomes.
+- `npm run check:admob-privacy-options-ui-contract`: Pass in post-merge mode.
+- `npm run check:admob-runtime-consent-coordinator`: Pass in post-merge mode.
+- `npm run check:admob-runtime-consent-bootstrap-contract`: Pass in
+  post-merge mode.
+- `npm run check:content-safety`: Pass.
+- `npm run check:share-text`: Pass.
+- `npm run check:doc-check-src-guardrails`: Pass.
+- `npx cap sync android`: Pass; generated Gradle line-ending changes were
+  restored so Android files remain unchanged.
+- `.\gradlew.bat clean`: Pass through a temporary ASCII drive mapping after
+  the direct workspace path was blocked by Gradle's Windows non-ASCII path
+  check.
+- `.\gradlew.bat assembleDebug`: Blocked because no Android SDK installation
+  or `ANDROID_HOME`/`ANDROID_SDK_ROOT` was available in the local environment.
+- `.\gradlew.bat :app:processDebugMainManifest`: Not run because
+  `assembleDebug` did not pass its environment prerequisite.
+- Android privacy-options device QA, offline QA, and ADB logcat: Not
+  performed.
+- GitHub Actions and Vercel: Pending; no remote success is claimed locally.
+
 ## PR #408 - AdMob Privacy Options UI Contract
 
 - Work date: 2026-07-27
