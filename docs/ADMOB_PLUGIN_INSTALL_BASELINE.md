@@ -10,10 +10,15 @@
 - UMP SDK dependency resolution: Completed
 - UMP SDK resolved version: 4.0.0
 - AdMob App ID configuration: Completed
-- Debug Gradle build after App ID configuration: Pending
-- Debug merged manifest App ID verification: Pending
-- Debug APK installation: Not started
-- Android app launch QA after App ID configuration: Not started
+- Debug Gradle build after App ID configuration: Completed
+- Debug merged manifest App ID verification: Completed
+- Debug APK artifact generation: Completed
+- Debug APK artifact download: Completed
+- Debug APK installation: Completed
+- Android app launch QA after App ID configuration: Completed
+- Android startup smoke QA: Pass
+- ADB logcat verification: Not performed
+- Full Android regression QA: Not completed
 - Release Gradle build verification: Blocked by the existing release-signing environment guard
 - Release merged manifest inspection: Blocked by the existing release-signing environment guard
 
@@ -94,13 +99,16 @@ this App ID update.
 
 ## Debug build verification
 
-The original plugin-install HEAD completed `clean` and `assembleDebug`, and a
-debug APK artifact was generated for build verification only.
+Android Debug Build run #345 completed successfully for tested HEAD
+`07f85a8dfe2b9fbc6551b25dd6731c81ee04d231`.
 
-After the App ID resource and manifest metadata were added, a new GitHub Actions
-run is required. Until that run completes, the updated debug build, artifact,
-and merged-manifest result remain Pending. No APK installation or Android
-device QA is inferred from a successful build.
+- Workflow run ID: `30230115096`
+- Artifact name: `harupuli-debug-apk`
+- Artifact ID: `8639819148`
+- Artifact digest: `sha256:4290933add6503a9fe55c8ca02514660fa7f3936b9529f9d06503dfaa196bb26`
+
+The artifact was downloaded, installed on a Galaxy S23 Ultra, and launched to
+the home screen without an immediate force close.
 
 ## Release build verification
 
@@ -110,15 +118,18 @@ upload, or release-completion claim was added in this PR.
 
 ## Debug merged manifest observations
 
-The original plugin-install HEAD's debug merged manifest contained SDK-provided
-Advertising ID permissions and Google Mobile Ads components including
-`MobileAdsInitProvider`, but it had no App ID metadata.
+The run #345 Debug APK was inspected directly. Its compiled manifest contains
+exactly one `com.google.android.gms.ads.APPLICATION_ID` metadata element whose
+value references resource ID `0x7f0d001b`.
 
-The source manifest now contains exactly one
-`com.google.android.gms.ads.APPLICATION_ID` metadata element and references
-`@string/admob_app_id`. The Android string resource contains the approved
-Harupuli App ID. Confirmation that the updated debug merged manifest resolves
-the resource to the actual value remains Pending until the new build completes.
+The APK resource table resolves that resource ID to:
+
+- Resource key: `admob_app_id`
+- Resource value: `ca-app-pub-9536468405324805~1921427615`
+
+The compiled manifest also contains `MobileAdsInitProvider` and inherited
+Advertising ID permissions. The source manifest does not manually declare
+those permissions.
 
 ## Release merged manifest observations
 
@@ -128,7 +139,7 @@ or inferred from the debug variant.
 
 ## Advertising ID impact
 
-The original debug merged manifest inherited
+The compiled debug manifest inherits
 `com.google.android.gms.permission.AD_ID` and
 `android.permission.ACCESS_ADSERVICES_AD_ID` from the Mobile Ads SDK. Neither
 permission is manually declared in the source manifest. This observation does
@@ -143,6 +154,8 @@ AdMob App ID configuration: Completed.
 - Configured App ID: `ca-app-pub-9536468405324805~1921427615`
 - Source manifest metadata name: `com.google.android.gms.ads.APPLICATION_ID`
 - Source manifest metadata value: `@string/admob_app_id`
+- Compiled APK metadata resource: `0x7f0d001b`
+- Compiled APK resource value: `ca-app-pub-9536468405324805~1921427615`
 - Google sample App ID: not used
 - Ad unit ID: not added
 - Test-device identifier: not added
@@ -160,10 +173,15 @@ API secret.
 - Consent form presentation: Not started
 - Privacy options runtime UI: Not started
 - Official test-ad request: Not started
-- Android device AdMob QA: Not started
+- Android advertising QA: Not started
 - Production ad units: 0
 - Actual ad requests: No data
 - Actual ad serving: Pending
+
+The user completed a startup smoke QA on a Galaxy S23 Ultra. The app launched to
+the home screen, no immediate force close was observed, and no
+`Missing application ID` error was observed during actual launch. ADB logcat
+verification and full Android regression QA were not performed.
 
 ## Files changed
 
@@ -172,7 +190,7 @@ API secret.
 - Capacitor-generated Android Gradle registration files
 - `android/app/src/main/AndroidManifest.xml`
 - `android/app/src/main/res/values/strings.xml`
-- This baseline document, project logs, TODO, and targeted checker
+- Baseline and QA documents, project logs, TODO, and targeted checker
 
 ## Files intentionally unchanged
 
@@ -194,10 +212,6 @@ No Console rollback is needed because this PR does not change either Console.
 
 ## Blocking conditions
 
-- The updated Debug APK build and merged-manifest verification remain Pending
-  until GitHub Actions completes for the new HEAD.
-- Android device QA remains Not started until the updated APK is installed and
-  launched on the Galaxy S23 Ultra.
 - Release dependency, build, and merged-manifest verification remain Blocked
   until approved release-signing variables are available.
 - Runtime advertising work remains out of scope until initialization, consent,
@@ -208,15 +222,13 @@ No Console rollback is needed because this PR does not change either Console.
 
 ## Pending work
 
-- Debug build after App ID configuration: Pending
-- Debug merged manifest App ID verification: Pending
-- Debug APK artifact generation for the new HEAD: Pending
-- Debug APK installation: Not started
-- Android app launch and Missing application ID QA: Not started
+- ADB logcat verification: Not performed
+- Full Android regression QA: Not completed
 - Mobile Ads SDK runtime initialization: Not started
 - UMP consent flow integration: Not started
 - Privacy options runtime UI: Not started
 - Official test-ad request: Not started
+- Android advertising QA: Not started
 - European regulations message publication: Not started
 - Google Play Data safety update: Not started
 - Advertising ID declaration: Not started
