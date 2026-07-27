@@ -15,6 +15,18 @@
 - Bootstrap/action serialization: Completed
 - Consent revocation gate reconciliation: Completed
 - Consent grant initialize-once reconciliation: Completed
+- Claude Code independent review: Pass; P0/P1/P2 findings: None
+- Failed privacy-options feedback: `role="alert"` without a forced
+  `aria-live="polite"`
+- Non-error privacy-options feedback: `role="status"` with
+  `aria-live="polite"`
+- Empty privacy-options feedback and hidden entry: No live-region element
+  rendered
+- Revoke then re-grant behavioral coverage: Pass; the ad gate closes and
+  reopens while initialize remains at one total call
+- `REQUIRED` to `NOT_REQUIRED` behavioral coverage: Pass; the entry helper
+  hides the entry and a later direct action safely resolves without plugin,
+  refresh, or initialize calls
 - Form, refresh, and initialize failure handling: Fail closed
 - App lazy snapshot hydration and effect resynchronization: Completed
 - Subscription cleanup and React StrictMode compatibility: Completed
@@ -25,7 +37,11 @@
 - Ad unit IDs, test-device identifiers, and debug geography: Not added
 - Ad request/load/show implementation: Not added
 - Android privacy-options device QA: Pending
+- Screen-reader announcement QA: Pending
+- `NOT_REQUIRED` transition UX verification: Pending
 - Post-dismiss refresh device verification: Pending
+- ADB logcat: Pending
+- Offline QA: Pending
 - Offline QA and ADB logcat verification: Pending
 - Google Play disclosure update: Pending
 - Release build, signing, signed APK, AAB, and Play upload: Pending
@@ -38,7 +54,8 @@ Local verification:
 - `npm run build`: Pass with the existing large-chunk warning.
 - `npm run check:admob-privacy-options-ui`: Pass in creation mode.
 - `npm run check:admob-privacy-options-ui -- --negative-self-test`: Pass;
-  46/46 expected outcomes.
+  48/48 forbidden mutations, post-merge fixture Pass, and 49/49 aggregate
+  targeted verification.
 - `npm run check:admob-privacy-options-ui-contract`: Pass in post-merge mode.
 - `npm run check:admob-runtime-consent-coordinator`: Pass in post-merge mode.
 - `npm run check:admob-runtime-consent-bootstrap-contract`: Pass in

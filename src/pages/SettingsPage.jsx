@@ -31,8 +31,10 @@ function SettingsPage({
   onEditProfile,
   onReset,
 }) {
+  const isPrivacyOptionsError =
+    privacyOptionsActionState === 'failed';
   const privacyOptionsMessageRole =
-    privacyOptionsActionState === 'failed' ? 'alert' : 'status';
+    isPrivacyOptionsError ? 'alert' : 'status';
 
   return (
     <div className="page-stack settings-page">
@@ -126,10 +128,10 @@ function SettingsPage({
         {shouldShowPrivacyOptionsEntry && privacyOptionsActionMessage && (
           <p
             className={`settings-privacy-options-message${
-              privacyOptionsActionState === 'failed' ? ' is-error' : ''
+              isPrivacyOptionsError ? ' is-error' : ''
             }`}
             role={privacyOptionsMessageRole}
-            aria-live="polite"
+            aria-live={isPrivacyOptionsError ? undefined : 'polite'}
           >
             {privacyOptionsActionMessage}
           </p>

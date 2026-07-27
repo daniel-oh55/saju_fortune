@@ -151,10 +151,14 @@ for (const text of [
 for (const text of [
   '개인정보 및 쿠키 설정',
   'shouldShowPrivacyOptionsEntry &&',
+  'shouldShowPrivacyOptionsEntry && privacyOptionsActionMessage &&',
   'disabled={isPrivacyOptionsActionPending}',
   "aria-busy={isPrivacyOptionsActionPending ? 'true' : undefined}",
+  'const isPrivacyOptionsError =',
+  "privacyOptionsActionState === 'failed';",
+  "isPrivacyOptionsError ? 'alert' : 'status';",
   "role={privacyOptionsMessageRole}",
-  'aria-live="polite"',
+  "aria-live={isPrivacyOptionsError ? undefined : 'polite'}",
 ]) {
   requireText(settingsSource, text, 'src/pages/SettingsPage.jsx')
 }
@@ -412,6 +416,61 @@ async function runBehavioralChecks() {
   assert.equal(revokeResult.state, ADMOB_RUNTIME_CONSENT_STATE.CONSENT_DENIED_OR_UNRESOLVED)
   assert.equal(revoke.calls.filter((call) => call === 'initialize').length, 1)
 
+  const revokeAndRegrant = createScenario({
+    startupForm: info({ status: 'OBTAINED', canRequestAds: true }),
+    privacyRefreshes: [
+      info({ canRequestAds: false }),
+      info({ status: 'OBTAINED', canRequestAds: true }),
+    ],
+  })
+  await revokeAndRegrant.coordinator.bootstrap()
+  const revokedResult = await revokeAndRegrant.coordinator.openPrivacyOptions()
+  assert.equal(revokedResult.adGateOpen, false)
+  assert.equal(revokedResult.canRequestAds, false)
+  assert.equal(revokeAndRegrant.calls.filter((call) => call === 'initialize').length, 1)
+  const regrantAction = revokeAndRegrant.coordinator.openPrivacyOptions()
+  assert.ok(regrantAction instanceof Promise)
+  const regrantedResult = await regrantAction
+  assert.equal(regrantedResult.adGateOpen, true)
+  assert.equal(regrantedResult.canRequestAds, true)
+  assert.equal(regrantedResult.initializeResolved, true)
+  assert.equal(revokeAndRegrant.calls.filter((call) => call === 'initialize').length, 1)
+  assert.equal(revokeAndRegrant.calls.filter((call) => call === 'showPrivacyOptionsForm').length, 2)
+  assert.equal(revokeAndRegrant.calls.filter((call) => call === 'requestConsentInfo').length, 3)
+  assert.equal(revokeAndRegrant.calls.filter((call) => call === 'showConsentForm').length, 1)
+
+  const requiredToNotRequired = createScenario({
+    startupForm: info({ status: 'OBTAINED', canRequestAds: true }),
+    privacyRefreshes: [
+      info({
+        status: 'OBTAINED',
+        canRequestAds: true,
+        privacyOptionsRequirementStatus: 'NOT_REQUIRED',
+      }),
+    ],
+  })
+  await requiredToNotRequired.coordinator.bootstrap()
+  assert.equal(
+    shouldShowAdmobPrivacyOptionsEntry(requiredToNotRequired.coordinator.getSnapshot()),
+    true,
+  )
+  const notRequiredResult = await requiredToNotRequired.coordinator.openPrivacyOptions()
+  assert.equal(notRequiredResult.privacyOptionsRequirementStatus, 'NOT_REQUIRED')
+  assert.equal(shouldShowAdmobPrivacyOptionsEntry(notRequiredResult), false)
+  assert.equal(
+    requiredToNotRequired.calls.filter((call) => call === 'showPrivacyOptionsForm').length,
+    1,
+  )
+  assert.equal(
+    requiredToNotRequired.calls.filter((call) => call === 'requestConsentInfo').length,
+    2,
+  )
+  assert.equal(requiredToNotRequired.calls.filter((call) => call === 'showConsentForm').length, 1)
+  const beforeBlockedActionCalls = [...requiredToNotRequired.calls]
+  const blockedActionResult = await requiredToNotRequired.coordinator.openPrivacyOptions()
+  assert.strictEqual(blockedActionResult, requiredToNotRequired.coordinator.getSnapshot())
+  assert.deepEqual(requiredToNotRequired.calls, beforeBlockedActionCalls)
+
   const formFailure = createScenario({
     startupForm: info({ status: 'OBTAINED', canRequestAds: true }),
     privacyForm: new Error('private native message'),
@@ -590,6 +649,9 @@ if (process.argv.includes('--negative-self-test')) {
     ['Web plugin', () => replaceAll(coordinatorPath, 'dependencies.isNativePlatform() === true &&', 'true &&')],
     ['entry label', () => replaceAll('src/pages/SettingsPage.jsx', '개인정보 및 쿠키 설정', '개인정보 설정')],
     ['pending disabled', () => replace('src/pages/SettingsPage.jsx', 'disabled={isPrivacyOptionsActionPending}', 'disabled={false}')],
+    ['failed polite live region', () => replace('src/pages/SettingsPage.jsx', "aria-live={isPrivacyOptionsError ? undefined : 'polite'}", 'aria-live="polite"')],
+    ['failed status role', () => replace('src/pages/SettingsPage.jsx', "isPrivacyOptionsError ? 'alert' : 'status';", "isPrivacyOptionsError ? 'status' : 'status';")],
+    ['non-error polite live region', () => replace('src/pages/SettingsPage.jsx', "aria-live={isPrivacyOptionsError ? undefined : 'polite'}", 'aria-live={undefined}')],
     ['single-flight', () => replace(coordinatorPath, 'if (privacyOptionsPromise) return privacyOptionsPromise;', '// single-flight removed')],
     ['Promise identity', () => replace(coordinatorPath, 'function openPrivacyOptions() {', 'async function openPrivacyOptions() {')],
     ['refresh', () => replace(coordinatorPath, 'refreshedConsentInfo = await dependencies.requestConsentInfo();', 'refreshedConsentInfo = snapshot;')],
@@ -605,7 +667,7 @@ if (process.argv.includes('--negative-self-test')) {
     ['known mojibake', () => append('CHANGELOG.md', `\n${['媛쒖씤', '?뺣낫'].join('')}\n`)],
     ['unexpected untracked', () => writeFileSync(resolve(root, unexpectedRootPath), 'negative probe\n', 'utf8')],
   ]
-  assert.equal(mutationCases.length, 45)
+  assert.equal(mutationCases.length, 48)
   const restorePaths = [
     'src/main.jsx',
     'src/components/ConsentBanner.jsx',
@@ -636,7 +698,7 @@ if (process.argv.includes('--negative-self-test')) {
         throw new Error(`${name}: checker unexpectedly accepted the mutation`)
       }
       passed += 1
-      console.log(`PASS ${passed}/46: ${name}`)
+      console.log(`PASS ${passed}/49: ${name}`)
     } finally {
       for (const [path, content] of originals) {
         writeFileSync(resolve(root, path), content, 'utf8')
@@ -655,8 +717,8 @@ if (process.argv.includes('--negative-self-test')) {
     throw new Error(`post-merge mode failed:\n${postMergeResult.stdout}\n${postMergeResult.stderr}`)
   }
   passed += 1
-  console.log(`PASS ${passed}/46: post-merge mode`)
-  console.log(`AdMob privacy options UI negative verification passed (${passed}/46)`)
+  console.log(`PASS ${passed}/49: post-merge mode`)
+  console.log(`AdMob privacy options UI negative verification passed (${passed}/49)`)
   process.exit(0)
 }
 
