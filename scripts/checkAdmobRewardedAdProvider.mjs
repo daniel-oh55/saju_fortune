@@ -164,6 +164,18 @@ function validateScope() {
   const branch = git(['branch', '--show-current']);
   if (branch === 'main') return;
 
+  try {
+    git(['rev-parse', '--verify', 'origin/main']);
+  } catch (error) {
+    if (process.env.GITHUB_ACTIONS === 'true') {
+      process.stdout.write(
+        'Scope check skipped: origin/main is unavailable in the shallow Actions checkout.\n',
+      );
+      return;
+    }
+    throw error;
+  }
+
   const diffFiles = new Set(
     git(['diff', '--name-only', 'origin/main...HEAD'])
       .split(/\r?\n/)
