@@ -24,6 +24,22 @@ Completed in this PR:
 - PR #411 implementation file plan
 - Targeted creation/post-merge checker
 
+Checker lifecycle:
+
+- PR #410 creation mode validates the exact docs/check-only scope and the
+  current stub baseline. It rejects production source, dependency, lockfile,
+  workflow, runtime prepare/show, storage, schema, and routing changes.
+- After merge, the same contract checker validates only the durable contract,
+  package script, document quality, preserved local-file rules, dependency-map
+  shape, and completion-claim guardrails.
+- Post-merge mode does not require the SDK provider to remain a stub, retain
+  `SDK_UNAVAILABLE`, omit `prepareRewardVideoAd`, omit `showRewardVideoAd`, or
+  retain mock-specific loader/modal implementation details.
+- PR #411 must not modify this contract checker merely to permit the planned
+  implementation. Production behavior and implementation correctness belong
+  to the separate `scripts/checkAdmobRewardedAdProvider.mjs` checker planned
+  for that PR.
+
 Pending:
 
 - SDK provider production code
@@ -283,6 +299,22 @@ On timeout:
 Infinite loading, a permanently pending show Promise, and a permanently
 disabled button are prohibited. Native error payloads and messages must not be
 shown to users or stored in localStorage.
+
+Installed Android v8.0.0 source has an important unsettled-call limitation:
+`Dismissed` and `FailedToShow` notify listeners, but those callbacks do not
+resolve or reject the `showRewardVideoAd` `PluginCall`. Only the reward callback
+resolves that call; synchronous setup failures can reject it.
+
+App-level timeout does not cancel or settle the native PluginCall. It settles
+only this app action, restores the app UI, and ignores late callbacks.
+Listener handle cleanup is separate from native PluginCall settlement and must
+not be described as canceling or settling the native call.
+
+This is an **Unsettled native call risk; device verification required**, not a
+confirmed native memory leak. Android QA and ADB logcat must cover repeated
+early dismissal, any reproducible `FailedToShow` path, a later deliberate
+retry, listener accumulation, stuck fullscreen or pending state, and recovery
+after retry. Those checks remain Pending until they run on the target device.
 
 ## 12. UI and persistence boundary
 

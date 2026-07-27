@@ -12241,3 +12241,27 @@ Remaining implementation and QA:
 - UI/routing unchanged
 - privacy files unchanged
 - Android/Gradle unchanged
+# 2026-07-27 AdMob Rewarded Contract Checker Forward Compatibility
+
+## Work completed
+
+- Kept creation mode strict for the PR #410 docs/check-only scope and current
+  SDK stub baseline.
+- Changed post-merge mode to validate the durable contract without freezing
+  the SDK provider, loader, or modal in their current stub/mock form.
+- Added historical and future SDK implementation compatibility fixtures.
+- Added negative checks for creation-mode runtime implementation, accidental
+  post-merge stub/call restrictions, and false native timeout/cleanup claims.
+- Documented that app-level timeout and listener cleanup do not cancel or
+  settle the Android native `PluginCall`.
+- Recorded the unsettled native show-call limitation as a device-verification
+  risk, not as a confirmed memory leak.
+- Production source, dependencies, storage, schema, routing, native projects,
+  and workflows are unchanged.
+
+## Pending
+
+- PR #411 production/behavioral checker and SDK provider implementation.
+- Repeated early-dismiss and reproducible `FailedToShow` Android QA with ADB
+  logcat.
+- Production ad unit configuration and live-ad readiness work.

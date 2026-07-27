@@ -53,6 +53,38 @@ const validPackageMap = (value) =>
     ([name, version]) => name.length > 0 && typeof version === 'string' && version.length > 0,
   )
 
+if (process.argv.includes('--post-merge-future-fixture')) {
+  const sdkPath = 'src/services/rewardedAdProvider.sdk.js'
+  const originalSdkSource = readFileSync(resolve(root, sdkPath), 'utf8')
+  const futureSdkSource = [
+    "import { AdMob } from '@capacitor-community/admob'",
+    '',
+    'export const showSdkRewardedAd = async (options) => {',
+    '  await AdMob.prepareRewardVideoAd(options)',
+    '  return AdMob.showRewardVideoAd()',
+    '}',
+    '',
+  ].join('\n')
+  let result
+  try {
+    writeFileSync(resolve(root, sdkPath), futureSdkSource, 'utf8')
+    result = spawnSync(
+      process.execPath,
+      [resolve(root, checkerPath), '--post-merge-fixture'],
+      { cwd: root, encoding: 'utf8' },
+    )
+  } finally {
+    writeFileSync(resolve(root, sdkPath), originalSdkSource, 'utf8')
+  }
+  if (result.status !== 0) {
+    throw new Error(
+      `future implementation compatibility fixture failed:\n${result.stdout}\n${result.stderr}`,
+    )
+  }
+  console.log('PASS future implementation compatibility fixture 1/1')
+  process.exit(0)
+}
+
 if (process.argv.includes('--negative-self-test')) {
   const append = (path, text) => writeFileSync(resolve(root, path), `${read(path)}${text}`, 'utf8')
   const replace = (path, from, to) => {
@@ -74,6 +106,14 @@ if (process.argv.includes('--negative-self-test')) {
   const cases = [
     ['unexpected src file', () => append('src/services/rewardedAdService.js', '\n// probe\n'), 'unexpected changed file'],
     ['SDK provider source', () => append('src/services/rewardedAdProvider.sdk.js', '\n// probe\n'), 'unexpected changed file'],
+    [
+      'creation mode SDK runtime implementation',
+      () => append(
+        'src/services/rewardedAdProvider.sdk.js',
+        `\n${['AdMob', 'prepareRewardVideoAd'].join('.')}({})\n${['AdMob', 'showRewardVideoAd'].join('.')}()\n`,
+      ),
+      'unexpected changed file',
+    ],
     ['RewardAdModal source', () => append('src/components/RewardAdModal.jsx', '\n// probe\n'), 'unexpected changed file'],
     ['App source', () => append('src/App.jsx', '\n// probe\n'), 'unexpected changed file'],
     ['AndroidManifest', () => append('android/app/src/main/AndroidManifest.xml', '\n<!-- probe -->\n'), 'unexpected changed file'],
@@ -102,6 +142,16 @@ if (process.argv.includes('--negative-self-test')) {
     ['listener cleanup removal', () => replaceAll(documentPath, 'Listener cleanup', 'Listener notes'), 'Listener cleanup'],
     ['remove all listeners', () => append(documentPath, `\n${['remove', 'All', 'Listeners'].join('')} is allowed.\n`), 'forbidden contract meaning'],
     ['timeout removal', () => replaceAll(documentPath, 'Ad load timeout', 'Ad load wait'), 'Ad load timeout'],
+    [
+      'timeout cancels native PluginCall claim',
+      () => append(documentPath, '\nApp-level timeout cancels the native PluginCall.\n'),
+      'forbidden contract meaning',
+    ],
+    [
+      'listener cleanup settles native call claim',
+      () => append(documentPath, '\nListener cleanup settles the native PluginCall.\n'),
+      'forbidden contract meaning',
+    ],
     ['missing production ID request', () => append(documentPath, '\nMissing production ID may still request an ad.\n'), 'forbidden contract meaning'],
     ['mode mixing', () => append(documentPath, '\nOfficial test and production modes may mix automatically.\n'), 'forbidden contract meaning'],
     ['UMP localStorage', () => append(documentPath, '\nStore UMP status in localStorage.\n'), 'forbidden contract meaning'],
@@ -148,17 +198,84 @@ if (process.argv.includes('--negative-self-test')) {
       if (existsSync(resolve(root, unexpectedPath))) unlinkSync(resolve(root, unexpectedPath))
     }
   }
-  const postMerge = spawnSync(
+  const historicalPostMerge = spawnSync(
     process.execPath,
     [resolve(root, checkerPath), '--post-merge-fixture'],
     { cwd: root, encoding: 'utf8' },
   )
-  if (postMerge.status !== 0) {
-    throw new Error(`post-merge fixture failed:\n${postMerge.stdout}\n${postMerge.stderr}`)
+  if (historicalPostMerge.status !== 0) {
+    throw new Error(
+      `historical post-merge fixture failed:\n${historicalPostMerge.stdout}\n${historicalPostMerge.stderr}`,
+    )
   }
-  console.log('PASS post-merge fixture 1/1: expected-file creation checks disabled')
+  console.log('PASS historical post-merge fixture 1/1')
+
+  const futurePostMerge = spawnSync(
+    process.execPath,
+    [resolve(root, checkerPath), '--post-merge-future-fixture'],
+    { cwd: root, encoding: 'utf8' },
+  )
+  if (futurePostMerge.status !== 0) {
+    throw new Error(
+      `future implementation compatibility fixture failed:\n${futurePostMerge.stdout}\n${futurePostMerge.stderr}`,
+    )
+  }
+  console.log('PASS future implementation compatibility fixture 1/1')
+
+  const checkerGuardSentinel = [
+    '// Post-merge mode intentionally has no production ',
+    'implementation-shape guards.',
+  ].join('')
+  const checkerRegressionCases = [
+    [
+      'post-merge permanently requires SDK_UNAVAILABLE',
+      "requireText(read('src/services/rewardedAdProvider.sdk.js'), 'SDK_UNAVAILABLE', 'post-merge SDK source')",
+      'SDK_UNAVAILABLE',
+    ],
+    [
+      'post-merge forbids prepareRewardVideoAd implementation',
+      "if (read('src/services/rewardedAdProvider.sdk.js').includes('prepareRewardVideoAd(')) errors.push('post-merge regression: prepareRewardVideoAd implementation forbidden')",
+      'prepareRewardVideoAd implementation forbidden',
+    ],
+    [
+      'post-merge forbids showRewardVideoAd implementation',
+      "if (read('src/services/rewardedAdProvider.sdk.js').includes('showRewardVideoAd(')) errors.push('post-merge regression: showRewardVideoAd implementation forbidden')",
+      'showRewardVideoAd implementation forbidden',
+    ],
+  ]
+  for (const [name, guard, expected] of checkerRegressionCases) {
+    const originalCheckerSource = readFileSync(resolve(root, checkerPath), 'utf8')
+    try {
+      if (!originalCheckerSource.includes(checkerGuardSentinel)) {
+        throw new Error(`self-test fixture missing: ${checkerGuardSentinel}`)
+      }
+      writeFileSync(
+        resolve(root, checkerPath),
+        originalCheckerSource.replace(
+          checkerGuardSentinel,
+          `${checkerGuardSentinel}\nif (!creationMode) ${guard}`,
+        ),
+        'utf8',
+      )
+      const result = spawnSync(
+        process.execPath,
+        [resolve(root, checkerPath), '--post-merge-future-fixture'],
+        { cwd: root, encoding: 'utf8' },
+      )
+      const output = `${result.stdout ?? ''}\n${result.stderr ?? ''}`
+      if (result.status === 0 || !output.includes(expected)) {
+        throw new Error(`${name}: expected self-test rejection containing "${expected}"\n${output}`)
+      }
+      mutationPasses += 1
+      console.log(
+        `PASS mutation ${mutationPasses}/${cases.length + checkerRegressionCases.length}: ${name}`,
+      )
+    } finally {
+      writeFileSync(resolve(root, checkerPath), originalCheckerSource, 'utf8')
+    }
+  }
   console.log(
-    `AdMob rewarded ad provider contract negative verification passed (mutations ${mutationPasses}/${cases.length}; post-merge fixture 1/1)`,
+    `AdMob rewarded ad provider contract negative verification passed (mutations ${mutationPasses}/${cases.length + checkerRegressionCases.length}; historical post-merge fixture 1/1; future implementation compatibility fixture 1/1)`,
   )
   process.exit(0)
 }
@@ -252,6 +369,9 @@ for (const text of [
   'removeAllListeners is prohibited',
   'Ad load timeout',
   'Native show-start timeout',
+  'App-level timeout does not cancel or settle the native PluginCall',
+  'Listener handle cleanup is separate from native PluginCall settlement',
+  'Unsettled native call risk; device verification required',
   'Official test mode',
   'Production ad unit pending',
   'No actual ad request/load/show in PR #410',
@@ -279,6 +399,8 @@ const forbiddenMeanings = [
   'Store native reward payload in localStorage.',
   'Change the existing reward localStorage key.',
   'Increment schemaVersion for this PR.',
+  'App-level timeout cancels the native PluginCall.',
+  'Listener cleanup settles the native PluginCall.',
 ]
 for (const meaning of forbiddenMeanings) {
   if (compactDocument.includes(meaning)) {
@@ -346,17 +468,7 @@ for (const runtimeCall of [
   }
 }
 
-if (!creationMode) {
-  const sdkSource = read('src/services/rewardedAdProvider.sdk.js')
-  const loaderSource = read('src/services/rewardedAdProvider.loader.js')
-  const modalSource = read('src/components/RewardAdModal.jsx')
-  requireText(sdkSource, 'SDK_UNAVAILABLE', 'post-merge SDK source')
-  requireText(loaderSource, 'showMockRewardedAd', 'post-merge loader source')
-  requireText(modalSource, 'getMockRewardedAdDurationSeconds', 'post-merge modal source')
-  if (sdkSource.includes('prepareRewardVideoAd(') || sdkSource.includes('showRewardVideoAd(')) {
-    errors.push('post-merge baseline: SDK provider is no longer the expected stub')
-  }
-}
+// Post-merge mode intentionally has no production implementation-shape guards.
 
 if (errors.length) {
   console.error('AdMob rewarded ad provider contract check failed.')
