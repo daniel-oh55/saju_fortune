@@ -12312,11 +12312,18 @@ Remaining implementation and QA:
   configured Android SDK location. No Android project property was changed.
 - `npm ci` reported the existing audit status of 3 high and 1 critical
   vulnerability; dependencies and `package-lock.json` were not changed.
+- GitHub Actions run `30253832382` completed the unchanged standard Android
+  Debug Build and uploaded `harupuli-debug-apk` with digest
+  `sha256:003bd36e934e84f7e9cd675f20134c803efbdeee346908afef143289ee4f8c8c`.
+- GitHub Actions run `30253832336` completed Android Rewarded Test Build and
+  uploaded `harupuli-rewarded-test-apk` with digest
+  `sha256:27f5d0b05c0a5e54a55088b9890a940737ba5a171604c9c07e8d383160b973da`.
+- Vercel Preview deployment completed successfully for implementation HEAD
+  `d8e95e0cc68cde07f71cb0d3639794c4810501bc`.
 
 ## Not performed
 
 - Galaxy S23 Ultra request, load, fullscreen show, Test Ad label, reward,
   early-dismiss, repeated-dismiss, offline, and ADB logcat verification
-- GitHub Actions workflow execution and artifact inspection
 - Production ad unit configuration or production ad request/load/show
 - Release signing, AAB generation, Play upload, or console changes

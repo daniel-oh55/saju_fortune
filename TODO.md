@@ -13,7 +13,7 @@
 - [x] Persist verified SDK rewards without changing storage keys or shape
 - [x] Align privacy copy with official-test-only capability
 - [x] Add dedicated Android Rewarded Test Build workflow and checker
-- [ ] Run the dedicated workflow and inspect `harupuli-rewarded-test-apk`
+- [x] Run the dedicated workflow and inspect `harupuli-rewarded-test-apk`
 - [ ] Perform Galaxy S23 Ultra official test-ad request/load/show/reward QA
 - [ ] Perform early-dismiss, repeated-dismiss, failure, offline, and ADB logcat QA
 - [ ] Create a production ad unit or enable production ad serving
