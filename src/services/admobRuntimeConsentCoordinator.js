@@ -12,6 +12,14 @@ export const ADMOB_RUNTIME_CONSENT_STATE = Object.freeze({
   WEB_NOOP: 'web-noop',
 });
 
+export const ADMOB_PRIVACY_OPTIONS_ACTION_STATE = Object.freeze({
+  IDLE: 'idle',
+  OPENING: 'opening',
+  REFRESHING: 'refreshing',
+  COMPLETED: 'completed',
+  FAILED: 'failed',
+});
+
 const INITIAL_SNAPSHOT = Object.freeze({
   state: ADMOB_RUNTIME_CONSENT_STATE.IDLE,
   isNativeAndroid: false,
@@ -25,6 +33,10 @@ const INITIAL_SNAPSHOT = Object.freeze({
   initializeResolved: false,
   adGateOpen: false,
   lastErrorStage: null,
+  privacyOptionsActionState: ADMOB_PRIVACY_OPTIONS_ACTION_STATE.IDLE,
+  isPrivacyOptionsActionPending: false,
+  privacyOptionsActionMessage: '',
+  lastPrivacyOptionsErrorStage: null,
 });
 
 function readConsentSnapshot(consentInfo, previousSnapshot) {
@@ -46,10 +58,20 @@ function readConsentSnapshot(consentInfo, previousSnapshot) {
   return nextSnapshot;
 }
 
+export function shouldShowAdmobPrivacyOptionsEntry(snapshot) {
+  return (
+    snapshot?.isNativeAndroid === true &&
+    snapshot?.consentInfoCompleted === true &&
+    snapshot?.privacyOptionsRequirementStatus === 'REQUIRED'
+  );
+}
+
 export function createAdmobRuntimeConsentCoordinator(dependencies) {
   let snapshot = INITIAL_SNAPSHOT;
   let bootstrapPromise = null;
   let initializePromise = null;
+  let privacyOptionsPromise = null;
+  let privacyRefreshGateBlocked = false;
   const listeners = new Set();
 
   function publish(changes) {
@@ -151,6 +173,17 @@ export function createAdmobRuntimeConsentCoordinator(dependencies) {
 
     try {
       await initializeOnce();
+
+      if (
+        snapshot.canRequestAds !== true ||
+        privacyRefreshGateBlocked
+      ) {
+        return publish({
+          initializeResolved: true,
+          adGateOpen: false,
+        });
+      }
+
       return publish({
         state: ADMOB_RUNTIME_CONSENT_STATE.READY,
         initializeResolved: true,
@@ -161,11 +194,182 @@ export function createAdmobRuntimeConsentCoordinator(dependencies) {
     }
   }
 
+  async function runPrivacyOptions() {
+    if (bootstrapPromise) {
+      await bootstrapPromise;
+    }
+
+    try {
+      const canOpenPrivacyOptions =
+        dependencies.isNativePlatform() === true &&
+        dependencies.getPlatform() === 'android' &&
+        snapshot.consentInfoCompleted === true &&
+        snapshot.privacyOptionsRequirementStatus === 'REQUIRED';
+
+      if (!canOpenPrivacyOptions) return snapshot;
+    } catch {
+      return snapshot;
+    }
+
+    publish({
+      privacyOptionsActionState:
+        ADMOB_PRIVACY_OPTIONS_ACTION_STATE.OPENING,
+      isPrivacyOptionsActionPending: true,
+      privacyOptionsActionMessage: '',
+      lastPrivacyOptionsErrorStage: null,
+    });
+
+    try {
+      const openPrivacyForm = dependencies.showPrivacyOptionsForm;
+      await openPrivacyForm();
+    } catch {
+      return publish({
+        privacyOptionsActionState:
+          ADMOB_PRIVACY_OPTIONS_ACTION_STATE.FAILED,
+        isPrivacyOptionsActionPending: false,
+        privacyOptionsActionMessage:
+          '설정 화면을 열지 못했어요. 잠시 후 다시 시도해 주세요.',
+        lastPrivacyOptionsErrorStage: 'privacy-options-form',
+      });
+    }
+
+    publish({
+      privacyOptionsActionState:
+        ADMOB_PRIVACY_OPTIONS_ACTION_STATE.REFRESHING,
+      isPrivacyOptionsActionPending: true,
+      privacyOptionsActionMessage: '',
+      lastPrivacyOptionsErrorStage: null,
+    });
+
+    let refreshedConsentInfo;
+    try {
+      refreshedConsentInfo = await dependencies.requestConsentInfo();
+    } catch {
+      privacyRefreshGateBlocked = true;
+      return publish({
+        state: ADMOB_RUNTIME_CONSENT_STATE.FAILED,
+        adGateOpen: false,
+        lastErrorStage: 'privacy-options-refresh',
+        privacyOptionsActionState:
+          ADMOB_PRIVACY_OPTIONS_ACTION_STATE.FAILED,
+        isPrivacyOptionsActionPending: false,
+        privacyOptionsActionMessage:
+          '최신 개인정보 설정 상태를 확인하지 못했어요. 잠시 후 다시 시도해 주세요.',
+        lastPrivacyOptionsErrorStage: 'privacy-options-refresh',
+      });
+    }
+
+    const refreshedSnapshot = readConsentSnapshot(
+      refreshedConsentInfo,
+      snapshot,
+    );
+    privacyRefreshGateBlocked = refreshedSnapshot.canRequestAds !== true;
+
+    publish({
+      ...refreshedSnapshot,
+      consentInfoCompleted: true,
+      lastErrorStage: null,
+    });
+
+    if (refreshedSnapshot.canRequestAds !== true) {
+      return publish({
+        state:
+          ADMOB_RUNTIME_CONSENT_STATE.CONSENT_DENIED_OR_UNRESOLVED,
+        canRequestAds: false,
+        adGateOpen: false,
+        privacyOptionsActionState:
+          ADMOB_PRIVACY_OPTIONS_ACTION_STATE.COMPLETED,
+        isPrivacyOptionsActionPending: false,
+        privacyOptionsActionMessage:
+          '개인정보 설정 상태를 다시 확인했어요.',
+        lastPrivacyOptionsErrorStage: null,
+      });
+    }
+
+    if (snapshot.initializeResolved === true) {
+      return publish({
+        state: ADMOB_RUNTIME_CONSENT_STATE.READY,
+        adGateOpen: true,
+        privacyOptionsActionState:
+          ADMOB_PRIVACY_OPTIONS_ACTION_STATE.COMPLETED,
+        isPrivacyOptionsActionPending: false,
+        privacyOptionsActionMessage:
+          '개인정보 설정 상태를 다시 확인했어요.',
+        lastPrivacyOptionsErrorStage: null,
+      });
+    }
+
+    publish({
+      state: ADMOB_RUNTIME_CONSENT_STATE.READY_TO_INITIALIZE,
+      adGateOpen: false,
+    });
+
+    try {
+      await initializeOnce();
+
+      if (
+        snapshot.canRequestAds !== true ||
+        privacyRefreshGateBlocked
+      ) {
+        return publish({
+          initializeResolved: true,
+          adGateOpen: false,
+          privacyOptionsActionState:
+            ADMOB_PRIVACY_OPTIONS_ACTION_STATE.COMPLETED,
+          isPrivacyOptionsActionPending: false,
+          privacyOptionsActionMessage:
+            '개인정보 설정 상태를 다시 확인했어요.',
+          lastPrivacyOptionsErrorStage: null,
+        });
+      }
+
+      return publish({
+        state: ADMOB_RUNTIME_CONSENT_STATE.READY,
+        initializeResolved: true,
+        adGateOpen: true,
+        privacyOptionsActionState:
+          ADMOB_PRIVACY_OPTIONS_ACTION_STATE.COMPLETED,
+        isPrivacyOptionsActionPending: false,
+        privacyOptionsActionMessage:
+          '개인정보 설정 상태를 다시 확인했어요.',
+        lastPrivacyOptionsErrorStage: null,
+      });
+    } catch {
+      privacyRefreshGateBlocked = true;
+      return publish({
+        state: ADMOB_RUNTIME_CONSENT_STATE.FAILED,
+        canRequestAds: true,
+        initializeStarted: true,
+        initializeResolved: false,
+        adGateOpen: false,
+        lastErrorStage: 'initialize',
+        privacyOptionsActionState:
+          ADMOB_PRIVACY_OPTIONS_ACTION_STATE.FAILED,
+        isPrivacyOptionsActionPending: false,
+        privacyOptionsActionMessage:
+          '광고 설정을 준비하지 못했어요. 잠시 후 다시 시도해 주세요.',
+        lastPrivacyOptionsErrorStage: 'initialize',
+      });
+    }
+  }
+
   function bootstrap() {
     if (bootstrapPromise) return bootstrapPromise;
 
     bootstrapPromise = Promise.resolve().then(runBootstrap);
     return bootstrapPromise;
+  }
+
+  function openPrivacyOptions() {
+    if (privacyOptionsPromise) return privacyOptionsPromise;
+
+    privacyOptionsPromise = Promise.resolve()
+      .then(runPrivacyOptions)
+      .finally(() => {
+        privacyOptionsPromise = null;
+      });
+
+    return privacyOptionsPromise;
   }
 
   function getSnapshot() {
@@ -179,6 +383,7 @@ export function createAdmobRuntimeConsentCoordinator(dependencies) {
 
   return Object.freeze({
     bootstrap,
+    openPrivacyOptions,
     getSnapshot,
     subscribe,
   });
@@ -207,6 +412,11 @@ const productionCoordinator = createAdmobRuntimeConsentCoordinator({
     const AdMob = await loadAdMobApi();
     return AdMob.showConsentForm();
   },
+  showPrivacyOptionsForm: async () => {
+    const AdMob = await loadAdMobApi();
+    const openPrivacyForm = AdMob.showPrivacyOptionsForm.bind(AdMob);
+    return openPrivacyForm();
+  },
   initialize: async () => {
     const AdMob = await loadAdMobApi();
     return AdMob.initialize();
@@ -221,3 +431,6 @@ export const getAdmobRuntimeConsentSnapshot = () =>
 
 export const subscribeAdmobRuntimeConsent = (listener) =>
   productionCoordinator.subscribe(listener);
+
+export const openAdmobPrivacyOptions = () =>
+  productionCoordinator.openPrivacyOptions();

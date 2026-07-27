@@ -1,5 +1,26 @@
 # TODO
 
+## PR #409 - AdMob Privacy Options Settings UI TODO
+
+- [x] Verify merged PR #408 baseline at the expected main HEAD
+- [x] Add conditional native-Android `REQUIRED` Settings entry
+- [x] Add privacy-options action and post-form consent-information refresh
+- [x] Add privacy action single-flight and bootstrap/action serialization
+- [x] Reconcile consent revocation and initialize-once consent grant
+- [x] Add fail-closed form, refresh, and initialize handling
+- [x] Add App snapshot hydration, resynchronization, and subscription cleanup
+- [x] Align privacy copy and separate local preferences from Google UMP
+- [x] Add targeted production and behavioral checker
+- [x] Complete Android privacy-options device QA
+- [x] Verify post-dismiss refresh on an Android device
+- [x] Complete offline startup QA
+- [ ] Complete ADB logcat verification
+- [ ] Complete TalkBack/screen-reader announcement QA
+- [ ] Implement rewarded-ad SDK provider and official test-ad request
+- [ ] Create production ad units and implement actual ad request/load/show
+- [ ] Update required Google Play disclosures
+- [ ] Complete release build, signing, AAB generation, and Play upload
+
 ## PR #408 - AdMob Privacy Options UI Contract TODO
 
 - [x] Verify merged PR #407 baseline at the expected main HEAD

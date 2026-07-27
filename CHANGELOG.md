@@ -1,5 +1,35 @@
 # CHANGELOG
 
+## PR #409 - AdMob Privacy Options Settings UI
+
+### Added
+
+- Added the native-Android `REQUIRED`-only `개인정보 및 쿠키 설정`
+  Settings entry and Google UMP privacy-options action.
+- Added post-form consent-information refresh, consent gate reconciliation,
+  initialize-once reuse, and single-flight interaction handling.
+- Added late-subscriber snapshot hydration, effect resynchronization, and
+  StrictMode-compatible subscription cleanup.
+- Aligned privacy copy with the connected AdMob/UMP bootstrap while keeping
+  local app preferences separate from Google UMP choices.
+- Added the targeted production and behavioral checker.
+
+### Unchanged
+
+- Existing local consent preferences, storage keys, and schema
+- Rewarded-ad providers and ad request/load/show behavior
+- Ad unit IDs, test-device identifiers, and debug geography
+- Android/iOS projects, public assets, workflows, and routing
+- AdMob and Google Play Consoles
+
+### Pending
+
+- Android privacy-options device QA and post-dismiss refresh verification
+- Offline QA and ADB logcat verification
+- Rewarded-ad SDK provider and official test-ad request
+- Production ad units and actual ad request/load/show/serving
+- Google Play disclosure update, release signing, and AAB work
+
 ## PR #408 - AdMob Privacy Options UI Contract
 
 ### Added

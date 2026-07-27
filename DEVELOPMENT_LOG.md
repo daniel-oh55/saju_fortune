@@ -1,5 +1,117 @@
 # DEVELOPMENT_LOG
 
+## PR #409 - AdMob Privacy Options Settings UI
+
+- Work date: 2026-07-27
+- PR type: production privacy-options UI and runtime action
+- Starting main HEAD: `7b89c90cff8593218165a56f4529e4cedcd40412`
+- Branch: `feat/admob-privacy-options-settings-ui`
+- Conditional Settings entry: Completed
+- Visibility: native Android, completed consent information, and `REQUIRED`
+- `showPrivacyOptionsForm` runtime action: Completed
+- Post-form `requestConsentInfo` refresh: Completed
+- Refresh-time secondary consent form: Not added
+- Privacy action single-flight and Promise identity: Completed
+- Bootstrap/action serialization: Completed
+- Consent revocation gate reconciliation: Completed
+- Consent grant initialize-once reconciliation: Completed
+- Claude Code independent review: Pass; P0/P1/P2 findings: None
+- Failed privacy-options feedback: `role="alert"` without a forced
+  `aria-live="polite"`
+- Non-error privacy-options feedback: `role="status"` with
+  `aria-live="polite"`
+- Empty privacy-options feedback and hidden entry: No live-region element
+  rendered
+- Revoke then re-grant behavioral coverage: Pass; the ad gate closes and
+  reopens while initialize remains at one total call
+- `REQUIRED` to `NOT_REQUIRED` behavioral coverage: Pass; the entry helper
+  hides the entry and a later direct action safely resolves without plugin,
+  refresh, or initialize calls
+- Form, refresh, and initialize failure handling: Fail closed
+- App lazy snapshot hydration and effect resynchronization: Completed
+- Subscription cleanup and React StrictMode compatibility: Completed
+- Privacy copy alignment: Completed
+- Local app consent and Google UMP choices: Kept separate
+- Existing localStorage keys and schema: Unchanged
+- Rewarded-ad SDK provider: Not started; existing provider remains mock
+- Official test-ad request: Not started
+- Ad unit IDs, test-device identifiers, and debug geography: Not added
+- Ad request/load/show implementation: Not started
+- Actual ad request/load/show: Not started
+- Android advertising QA: Not started
+- Android privacy-options device QA: Pass
+- Post-dismiss refresh device verification: Pass
+- `REQUIRED` to `NOT_REQUIRED` transition UX verification: Pass
+- Offline startup QA: Pass
+- APK installation/update: Completed
+- Cold launch/device smoke QA: Pass
+- Background/resume and app restart: Pass
+- Existing local data-use settings regression check: Pass
+- No ad displayed: Expected and confirmed
+- Screen-reader/TalkBack announcement QA: Not performed
+- ADB logcat: Not performed
+- Google Play disclosure update: Pending
+- Release build, signing, signed APK, AAB, and Play upload: Pending
+- AdMob and Google Play Consoles: Unchanged
+
+Android device QA:
+
+- Tested artifact: GitHub Actions run #357
+- Run ID: `30242828677`
+- Artifact name: `harupuli-debug-apk`
+- Artifact ID: `8643921124`
+- Artifact digest:
+  `sha256:86659690b3535b92b564d2ac484294c7ccce33863205c6ff8a960083eea67bcd`
+- Tested HEAD: `395cbfbede8b3e12da1fa09cf30c27d7454d67a3`
+- Tested device: Galaxy S23 Ultra
+- APK installation/update: Completed
+- Cold launch, home screen, Settings page, and existing fortune feature
+  smoke checks: Pass
+- `개인정보 및 쿠키 설정` entry displayed: Yes
+- Entry display matched current UMP status: Pass
+- Rapid repeated taps: Native form displayed once
+- Privacy-options form opened, closed, and returned to the app: Pass
+- Post-form pending state cleared and message displayed: Pass
+- `REQUIRED` to `NOT_REQUIRED` transition: Observed and Pass
+- Background/resume and app restart: Pass
+- Existing `데이터 사용 설정`: Pass
+- Offline startup: Pass
+- Actual ad displayed: None, expected
+- Android privacy-options device QA: Pass
+- TalkBack announcement QA: Not performed
+- ADB logcat: Not performed
+
+Local verification:
+
+- `npm ci`: Pass; npm reported 4 dependency audit findings (3 high, 1
+  critical). No automatic dependency fix was applied.
+- `npm run build`: Pass with the existing large-chunk warning.
+- `npm run check:admob-privacy-options-ui`: Pass in creation mode.
+- `npm run check:admob-privacy-options-ui -- --negative-self-test`: Pass;
+  48/48 forbidden mutations, post-merge fixture Pass, and 49/49 aggregate
+  targeted verification.
+- `npm run check:admob-privacy-options-ui-contract`: Pass in post-merge mode.
+- `npm run check:admob-runtime-consent-coordinator`: Pass in post-merge mode.
+- `npm run check:admob-runtime-consent-bootstrap-contract`: Pass in
+  post-merge mode.
+- `npm run check:content-safety`: Pass.
+- `npm run check:share-text`: Pass.
+- `npm run check:doc-check-src-guardrails`: Pass.
+- `npx cap sync android`: Pass; generated Gradle line-ending changes were
+  restored so Android files remain unchanged.
+- `.\gradlew.bat clean`: Pass through a temporary ASCII drive mapping after
+  the direct workspace path was blocked by Gradle's Windows non-ASCII path
+  check.
+- `.\gradlew.bat assembleDebug`: Blocked because no Android SDK installation
+  or `ANDROID_HOME`/`ANDROID_SDK_ROOT` was available in the local environment.
+- `.\gradlew.bat :app:processDebugMainManifest`: Not run because
+  `assembleDebug` did not pass its environment prerequisite.
+- Android privacy-options device QA and offline startup: Pass on Galaxy S23
+  Ultra using run #357 artifact `8643921124`.
+- TalkBack announcement QA and ADB logcat: Not performed.
+- GitHub Actions run `30242828677`: Success.
+- Vercel deployment and Vercel Preview Comments: Success.
+
 ## PR #408 - AdMob Privacy Options UI Contract
 
 - Work date: 2026-07-27

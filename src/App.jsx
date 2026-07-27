@@ -19,6 +19,12 @@ import CompatibilityPage from './pages/CompatibilityPage.jsx';
 import PremiumPage from './pages/PremiumPage.jsx';
 import PrivacyInfoPage from './pages/PrivacyInfoPage.jsx';
 import SettingsPage from './pages/SettingsPage.jsx';
+import {
+  getAdmobRuntimeConsentSnapshot,
+  openAdmobPrivacyOptions,
+  shouldShowAdmobPrivacyOptionsEntry,
+  subscribeAdmobRuntimeConsent,
+} from './services/admobRuntimeConsentCoordinator.js';
 import { CURRENT_FORTUNE_SCHEMA_VERSION, createTodayFortune } from './utils/fortuneEngine.js';
 import { getKoreaDateKey } from './utils/date.js';
 import {
@@ -128,6 +134,9 @@ function App() {
   const [isReminderSettingsOpen, setIsReminderSettingsOpen] = useState(false);
   const [reminderSettingsMessage, setReminderSettingsMessage] = useState('');
   const [isAppLoading, setIsAppLoading] = useState(true);
+  const [admobSnapshot, setAdmobSnapshot] = useState(
+    () => getAdmobRuntimeConsentSnapshot(),
+  );
   const activePageRef = useRef(activePage);
   const detailReturnPageRef = useRef('home');
   const detailHistoryPushedRef = useRef(false);
@@ -138,6 +147,14 @@ function App() {
   useEffect(() => {
     const timer = window.setTimeout(() => setIsAppLoading(false), APP_LOADING_DURATION_MS);
     return () => window.clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    setAdmobSnapshot(getAdmobRuntimeConsentSnapshot());
+
+    return subscribeAdmobRuntimeConsent((nextSnapshot) => {
+      setAdmobSnapshot(nextSnapshot);
+    });
   }, []);
 
   const fortune = useMemo(() => {
@@ -457,6 +474,10 @@ function App() {
     setIsReminderSettingsOpen(true);
   };
 
+  const handleOpenAdmobPrivacyOptions = () => {
+    void openAdmobPrivacyOptions();
+  };
+
   const handleToggleDailyReminder = async (enabled) => {
     if (!enabled) {
       setDailyReminderDraft((current) => ({ ...current, enabled: false }));
@@ -612,8 +633,13 @@ function App() {
             profile={profile}
             fortune={fortune}
             consentPreferences={consentPreferences}
+            shouldShowPrivacyOptionsEntry={shouldShowAdmobPrivacyOptionsEntry(admobSnapshot)}
+            isPrivacyOptionsActionPending={admobSnapshot.isPrivacyOptionsActionPending}
+            privacyOptionsActionState={admobSnapshot.privacyOptionsActionState}
+            privacyOptionsActionMessage={admobSnapshot.privacyOptionsActionMessage}
             onNavigate={handleNavigate}
             onOpenConsentSettings={handleOpenConsentSettings}
+            onOpenPrivacyOptions={handleOpenAdmobPrivacyOptions}
             onEditProfile={() => handleNavigate('profileEdit')}
             onReset={handleReset}
           />

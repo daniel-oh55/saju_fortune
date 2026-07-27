@@ -3967,6 +3967,28 @@ input:disabled {
   line-height: 1.45;
 }
 
+.settings-menu-list .settings-privacy-options-button:disabled {
+  cursor: wait;
+  opacity: 0.62;
+}
+
+.settings-privacy-options-message {
+  margin: 0;
+  border-radius: 16px;
+  padding: 11px 12px;
+  background: #f5fbf8;
+  color: #47706e;
+  font-size: 0.82rem;
+  font-weight: 800;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.settings-privacy-options-message.is-error {
+  background: #fff4f1;
+  color: #a04a3f;
+}
+
 @media (max-width: 560px) {
   body {
     overflow-x: hidden;

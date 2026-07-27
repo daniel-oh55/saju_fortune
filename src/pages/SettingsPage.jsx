@@ -17,7 +17,25 @@ function lateNightJasiPolicyLabel(value) {
   return value === 'next_day' ? '다음 날 자시 기준' : '입력한 날짜 기준';
 }
 
-function SettingsPage({ profile, fortune, consentPreferences, onNavigate, onOpenConsentSettings, onEditProfile, onReset }) {
+function SettingsPage({
+  profile,
+  fortune,
+  consentPreferences,
+  shouldShowPrivacyOptionsEntry,
+  isPrivacyOptionsActionPending,
+  privacyOptionsActionState,
+  privacyOptionsActionMessage,
+  onNavigate,
+  onOpenConsentSettings,
+  onOpenPrivacyOptions,
+  onEditProfile,
+  onReset,
+}) {
+  const isPrivacyOptionsError =
+    privacyOptionsActionState === 'failed';
+  const privacyOptionsMessageRole =
+    isPrivacyOptionsError ? 'alert' : 'status';
+
   return (
     <div className="page-stack settings-page">
       <section className="settings-title-row">
@@ -95,6 +113,29 @@ function SettingsPage({ profile, fortune, consentPreferences, onNavigate, onOpen
           <span aria-hidden="true">▤</span>
           데이터 사용 설정
         </button>
+        {shouldShowPrivacyOptionsEntry && (
+          <button
+            className="settings-privacy-options-button"
+            type="button"
+            disabled={isPrivacyOptionsActionPending}
+            aria-busy={isPrivacyOptionsActionPending ? 'true' : undefined}
+            onClick={onOpenPrivacyOptions}
+          >
+            <span aria-hidden="true">◎</span>
+            개인정보 및 쿠키 설정
+          </button>
+        )}
+        {shouldShowPrivacyOptionsEntry && privacyOptionsActionMessage && (
+          <p
+            className={`settings-privacy-options-message${
+              isPrivacyOptionsError ? ' is-error' : ''
+            }`}
+            role={privacyOptionsMessageRole}
+            aria-live={isPrivacyOptionsError ? undefined : 'polite'}
+          >
+            {privacyOptionsActionMessage}
+          </p>
+        )}
         {consentPreferences && (
           <div className="settings-consent-summary">
             <span aria-hidden="true">◇</span>
