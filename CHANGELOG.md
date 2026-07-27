@@ -1,5 +1,36 @@
 # CHANGELOG
 
+## PR #406 - AdMob Runtime Consent Bootstrap Contract
+
+### Added
+
+- Defined the native-Android-only UMP consent bootstrap contract.
+- Selected consent update, unconditional UMP form resolution, and the latest
+  form-result gate before Mobile Ads initialization.
+- Defined the `canRequestAds` fail-closed gate, state model, single-flight
+  Promise, initialization guard, and web no-op.
+- Recorded the installed plugin v8.0.0 TypeScript and Android source evidence.
+- Recorded the plugin README versus current Google UMP ordering conflict.
+- Defined the conditional `개인정보 및 쿠키 설정` privacy-options entry point.
+- Added a targeted docs/check-only scope and content checker.
+- Split the checker into contract-creation and post-merge validation modes.
+
+### Unchanged
+
+- Production `src` and `public`
+- Android native project and dependencies
+- Runtime initialization, consent, privacy-options, and ad calls
+- Ad unit IDs, test-device identifiers, and debug geography
+- Existing storage keys and schema versions
+- AdMob and Google Play Consoles
+
+### Pending
+
+- Runtime consent coordinator implementation
+- Conditional privacy-options UI
+- Rewarded-ad SDK provider and request guards
+- Official test-ad request and Android advertising QA
+
 ## PR #405 - AdMob Plugin Install Baseline
 
 ### Added
