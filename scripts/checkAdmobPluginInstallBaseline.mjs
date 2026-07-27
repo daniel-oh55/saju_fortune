@@ -37,11 +37,20 @@ const requireText = (content, text, label) => {
   if (!content.includes(text)) errors.push(`${label}: missing required text: ${text}`)
 }
 
+const ignoredLocalUntrackedFiles = new Set([
+  'pr405-review.json',
+  'pr405.diff',
+])
+const untrackedFiles = lines(
+  'ls-files',
+  '--others',
+  '--exclude-standard',
+).filter((path) => !ignoredLocalUntrackedFiles.has(path))
 const changedFiles = new Set([
   ...lines('diff', '--name-only', 'origin/main...HEAD'),
   ...lines('diff', '--name-only', '--cached'),
   ...lines('diff', '--name-only'),
-  ...lines('ls-files', '--others', '--exclude-standard'),
+  ...untrackedFiles,
 ])
 for (const path of changedFiles) {
   if (!allowedFiles.has(path)) errors.push(`change scope: unexpected changed file: ${path}`)
@@ -246,17 +255,21 @@ for (const forbiddenClaim of [
 }
 
 const textFiles = [...allowedFiles].filter((path) => /\.(?:md|json|mjs|gradle|xml)$/u.test(path))
+const payloadScanFiles = [...allowedFiles].filter((path) => path !== checkerPath)
 const privacyLabel = '개인정보 및 쿠키 설정'
 const knownMojibake = '媛쒖씤?뺣낫 諛?荑좏궎 ?ㅼ젙'
 for (const path of textFiles) {
   const content = read(path)
   if (content.includes('\uFFFD')) errors.push(`${path}: Unicode replacement character found`)
+}
+for (const path of payloadScanFiles) {
+  const content = read(path)
   if (content.includes(knownMojibake)) errors.push(`${path}: mojibake privacy-options label found`)
 }
 if (!document.includes(privacyLabel)) errors.push(`${documentPath}: approved privacy-options label is missing`)
 
-const changedContent = [...changedFiles]
-  .filter((path) => allowedFiles.has(path))
+const changedContent = payloadScanFiles
+  .filter((path) => changedFiles.has(path))
   .map((path) => read(path))
   .join('\n')
 const appIds = changedContent.match(/ca-app-pub-\d+~\d+/gu) ?? []

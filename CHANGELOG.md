@@ -4,21 +4,55 @@
 
 ### Added
 
-- Installed exact `@capacitor-community/admob@8.0.0` and synchronized its Android module.
-- Pinned Google Mobile Ads SDK 24.9.0 and UMP SDK 4.0.0.
-- Added dependency, debug build, debug merged-manifest, status, rollback, and scope documentation.
-- Added a targeted install-baseline checker.
+- Installed exact `@capacitor-community/admob@8.0.0`.
+- Pinned Mobile Ads SDK 24.9.0 and UMP SDK 4.0.0.
+- Synchronized the Capacitor Android plugin.
+- Configured the approved Harupuli AdMob App ID string resource.
+- Configured APPLICATION_ID source manifest metadata.
+- Added the run #345 QA record.
+- Strengthened the targeted install-baseline checker.
+- Blocked known mojibake and the Unicode replacement character U+FFFD.
+- Blocked sample App IDs, ad unit IDs, placeholders, and test-device identifiers.
+- Blocked manual source manifest AD_ID declarations.
 
 ### Verified
 
-- Debug dependency resolution, dependency insight, Gradle build, and merged manifest completed.
-- The debug merged manifest inherits Advertising ID permissions and Mobile Ads components but has no App ID metadata.
-- Release dependency, build, and manifest tasks remain blocked by the existing release-signing environment guard, which reproduces on `origin/main`.
+- Debug dependency resolution.
+- Android Debug Build run #345: Success.
+- Compiled manifest APPLICATION_ID metadata is present.
+- The `admob_app_id` resource resolves to the approved Harupuli App ID.
+- `MobileAdsInitProvider` is present.
+- SDK AD_ID permissions are inherited in the compiled manifest.
+- The run #345 artifact was downloaded and installed on a Galaxy S23 Ultra.
+- The app launched and displayed the home screen normally.
+- No immediate force close was observed.
+- The `Missing application ID` error was not observed during actual device launch.
+- Android startup smoke QA: Pass.
+- Android Debug Build run #348 for the current docs/check-only HEAD: Success.
 
 ### Pending
 
-- App ID configuration, runtime initialization, UMP consent flow, privacy options UI, test-ad request, and Android device QA
-- European message publication, Data safety, Advertising ID declaration, production ad units, requests, serving, and store update
+- ADB logcat verification
+- Full Android regression QA
+- Mobile Ads SDK runtime initialization
+- UMP consent flow
+- `canRequestAds` gate
+- `개인정보 및 쿠키 설정` runtime UI
+- Official test-ad request
+- Android advertising QA
+- Ad unit creation
+- European regulations message publication
+- Privacy policy advertising update
+- Google Play Data safety update
+- Advertising ID declaration
+- Production ad requests
+- Actual ad serving
+- First advertising update
+- Release dependency/build/manifest verification: Blocked by the existing release-signing environment guard
+- Release signing for this update: Not started
+- Signed APK for this update: Not started
+- AAB generation for this update: Not started
+- Google Play advertising update upload: Not started
 
 ## AdMob Plugin Version Selection
 

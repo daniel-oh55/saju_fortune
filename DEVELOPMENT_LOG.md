@@ -3,23 +3,70 @@
 ## PR #405 - AdMob Plugin Install Baseline
 
 - Work date: 2026-07-27
-- PR type: dependency / Android native integration baseline
+- PR type: dependency / Android native App ID baseline / docs and QA finalization
 - Starting main HEAD: `d1d1ff5d6e3256ad6326c6e17e4e57b9d76bbe97`
-- PR #404 verification: Merged; its merge commit equals the starting `main` HEAD.
-- Installed package: exact `@capacitor-community/admob@8.0.0`; lockfile version, tarball, and integrity verified.
-- Capacitor Android sync: Completed; generated settings and app dependency registration changed.
-- Mobile Ads dependency resolution: Completed on `debugRuntimeClasspath`; resolved 24.9.0 from the plugin.
-- UMP dependency resolution: Completed on `debugRuntimeClasspath`; resolved 4.0.0 by direct-pin conflict resolution over transitive 3.2.0.
-- Debug Gradle build: Completed with temporary external Temurin 21 and Android SDK 36.
-- Debug merged manifest inspection: Completed; inherited Advertising ID permissions and Mobile Ads components are present, while App ID metadata and real identifiers are absent.
-- Release dependency tree, build, and merged manifest: Blocked by the existing release-signing environment guard; all three failures reproduce on detached `origin/main`.
-- Production source, routing, storage, schema, fortune logic, source manifest, strings, `MainActivity`, app Gradle, wrapper, and workflows: Unchanged.
-- App ID configuration: Not started
-- Mobile Ads SDK runtime initialization: Not started
-- UMP consent flow integration: Not started
-- Privacy options runtime UI: Not started
+- PR #404: Merged.
+- Installed exact `@capacitor-community/admob@8.0.0`.
+- Mobile Ads SDK version: 24.9.0.
+- UMP SDK version: 4.0.0.
+- Capacitor Android sync: Completed.
+- Approved Harupuli AdMob App ID resource configuration: Completed.
+- APPLICATION_ID metadata configuration: Completed.
+- Source manifest and `strings.xml`: Changed in this PR.
+- `MainActivity`: Unchanged.
+- Production `src` and `public`: Unchanged.
+- Routing, storage, schema, and fortune logic: Unchanged.
+- Ad unit IDs: None.
+- Test-device identifiers: None.
+- Mobile Ads SDK runtime initialization: Not started.
+- UMP runtime flow: Not started.
+- Ad request/show code: Not added.
+
+Run #345 actual result:
+
+- Tested HEAD: `07f85a8dfe2b9fbc6551b25dd6731c81ee04d231`.
+- Workflow run ID: `30230115096`.
+- Artifact ID: `8639819148`.
+- Artifact digest: `sha256:4290933add6503a9fe55c8ca02514660fa7f3936b9529f9d06503dfaa196bb26`.
+- Compiled manifest and resource verification: Completed.
+- Debug APK artifact download: Completed.
+- Galaxy S23 Ultra APK installation: Completed.
+- App launch: Completed.
+- Home screen display: Normal.
+- Immediate force close: Not observed.
+- `Missing application ID` error: Not observed during actual device launch.
+- Android startup smoke QA: Pass.
+- ADB logcat verification: Not performed.
+- Full Android regression QA: Not completed.
+
+Run #348 actual result:
+
+- Current docs/check-only HEAD: `a61dac5ab748b2ba62fcbce6e5f45e9b62406caa`.
+- Workflow run ID: `30231133266`.
+- Workflow conclusion: Success.
+- Artifact ID: `8640158909`.
+- Artifact digest: `sha256:4ff06d5f0bb0e7f117b95021349a9d46ad4575b471311820e633894db920ee6b`.
+- Run #348 APK installation: Not performed.
+- Source/native changes affecting the APK after run #345: None.
+
+Release status:
+
+- `releaseRuntimeClasspath`: Blocked by the existing release-signing environment guard.
+- `assembleRelease`: Blocked by the existing release-signing environment guard.
+- Release merged manifest: Blocked by the existing release-signing environment guard.
+- Release signing for this update: Not started.
+- Signed APK for this update: Not started.
+- AAB generation for this update: Not started.
+- Google Play advertising update upload: Not started.
+
+Remaining implementation and QA:
+
+- Mobile Ads SDK runtime initialization: Not started.
+- UMP consent flow integration: Not started.
+- `canRequestAds` gate: Not started.
+- `개인정보 및 쿠키 설정` runtime UI: Not started.
 - Official test-ad request: Not started
-- Android device AdMob QA: Not started
+- Android advertising QA: Not started
 - European regulations message publication: Not started
 - Google Play Data safety update: Not started
 - Advertising ID declaration: Not started
@@ -27,23 +74,6 @@
 - Actual ad requests: No data
 - Actual ad serving: Pending
 - First advertising app update: Pending
-- Tests:
-  - `npm ci`: PASS; 164 packages installed and 165 packages audited.
-  - `npm audit`: FAIL; 4 findings (3 high and 1 critical) in `brace-expansion`, `postcss`, `tar`, and `vite`. No unrelated upgrade was applied.
-  - `npm run build`: PASS; the existing 664.45 kB large-chunk warning remains.
-  - `npx cap sync android`: PASS; two Android plugins detected.
-  - `npm run check:admob-plugin-install-baseline`: PASS.
-  - `npm run check:admob-plugin-version-selection`: FAIL; the PR #404 checker requires its docs/check-only diff and rejects this dependency/native PR. It also fails on clean `origin/main` because no PR #404 diff is active, so this is a historical PR-scoped allowlist incompatibility rather than a product regression.
-  - `npm run check:content-safety`: PASS.
-  - `npm run check:share-text`: PASS.
-  - `npm run check:doc-check-src-guardrails`: PASS.
-  - `git diff --check`: PASS.
-  - `debugRuntimeClasspath`: PASS; exact Mobile Ads 24.9.0 and UMP 4.0.0 resolved.
-  - `releaseRuntimeClasspath`: BLOCKED; existing signing-variable guard, reproduced on `origin/main`.
-  - Mobile Ads and UMP `dependencyInsight`: PASS.
-  - `clean`, `assembleDebug`, and `processDebugMainManifest`: PASS.
-  - `assembleRelease` and `processReleaseMainManifest`: BLOCKED; existing signing-variable guard, reproduced on `origin/main`.
-  - Negative verification: PASS; all seven temporary mutations failed the targeted checker and were reverted.
 
 ## AdMob Plugin Version Selection
 
