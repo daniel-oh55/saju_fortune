@@ -6,6 +6,7 @@ import {
 import {
   getMockRewardedAdDurationSeconds,
   getRewardedAdOutcomeMessage,
+  isRewardedResultForRequest,
   showRewardedAd,
 } from '../services/rewardedAdService.js';
 
@@ -24,6 +25,7 @@ function RewardAdModal({
   const [errorMessage, setErrorMessage] = useState('');
   const [errorReason, setErrorReason] = useState('');
   const completionDeliveredRef = useRef(false);
+  const completionInFlightRef = useRef(false);
   const mountedRef = useRef(true);
   const providerConfig = getRewardedAdSdkConfig();
   const isSdkProvider = providerConfig.provider === REWARDED_AD_PROVIDER_KEY.SDK;
@@ -47,15 +49,17 @@ function RewardAdModal({
   }, [isSdkProvider, secondsLeft]);
 
   const handleComplete = async () => {
-    if (isCompleting) return;
+    if (completionInFlightRef.current) return;
 
+    completionInFlightRef.current = true;
+    const requestedPlacementId = placementId || categoryLabel;
     setIsCompleting(true);
     setErrorMessage('');
     setErrorReason('');
 
     try {
       const result = await showRewardedAd({
-        placementId: placementId || categoryLabel,
+        placementId: requestedPlacementId,
         categoryLabel,
         consentPreferences,
         delayMs: 0,
@@ -68,18 +72,45 @@ function RewardAdModal({
         return;
       }
 
+      if (!isRewardedResultForRequest(result, {
+        placementId: requestedPlacementId,
+        categoryLabel,
+      })) {
+        if (!mountedRef.current) return;
+        setErrorMessage(
+          '다른 상세 풀이의 광고 요청이 처리되었어요. 다시 눌러 현재 상세 풀이의 테스트 광고를 시작해 주세요.',
+        );
+        return;
+      }
+
       if (completionDeliveredRef.current) return;
       completionDeliveredRef.current = true;
       try {
-        onRewardComplete(result);
-      } finally {
+        const wasPersisted = await onRewardComplete(result);
+        if (wasPersisted === false) {
+          completionDeliveredRef.current = false;
+          if (mountedRef.current) {
+            setErrorMessage(
+              '상세 풀이를 열지 못했어요. 잠시 후 다시 시도해 주세요.',
+            );
+          }
+          return;
+        }
         if (mountedRef.current) onClose();
+      } catch {
+        completionDeliveredRef.current = false;
+        if (mountedRef.current) {
+          setErrorMessage(
+            '상세 풀이를 열지 못했어요. 잠시 후 다시 시도해 주세요.',
+          );
+        }
       }
     } catch {
       if (mountedRef.current) {
         setErrorMessage('광고 처리 중 오류가 발생했어요. 잠시 후 다시 시도해 주세요.');
       }
     } finally {
+      completionInFlightRef.current = false;
       if (mountedRef.current) setIsCompleting(false);
     }
   };

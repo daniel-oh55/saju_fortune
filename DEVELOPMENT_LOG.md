@@ -12327,3 +12327,49 @@ Remaining implementation and QA:
   early-dismiss, repeated-dismiss, offline, and ADB logcat verification
 - Production ad unit configuration or production ad request/load/show
 - Release signing, AAB generation, Play upload, or console changes
+
+# 2026-07-27 Rewarded Consent And Request Ownership Follow-up
+
+## Work completed
+
+- Bound the pre-prepare ads gate and `npa` option to the same local-consent
+  snapshot. Removed the extra unvalidated local-consent read before prepare.
+- Kept fresh local/runtime gate reads at action start, pre-prepare, and
+  pre-show without changing local consent or UMP state.
+- Added request ownership matching for placement and category so callers that
+  share another request's single-flight Promise cannot claim its reward.
+- Added one sanitized `rewardActionId` per SDK action. Concurrent callers share
+  the same ID and a deliberate retry receives a new ID.
+- Added App persistence checks for successful results, current fortune,
+  current reward-session epoch, duplicate category, and duplicate SDK action.
+  SDK action IDs are registered before storage and rolled back with the
+  persistence key if storage fails.
+- Reset now clears both in-memory reward guard Sets and advances the reward
+  session epoch. Pre-reset callbacks and callbacks for an inactive fortune are
+  rejected, while the same deterministic fortune/category can be unlocked
+  again with a new action after reset.
+- Kept mock behavior, storage keys and shape, schema version, routing, fortune
+  generation, Android native files, and workflows unchanged.
+- Expanded the production checker to 79 behavioral scenarios, 74 static
+  invariants, and 79 detected negative mutations. Targeted negative mutations
+  cover an unvalidated pre-prepare read, removed request matching, removed
+  action-ID consumption, removed reset Set clearing, and removed epoch checks.
+
+## Validation
+
+- Default mock `npm run build`: passed with the existing chunk-size warning.
+- Official-test/debug `npm run build`: passed with the existing chunk-size
+  warning.
+- Rewarded provider behavioral, negative self-test, and provider contract
+  checks: passed.
+- AdMob privacy-options UI and contract checks: passed.
+- AdMob runtime-consent coordinator and bootstrap contract checks: passed.
+- Content-safety, share-text, and doc/src guardrail checks: passed.
+- `npx cap sync android`: passed; no tracked `android/**` diff.
+- `git diff --check`: passed.
+
+## Not performed
+
+- Android device installation or QA
+- Production ad unit configuration or production ad request/load/show
+- PR merge or Ready-for-review transition

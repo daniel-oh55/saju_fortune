@@ -45,6 +45,9 @@ import {
   updateConsentPreferences,
 } from './utils/consentPreferencesStorage.js';
 import {
+  getRewardPersistenceDecision,
+} from './services/rewardedAdService.js';
+import {
   clearAppData,
   loadFortune,
   loadProfile,
@@ -144,6 +147,8 @@ function App() {
   const appPageStackRef = useRef([activePage]);
   const handleAppBackRef = useRef(null);
   const persistedRewardKeysRef = useRef(new Set());
+  const consumedSdkRewardActionIdsRef = useRef(new Set());
+  const rewardSessionEpochRef = useRef(0);
 
   useEffect(() => {
     const timer = window.setTimeout(() => setIsAppLoading(false), APP_LOADING_DURATION_MS);
@@ -170,6 +175,9 @@ function App() {
     saveFortune(created);
     return created;
   }, [profile]);
+  const activeFortuneIdRef = useRef(fortune?.id || null);
+  activeFortuneIdRef.current = fortune?.id || null;
+  const currentRewardSessionEpoch = rewardSessionEpochRef.current;
 
   const syncAppPageStack = (page, { replaceStack = false, resetStack = false } = {}) => {
     if (resetStack || page === 'home' || page === 'onboarding') {
@@ -407,26 +415,38 @@ function App() {
   };
 
   const handleUnlockDetail = (categoryId, rewardResult) => {
-    if (!fortune?.id || !categoryId) return;
+    const decision = getRewardPersistenceDecision({
+      categoryId,
+      rewardResult,
+      expectedFortuneId: fortune?.id,
+      activeFortuneId: activeFortuneIdRef.current,
+      sessionEpoch: currentRewardSessionEpoch,
+      currentSessionEpoch: rewardSessionEpochRef.current,
+      isAlreadyUnlocked: unlockedDetails[categoryId]?.unlocked === true,
+      persistedRewardKeys: persistedRewardKeysRef.current,
+      consumedSdkRewardActionIds: consumedSdkRewardActionIdsRef.current,
+    });
+    if (!decision.allowed) return false;
 
-    const persistenceKey = `${fortune.id}:${categoryId}`;
-    if (
-      unlockedDetails[categoryId]?.unlocked ||
-      persistedRewardKeysRef.current.has(persistenceKey)
-    ) {
-      return;
+    persistedRewardKeysRef.current.add(decision.persistenceKey);
+    if (decision.rewardActionId) {
+      consumedSdkRewardActionIdsRef.current.add(decision.rewardActionId);
     }
-    persistedRewardKeysRef.current.add(persistenceKey);
 
-    const rewardType =
-      rewardResult?.provider === 'sdk_rewarded_ad'
-        ? 'sdk_rewarded_ad'
-        : 'mock_rewarded_ad';
     try {
-      const nextUnlocks = saveRewardUnlock(fortune.id, categoryId, rewardType);
+      const nextUnlocks = saveRewardUnlock(
+        fortune.id,
+        categoryId,
+        decision.rewardType,
+      );
       setUnlockedDetails(nextUnlocks);
+      return true;
     } catch {
-      persistedRewardKeysRef.current.delete(persistenceKey);
+      persistedRewardKeysRef.current.delete(decision.persistenceKey);
+      if (decision.rewardActionId) {
+        consumedSdkRewardActionIdsRef.current.delete(decision.rewardActionId);
+      }
+      return false;
     }
   };
 
@@ -439,6 +459,9 @@ function App() {
   };
 
   const handleReset = () => {
+    rewardSessionEpochRef.current += 1;
+    persistedRewardKeysRef.current.clear();
+    consumedSdkRewardActionIdsRef.current.clear();
     clearAppData();
     setProfile(null);
     setUnlockedDetails({});

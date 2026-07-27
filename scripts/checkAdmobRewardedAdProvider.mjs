@@ -13,7 +13,11 @@ import {
   REWARDED_AD_TIMEOUT_MS,
 } from '../src/services/rewardedAdProvider.sdk.js';
 import { REWARDED_AD_OUTCOME } from '../src/services/rewardedAdProvider.types.js';
-import { getRewardedAdOutcomeMessage } from '../src/services/rewardedAdService.js';
+import {
+  getRewardPersistenceDecision,
+  getRewardedAdOutcomeMessage,
+  isRewardedResultForRequest,
+} from '../src/services/rewardedAdService.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const negativeSelfTest = process.argv.includes('--negative-self-test');
@@ -91,22 +95,36 @@ const requiredTokens = [
   ['src/services/rewardedAdProvider.sdk.js', 'dismissRewardGrace'],
   ['src/services/rewardedAdProvider.sdk.js', 'cleanup: 2_000'],
   ['src/services/rewardedAdProvider.sdk.js', 'Rewarded is diagnostic only'],
-  ['src/services/rewardedAdProvider.sdk.js', 'latestLocalConsent?.personalizedAds'],
+  ['src/services/rewardedAdProvider.sdk.js', 'const prePrepareGate = readGateState()'],
+  ['src/services/rewardedAdProvider.sdk.js', 'prePrepareGate.localConsent?.personalizedAds'],
+  ['src/services/rewardedAdProvider.sdk.js', 'const preShowGate = readGateState()'],
+  ['src/services/rewardedAdProvider.sdk.js', 'const rewardActionId = createRewardActionId()'],
+  ['src/services/rewardedAdProvider.sdk.js', 'rewardActionId,'],
   ['src/services/rewardedAdProvider.loader.js', 'return showSdkRewardedAd({ ...options, config })'],
   ['src/services/rewardedAdService.js', 'export function showRewardedAd(options = {})'],
+  ['src/services/rewardedAdService.js', 'export function isRewardedResultForRequest('],
+  ['src/services/rewardedAdService.js', 'export function getRewardPersistenceDecision({'],
+  ['src/services/rewardedAdService.js', 'consumedSdkRewardActionIds.has(rewardActionId)'],
   ['src/services/rewardedAdProvider.loader.js', 'export function showRewardedAdWithResolvedProvider'],
   ['src/services/rewardedAdProvider.sdk.js', 'export function showSdkRewardedAd(options = {})'],
   ['src/components/RewardAdModal.jsx', 'completionDeliveredRef'],
+  ['src/components/RewardAdModal.jsx', 'completionInFlightRef'],
   ['src/components/RewardAdModal.jsx', 'mountedRef'],
   ['src/components/RewardAdModal.jsx', 'Google 공식 테스트 광고'],
   ['src/components/RewardAdModal.jsx', '테스트 광고 보고 상세 풀이 열기'],
-  ['src/components/RewardAdModal.jsx', 'onRewardComplete(result)'],
+  ['src/components/RewardAdModal.jsx', 'isRewardedResultForRequest(result, {'],
+  ['src/components/RewardAdModal.jsx', 'const wasPersisted = await onRewardComplete(result)'],
+  ['src/components/RewardAdModal.jsx', 'if (wasPersisted === false)'],
   ['src/components/RewardAdModal.jsx', "errorReason === 'ads_consent_required'"],
   ['src/pages/FortuneDetailPage.jsx', 'onUnlock={(rewardResult) => onUnlockDetail(category.id, rewardResult)}'],
   ['src/pages/SajuInsightPage.jsx', 'onUnlock={(rewardResult) =>'],
   ['src/App.jsx', 'const handleUnlockDetail = (categoryId, rewardResult) =>'],
-  ['src/App.jsx', 'if (!fortune?.id || !categoryId) return'],
-  ['src/App.jsx', "rewardResult?.provider === 'sdk_rewarded_ad'"],
+  ['src/App.jsx', 'getRewardPersistenceDecision({'],
+  ['src/App.jsx', 'consumedSdkRewardActionIdsRef.current.add(decision.rewardActionId)'],
+  ['src/App.jsx', 'currentSessionEpoch: rewardSessionEpochRef.current'],
+  ['src/App.jsx', 'persistedRewardKeysRef.current.clear()'],
+  ['src/App.jsx', 'consumedSdkRewardActionIdsRef.current.clear()'],
+  ['src/App.jsx', 'rewardSessionEpochRef.current += 1'],
   ['src/utils/storage.js', "rewardType = 'mock_rewarded_ad'"],
   ['src/utils/storage.js', "rewardType === 'sdk_rewarded_ad'"],
   ['src/utils/storage.js', 'rewardType: safeRewardType'],
@@ -135,6 +153,8 @@ function validateSources(sourceOverrides = new Map()) {
   const sdkSource = sourceFor('src/services/rewardedAdProvider.sdk.js');
   const loaderSource = sourceFor('src/services/rewardedAdProvider.loader.js');
   const serviceSource = sourceFor('src/services/rewardedAdService.js');
+  const modalSource = sourceFor('src/components/RewardAdModal.jsx');
+  const appSource = sourceFor('src/App.jsx');
   if (/export\s+async\s+function\s+showSdkRewardedAd/.test(sdkSource)) {
     errors.push('SDK public forwarding function must preserve Promise identity');
   }
@@ -149,6 +169,34 @@ function validateSources(sourceOverrides = new Map()) {
       loaderSource.indexOf('showMockRewardedAd(options);') <
         loaderSource.indexOf('return showSdkRewardedAd')) {
     errors.push('SDK-to-mock fallback detected');
+  }
+  const prePrepareBlock = sdkSource.slice(
+    sdkSource.indexOf('const prePrepareGate = readGateState()'),
+    sdkSource.indexOf('const prepareOptions'),
+  );
+  if (prePrepareBlock.includes('loadLocalConsentPreferences')) {
+    errors.push('unvalidated local consent read detected before prepare');
+  }
+  if (!modalSource.includes('isRewardedResultForRequest(result, {')) {
+    errors.push('modal request ownership validation is required');
+  }
+  if (!modalSource.includes('if (completionInFlightRef.current) return')) {
+    errors.push('modal synchronous completion single-flight guard is required');
+  }
+  if (!serviceSource.includes('consumedSdkRewardActionIds.has(rewardActionId)')) {
+    errors.push('SDK rewardActionId consumption guard is required');
+  }
+  if (
+    !appSource.includes('persistedRewardKeysRef.current.clear()') ||
+    !appSource.includes('consumedSdkRewardActionIdsRef.current.clear()')
+  ) {
+    errors.push('reset must clear reward persistence guards');
+  }
+  if (
+    !appSource.includes('sessionEpoch: currentRewardSessionEpoch') ||
+    !appSource.includes('currentSessionEpoch: rewardSessionEpochRef.current')
+  ) {
+    errors.push('reward session epoch validation is required');
   }
 
   for (const file of changedFiles) {
@@ -218,6 +266,8 @@ function createHarness(options = {}) {
   let localReads = 0;
   let runtimeReads = 0;
   let moduleLoads = 0;
+  let actionIdCreates = 0;
+  const preparedOptions = [];
   const localSequence = options.localSequence || [{ ads: true, personalizedAds: false }];
   const runtimeOpen = {
     isNativeAndroid: true,
@@ -248,6 +298,7 @@ function createHarness(options = {}) {
       },
       async prepareRewardVideoAd(prepareOptions) {
         prepareCalls += 1;
+        preparedOptions.push(prepareOptions);
         options.onPrepare?.({ prepareOptions, listeners });
         if (options.prepareReject) throw new Error('load');
         if (options.preparePending) return new Promise(() => {});
@@ -281,11 +332,24 @@ function createHarness(options = {}) {
       cleanup: 5,
     },
     now: () => new Date('2026-07-27T00:00:00.000Z'),
+    createActionId: () => {
+      actionIdCreates += 1;
+      return options.actionIds?.[actionIdCreates - 1] || `action-${actionIdCreates}`;
+    },
   };
   return {
     provider: createSdkRewardedAdProvider(dependencies),
     listeners,
-    stats: () => ({ prepareCalls, showCalls, localReads, runtimeReads, moduleLoads, removed }),
+    stats: () => ({
+      prepareCalls,
+      showCalls,
+      localReads,
+      runtimeReads,
+      moduleLoads,
+      actionIdCreates,
+      preparedOptions,
+      removed,
+    }),
   };
 }
 
@@ -349,7 +413,12 @@ test('local consent closes all ad calls', async () => {
   const harness = createHarness({ localSequence: [{ ads: false }] });
   const result = await harness.provider.show({ config: makeConfig() });
   assert.equal(result.reason, REWARDED_AD_OUTCOME.ADS_CONSENT_REQUIRED);
-  assert.deepEqual(harness.stats(), { prepareCalls: 0, showCalls: 0, localReads: 1, runtimeReads: 0, moduleLoads: 0, removed: [] });
+  assert.equal(harness.stats().prepareCalls, 0);
+  assert.equal(harness.stats().showCalls, 0);
+  assert.equal(harness.stats().localReads, 1);
+  assert.equal(harness.stats().runtimeReads, 0);
+  assert.equal(harness.stats().moduleLoads, 0);
+  assert.deepEqual(harness.stats().removed, []);
 });
 test('runtime gate closes all ad calls', async () => {
   const harness = createHarness({ runtimeSequence: [{ adGateOpen: false }] });
@@ -362,6 +431,8 @@ test('pre-prepare local withdrawal blocks prepare', async () => {
   const result = await harness.provider.show({ config: makeConfig() });
   assert.equal(result.reason, REWARDED_AD_OUTCOME.ADS_CONSENT_REQUIRED);
   assert.equal(harness.stats().prepareCalls, 0);
+  assert.equal(harness.stats().showCalls, 0);
+  assert.equal(harness.stats().localReads, 2);
 });
 test('pre-prepare runtime withdrawal blocks prepare', async () => {
   const open = { isNativeAndroid: true, consentInfoCompleted: true, canRequestAds: true, initializeResolved: true, adGateOpen: true };
@@ -376,6 +447,35 @@ test('pre-show withdrawal blocks show after one prepare', async () => {
   assert.equal(result.reason, REWARDED_AD_OUTCOME.ADS_CONSENT_REQUIRED);
   assert.equal(harness.stats().prepareCalls, 1);
   assert.equal(harness.stats().showCalls, 0);
+  assert.equal(harness.stats().localReads, 3);
+});
+test('prepare uses exactly the validated local snapshot with npa enabled', async () => {
+  const harness = createHarness({
+    localSequence: [
+      { ads: true, personalizedAds: true },
+      { ads: true, personalizedAds: false },
+      { ads: true, personalizedAds: true },
+    ],
+    onPrepare: () => {
+      assert.equal(harness.stats().localReads, 2);
+    },
+  });
+  await harness.provider.show({ config: makeConfig() });
+  assert.equal(harness.stats().preparedOptions[0].npa, true);
+});
+test('prepare uses exactly the validated local snapshot without forced npa', async () => {
+  const harness = createHarness({
+    localSequence: [
+      { ads: true, personalizedAds: false },
+      { ads: true, personalizedAds: true },
+      { ads: true, personalizedAds: false },
+    ],
+    onPrepare: () => {
+      assert.equal(harness.stats().localReads, 2);
+    },
+  });
+  await harness.provider.show({ config: makeConfig() });
+  assert.equal('npa' in harness.stats().preparedOptions[0], false);
 });
 test('valid reward completes without native payload exposure', async () => {
   const harness = createHarness();
@@ -385,6 +485,7 @@ test('valid reward completes without native payload exposure', async () => {
     provider: 'sdk_rewarded_ad',
     placementId: 'today',
     categoryLabel: '총운',
+    rewardActionId: 'action-1',
     rewardedAt: '2026-07-27T00:00:00.000Z',
   });
   assert.equal(harness.stats().prepareCalls, 1);
@@ -465,14 +566,219 @@ test('rapid calls and listener reentry share one Promise', async () => {
   assert.equal(harness.stats().showCalls, 1);
 });
 test('a deliberate retry creates a new action', async () => {
-  const harness = createHarness();
+  const harness = createHarness({ actionIds: ['first-action', 'retry-action'] });
   const first = harness.provider.show({ config: makeConfig() });
-  await first;
+  const firstResult = await first;
   const second = harness.provider.show({ config: makeConfig() });
   assert.notEqual(first, second);
-  await second;
+  const secondResult = await second;
+  assert.equal(firstResult.rewardActionId, 'first-action');
+  assert.equal(secondResult.rewardActionId, 'retry-action');
+  assert.notEqual(firstResult.rewardActionId, secondResult.rewardActionId);
   assert.equal(harness.stats().prepareCalls, 2);
   assert.equal(harness.stats().showCalls, 2);
+});
+test('different category callers share one action but only the owner matches', async () => {
+  const harness = createHarness({ actionIds: ['shared-category-action'] });
+  const firstRequest = {
+    config: makeConfig(),
+    placementId: 'today_fortune_detail',
+    categoryLabel: '총운',
+  };
+  const secondRequest = {
+    config: makeConfig(),
+    placementId: 'today_fortune_detail',
+    categoryLabel: '재물운',
+  };
+  const first = harness.provider.show(firstRequest);
+  const second = harness.provider.show(secondRequest);
+  assert.equal(first, second);
+  const result = await first;
+  assert.equal(harness.stats().prepareCalls, 1);
+  assert.equal(harness.stats().showCalls, 1);
+  assert.equal(isRewardedResultForRequest(result, firstRequest), true);
+  assert.equal(isRewardedResultForRequest(result, secondRequest), false);
+  assert.equal(result.categoryLabel, '총운');
+});
+test('different placement callers cannot claim a shared action', async () => {
+  const harness = createHarness();
+  const firstRequest = {
+    config: makeConfig(),
+    placementId: 'today_fortune_detail',
+    categoryLabel: '총운',
+  };
+  const secondRequest = {
+    config: makeConfig(),
+    placementId: 'saju_insight_deep_dive',
+    categoryLabel: '총운',
+  };
+  const first = harness.provider.show(firstRequest);
+  const second = harness.provider.show(secondRequest);
+  assert.equal(first, second);
+  const result = await first;
+  assert.equal(isRewardedResultForRequest(result, firstRequest), true);
+  assert.equal(isRewardedResultForRequest(result, secondRequest), false);
+});
+test('shared result callback is delivered at most once to its owner', async () => {
+  const result = {
+    ok: true,
+    placementId: 'today_fortune_detail',
+    categoryLabel: '총운',
+  };
+  let callbacks = 0;
+  for (const request of [
+    { placementId: 'today_fortune_detail', categoryLabel: '총운' },
+    { placementId: 'today_fortune_detail', categoryLabel: '재물운' },
+  ]) {
+    if (isRewardedResultForRequest(result, request)) callbacks += 1;
+  }
+  assert.equal(callbacks, 1);
+});
+test('same in-flight action shares one rewardActionId', async () => {
+  const harness = createHarness({ actionIds: ['same-action'] });
+  const first = harness.provider.show({ config: makeConfig() });
+  const second = harness.provider.show({ config: makeConfig() });
+  assert.equal(first, second);
+  const [firstResult, secondResult] = await Promise.all([first, second]);
+  assert.equal(firstResult.rewardActionId, 'same-action');
+  assert.equal(secondResult.rewardActionId, 'same-action');
+  assert.equal(harness.stats().actionIdCreates, 1);
+});
+test('SDK action ID is sanitized before reaching App', async () => {
+  const harness = createHarness({ actionIds: ['  unsafe action/id  '] });
+  const result = await harness.provider.show({ config: makeConfig() });
+  assert.equal(result.rewardActionId, 'unsafe-action-id');
+  assert(!result.rewardActionId.includes('/'));
+});
+
+function reservePersistence(state, request) {
+  const decision = getRewardPersistenceDecision({
+    ...request,
+    persistedRewardKeys: state.persistedRewardKeys,
+    consumedSdkRewardActionIds: state.consumedSdkRewardActionIds,
+  });
+  if (!decision.allowed) return false;
+  state.persistedRewardKeys.add(decision.persistenceKey);
+  if (decision.rewardActionId) {
+    state.consumedSdkRewardActionIds.add(decision.rewardActionId);
+  }
+  state.saves += 1;
+  return true;
+}
+
+test('SDK rewardActionId can be persisted at most once', () => {
+  const state = {
+    persistedRewardKeys: new Set(),
+    consumedSdkRewardActionIds: new Set(),
+    saves: 0,
+  };
+  const request = {
+    categoryId: 'overall',
+    rewardResult: {
+      ok: true,
+      provider: 'sdk_rewarded_ad',
+      rewardActionId: 'one-native-action',
+    },
+    expectedFortuneId: 'fortune-a',
+    activeFortuneId: 'fortune-a',
+    sessionEpoch: 0,
+    currentSessionEpoch: 0,
+    isAlreadyUnlocked: false,
+  };
+  assert.equal(reservePersistence(state, request), true);
+  state.persistedRewardKeys.clear();
+  assert.equal(reservePersistence(state, request), false);
+  assert.equal(state.saves, 1);
+});
+test('SDK persistence rejects missing or invalid action IDs', () => {
+  const state = {
+    persistedRewardKeys: new Set(),
+    consumedSdkRewardActionIds: new Set(),
+    saves: 0,
+  };
+  for (const rewardActionId of [undefined, '', 'unsafe action/id']) {
+    assert.equal(reservePersistence(state, {
+      categoryId: 'overall',
+      rewardResult: {
+        ok: true,
+        provider: 'sdk_rewarded_ad',
+        rewardActionId,
+      },
+      expectedFortuneId: 'fortune-a',
+      activeFortuneId: 'fortune-a',
+      sessionEpoch: 0,
+      currentSessionEpoch: 0,
+      isAlreadyUnlocked: false,
+    }), false);
+  }
+  assert.equal(state.saves, 0);
+});
+test('reset permits same fortune and category only in the new session', () => {
+  const state = {
+    persistedRewardKeys: new Set(),
+    consumedSdkRewardActionIds: new Set(),
+    saves: 0,
+  };
+  const base = {
+    categoryId: 'overall',
+    expectedFortuneId: 'deterministic-profile-id:2026-07-27',
+    activeFortuneId: 'deterministic-profile-id:2026-07-27',
+    isAlreadyUnlocked: false,
+  };
+  assert.equal(reservePersistence(state, {
+    ...base,
+    rewardResult: {
+      ok: true,
+      provider: 'sdk_rewarded_ad',
+      rewardActionId: 'pre-reset-action',
+    },
+    sessionEpoch: 0,
+    currentSessionEpoch: 0,
+  }), true);
+
+  state.persistedRewardKeys.clear();
+  state.consumedSdkRewardActionIds.clear();
+  const currentSessionEpoch = 1;
+
+  assert.equal(reservePersistence(state, {
+    ...base,
+    rewardResult: {
+      ok: true,
+      provider: 'sdk_rewarded_ad',
+      rewardActionId: 'stale-callback-action',
+    },
+    sessionEpoch: 0,
+    currentSessionEpoch,
+  }), false);
+  assert.equal(reservePersistence(state, {
+    ...base,
+    rewardResult: {
+      ok: true,
+      provider: 'sdk_rewarded_ad',
+      rewardActionId: 'new-session-action',
+    },
+    sessionEpoch: 1,
+    currentSessionEpoch,
+  }), true);
+  assert.equal(state.saves, 2);
+});
+test('old fortune callback is rejected after profile or fortune change', () => {
+  const decision = getRewardPersistenceDecision({
+    categoryId: 'overall',
+    rewardResult: {
+      ok: true,
+      provider: 'sdk_rewarded_ad',
+      rewardActionId: 'old-fortune-action',
+    },
+    expectedFortuneId: 'old-fortune',
+    activeFortuneId: 'new-fortune',
+    sessionEpoch: 0,
+    currentSessionEpoch: 0,
+    isAlreadyUnlocked: false,
+    persistedRewardKeys: new Set(),
+    consumedSdkRewardActionIds: new Set(),
+  });
+  assert.equal(decision.allowed, false);
 });
 
 const configMatrix = [
@@ -578,6 +884,48 @@ for (const [key, expected] of [
   });
 }
 
+const targetedNegativeMutations = [
+  {
+    name: 'unvalidated local read reintroduced before prepare',
+    file: 'src/services/rewardedAdProvider.sdk.js',
+    mutate: (source) => source.replace(
+      'const prepareOptions = {',
+      'const unsafeLocalConsent = dependencies.loadLocalConsentPreferences();\n      const prepareOptions = {',
+    ),
+  },
+  {
+    name: 'result request ownership matching removed',
+    file: 'src/components/RewardAdModal.jsx',
+    mutate: (source) => source.replace(
+      'isRewardedResultForRequest(result, {',
+      'Boolean(result?.ok) && ignoreRequestOwnership({',
+    ),
+  },
+  {
+    name: 'rewardActionId consumption guard removed',
+    file: 'src/services/rewardedAdService.js',
+    mutate: (source) => source.replace(
+      'consumedSdkRewardActionIds.has(rewardActionId)',
+      'false',
+    ),
+  },
+  {
+    name: 'reset Set clears removed',
+    file: 'src/App.jsx',
+    mutate: (source) => source
+      .replace('persistedRewardKeysRef.current.clear();', '')
+      .replace('consumedSdkRewardActionIdsRef.current.clear();', ''),
+  },
+  {
+    name: 'reward session epoch check removed',
+    file: 'src/App.jsx',
+    mutate: (source) => source.replace(
+      'currentSessionEpoch: rewardSessionEpochRef.current',
+      'currentSessionEpoch: currentRewardSessionEpoch',
+    ),
+  },
+];
+
 async function main() {
   validateScope();
   const sourceErrors = validateSources();
@@ -602,6 +950,14 @@ async function main() {
       const mutated = source.replaceAll(token, `__MUTATION_${index}__`);
       const errors = validateSources(new Map([[file, mutated]]));
       assert(errors.length > 0, `negative mutation escaped: ${file} ${token}`);
+      detected += 1;
+    }
+    for (const mutation of targetedNegativeMutations) {
+      const source = read(mutation.file);
+      const mutated = mutation.mutate(source);
+      assert.notEqual(mutated, source, `negative mutation did not apply: ${mutation.name}`);
+      const errors = validateSources(new Map([[mutation.file, mutated]]));
+      assert(errors.length > 0, `negative mutation escaped: ${mutation.name}`);
       detected += 1;
     }
     process.stdout.write(`Negative self-test: ${detected} mutations detected.\n`);

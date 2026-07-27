@@ -72,11 +72,23 @@ export function createSdkRewardedAdProvider(dependencyOverrides = {}) {
     setTimeout: (callback, delay) => globalThis.setTimeout(callback, delay),
     clearTimeout: (timerId) => globalThis.clearTimeout(timerId),
     now: () => new Date(),
+    createActionId: () => globalThis.crypto?.randomUUID?.(),
     timeoutMs: REWARDED_AD_TIMEOUT_MS,
     ...dependencyOverrides,
   };
 
   let rewardedPromise = null;
+  let actionSequence = 0;
+
+  function createRewardActionId() {
+    actionSequence += 1;
+    const candidate = dependencies.createActionId();
+    const sanitized = typeof candidate === 'string'
+      ? candidate.trim().replace(/[^A-Za-z0-9._:-]+/g, '-').slice(0, 128)
+      : '';
+
+    return sanitized || `sdk-reward-${dependencies.now().getTime()}-${actionSequence}`;
+  }
 
   function withTimeout(promise, milliseconds, timeoutValue) {
     let timerId;
@@ -98,18 +110,31 @@ export function createSdkRewardedAdProvider(dependencyOverrides = {}) {
     await withTimeout(cleanup, dependencies.timeoutMs.cleanup, null);
   }
 
-  function readGates() {
+  function readGateState() {
     const localConsent = dependencies.loadLocalConsentPreferences();
     if (localConsent?.ads !== true) {
-      return REWARDED_AD_OUTCOME.ADS_CONSENT_REQUIRED;
+      return {
+        failureReason: REWARDED_AD_OUTCOME.ADS_CONSENT_REQUIRED,
+        localConsent,
+        runtimeSnapshot: null,
+      };
     }
-    if (!runtimeGateOpen(dependencies.getRuntimeConsentSnapshot())) {
-      return REWARDED_AD_OUTCOME.AD_GATE_CLOSED;
+    const runtimeSnapshot = dependencies.getRuntimeConsentSnapshot();
+    if (!runtimeGateOpen(runtimeSnapshot)) {
+      return {
+        failureReason: REWARDED_AD_OUTCOME.AD_GATE_CLOSED,
+        localConsent,
+        runtimeSnapshot,
+      };
     }
-    return null;
+    return {
+      failureReason: null,
+      localConsent,
+      runtimeSnapshot,
+    };
   }
 
-  async function runAction(options) {
+  async function runAction(options, rewardActionId) {
     const handles = [];
     let settled = false;
     let rewardDelivered = false;
@@ -126,8 +151,10 @@ export function createSdkRewardedAdProvider(dependencyOverrides = {}) {
         return failure(options, REWARDED_AD_OUTCOME.SDK_UNAVAILABLE);
       }
 
-      const initialGateFailure = readGates();
-      if (initialGateFailure) return failure(options, initialGateFailure);
+      const initialGate = readGateState();
+      if (initialGate.failureReason) {
+        return failure(options, initialGate.failureReason);
+      }
 
       const module = await dependencies.loadAdMobModule();
       const AdMob = module?.AdMob || module;
@@ -167,14 +194,15 @@ export function createSdkRewardedAdProvider(dependencyOverrides = {}) {
         handles.push(handle);
       }
 
-      const prePrepareGateFailure = readGates();
-      if (prePrepareGateFailure) return failure(options, prePrepareGateFailure);
+      const prePrepareGate = readGateState();
+      if (prePrepareGate.failureReason) {
+        return failure(options, prePrepareGate.failureReason);
+      }
 
-      const latestLocalConsent = dependencies.loadLocalConsentPreferences();
       const prepareOptions = {
         adId: options.config.adId,
         isTesting: true,
-        ...(latestLocalConsent?.personalizedAds === true ? {} : { npa: true }),
+        ...(prePrepareGate.localConsent?.personalizedAds === true ? {} : { npa: true }),
       };
       const prepareResult = await withTimeout(
         Promise.race([
@@ -197,8 +225,10 @@ export function createSdkRewardedAdProvider(dependencyOverrides = {}) {
         return failure(options, REWARDED_AD_OUTCOME.LOAD_FAILED);
       }
 
-      const preShowGateFailure = readGates();
-      if (preShowGateFailure) return failure(options, preShowGateFailure);
+      const preShowGate = readGateState();
+      if (preShowGate.failureReason) {
+        return failure(options, preShowGate.failureReason);
+      }
 
       const showPromise = Promise.resolve()
         .then(() => AdMob.showRewardVideoAd())
@@ -252,6 +282,7 @@ export function createSdkRewardedAdProvider(dependencyOverrides = {}) {
           provider: REWARDED_AD_PROVIDER_TYPE.SDK,
           placementId: options.placementId,
           categoryLabel: options.categoryLabel,
+          rewardActionId,
           rewardedAt: dependencies.now().toISOString(),
         };
       }
@@ -277,9 +308,10 @@ export function createSdkRewardedAdProvider(dependencyOverrides = {}) {
   function show(options = {}) {
     if (rewardedPromise) return rewardedPromise;
 
+    const rewardActionId = createRewardActionId();
     let currentPromise;
     currentPromise = Promise.resolve()
-      .then(() => runAction(options))
+      .then(() => runAction(options, rewardActionId))
       .finally(() => {
         if (rewardedPromise === currentPromise) {
           rewardedPromise = null;

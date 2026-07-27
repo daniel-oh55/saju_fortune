@@ -53,6 +53,66 @@ export function getRewardedAdOutcomeMessage(reason) {
   return '광고 보상 확인 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.';
 }
 
+export function isRewardedResultForRequest(
+  result,
+  { placementId, categoryLabel },
+) {
+  return (
+    result?.ok === true &&
+    result?.placementId === placementId &&
+    result?.categoryLabel === categoryLabel
+  );
+}
+
+export function getRewardPersistenceDecision({
+  categoryId,
+  rewardResult,
+  expectedFortuneId,
+  activeFortuneId,
+  sessionEpoch,
+  currentSessionEpoch,
+  isAlreadyUnlocked,
+  persistedRewardKeys,
+  consumedSdkRewardActionIds,
+}) {
+  if (
+    rewardResult?.ok !== true ||
+    !categoryId ||
+    !expectedFortuneId ||
+    expectedFortuneId !== activeFortuneId ||
+    sessionEpoch !== currentSessionEpoch ||
+    isAlreadyUnlocked
+  ) {
+    return { allowed: false };
+  }
+
+  const persistenceKey = `${expectedFortuneId}:${categoryId}`;
+  if (persistedRewardKeys.has(persistenceKey)) {
+    return { allowed: false };
+  }
+
+  const isSdkReward = rewardResult.provider === 'sdk_rewarded_ad';
+  const rewardActionId = isSdkReward &&
+    typeof rewardResult.rewardActionId === 'string' &&
+    /^[A-Za-z0-9._:-]{1,128}$/.test(rewardResult.rewardActionId)
+    ? rewardResult.rewardActionId
+    : null;
+
+  if (
+    isSdkReward &&
+    (!rewardActionId || consumedSdkRewardActionIds.has(rewardActionId))
+  ) {
+    return { allowed: false };
+  }
+
+  return {
+    allowed: true,
+    persistenceKey,
+    rewardActionId,
+    rewardType: isSdkReward ? 'sdk_rewarded_ad' : 'mock_rewarded_ad',
+  };
+}
+
 export function showRewardedAd(options = {}) {
   return showRewardedAdWithResolvedProvider(options, options.envOverride);
 }
