@@ -11,9 +11,11 @@
 - [x] Add App snapshot hydration, resynchronization, and subscription cleanup
 - [x] Align privacy copy and separate local preferences from Google UMP
 - [x] Add targeted production and behavioral checker
-- [ ] Complete Android privacy-options device QA
-- [ ] Verify post-dismiss refresh on an Android device
-- [ ] Complete offline QA and ADB logcat verification
+- [x] Complete Android privacy-options device QA
+- [x] Verify post-dismiss refresh on an Android device
+- [x] Complete offline startup QA
+- [ ] Complete ADB logcat verification
+- [ ] Complete TalkBack/screen-reader announcement QA
 - [ ] Implement rewarded-ad SDK provider and official test-ad request
 - [ ] Create production ad units and implement actual ad request/load/show
 - [ ] Update required Google Play disclosures

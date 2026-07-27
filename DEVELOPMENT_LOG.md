@@ -33,19 +33,53 @@
 - Privacy copy alignment: Completed
 - Local app consent and Google UMP choices: Kept separate
 - Existing localStorage keys and schema: Unchanged
-- Rewarded-ad providers: Unchanged
+- Rewarded-ad SDK provider: Not started; existing provider remains mock
+- Official test-ad request: Not started
 - Ad unit IDs, test-device identifiers, and debug geography: Not added
-- Ad request/load/show implementation: Not added
-- Android privacy-options device QA: Pending
-- Screen-reader announcement QA: Pending
-- `NOT_REQUIRED` transition UX verification: Pending
-- Post-dismiss refresh device verification: Pending
-- ADB logcat: Pending
-- Offline QA: Pending
-- Offline QA and ADB logcat verification: Pending
+- Ad request/load/show implementation: Not started
+- Actual ad request/load/show: Not started
+- Android advertising QA: Not started
+- Android privacy-options device QA: Pass
+- Post-dismiss refresh device verification: Pass
+- `REQUIRED` to `NOT_REQUIRED` transition UX verification: Pass
+- Offline startup QA: Pass
+- APK installation/update: Completed
+- Cold launch/device smoke QA: Pass
+- Background/resume and app restart: Pass
+- Existing local data-use settings regression check: Pass
+- No ad displayed: Expected and confirmed
+- Screen-reader/TalkBack announcement QA: Not performed
+- ADB logcat: Not performed
 - Google Play disclosure update: Pending
 - Release build, signing, signed APK, AAB, and Play upload: Pending
 - AdMob and Google Play Consoles: Unchanged
+
+Android device QA:
+
+- Tested artifact: GitHub Actions run #357
+- Run ID: `30242828677`
+- Artifact name: `harupuli-debug-apk`
+- Artifact ID: `8643921124`
+- Artifact digest:
+  `sha256:86659690b3535b92b564d2ac484294c7ccce33863205c6ff8a960083eea67bcd`
+- Tested HEAD: `395cbfbede8b3e12da1fa09cf30c27d7454d67a3`
+- Tested device: Galaxy S23 Ultra
+- APK installation/update: Completed
+- Cold launch, home screen, Settings page, and existing fortune feature
+  smoke checks: Pass
+- `개인정보 및 쿠키 설정` entry displayed: Yes
+- Entry display matched current UMP status: Pass
+- Rapid repeated taps: Native form displayed once
+- Privacy-options form opened, closed, and returned to the app: Pass
+- Post-form pending state cleared and message displayed: Pass
+- `REQUIRED` to `NOT_REQUIRED` transition: Observed and Pass
+- Background/resume and app restart: Pass
+- Existing `데이터 사용 설정`: Pass
+- Offline startup: Pass
+- Actual ad displayed: None, expected
+- Android privacy-options device QA: Pass
+- TalkBack announcement QA: Not performed
+- ADB logcat: Not performed
 
 Local verification:
 
@@ -72,9 +106,11 @@ Local verification:
   or `ANDROID_HOME`/`ANDROID_SDK_ROOT` was available in the local environment.
 - `.\gradlew.bat :app:processDebugMainManifest`: Not run because
   `assembleDebug` did not pass its environment prerequisite.
-- Android privacy-options device QA, offline QA, and ADB logcat: Not
-  performed.
-- GitHub Actions and Vercel: Pending; no remote success is claimed locally.
+- Android privacy-options device QA and offline startup: Pass on Galaxy S23
+  Ultra using run #357 artifact `8643921124`.
+- TalkBack announcement QA and ADB logcat: Not performed.
+- GitHub Actions run `30242828677`: Success.
+- Vercel deployment and Vercel Preview Comments: Success.
 
 ## PR #408 - AdMob Privacy Options UI Contract
 
