@@ -66,10 +66,12 @@ export function createAdmobRuntimeConsentCoordinator(dependencies) {
     return snapshot;
   }
 
-  function fail(lastErrorStage) {
+  function fail(lastErrorStage, { preserveCanRequestAds = false } = {}) {
     return publish({
       state: ADMOB_RUNTIME_CONSENT_STATE.FAILED,
-      canRequestAds: false,
+      canRequestAds: preserveCanRequestAds
+        ? snapshot.canRequestAds
+        : false,
       adGateOpen: false,
       lastErrorStage,
     });
@@ -155,14 +157,14 @@ export function createAdmobRuntimeConsentCoordinator(dependencies) {
         adGateOpen: true,
       });
     } catch {
-      return fail('initialize');
+      return fail('initialize', { preserveCanRequestAds: true });
     }
   }
 
   function bootstrap() {
     if (bootstrapPromise) return bootstrapPromise;
 
-    bootstrapPromise = runBootstrap();
+    bootstrapPromise = Promise.resolve().then(runBootstrap);
     return bootstrapPromise;
   }
 

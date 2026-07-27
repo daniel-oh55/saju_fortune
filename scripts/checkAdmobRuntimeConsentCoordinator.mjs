@@ -300,6 +300,38 @@ async function runBehavioralChecks() {
   assert.strictEqual(ready.coordinator.bootstrap(), firstPromise)
   assert.equal(ready.calls.filter((call) => call === 'initialize').length, 1)
 
+  const reentrant = createScenario()
+  let reentrantPromise
+  let didReenter = false
+  reentrant.coordinator.subscribe(() => {
+    if (didReenter) return
+    didReenter = true
+    reentrantPromise = reentrant.coordinator.bootstrap()
+  })
+  const reentrantFirstPromise = reentrant.coordinator.bootstrap()
+  const reentrantResult = await reentrantFirstPromise
+  assert.strictEqual(reentrantPromise, reentrantFirstPromise)
+  assert.deepEqual(
+    reentrant.calls,
+    ['requestConsentInfo', 'showConsentForm', 'initialize'],
+  )
+  assert.equal(reentrantResult.state, ADMOB_RUNTIME_CONSENT_STATE.READY)
+  assert.equal(reentrantResult.adGateOpen, true)
+
+  const webReentrant = createScenario({ native: false })
+  let webReentrantPromise
+  let didReenterWeb = false
+  webReentrant.coordinator.subscribe(() => {
+    if (didReenterWeb) return
+    didReenterWeb = true
+    webReentrantPromise = webReentrant.coordinator.bootstrap()
+  })
+  const webFirstPromise = webReentrant.coordinator.bootstrap()
+  const webResult = await webFirstPromise
+  assert.strictEqual(webReentrantPromise, webFirstPromise)
+  assert.deepEqual(webReentrant.calls, [])
+  assert.equal(webResult.state, ADMOB_RUNTIME_CONSENT_STATE.WEB_NOOP)
+
   const denied = createScenario({
     requestResult: info({ canRequestAds: true }),
     formResult: info({ status: 'REQUIRED', canRequestAds: false }),
@@ -326,33 +358,43 @@ async function runBehavioralChecks() {
       scenario: createScenario({ requestError: new Error('private request error') }),
       stage: 'consent-info',
       calls: ['requestConsentInfo'],
+      canRequestAds: false,
     },
     {
       scenario: createScenario({ formError: new Error('private form error') }),
       stage: 'consent-form',
       calls: ['requestConsentInfo', 'showConsentForm'],
+      canRequestAds: false,
     },
     {
       scenario: createScenario({ initializeError: new Error('private init error') }),
       stage: 'initialize',
       calls: ['requestConsentInfo', 'showConsentForm', 'initialize'],
+      canRequestAds: true,
+      initializeStarted: true,
+      initializeResolved: false,
     },
     {
       scenario: createScenario({ platformError: new Error('private platform error') }),
       stage: 'platform',
       calls: [],
+      canRequestAds: false,
     },
   ]) {
     const result = await expected.scenario.coordinator.bootstrap()
     assert.equal(result.state, ADMOB_RUNTIME_CONSENT_STATE.FAILED)
     assert.equal(result.lastErrorStage, expected.stage)
-    assert.equal(result.canRequestAds, false)
+    assert.equal(result.canRequestAds, expected.canRequestAds)
+    if (expected.initializeStarted !== undefined) {
+      assert.equal(result.initializeStarted, expected.initializeStarted)
+      assert.equal(result.initializeResolved, expected.initializeResolved)
+    }
     assert.equal(result.adGateOpen, false)
     assert.deepEqual(expected.scenario.calls, expected.calls)
-    assert.strictEqual(
-      expected.scenario.coordinator.bootstrap(),
-      expected.scenario.coordinator.bootstrap(),
-    )
+    const repeatedPromise = expected.scenario.coordinator.bootstrap()
+    assert.strictEqual(repeatedPromise, expected.scenario.coordinator.bootstrap())
+    await repeatedPromise
+    assert.deepEqual(expected.scenario.calls, expected.calls)
   }
 
   const observable = createScenario()
