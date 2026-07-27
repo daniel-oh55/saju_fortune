@@ -1,5 +1,23 @@
 # TODO
 
+## PR #406 - AdMob Runtime Consent Bootstrap Contract TODO
+
+- [x] Verify starting `main` and merged PR #405 baseline
+- [x] Investigate React/Vite bootstrap and native platform detection
+- [x] Investigate rewarded-ad provider and privacy/settings structure
+- [x] Inspect installed v8.0.0 TypeScript declarations
+- [x] Inspect installed v8.0.0 Android consent and initialization sources
+- [x] Compare plugin README order with current Google UMP/Mobile Ads guidance
+- [x] Select consent-first runtime sequence
+- [x] Define state, gate, single-flight, error, and web no-op contracts
+- [x] Define conditional `개인정보 및 쿠키 설정` UI boundary
+- [x] Define production file plan, tests, device QA, blockers, and rollback
+- [x] Add targeted docs/check-only checker
+- [ ] Implement runtime consent coordinator in a separate production PR
+- [ ] Implement conditional privacy-options UI in a separate production UI PR
+- [ ] Resolve adapter readiness and implement guarded official test-ad request
+- [ ] Complete Android advertising device QA
+
 ## PR #405 - AdMob Plugin Install Baseline TODO
 
 - [x] Install exact `@capacitor-community/admob@8.0.0`

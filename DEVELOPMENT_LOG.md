@@ -1,5 +1,54 @@
 # DEVELOPMENT_LOG
 
+## PR #406 - AdMob Runtime Consent Bootstrap Contract
+
+- Work date: 2026-07-27
+- PR type: docs/check-only
+- Starting main HEAD: `f774e74c0f237184ee68fb03d1d4036003ed62b4`
+- Branch: `docs/admob-runtime-consent-bootstrap`
+- Installed source inspected: `@capacitor-community/admob@8.0.0`
+- `requestConsentInfo` before `AdMob.initialize`: Supported by the installed
+  Android implementation because its UMP executor has no Mobile Ads
+  initialization dependency.
+- Selected order: consent information update, optional required form,
+  `canRequestAds` gate, then one Mobile Ads initialization call.
+- Ordering basis: current Google UMP/Mobile Ads guidance takes precedence over
+  the plugin README example because initialization can preload ads or mediation
+  adapters.
+- Consent/form rejection fallback: fail closed because the plugin rejects
+  without returning cached `canRequestAds`.
+- Web/PWA/Vercel behavior: no-op with zero native plugin calls.
+- Duplicate protection: module-level bootstrap Promise plus a monotonic
+  initialization guard.
+- Runtime-bootstrap implementation entry: Ready within the documented
+  consent/init-only scope.
+- First ad-request implementation: Blocked pending adapter-readiness review,
+  request-level duplicate guard, approved test-ad setup, and device QA.
+- Production `src` and `public`: Unchanged.
+- Android native files and dependencies: Unchanged.
+- Runtime SDK/UMP/ad calls: Not added.
+- Consoles: Unchanged.
+- APK installation and Android device QA: Not performed.
+
+Local verification:
+
+- `npm ci`: Pass; npm reported 4 dependency audit findings (3 high, 1
+  critical). No automatic dependency fix was applied in this docs/check-only
+  PR.
+- `npm run build`: Pass with the existing large-chunk warning.
+- `npm run check:admob-runtime-consent-bootstrap-contract`: Pass.
+- `npm run check:content-safety`: Pass.
+- `npm run check:share-text`: Pass.
+- `npm run check:doc-check-src-guardrails`: Pass.
+- `npm run check:admob-plugin-install-baseline`: Executed but does not pass
+  after PR #405 was merged because that checker requires the original #405
+  change set relative to `origin/main`; it reports this PR's new files as
+  unexpected and the already-merged #405 files as missing.
+- Negative verification: all 16 temporary mutations were rejected and restored.
+  U+FFFD was re-run with an exact Unicode code point after PowerShell initially
+  converted the attempted character to `?`.
+- `git diff --check`: Pass.
+
 ## PR #405 - AdMob Plugin Install Baseline
 
 - Work date: 2026-07-27
