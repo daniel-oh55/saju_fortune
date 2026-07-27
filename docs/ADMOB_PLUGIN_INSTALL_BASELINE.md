@@ -9,17 +9,28 @@
 - Mobile Ads SDK resolved version: 24.9.0
 - UMP SDK dependency resolution: Completed
 - UMP SDK resolved version: 4.0.0
-- Debug Gradle build: Completed
+- AdMob App ID configuration: Completed
+- Debug Gradle build after App ID configuration: Pending
+- Debug merged manifest App ID verification: Pending
+- Debug APK installation: Not started
+- Android app launch QA after App ID configuration: Not started
 - Release Gradle build verification: Blocked by the existing release-signing environment guard
-- Debug merged manifest inspection: Completed
 - Release merged manifest inspection: Blocked by the existing release-signing environment guard
 
 ## Purpose and scope
 
 This baseline installs the exact Capacitor community AdMob plugin, synchronizes
-its Android module, and verifies the debug dependency and manifest effects. It
-does not configure identifiers, initialize either SDK at runtime, implement a
-consent flow, request an ad, display an ad, or change either Console.
+its Android module, pins the selected Android SDK versions, and configures the
+approved Harupuli AdMob App ID through an Android string resource referenced by
+the source manifest.
+
+It does not initialize either SDK at runtime, implement a consent flow, request
+an ad, display an ad, configure an ad unit, add a test-device identifier, or
+change either the AdMob Console or Google Play Console.
+
+The official privacy-options label remains:
+
+`개인정보 및 쿠키 설정`
 
 ## Starting baseline
 
@@ -28,11 +39,8 @@ consent flow, request an ad, display an ad, or change either Console.
 - PR #404: merged; its merge commit is the starting HEAD.
 - Capacitor core / Android / CLI: 8.4.0 / 8.4.0 / 8.4.0
 - React / Vite: 18.3.1 / 6.4.2
-- Local Node / initial JDK: 24.15.0 / Temurin 17.0.19
-- Verification JDK / CI: Temurin 21.0.11 / Node 22 and Temurin 21
 - Android SDK: min 24, compile 36, target 36
 - Android build: AGP 8.13.0, Gradle 8.14.3, Java source/target 21
-- Kotlin: no app Kotlin plugin or source; plugin-internal Kotlin 2.2.20
 - Existing synchronized Capacitor plugin: `@capacitor/app@8.1.0`
 
 The starting dependency tree and Android source contained no AdMob plugin,
@@ -49,8 +57,7 @@ did not change.
 
 The root dependency entry and `node_modules/@capacitor-community/admob` entry
 both resolve to 8.0.0. The registry tarball URL and SHA-512 integrity value are
-present. The only new lockfile packages are the plugin and its package-metadata
-tooling dependency tree.
+present.
 
 ## Android plugin registration
 
@@ -62,7 +69,7 @@ registration for the already installed `@capacitor/app` plugin. No manual
 
 ## Exact Android dependency pins
 
-The existing `android/variables.gradle` extension now sets:
+The existing `android/variables.gradle` extension sets:
 
 - `playServicesAdsVersion = '24.9.0'`
 - `userMessagingPlatformVersion = '4.0.0'`
@@ -76,56 +83,74 @@ SDK levels, AGP, Gradle, Java, Kotlin, and AndroidX versions remain unchanged.
 `:capacitor-community-admob`.
 
 It resolved `com.google.android.ump:user-messaging-platform:4.0.0` directly
-from the plugin. `dependencyInsight` records conflict resolution between the
+from the plugin. `dependencyInsight` recorded conflict resolution between the
 direct 4.0.0 pin and Mobile Ads API's transitive 3.2.0 request, selecting
 4.0.0. No floating or 25.x Mobile Ads version was resolved.
 
 `releaseRuntimeClasspath` could not be resolved because the existing app
-Gradle script rejects every release-named task when release-signing environment
-variables are absent. The same command fails at the same line on a detached
-`origin/main` worktree before plugin resolution, so this is not a plugin
-dependency regression.
+Gradle script rejects release-named tasks when release-signing environment
+variables are absent. The same behavior was reproduced on `origin/main` before
+this App ID update.
 
 ## Debug build verification
 
-With an external temporary Temurin 21 JDK and Android SDK 36, `clean` and
-`assembleDebug` completed. The debug APK was generated for build verification
-only; no APK installation or device QA was performed.
+The original plugin-install HEAD completed `clean` and `assembleDebug`, and a
+debug APK artifact was generated for build verification only.
+
+After the App ID resource and manifest metadata were added, a new GitHub Actions
+run is required. Until that run completes, the updated debug build, artifact,
+and merged-manifest result remain Pending. No APK installation or Android
+device QA is inferred from a successful build.
 
 ## Release build verification
 
-`assembleRelease` stopped during app Gradle evaluation with
-`Release signing environment variables are required for release builds.` The
-same failure reproduces on `origin/main`. No signing variables, keystore,
-signing configuration, AAB, upload, or release-completion claim was added.
+`assembleRelease` remains blocked by the existing release-signing environment
+guard. No signing variables, keystore, signing configuration, signed APK, AAB,
+upload, or release-completion claim was added in this PR.
 
 ## Debug merged manifest observations
 
-`processDebugMainManifest` completed. The generated debug merged manifest
-contains the SDK-provided Advertising ID permission and Google Mobile Ads
-`AdActivity`, `MobileAdsInitProvider`, `AdService`, and related SDK components.
-It contains no Mobile Ads App ID metadata and no real AdMob identifier. No
-distinct UMP activity, service, or provider was added.
+The original plugin-install HEAD's debug merged manifest contained SDK-provided
+Advertising ID permissions and Google Mobile Ads components including
+`MobileAdsInitProvider`, but it had no App ID metadata.
+
+The source manifest now contains exactly one
+`com.google.android.gms.ads.APPLICATION_ID` metadata element and references
+`@string/admob_app_id`. The Android string resource contains the approved
+Harupuli App ID. Confirmation that the updated debug merged manifest resolves
+the resource to the actual value remains Pending until the new build completes.
 
 ## Release merged manifest observations
 
-`processReleaseMainManifest` is blocked by the same existing release-signing
-environment guard and fails identically on `origin/main`. No release merged
-manifest result is claimed or inferred from the debug variant.
+`processReleaseMainManifest` remains blocked by the same existing
+release-signing environment guard. No release merged-manifest result is claimed
+or inferred from the debug variant.
 
 ## Advertising ID impact
 
-The debug merged manifest contains
-`com.google.android.gms.permission.AD_ID`, inherited from the Mobile Ads SDK,
-and `android.permission.ACCESS_ADSERVICES_AD_ID`. The source manifest remains
-unchanged. This observation does not complete the Google Play Advertising ID
-declaration or Data safety work.
+The original debug merged manifest inherited
+`com.google.android.gms.permission.AD_ID` and
+`android.permission.ACCESS_ADSERVICES_AD_ID` from the Mobile Ads SDK. Neither
+permission is manually declared in the source manifest. This observation does
+not complete the Google Play Advertising ID declaration or Data safety work.
 
 ## Application ID status
 
-AdMob App ID configuration: Not started. The source and debug merged manifests
-contain no `com.google.android.gms.ads.APPLICATION_ID` metadata. There are no
-App IDs, ad unit IDs, sample IDs, or test-device identifiers in this change.
+AdMob App ID configuration: Completed.
+
+- Android package: `com.harupuli.app`
+- Resource name: `admob_app_id`
+- Configured App ID: `ca-app-pub-9536468405324805~1921427615`
+- Source manifest metadata name: `com.google.android.gms.ads.APPLICATION_ID`
+- Source manifest metadata value: `@string/admob_app_id`
+- Google sample App ID: not used
+- Ad unit ID: not added
+- Test-device identifier: not added
+- Placeholder value: not used
+
+The App ID was provided by the user as the value copied for the Harupuli app in
+AdMob. It is an application identifier embedded in the Android package, not an
+API secret.
 
 ## Runtime integration status
 
@@ -145,43 +170,60 @@ App IDs, ad unit IDs, sample IDs, or test-device identifiers in this change.
 - Dependency manifest and lockfile
 - Exact Android SDK variables
 - Capacitor-generated Android Gradle registration files
-- This baseline document, project logs, and its targeted checker
+- `android/app/src/main/AndroidManifest.xml`
+- `android/app/src/main/res/values/strings.xml`
+- This baseline document, project logs, TODO, and targeted checker
 
 ## Files intentionally unchanged
 
-Production `src` and `public` files, Capacitor/Vite configuration, source
-Android manifest, strings, `MainActivity`, app Gradle file, Gradle wrapper,
-workflows, privacy policy, `app-ads.txt`, routing, storage, schema, and fortune
-logic are unchanged.
+Production `src` and `public` files, Capacitor/Vite configuration,
+`MainActivity`, app Gradle file, Gradle wrapper, workflows, privacy policy,
+`app-ads.txt`, routing, storage, schema, and fortune logic remain unchanged.
+
+No Mobile Ads initialization, UMP runtime call, ad load, or ad show code was
+added.
 
 ## Rollback plan
 
-Revert this PR commit, run `npm ci`, rebuild the web bundle, and run
-`npx cap sync android`. Confirm that the AdMob module registration and both
-exact SDK variables disappear, then rerun the existing web and Android checks.
-No Console or production identifier rollback is needed because none changed.
+Revert the PR commits, run `npm ci`, rebuild the web bundle, and run
+`npx cap sync android`. Confirm that the AdMob module registration, exact SDK
+variables, App ID string resource, and APPLICATION_ID metadata disappear, then
+rerun the existing web and Android checks.
+
+No Console rollback is needed because this PR does not change either Console.
 
 ## Blocking conditions
 
-- Release dependency, build, and merged-manifest verification remain blocked
+- The updated Debug APK build and merged-manifest verification remain Pending
+  until GitHub Actions completes for the new HEAD.
+- Android device QA remains Not started until the updated APK is installed and
+  launched on the Galaxy S23 Ultra.
+- Release dependency, build, and merged-manifest verification remain Blocked
   until approved release-signing variables are available.
-- Runtime work remains blocked until App ID injection, consent coordination,
-  test-only configuration, privacy entry point, and Console work are separately
+- Runtime advertising work remains out of scope until initialization, consent,
+  test-ad configuration, privacy entry point, and Console work are separately
   approved.
-- A production identifier, floating dependency, source change, or claim that
-  the pending runtime/Console work is complete blocks this baseline.
+- A sample App ID, ad unit ID, placeholder, committed test-device identifier,
+  manual source AD_ID declaration, or runtime ad request blocks this baseline.
 
 ## Pending work
 
-- AdMob App ID configuration: Not started
+- Debug build after App ID configuration: Pending
+- Debug merged manifest App ID verification: Pending
+- Debug APK artifact generation for the new HEAD: Pending
+- Debug APK installation: Not started
+- Android app launch and Missing application ID QA: Not started
 - Mobile Ads SDK runtime initialization: Not started
 - UMP consent flow integration: Not started
 - Privacy options runtime UI: Not started
 - Official test-ad request: Not started
-- Android device AdMob QA: Not started
 - European regulations message publication: Not started
 - Google Play Data safety update: Not started
 - Advertising ID declaration: Not started
+- Release signing: Not started
+- Signed APK: Not started
+- AAB generation: Not started
+- Google Play advertising update upload: Not started
 - Production ad units: 0
 - Actual ad requests: No data
 - Actual ad serving: Pending
