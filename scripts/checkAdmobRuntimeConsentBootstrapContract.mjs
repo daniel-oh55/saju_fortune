@@ -28,11 +28,28 @@ const lines = (...args) =>
 const requireText = (content, text, label) => {
   if (!content.includes(text)) errors.push(`${label}: missing required text: ${text}`)
 }
+const isPlainObject = (value) =>
+  value !== null && typeof value === 'object' && !Array.isArray(value)
+const hasValidPackageMap = (value) =>
+  isPlainObject(value) &&
+  Object.entries(value).every(
+    ([name, version]) => name.length > 0 && typeof version === 'string' && version.length > 0,
+  )
+const gitObjectExists = (objectName) => {
+  try {
+    execFileSync('git', ['cat-file', '-e', objectName], { cwd: root, stdio: 'ignore' })
+    return true
+  } catch {
+    return false
+  }
+}
 
 const untrackedFiles = lines('ls-files', '--others', '--exclude-standard')
 const unexpectedUntrackedFiles = untrackedFiles.filter(
   (path) => !ignoredLocalUntrackedFiles.has(path),
 )
+const contractExistsOnMain = gitObjectExists(`origin/main:${documentPath}`)
+const creationMode = !contractExistsOnMain
 const changedFiles = new Set([
   ...lines('diff', '--name-only', 'origin/main...HEAD'),
   ...lines('diff', '--name-only', '--cached'),
@@ -40,11 +57,13 @@ const changedFiles = new Set([
   ...unexpectedUntrackedFiles,
 ])
 
-for (const path of changedFiles) {
-  if (!allowedFiles.has(path)) errors.push(`change scope: unexpected changed file: ${path}`)
-}
-for (const path of allowedFiles) {
-  if (!changedFiles.has(path)) errors.push(`change scope: expected changed file is missing: ${path}`)
+if (creationMode) {
+  for (const path of changedFiles) {
+    if (!allowedFiles.has(path)) errors.push(`change scope: unexpected changed file: ${path}`)
+  }
+  for (const path of allowedFiles) {
+    if (!changedFiles.has(path)) errors.push(`change scope: expected changed file is missing: ${path}`)
+  }
 }
 for (const ignoredPath of ignoredLocalUntrackedFiles) {
   if (
@@ -63,37 +82,47 @@ const forbiddenPrefixes = [
   'ios/',
   '.github/workflows/',
 ]
-for (const prefix of forbiddenPrefixes) {
-  if ([...changedFiles].some((path) => path.startsWith(prefix))) {
-    errors.push(`docs/check-only scope: ${prefix} must remain unchanged`)
+if (creationMode) {
+  for (const prefix of forbiddenPrefixes) {
+    if ([...changedFiles].some((path) => path.startsWith(prefix))) {
+      errors.push(`docs/check-only scope: ${prefix} must remain unchanged`)
+    }
   }
-}
-for (const pattern of [
-  /^capacitor\.config\./u,
-  /^vite\.config\./u,
-  /service-worker/iu,
-  /package-lock\.json$/u,
-]) {
-  if ([...changedFiles].some((path) => pattern.test(path))) {
-    errors.push(`docs/check-only scope: forbidden changed path matching ${pattern}`)
+  for (const pattern of [
+    /^capacitor\.config\./u,
+    /^vite\.config\./u,
+    /service-worker/iu,
+    /package-lock\.json$/u,
+  ]) {
+    if ([...changedFiles].some((path) => pattern.test(path))) {
+      errors.push(`docs/check-only scope: forbidden changed path matching ${pattern}`)
+    }
   }
 }
 
 const packageJson = JSON.parse(read('package.json'))
-const basePackageJson = JSON.parse(git('show', 'origin/main:package.json'))
 if (packageJson.scripts?.[scriptName] !== `node ${checkerPath}`) {
   errors.push(`package.json: incorrect ${scriptName} command`)
 }
-const currentScripts = { ...packageJson.scripts }
-delete currentScripts[scriptName]
-if (JSON.stringify(currentScripts) !== JSON.stringify(basePackageJson.scripts)) {
-  errors.push('package.json: an existing script changed')
+if (!hasValidPackageMap(packageJson.dependencies)) {
+  errors.push('package.json: dependencies must remain a valid package map')
 }
-if (JSON.stringify(packageJson.dependencies) !== JSON.stringify(basePackageJson.dependencies)) {
-  errors.push('package.json: dependencies changed')
+if (!hasValidPackageMap(packageJson.devDependencies)) {
+  errors.push('package.json: devDependencies must remain a valid package map')
 }
-if (JSON.stringify(packageJson.devDependencies) !== JSON.stringify(basePackageJson.devDependencies)) {
-  errors.push('package.json: devDependencies changed')
+if (creationMode) {
+  const basePackageJson = JSON.parse(git('show', 'origin/main:package.json'))
+  const currentScripts = { ...packageJson.scripts }
+  delete currentScripts[scriptName]
+  if (JSON.stringify(currentScripts) !== JSON.stringify(basePackageJson.scripts)) {
+    errors.push('package.json: an existing script changed')
+  }
+  if (JSON.stringify(packageJson.dependencies) !== JSON.stringify(basePackageJson.dependencies)) {
+    errors.push('package.json: dependencies changed')
+  }
+  if (JSON.stringify(packageJson.devDependencies) !== JSON.stringify(basePackageJson.devDependencies)) {
+    errors.push('package.json: devDependencies changed')
+  }
 }
 
 const document = read(documentPath)
@@ -113,21 +142,31 @@ const requiredSections = [
   'Duplicate execution guard',
   'Error handling and fail-closed behavior',
   'Privacy options contract',
-  'Production implementation file plan',
   'Test plan',
   'Android device QA plan',
   'Blocking conditions',
+  'Production implementation file plan',
   'Explicitly excluded work',
   'Pending work',
   'Rollback plan',
   'Official references',
 ]
+let previousSectionIndex = -1
 for (const section of requiredSections) {
-  requireText(document, `## ${section}`, documentPath)
+  const heading = `## ${section}`
+  const sectionIndex = document.indexOf(heading)
+  if (sectionIndex === -1) {
+    errors.push(`${documentPath}: missing required text: ${heading}`)
+  } else if (sectionIndex <= previousSectionIndex) {
+    errors.push(`${documentPath}: section is out of order: ${heading}`)
+  } else {
+    previousSectionIndex = sectionIndex
+  }
 }
+const compactDocument = document.replace(/\s+/gu, ' ')
 for (const text of [
   '개인정보 및 쿠키 설정',
-  'consent first, gate second, initialization third',
+  'consent first, form resolution second, gate third, initialization fourth',
   'requestConsentInfoUpdate',
   'loadAndShowConsentFormIfRequired',
   'React.StrictMode',
@@ -141,8 +180,25 @@ for (const text of [
   'Production ad units: 0',
   'APK installation and device QA are Not performed',
   'Runtime consent coordinator implementation',
+  'After every successful consent-information response',
+  'call `AdMob.showConsentForm()`',
+  'never as a call gate',
+  "successful `showConsentForm` response's latest `canRequestAds`",
 ]) {
-  requireText(document, text, documentPath)
+  requireText(compactDocument, text, documentPath)
+}
+const forbiddenContractMeanings = [
+  'isConsentFormAvailable이 true일 때만 showConsentForm 호출',
+  'required but unavailable이면 showConsentForm 호출 생략',
+  'isConsentFormAvailable을 광고 초기화 또는 form 호출 gate로 사용',
+  'only call showConsentForm when isConsentFormAvailable is true',
+  'skip showConsentForm when required but unavailable',
+  'use isConsentFormAvailable as the initialization gate',
+]
+for (const forbiddenMeaning of forbiddenContractMeanings) {
+  if (compactDocument.includes(forbiddenMeaning)) {
+    errors.push(`${documentPath}: forbidden contract meaning: ${forbiddenMeaning}`)
+  }
 }
 
 const baseProductionPaths = [
@@ -153,22 +209,29 @@ const baseProductionPaths = [
   'vite.config.js',
   '.github/workflows',
 ]
-const productionDiff = lines('diff', '--name-only', 'origin/main', '--', ...baseProductionPaths)
-if (productionDiff.length) {
-  errors.push(`production/native source changed: ${productionDiff.join(', ')}`)
+if (creationMode) {
+  const productionDiff = lines('diff', '--name-only', 'origin/main', '--', ...baseProductionPaths)
+  if (productionDiff.length) {
+    errors.push(`production/native source changed: ${productionDiff.join(', ')}`)
+  }
 }
 
 const payloadPaths = [...allowedFiles].filter((path) => path !== checkerPath)
-const changedPayload = payloadPaths
-  .filter((path) => changedFiles.has(path))
+const payloadPathsToScan = creationMode
+  ? payloadPaths.filter((path) => changedFiles.has(path))
+  : [documentPath]
+const checkedPayload = payloadPathsToScan
   .map((path) => read(path))
   .join('\n')
-const nonContractPayload = payloadPaths
-  .filter((path) => path !== documentPath && changedFiles.has(path))
-  .map((path) => read(path))
-  .join('\n')
-const allCheckedText = [...payloadPaths, checkerPath].map((path) => read(path)).join('\n')
-if (allCheckedText.includes('\uFFFD')) {
+const nonContractPayload = creationMode
+  ? payloadPaths
+      .filter((path) => path !== documentPath && changedFiles.has(path))
+      .map((path) => read(path))
+      .join('\n')
+  : ''
+const checkerSource = read(checkerPath)
+const textQualityPayload = `${checkedPayload}\n${checkerSource}`
+if (textQualityPayload.includes('\uFFFD')) {
   errors.push('text quality: Unicode replacement character U+FFFD found')
 }
 const knownMojibake = [
@@ -177,19 +240,19 @@ const knownMojibake = [
   ['?대쾲', ' PR'].join(''),
 ]
 for (const marker of knownMojibake) {
-  if (allCheckedText.includes(marker)) errors.push(`text quality: known mojibake found: ${marker}`)
+  if (textQualityPayload.includes(marker)) errors.push(`text quality: known mojibake found: ${marker}`)
 }
 
-const appIds = changedPayload.match(/ca-app-pub-\d+~\d+/gu) ?? []
+const appIds = checkedPayload.match(/ca-app-pub-\d+~\d+/gu) ?? []
 if (appIds.length) errors.push('content safety: an AdMob App ID was repeated')
-if (/ca-app-pub-\d+\/\d+/u.test(changedPayload)) {
+if (/ca-app-pub-\d+\/\d+/u.test(checkedPayload)) {
   errors.push('content safety: an ad unit ID was added')
 }
-if (/\b[A-F0-9]{32}\b/u.test(changedPayload)) {
+if (/\b[A-F0-9]{32}\b/u.test(checkedPayload)) {
   errors.push('content safety: a test-device hashed identifier was added')
 }
 const googleSampleAppId = ['ca-app-pub-3940256099942544', '3347511713'].join('~')
-if (changedPayload.includes(googleSampleAppId)) {
+if (checkedPayload.includes(googleSampleAppId)) {
   errors.push('content safety: Google sample App ID was added')
 }
 const forbiddenPlaceholders = [
@@ -198,7 +261,7 @@ const forbiddenPlaceholders = [
   ['SAMPLE', 'APP', 'ID'].join('_'),
 ]
 for (const placeholder of forbiddenPlaceholders) {
-  if (changedPayload.includes(placeholder)) {
+  if (checkedPayload.includes(placeholder)) {
     errors.push(`content safety: placeholder was added: ${placeholder}`)
   }
 }
@@ -226,7 +289,7 @@ const forbiddenCompletionClaims = [
   ['Android device QA', 'Completed'].join(': '),
 ]
 for (const claim of forbiddenCompletionClaims) {
-  if (changedPayload.includes(claim)) {
+  if (checkedPayload.includes(claim)) {
     errors.push(`documentation: forbidden completion claim: ${claim}`)
   }
 }
@@ -236,4 +299,6 @@ if (errors.length) {
   for (const error of errors) console.error(`- ${error}`)
   process.exit(1)
 }
-console.log('AdMob runtime consent bootstrap contract check passed')
+console.log(
+  `AdMob runtime consent bootstrap contract check passed (${creationMode ? 'creation' : 'post-merge'} mode)`,
+)

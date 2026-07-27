@@ -9,10 +9,13 @@
 - [x] Inspect installed v8.0.0 Android consent and initialization sources
 - [x] Compare plugin README order with current Google UMP/Mobile Ads guidance
 - [x] Select consent-first runtime sequence
+- [x] Require form resolution after every successful consent-info response
+- [x] Limit `isConsentFormAvailable` to diagnostics and test observation
 - [x] Define state, gate, single-flight, error, and web no-op contracts
 - [x] Define conditional `개인정보 및 쿠키 설정` UI boundary
 - [x] Define production file plan, tests, device QA, blockers, and rollback
 - [x] Add targeted docs/check-only checker
+- [x] Support post-merge and later-PR historical contract checking
 - [ ] Implement runtime consent coordinator in a separate production PR
 - [ ] Implement conditional privacy-options UI in a separate production UI PR
 - [ ] Resolve adapter readiness and implement guarded official test-ad request

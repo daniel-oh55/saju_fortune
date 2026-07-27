@@ -5,14 +5,15 @@
 ### Added
 
 - Defined the native-Android-only UMP consent bootstrap contract.
-- Selected consent update and optional required form before Mobile Ads
-  initialization.
+- Selected consent update, unconditional UMP form resolution, and the latest
+  form-result gate before Mobile Ads initialization.
 - Defined the `canRequestAds` fail-closed gate, state model, single-flight
   Promise, initialization guard, and web no-op.
 - Recorded the installed plugin v8.0.0 TypeScript and Android source evidence.
 - Recorded the plugin README versus current Google UMP ordering conflict.
 - Defined the conditional `개인정보 및 쿠키 설정` privacy-options entry point.
 - Added a targeted docs/check-only scope and content checker.
+- Split the checker into contract-creation and post-merge validation modes.
 
 ### Unchanged
 

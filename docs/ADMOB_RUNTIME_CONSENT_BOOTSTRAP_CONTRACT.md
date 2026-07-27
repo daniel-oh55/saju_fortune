@@ -129,7 +129,9 @@ Google's Android UMP guidance requires:
 
 - request a consent-information update on every app launch;
 - do not rely on a locally cached consent string or app preference;
-- after a successful update, load and show a form if required;
+- after a successful update, resolve the form step through
+  `loadAndShowConsentFormIfRequired`, which loads and shows a form when UMP
+  requires one and completes immediately otherwise;
 - check `canRequestAds` after the update and after consent gathering;
 - prevent duplicate ad-request work because either check can become true;
 - expose an interactable privacy-options entry point only when its requirement
@@ -166,7 +168,8 @@ required for the consent methods.
 
 Google's current guidance takes precedence because initialization can trigger
 SDK or mediation preload before consent actions. The selected contract is
-therefore consent first, gate second, initialization third.
+therefore consent first, form resolution second, gate third, initialization
+fourth.
 
 This is not an inferred unsupported sequence: the v8.0.0 Android implementation
 contains no initialization dependency in either consent method.
@@ -182,18 +185,23 @@ The next production bootstrap PR must implement this sequence:
    for this app launch.
 4. Record status, form availability, `canRequestAds`, and privacy-options
    requirement status from the successful response.
-5. If status is `REQUIRED` and a form is available, enter
-   `showing-consent-form` and call `AdMob.showConsentForm()`.
-6. Replace the gate and returned fields with the successful form response.
-7. If consent is required but a form is unavailable, enter
-   `consent-unavailable`, keep the ad gate false, and do not initialize.
-8. If the latest `canRequestAds` is not true, enter
+5. After every successful consent-information response, enter
+   `resolving-consent-form` and call `AdMob.showConsentForm()`, regardless of
+   status or `isConsentFormAvailable`.
+6. Let the plugin's Android implementation call
+   `UserMessagingPlatform.loadAndShowConsentFormIfRequired`; UMP loads and
+   shows the form when required and otherwise completes immediately.
+7. Replace status, `canRequestAds`, and `privacyOptionsRequirementStatus` with
+   the successful form response. Retain `isConsentFormAvailable` only as a
+   diagnostic snapshot or test observation, never as a call gate.
+8. If the latest form response's `canRequestAds` is not exactly true, enter
    `consent-denied-or-unresolved`, keep the ad gate false, and do not initialize.
-9. If `canRequestAds` is true, enter `ready-to-initialize`.
-10. Use a separate initialization guard, enter `initializing`, and call
+9. If the latest form response's `canRequestAds` is exactly true, enter
+   `ready-to-initialize`. Use a separate initialization guard, enter
+   `initializing`, and call
     `AdMob.initialize()` at most once.
-11. When the plugin Promise resolves, enter `ready` with the ad gate true.
-12. Do not request, load, prepare, or show any ad from the bootstrap.
+10. When the plugin Promise resolves, enter `ready` with the ad gate true. Do
+    not request, load, prepare, or show any ad from the bootstrap.
 
 The coordinator must expose a read-only snapshot or subscription suitable for a
 later provider and privacy UI. It must not import or render React components.
@@ -220,8 +228,7 @@ The minimum coordinator states are:
 
 - `idle`
 - `requesting-consent-info`
-- `showing-consent-form`
-- `consent-unavailable`
+- `resolving-consent-form`
 - `consent-denied-or-unresolved`
 - `ready-to-initialize`
 - `initializing`
@@ -233,7 +240,9 @@ The state snapshot must distinguish:
 
 - native-Android platform eligibility;
 - whether consent information completed;
-- whether a consent form was shown;
+- whether the consent-form resolution step completed and, when observable,
+  whether a consent form was shown;
+- `isConsentFormAvailable` as diagnostic/test metadata only;
 - the latest `canRequestAds`;
 - the latest `privacyOptionsRequirementStatus`;
 - whether Mobile Ads initialization was invoked and resolved;
@@ -244,13 +253,18 @@ Actual ad loaded/showing states are explicitly outside this model.
 
 ## canRequestAds gate
 
-The runtime advertising gate starts false. Only a successful plugin response
-whose latest `canRequestAds` is exactly true may open it.
+The runtime advertising gate starts false. Only the successful
+`showConsentForm` response's latest `canRequestAds` value being exactly true may
+open it and permit `AdMob.initialize()`.
 
 The gate is false for unknown, missing, rejected, stale, or locally persisted
 values. `AdmobConsentStatus.OBTAINED` alone is not a substitute for the gate.
 The app's existing `consentPreferences.ads` flag is also not a substitute for
 UMP's runtime gate.
+
+`isConsentFormAvailable` may be retained for diagnostics, state snapshots, and
+test observation. It must not gate the `showConsentForm` call or Mobile Ads
+initialization, and it must not independently determine a terminal state.
 
 The later rewarded-ad provider must require both its existing product-level
 permission and this runtime UMP gate. It must also use a separate per-placement
@@ -284,7 +298,7 @@ navigation, saved data, fortune generation, and settings.
 - `requestConsentInfo` failure: enter `failed`, record
   `lastErrorStage = consent-info`, keep the gate false, do not show a form, and
   do not initialize.
-- `showConsentForm` failure: enter `failed`, record
+- `showConsentForm` load or show failure: enter `failed`, record
   `lastErrorStage = consent-form`, keep the gate false, and do not initialize.
 - `AdMob.initialize` failure: enter `failed`, record
   `lastErrorStage = initialize`, keep the gate false, and do not auto-retry.
@@ -314,39 +328,22 @@ The coordinator must not import `SettingsPage`, `PrivacyInfoPage`, or any UI
 component. Privacy-form completion and errors will need a UI-specific refresh
 contract in that later PR.
 
-## Production implementation file plan
-
-Candidate scope for the next runtime-bootstrap PR:
-
-- Add `src/services/admobRuntimeConsentCoordinator.js` for platform gating,
-  state, single-flight execution, error isolation, and the initialize guard.
-- Update `src/main.jsx` to start the coordinator once without coupling it to
-  React rendering success.
-- Add a targeted Node regression checker for native/web sequence, state
-  transitions, duplicate calls, and failures.
-- Update only the related logs and TODO.
-
-Candidate scope for later, separate PRs:
-
-- Update `src/services/rewardedAdProvider.sdk.js` to consume the coordinator
-  gate and add ad-request guards.
-- Update `src/pages/SettingsPage.jsx` or `src/pages/PrivacyInfoPage.jsx` for the
-  conditional privacy-options entry point.
-- Add official test-ad configuration and device QA without committing a test
-  device identifier or release debug geography.
-
-These are plans, not files created by this PR.
-
 ## Test plan
 
 The runtime implementation PR must cover:
 
 - native Android success without a required form;
 - native Android success with required and available form;
-- required but unavailable form;
+- `requestConsentInfo` returns `REQUIRED` and
+  `isConsentFormAvailable === false`, but `showConsentForm` is still called;
+- `showConsentForm` completes immediately when UMP determines no form is
+  required;
 - consent denied or unresolved;
 - consent information rejection;
-- form rejection;
+- `showConsentForm` load failure is fail-closed;
+- `showConsentForm` show failure is fail-closed;
+- only the successful `showConsentForm` response's latest `canRequestAds` is
+  used as the final initialization gate;
 - initialization rejection;
 - web/PWA no-op with zero plugin calls;
 - non-Android native no-op;
@@ -398,6 +395,29 @@ The later ad-request PR remains blocked until it addresses the plugin's early
 initialization Promise resolution, any mediation adapter-readiness need, a
 request-level duplicate guard, approved test-ad configuration, and Android
 device QA.
+
+## Production implementation file plan
+
+Candidate scope for the next runtime-bootstrap PR:
+
+- Add `src/services/admobRuntimeConsentCoordinator.js` for platform gating,
+  state, single-flight execution, error isolation, and the initialize guard.
+- Update `src/main.jsx` to start the coordinator once without coupling it to
+  React rendering success.
+- Add a targeted Node regression checker for native/web sequence, state
+  transitions, duplicate calls, and failures.
+- Update only the related logs and TODO.
+
+Candidate scope for later, separate PRs:
+
+- Update `src/services/rewardedAdProvider.sdk.js` to consume the coordinator
+  gate and add ad-request guards.
+- Update `src/pages/SettingsPage.jsx` or `src/pages/PrivacyInfoPage.jsx` for the
+  conditional privacy-options entry point.
+- Add official test-ad configuration and device QA without committing a test
+  device identifier or release debug geography.
+
+These are plans, not files created by this PR.
 
 ## Explicitly excluded work
 

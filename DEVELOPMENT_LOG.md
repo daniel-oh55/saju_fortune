@@ -10,8 +10,11 @@
 - `requestConsentInfo` before `AdMob.initialize`: Supported by the installed
   Android implementation because its UMP executor has no Mobile Ads
   initialization dependency.
-- Selected order: consent information update, optional required form,
-  `canRequestAds` gate, then one Mobile Ads initialization call.
+- Selected order: consent information update, unconditional
+  `showConsentForm`/UMP form resolution, latest form-result `canRequestAds`
+  gate, then one Mobile Ads initialization call.
+- `isConsentFormAvailable`: Diagnostic, snapshot, and test-observation metadata
+  only; it is not a form-call or initialization gate.
 - Ordering basis: current Google UMP/Mobile Ads guidance takes precedence over
   the plugin README example because initialization can preload ads or mediation
   adapters.
@@ -44,7 +47,10 @@ Local verification:
   after PR #405 was merged because that checker requires the original #405
   change set relative to `origin/main`; it reports this PR's new files as
   unexpected and the already-merged #405 files as missing.
-- Negative verification: all 16 temporary mutations were rejected and restored.
+- Checker modes: exact six-file scope enforcement while the contract is absent
+  from `origin/main`; historical contract/package validation after it exists.
+- Negative verification: all 21 temporary mutations were rejected or accepted
+  as expected and restored.
   U+FFFD was re-run with an exact Unicode code point after PowerShell initially
   converted the attempted character to `?`.
 - `git diff --check`: Pass.
