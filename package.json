@@ -282,11 +282,13 @@
     "check:admob-capacitor-implementation-approach-review": "node scripts/checkAdMobCapacitorImplementationApproachReview.mjs",
     "check:advertising-console-readiness": "node scripts/checkAdvertisingConsoleReadiness.mjs",
     "check:admob-plugin-version-selection": "node scripts/checkAdmobPluginVersionSelection.mjs",
+    "check:admob-plugin-install-baseline": "node scripts/checkAdmobPluginInstallBaseline.mjs",
     "check:privacy-policy-production-verification": "node scripts/checkPrivacyPolicyProductionVerification.mjs",
     "check:privacy-policy-external-link": "node scripts/checkPrivacyPolicyExternalLink.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@capacitor-community/admob": "8.0.0",
     "@capacitor/android": "^8.4.0",
     "@capacitor/app": "^8.1.0",
     "@capacitor/core": "^8.4.0",

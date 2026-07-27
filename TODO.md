@@ -1,5 +1,46 @@
 # TODO
 
+## PR #405 - AdMob Plugin Install Baseline TODO
+
+- [x] Install exact `@capacitor-community/admob@8.0.0`
+- [x] Verify package-lock resolved version and integrity
+- [x] Pin Mobile Ads SDK 24.9.0
+- [x] Pin UMP SDK 4.0.0
+- [x] Synchronize the existing Capacitor Android project
+- [x] Verify debug dependency tree and dependency insight
+- [x] Configure approved Harupuli AdMob App ID resource
+- [x] Add APPLICATION_ID metadata using `@string/admob_app_id`
+- [x] Complete Android Debug Build run #345
+- [x] Verify compiled Debug APK APPLICATION_ID metadata
+- [x] Verify `admob_app_id` resolves to the approved App ID
+- [x] Verify MobileAdsInitProvider in compiled manifest
+- [x] Verify inherited AD_ID permissions in compiled manifest
+- [x] Verify source manifest has no manual AD_ID declaration
+- [x] Download run #345 Debug APK artifact
+- [x] Install run #345 APK on Galaxy S23 Ultra
+- [x] Launch app and confirm the home screen
+- [x] Confirm no immediate force close
+- [x] Record Missing application ID error as not observed
+- [x] Complete Android startup smoke QA
+- [x] Add run #345 QA record
+- [x] Finalize targeted install-baseline checker
+- [x] Complete Android Debug Build run #348 for current docs/check-only HEAD
+- [ ] ADB logcat verification
+- [ ] Full Android regression QA
+- [ ] Resolve existing release-signing environment blocker for release dependency/build/manifest verification
+- [ ] Mobile Ads SDK runtime initialization
+- [ ] UMP consent flow integration
+- [ ] `canRequestAds` gate and duplicate initialization/request guard
+- [ ] `개인정보 및 쿠키 설정` runtime UI
+- [ ] Official test-ad request
+- [ ] Android advertising QA
+- [ ] European regulations message publication
+- [ ] Google Play Data safety update
+- [ ] Advertising ID declaration
+- [ ] Production ad units
+- [ ] Actual ad requests and serving
+- [ ] First advertising app update
+
 ## AdMob Plugin Version Selection TODO
 
 - [x] Current Capacitor and Android baseline investigation
