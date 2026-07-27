@@ -1,5 +1,37 @@
 # CHANGELOG
 
+## PR #410 - AdMob Rewarded Ad Provider Contract
+
+### Added
+
+- Documented the current mock rewarded-ad flow and installed AdMob v8.0.0
+  declaration and Android source evidence.
+- Selected a valid resolved reward Promise as the single authoritative signal
+  with explicit exactly-once, single-flight, listener cleanup, and timeout
+  contracts.
+- Defined independent local-consent and latest AdMob-runtime gates with
+  pre-prepare and pre-show checks.
+- Defined strict official-test/production separation, no SDK-to-mock fallback,
+  outcome mapping, PR #411 implementation scope, automated tests, and device
+  QA plans.
+- Added a targeted creation/post-merge contract checker and negative
+  self-test.
+
+### Unchanged
+
+- Production UI and all `src`, public, Android, iOS, and workflow files
+- Rewarded provider runtime implementation and mock countdown behavior
+- Existing storage keys, storage shape, schema, routing, and fortune logic
+- Dependencies, lockfile, Capacitor configuration, and Vite configuration
+- Ad unit IDs, test-device identifiers, debug geography, and consoles
+
+### Pending
+
+- PR #411 native-Android official test rewarded implementation
+- Actual ad request/load/show and Android advertising QA
+- Production ad unit, production serving, and disclosure work
+- ADB logcat, release signing, AAB generation, and Play upload
+
 ## PR #409 - AdMob Privacy Options Settings UI
 
 ### Added

@@ -1,5 +1,57 @@
 # DEVELOPMENT_LOG
 
+## PR #410 - AdMob Rewarded Ad Provider Contract
+
+- Work date: 2026-07-27
+- PR type: docs/check-only provider contract
+- Starting main HEAD: `871c81c48e0c8a787eb635679c0b2f0d32b25071`
+- Branch: `docs/admob-rewarded-ad-provider-contract`
+- Current provider default: mock
+- SDK provider: `SDK_UNAVAILABLE` stub
+- Current local SDK gate: `consentPreferences.ads === true`
+- Current runtime `adGateOpen` rewarded integration: Not implemented
+- Current modal: mock two-second countdown
+- Existing unlock persistence: Unchanged
+- Installed plugin: `@capacitor-community/admob@8.0.0`
+- Authoritative reward: successfully resolved valid `AdMobRewardItem`
+- Rewarded event as second unlock authority: Prohibited
+- Exactly-once and `rewardDelivered` guard contract: Completed
+- Dual local-consent/runtime gate contract: Completed
+- Pre-prepare and pre-show latest-state recheck: Completed
+- SDK-to-mock fallback: Prohibited
+- Dedicated rewarded same-Promise single-flight: Required
+- Per-handle listener cleanup: Required
+- `removeAllListeners`: Prohibited
+- Load, show-start, and lifecycle bounded timeout: Required
+- Official test/production separation: Completed
+- Production ad unit: Pending and Blocked
+- PR #411 implementation/test/device-QA plan: Completed
+- Actual ad request/load/show: Not performed
+- Android advertising QA and ADB logcat: Not performed
+- Production UI and source: Unchanged
+- Android/iOS, public, workflow, Capacitor, and Vite files: Unchanged
+- Dependencies and package lock: Unchanged
+- Storage keys, storage shape, schema, routing, and fortune logic: Unchanged
+- AdMob and Google Play Consoles: Unchanged
+
+Local verification:
+
+- `npm ci`: Pass; npm reported 4 existing audit findings (3 high, 1
+  critical). No dependency fix was applied.
+- `npm run build`: Pass with the existing large-chunk warning.
+- `npm run check:admob-rewarded-provider-contract`: Pass in creation mode.
+- `npm run check:admob-rewarded-provider-contract -- --negative-self-test`:
+  Pass; 42/42 forbidden mutations and 1/1 post-merge fixture.
+- `npm run check:admob-privacy-options-ui`: Pass in post-merge mode.
+- `npm run check:admob-privacy-options-ui-contract`: Pass in post-merge mode.
+- `npm run check:admob-runtime-consent-coordinator`: Pass in post-merge mode.
+- `npm run check:admob-runtime-consent-bootstrap-contract`: Pass in
+  post-merge mode.
+- `npm run check:content-safety`: Pass.
+- `npm run check:share-text`: Pass.
+- `npm run check:doc-check-src-guardrails`: Pass.
+- `git diff --check`: Pass.
+
 ## PR #409 - AdMob Privacy Options Settings UI
 
 - Work date: 2026-07-27
