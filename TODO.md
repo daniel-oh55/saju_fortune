@@ -1,5 +1,30 @@
 # TODO
 
+## PR #405 - AdMob Plugin Install Baseline TODO
+
+- [x] Install exact `@capacitor-community/admob@8.0.0`
+- [x] Verify package-lock resolved version and integrity
+- [x] Pin Mobile Ads SDK 24.9.0
+- [x] Pin UMP SDK 4.0.0
+- [x] Synchronize the existing Capacitor Android project
+- [x] Verify debug dependency tree and dependency insight
+- [x] Complete debug Gradle build
+- [x] Inspect debug merged manifest
+- [x] Add targeted baseline checker and documentation
+- [ ] Resolve existing release-signing environment blocker for release dependency/build/manifest verification
+- [ ] AdMob App ID configuration
+- [ ] Mobile Ads SDK runtime initialization
+- [ ] UMP consent flow integration
+- [ ] Privacy options runtime UI
+- [ ] Official test-ad request
+- [ ] Android device AdMob QA
+- [ ] European regulations message publication
+- [ ] Google Play Data safety update
+- [ ] Advertising ID declaration
+- [ ] Production ad units
+- [ ] Actual ad requests and serving
+- [ ] First advertising app update
+
 ## AdMob Plugin Version Selection TODO
 
 - [x] Current Capacitor and Android baseline investigation

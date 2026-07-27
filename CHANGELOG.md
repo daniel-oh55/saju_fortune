@@ -1,5 +1,25 @@
 # CHANGELOG
 
+## PR #405 - AdMob Plugin Install Baseline
+
+### Added
+
+- Installed exact `@capacitor-community/admob@8.0.0` and synchronized its Android module.
+- Pinned Google Mobile Ads SDK 24.9.0 and UMP SDK 4.0.0.
+- Added dependency, debug build, debug merged-manifest, status, rollback, and scope documentation.
+- Added a targeted install-baseline checker.
+
+### Verified
+
+- Debug dependency resolution, dependency insight, Gradle build, and merged manifest completed.
+- The debug merged manifest inherits Advertising ID permissions and Mobile Ads components but has no App ID metadata.
+- Release dependency, build, and manifest tasks remain blocked by the existing release-signing environment guard, which reproduces on `origin/main`.
+
+### Pending
+
+- App ID configuration, runtime initialization, UMP consent flow, privacy options UI, test-ad request, and Android device QA
+- European message publication, Data safety, Advertising ID declaration, production ad units, requests, serving, and store update
+
 ## AdMob Plugin Version Selection
 
 ### Docs

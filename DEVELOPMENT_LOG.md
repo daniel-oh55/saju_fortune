@@ -1,5 +1,50 @@
 # DEVELOPMENT_LOG
 
+## PR #405 - AdMob Plugin Install Baseline
+
+- Work date: 2026-07-27
+- PR type: dependency / Android native integration baseline
+- Starting main HEAD: `d1d1ff5d6e3256ad6326c6e17e4e57b9d76bbe97`
+- PR #404 verification: Merged; its merge commit equals the starting `main` HEAD.
+- Installed package: exact `@capacitor-community/admob@8.0.0`; lockfile version, tarball, and integrity verified.
+- Capacitor Android sync: Completed; generated settings and app dependency registration changed.
+- Mobile Ads dependency resolution: Completed on `debugRuntimeClasspath`; resolved 24.9.0 from the plugin.
+- UMP dependency resolution: Completed on `debugRuntimeClasspath`; resolved 4.0.0 by direct-pin conflict resolution over transitive 3.2.0.
+- Debug Gradle build: Completed with temporary external Temurin 21 and Android SDK 36.
+- Debug merged manifest inspection: Completed; inherited Advertising ID permissions and Mobile Ads components are present, while App ID metadata and real identifiers are absent.
+- Release dependency tree, build, and merged manifest: Blocked by the existing release-signing environment guard; all three failures reproduce on detached `origin/main`.
+- Production source, routing, storage, schema, fortune logic, source manifest, strings, `MainActivity`, app Gradle, wrapper, and workflows: Unchanged.
+- App ID configuration: Not started
+- Mobile Ads SDK runtime initialization: Not started
+- UMP consent flow integration: Not started
+- Privacy options runtime UI: Not started
+- Official test-ad request: Not started
+- Android device AdMob QA: Not started
+- European regulations message publication: Not started
+- Google Play Data safety update: Not started
+- Advertising ID declaration: Not started
+- Production ad units: 0
+- Actual ad requests: No data
+- Actual ad serving: Pending
+- First advertising app update: Pending
+- Tests:
+  - `npm ci`: PASS; 164 packages installed and 165 packages audited.
+  - `npm audit`: FAIL; 4 findings (3 high and 1 critical) in `brace-expansion`, `postcss`, `tar`, and `vite`. No unrelated upgrade was applied.
+  - `npm run build`: PASS; the existing 664.45 kB large-chunk warning remains.
+  - `npx cap sync android`: PASS; two Android plugins detected.
+  - `npm run check:admob-plugin-install-baseline`: PASS.
+  - `npm run check:admob-plugin-version-selection`: FAIL; the PR #404 checker requires its docs/check-only diff and rejects this dependency/native PR. It also fails on clean `origin/main` because no PR #404 diff is active, so this is a historical PR-scoped allowlist incompatibility rather than a product regression.
+  - `npm run check:content-safety`: PASS.
+  - `npm run check:share-text`: PASS.
+  - `npm run check:doc-check-src-guardrails`: PASS.
+  - `git diff --check`: PASS.
+  - `debugRuntimeClasspath`: PASS; exact Mobile Ads 24.9.0 and UMP 4.0.0 resolved.
+  - `releaseRuntimeClasspath`: BLOCKED; existing signing-variable guard, reproduced on `origin/main`.
+  - Mobile Ads and UMP `dependencyInsight`: PASS.
+  - `clean`, `assembleDebug`, and `processDebugMainManifest`: PASS.
+  - `assembleRelease` and `processReleaseMainManifest`: BLOCKED; existing signing-variable guard, reproduced on `origin/main`.
+  - Negative verification: PASS; all seven temporary mutations failed the targeted checker and were reverted.
+
 ## AdMob Plugin Version Selection
 
 - Work date: 2026-07-26
