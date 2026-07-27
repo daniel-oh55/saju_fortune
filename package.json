@@ -287,6 +287,7 @@
     "check:admob-runtime-consent-coordinator": "node scripts/checkAdmobRuntimeConsentCoordinator.mjs",
     "check:admob-privacy-options-ui-contract": "node scripts/checkAdmobPrivacyOptionsUiContract.mjs",
     "check:admob-privacy-options-ui": "node scripts/checkAdmobPrivacyOptionsUi.mjs",
+    "check:admob-rewarded-provider-contract": "node scripts/checkAdmobRewardedAdProviderContract.mjs",
     "check:privacy-policy-production-verification": "node scripts/checkPrivacyPolicyProductionVerification.mjs",
     "check:privacy-policy-external-link": "node scripts/checkPrivacyPolicyExternalLink.mjs",
     "preview": "vite preview"

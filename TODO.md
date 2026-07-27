@@ -1,5 +1,24 @@
 # TODO
 
+## PR #410 - AdMob Rewarded Ad Provider Contract TODO
+
+- [x] Verify merged PR #409 baseline at the expected main HEAD
+- [x] Inspect the current mock, SDK stub, modal, unlock, and consent flows
+- [x] Inspect installed AdMob v8.0.0 declarations and Android rewarded source
+- [x] Select the resolved valid reward Promise as the authoritative signal
+- [x] Define exactly-once and dedicated rewarded single-flight behavior
+- [x] Define local-consent and latest AdMob-runtime dual gates
+- [x] Define pre-prepare and pre-show gate rechecks
+- [x] Define listener cleanup, bounded timeout, and outcome mapping
+- [x] Define official-test and production separation
+- [x] Define PR #411 files, automated tests, and Android QA plan
+- [x] Add targeted creation/post-merge checker and negative self-test
+- [ ] Implement the PR #411 official test rewarded SDK path
+- [ ] Perform actual official test-ad request/load/show
+- [ ] Complete Android advertising QA and ADB logcat
+- [ ] Create production ad unit and enable production serving
+- [ ] Complete disclosure, signing, AAB, and Play release work
+
 ## PR #409 - AdMob Privacy Options Settings UI TODO
 
 - [x] Verify merged PR #408 baseline at the expected main HEAD
