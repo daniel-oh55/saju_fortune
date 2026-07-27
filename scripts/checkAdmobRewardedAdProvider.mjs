@@ -14,8 +14,10 @@ import {
 } from '../src/services/rewardedAdProvider.sdk.js';
 import { REWARDED_AD_OUTCOME } from '../src/services/rewardedAdProvider.types.js';
 import {
+  createRewardedRequestId,
   getRewardPersistenceDecision,
   getRewardedAdOutcomeMessage,
+  isValidRewardedRequestId,
   isRewardedResultForRequest,
 } from '../src/services/rewardedAdService.js';
 
@@ -87,7 +89,7 @@ const requiredTokens = [
   ['src/services/rewardedAdProvider.sdk.js', 'Number.isFinite(rewardItem.amount)'],
   ['src/services/rewardedAdProvider.sdk.js', 'rewardItem.amount > 0'],
   ['src/services/rewardedAdProvider.sdk.js', 'rewardItem.type.trim().length > 0'],
-  ['src/services/rewardedAdProvider.sdk.js', 'if (rewardedPromise) return rewardedPromise'],
+  ['src/services/rewardedAdProvider.sdk.js', 'if (rewardedPromise) return rewardedPromise;\n'],
   ['src/services/rewardedAdProvider.sdk.js', 'if (settled) return'],
   ['src/services/rewardedAdProvider.sdk.js', 'if (rewardDelivered)'],
   ['src/services/rewardedAdProvider.sdk.js', 'handle?.remove?.()'],
@@ -100,15 +102,23 @@ const requiredTokens = [
   ['src/services/rewardedAdProvider.sdk.js', 'const preShowGate = readGateState()'],
   ['src/services/rewardedAdProvider.sdk.js', 'const rewardActionId = createRewardActionId()'],
   ['src/services/rewardedAdProvider.sdk.js', 'rewardActionId,'],
+  ['src/services/rewardedAdProvider.sdk.js', 'rewardRequestId: options.rewardRequestId'],
+  ['src/services/rewardedAdProvider.sdk.js', 'isValidRewardedRequestId(options.rewardRequestId)'],
   ['src/services/rewardedAdProvider.loader.js', 'return showSdkRewardedAd({ ...options, config })'],
   ['src/services/rewardedAdService.js', 'export function showRewardedAd(options = {})'],
+  ['src/services/rewardedAdService.js', 'export function createRewardedRequestId('],
+  ['src/services/rewardedAdService.js', 'export function isValidRewardedRequestId(value)'],
   ['src/services/rewardedAdService.js', 'export function isRewardedResultForRequest('],
+  ['src/services/rewardedAdService.js', 'result.rewardRequestId === rewardRequestId'],
   ['src/services/rewardedAdService.js', 'export function getRewardPersistenceDecision({'],
   ['src/services/rewardedAdService.js', 'consumedSdkRewardActionIds.has(rewardActionId)'],
   ['src/services/rewardedAdProvider.loader.js', 'export function showRewardedAdWithResolvedProvider'],
   ['src/services/rewardedAdProvider.sdk.js', 'export function showSdkRewardedAd(options = {})'],
   ['src/components/RewardAdModal.jsx', 'completionDeliveredRef'],
   ['src/components/RewardAdModal.jsx', 'completionInFlightRef'],
+  ['src/components/RewardAdModal.jsx', 'const rewardRequestId = createRewardedRequestId()'],
+  ['src/components/RewardAdModal.jsx', 'rewardRequestId,'],
+  ['src/components/RewardAdModal.jsx', 'categoryLabel,\n        rewardRequestId,\n        consentPreferences'],
   ['src/components/RewardAdModal.jsx', 'mountedRef'],
   ['src/components/RewardAdModal.jsx', 'Google 공식 테스트 광고'],
   ['src/components/RewardAdModal.jsx', '테스트 광고 보고 상세 풀이 열기'],
@@ -179,6 +189,31 @@ function validateSources(sourceOverrides = new Map()) {
   }
   if (!modalSource.includes('isRewardedResultForRequest(result, {')) {
     errors.push('modal request ownership validation is required');
+  }
+  if (
+    !modalSource.includes('const rewardRequestId = createRewardedRequestId()') ||
+    !modalSource.includes('rewardRequestId,')
+  ) {
+    errors.push('modal caller-owned rewardRequestId is required');
+  }
+  if (
+    !sdkSource.includes('isValidRewardedRequestId(options.rewardRequestId)') ||
+    !sdkSource.includes('rewardRequestId: options.rewardRequestId')
+  ) {
+    errors.push('SDK must fail closed and bind success to the initiating request ID');
+  }
+  if (
+    !serviceSource.includes("result?.provider === 'sdk_rewarded_ad'") ||
+    !serviceSource.includes('result.rewardRequestId === rewardRequestId')
+  ) {
+    errors.push('SDK result ownership must require rewardRequestId equality');
+  }
+  if (
+    serviceSource.includes(
+      "if (result?.provider === 'sdk_rewarded_ad') return baseRequestFieldsMatch",
+    )
+  ) {
+    errors.push('SDK ownership cannot fall back to placement/category fields');
   }
   if (!modalSource.includes('if (completionInFlightRef.current) return')) {
     errors.push('modal synchronous completion single-flight guard is required');
@@ -308,6 +343,7 @@ function createHarness(options = {}) {
         showCalls += 1;
         options.onShow?.({ listeners });
         if (options.showReject) throw new Error('show');
+        if (options.showResultPromise) return options.showResultPromise;
         if (options.showPending) return new Promise(() => {});
         return options.rewardItem || { amount: 1, type: 'detail' };
       },
@@ -337,8 +373,15 @@ function createHarness(options = {}) {
       return options.actionIds?.[actionIdCreates - 1] || `action-${actionIdCreates}`;
     },
   };
+  const sdkProvider = createSdkRewardedAdProvider(dependencies);
   return {
-    provider: createSdkRewardedAdProvider(dependencies),
+    provider: {
+      show: (request = {}) => sdkProvider.show({
+        rewardRequestId: 'default-test-request',
+        ...request,
+      }),
+    },
+    providerWithoutDefaultRequestId: sdkProvider,
     listeners,
     stats: () => ({
       prepareCalls,
@@ -486,6 +529,7 @@ test('valid reward completes without native payload exposure', async () => {
     placementId: 'today',
     categoryLabel: '총운',
     rewardActionId: 'action-1',
+    rewardRequestId: 'default-test-request',
     rewardedAt: '2026-07-27T00:00:00.000Z',
   });
   assert.equal(harness.stats().prepareCalls, 1);
@@ -584,11 +628,13 @@ test('different category callers share one action but only the owner matches', a
     config: makeConfig(),
     placementId: 'today_fortune_detail',
     categoryLabel: '총운',
+    rewardRequestId: 'category-owner',
   };
   const secondRequest = {
     config: makeConfig(),
     placementId: 'today_fortune_detail',
     categoryLabel: '재물운',
+    rewardRequestId: 'category-non-owner',
   };
   const first = harness.provider.show(firstRequest);
   const second = harness.provider.show(secondRequest);
@@ -606,11 +652,13 @@ test('different placement callers cannot claim a shared action', async () => {
     config: makeConfig(),
     placementId: 'today_fortune_detail',
     categoryLabel: '총운',
+    rewardRequestId: 'placement-owner',
   };
   const secondRequest = {
     config: makeConfig(),
     placementId: 'saju_insight_deep_dive',
     categoryLabel: '총운',
+    rewardRequestId: 'placement-non-owner',
   };
   const first = harness.provider.show(firstRequest);
   const second = harness.provider.show(secondRequest);
@@ -618,6 +666,149 @@ test('different placement callers cannot claim a shared action', async () => {
   const result = await first;
   assert.equal(isRewardedResultForRequest(result, firstRequest), true);
   assert.equal(isRewardedResultForRequest(result, secondRequest), false);
+});
+test('same placement and category callers share one action but only the initiating request ID owns it', async () => {
+  let resolveReward;
+  const showResultPromise = new Promise((resolve) => {
+    resolveReward = resolve;
+  });
+  const harness = createHarness({
+    actionIds: ['same-fields-action'],
+    showResultPromise,
+  });
+  const firstRequest = {
+    config: makeConfig(),
+    placementId: 'today_fortune_detail',
+    categoryLabel: '총운',
+    rewardRequestId: 'request-before-reset',
+  };
+  const secondRequest = {
+    ...firstRequest,
+    rewardRequestId: 'request-after-reset',
+  };
+  const first = harness.provider.show(firstRequest);
+  const second = harness.provider.show(secondRequest);
+  assert.equal(first, second);
+  resolveReward({ amount: 1, type: 'detail' });
+  const result = await first;
+  assert.equal(harness.stats().prepareCalls, 1);
+  assert.equal(harness.stats().showCalls, 1);
+  assert.equal(result.rewardRequestId, firstRequest.rewardRequestId);
+  assert.equal(isRewardedResultForRequest(result, firstRequest), true);
+  assert.equal(isRewardedResultForRequest(result, secondRequest), false);
+});
+test('reset and new session reject a shared old request before a deliberate retry', async () => {
+  let resolveReward;
+  const showResultPromise = new Promise((resolve) => {
+    resolveReward = resolve;
+  });
+  const sharedHarness = createHarness({
+    actionIds: ['pre-reset-action'],
+    showResultPromise,
+  });
+  const beforeReset = {
+    config: makeConfig(),
+    placementId: 'today_fortune_detail',
+    categoryLabel: '총운',
+    rewardRequestId: 'request-before-reset',
+  };
+  const afterReset = {
+    ...beforeReset,
+    rewardRequestId: 'request-after-reset',
+  };
+  const oldPromise = sharedHarness.provider.show(beforeReset);
+  const sharedPromise = sharedHarness.provider.show(afterReset);
+  assert.equal(oldPromise, sharedPromise);
+  resolveReward({ amount: 1, type: 'detail' });
+  const oldResult = await oldPromise;
+
+  const state = {
+    persistedRewardKeys: new Set(),
+    consumedSdkRewardActionIds: new Set(),
+    saves: 0,
+  };
+  assert.equal(isRewardedResultForRequest(oldResult, afterReset), false);
+  assert.equal(reservePersistence(state, {
+    categoryId: 'overall',
+    rewardResult: oldResult,
+    expectedFortuneId: 'fortune-a',
+    activeFortuneId: 'fortune-a',
+    sessionEpoch: 0,
+    currentSessionEpoch: 1,
+    isAlreadyUnlocked: false,
+  }), false);
+  assert.equal(state.saves, 0);
+
+  const retryHarness = createHarness({ actionIds: ['new-session-action'] });
+  const retryRequest = {
+    ...afterReset,
+    rewardRequestId: 'request-deliberate-retry',
+  };
+  const retryResult = await retryHarness.provider.show(retryRequest);
+  assert.notEqual(retryResult.rewardActionId, oldResult.rewardActionId);
+  assert.notEqual(retryResult.rewardRequestId, oldResult.rewardRequestId);
+  assert.equal(isRewardedResultForRequest(retryResult, retryRequest), true);
+  assert.equal(reservePersistence(state, {
+    categoryId: 'overall',
+    rewardResult: retryResult,
+    expectedFortuneId: 'fortune-a',
+    activeFortuneId: 'fortune-a',
+    sessionEpoch: 1,
+    currentSessionEpoch: 1,
+    isAlreadyUnlocked: false,
+  }), true);
+  assert.equal(state.saves, 1);
+});
+test('fortune replacement rejects shared old request and accepts deliberate retry', async () => {
+  const sharedHarness = createHarness({ actionIds: ['fortune-a-action'] });
+  const fortuneARequest = {
+    config: makeConfig(),
+    placementId: 'today_fortune_detail',
+    categoryLabel: '총운',
+    rewardRequestId: 'fortune-a-request',
+  };
+  const fortuneBRequest = {
+    ...fortuneARequest,
+    rewardRequestId: 'fortune-b-request',
+  };
+  const oldPromise = sharedHarness.provider.show(fortuneARequest);
+  const sharedPromise = sharedHarness.provider.show(fortuneBRequest);
+  assert.equal(oldPromise, sharedPromise);
+  const oldResult = await oldPromise;
+  assert.equal(isRewardedResultForRequest(oldResult, fortuneBRequest), false);
+
+  const state = {
+    persistedRewardKeys: new Set(),
+    consumedSdkRewardActionIds: new Set(),
+    saves: 0,
+  };
+  assert.equal(reservePersistence(state, {
+    categoryId: 'overall',
+    rewardResult: oldResult,
+    expectedFortuneId: 'fortune-a',
+    activeFortuneId: 'fortune-b',
+    sessionEpoch: 0,
+    currentSessionEpoch: 0,
+    isAlreadyUnlocked: false,
+  }), false);
+
+  const retryHarness = createHarness({ actionIds: ['fortune-b-action'] });
+  const retryRequest = {
+    ...fortuneBRequest,
+    rewardRequestId: 'fortune-b-retry',
+  };
+  const retryResult = await retryHarness.provider.show(retryRequest);
+  assert.equal(isRewardedResultForRequest(retryResult, retryRequest), true);
+  assert.equal(reservePersistence(state, {
+    categoryId: 'overall',
+    rewardResult: retryResult,
+    expectedFortuneId: 'fortune-b',
+    activeFortuneId: 'fortune-b',
+    sessionEpoch: 0,
+    currentSessionEpoch: 0,
+    isAlreadyUnlocked: false,
+  }), true);
+  assert.equal(state.saves, 1);
 });
 test('shared result callback is delivered at most once to its owner', async () => {
   const result = {
@@ -649,6 +840,45 @@ test('SDK action ID is sanitized before reaching App', async () => {
   const result = await harness.provider.show({ config: makeConfig() });
   assert.equal(result.rewardActionId, 'unsafe-action-id');
   assert(!result.rewardActionId.includes('/'));
+});
+test('reward request IDs are unique and use only safe bounded characters', () => {
+  const generated = Array.from({ length: 10 }, () => createRewardedRequestId());
+  assert.equal(new Set(generated).size, generated.length);
+  for (const rewardRequestId of generated) {
+    assert.equal(isValidRewardedRequestId(rewardRequestId), true);
+    assert(rewardRequestId.length <= 128);
+    assert(!/[/\s\x00-\x1F]/.test(rewardRequestId));
+  }
+});
+test('reward request ID fallback remains unique without crypto', () => {
+  const first = createRewardedRequestId({
+    randomUUID: () => undefined,
+    now: () => 1_721_862_400_000,
+  });
+  const second = createRewardedRequestId({
+    randomUUID: () => undefined,
+    now: () => 1_721_862_400_000,
+  });
+  assert.notEqual(first, second);
+  assert.equal(isValidRewardedRequestId(first), true);
+  assert.equal(isValidRewardedRequestId(second), true);
+});
+test('SDK fails closed before module load for missing or invalid reward request IDs', async () => {
+  const invalidRequestIds = [undefined, '', ' ', 'unsafe/request', 'x'.repeat(129)];
+  for (const rewardRequestId of invalidRequestIds) {
+    const harness = createHarness();
+    const result = await harness.providerWithoutDefaultRequestId.show({
+      config: makeConfig(),
+      placementId: 'today_fortune_detail',
+      categoryLabel: '총운',
+      rewardRequestId,
+    });
+    assert.equal(result.ok, false);
+    assert.equal(result.reason, REWARDED_AD_OUTCOME.SDK_UNAVAILABLE);
+    assert.equal(harness.stats().moduleLoads, 0);
+    assert.equal(harness.stats().prepareCalls, 0);
+    assert.equal(harness.stats().showCalls, 0);
+  }
 });
 
 function reservePersistence(state, request) {
@@ -922,6 +1152,62 @@ const targetedNegativeMutations = [
     mutate: (source) => source.replace(
       'currentSessionEpoch: rewardSessionEpochRef.current',
       'currentSessionEpoch: currentRewardSessionEpoch',
+    ),
+  },
+  {
+    name: 'modal rewardRequestId generation removed',
+    file: 'src/components/RewardAdModal.jsx',
+    mutate: (source) => source.replace(
+      '    const rewardRequestId = createRewardedRequestId();\n',
+      '',
+    ),
+  },
+  {
+    name: 'modal show options rewardRequestId removed',
+    file: 'src/components/RewardAdModal.jsx',
+    mutate: (source) => source.replace(
+      '        rewardRequestId,\n        consentPreferences,',
+      '        consentPreferences,',
+    ),
+  },
+  {
+    name: 'SDK success result rewardRequestId removed',
+    file: 'src/services/rewardedAdProvider.sdk.js',
+    mutate: (source) => source.replace(
+      '          rewardRequestId: options.rewardRequestId,\n',
+      '',
+    ),
+  },
+  {
+    name: 'SDK request ID equality removed from ownership helper',
+    file: 'src/services/rewardedAdService.js',
+    mutate: (source) => source.replace(
+      'result.rewardRequestId === rewardRequestId',
+      'true',
+    ),
+  },
+  {
+    name: 'SDK ownership reduced to placement and category',
+    file: 'src/services/rewardedAdService.js',
+    mutate: (source) => source.replace(
+      "  if (result?.provider === 'sdk_rewarded_ad') {",
+      "  if (result?.provider === 'sdk_rewarded_ad') return baseRequestFieldsMatch;\n  if (false) {",
+    ),
+  },
+  {
+    name: 'SDK missing request ID allowed to reach ad calls',
+    file: 'src/services/rewardedAdProvider.sdk.js',
+    mutate: (source) => source.replace(
+      'if (!isValidRewardedRequestId(options.rewardRequestId)) {',
+      'if (false) {',
+    ),
+  },
+  {
+    name: 'second same-fields caller rewrites initiating request ownership',
+    file: 'src/services/rewardedAdProvider.sdk.js',
+    mutate: (source) => source.replace(
+      'if (rewardedPromise) return rewardedPromise;',
+      'if (rewardedPromise) return rewardedPromise.then((result) => ({ ...result, rewardRequestId: options.rewardRequestId }));',
     ),
   },
 ];

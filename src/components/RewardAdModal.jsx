@@ -4,6 +4,7 @@ import {
   REWARDED_AD_PROVIDER_KEY,
 } from '../config/rewardedAdSdkConfig.js';
 import {
+  createRewardedRequestId,
   getMockRewardedAdDurationSeconds,
   getRewardedAdOutcomeMessage,
   isRewardedResultForRequest,
@@ -53,6 +54,7 @@ function RewardAdModal({
 
     completionInFlightRef.current = true;
     const requestedPlacementId = placementId || categoryLabel;
+    const rewardRequestId = createRewardedRequestId();
     setIsCompleting(true);
     setErrorMessage('');
     setErrorReason('');
@@ -61,6 +63,7 @@ function RewardAdModal({
       const result = await showRewardedAd({
         placementId: requestedPlacementId,
         categoryLabel,
+        rewardRequestId,
         consentPreferences,
         delayMs: 0,
       });
@@ -75,6 +78,7 @@ function RewardAdModal({
       if (!isRewardedResultForRequest(result, {
         placementId: requestedPlacementId,
         categoryLabel,
+        rewardRequestId,
       })) {
         if (!mountedRef.current) return;
         setErrorMessage(

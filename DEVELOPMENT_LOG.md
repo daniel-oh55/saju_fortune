@@ -12373,3 +12373,44 @@ Remaining implementation and QA:
 - Android device installation or QA
 - Production ad unit configuration or production ad request/load/show
 - PR merge or Ready-for-review transition
+
+# 2026-07-27 Rewarded Caller-Owned Request Identity Follow-up
+
+## Work completed
+
+- Added a caller-owned `rewardRequestId` for every deliberate reward-modal
+  action. Placement and category remain semantic request fields and are not a
+  unique caller identity.
+- Added `crypto.randomUUID()` request-ID generation with a timestamp and
+  module-sequence fallback. IDs are limited to 1-128 safe
+  `A-Za-z0-9._:-` characters.
+- Bound an SDK success result to the first caller's validated
+  `rewardRequestId`. A second caller may share the same SDK Promise but cannot
+  claim that first caller's result, even when placement and category match.
+- Kept `rewardActionId` separate as the native rewarded-action exactly-once
+  token. `rewardRequestId` identifies the initiating caller, while the reward
+  session epoch rejects stale App callbacks after reset or fortune/profile
+  replacement. These three controls are not interchangeable.
+- Invalid or missing SDK request IDs fail closed before plugin import,
+  prepare, or show. Failure results do not expose native error details.
+- Kept mock result matching backward compatible with placement/category
+  ownership.
+- Kept request IDs out of localStorage, native ad payloads, and user-visible
+  UI. No production ad unit ID was added.
+- Added same-placement/category shared-Promise, reset/new-session,
+  fortune-replacement, deliberate-retry, ID generation/fallback, invalid-ID,
+  and request-ownership regression coverage.
+- Expanded the checker to 85 behavioral scenarios, 82 static invariants, and
+  94 detected negative mutations. The prior 79 mutations remain, with seven
+  targeted mutations for missing generation/options/result propagation,
+  weakened ownership matching, missing fail-closed validation, and
+  second-caller result claiming.
+
+## Pending
+
+- Actual official test-ad request, load, fullscreen show, Test Ad label, and
+  reward callback verification on an Android device
+- Reset or profile/fortune change while a native ad is in flight on a device
+- Early dismiss, repeated dismiss, offline behavior, and ADB logcat review
+- Production ad unit configuration and production ad request/load/show
+- PR merge or Ready-for-review transition

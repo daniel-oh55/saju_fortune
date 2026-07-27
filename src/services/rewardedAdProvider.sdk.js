@@ -41,6 +41,13 @@ function failure(options, reason) {
   };
 }
 
+function isValidRewardedRequestId(value) {
+  return (
+    typeof value === 'string' &&
+    /^[A-Za-z0-9._:-]{1,128}$/.test(value)
+  );
+}
+
 function runtimeGateOpen(snapshot) {
   return (
     snapshot?.isNativeAndroid === true &&
@@ -283,6 +290,7 @@ export function createSdkRewardedAdProvider(dependencyOverrides = {}) {
           placementId: options.placementId,
           categoryLabel: options.categoryLabel,
           rewardActionId,
+          rewardRequestId: options.rewardRequestId,
           rewardedAt: dependencies.now().toISOString(),
         };
       }
@@ -306,6 +314,9 @@ export function createSdkRewardedAdProvider(dependencyOverrides = {}) {
   }
 
   function show(options = {}) {
+    if (!isValidRewardedRequestId(options.rewardRequestId)) {
+      return Promise.resolve(failure(options, REWARDED_AD_OUTCOME.SDK_UNAVAILABLE));
+    }
     if (rewardedPromise) return rewardedPromise;
 
     const rewardActionId = createRewardActionId();

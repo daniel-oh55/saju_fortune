@@ -7,11 +7,35 @@ import {
 } from './rewardedAdProvider.mock.js';
 import { showRewardedAdWithResolvedProvider } from './rewardedAdProvider.loader.js';
 
+let rewardedRequestSequence = 0;
+
 export {
   getMockRewardedAdDurationSeconds,
   REWARDED_AD_OUTCOME,
   REWARDED_AD_PROVIDER,
 };
+
+export function isValidRewardedRequestId(value) {
+  return (
+    typeof value === 'string' &&
+    /^[A-Za-z0-9._:-]{1,128}$/.test(value)
+  );
+}
+
+export function createRewardedRequestId({
+  randomUUID = () => globalThis.crypto?.randomUUID?.(),
+  now = () => Date.now(),
+} = {}) {
+  rewardedRequestSequence += 1;
+  const candidate = randomUUID();
+  if (isValidRewardedRequestId(candidate)) return candidate;
+
+  return [
+    'reward-request',
+    now().toString(36),
+    rewardedRequestSequence.toString(36),
+  ].join('-');
+}
 
 export function getRewardedAdOutcomeMessage(reason) {
   if (reason === REWARDED_AD_OUTCOME.SDK_UNAVAILABLE) {
@@ -55,13 +79,24 @@ export function getRewardedAdOutcomeMessage(reason) {
 
 export function isRewardedResultForRequest(
   result,
-  { placementId, categoryLabel },
+  { placementId, categoryLabel, rewardRequestId },
 ) {
-  return (
+  const baseRequestFieldsMatch = (
     result?.ok === true &&
     result?.placementId === placementId &&
     result?.categoryLabel === categoryLabel
   );
+
+  if (result?.provider === 'sdk_rewarded_ad') {
+    return (
+      baseRequestFieldsMatch &&
+      isValidRewardedRequestId(rewardRequestId) &&
+      isValidRewardedRequestId(result.rewardRequestId) &&
+      result.rewardRequestId === rewardRequestId
+    );
+  }
+
+  return baseRequestFieldsMatch;
 }
 
 export function getRewardPersistenceDecision({
