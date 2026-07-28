@@ -151,8 +151,13 @@ const requiredTokens = [
   ['src/pages/PrivacyInfoPage.jsx', '승인된 production/release 구성에서는 AdMob production Rewarded 광고'],
   ['src/pages/PrivacyInfoPage.jsx', 'release workflow 실행, AAB 생성, 기기 QA, serving은 아직 수행하지 않았습니다'],
   ['src/pages/PrivacyInfoPage.jsx', '앱 내부 광고 데이터 사용 선택과 Google UMP runtime gate가 모두 필요'],
+  ['src/pages/PrivacyInfoPage.jsx', '이 페이지는 하루풀이 앱의 현재 개인정보 처리 안내입니다'],
+  ['src/pages/PrivacyInfoPage.jsx', '최신 개인정보처리방침 전문은'],
+  ['src/pages/PrivacyInfoPage.jsx', '아래 외부 페이지에서 확인할 수 있으며'],
+  ['src/pages/PrivacyInfoPage.jsx', 'production 광고 활성화 전 개인정보/Data Safety'],
   ['src/pages/PrivacyInfoPage.jsx', '외부 공개 개인정보처리방침 최종 검토'],
   ['src/pages/PrivacyInfoPage.jsx', '광고 관련 disclosure 최종 검토'],
+  ['src/pages/PrivacyInfoPage.jsx', 'https://hymlounge.com/harupuli/privacy/'],
   ['src/components/ConsentSettingsPanel.jsx', '공식 테스트 및 승인된 production Rewarded 경로 모두'],
   ['src/components/ConsentSettingsPanel.jsx', '공식 테스트 및 승인된 production Rewarded 광고 요청 경로'],
   ['src/components/ConsentSettingsPanel.jsx', '이 선택이 true가'],
@@ -238,10 +243,18 @@ function validateSources(sourceOverrides = new Map()) {
     'production 광고 단위 ID와 production 광고 request/load/show는 구현되지 않았습니다',
     'production 환경의 실제 광고 송출은 없습니다',
     '공식 테스트 전용 빌드에서만',
+    '실제 서비스 공개 전',
   ]) {
     if (privacySource.includes(staleClaim)) {
       errors.push(`privacy copy contains a stale production capability claim: ${staleClaim}`);
     }
+  }
+  if (
+    /(?:개인정보|Privacy)\/Data Safety.{0,80}(?:Completed|완료)|(?:Completed|완료).{0,80}(?:개인정보|Privacy)\/Data Safety/su.test(
+      privacySource,
+    )
+  ) {
+    errors.push('Privacy/Data Safety review must not be represented as completed');
   }
   for (const staleClaim of [
     'production 광고 request/load/show 기능은 아직 구현되지 않았습니다',
@@ -1475,6 +1488,11 @@ const targetedNegativeMutations = [
     file: 'src/pages/PrivacyInfoPage.jsx',
     mutate: (source) =>
       `${source}\nproduction 환경의 실제 광고 송출은 없습니다.\n`,
+  },
+  {
+    name: 'privacy copy restores unpublished-app claim',
+    file: 'src/pages/PrivacyInfoPage.jsx',
+    mutate: (source) => `${source}\n실제 서비스 공개 전\n`,
   },
   {
     name: 'consent copy restores production-not-implemented claim',

@@ -68,8 +68,9 @@ function PrivacyInfoPage({ onNavigate, consentPreferences }) {
         <p className="eyebrow">Privacy Guide</p>
         <h1>개인정보 안내</h1>
         <p>
-          이 페이지는 하루풀이 MVP 기준의 개인정보 처리 안내입니다. 법률 검토를 완료한 최종
-          개인정보 처리방침은 실제 서비스 공개 전 별도로 확정될 예정입니다.
+          이 페이지는 하루풀이 앱의 현재 개인정보 처리 안내입니다. 최신 개인정보처리방침 전문은
+          아래 외부 페이지에서 확인할 수 있으며, production 광고 활성화 전 개인정보/Data Safety,
+          외부 공개 개인정보처리방침, 광고 관련 disclosure를 최종 검토합니다.
         </p>
       </section>
 
