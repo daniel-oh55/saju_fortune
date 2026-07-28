@@ -1,5 +1,57 @@
 # DEVELOPMENT_LOG
 
+## 2026-07-28 Galaxy S23 Ultra Rewarded Test Final Device QA
+
+Test basis:
+
+- Run ID: `30319362755`
+- Artifact ID: `8673428676`
+- Artifact name: `harupuli-rewarded-test-apk`
+- Tested HEAD: `7ab324436c64d0cbec5b8b906cbc942ee200e42f`
+- Tested device: Galaxy S23 Ultra
+- OS: One UI 8.5
+
+Device QA Pass:
+
+- New APK installation
+- Cold launch
+- Home, Settings, and existing fortune features
+- Test-ad button display
+- Native fullscreen Google official Test Ad display
+- Test Ad label confirmation
+- Ad completion
+- Reward callback
+- Exactly one selected detailed reading unlocked
+- No additional detailed reading unlocked
+- Rapid repeated taps displayed the ad only once
+- No duplicate reward
+- Airplane-mode ad failure
+- No detailed reading unlocked in airplane mode
+- Successful retry after internet recovery
+- Unlock state persisted after app exit and relaunch
+- No hang after background/resume
+- No recurrence of the prior `AdMob.then()` error
+- Capacitor AdMob Proxy Promise-assimilation fix device verification
+
+Early-dismiss status:
+
+- Actual early-dismiss device QA: Not testable
+- Reason: Google's official test-ad creative did not provide a mid-ad close
+  button, so the early-dismiss scenario could not be reproduced on the
+  device.
+- The automated behavioral checker's dismiss-handling verification remains
+  in place. It is distinct from the actual device scenario, which was not
+  performed.
+
+Remaining status:
+
+- Functional Android Rewarded Test QA: Pass
+- Repeated ADB listener-accumulation diagnostics: Not performed / Pending
+- Production ad unit ID: None
+- Production ad request/load/show: Not started
+- Production serving: Not started
+- Release signing/AAB/Play work: Pending
+
 ## 2026-07-28 Galaxy S23 Ultra AdMob Proxy Thenable Finding
 
 - Tested device: Galaxy S23 Ultra

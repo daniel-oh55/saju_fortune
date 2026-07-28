@@ -29,6 +29,25 @@
   coverage for zero `then` access/calls, one module load, native call order,
   privacy-options reuse, and zero Web module loads.
 
+### Verified
+
+- Galaxy S23 Ultra with One UI 8.5 passed functional Android Rewarded Test QA
+  using run `30319362755`, artifact `8673428676`
+  (`harupuli-rewarded-test-apk`), at tested HEAD
+  `7ab324436c64d0cbec5b8b906cbc942ee200e42f`.
+- Verified new APK installation, cold launch, home/Settings/existing fortune
+  features, test-ad button display, native fullscreen Google official Test Ad
+  display and label, ad completion, reward callback, and exactly one selected
+  detailed-reading unlock.
+- Verified no additional unlock or duplicate reward, one ad on rapid repeated
+  taps, airplane-mode failure without unlock, successful recovery retry,
+  restart persistence, and background/resume without a hang.
+- Verified no recurrence of the prior `AdMob.then()` error and passed device
+  validation of the Capacitor AdMob Proxy Promise-assimilation fix.
+- Actual early-dismiss device QA was Not testable because the official
+  test-ad creative provided no mid-ad close button. Automated behavioral
+  dismiss handling remains covered separately.
+
 ### Unchanged
 
 - The default Web, Vercel, and standard Android Debug provider remains mock.
@@ -38,8 +57,8 @@
 
 ### Pending
 
-- Galaxy S23 Ultra request/load/fullscreen/reward and early-dismiss QA
-- ADB logcat listener-accumulation and offline/failure-path device QA
+- Actual early-dismiss device QA
+- Repeated ADB listener-accumulation diagnostics
 - Production ad unit, production serving, disclosure, signing, AAB, and Play
   release work
 

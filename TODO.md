@@ -16,9 +16,13 @@
 - [x] Run the dedicated workflow and inspect `harupuli-rewarded-test-apk`
 - [x] Fix Capacitor AdMob Proxy Promise thenable assimilation
 - [x] Add Proxy `then` access/call, module single-load, and Web no-load regressions
-- [ ] Retest the superseding rewarded-test APK on Galaxy S23 Ultra
-- [ ] Perform Galaxy S23 Ultra official test-ad request/load/show/reward QA
-- [ ] Perform early-dismiss, repeated-dismiss, failure, offline, and ADB logcat QA
+- [x] Retest the superseding rewarded-test APK on Galaxy S23 Ultra
+- [x] Perform Galaxy S23 Ultra official Test Ad request/load/fullscreen/reward QA
+- [x] Perform rapid-tap, offline/recovery, restart-persistence, and
+  background/resume functional QA
+- [ ] Perform actual early-dismiss device QA; the current official test
+  creative has no mid-ad close button, so this scenario was Not testable
+- [ ] Perform repeated ADB listener-accumulation diagnostics
 - [ ] Create a production ad unit or enable production ad serving
 - [ ] Complete disclosure, signing, AAB, and Play release work
 
