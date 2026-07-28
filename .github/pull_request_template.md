@@ -24,7 +24,7 @@ Primary implementer:
 - [ ] Android changed
 - [ ] GitHub workflow changed
 - [ ] Package or lockfile changed
-- [ ] No production identifier or secret included
+- [ ] No secret or unapproved production identifier included
 
 ## Acceptance criteria
 

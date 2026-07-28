@@ -14,6 +14,10 @@ GitHub에서 자동 표시되는 실제 template은 [`.github/pull_request_templ
 
 변경한 내용과 명시적으로 제외한 내용을 함께 적습니다. 관련 있어 보이더라도 이번 PR에서 다루지 않은 항목은 `Out of scope`에 남깁니다.
 
+## Ownership and change areas
+
+`No secret or unapproved production identifier included`는 secret과 승인되지 않은 production identifier를 포함하지 않았다는 뜻입니다. 기존에 승인되어 커밋된 비밀이 아닌 식별자는 secret으로 취급하지 않습니다.
+
 ## Acceptance criteria
 
 구현 방법이 아니라 결과로 확인할 수 있는 완료 조건을 체크리스트로 작성합니다.

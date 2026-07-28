@@ -7,7 +7,8 @@
 - 하루풀이는 React + Vite + Capacitor Android 기반의 운세·라이프스타일 앱입니다.
 - 사용자 데이터는 현재 주로 `localStorage`에 저장합니다. 기존 key와 schema의 호환성을 임의로 깨지 않습니다.
 - AdMob, UMP, Android release 관련 작업은 HIGH-risk 작업입니다.
-- 실제 secret, production identifier, signing material은 Git에 커밋하지 않습니다.
+- secret, private key, token, signing material과 Owner가 저장소 밖에서 관리하는 실제 production Rewarded ad unit ID는 출력·문서화·커밋하지 않습니다.
+- 기존 Android resource에 승인되어 커밋된 AdMob App ID와 package/application ID 같은 비밀이 아닌 식별자는 secret이 아닙니다.
 - 기존 React 컴포넌트·유틸·데이터 파일 분리, 함수명, props, class를 가능한 한 유지하고 요청 범위만 최소 수정합니다.
 - 운세 문구, AI 상담 문구, 광고 해금 문구는 `docs/BRAND_GUIDE.md`와 `docs/CONTENT_STYLE_GUIDE.md`를 먼저 확인합니다.
 - 운세는 참고용·엔터테인먼트 콘텐츠로 표현하며 건강, 사고, 사망, 투자 손실, 이별, 해고 등 중대한 사건을 단정하지 않습니다.
@@ -21,7 +22,8 @@
 
 - 제품과 운영의 최종 승인자입니다.
 - 실제 Console 작업, 실기기 QA, production serving, Play 배포를 승인합니다.
-- production 값과 signing material을 저장소 밖에서 관리합니다.
+- secret, private key, token, signing material과 실제 production Rewarded ad unit ID를 저장소 밖에서 관리합니다.
+- 기존에 승인되어 커밋된 비밀이 아닌 AdMob App ID와 package/application ID의 저장 위치를 승인합니다.
 
 ### ChatGPT
 
@@ -75,7 +77,7 @@
 - Android native 설정
 - signing/AAB
 - GitHub Actions release workflow
-- production identifier
+- 비밀이 아닌 production identifier 추가·변경
 - 배포·rollout·rollback
 - 외부 API·DB·인증·결제
 
@@ -95,7 +97,9 @@
 - 한 브랜치에는 한 명의 primary implementer만 둡니다.
 - 범위 밖 문제를 발견해도 임의 수정하지 않고 remaining risk로 보고합니다.
 - 기존 미추적 파일이나 사용자 파일을 삭제·이동·정리하지 않습니다.
-- 실제 secret과 production identifier를 출력·문서화·커밋하지 않습니다.
+- secret, private key, token, signing material과 실제 production Rewarded ad unit ID를 출력·문서화·커밋하지 않습니다.
+- 비밀이 아닌 production identifier의 추가·변경은 명시적 task scope와 Owner가 승인한 저장 위치가 있을 때만 허용합니다.
+- 기존 Android resource에 승인되어 커밋된 AdMob App ID와 package/application ID를 secret으로 취급해 삭제·마스킹·이동하지 않습니다.
 - API Key, DB URL, Secret Key를 코드에 직접 쓰지 않습니다.
 - 환경변수는 `.env` 또는 배포 환경에서 관리하고 `.env`를 커밋하지 않으며, `.env.example`에는 실제 값을 쓰지 않습니다.
 - 명시적으로 요청받지 않은 Console·Vercel·AdMob·Play Console 작업을 하지 않습니다.
