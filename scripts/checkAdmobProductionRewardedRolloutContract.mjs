@@ -12,7 +12,6 @@ const expectedFiles = new Set([
   'DEVELOPMENT_LOG.md',
   'TODO.md',
   documentPath,
-  'package.json',
   checkerPath,
 ])
 const preservedUntrackedFiles = new Set(['pr405-review.json', 'pr405.diff'])
@@ -22,7 +21,9 @@ const protectedPaths = [
   'ios',
   'public',
   '.github/workflows',
+  'package.json',
   'package-lock.json',
+  'capacitor.config.json',
   'capacitor.config.js',
   'capacitor.config.ts',
   'vite.config.js',
@@ -59,14 +60,6 @@ const lines = (...args) =>
 const requireText = (content, text, label = documentPath) => {
   if (!content.includes(text)) errors.push(`${label}: missing required text: ${text}`)
 }
-const gitObjectExists = (name) => {
-  try {
-    execFileSync('git', ['cat-file', '-e', name], { cwd: root, stdio: 'ignore' })
-    return true
-  } catch {
-    return false
-  }
-}
 const isPlainObject = (value) =>
   value !== null && typeof value === 'object' && !Array.isArray(value)
 const validPackageMap = (value) =>
@@ -84,14 +77,19 @@ if (process.argv.includes('--negative-self-test')) {
   }
   const cases = [
     [
-      'production ad unit false completion',
-      () => replace(documentPath, 'Production rewarded ad unit: Pending', 'Production rewarded ad unit: Completed'),
-      'forbidden completion claim',
+      'Console creation regression',
+      () => replace(documentPath, 'AdMob Console creation: Completed', 'AdMob Console creation: Not performed'),
+      'forbidden state regression',
     ],
     [
-      'production serving false completion',
-      () => replace(documentPath, 'Production serving: Not started', 'Production serving: Completed'),
-      'forbidden completion claim',
+      'production ad unit regression',
+      () => replace(documentPath, 'Production rewarded ad unit: Created', 'Production rewarded ad unit: Pending'),
+      'forbidden state regression',
+    ],
+    [
+      'owner-supplied ID regression',
+      () => replace(documentPath, 'Production ad unit ID supplied by owner: Yes', 'Production ad unit ID supplied by owner: No'),
+      'forbidden state regression',
     ],
     [
       'App ID used for ad request',
@@ -109,14 +107,49 @@ if (process.argv.includes('--negative-self-test')) {
       'forbidden contract meaning',
     ],
     [
+      'concrete production identifier',
+      () => append(documentPath, '\nca-app-pub-1234567890123456/1234567890\n'),
+      'concrete AdMob ad unit ID',
+    ],
+    [
+      'production source connection false completion',
+      () => replace(documentPath, 'Production source connection: Not started', 'Production source connection: Completed'),
+      'forbidden completion claim',
+    ],
+    [
+      'production request load show false completion',
+      () => replace(documentPath, 'Production request/load/show: Not started', 'Production request/load/show: Completed'),
+      'forbidden completion claim',
+    ],
+    [
+      'production serving false completion',
+      () => replace(documentPath, 'Production serving: Not started', 'Production serving: Completed'),
+      'forbidden completion claim',
+    ],
+    [
+      'Privacy Data Safety false completion',
+      () => replace(documentPath, 'Privacy/Data Safety final review: Pending', 'Privacy/Data Safety final review: Completed'),
+      'forbidden completion claim',
+    ],
+    [
+      'release signing AAB false completion',
+      () => replace(documentPath, 'Release signing/AAB: Pending', 'Release signing/AAB: Completed'),
+      'forbidden completion claim',
+    ],
+    [
+      'production device QA false completion',
+      () => replace(documentPath, 'Production device QA: Not started', 'Production device QA: Completed'),
+      'forbidden completion claim',
+    ],
+    [
+      'Play Console upload false completion',
+      () => replace(documentPath, 'Play Console release upload: Not started', 'Play Console release upload: Completed'),
+      'forbidden completion claim',
+    ],
+    [
       'official test ID used in production',
       () => append(documentPath, '\nUse the Google official Rewarded Test Ad unit ID in production.\n'),
       'forbidden contract meaning',
-    ],
-    [
-      'arbitrary production identifier',
-      () => append(documentPath, '\nca-app-pub-1234567890123456/1234567890\n'),
-      'concrete AdMob ad unit ID',
     ],
     [
       'debug geography',
@@ -144,6 +177,11 @@ if (process.argv.includes('--negative-self-test')) {
       'forbidden contract meaning',
     ],
     [
+      'source change',
+      () => append('src/services/rewardedAdProvider.sdk.js', '\n// rollout probe\n'),
+      'forbidden protected path changed',
+    ],
+    [
       'Android native change',
       () => append('android/app/src/main/AndroidManifest.xml', '\n<!-- rollout probe -->\n'),
       'forbidden protected path changed',
@@ -152,16 +190,6 @@ if (process.argv.includes('--negative-self-test')) {
       'workflow change',
       () => append('.github/workflows/android-debug-build.yml', '\n# rollout probe\n'),
       'forbidden protected path changed',
-    ],
-    [
-      'release signing AAB false completion',
-      () => replace(documentPath, 'Release signing/AAB: Pending', 'Release signing/AAB: Completed'),
-      'forbidden completion claim',
-    ],
-    [
-      'Google Play disclosure false completion',
-      () => append(documentPath, '\nGoogle Play disclosure: Completed\n'),
-      'forbidden completion claim',
     ],
     [
       'required section deletion',
@@ -180,6 +208,7 @@ if (process.argv.includes('--negative-self-test')) {
   ]
   const pathsToRestore = [
     documentPath,
+    'src/services/rewardedAdProvider.sdk.js',
     'android/app/src/main/AndroidManifest.xml',
     '.github/workflows/android-debug-build.yml',
   ]
@@ -215,7 +244,6 @@ if (!existsSync(resolve(root, documentPath))) {
   process.exit(1)
 }
 
-const creationMode = !gitObjectExists(`origin/main:${documentPath}`)
 const untrackedFiles = lines('ls-files', '--others', '--exclude-standard')
 const unexpectedUntrackedFiles = untrackedFiles.filter(
   (path) => !preservedUntrackedFiles.has(path),
@@ -230,13 +258,11 @@ const changedFiles = new Set([
   ...unexpectedUntrackedFiles,
 ])
 
-if (creationMode) {
-  for (const path of changedFiles) {
-    if (!expectedFiles.has(path)) errors.push(`change scope: unexpected changed file: ${path}`)
-  }
-  for (const path of expectedFiles) {
-    if (!changedFiles.has(path)) errors.push(`change scope: expected changed file is missing: ${path}`)
-  }
+for (const path of changedFiles) {
+  if (!expectedFiles.has(path)) errors.push(`change scope: unexpected changed file: ${path}`)
+}
+for (const path of expectedFiles) {
+  if (!changedFiles.has(path)) errors.push(`change scope: expected changed file is missing: ${path}`)
 }
 
 const trackedFiles = new Set(lines('ls-files'))
@@ -246,21 +272,19 @@ for (const path of preservedUntrackedFiles) {
   }
 }
 
-if (creationMode) {
-  for (const path of protectedPaths) {
-    const normalizedPath = path.replaceAll('\\', '/')
-    if (
-      [...changedFiles].some(
-        (changed) => changed === normalizedPath || changed.startsWith(`${normalizedPath}/`),
-      )
-    ) {
-      errors.push(`docs/check-only scope: forbidden protected path changed: ${path}`)
-    }
+for (const path of protectedPaths) {
+  const normalizedPath = path.replaceAll('\\', '/')
+  if (
+    [...changedFiles].some(
+      (changed) => changed === normalizedPath || changed.startsWith(`${normalizedPath}/`),
+    )
+  ) {
+    errors.push(`docs/check-only scope: forbidden protected path changed: ${path}`)
   }
-  const protectedDiff = lines('diff', '--name-only', 'origin/main', '--', ...protectedPaths)
-  if (protectedDiff.length) {
-    errors.push(`docs/check-only scope: protected diff exists: ${protectedDiff.join(', ')}`)
-  }
+}
+const protectedDiff = lines('diff', '--name-only', 'origin/main', '--', ...protectedPaths)
+if (protectedDiff.length) {
+  errors.push(`docs/check-only scope: protected diff exists: ${protectedDiff.join(', ')}`)
 }
 
 const packageJson = JSON.parse(read('package.json'))
@@ -269,19 +293,15 @@ if (packageJson.scripts?.[scriptName] !== `node ${checkerPath}`) {
 }
 if (!validPackageMap(packageJson.dependencies)) errors.push('package.json: invalid dependencies map')
 if (!validPackageMap(packageJson.devDependencies)) errors.push('package.json: invalid devDependencies map')
-if (creationMode) {
-  const basePackageJson = JSON.parse(git('show', 'origin/main:package.json'))
-  const currentScripts = { ...packageJson.scripts }
-  delete currentScripts[scriptName]
-  if (JSON.stringify(currentScripts) !== JSON.stringify(basePackageJson.scripts)) {
-    errors.push('package.json: an existing script changed')
-  }
-  if (JSON.stringify(packageJson.dependencies) !== JSON.stringify(basePackageJson.dependencies)) {
-    errors.push('package.json: dependencies changed')
-  }
-  if (JSON.stringify(packageJson.devDependencies) !== JSON.stringify(basePackageJson.devDependencies)) {
-    errors.push('package.json: devDependencies changed')
-  }
+const basePackageJson = JSON.parse(git('show', 'origin/main:package.json'))
+if (JSON.stringify(packageJson.scripts) !== JSON.stringify(basePackageJson.scripts)) {
+  errors.push('package.json: scripts changed')
+}
+if (JSON.stringify(packageJson.dependencies) !== JSON.stringify(basePackageJson.dependencies)) {
+  errors.push('package.json: dependencies changed')
+}
+if (JSON.stringify(packageJson.devDependencies) !== JSON.stringify(basePackageJson.devDependencies)) {
+  errors.push('package.json: devDependencies changed')
 }
 
 const document = read(documentPath)
@@ -308,14 +328,21 @@ for (const text of [
   'Google official Rewarded Test Ad unit ID',
   'must never be used by a production build',
   'harupuli_rewarded_detail_unlock_android',
-  'AdMob Console was not changed',
-  'Production rewarded ad unit: Pending',
-  'Production ad unit ID: None',
+  'AdMob Console creation: Completed',
+  'Production rewarded ad unit creation: Completed',
+  'Production rewarded ad unit: Created',
+  'Production ad unit ID supplied by owner: Yes',
+  'Production ad unit ID: Supplied by owner and held out of repository',
+  'Production ad unit ID format validation: Pass',
+  'Production ad unit ID format: Valid `/` form',
+  'Exact production ad unit ID committed to repository: No',
+  'Production source connection: Not started',
   'Production request/load/show: Not started',
   'Production serving: Not started',
-  'AdMob Console creation: Not performed',
   'Privacy/Data Safety final review: Pending',
   'Release signing/AAB: Pending',
+  'Production device QA: Not started',
+  'Play Console release upload: Not started',
   'Manage the production ID in exactly one configuration source.',
   'Fail closed if release mode receives a test ID.',
   'Fail closed if debug mode receives a production ID.',
@@ -357,15 +384,27 @@ for (const [meaning, label] of [
 }
 
 for (const claim of [
-  'Production rewarded ad unit: Completed',
+  'Production source connection: Completed',
+  'Production request/load/show: Completed',
   'Production serving: Completed',
+  'Privacy/Data Safety final review: Completed',
   'Release signing/AAB: Completed',
+  'Production device QA: Completed',
+  'Play Console release upload: Completed',
   'Google Play disclosure: Completed',
   'Production serving enabled',
   'Ready for production',
-  'Ad unit created',
 ]) {
   if (document.includes(claim)) errors.push(`forbidden completion claim: ${claim}`)
+}
+
+for (const regression of [
+  'AdMob Console creation: Not performed',
+  'Production rewarded ad unit: Pending',
+  'Production ad unit ID supplied by owner: No',
+  'Production ad unit ID: None',
+]) {
+  if (document.includes(regression)) errors.push(`forbidden state regression: ${regression}`)
 }
 
 const checkedContent = [
@@ -391,21 +430,21 @@ for (const mojibake of ['媛쒖', '?뺣낫', '吏', '?묒뾽']) {
 
 for (const [path, snippets] of [
   ['DEVELOPMENT_LOG.md', [
-    '2026-07-28 AdMob Production Rewarded Rollout Contract',
+    '2026-07-28 AdMob Production Rewarded Unit Readiness',
     'Status: Docs/check-only',
-    'Production rewarded ad unit: Pending',
-    'Production ad unit ID: None',
-    'AdMob Console creation: Not performed',
+    'Production rewarded ad unit: Created',
+    'Production ad unit ID supplied by owner: Yes',
+    'Production source connection: Not started',
   ]],
   ['TODO.md', [
-    'PR #412 - AdMob Production Rewarded Rollout Contract TODO',
-    'Add the 20-section production Rewarded rollout contract',
-    'Create the production Rewarded ad unit in AdMob Console',
+    'PR #413 - AdMob Production Rewarded Unit Readiness TODO',
+    'Record the completed production Rewarded ad unit creation',
+    'Implement production source connection in a separate approved PR',
   ]],
   ['CHANGELOG.md', [
-    'PR #412 - AdMob Production Rewarded Rollout Contract',
-    'Added a 20-section production Rewarded rollout contract',
-    'Production ad unit ID, source, native, workflow, and lockfile',
+    'PR #413 - AdMob Production Rewarded Unit Readiness',
+    'Recorded the owner-completed production Rewarded ad unit creation',
+    'Production source connection, request/load/show, and serving',
   ]],
 ]) {
   const content = read(path)
