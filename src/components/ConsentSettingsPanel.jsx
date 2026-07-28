@@ -39,8 +39,8 @@ function ConsentSettingsPanel({ preferences, onSave, onClose, onOpenPrivacyInfo 
           <p>
             아래 항목은 하루풀이 앱 내부의 app-level 선택 설정으로 Google UMP 개인정보 선택과
             별도이며, UMP 선택을 대신하지 않습니다. AdMob SDK와 UMP 동의 확인 절차는 연결되어
-            있고, 별도 Android 공식 테스트 전용 빌드에서만 Google 공식 Rewarded Test Ad를
-            요청·표시할 수 있습니다. production 광고 request/load/show 기능은 아직 구현되지 않았습니다.
+            있고, 공식 테스트 및 승인된 production Rewarded 경로 모두 앱 내부 광고 데이터 사용
+            선택과 Google UMP runtime gate를 확인합니다.
           </p>
         </div>
 
@@ -65,8 +65,8 @@ function ConsentSettingsPanel({ preferences, onSave, onClose, onOpenPrivacyInfo 
             <span>
               <strong>광고 데이터 사용</strong>
               <small>
-                공식 테스트 광고 요청 경로에서도 확인하는 app-level 선택이며 Google UMP
-                선택을 대신하지 않습니다.
+                공식 테스트 및 승인된 production Rewarded 광고 요청 경로에서 모두 확인하는
+                app-level 선택이며 Google UMP 선택을 대신하지 않습니다.
               </small>
             </span>
           </label>
@@ -80,8 +80,8 @@ function ConsentSettingsPanel({ preferences, onSave, onClose, onOpenPrivacyInfo 
             <span>
               <strong>맞춤형 광고</strong>
               <small>
-                향후 맞춤형 광고 기능을 위한 app-level 선택이며 Google UMP 선택을 대신하지
-                않습니다.
+                app-level 선택이며 Google UMP 선택을 대신하지 않습니다. 이 선택이 true가
+                아니면 non-personalized 광고 요청으로 제한합니다.
               </small>
             </span>
           </label>
