@@ -5,8 +5,8 @@
 ## 기준
 
 - 기준일: 2026-07-28
-- State baseline main HEAD: `00ca6b94568f735678ebf6faf7314f20d7cc29ea`
-- 작업 시작 전 Open PR: 없음
+- State baseline main HEAD: `2ea0e017abf7ac6df1ba3d4132671194a078b826`
+- 작업 시작 전 Open PR: #417 (Draft/Open, 보류)
 - 현재 앱: Google Play 공개 상태
 - 현재 플랫폼: React + Vite + Capacitor Android
 - 데이터: 주로 `localStorage`에 저장하며 별도 사용자 계정 서버는 없음
@@ -21,18 +21,25 @@
 - production Rewarded ad unit은 Owner가 AdMob Console에서 생성 완료
 - 실제 production ad unit ID 값은 저장소 밖에서 관리
 - production source connection capability 구현 완료
-- owner-held production ID release injection은 시작하지 않음
-- production request/load/show와 serving은 시작하지 않음
+- production Rewarded mode-aware UI copy 구현 완료
+- 인앱 개인정보/동의 문구를 현재 capability에 맞게 정합화 완료
+- owner-held production ID release injection path는 PR #417에서 Draft/Open 상태로 보류
+- GitHub Secret 실제 설정과 production-configured workflow 실행은 시작하지 않음
+- production request/load/show 검증과 serving은 시작하지 않음
 
 ## 현재 남은 단계
 
-1. owner-held production ID release injection
-2. production request/load/show 및 serving
-3. production Android device QA
-4. Privacy / Data Safety 최종 검토
-5. release signing 및 AAB
-6. Play 테스트 트랙과 staged rollout
-7. rollback 기준 검증
+1. GitHub Secret 실제 설정
+2. production-configured workflow 실행
+3. production AAB 생성
+4. production request/load/show 검증
+5. production serving
+6. production Android device QA
+7. Play upload
+8. Privacy / Data Safety 최종 검토
+9. 외부 공개 개인정보처리방침 최종 검토
+10. 광고 관련 disclosure 최종 검토
+11. staged rollout 및 rollback 기준 검증
 
 ## 미완료 또는 deferred QA
 

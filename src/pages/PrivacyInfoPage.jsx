@@ -19,10 +19,13 @@ const externalTransferItems = [
   '실제 결제 SDK는 아직 연결되지 않음',
   '기본 Web/Vercel/일반 Android Debug Build의 provider는 mock이며 실제 광고를 요청하지 않음',
   'native Android 공식 테스트 전용 빌드는 Google 공식 Rewarded Test Ad를 요청·표시할 수 있음',
+  '승인된 production/release 구성에서는 AdMob production Rewarded 광고를 요청·표시할 수 있는 source capability가 연결되어 있음',
 ];
 
 const reviewNeededItems = [
-  'production 광고 단위 ID 및 실제 광고 요청 기능 도입',
+  'production 활성화 전 개인정보/Data Safety 최종 검토',
+  '외부 공개 개인정보처리방침 최종 검토',
+  '광고 관련 disclosure 최종 검토',
   '분석 SDK 도입',
   '로그인 기능 도입',
   '서버/DB 저장 도입',
@@ -75,10 +78,14 @@ function PrivacyInfoPage({ onNavigate, consentPreferences }) {
         <p>
           현재 저장되는 정보는 서버가 아니라 사용자의 브라우저 localStorage에 보관됩니다.
           Android 앱에는 AdMob SDK와 Google UMP 동의 확인 절차가 연결되어 있습니다. 별도
-          공식 테스트 전용 빌드에서만 Google 공식 Rewarded Test Ad를 요청·표시할 수 있으며,
-          기본 Web/Vercel/일반 Android Debug Build는 mock provider를 유지합니다. production
-          광고 단위 ID와 production 광고 request/load/show는 구현되지 않았습니다. production
-          환경의 실제 광고 송출은 없습니다.
+          공식 테스트 전용 Debug Build에서는 Google 공식 Rewarded Test Ad를 요청·표시할 수
+          있고, 승인된 production/release 구성에서는 AdMob production Rewarded 광고를
+          요청·표시할 수 있는 source capability가 연결되어 있습니다. 기본
+          Web/Vercel/일반 Android Debug Build는 mock provider를 유지합니다. 실제 production
+          release workflow 실행, AAB 생성, 기기 QA, serving은 아직 수행하지 않았습니다. 광고
+          요청에는 앱 내부 광고 데이터 사용 선택과 Google UMP runtime gate가 모두 필요하며,
+          production 활성화 전 개인정보/Data Safety, 외부 공개 개인정보처리방침, 광고 관련
+          disclosure의 최종 검토가 필요합니다.
         </p>
       </section>
 

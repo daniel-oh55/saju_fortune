@@ -1,5 +1,45 @@
 # CHANGELOG
 
+## Unreleased - Production-aware Rewarded Advertising Copy
+
+### Changed
+
+- Added mode-aware Rewarded modal copy for mock, official-test/debug SDK, and
+  production/release SDK states.
+- Kept Google official test-ad language in the official-test path while using
+  mode-neutral production title, description, preparing, guidance, CTA, and
+  request-ownership error copy.
+- Aligned the in-app privacy and consent explanations with the connected
+  production source capability, app-level advertising choice, Google UMP
+  runtime gate, and non-personalized request behavior.
+- Extended the existing Rewarded provider checker with production-copy,
+  privacy-copy, consent-copy, mode-separation, and negative-mutation coverage.
+
+### Safety
+
+- Mock timing, SDK request/load/show behavior, Same-Promise ownership,
+  rewardRequestId binding, exactly-once persistence, consent gates, storage,
+  routing, and fortune behavior are unchanged.
+- Android native files, GitHub workflows, packages, and lockfiles are
+  unchanged.
+- The owner-held production Rewarded ad unit ID remains outside the
+  repository.
+
+### Not started
+
+- GitHub Secret actual configuration
+- Production-configured workflow run
+- Production AAB
+- Production request/load/show verification and serving
+- Production Android device QA
+- Play upload
+
+### Pending
+
+- Privacy/Data Safety final review
+- External public privacy policy final review
+- Advertising disclosure final review
+
 ## PR #416 - Production Rewarded Source Connection
 
 ### Changed
