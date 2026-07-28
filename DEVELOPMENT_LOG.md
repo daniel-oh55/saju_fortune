@@ -1,5 +1,62 @@
 # DEVELOPMENT_LOG
 
+## 2026-07-28 AdMob Rollout Post-merge Lifecycle Fixture
+
+Status: Checker/docs hotfix
+
+Starting state:
+
+- PR #413 readiness documentation: Merged
+- Canonical rollout contract check: Pass
+- Post-merge lifecycle fixture regression: Confirmed
+- Lifecycle 4/4 before this fix: Failed
+- Negative 25/25 before this fix: Not completed
+- Production source connection: Not started
+- Production request/load/show: Not started
+- Production serving: Not started
+- Privacy/Data Safety final review: Pending
+- Release signing/AAB: Pending
+
+Root cause:
+
+- The lifecycle fixture checked out the current `HEAD` as its transition
+  branch. After merge, both `origin/main` and `HEAD` contained the completed
+  readiness state, so the checker selected canonical mode and did not enforce
+  transition-only protected-path rules.
+
+Implementation:
+
+- Search first-parent history for the nearest contract commit containing all
+  three Pending readiness states.
+- Check out that discovered commit in the temporary clone and point
+  `refs/remotes/origin/main` to the same commit.
+- Copy and commit only `CHANGELOG.md`, `DEVELOPMENT_LOG.md`, `TODO.md`, the
+  rollout contract, and its checker to create a synthetic readiness
+  transition.
+- Validate the expected mode for every lifecycle scenario and fail closed if
+  the Pending baseline cannot be found.
+- Remove the temporary clone in `finally` on success, assertion failure, or
+  exception.
+
+Completed verification:
+
+- Post-merge lifecycle 4/4: Pass
+- Negative mutation 25/25: Pass
+- Synthetic transition: `readiness-transition`
+- Post-merge main with zero committed diff: `canonical`
+- Unrelated future PR: `canonical`
+- Approved production source/package-script follow-up: `canonical`
+- Transition source, Android, workflow, and package-script mutations: Rejected
+- Lifecycle and negative mutation fixtures: Restored byte-for-byte
+
+Unchanged:
+
+- The exact owner-held production ad unit ID remains outside the repository.
+- Production source, Android/iOS native files, public assets, workflows,
+  package scripts, dependencies, lockfile, Capacitor/Vite configuration,
+  routing, schema, localStorage keys and shape, fortune calculations, and
+  result generation
+
 ## 2026-07-28 AdMob Production Rewarded Unit Readiness
 
 Status: Docs/check-only
