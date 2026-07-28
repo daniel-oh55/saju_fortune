@@ -1,5 +1,29 @@
 # Android Release AAB Workflow
 
+## Production Rewarded Release Injection Update
+
+- Production Rewarded release workflow injection support: Implemented
+- Release environment preflight support: Implemented
+- workflow trigger: `workflow_dispatch` only
+- required branch: `main`
+- required input: `confirm_production_rewarded_release`
+- workflow permissions: `contents: read`
+- repository Secret name: `ADMOB_REWARDED_PRODUCTION_AD_UNIT_ID`
+- Vite environment mapping: `VITE_REWARDED_AD_UNIT_ID`
+- GitHub Secret actual value configuration: Not started
+- Production-configured release workflow run: Not started
+- Existing release signing infrastructure: Confirmed
+- Existing signed AAB workflow: Confirmed
+- Production Rewarded-configured signed AAB: Not started
+- Production Android device QA: Not started
+- Play Console upload and rollout: Not started
+- Secret actual values: Not recorded
+
+The preflight and web build receive the same production Rewarded environment.
+Missing or invalid configuration fails before the web build, Android sync,
+signed AAB build, verification, and artifact upload. This PR does not execute
+the workflow or generate an AAB.
+
 ## Android Release AAB Secret Correction Rerun Result
 
 - ANDROID_KEYSTORE_BASE64 configuration: Confirmed

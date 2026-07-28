@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { execFileSync } from 'node:child_process';
+import { execFileSync, spawnSync } from 'node:child_process';
 import { existsSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
@@ -25,7 +25,15 @@ import {
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const negativeSelfTest = process.argv.includes('--negative-self-test');
+const releaseEnvPreflight = process.argv.includes('--release-env-preflight');
 const preservedUntrackedFiles = new Set(['pr405-review.json', 'pr405.diff']);
+const releaseEnvKeys = [
+  'VITE_REWARDED_AD_PROVIDER',
+  'VITE_REWARDED_AD_SDK_ENABLED',
+  'VITE_REWARDED_AD_MODE',
+  'VITE_REWARDED_AD_BUILD_TARGET',
+  'VITE_REWARDED_AD_UNIT_ID',
+];
 
 function read(relativePath) {
   return readFileSync(path.join(root, relativePath), 'utf8');
@@ -55,7 +63,7 @@ function getChangedFiles() {
   return [...new Set([...committed, ...committedFallback, ...staged, ...working, ...untracked])];
 }
 
-const changedFiles = getChangedFiles();
+let changedFiles = [];
 
 const requiredTokens = [
   ['src/config/rewardedAdSdkConfig.js', 'GOOGLE_OFFICIAL_ANDROID_REWARDED_TEST_AD_UNIT_ID'],
@@ -278,6 +286,87 @@ function createSyntheticAppId() {
   const publisher = ['1234', '5678', '9012', '3456'].join('');
   const app = ['12345', '67890'].join('');
   return ['ca-app-pub-', publisher, '~', app].join('');
+}
+
+function validateProductionReleaseEnvironment(env) {
+  const config = getRewardedAdSdkConfig(env);
+  const valid =
+    String(env.VITE_REWARDED_AD_PROVIDER ?? '').trim().toLowerCase() === 'sdk' &&
+    String(env.VITE_REWARDED_AD_SDK_ENABLED ?? '').trim().toLowerCase() === 'true' &&
+    String(env.VITE_REWARDED_AD_MODE ?? '').trim().toLowerCase() === 'production' &&
+    String(env.VITE_REWARDED_AD_BUILD_TARGET ?? '').trim().toLowerCase() === 'release' &&
+    typeof env.VITE_REWARDED_AD_UNIT_ID === 'string' &&
+    env.VITE_REWARDED_AD_UNIT_ID.trim().includes('/') &&
+    !env.VITE_REWARDED_AD_UNIT_ID.trim().includes('~') &&
+    env.VITE_REWARDED_AD_UNIT_ID.trim() !== GOOGLE_OFFICIAL_ANDROID_REWARDED_TEST_AD_UNIT_ID &&
+    config.configurationValid === true &&
+    config.mockAllowed === false &&
+    config.isTesting === false &&
+    isApprovedRewardedAdSdkConfig(config) === true;
+
+  if (!valid) {
+    throw new Error('Production Rewarded release environment preflight failed');
+  }
+}
+
+function runReleaseEnvironmentPreflight() {
+  validateProductionReleaseEnvironment(process.env);
+  process.stdout.write('Production Rewarded release environment preflight passed\n');
+}
+
+function runReleaseEnvironmentPreflightSubprocessTests() {
+  const checker = fileURLToPath(import.meta.url);
+  const syntheticAdUnitId = createSyntheticProductionAdUnitId();
+  const syntheticAppId = createSyntheticAppId();
+  const baseEnv = Object.fromEntries(releaseEnvKeys.map((key) => [key, '']));
+  const validEnv = {
+    ...baseEnv,
+    VITE_REWARDED_AD_PROVIDER: 'sdk',
+    VITE_REWARDED_AD_SDK_ENABLED: 'true',
+    VITE_REWARDED_AD_MODE: 'production',
+    VITE_REWARDED_AD_BUILD_TARGET: 'release',
+    VITE_REWARDED_AD_UNIT_ID: syntheticAdUnitId,
+  };
+  const cases = [
+    ['valid production release', validEnv, true],
+    ['missing ID', { ...validEnv, VITE_REWARDED_AD_UNIT_ID: '' }, false],
+    ['malformed ID', { ...validEnv, VITE_REWARDED_AD_UNIT_ID: 'invalid' }, false],
+    ['App ID', { ...validEnv, VITE_REWARDED_AD_UNIT_ID: syntheticAppId }, false],
+    ['official test ID', {
+      ...validEnv,
+      VITE_REWARDED_AD_UNIT_ID: GOOGLE_OFFICIAL_ANDROID_REWARDED_TEST_AD_UNIT_ID,
+    }, false],
+    ['debug target', { ...validEnv, VITE_REWARDED_AD_BUILD_TARGET: 'debug' }, false],
+    ['official test mode', { ...validEnv, VITE_REWARDED_AD_MODE: 'official_test' }, false],
+    ['mock provider', { ...validEnv, VITE_REWARDED_AD_PROVIDER: 'mock' }, false],
+    ['SDK disabled', { ...validEnv, VITE_REWARDED_AD_SDK_ENABLED: 'false' }, false],
+    ['unknown target', { ...validEnv, VITE_REWARDED_AD_BUILD_TARGET: 'unknown' }, false],
+  ];
+
+  for (const [name, env, shouldPass] of cases) {
+    const result = spawnSync(process.execPath, [checker, '--release-env-preflight'], {
+      cwd: root,
+      encoding: 'utf8',
+      env: { ...process.env, ...env },
+    });
+    const output = `${result.stdout ?? ''}${result.stderr ?? ''}`;
+    assert.equal(result.status === 0, shouldPass, `${name}: unexpected preflight result`);
+    assert(!output.includes(syntheticAdUnitId), `${name}: synthetic ID leaked`);
+    assert(!output.includes(syntheticAppId), `${name}: synthetic App ID leaked`);
+    if (shouldPass) {
+      assert.equal(
+        result.stdout,
+        'Production Rewarded release environment preflight passed\n',
+        `${name}: unexpected success output`,
+      );
+      assert.equal(result.stderr, '', `${name}: unexpected success error output`);
+    } else {
+      assert(
+        output.includes('Production Rewarded release environment preflight failed'),
+        `${name}: missing generic failure output`,
+      );
+    }
+  }
 }
 
 function makeProductionConfig() {
@@ -1459,6 +1548,12 @@ const targetedNegativeMutations = [
 ];
 
 async function main() {
+  if (releaseEnvPreflight) {
+    runReleaseEnvironmentPreflight();
+    return;
+  }
+
+  changedFiles = getChangedFiles();
   const sourceErrors = validateSources();
   assert.deepEqual(sourceErrors, [], sourceErrors.join('\n'));
 
@@ -1474,6 +1569,7 @@ async function main() {
     );
   }
   assert(!read('.github/workflows/android-debug-build.yml').includes('VITE_REWARDED_AD_PROVIDER: sdk'));
+  runReleaseEnvironmentPreflightSubprocessTests();
 
   let behavioralAssertions = 0;
   for (const { name, run } of tests) {
