@@ -12,6 +12,21 @@
 - Updated the 20-section rollout contract and checker to validate the current
   readiness state, exact five-file scope, protected paths, untracked-file
   preservation, identifier safety, and 25 negative mutations.
+- Added temporary-clone lifecycle coverage for the readiness transition,
+  post-merge main, unrelated future changes, and an approved future
+  production source/package-script change.
+
+### Fixed
+
+- Derived `readinessTransitionMode` from the canonical
+  Pending/None/Not performed to Created/owner-supplied/Completed document
+  transition.
+- Limited exact-five scope, protected source/native/workflow/configuration
+  paths, preserved untracked files, and package equality checks to that
+  transition so canonical validation remains usable after merge and in future
+  PRs.
+- Verified transition mutations still fail and negative-test fixture files
+  are restored exactly after every mutation.
 
 ### Not started
 

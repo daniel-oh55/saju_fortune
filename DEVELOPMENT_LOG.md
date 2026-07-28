@@ -17,6 +17,19 @@ Completed:
 - Updated the checker and 25-case negative self-test for the new canonical
   state, exact five-file scope, protected paths, and preserved untracked
   review files.
+- Fixed the rollout checker so `readinessTransitionMode` is derived from the
+  canonical document changing from Pending/None/Not performed on
+  `origin/main` to Created/owner-supplied/Completed in the current tree.
+- Limited exact-five scope, protected path, workflow/configuration, preserved
+  untracked file, and package equality enforcement to that readiness
+  transition only. Canonical contract validation remains active after merge
+  and in future PRs.
+- Added temporary-clone lifecycle verification for the PR #413 transition,
+  post-merge main with zero committed diff, an unrelated future PR, and an
+  approved future production source/package-script PR.
+- Kept transition-time source, Android, workflow, and package mutations
+  fail-closed, and verified that negative-test mutations restore every
+  modified fixture byte-for-byte.
 
 Not started:
 

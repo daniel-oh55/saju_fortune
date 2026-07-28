@@ -11,6 +11,14 @@
 - [x] Update the 20-section contract without changing section order
 - [x] Update the checker and 25-case negative self-test for the new canonical
   readiness state and exact five-file scope
+- [x] Derive `readinessTransitionMode` from the canonical old-to-new document
+  state instead of the branch name
+- [x] Keep exact-five and protected implementation/package enforcement active
+  only during the PR #413 readiness transition
+- [x] Verify post-merge main, unrelated future PR, and approved production
+  implementation PR lifecycle scenarios in a temporary clone
+- [x] Verify transition-time source, Android, workflow, and package mutations
+  still fail and all negative-test fixture contents are restored exactly
 - [ ] Implement production source connection in a separate approved PR
 - [ ] Perform production request/load/show
 - [ ] Enable and verify production serving
