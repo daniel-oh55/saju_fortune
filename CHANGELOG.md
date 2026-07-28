@@ -1,5 +1,53 @@
 # CHANGELOG
 
+## PR #413 - AdMob Production Rewarded Unit Readiness
+
+### Changed
+
+- Recorded the owner-completed production Rewarded ad unit creation in AdMob
+  Console.
+- Recorded that the owner supplied the actual production ad unit ID, verified
+  its `/` form and existing App ID publisher-prefix match, and retained the
+  exact value outside the repository.
+- Updated the 20-section rollout contract and checker to validate the current
+  readiness state, exact five-file scope, protected paths, untracked-file
+  preservation, identifier safety, and 25 negative mutations.
+- Added temporary-clone lifecycle coverage for the readiness transition,
+  post-merge main, unrelated future changes, and an approved future
+  production source/package-script change.
+
+### Fixed
+
+- Derived `readinessTransitionMode` from the canonical
+  Pending/None/Not performed to Created/owner-supplied/Completed document
+  transition.
+- Limited exact-five scope, protected source/native/workflow/configuration
+  paths, preserved untracked files, and package equality checks to that
+  transition so canonical validation remains usable after merge and in future
+  PRs.
+- Verified transition mutations still fail and negative-test fixture files
+  are restored exactly after every mutation.
+
+### Not started
+
+- Production source connection, request/load/show, and serving
+- Production release build, production device QA, and Play Console release
+  upload
+
+### Pending
+
+- Privacy/Data Safety final review
+- Release signing/AAB
+- Actual early-dismiss device QA
+- Repeated ADB listener-accumulation diagnostics
+
+### Unchanged
+
+- The exact production ad unit ID is not recorded in the repository.
+- Production source, native code, workflows, dependencies, lockfile, storage,
+  schema, routing, fortune calculations, and result generation
+- Existing mock and official-test behavior and consent gates
+
 ## PR #412 - AdMob Production Rewarded Rollout Contract
 
 ### Added

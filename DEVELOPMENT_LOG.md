@@ -1,5 +1,60 @@
 # DEVELOPMENT_LOG
 
+## 2026-07-28 AdMob Production Rewarded Unit Readiness
+
+Status: Docs/check-only
+
+Completed:
+
+- Production rewarded ad unit creation: Completed
+- Production rewarded ad unit: Created
+- Production ad unit ID supplied by owner: Yes
+- Production ad unit ID format validation: Pass
+- Existing App ID publisher-prefix match: Confirmed
+- Exact production ad unit ID committed to repository: No
+- Updated the 20-section rollout contract to record the owner-confirmed AdMob
+  Console state without recording the exact production ad unit ID.
+- Updated the checker and 25-case negative self-test for the new canonical
+  state, exact five-file scope, protected paths, and preserved untracked
+  review files.
+- Fixed the rollout checker so `readinessTransitionMode` is derived from the
+  canonical document changing from Pending/None/Not performed on
+  `origin/main` to Created/owner-supplied/Completed in the current tree.
+- Limited exact-five scope, protected path, workflow/configuration, preserved
+  untracked file, and package equality enforcement to that readiness
+  transition only. Canonical contract validation remains active after merge
+  and in future PRs.
+- Added temporary-clone lifecycle verification for the PR #413 transition,
+  post-merge main with zero committed diff, an unrelated future PR, and an
+  approved future production source/package-script PR.
+- Kept transition-time source, Android, workflow, and package mutations
+  fail-closed, and verified that negative-test mutations restore every
+  modified fixture byte-for-byte.
+
+Not started:
+
+- Production source connection: Not started
+- Production request/load/show: Not started
+- Production serving: Not started
+- Production release build: Not started
+- Production device QA: Not started
+- Play Console release upload: Not started
+
+Pending:
+
+- Privacy/Data Safety final review: Pending
+- Release signing/AAB: Pending
+- Actual early-dismiss device QA: Pending
+- Repeated ADB listener-accumulation diagnostics: Pending
+
+Unchanged:
+
+- The exact owner-held production ad unit ID remains outside the repository.
+- Production source, Android/iOS native files, public assets, workflows,
+  dependencies, lockfile, Capacitor/Vite configuration, routing, schema,
+  localStorage keys and shape, fortune calculations, and result generation
+- Existing mock and official-test behavior and the UMP/local consent dual gate
+
 ## 2026-07-28 AdMob Production Rewarded Rollout Contract
 
 Status: Docs/check-only

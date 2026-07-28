@@ -6,11 +6,11 @@ This contract defines the prerequisites, configuration boundaries, validation
 rules, privacy review, release gates, device QA, and rollback criteria that
 must be satisfied before 하루풀이 uses a production Rewarded ad unit.
 
-This PR is docs/check-only. It does not create an AdMob ad unit, add a
-production identifier, request or serve a production ad, change native code,
-or prepare a release artifact. The production implementation requires a
-separate, approved PR after the user supplies and confirms the real ad unit
-ID.
+This PR is docs/check-only. It records the owner's completed AdMob Console
+creation and identifier confirmation, but it does not create or connect an
+AdMob ad unit, add a production identifier to the repository, request or
+serve a production ad, change native code, or prepare a release artifact.
+Production implementation requires a separate, approved PR.
 
 ## 2. Current merged baseline
 
@@ -18,6 +18,11 @@ Completed:
 
 - `@capacitor-community/admob` 8.0.0 is installed.
 - The real AdMob App ID is connected to Android metadata.
+- The owner created the 하루풀이 Android Rewarded ad unit in AdMob Console.
+- The owner supplied and retained the real production Rewarded ad unit ID
+  outside the repository.
+- The production ad unit ID has the valid `/` form and its publisher prefix
+  matches the existing App ID.
 - The UMP runtime consent coordinator and privacy-options UI are implemented.
 - The Google official Rewarded Test Ad provider is implemented.
 - Galaxy S23 Ultra functional QA covered fullscreen display, the Test Ad
@@ -32,7 +37,6 @@ Not testable / Pending:
 
 Not started:
 
-- Production Rewarded ad unit creation
 - Production ad unit ID source connection
 - Production request/load/show
 - Production serving
@@ -41,13 +45,21 @@ Not started:
 
 Canonical rollout state:
 
-- Production rewarded ad unit: Pending
-- Production ad unit ID: None
+- Production rewarded ad unit creation: Completed
+- Production rewarded ad unit: Created
+- Production ad unit ID supplied by owner: Yes
+- Production ad unit ID: Supplied by owner and held out of repository
+- Production ad unit ID format validation: Pass
+- Production ad unit ID format: Valid `/` form
+- Exact production ad unit ID committed to repository: No
+- Production source connection: Not started
 - Production request/load/show: Not started
 - Production serving: Not started
-- AdMob Console creation: Not performed
+- AdMob Console creation: Completed
 - Privacy/Data Safety final review: Pending
 - Release signing/AAB: Pending
+- Production device QA: Not started
+- Play Console release upload: Not started
 
 ## 3. Test and production separation
 
@@ -76,62 +88,77 @@ unit ID is required, or describing the `/` form as an App ID, must fail
 closed.
 
 The Google official Rewarded Test Ad unit ID remains restricted to
-debug/official-test use and is prohibited in production. The actual
-production Rewarded ad unit ID is currently None / Pending. No placeholder,
-guessed value, or arbitrary `ca-app-pub` value may be inserted before the user
-creates the unit in AdMob Console and supplies the confirmed `/` identifier.
+debug/official-test use and is prohibited in production. The owner has
+supplied the actual production Rewarded ad unit ID, confirmed its `/` form,
+and retained its exact value outside the repository. Its publisher prefix
+matches the existing App ID. No placeholder, guessed value, arbitrary
+`ca-app-pub` value, or exact owner-held production ID may be committed.
 
 ## 5. Production rewarded ad unit creation prerequisites
 
-Before creating or connecting the unit, the owner must confirm:
+The owner confirmed these creation prerequisites:
 
 - The correct 하루풀이 AdMob app and Android package are selected.
+- The Rewarded format and detail-unlock placement use the ad unit name
+  `harupuli_rewarded_detail_unlock_android`.
+- The reward amount is 1 and the reward item is `상세 풀이 해금`.
+- The enabled ad types are video and interactive.
+- Server-side verification is not configured.
+- Frequency capping is disabled.
+- Minimum eCPM uses Google optimization / all prices.
+- The copied ad unit ID uses the `/` form and its publisher prefix matches the
+  existing App ID.
+
+Before production connection or rollout, the owner must also confirm:
+
 - AdMob account and app serving eligibility are in an acceptable state.
-- The Rewarded format and detail-unlock placement are approved.
-- Reward settings and user-facing reward behavior match one selected detail
-  unlock.
 - Privacy policy, consent, Google Play Data safety, advertising ID, and target
   audience implications have owners and review dates.
 - Production configuration and secrets have a single controlled source.
 - Release signing, AAB, device QA, monitoring, and rollback owners are known.
 
-These are gates, not claims that the corresponding Console or release work
-has already occurred.
+The creation facts above are complete. The connection and rollout items remain
+gates, not claims that release work has occurred.
 
 ## 6. AdMob Console creation procedure
 
-The recommended user-operated procedure is:
+The owner completed this user-operated procedure:
 
-1. Open AdMob Console and select the 하루풀이 app.
-2. Enter the ad units menu.
-3. Choose the Rewarded format.
-4. Use `harupuli_rewarded_detail_unlock_android` as the candidate ad unit
-   name.
-5. Review the reward amount and reward item settings against the one-detail
-   unlock contract.
-6. Create the ad unit.
-7. Copy and independently verify the real ad unit ID in `/` format.
-8. Do not confuse it with the App ID value in `~` format.
-9. Record that serving may not stabilize immediately after unit creation.
-10. Have the user confirm the ID, then connect it only in a separate
-    production implementation PR.
+1. Opened AdMob Console and selected the 하루풀이 Android app.
+2. Entered the ad units menu and chose the Rewarded format.
+3. Named the unit `harupuli_rewarded_detail_unlock_android`.
+4. Set reward amount 1 and reward item `상세 풀이 해금`.
+5. Enabled video and interactive ad types.
+6. Left server-side verification unconfigured.
+7. Disabled frequency capping.
+8. Selected Google optimization / all prices for minimum eCPM.
+9. Created the ad unit.
+10. Copied the real ad unit ID, verified the `/` form and publisher-prefix
+    match, and retained the exact value outside the repository.
 
-AdMob Console was not changed as part of this docs/check-only work.
+AdMob Console creation: Completed. The Console was changed by the owner
+outside this docs/check-only PR; this PR only records the confirmed state.
+Source connection must occur only in a separate approved implementation PR.
 
 ## 7. Required user-supplied values
 
-The production implementation cannot begin until the user supplies or
-confirms:
+Supplied and confirmed by the owner:
 
-- The real production Rewarded ad unit ID copied from AdMob Console
+- The real production Rewarded ad unit ID copied from AdMob Console, with the
+  exact value held out of the repository
 - Confirmation that it belongs to the 하루풀이 Android app
-- The approved reward amount and reward item
+- Valid `/` form and matching App ID publisher prefix
+- Reward amount 1 and reward item `상세 풀이 해금`
+
+Still required before production rollout:
+
 - The intended release environment and rollout owner
 - Privacy/Data Safety review decisions and any required disclosure updates
 - Release signing and Play Console ownership
 
-The production ID must be treated as absent until those values are confirmed.
-It must not be inferred from the App ID or synthesized from examples.
+The exact production ID must not be inferred from the App ID, synthesized
+from examples, or committed to documentation, logs, checker fixtures, commit
+messages, or PR text.
 
 ## 8. Production configuration design
 
@@ -300,8 +327,9 @@ localStorage key migration.
 
 Production implementation or rollout is blocked by any of the following:
 
-- Missing or unconfirmed production Rewarded ad unit ID
-- Identifier type or ownership ambiguity
+- Missing approved configuration source for the owner-held production
+  Rewarded ad unit ID
+- Identifier type, format, or ownership ambiguity
 - Unapproved build/provider mode pairing
 - Missing fail-closed configuration validation
 - Any path that unlocks without a valid authoritative reward
@@ -316,8 +344,8 @@ Production implementation or rollout is blocked by any of the following:
 
 This PR explicitly excludes:
 
-- AdMob Console changes or ad unit creation
-- Any real production ad unit ID
+- AdMob Console changes or ad unit creation performed by this PR
+- The exact real production ad unit ID
 - Production source implementation
 - Production request/load/show or serving
 - `src/**`, `android/**`, `ios/**`, `public/**`, or workflow changes
@@ -329,13 +357,21 @@ This PR explicitly excludes:
 
 ## 19. Pending work
 
-- Production rewarded ad unit: Pending
-- Production ad unit ID: None
+- Production rewarded ad unit creation: Completed
+- Production rewarded ad unit: Created
+- Production ad unit ID supplied by owner: Yes
+- Production ad unit ID: Supplied by owner and held out of repository
+- Production ad unit ID format validation: Pass
+- Production ad unit ID format: Valid `/` form
+- Exact production ad unit ID committed to repository: No
+- Production source connection: Not started
 - Production request/load/show: Not started
 - Production serving: Not started
-- AdMob Console creation: Not performed
+- AdMob Console creation: Completed
 - Privacy/Data Safety final review: Pending
 - Release signing/AAB: Pending
+- Production device QA: Not started
+- Play Console release upload: Not started
 - Actual early-dismiss device QA: Pending
 - Repeated ADB listener-accumulation diagnostics: Pending
 
@@ -347,14 +383,15 @@ This contract PR is complete only when:
 - The identifier types, mode matrix, fail-closed rules, consent gates,
   disclosure impact, implementation boundaries, QA, and rollback requirements
   are documented.
-- The checker and all 18 negative mutations pass.
+- The checker and all 25 negative mutations pass.
 - Existing AdMob provider, consent, content-safety, and docs/source guardrail
   checks pass.
-- Only the six approved docs/check files are changed.
+- Only the five approved docs/check files are changed.
 - No source, native, workflow, lockfile, storage, schema, routing, or fortune
   behavior changes exist.
 - The two pre-existing untracked review files remain untracked and unstaged.
 
 Production rollout completion is a separate milestone. It requires a
-user-confirmed production ID, approved follow-up implementation, final
-privacy/disclosure review, signed release/AAB, and production device QA.
+secure connection of the owner-confirmed production ID, approved follow-up
+implementation, final privacy/disclosure review, signed release/AAB, and
+production device QA.

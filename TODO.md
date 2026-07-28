@@ -1,5 +1,35 @@
 # TODO
 
+## PR #413 - AdMob Production Rewarded Unit Readiness TODO
+
+- [x] Record the completed production Rewarded ad unit creation
+- [x] Record that the owner supplied and retained the actual production ad
+  unit ID outside the repository
+- [x] Record the valid `/` form and existing App ID publisher-prefix match
+- [x] Keep the exact production ad unit ID out of documentation, logs,
+  checker canonical text, commit text, and PR text
+- [x] Update the 20-section contract without changing section order
+- [x] Update the checker and 25-case negative self-test for the new canonical
+  readiness state and exact five-file scope
+- [x] Derive `readinessTransitionMode` from the canonical old-to-new document
+  state instead of the branch name
+- [x] Keep exact-five and protected implementation/package enforcement active
+  only during the PR #413 readiness transition
+- [x] Verify post-merge main, unrelated future PR, and approved production
+  implementation PR lifecycle scenarios in a temporary clone
+- [x] Verify transition-time source, Android, workflow, and package mutations
+  still fail and all negative-test fixture contents are restored exactly
+- [ ] Implement production source connection in a separate approved PR
+- [ ] Perform production request/load/show
+- [ ] Enable and verify production serving
+- [ ] Build the production release
+- [ ] Perform production device QA
+- [ ] Upload the Play Console release
+- [ ] Complete Privacy/Data Safety final review
+- [ ] Complete release signing/AAB
+- [ ] Perform actual early-dismiss device QA
+- [ ] Perform repeated ADB listener-accumulation diagnostics
+
 ## PR #412 - AdMob Production Rewarded Rollout Contract TODO
 
 - [x] Verify merged PR #411 baseline at
