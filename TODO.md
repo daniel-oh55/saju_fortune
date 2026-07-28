@@ -1,5 +1,32 @@
 # TODO
 
+## PR #414 - AdMob Rollout Post-merge Lifecycle Fixture TODO
+
+- [x] Confirm PR #413 readiness documentation is merged
+- [x] Confirm the canonical rollout contract check passes
+- [x] Reproduce the post-merge lifecycle fixture regression
+- [x] Record lifecycle 4/4 failed before the fix
+- [x] Record negative 25/25 was not completed before the fix
+- [x] Locate the nearest complete Pending readiness baseline from
+  first-parent contract history
+- [x] Build a synthetic exact-five readiness transition from the discovered
+  Pending baseline
+- [x] Validate transition mode is `readiness-transition`
+- [x] Reject transition source, Android, workflow, and package-script
+  mutations
+- [x] Validate post-merge main with zero committed diff in `canonical` mode
+- [x] Validate unrelated and approved production follow-ups in `canonical`
+  mode
+- [x] Verify post-merge lifecycle 4/4
+- [x] Verify negative mutation 25/25
+- [x] Verify lifecycle and negative mutation fixtures restore byte-for-byte
+- [x] Remove temporary lifecycle clones in all exit paths
+- [ ] Implement production source connection in a separate approved PR
+- [ ] Perform production request/load/show
+- [ ] Enable and verify production serving
+- [ ] Complete Privacy/Data Safety final review
+- [ ] Complete release signing/AAB
+
 ## PR #413 - AdMob Production Rewarded Unit Readiness TODO
 
 - [x] Record the completed production Rewarded ad unit creation

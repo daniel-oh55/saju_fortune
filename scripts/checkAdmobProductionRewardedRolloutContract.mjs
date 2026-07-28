@@ -22,6 +22,16 @@ const expectedFiles = new Set([
   documentPath,
   checkerPath,
 ])
+const pendingReadinessState = [
+  'Production rewarded ad unit: Pending',
+  'Production ad unit ID: None',
+  'AdMob Console creation: Not performed',
+]
+const completedReadinessState = [
+  'Production rewarded ad unit: Created',
+  'Production ad unit ID supplied by owner: Yes',
+  'AdMob Console creation: Completed',
+]
 const preservedUntrackedFiles = new Set(['pr405-review.json', 'pr405.diff'])
 const protectedPaths = [
   'src',
@@ -80,9 +90,16 @@ const run = (command, args, cwd = root) =>
     cwd,
     encoding: 'utf8',
   })
-const assertSuccessfulCheck = (result, label) => {
+const assertSuccessfulCheck = (result, label, expectedMode) => {
   const output = `${result.stdout ?? ''}\n${result.stderr ?? ''}`
   if (result.status !== 0) throw new Error(`${label}: expected Pass\n${output}`)
+  if (!output.includes(`mode ${expectedMode}`)) {
+    throw new Error(`${label}: expected mode ${expectedMode}\n${output}`)
+  }
+  if (output.includes('change scope: expected changed file is missing')) {
+    throw new Error(`${label}: unexpected exact-five missing-file error\n${output}`)
+  }
+  console.log(output.trim())
   console.log(`PASS lifecycle: ${label}`)
 }
 const assertRejectedCheck = (result, label, expected) => {
@@ -97,12 +114,30 @@ const writeFixture = (fixtureRoot, path, content) => {
   mkdirSync(dirname(target), { recursive: true })
   writeFileSync(target, content)
 }
-const runLifecycleSelfTest = () => {
+const findPendingReadinessBaseCommit = () => {
+  for (const commit of lines('rev-list', '--first-parent', 'HEAD', '--', documentPath)) {
+    const candidateDocument = git('show', `${commit}:${documentPath}`)
+    if (pendingReadinessState.every((state) => candidateDocument.includes(state))) {
+      return commit
+    }
+  }
+  throw new Error('unable to locate pending readiness baseline commit')
+}
+const createSyntheticReadinessTransitionFixture = () => {
   const temporaryRoot = mkdtempSync(join(tmpdir(), 'admob-rollout-lifecycle-'))
   const fixtureRoot = resolve(temporaryRoot, 'repository')
-  const currentHead = git('rev-parse', 'HEAD').trim()
 
   try {
+    const pendingReadinessBaseCommit = findPendingReadinessBaseCommit()
+    const pendingDocument = git('show', `${pendingReadinessBaseCommit}:${documentPath}`)
+    const currentDocument = read(documentPath)
+    if (!pendingReadinessState.every((state) => pendingDocument.includes(state))) {
+      throw new Error('pending readiness baseline commit does not contain the complete old state')
+    }
+    if (!completedReadinessState.every((state) => currentDocument.includes(state))) {
+      throw new Error('current rollout contract does not contain the complete readiness state')
+    }
+
     const clone = run(
       'git',
       [
@@ -122,9 +157,16 @@ const runLifecycleSelfTest = () => {
     }
 
     execFileSync('git', ['config', 'core.autocrlf', 'false'], { cwd: fixtureRoot })
-    execFileSync('git', ['checkout', '--quiet', '-b', 'readiness-transition', currentHead], {
-      cwd: fixtureRoot,
-    })
+    execFileSync(
+      'git',
+      ['checkout', '--quiet', '-b', 'readiness-transition', pendingReadinessBaseCommit],
+      { cwd: fixtureRoot },
+    )
+    execFileSync(
+      'git',
+      ['update-ref', 'refs/remotes/origin/main', pendingReadinessBaseCommit],
+      { cwd: fixtureRoot },
+    )
     for (const path of expectedFiles) {
       writeFixture(fixtureRoot, path, readFileSync(resolve(root, path)))
     }
@@ -132,15 +174,44 @@ const runLifecycleSelfTest = () => {
     execFileSync('git', ['config', 'user.email', 'rollout-self-test@example.invalid'], {
       cwd: fixtureRoot,
     })
-    if (run('git', ['status', '--porcelain'], fixtureRoot).stdout.trim()) {
-      execFileSync('git', ['add', '--', ...expectedFiles], { cwd: fixtureRoot })
-      execFileSync('git', ['commit', '--quiet', '-m', 'fixture: current transition tree'], {
-        cwd: fixtureRoot,
-      })
+    execFileSync('git', ['add', '--', ...expectedFiles], { cwd: fixtureRoot })
+    execFileSync('git', ['commit', '--quiet', '-m', 'fixture: synthetic readiness transition'], {
+      cwd: fixtureRoot,
+    })
+    const syntheticTransitionHead = execFileSync('git', ['rev-parse', 'HEAD'], {
+      cwd: fixtureRoot,
+      encoding: 'utf8',
+    }).trim()
+    if (syntheticTransitionHead === pendingReadinessBaseCommit) {
+      throw new Error('pending readiness baseline and synthetic transition HEAD must differ')
     }
+    return {
+      fixtureRoot,
+      pendingReadinessBaseCommit,
+      syntheticTransitionHead,
+      temporaryRoot,
+    }
+  } catch (error) {
+    rmSync(temporaryRoot, { recursive: true, force: true })
+    throw error
+  }
+}
+const runLifecycleSelfTest = () => {
+  const {
+    fixtureRoot,
+    pendingReadinessBaseCommit,
+    syntheticTransitionHead,
+    temporaryRoot,
+  } = createSyntheticReadinessTransitionFixture()
 
+  try {
+    console.log(`Pending readiness baseline commit: ${pendingReadinessBaseCommit}`)
     const check = () => run(process.execPath, [resolve(fixtureRoot, checkerPath)], fixtureRoot)
-    assertSuccessfulCheck(check(), 'A. PR #413 readiness transition exact-five scope')
+    assertSuccessfulCheck(
+      check(),
+      'A. synthetic readiness transition exact-five scope (mode readiness-transition)',
+      'readiness-transition',
+    )
 
     const transitionMutations = [
       [
@@ -189,15 +260,24 @@ const runLifecycleSelfTest = () => {
     if (!readFileSync(packagePath).equals(originalPackage)) {
       throw new Error('A. transition package mutation: fixture content was not restored exactly')
     }
+    console.log('PASS lifecycle: transition mutations restored byte-for-byte (4/4)')
 
-    const finalTransitionHead = execFileSync('git', ['rev-parse', 'HEAD'], {
-      cwd: fixtureRoot,
-      encoding: 'utf8',
-    }).trim()
-    execFileSync('git', ['update-ref', 'refs/remotes/origin/main', finalTransitionHead], {
+    execFileSync('git', ['update-ref', 'refs/remotes/origin/main', syntheticTransitionHead], {
       cwd: fixtureRoot,
     })
-    assertSuccessfulCheck(check(), 'B. post-merge main simulation with zero committed diff')
+    const postMergeCommittedDiff = run(
+      'git',
+      ['diff', '--name-only', 'origin/main...HEAD'],
+      fixtureRoot,
+    ).stdout.trim()
+    if (postMergeCommittedDiff) {
+      throw new Error(`B. post-merge main simulation: expected zero committed diff\n${postMergeCommittedDiff}`)
+    }
+    assertSuccessfulCheck(
+      check(),
+      'B. post-merge main simulation with zero committed diff (mode canonical)',
+      'canonical',
+    )
 
     execFileSync('git', ['checkout', '--quiet', '-b', 'future-unrelated'], { cwd: fixtureRoot })
     writeFixture(fixtureRoot, 'notes/unrelated-follow-up.md', '# Unrelated follow-up fixture\n')
@@ -205,7 +285,11 @@ const runLifecycleSelfTest = () => {
     execFileSync('git', ['commit', '--quiet', '-m', 'fixture: unrelated follow-up'], {
       cwd: fixtureRoot,
     })
-    assertSuccessfulCheck(check(), 'C. future unrelated PR simulation')
+    assertSuccessfulCheck(
+      check(),
+      'C. future unrelated PR simulation (mode canonical)',
+      'canonical',
+    )
 
     execFileSync('git', ['checkout', '--quiet', '--detach', 'origin/main'], { cwd: fixtureRoot })
     execFileSync('git', ['checkout', '--quiet', '-b', 'future-production'], { cwd: fixtureRoot })
@@ -230,7 +314,11 @@ const runLifecycleSelfTest = () => {
     execFileSync('git', ['commit', '--quiet', '-m', 'fixture: approved production follow-up'], {
       cwd: fixtureRoot,
     })
-    assertSuccessfulCheck(check(), 'D. future approved production implementation simulation')
+    assertSuccessfulCheck(
+      check(),
+      'D. future approved production implementation simulation (mode canonical)',
+      'canonical',
+    )
 
     console.log('AdMob rollout lifecycle verification passed (scenarios 4/4)')
   } finally {
@@ -247,12 +335,15 @@ if (lifecycleSelfTestRequested && !negativeSelfTestRequested) {
   process.exit(0)
 }
 
-if (negativeSelfTestRequested) {
-  const append = (path, text) => writeFileSync(resolve(root, path), `${read(path)}${text}`, 'utf8')
+const runNegativeMutationSelfTest = (fixtureRoot) => {
+  const readFixture = (path) =>
+    readFileSync(resolve(fixtureRoot, path), 'utf8').replace(/\r\n/g, '\n')
+  const append = (path, text) =>
+    writeFileSync(resolve(fixtureRoot, path), `${readFixture(path)}${text}`, 'utf8')
   const replace = (path, from, to) => {
-    const content = read(path)
+    const content = readFixture(path)
     if (!content.includes(from)) throw new Error(`self-test fixture missing: ${from}`)
-    writeFileSync(resolve(root, path), content.replace(from, to), 'utf8')
+    writeFileSync(resolve(fixtureRoot, path), content.replace(from, to), 'utf8')
   }
   const cases = [
     [
@@ -392,14 +483,14 @@ if (negativeSelfTestRequested) {
     '.github/workflows/android-debug-build.yml',
   ]
   const originalContents = new Map(
-    pathsToRestore.map((path) => [path, readFileSync(resolve(root, path))]),
+    pathsToRestore.map((path) => [path, readFileSync(resolve(fixtureRoot, path))]),
   )
   let mutationPasses = 0
   for (const [name, mutate, expected] of cases) {
     try {
       mutate()
-      const result = spawnSync(process.execPath, [resolve(root, checkerPath)], {
-        cwd: root,
+      const result = spawnSync(process.execPath, [resolve(fixtureRoot, checkerPath)], {
+        cwd: fixtureRoot,
         encoding: 'utf8',
       })
       const output = `${result.stdout ?? ''}\n${result.stderr ?? ''}`
@@ -410,16 +501,28 @@ if (negativeSelfTestRequested) {
       console.log(`PASS mutation ${mutationPasses}/${cases.length}: ${name}`)
     } finally {
       for (const [path, content] of originalContents) {
-        writeFileSync(resolve(root, path), content)
-        if (!readFileSync(resolve(root, path)).equals(content)) {
+        writeFileSync(resolve(fixtureRoot, path), content)
+        if (!readFileSync(resolve(fixtureRoot, path)).equals(content)) {
           throw new Error(`${name}: ${path} was not restored exactly`)
         }
       }
     }
   }
   console.log(
+    `AdMob production rewarded rollout contract negative fixture restoration passed (byte-for-byte ${mutationPasses}/${cases.length})`,
+  )
+  console.log(
     `AdMob production rewarded rollout contract negative verification passed (mutations ${mutationPasses}/${cases.length})`,
   )
+}
+
+if (negativeSelfTestRequested) {
+  const { fixtureRoot, temporaryRoot } = createSyntheticReadinessTransitionFixture()
+  try {
+    runNegativeMutationSelfTest(fixtureRoot)
+  } finally {
+    rmSync(temporaryRoot, { recursive: true, force: true })
+  }
   process.exit(0)
 }
 

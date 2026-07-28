@@ -1,5 +1,50 @@
 # CHANGELOG
 
+## PR #414 - AdMob Rollout Post-merge Lifecycle Fixture
+
+### Fixed
+
+- Confirmed the post-merge lifecycle fixture regression after the PR #413
+  readiness documentation was merged.
+- Changed the lifecycle self-test to locate the nearest Pending readiness
+  baseline from first-parent contract history instead of using the current
+  checkout as the transition base.
+- Built an explicit synthetic transition containing only the approved five
+  checker/documentation files, with the discovered Pending commit set as
+  `origin/main`.
+- Kept lifecycle baseline discovery fail-closed when the complete historical
+  Pending/None/Not performed state cannot be found.
+
+### Verified
+
+- Canonical rollout contract check: Pass
+- Post-merge lifecycle 4/4: Pass
+- Negative mutation 25/25: Pass
+- Transition source, Android, workflow, and package-script mutations: Rejected
+- Transition mode: `readiness-transition`
+- Post-merge, unrelated future PR, and approved production follow-up modes:
+  `canonical`
+- Lifecycle and negative mutation fixtures: Restored byte-for-byte
+- Temporary lifecycle clones: Removed
+
+### Not started
+
+- Production source connection
+- Production request/load/show
+- Production serving
+
+### Pending
+
+- Privacy/Data Safety final review
+- Release signing/AAB
+
+### Unchanged
+
+- The exact production ad unit ID remains outside the repository.
+- Production source, native code, workflows, package scripts, dependencies,
+  lockfile, storage, schema, routing, fortune calculations, and result
+  generation
+
 ## PR #413 - AdMob Production Rewarded Unit Readiness
 
 ### Changed
