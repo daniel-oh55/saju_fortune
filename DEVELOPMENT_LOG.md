@@ -1,5 +1,90 @@
 # DEVELOPMENT_LOG
 
+## 2026-07-28 Galaxy S23 Ultra Rewarded Test Final Device QA
+
+Test basis:
+
+- Run ID: `30319362755`
+- Artifact ID: `8673428676`
+- Artifact name: `harupuli-rewarded-test-apk`
+- Tested HEAD: `7ab324436c64d0cbec5b8b906cbc942ee200e42f`
+- Tested device: Galaxy S23 Ultra
+- OS: One UI 8.5
+
+Device QA Pass:
+
+- New APK installation
+- Cold launch
+- Home, Settings, and existing fortune features
+- Test-ad button display
+- Native fullscreen Google official Test Ad display
+- Test Ad label confirmation
+- Ad completion
+- Reward callback
+- Exactly one selected detailed reading unlocked
+- No additional detailed reading unlocked
+- Rapid repeated taps displayed the ad only once
+- No duplicate reward
+- Airplane-mode ad failure
+- No detailed reading unlocked in airplane mode
+- Successful retry after internet recovery
+- Unlock state persisted after app exit and relaunch
+- No hang after background/resume
+- No recurrence of the prior `AdMob.then()` error
+- Capacitor AdMob Proxy Promise-assimilation fix device verification
+
+Early-dismiss status:
+
+- Actual early-dismiss device QA: Not testable
+- Reason: Google's official test-ad creative did not provide a mid-ad close
+  button, so the early-dismiss scenario could not be reproduced on the
+  device.
+- The automated behavioral checker's dismiss-handling verification remains
+  in place. It is distinct from the actual device scenario, which was not
+  performed.
+
+Remaining status:
+
+- Functional Android Rewarded Test QA: Pass
+- Repeated ADB listener-accumulation diagnostics: Not performed / Pending
+- Production ad unit ID: None
+- Production ad request/load/show: Not started
+- Production serving: Not started
+- Release signing/AAB/Play work: Pending
+
+## 2026-07-28 Galaxy S23 Ultra AdMob Proxy Thenable Finding
+
+- Tested device: Galaxy S23 Ultra
+- Installed artifact: `8652530894`
+- Tested HEAD: `6d685d4f444e5441508cac77403adad4f0c1f1ce`
+- APK install/basic smoke: Pass
+- Local app consent: Pass
+- Privacy message publication: Completed
+- Native test ad: Blocked
+- Logcat finding: `"AdMob.then()" is not implemented on android`
+- Root cause: Promise thenable assimilation of the Capacitor `AdMob` Proxy
+- `requestConsentInfo()` native call: Not reached
+- Actual test-ad load/show/reward: Not performed
+- Artifact `8652530894`: Superseded for advertising QA
+- New artifact/device retest: Required
+- Production advertising: Not started
+
+Implementation follow-up:
+
+- Replaced the unsafe Promise of the `AdMob` Proxy with a cached dynamic-import
+  module namespace Promise.
+- Added injectable native dependencies that destructure `AdMob` only inside
+  request, form, privacy-options, and initialize calls.
+- Added a fake Capacitor Proxy regression proving zero `then` access/calls,
+  one module load, `requestConsentInfo -> showConsentForm -> initialize`
+  bootstrap order, privacy-options module reuse, READY/ad-gate state, and zero
+  Web module loads.
+- Added 9 Proxy static invariants and 8 immediately detected negative
+  mutations. The rewarded-provider checker remains at 85 behavioral
+  scenarios, 82 static invariants, and 94 detected negative mutations.
+- Actual official test-ad device QA remains Pending. No Test Ad QA pass is
+  claimed by this change.
+
 ## PR #410 - AdMob Rewarded Ad Provider Contract
 
 - Work date: 2026-07-27
@@ -12265,3 +12350,152 @@ Remaining implementation and QA:
 - Repeated early-dismiss and reproducible `FailedToShow` Android QA with ADB
   logcat.
 - Production ad unit configuration and live-ad readiness work.
+
+# 2026-07-27 AdMob Official Test Rewarded Provider
+
+## Work completed
+
+- Started from merged `main` HEAD
+  `73be1eb50406f1de1987d0164cc29506f228e584`.
+- Added the centrally configured Google official Android rewarded demo ID.
+  It is valid only for explicit SDK, enabled, `official_test`, and `debug`
+  configuration. Release and production modes fail closed.
+- Implemented native Android AdMob module loading after configuration,
+  platform, local-consent, and runtime-gate checks.
+- Added fresh local-consent and runtime-gate reads before prepare and before
+  show, with no SDK-to-mock fallback or automatic retry.
+- Added one dedicated same-Promise single-flight, one prepare and show per
+  action, authoritative resolved-show reward validation, and exactly-once
+  result handling.
+- Observed FailedToLoad, Showed, FailedToShow, Dismissed, and Rewarded events.
+  Rewarded remains diagnostic; only a valid resolved show Promise authorizes
+  an unlock.
+- Added individual listener-handle cleanup and bounded load, show-start,
+  lifecycle, dismiss-reward-grace, and cleanup deadlines.
+- App-level timeout and listener removal do not cancel, resolve, or reject the
+  native Android PluginCall. Late results are ignored by settlement guards.
+- Preserved the mock two-second UI and added a separate SDK UI that requires a
+  user button tap, has no fake countdown or auto-run, and identifies the
+  Google official test ad.
+- Passed sanitized reward results through pages and App, saving
+  `sdk_rewarded_ad` only for verified SDK results. The existing
+  `aiTodayFortune.rewardUnlocks` key and stored object shape remain unchanged.
+- Updated current-state privacy copy without claiming production serving,
+  revenue, or completed Android device QA.
+- Added `Android Rewarded Test Build`, producing
+  `harupuli-rewarded-test-apk` separately from the unchanged standard
+  `harupuli-debug-apk` workflow.
+- Added a creation/post-merge production and behavioral checker with an
+  in-memory negative mutation self-test. The checker covers 68 behavioral
+  scenarios, 60 static invariants, and 60 detected negative mutations.
+- `npm ci`, the default mock `npm run build`, rewarded provider/contract,
+  privacy-options, runtime-consent, content-safety, share-text, and doc/src
+  guardrail checks passed.
+- `npx cap sync android` passed and left no tracked Android diff.
+- Local `assembleDebug` reached Android SDK discovery after a command-only
+  non-ASCII-path override, then was blocked because this workstation has no
+  configured Android SDK location. No Android project property was changed.
+- `npm ci` reported the existing audit status of 3 high and 1 critical
+  vulnerability; dependencies and `package-lock.json` were not changed.
+- GitHub Actions run `30253832382` completed the unchanged standard Android
+  Debug Build and uploaded `harupuli-debug-apk` with digest
+  `sha256:003bd36e934e84f7e9cd675f20134c803efbdeee346908afef143289ee4f8c8c`.
+- GitHub Actions run `30253832336` completed Android Rewarded Test Build and
+  uploaded `harupuli-rewarded-test-apk` with digest
+  `sha256:27f5d0b05c0a5e54a55088b9890a940737ba5a171604c9c07e8d383160b973da`.
+- Vercel Preview deployment completed successfully for implementation HEAD
+  `d8e95e0cc68cde07f71cb0d3639794c4810501bc`.
+
+## Not performed
+
+- Galaxy S23 Ultra request, load, fullscreen show, Test Ad label, reward,
+  early-dismiss, repeated-dismiss, offline, and ADB logcat verification
+- Production ad unit configuration or production ad request/load/show
+- Release signing, AAB generation, Play upload, or console changes
+
+# 2026-07-27 Rewarded Consent And Request Ownership Follow-up
+
+## Work completed
+
+- Bound the pre-prepare ads gate and `npa` option to the same local-consent
+  snapshot. Removed the extra unvalidated local-consent read before prepare.
+- Kept fresh local/runtime gate reads at action start, pre-prepare, and
+  pre-show without changing local consent or UMP state.
+- Added request ownership matching for placement and category so callers that
+  share another request's single-flight Promise cannot claim its reward.
+- Added one sanitized `rewardActionId` per SDK action. Concurrent callers share
+  the same ID and a deliberate retry receives a new ID.
+- Added App persistence checks for successful results, current fortune,
+  current reward-session epoch, duplicate category, and duplicate SDK action.
+  SDK action IDs are registered before storage and rolled back with the
+  persistence key if storage fails.
+- Reset now clears both in-memory reward guard Sets and advances the reward
+  session epoch. Pre-reset callbacks and callbacks for an inactive fortune are
+  rejected, while the same deterministic fortune/category can be unlocked
+  again with a new action after reset.
+- Kept mock behavior, storage keys and shape, schema version, routing, fortune
+  generation, Android native files, and workflows unchanged.
+- Expanded the production checker to 79 behavioral scenarios, 74 static
+  invariants, and 79 detected negative mutations. Targeted negative mutations
+  cover an unvalidated pre-prepare read, removed request matching, removed
+  action-ID consumption, removed reset Set clearing, and removed epoch checks.
+
+## Validation
+
+- Default mock `npm run build`: passed with the existing chunk-size warning.
+- Official-test/debug `npm run build`: passed with the existing chunk-size
+  warning.
+- Rewarded provider behavioral, negative self-test, and provider contract
+  checks: passed.
+- AdMob privacy-options UI and contract checks: passed.
+- AdMob runtime-consent coordinator and bootstrap contract checks: passed.
+- Content-safety, share-text, and doc/src guardrail checks: passed.
+- `npx cap sync android`: passed; no tracked `android/**` diff.
+- `git diff --check`: passed.
+
+## Not performed
+
+- Android device installation or QA
+- Production ad unit configuration or production ad request/load/show
+- PR merge or Ready-for-review transition
+
+# 2026-07-27 Rewarded Caller-Owned Request Identity Follow-up
+
+## Work completed
+
+- Added a caller-owned `rewardRequestId` for every deliberate reward-modal
+  action. Placement and category remain semantic request fields and are not a
+  unique caller identity.
+- Added `crypto.randomUUID()` request-ID generation with a timestamp and
+  module-sequence fallback. IDs are limited to 1-128 safe
+  `A-Za-z0-9._:-` characters.
+- Bound an SDK success result to the first caller's validated
+  `rewardRequestId`. A second caller may share the same SDK Promise but cannot
+  claim that first caller's result, even when placement and category match.
+- Kept `rewardActionId` separate as the native rewarded-action exactly-once
+  token. `rewardRequestId` identifies the initiating caller, while the reward
+  session epoch rejects stale App callbacks after reset or fortune/profile
+  replacement. These three controls are not interchangeable.
+- Invalid or missing SDK request IDs fail closed before plugin import,
+  prepare, or show. Failure results do not expose native error details.
+- Kept mock result matching backward compatible with placement/category
+  ownership.
+- Kept request IDs out of localStorage, native ad payloads, and user-visible
+  UI. No production ad unit ID was added.
+- Added same-placement/category shared-Promise, reset/new-session,
+  fortune-replacement, deliberate-retry, ID generation/fallback, invalid-ID,
+  and request-ownership regression coverage.
+- Expanded the checker to 85 behavioral scenarios, 82 static invariants, and
+  94 detected negative mutations. The prior 79 mutations remain, with seven
+  targeted mutations for missing generation/options/result propagation,
+  weakened ownership matching, missing fail-closed validation, and
+  second-caller result claiming.
+
+## Pending
+
+- Actual official test-ad request, load, fullscreen show, Test Ad label, and
+  reward callback verification on an Android device
+- Reset or profile/fortune change while a native ad is in flight on a device
+- Early dismiss, repeated dismiss, offline behavior, and ADB logcat review
+- Production ad unit configuration and production ad request/load/show
+- PR merge or Ready-for-review transition

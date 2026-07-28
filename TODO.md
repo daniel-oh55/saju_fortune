@@ -1,5 +1,31 @@
 # TODO
 
+## PR #411 - AdMob Official Test Rewarded Provider TODO
+
+- [x] Verify merged PR #410 baseline at `73be1eb50406f1de1987d0164cc29506f228e584`
+- [x] Add official-test/debug-only SDK configuration and keep default mock
+- [x] Implement native Android prepare/show with dynamic AdMob import
+- [x] Add local consent and AdMob runtime dual gates with fresh rechecks
+- [x] Add same-Promise single-flight and authoritative reward validation
+- [x] Add exactly-once result handling and individual listener cleanup
+- [x] Add bounded load, show-start, lifecycle, dismiss-grace, and cleanup timeouts
+- [x] Split mock countdown and SDK user-gesture modal behavior
+- [x] Persist verified SDK rewards without changing storage keys or shape
+- [x] Align privacy copy with official-test-only capability
+- [x] Add dedicated Android Rewarded Test Build workflow and checker
+- [x] Run the dedicated workflow and inspect `harupuli-rewarded-test-apk`
+- [x] Fix Capacitor AdMob Proxy Promise thenable assimilation
+- [x] Add Proxy `then` access/call, module single-load, and Web no-load regressions
+- [x] Retest the superseding rewarded-test APK on Galaxy S23 Ultra
+- [x] Perform Galaxy S23 Ultra official Test Ad request/load/fullscreen/reward QA
+- [x] Perform rapid-tap, offline/recovery, restart-persistence, and
+  background/resume functional QA
+- [ ] Perform actual early-dismiss device QA; the current official test
+  creative has no mid-ad close button, so this scenario was Not testable
+- [ ] Perform repeated ADB listener-accumulation diagnostics
+- [ ] Create a production ad unit or enable production ad serving
+- [ ] Complete disclosure, signing, AAB, and Play release work
+
 ## PR #410 - AdMob Rewarded Ad Provider Contract TODO
 
 - [x] Verify merged PR #409 baseline at the expected main HEAD
@@ -13,7 +39,7 @@
 - [x] Define official-test and production separation
 - [x] Define PR #411 files, automated tests, and Android QA plan
 - [x] Add targeted creation/post-merge checker and negative self-test
-- [ ] Implement the PR #411 official test rewarded SDK path
+- [x] Implement the PR #411 official test rewarded SDK path
 - [ ] Perform actual official test-ad request/load/show
 - [ ] Complete Android advertising QA and ADB logcat
 - [ ] Create production ad unit and enable production serving

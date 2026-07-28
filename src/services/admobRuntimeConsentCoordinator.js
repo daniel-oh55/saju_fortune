@@ -389,38 +389,55 @@ export function createAdmobRuntimeConsentCoordinator(dependencies) {
   });
 }
 
-let adMobApiPromise = null;
+export function createAdmobNativeDependencies({ loadAdMobModule }) {
+  let modulePromise = null;
 
-function loadAdMobApi() {
-  if (!adMobApiPromise) {
-    adMobApiPromise = import('@capacitor-community/admob').then(
-      ({ AdMob }) => AdMob,
-    );
+  function getAdMobModule() {
+    if (!modulePromise) {
+      modulePromise = loadAdMobModule();
+    }
+
+    return modulePromise;
   }
 
-  return adMobApiPromise;
+  return Object.freeze({
+    requestConsentInfo: async () => {
+      const { AdMob } = await getAdMobModule();
+      return AdMob.requestConsentInfo();
+    },
+    showConsentForm: async () => {
+      const { AdMob } = await getAdMobModule();
+      return AdMob.showConsentForm();
+    },
+    showPrivacyOptionsForm: async () => {
+      const { AdMob } = await getAdMobModule();
+      return AdMob.showPrivacyOptionsForm();
+    },
+    initialize: async () => {
+      const { AdMob } = await getAdMobModule();
+      return AdMob.initialize();
+    },
+  });
 }
+
+let adMobModulePromise = null;
+
+function loadAdMobModule() {
+  if (!adMobModulePromise) {
+    adMobModulePromise = import('@capacitor-community/admob');
+  }
+
+  return adMobModulePromise;
+}
+
+const productionNativeDependencies = createAdmobNativeDependencies({
+  loadAdMobModule,
+});
 
 const productionCoordinator = createAdmobRuntimeConsentCoordinator({
   isNativePlatform: () => Capacitor.isNativePlatform(),
   getPlatform: () => Capacitor.getPlatform(),
-  requestConsentInfo: async () => {
-    const AdMob = await loadAdMobApi();
-    return AdMob.requestConsentInfo();
-  },
-  showConsentForm: async () => {
-    const AdMob = await loadAdMobApi();
-    return AdMob.showConsentForm();
-  },
-  showPrivacyOptionsForm: async () => {
-    const AdMob = await loadAdMobApi();
-    const openPrivacyForm = AdMob.showPrivacyOptionsForm.bind(AdMob);
-    return openPrivacyForm();
-  },
-  initialize: async () => {
-    const AdMob = await loadAdMobApi();
-    return AdMob.initialize();
-  },
+  ...productionNativeDependencies,
 });
 
 export const bootstrapAdmobRuntimeConsent = () =>

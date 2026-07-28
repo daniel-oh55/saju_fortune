@@ -17,7 +17,8 @@ const externalTransferItems = [
   'Android 앱의 Google UMP는 동의 상태 확인을 위해 Google 서비스와 통신할 수 있음',
   '외부 분석 SDK는 아직 연결되지 않음',
   '실제 결제 SDK는 아직 연결되지 않음',
-  '기존 rewarded provider는 mock이며 실제 광고를 요청하지 않음',
+  '기본 Web/Vercel/일반 Android Debug Build의 provider는 mock이며 실제 광고를 요청하지 않음',
+  'native Android 공식 테스트 전용 빌드는 Google 공식 Rewarded Test Ad를 요청·표시할 수 있음',
 ];
 
 const reviewNeededItems = [
@@ -73,9 +74,11 @@ function PrivacyInfoPage({ onNavigate, consentPreferences }) {
         <strong>MVP 기준 안내</strong>
         <p>
           현재 저장되는 정보는 서버가 아니라 사용자의 브라우저 localStorage에 보관됩니다.
-          Android 앱에는 AdMob SDK와 Google UMP 동의 확인 절차가 연결되어 있지만, production
-          광고 단위 ID와 광고 request/load/show 기능은 아직 구현되지 않아 실제 광고 송출은
-          이루어지지 않습니다.
+          Android 앱에는 AdMob SDK와 Google UMP 동의 확인 절차가 연결되어 있습니다. 별도
+          공식 테스트 전용 빌드에서만 Google 공식 Rewarded Test Ad를 요청·표시할 수 있으며,
+          기본 Web/Vercel/일반 Android Debug Build는 mock provider를 유지합니다. production
+          광고 단위 ID와 production 광고 request/load/show는 구현되지 않았습니다. production
+          환경의 실제 광고 송출은 없습니다.
         </p>
       </section>
 

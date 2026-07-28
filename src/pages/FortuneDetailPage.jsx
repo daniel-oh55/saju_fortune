@@ -90,7 +90,7 @@ function FortuneDetailPage({
             isUnlocked={false}
             consentPreferences={consentPreferences}
             onOpenConsentSettings={onOpenConsentSettings}
-            onUnlock={() => onUnlockDetail(category.id)}
+            onUnlock={(rewardResult) => onUnlockDetail(category.id, rewardResult)}
             buttonLabel="상세풀이 열기"
             helperText="상세 풀이는 짧은 광고 시청 후 열람할 수 있습니다."
             layout="inline"
@@ -133,7 +133,7 @@ function FortuneDetailPage({
         isUnlocked={isUnlocked}
         consentPreferences={consentPreferences}
         onOpenConsentSettings={onOpenConsentSettings}
-        onUnlock={() => onUnlockDetail(category.id)}
+        onUnlock={(rewardResult) => onUnlockDetail(category.id, rewardResult)}
         showButton={false}
       />
     </div>

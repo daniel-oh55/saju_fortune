@@ -1,5 +1,67 @@
 # CHANGELOG
 
+## PR #411 - AdMob Official Test Rewarded Provider
+
+### Added
+
+- Added the native Android Google official rewarded test-ad provider with
+  official-test/debug-only configuration and fail-closed production mode.
+- Added local app consent and latest AdMob runtime dual gates, including
+  pre-prepare and pre-show rechecks.
+- Added same-Promise single-flight, authoritative reward validation,
+  exactly-once settlement, individual listener cleanup, and bounded app-level
+  timeouts.
+- Added separate mock/SDK modal behavior and persisted verified SDK unlocks as
+  `sdk_rewarded_ad` without changing the existing storage key or shape.
+- Added a dedicated rewarded-test Android Debug APK workflow and production/
+  behavioral checker with negative mutation coverage.
+
+### Fixed
+
+- Fixed native Android startup failing before `requestConsentInfo()` because
+  Promise resolution treated the Capacitor `AdMob` Proxy as a thenable and
+  attempted the unavailable native `AdMob.then()` method.
+- The dynamic import now caches only the module namespace Promise. Native
+  dependencies retrieve `AdMob` from that namespace immediately before each
+  request, form, privacy-options, or initialize call without resolving or
+  returning the Proxy itself.
+- Added a Proxy-based behavioral regression plus static and negative mutation
+  coverage for zero `then` access/calls, one module load, native call order,
+  privacy-options reuse, and zero Web module loads.
+
+### Verified
+
+- Galaxy S23 Ultra with One UI 8.5 passed functional Android Rewarded Test QA
+  using run `30319362755`, artifact `8673428676`
+  (`harupuli-rewarded-test-apk`), at tested HEAD
+  `7ab324436c64d0cbec5b8b906cbc942ee200e42f`.
+- Verified new APK installation, cold launch, home/Settings/existing fortune
+  features, test-ad button display, native fullscreen Google official Test Ad
+  display and label, ad completion, reward callback, and exactly one selected
+  detailed-reading unlock.
+- Verified no additional unlock or duplicate reward, one ad on rapid repeated
+  taps, airplane-mode failure without unlock, successful recovery retry,
+  restart persistence, and background/resume without a hang.
+- Verified no recurrence of the prior `AdMob.then()` error and passed device
+  validation of the Capacitor AdMob Proxy Promise-assimilation fix.
+- Actual early-dismiss device QA was Not testable because the official
+  test-ad creative provided no mid-ad close button. Automated behavioral
+  dismiss handling remains covered separately.
+
+### Unchanged
+
+- The default Web, Vercel, and standard Android Debug provider remains mock.
+- Production ad unit IDs, production ad request/load/show, test-device IDs,
+  debug geography, native Android sources, dependencies, lockfile, routing,
+  schema, fortune calculations, and existing storage keys remain unchanged.
+
+### Pending
+
+- Actual early-dismiss device QA
+- Repeated ADB listener-accumulation diagnostics
+- Production ad unit, production serving, disclosure, signing, AAB, and Play
+  release work
+
 ## PR #410 - AdMob Rewarded Ad Provider Contract
 
 ### Added

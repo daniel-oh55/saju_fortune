@@ -1,7 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
+  getRewardedAdSdkConfig,
+  REWARDED_AD_PROVIDER_KEY,
+} from '../config/rewardedAdSdkConfig.js';
+import {
+  createRewardedRequestId,
   getMockRewardedAdDurationSeconds,
   getRewardedAdOutcomeMessage,
+  isRewardedResultForRequest,
   showRewardedAd,
 } from '../services/rewardedAdService.js';
 
@@ -19,45 +25,97 @@ function RewardAdModal({
   const [isCompleting, setIsCompleting] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [errorReason, setErrorReason] = useState('');
-  const isCompleted = secondsLeft === 0;
+  const completionDeliveredRef = useRef(false);
+  const completionInFlightRef = useRef(false);
+  const mountedRef = useRef(true);
+  const providerConfig = getRewardedAdSdkConfig();
+  const isSdkProvider = providerConfig.provider === REWARDED_AD_PROVIDER_KEY.SDK;
+  const isCompleted = !isSdkProvider && secondsLeft === 0;
 
   useEffect(() => {
-    if (secondsLeft === 0) return undefined;
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isSdkProvider || secondsLeft === 0) return undefined;
 
     const timerId = globalThis.setTimeout(() => {
       setSecondsLeft((current) => Math.max(current - 1, 0));
     }, 1000);
 
     return () => globalThis.clearTimeout(timerId);
-  }, [secondsLeft]);
+  }, [isSdkProvider, secondsLeft]);
 
   const handleComplete = async () => {
-    if (isCompleting) return;
+    if (completionInFlightRef.current) return;
 
+    completionInFlightRef.current = true;
+    const requestedPlacementId = placementId || categoryLabel;
+    const rewardRequestId = createRewardedRequestId();
     setIsCompleting(true);
     setErrorMessage('');
     setErrorReason('');
 
     try {
       const result = await showRewardedAd({
-        placementId: placementId || categoryLabel,
+        placementId: requestedPlacementId,
         categoryLabel,
+        rewardRequestId,
         consentPreferences,
         delayMs: 0,
       });
 
       if (!result.ok) {
+        if (!mountedRef.current) return;
         setErrorReason(result.reason || '');
         setErrorMessage(getRewardedAdOutcomeMessage(result.reason));
         return;
       }
 
-      onRewardComplete();
-      onClose();
+      if (!isRewardedResultForRequest(result, {
+        placementId: requestedPlacementId,
+        categoryLabel,
+        rewardRequestId,
+      })) {
+        if (!mountedRef.current) return;
+        setErrorMessage(
+          '다른 상세 풀이의 광고 요청이 처리되었어요. 다시 눌러 현재 상세 풀이의 테스트 광고를 시작해 주세요.',
+        );
+        return;
+      }
+
+      if (completionDeliveredRef.current) return;
+      completionDeliveredRef.current = true;
+      try {
+        const wasPersisted = await onRewardComplete(result);
+        if (wasPersisted === false) {
+          completionDeliveredRef.current = false;
+          if (mountedRef.current) {
+            setErrorMessage(
+              '상세 풀이를 열지 못했어요. 잠시 후 다시 시도해 주세요.',
+            );
+          }
+          return;
+        }
+        if (mountedRef.current) onClose();
+      } catch {
+        completionDeliveredRef.current = false;
+        if (mountedRef.current) {
+          setErrorMessage(
+            '상세 풀이를 열지 못했어요. 잠시 후 다시 시도해 주세요.',
+          );
+        }
+      }
     } catch {
-      setErrorMessage('광고 보상 확인 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+      if (mountedRef.current) {
+        setErrorMessage('광고 처리 중 오류가 발생했어요. 잠시 후 다시 시도해 주세요.');
+      }
     } finally {
-      setIsCompleting(false);
+      completionInFlightRef.current = false;
+      if (mountedRef.current) setIsCompleting(false);
     }
   };
 
@@ -66,18 +124,32 @@ function RewardAdModal({
       <section className="reward-modal" role="dialog" aria-modal="true" aria-label="광고 시청">
         <div className="mock-ad-screen">
           <span>광고 영역</span>
-          <strong>{categoryLabel} 상세 풀이 보상 광고</strong>
-          <p>실제 광고 SDK가 연결되면 이 영역에 보상형 광고가 표시됩니다.</p>
+          <strong>
+            {isSdkProvider
+              ? 'Google 공식 테스트 광고'
+              : `${categoryLabel} 상세 풀이 보상 광고`}
+          </strong>
+          <p>
+            {isSdkProvider
+              ? '버튼을 누르면 Android의 Google 공식 Rewarded Test Ad가 열립니다.'
+              : '테스트용 광고 화면이며, 2초 후 상세 풀이를 열 수 있습니다.'}
+          </p>
         </div>
 
         <div className="ad-progress">
-          <div className="ad-progress-bar">
-            <span style={{ width: `${((AD_SECONDS - secondsLeft) / AD_SECONDS) * 100}%` }} />
-          </div>
+          {!isSdkProvider && (
+            <div className="ad-progress-bar">
+              <span style={{ width: `${((AD_SECONDS - secondsLeft) / AD_SECONDS) * 100}%` }} />
+            </div>
+          )}
           <p>
-            {isCompleted
-              ? '광고 시청이 완료되었습니다.'
-              : `${secondsLeft}초 후 상세 풀이가 열립니다.`}
+            {isSdkProvider
+              ? (isCompleting
+                ? 'Google 공식 테스트 광고를 준비하고 있어요.'
+                : '테스트 광고 시청은 선택 사항이며, 버튼을 눌러 시작할 수 있어요.')
+              : (isCompleted
+                ? '테스트 광고 확인이 끝났습니다.'
+                : `${secondsLeft}초 후 상세 풀이를 열 수 있습니다.`)}
           </p>
           {errorMessage && <p className="ad-error-message">{errorMessage}</p>}
           {errorReason === 'ads_consent_required' && onOpenConsentSettings && (
@@ -95,9 +167,11 @@ function RewardAdModal({
             className="primary-button"
             type="button"
             onClick={handleComplete}
-            disabled={!isCompleted || isCompleting}
+            disabled={(!isSdkProvider && !isCompleted) || isCompleting}
           >
-            {isCompleting ? '보상 확인 중...' : '상세 풀이 열기'}
+            {isCompleting
+              ? '광고 준비 중...'
+              : (isSdkProvider ? '테스트 광고 보고 상세 풀이 열기' : '상세 풀이 열기')}
           </button>
         </div>
       </section>
