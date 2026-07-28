@@ -13,39 +13,26 @@ import { fileURLToPath } from 'node:url'
 
 const root = resolve(fileURLToPath(new URL('..', import.meta.url)))
 const documentPath = 'docs/ADMOB_PRODUCTION_REWARDED_ROLLOUT_CONTRACT.md'
+const projectStatePath = 'docs/PROJECT_STATE.md'
 const checkerPath = 'scripts/checkAdmobProductionRewardedRolloutContract.mjs'
 const scriptName = 'check:admob-production-rewarded-rollout-contract'
-const expectedFiles = new Set([
+const fixtureFiles = new Set([
   'CHANGELOG.md',
   'DEVELOPMENT_LOG.md',
   'TODO.md',
   documentPath,
+  projectStatePath,
   checkerPath,
 ])
-const pendingReadinessState = [
-  'Production rewarded ad unit: Pending',
-  'Production ad unit ID: None',
-  'AdMob Console creation: Not performed',
-]
-const completedReadinessState = [
-  'Production rewarded ad unit: Created',
-  'Production ad unit ID supplied by owner: Yes',
-  'AdMob Console creation: Completed',
-]
-const preservedUntrackedFiles = new Set(['pr405-review.json', 'pr405.diff'])
-const protectedPaths = [
-  'src',
-  'android',
-  'ios',
-  'public',
-  '.github/workflows',
-  'package.json',
-  'package-lock.json',
-  'capacitor.config.json',
-  'capacitor.config.js',
-  'capacitor.config.ts',
-  'vite.config.js',
-  'vite.config.ts',
+const canonicalSourceCapabilityState = [
+  'Production source connection capability: Implemented',
+  'Owner-held production ID release injection: Not started',
+  'Production request/load/show: Not started',
+  'Production serving: Not started',
+  'Production device QA: Not started',
+  'Privacy/Data Safety final review: Pending',
+  'Release signing/AAB: Pending',
+  'Play Console release upload: Not started',
 ]
 const requiredHeadings = [
   '## 1. Purpose and scope',
@@ -73,8 +60,6 @@ const errors = []
 const read = (path) => readFileSync(resolve(root, path), 'utf8').replace(/\r\n/g, '\n')
 const git = (...args) =>
   execFileSync('git', args, { cwd: root, encoding: 'utf8' }).replace(/\r\n/g, '\n')
-const lines = (...args) =>
-  git(...args).split('\n').map((line) => line.trim().replaceAll('\\', '/')).filter(Boolean)
 const requireText = (content, text, label = documentPath) => {
   if (!content.includes(text)) errors.push(`${label}: missing required text: ${text}`)
 }
@@ -96,9 +81,6 @@ const assertSuccessfulCheck = (result, label, expectedMode) => {
   if (!output.includes(`mode ${expectedMode}`)) {
     throw new Error(`${label}: expected mode ${expectedMode}\n${output}`)
   }
-  if (output.includes('change scope: expected changed file is missing')) {
-    throw new Error(`${label}: unexpected exact-five missing-file error\n${output}`)
-  }
   console.log(output.trim())
   console.log(`PASS lifecycle: ${label}`)
 }
@@ -114,28 +96,15 @@ const writeFixture = (fixtureRoot, path, content) => {
   mkdirSync(dirname(target), { recursive: true })
   writeFileSync(target, content)
 }
-const findPendingReadinessBaseCommit = () => {
-  for (const commit of lines('rev-list', '--first-parent', 'HEAD', '--', documentPath)) {
-    const candidateDocument = git('show', `${commit}:${documentPath}`)
-    if (pendingReadinessState.every((state) => candidateDocument.includes(state))) {
-      return commit
-    }
-  }
-  throw new Error('unable to locate pending readiness baseline commit')
-}
-const createSyntheticReadinessTransitionFixture = () => {
+const createSyntheticSourceCapabilityFixture = () => {
   const temporaryRoot = mkdtempSync(join(tmpdir(), 'admob-rollout-lifecycle-'))
   const fixtureRoot = resolve(temporaryRoot, 'repository')
 
   try {
-    const pendingReadinessBaseCommit = findPendingReadinessBaseCommit()
-    const pendingDocument = git('show', `${pendingReadinessBaseCommit}:${documentPath}`)
+    const baselineCommit = git('rev-parse', 'HEAD').trim()
     const currentDocument = read(documentPath)
-    if (!pendingReadinessState.every((state) => pendingDocument.includes(state))) {
-      throw new Error('pending readiness baseline commit does not contain the complete old state')
-    }
-    if (!completedReadinessState.every((state) => currentDocument.includes(state))) {
-      throw new Error('current rollout contract does not contain the complete readiness state')
+    if (!canonicalSourceCapabilityState.every((state) => currentDocument.includes(state))) {
+      throw new Error('current rollout contract does not contain the canonical source-capability state')
     }
 
     const clone = run(
@@ -159,35 +128,35 @@ const createSyntheticReadinessTransitionFixture = () => {
     execFileSync('git', ['config', 'core.autocrlf', 'false'], { cwd: fixtureRoot })
     execFileSync(
       'git',
-      ['checkout', '--quiet', '-b', 'readiness-transition', pendingReadinessBaseCommit],
+      ['checkout', '--quiet', '-b', 'source-capability-lifecycle', baselineCommit],
       { cwd: fixtureRoot },
     )
     execFileSync(
       'git',
-      ['update-ref', 'refs/remotes/origin/main', pendingReadinessBaseCommit],
+      ['update-ref', 'refs/remotes/origin/main', baselineCommit],
       { cwd: fixtureRoot },
     )
-    for (const path of expectedFiles) {
+    for (const path of fixtureFiles) {
       writeFixture(fixtureRoot, path, readFileSync(resolve(root, path)))
     }
     execFileSync('git', ['config', 'user.name', 'Rollout Contract Self-Test'], { cwd: fixtureRoot })
     execFileSync('git', ['config', 'user.email', 'rollout-self-test@example.invalid'], {
       cwd: fixtureRoot,
     })
-    execFileSync('git', ['add', '--', ...expectedFiles], { cwd: fixtureRoot })
-    execFileSync('git', ['commit', '--quiet', '-m', 'fixture: synthetic readiness transition'], {
+    execFileSync('git', ['add', '--', ...fixtureFiles], { cwd: fixtureRoot })
+    execFileSync('git', ['commit', '--quiet', '-m', 'fixture: synthetic source capability'], {
       cwd: fixtureRoot,
     })
     const syntheticTransitionHead = execFileSync('git', ['rev-parse', 'HEAD'], {
       cwd: fixtureRoot,
       encoding: 'utf8',
     }).trim()
-    if (syntheticTransitionHead === pendingReadinessBaseCommit) {
-      throw new Error('pending readiness baseline and synthetic transition HEAD must differ')
+    if (syntheticTransitionHead === baselineCommit) {
+      throw new Error('source-capability baseline and synthetic HEAD must differ')
     }
     return {
       fixtureRoot,
-      pendingReadinessBaseCommit,
+      baselineCommit,
       syntheticTransitionHead,
       temporaryRoot,
     }
@@ -199,68 +168,21 @@ const createSyntheticReadinessTransitionFixture = () => {
 const runLifecycleSelfTest = () => {
   const {
     fixtureRoot,
-    pendingReadinessBaseCommit,
+    baselineCommit,
     syntheticTransitionHead,
     temporaryRoot,
-  } = createSyntheticReadinessTransitionFixture()
+  } = createSyntheticSourceCapabilityFixture()
 
   try {
-    console.log(`Pending readiness baseline commit: ${pendingReadinessBaseCommit}`)
+    console.log(`Source capability fixture baseline commit: ${baselineCommit}`)
     const check = () => run(process.execPath, [resolve(fixtureRoot, checkerPath)], fixtureRoot)
     assertSuccessfulCheck(
       check(),
-      'A. synthetic readiness transition exact-five scope (mode readiness-transition)',
-      'readiness-transition',
+      'A. synthetic canonical source-capability state (mode canonical)',
+      'canonical',
     )
 
-    const transitionMutations = [
-      [
-        'A. transition source mutation rejected',
-        'src/services/rewardedAdProvider.sdk.js',
-        '\n// lifecycle source probe\n',
-        'forbidden protected path changed',
-      ],
-      [
-        'A. transition Android mutation rejected',
-        'android/app/src/main/AndroidManifest.xml',
-        '\n<!-- lifecycle Android probe -->\n',
-        'forbidden protected path changed',
-      ],
-      [
-        'A. transition workflow mutation rejected',
-        '.github/workflows/android-debug-build.yml',
-        '\n# lifecycle workflow probe\n',
-        'forbidden protected path changed',
-      ],
-    ]
-    for (const [label, path, suffix, expected] of transitionMutations) {
-      const target = resolve(fixtureRoot, path)
-      const original = readFileSync(target)
-      try {
-        writeFileSync(target, Buffer.concat([original, Buffer.from(suffix)]))
-        assertRejectedCheck(check(), label, expected)
-      } finally {
-        writeFileSync(target, original)
-      }
-      if (!readFileSync(target).equals(original)) {
-        throw new Error(`${label}: fixture content was not restored exactly`)
-      }
-    }
-
     const packagePath = resolve(fixtureRoot, 'package.json')
-    const originalPackage = readFileSync(packagePath)
-    try {
-      const packageJson = JSON.parse(originalPackage.toString('utf8'))
-      packageJson.scripts['check:lifecycle-package-probe'] = 'node --version'
-      writeFileSync(packagePath, `${JSON.stringify(packageJson, null, 2)}\n`)
-      assertRejectedCheck(check(), 'A. transition package mutation rejected', 'scripts changed')
-    } finally {
-      writeFileSync(packagePath, originalPackage)
-    }
-    if (!readFileSync(packagePath).equals(originalPackage)) {
-      throw new Error('A. transition package mutation: fixture content was not restored exactly')
-    }
-    console.log('PASS lifecycle: transition mutations restored byte-for-byte (4/4)')
 
     execFileSync('git', ['update-ref', 'refs/remotes/origin/main', syntheticTransitionHead], {
       cwd: fixtureRoot,
@@ -345,6 +267,12 @@ const runNegativeMutationSelfTest = (fixtureRoot) => {
     if (!content.includes(from)) throw new Error(`self-test fixture missing: ${from}`)
     writeFileSync(resolve(fixtureRoot, path), content.replace(from, to), 'utf8')
   }
+  const syntheticConcreteId = [
+    'ca-app-pub-',
+    ['1234', '5678', '9012', '3456'].join(''),
+    '/',
+    ['12345', '67890'].join(''),
+  ].join('')
   const cases = [
     [
       'Console creation regression',
@@ -378,12 +306,25 @@ const runNegativeMutationSelfTest = (fixtureRoot) => {
     ],
     [
       'concrete production identifier',
-      () => append(documentPath, '\nca-app-pub-1234567890123456/1234567890\n'),
+      () => append(documentPath, `\n${syntheticConcreteId}\n`),
       'concrete AdMob ad unit ID',
     ],
     [
-      'production source connection false completion',
-      () => replace(documentPath, 'Production source connection: Not started', 'Production source connection: Completed'),
+      'production source capability regression',
+      () => replace(
+        documentPath,
+        'Production source connection capability: Implemented',
+        'Production source connection capability: Not started',
+      ),
+      'forbidden state regression',
+    ],
+    [
+      'owner ID release injection false completion',
+      () => replace(
+        documentPath,
+        'Owner-held production ID release injection: Not started',
+        'Owner-held production ID release injection: Completed',
+      ),
       'forbidden completion claim',
     ],
     [
@@ -447,21 +388,6 @@ const runNegativeMutationSelfTest = (fixtureRoot) => {
       'forbidden contract meaning',
     ],
     [
-      'source change',
-      () => append('src/services/rewardedAdProvider.sdk.js', '\n// rollout probe\n'),
-      'forbidden protected path changed',
-    ],
-    [
-      'Android native change',
-      () => append('android/app/src/main/AndroidManifest.xml', '\n<!-- rollout probe -->\n'),
-      'forbidden protected path changed',
-    ],
-    [
-      'workflow change',
-      () => append('.github/workflows/android-debug-build.yml', '\n# rollout probe\n'),
-      'forbidden protected path changed',
-    ],
-    [
       'required section deletion',
       () => replace(documentPath, '## 10. Fail-closed requirements', '### Fail-closed notes'),
       'required section missing',
@@ -476,12 +402,7 @@ const runNegativeMutationSelfTest = (fixtureRoot) => {
       'required section order',
     ],
   ]
-  const pathsToRestore = [
-    documentPath,
-    'src/services/rewardedAdProvider.sdk.js',
-    'android/app/src/main/AndroidManifest.xml',
-    '.github/workflows/android-debug-build.yml',
-  ]
+  const pathsToRestore = [documentPath]
   const originalContents = new Map(
     pathsToRestore.map((path) => [path, readFileSync(resolve(fixtureRoot, path))]),
   )
@@ -517,7 +438,7 @@ const runNegativeMutationSelfTest = (fixtureRoot) => {
 }
 
 if (negativeSelfTestRequested) {
-  const { fixtureRoot, temporaryRoot } = createSyntheticReadinessTransitionFixture()
+  const { fixtureRoot, temporaryRoot } = createSyntheticSourceCapabilityFixture()
   try {
     runNegativeMutationSelfTest(fixtureRoot)
   } finally {
@@ -540,70 +461,6 @@ if (!validPackageMap(packageJson.devDependencies)) errors.push('package.json: in
 
 const document = read(documentPath)
 const compactDocument = document.replace(/\s+/gu, ' ')
-const baseDocument = git('show', `origin/main:${documentPath}`)
-const readinessTransitionMode =
-  baseDocument.includes('Production rewarded ad unit: Pending') &&
-  baseDocument.includes('Production ad unit ID: None') &&
-  baseDocument.includes('AdMob Console creation: Not performed') &&
-  document.includes('Production rewarded ad unit: Created') &&
-  document.includes('Production ad unit ID supplied by owner: Yes') &&
-  document.includes('AdMob Console creation: Completed')
-
-if (readinessTransitionMode) {
-  const untrackedFiles = lines('ls-files', '--others', '--exclude-standard')
-  const unexpectedUntrackedFiles = untrackedFiles.filter(
-    (path) => !preservedUntrackedFiles.has(path),
-  )
-  const committedChanges = lines('diff', '--name-only', 'origin/main...HEAD')
-  const stagedChanges = lines('diff', '--name-only', '--cached')
-  const workingChanges = lines('diff', '--name-only')
-  const changedFiles = new Set([
-    ...committedChanges,
-    ...stagedChanges,
-    ...workingChanges,
-    ...unexpectedUntrackedFiles,
-  ])
-
-  for (const path of changedFiles) {
-    if (!expectedFiles.has(path)) errors.push(`change scope: unexpected changed file: ${path}`)
-  }
-  for (const path of expectedFiles) {
-    if (!changedFiles.has(path)) errors.push(`change scope: expected changed file is missing: ${path}`)
-  }
-
-  const trackedFiles = new Set(lines('ls-files'))
-  for (const path of preservedUntrackedFiles) {
-    if (committedChanges.includes(path) || stagedChanges.includes(path) || trackedFiles.has(path)) {
-      errors.push(`preserved local file must remain untracked and uncommitted: ${path}`)
-    }
-  }
-
-  for (const path of protectedPaths) {
-    const normalizedPath = path.replaceAll('\\', '/')
-    if (
-      [...changedFiles].some(
-        (changed) => changed === normalizedPath || changed.startsWith(`${normalizedPath}/`),
-      )
-    ) {
-      errors.push(`docs/check-only scope: forbidden protected path changed: ${path}`)
-    }
-  }
-  const protectedDiff = lines('diff', '--name-only', 'origin/main', '--', ...protectedPaths)
-  if (protectedDiff.length) {
-    errors.push(`docs/check-only scope: protected diff exists: ${protectedDiff.join(', ')}`)
-  }
-
-  const basePackageJson = JSON.parse(git('show', 'origin/main:package.json'))
-  if (JSON.stringify(packageJson.scripts) !== JSON.stringify(basePackageJson.scripts)) {
-    errors.push('package.json: scripts changed')
-  }
-  if (JSON.stringify(packageJson.dependencies) !== JSON.stringify(basePackageJson.dependencies)) {
-    errors.push('package.json: dependencies changed')
-  }
-  if (JSON.stringify(packageJson.devDependencies) !== JSON.stringify(basePackageJson.devDependencies)) {
-    errors.push('package.json: devDependencies changed')
-  }
-}
 
 let priorHeadingIndex = -1
 for (const heading of requiredHeadings) {
@@ -635,7 +492,8 @@ for (const text of [
   'Production ad unit ID format validation: Pass',
   'Production ad unit ID format: Valid `/` form',
   'Exact production ad unit ID committed to repository: No',
-  'Production source connection: Not started',
+  'Production source connection capability: Implemented',
+  'Owner-held production ID release injection: Not started',
   'Production request/load/show: Not started',
   'Production serving: Not started',
   'Privacy/Data Safety final review: Pending',
@@ -664,7 +522,7 @@ for (const text of [
   '`src/config/rewardedAdSdkConfig.js`',
   '`src/services/rewardedAdProvider.loader.js`',
   '`src/services/rewardedAdProvider.sdk.js`',
-  'No production source or Android native file is changed',
+  'No owner-held production identifier, Android native file',
   'No workflow or release environment configuration is changed',
 ]) {
   requireText(compactDocument, text)
@@ -683,7 +541,7 @@ for (const [meaning, label] of [
 }
 
 for (const claim of [
-  'Production source connection: Completed',
+  'Owner-held production ID release injection: Completed',
   'Production request/load/show: Completed',
   'Production serving: Completed',
   'Privacy/Data Safety final review: Completed',
@@ -698,6 +556,7 @@ for (const claim of [
 }
 
 for (const regression of [
+  'Production source connection capability: Not started',
   'AdMob Console creation: Not performed',
   'Production rewarded ad unit: Pending',
   'Production ad unit ID supplied by owner: No',
@@ -708,6 +567,7 @@ for (const regression of [
 
 const checkedContent = [
   document,
+  read(projectStatePath),
   read('DEVELOPMENT_LOG.md'),
   read('TODO.md'),
   read('CHANGELOG.md'),
@@ -741,9 +601,15 @@ for (const [path, snippets] of [
     'Implement production source connection in a separate approved PR',
   ]],
   ['CHANGELOG.md', [
-    'PR #413 - AdMob Production Rewarded Unit Readiness',
-    'Recorded the owner-completed production Rewarded ad unit creation',
-    'Production source connection, request/load/show, and serving',
+    'PR #416 - Production Rewarded Source Connection',
+    'VITE_REWARDED_AD_UNIT_ID',
+    'Owner-held production ID release injection',
+  ]],
+  [projectStatePath, [
+    'State baseline main HEAD: `00ca6b94568f735678ebf6faf7314f20d7cc29ea`',
+    'AI workflow harness: merged / active',
+    'production source connection capability 구현 완료',
+    'owner-held production ID release injection은 시작하지 않음',
   ]],
 ]) {
   const content = read(path)
@@ -757,7 +623,5 @@ if (errors.length) {
 }
 
 console.log(
-  `AdMob production rewarded rollout contract check passed (mode ${
-    readinessTransitionMode ? 'readiness-transition' : 'canonical'
-  }; sections ${requiredHeadings.length}/${requiredHeadings.length})`,
+  `AdMob production rewarded rollout contract check passed (mode canonical; sections ${requiredHeadings.length}/${requiredHeadings.length})`,
 )

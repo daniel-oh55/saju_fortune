@@ -1,12 +1,14 @@
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import {
   getRewardedAdSdkConfig,
   GOOGLE_OFFICIAL_ANDROID_REWARDED_TEST_AD_UNIT_ID,
+  isApprovedRewardedAdSdkConfig,
 } from '../src/config/rewardedAdSdkConfig.js';
+import { createRewardedAdProviderLoader } from '../src/services/rewardedAdProvider.loader.js';
 import {
   createSdkRewardedAdProvider,
   isValidAdMobRewardItem,
@@ -23,41 +25,7 @@ import {
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const negativeSelfTest = process.argv.includes('--negative-self-test');
-const changedFiles = [
-  '.github/workflows/android-rewarded-test-build.yml',
-  'scripts/checkAdmobRewardedAdProvider.mjs',
-  'scripts/checkAdmobRuntimeConsentCoordinator.mjs',
-  'src/services/admobRuntimeConsentCoordinator.js',
-  'src/services/rewardedAdProvider.sdk.js',
-  'src/services/rewardedAdProvider.loader.js',
-  'src/services/rewardedAdProvider.types.js',
-  'src/services/rewardedAdService.js',
-  'src/config/rewardedAdSdkConfig.js',
-  'src/components/RewardAdModal.jsx',
-  'src/pages/FortuneDetailPage.jsx',
-  'src/pages/SajuInsightPage.jsx',
-  'src/App.jsx',
-  'src/utils/storage.js',
-  'src/pages/PrivacyInfoPage.jsx',
-  'src/components/ConsentSettingsPanel.jsx',
-  'package.json',
-  'CHANGELOG.md',
-  'DEVELOPMENT_LOG.md',
-  'TODO.md',
-].sort();
-
-const protectedFiles = [
-  'docs/ADMOB_REWARDED_AD_PROVIDER_CONTRACT.md',
-  'scripts/checkAdmobRewardedAdProviderContract.mjs',
-  'src/services/rewardedAdProvider.mock.js',
-  'src/components/AdRewardBox.jsx',
-  'src/config/rewardedAdPlacements.js',
-  'src/main.jsx',
-  '.github/workflows/android-debug-build.yml',
-  'package-lock.json',
-  'capacitor.config.json',
-  'vite.config.js',
-];
+const preservedUntrackedFiles = new Set(['pr405-review.json', 'pr405.diff']);
 
 function read(relativePath) {
   return readFileSync(path.join(root, relativePath), 'utf8');
@@ -67,14 +35,41 @@ function git(args) {
   return execFileSync('git', args, { cwd: root, encoding: 'utf8' }).trim();
 }
 
+function gitLines(args) {
+  try {
+    return git(args).split(/\r?\n/).filter(Boolean).map((file) => file.replaceAll('\\', '/'));
+  } catch {
+    return [];
+  }
+}
+
+function getChangedFiles() {
+  const committed = gitLines(['diff', '--name-only', 'origin/main...HEAD']);
+  const committedFallback = committed.length > 0
+    ? []
+    : gitLines(['diff', '--name-only', 'HEAD^...HEAD']);
+  const staged = gitLines(['diff', '--name-only', '--cached']);
+  const working = gitLines(['diff', '--name-only']);
+  const untracked = gitLines(['ls-files', '--others', '--exclude-standard'])
+    .filter((file) => !preservedUntrackedFiles.has(file));
+  return [...new Set([...committed, ...committedFallback, ...staged, ...working, ...untracked])];
+}
+
+const changedFiles = getChangedFiles();
+
 const requiredTokens = [
   ['src/config/rewardedAdSdkConfig.js', 'GOOGLE_OFFICIAL_ANDROID_REWARDED_TEST_AD_UNIT_ID'],
+  ['src/config/rewardedAdSdkConfig.js', "REWARDED_AD_UNIT_ID_ENV_KEY = 'VITE_REWARDED_AD_UNIT_ID'"],
   ['src/config/rewardedAdSdkConfig.js', "OFFICIAL_TEST: 'official_test'"],
   ['src/config/rewardedAdSdkConfig.js', "PRODUCTION: 'production'"],
   ['src/config/rewardedAdSdkConfig.js', "DEBUG: 'debug'"],
   ['src/config/rewardedAdSdkConfig.js', "RELEASE: 'release'"],
+  ['src/config/rewardedAdSdkConfig.js', 'normalizeRewardedAdUnitId'],
+  ['src/config/rewardedAdSdkConfig.js', 'isValidAdMobRewardedAdUnitId'],
+  ['src/config/rewardedAdSdkConfig.js', 'isApprovedRewardedAdSdkConfig'],
   ['src/config/rewardedAdSdkConfig.js', 'configurationValid'],
-  ['src/config/rewardedAdSdkConfig.js', 'isTesting: configurationValid'],
+  ['src/config/rewardedAdSdkConfig.js', 'isTesting: officialTestApproved'],
+  ['src/config/rewardedAdSdkConfig.js', 'mockAllowed'],
   ['src/services/rewardedAdProvider.types.js', "AD_GATE_CLOSED: 'ad_gate_closed'"],
   ['src/services/rewardedAdProvider.types.js', "SHOW_FAILED: 'show_failed'"],
   ['src/services/rewardedAdProvider.types.js', "TIMEOUT: 'timeout'"],
@@ -90,7 +85,7 @@ const requiredTokens = [
   ['src/services/rewardedAdProvider.sdk.js', 'Number.isFinite(rewardItem.amount)'],
   ['src/services/rewardedAdProvider.sdk.js', 'rewardItem.amount > 0'],
   ['src/services/rewardedAdProvider.sdk.js', 'rewardItem.type.trim().length > 0'],
-  ['src/services/rewardedAdProvider.sdk.js', 'if (rewardedPromise) return rewardedPromise;\n'],
+  ['src/services/rewardedAdProvider.sdk.js', 'if (rewardedPromise) return rewardedPromise;'],
   ['src/services/rewardedAdProvider.sdk.js', 'if (settled) return'],
   ['src/services/rewardedAdProvider.sdk.js', 'if (rewardDelivered)'],
   ['src/services/rewardedAdProvider.sdk.js', 'handle?.remove?.()'],
@@ -101,11 +96,16 @@ const requiredTokens = [
   ['src/services/rewardedAdProvider.sdk.js', 'const prePrepareGate = readGateState()'],
   ['src/services/rewardedAdProvider.sdk.js', 'prePrepareGate.localConsent?.personalizedAds'],
   ['src/services/rewardedAdProvider.sdk.js', 'const preShowGate = readGateState()'],
+  ['src/services/rewardedAdProvider.sdk.js', 'isApprovedRewardedAdSdkConfig(options.config)'],
+  ['src/services/rewardedAdProvider.sdk.js', 'isTesting: options.config.isTesting'],
   ['src/services/rewardedAdProvider.sdk.js', 'const rewardActionId = createRewardActionId()'],
   ['src/services/rewardedAdProvider.sdk.js', 'rewardActionId,'],
   ['src/services/rewardedAdProvider.sdk.js', 'rewardRequestId: options.rewardRequestId'],
   ['src/services/rewardedAdProvider.sdk.js', 'isValidRewardedRequestId(options.rewardRequestId)'],
-  ['src/services/rewardedAdProvider.loader.js', 'return showSdkRewardedAd({ ...options, config })'],
+  ['src/services/rewardedAdProvider.loader.js', 'createRewardedAdProviderLoader'],
+  ['src/services/rewardedAdProvider.loader.js', 'config.mockAllowed === true'],
+  ['src/services/rewardedAdProvider.loader.js', 'isApprovedRewardedAdSdkConfig(config)'],
+  ['src/services/rewardedAdProvider.loader.js', 'return showSdk({ ...options, config })'],
   ['src/services/rewardedAdService.js', 'export function showRewardedAd(options = {})'],
   ['src/services/rewardedAdService.js', 'export function createRewardedRequestId('],
   ['src/services/rewardedAdService.js', 'export function isValidRewardedRequestId(value)'],
@@ -119,7 +119,6 @@ const requiredTokens = [
   ['src/components/RewardAdModal.jsx', 'completionInFlightRef'],
   ['src/components/RewardAdModal.jsx', 'const rewardRequestId = createRewardedRequestId()'],
   ['src/components/RewardAdModal.jsx', 'rewardRequestId,'],
-  ['src/components/RewardAdModal.jsx', 'categoryLabel,\n        rewardRequestId,\n        consentPreferences'],
   ['src/components/RewardAdModal.jsx', 'mountedRef'],
   ['src/components/RewardAdModal.jsx', 'Google 공식 테스트 광고'],
   ['src/components/RewardAdModal.jsx', '테스트 광고 보고 상세 풀이 열기'],
@@ -166,6 +165,14 @@ function validateSources(sourceOverrides = new Map()) {
   const serviceSource = sourceFor('src/services/rewardedAdService.js');
   const modalSource = sourceFor('src/components/RewardAdModal.jsx');
   const appSource = sourceFor('src/App.jsx');
+  const configSource = sourceFor('src/config/rewardedAdSdkConfig.js');
+  if (
+    !/const mockBuildTargetApproved\s*=\s*buildTarget === ''\s*\|\|\s*buildTarget === REWARDED_AD_BUILD_TARGET\.DEBUG;/u.test(
+      configSource,
+    )
+  ) {
+    errors.push('mock build target allowlist must contain only blank and debug');
+  }
   if (/export\s+async\s+function\s+showSdkRewardedAd/.test(sdkSource)) {
     errors.push('SDK public forwarding function must preserve Promise identity');
   }
@@ -193,7 +200,9 @@ function validateSources(sourceOverrides = new Map()) {
   }
   if (
     !modalSource.includes('const rewardRequestId = createRewardedRequestId()') ||
-    !modalSource.includes('rewardRequestId,')
+    !/showRewardedAd\(\{\s*placementId: requestedPlacementId,\s*categoryLabel,\s*rewardRequestId,\s*consentPreferences,/u.test(
+      modalSource,
+    )
   ) {
     errors.push('modal caller-owned rewardRequestId is required');
   }
@@ -236,53 +245,13 @@ function validateSources(sourceOverrides = new Map()) {
   }
 
   for (const file of changedFiles) {
+    if (!existsSync(path.join(root, file))) continue;
     const source = sourceFor(file);
     if (source.includes('\uFFFD') || /[?][쒕쟾젣]/u.test(source)) {
       errors.push(`${file}: replacement character or known mojibake detected`);
     }
   }
   return errors;
-}
-
-function validateScope() {
-  const branch = git(['branch', '--show-current']);
-  if (branch === 'main') return;
-
-  try {
-    git(['rev-parse', '--verify', 'origin/main']);
-  } catch (error) {
-    if (process.env.GITHUB_ACTIONS === 'true') {
-      process.stdout.write(
-        'Scope check skipped: origin/main is unavailable in the shallow Actions checkout.\n',
-      );
-      return;
-    }
-    throw error;
-  }
-
-  const diffFiles = new Set(
-    git(['diff', '--name-only', 'origin/main...HEAD'])
-      .split(/\r?\n/)
-      .filter(Boolean),
-  );
-  const statusLines = execFileSync('git', ['status', '--porcelain'], {
-    cwd: root,
-    encoding: 'utf8',
-  })
-    .split(/\r?\n/)
-    .filter(Boolean);
-  for (const line of statusLines) {
-    const file = line.slice(3).replaceAll('\\', '/');
-    if (!['pr405-review.json', 'pr405.diff'].includes(file)) diffFiles.add(file);
-  }
-  assert.deepEqual(
-    [...diffFiles].sort(),
-    changedFiles,
-    `PR must contain exactly the approved ${changedFiles.length} files`,
-  );
-  for (const file of protectedFiles) {
-    assert(!diffFiles.has(file), `protected file changed: ${file}`);
-  }
 }
 
 function makeConfig(overrides = {}) {
@@ -294,13 +263,38 @@ function makeConfig(overrides = {}) {
     configurationValid: true,
     adId: GOOGLE_OFFICIAL_ANDROID_REWARDED_TEST_AD_UNIT_ID,
     isTesting: true,
+    mockAllowed: false,
     ...overrides,
   };
+}
+
+function createSyntheticProductionAdUnitId() {
+  const publisher = ['1234', '5678', '9012', '3456'].join('');
+  const adUnit = ['12345', '67890'].join('');
+  return ['ca-app-pub-', publisher, '/', adUnit].join('');
+}
+
+function createSyntheticAppId() {
+  const publisher = ['1234', '5678', '9012', '3456'].join('');
+  const app = ['12345', '67890'].join('');
+  return ['ca-app-pub-', publisher, '~', app].join('');
+}
+
+function makeProductionConfig() {
+  const productionAdUnitId = createSyntheticProductionAdUnitId();
+  return getRewardedAdSdkConfig({
+    VITE_REWARDED_AD_PROVIDER: 'sdk',
+    VITE_REWARDED_AD_SDK_ENABLED: 'true',
+    VITE_REWARDED_AD_MODE: 'production',
+    VITE_REWARDED_AD_BUILD_TARGET: 'release',
+    VITE_REWARDED_AD_UNIT_ID: `  ${productionAdUnitId}  `,
+  });
 }
 
 function createHarness(options = {}) {
   const listeners = new Map();
   const removed = [];
+  let listenerCalls = 0;
   let prepareCalls = 0;
   let showCalls = 0;
   let localReads = 0;
@@ -327,6 +321,7 @@ function createHarness(options = {}) {
     },
     AdMob: {
       async addListener(event, callback) {
+        listenerCalls += 1;
         if (options.listenerFailureAt === listeners.size) throw new Error('listener setup');
         listeners.set(event, callback);
         return {
@@ -394,6 +389,7 @@ function createHarness(options = {}) {
       localReads,
       runtimeReads,
       moduleLoads,
+      listenerCalls,
       actionIdCreates,
       preparedOptions,
       removed,
@@ -406,13 +402,52 @@ function test(name, run) {
   tests.push({ name, run });
 }
 
-test('default config remains mock and disabled', () => {
+function createLoaderHarness(options = {}) {
+  let mockCalls = 0;
+  let sdkCalls = 0;
+  const loader = createRewardedAdProviderLoader({
+    showMock: (request) => {
+      mockCalls += 1;
+      return Promise.resolve({ ok: true, provider: 'mock_rewarded_ad', request });
+    },
+    showSdk: (request) => {
+      sdkCalls += 1;
+      return Promise.resolve(
+        options.sdkResult || { ok: true, provider: 'sdk_rewarded_ad', request },
+      );
+    },
+  });
+  return {
+    loader,
+    stats: () => ({ mockCalls, sdkCalls }),
+  };
+}
+
+test('default no-intent config allows exactly one mock call', async () => {
   const config = getRewardedAdSdkConfig({});
   assert.equal(config.provider, 'mock');
   assert.equal(config.configurationValid, false);
   assert.equal(config.adId, '');
+  assert.equal(config.mockAllowed, true);
+
+  const harness = createLoaderHarness();
+  await harness.loader({}, {});
+  assert.deepEqual(harness.stats(), { mockCalls: 1, sdkCalls: 0 });
 });
-test('official test debug configuration is the only valid SDK configuration', () => {
+test('mock debug build target allows exactly one mock call', async () => {
+  const env = {
+    VITE_REWARDED_AD_PROVIDER: 'mock',
+    VITE_REWARDED_AD_BUILD_TARGET: 'debug',
+  };
+  const config = getRewardedAdSdkConfig(env);
+  assert.equal(config.configurationValid, false);
+  assert.equal(config.mockAllowed, true);
+
+  const harness = createLoaderHarness();
+  await harness.loader({}, env);
+  assert.deepEqual(harness.stats(), { mockCalls: 1, sdkCalls: 0 });
+});
+test('official test debug configuration is approved and isolated', () => {
   const valid = getRewardedAdSdkConfig({
     VITE_REWARDED_AD_PROVIDER: 'sdk',
     VITE_REWARDED_AD_SDK_ENABLED: 'true',
@@ -421,22 +456,108 @@ test('official test debug configuration is the only valid SDK configuration', ()
   });
   assert.equal(valid.configurationValid, true);
   assert.equal(valid.isTesting, true);
+  assert.equal(valid.mockAllowed, false);
   assert.equal(valid.adId, GOOGLE_OFFICIAL_ANDROID_REWARDED_TEST_AD_UNIT_ID);
-  for (const mutation of [
-    { VITE_REWARDED_AD_MODE: '' },
-    { VITE_REWARDED_AD_BUILD_TARGET: '' },
-    { VITE_REWARDED_AD_BUILD_TARGET: 'release' },
-    { VITE_REWARDED_AD_MODE: 'production' },
-    { VITE_REWARDED_AD_SDK_ENABLED: 'false' },
-  ]) {
-    assert.equal(getRewardedAdSdkConfig({
+  assert.equal(isApprovedRewardedAdSdkConfig(valid), true);
+});
+test('production release configuration normalizes the injected ID and disables testing', () => {
+  const config = makeProductionConfig();
+  assert.equal(config.configurationValid, true);
+  assert.equal(config.adId, createSyntheticProductionAdUnitId());
+  assert.equal(config.isTesting, false);
+  assert.equal(config.mockAllowed, false);
+  assert.equal(isApprovedRewardedAdSdkConfig(config), true);
+});
+test('loader routes approved SDK configurations exactly once', async () => {
+  for (const env of [
+    {
       VITE_REWARDED_AD_PROVIDER: 'sdk',
       VITE_REWARDED_AD_SDK_ENABLED: 'true',
       VITE_REWARDED_AD_MODE: 'official_test',
       VITE_REWARDED_AD_BUILD_TARGET: 'debug',
-      ...mutation,
-    }).configurationValid, false);
+    },
+    {
+      VITE_REWARDED_AD_PROVIDER: 'sdk',
+      VITE_REWARDED_AD_SDK_ENABLED: 'true',
+      VITE_REWARDED_AD_MODE: 'production',
+      VITE_REWARDED_AD_BUILD_TARGET: 'release',
+      VITE_REWARDED_AD_UNIT_ID: createSyntheticProductionAdUnitId(),
+    },
+  ]) {
+    const sdkHarness = createLoaderHarness();
+    await sdkHarness.loader({}, env);
+    assert.deepEqual(sdkHarness.stats(), { mockCalls: 0, sdkCalls: 1 });
   }
+});
+for (const [name, env] of [
+  ['unset provider with malformed releas target', {
+    VITE_REWARDED_AD_BUILD_TARGET: 'releas',
+  }],
+  ['mock provider with preview target', {
+    VITE_REWARDED_AD_PROVIDER: 'mock',
+    VITE_REWARDED_AD_BUILD_TARGET: 'preview',
+  }],
+  ['mock provider with production target', {
+    VITE_REWARDED_AD_PROVIDER: 'mock',
+    VITE_REWARDED_AD_BUILD_TARGET: 'production',
+  }],
+]) {
+  test(`loader fails closed for ${name}`, async () => {
+    const config = getRewardedAdSdkConfig(env);
+    assert.equal(config.configurationValid, false);
+    assert.equal(config.mockAllowed, false);
+
+    const harness = createLoaderHarness();
+    const result = await harness.loader({}, env);
+    assert.equal(result.reason, REWARDED_AD_OUTCOME.SDK_UNAVAILABLE);
+    assert.deepEqual(harness.stats(), { mockCalls: 0, sdkCalls: 0 });
+  });
+}
+test('loader fails closed for invalid production intent without mock fallback', async () => {
+  const harness = createLoaderHarness();
+  const result = await harness.loader(
+    { placementId: 'today', categoryLabel: '총운' },
+    {
+      VITE_REWARDED_AD_PROVIDER: 'sdk',
+      VITE_REWARDED_AD_SDK_ENABLED: 'true',
+      VITE_REWARDED_AD_MODE: 'production',
+      VITE_REWARDED_AD_BUILD_TARGET: 'release',
+    },
+  );
+  assert.equal(result.ok, false);
+  assert.equal(result.reason, REWARDED_AD_OUTCOME.SDK_UNAVAILABLE);
+  assert.deepEqual(harness.stats(), { mockCalls: 0, sdkCalls: 0 });
+});
+test('legacy blank SDK scaffold preserves consent precondition with zero provider calls', async () => {
+  const harness = createLoaderHarness();
+  const env = {
+    VITE_REWARDED_AD_PROVIDER: 'sdk',
+    VITE_REWARDED_AD_SDK_ENABLED: 'true',
+  };
+  const withoutConsent = await harness.loader({ consentPreferences: { ads: false } }, env);
+  assert.equal(withoutConsent.reason, REWARDED_AD_OUTCOME.ADS_CONSENT_REQUIRED);
+  assert.deepEqual(harness.stats(), { mockCalls: 0, sdkCalls: 0 });
+
+  const withConsent = await harness.loader({ consentPreferences: { ads: true } }, env);
+  assert.equal(withConsent.reason, REWARDED_AD_OUTCOME.SDK_UNAVAILABLE);
+  assert.deepEqual(harness.stats(), { mockCalls: 0, sdkCalls: 0 });
+});
+test('loader never falls back to mock after an SDK failure', async () => {
+  const harness = createLoaderHarness({
+    sdkResult: {
+      ok: false,
+      provider: 'sdk_rewarded_ad',
+      reason: REWARDED_AD_OUTCOME.SDK_UNAVAILABLE,
+    },
+  });
+  const result = await harness.loader({}, {
+    VITE_REWARDED_AD_PROVIDER: 'sdk',
+    VITE_REWARDED_AD_SDK_ENABLED: 'true',
+    VITE_REWARDED_AD_MODE: 'official_test',
+    VITE_REWARDED_AD_BUILD_TARGET: 'debug',
+  });
+  assert.equal(result.ok, false);
+  assert.deepEqual(harness.stats(), { mockCalls: 0, sdkCalls: 1 });
 });
 test('reward payload validation rejects unsafe values', () => {
   assert.equal(isValidAdMobRewardItem({ amount: 1, type: 'detail' }), true);
@@ -451,11 +572,28 @@ test('web and iOS fail before plugin import', async () => {
     assert.equal(harness.stats().moduleLoads, 0);
   }
 });
-test('invalid config fails before plugin import', async () => {
-  const harness = createHarness();
-  const result = await harness.provider.show({ config: makeConfig({ configurationValid: false }) });
-  assert.equal(result.reason, REWARDED_AD_OUTCOME.SDK_UNAVAILABLE);
-  assert.equal(harness.stats().moduleLoads, 0);
+test('invalid configs make zero module, listener, prepare, and show calls', async () => {
+  for (const config of [
+    makeConfig({ configurationValid: false }),
+    makeConfig({ mockAllowed: true }),
+    makeConfig({ provider: 'mock' }),
+    makeConfig({ adId: '' }),
+    makeConfig({ isTesting: false }),
+    makeConfig({
+      mode: 'production',
+      buildTarget: 'release',
+      adId: GOOGLE_OFFICIAL_ANDROID_REWARDED_TEST_AD_UNIT_ID,
+      isTesting: false,
+    }),
+  ]) {
+    const harness = createHarness();
+    const result = await harness.provider.show({ config });
+    assert.equal(result.reason, REWARDED_AD_OUTCOME.SDK_UNAVAILABLE);
+    assert.equal(harness.stats().moduleLoads, 0);
+    assert.equal(harness.stats().listenerCalls, 0);
+    assert.equal(harness.stats().prepareCalls, 0);
+    assert.equal(harness.stats().showCalls, 0);
+  }
 });
 test('local consent closes all ad calls', async () => {
   const harness = createHarness({ localSequence: [{ ads: false }] });
@@ -509,6 +647,11 @@ test('prepare uses exactly the validated local snapshot with npa enabled', async
     },
   });
   await harness.provider.show({ config: makeConfig() });
+  assert.equal(harness.stats().preparedOptions[0].isTesting, true);
+  assert.equal(
+    harness.stats().preparedOptions[0].adId,
+    GOOGLE_OFFICIAL_ANDROID_REWARDED_TEST_AD_UNIT_ID,
+  );
   assert.equal(harness.stats().preparedOptions[0].npa, true);
 });
 test('prepare uses exactly the validated local snapshot without forced npa', async () => {
@@ -524,6 +667,13 @@ test('prepare uses exactly the validated local snapshot without forced npa', asy
   });
   await harness.provider.show({ config: makeConfig() });
   assert.equal('npa' in harness.stats().preparedOptions[0], false);
+});
+test('production prepare uses the normalized production ID with testing disabled', async () => {
+  const harness = createHarness();
+  const config = makeProductionConfig();
+  await harness.provider.show({ config });
+  assert.equal(harness.stats().preparedOptions[0].adId, createSyntheticProductionAdUnitId());
+  assert.equal(harness.stats().preparedOptions[0].isTesting, false);
 });
 test('valid reward completes without native payload exposure', async () => {
   const harness = createHarness();
@@ -1016,32 +1166,115 @@ test('old fortune callback is rejected after profile or fortune change', () => {
   assert.equal(decision.allowed, false);
 });
 
-const configMatrix = [
-  ['missing mode', { VITE_REWARDED_AD_MODE: '' }, false],
-  ['missing target', { VITE_REWARDED_AD_BUILD_TARGET: '' }, false],
-  ['release target', { VITE_REWARDED_AD_BUILD_TARGET: 'release' }, false],
-  ['production mode', { VITE_REWARDED_AD_MODE: 'production' }, false],
-  ['disabled provider', { VITE_REWARDED_AD_PROVIDER: 'mock' }, false],
-  ['unknown mode', { VITE_REWARDED_AD_MODE: 'preview' }, false],
-  ['unknown target', { VITE_REWARDED_AD_BUILD_TARGET: 'preview' }, false],
-  ['SDK disabled', { VITE_REWARDED_AD_SDK_ENABLED: 'false' }, false],
+const approvedConfigMatrix = [
   ['case-normalized official test', {
-    VITE_REWARDED_AD_PROVIDER: 'SDK',
-    VITE_REWARDED_AD_MODE: 'OFFICIAL_TEST',
-    VITE_REWARDED_AD_BUILD_TARGET: 'DEBUG',
+    VITE_REWARDED_AD_PROVIDER: ' SDK ',
+    VITE_REWARDED_AD_SDK_ENABLED: ' TRUE ',
+    VITE_REWARDED_AD_MODE: ' OFFICIAL_TEST ',
+    VITE_REWARDED_AD_BUILD_TARGET: ' DEBUG ',
   }, true],
+  ['normalized production release', {
+    VITE_REWARDED_AD_PROVIDER: 'sdk',
+    VITE_REWARDED_AD_SDK_ENABLED: 'true',
+    VITE_REWARDED_AD_MODE: 'production',
+    VITE_REWARDED_AD_BUILD_TARGET: 'release',
+    VITE_REWARDED_AD_UNIT_ID: ` ${createSyntheticProductionAdUnitId()} `,
+  }, false],
 ];
-for (const [name, mutation, expected] of configMatrix) {
-  test(`configuration matrix: ${name}`, () => {
-    const config = getRewardedAdSdkConfig({
-      VITE_REWARDED_AD_PROVIDER: 'sdk',
-      VITE_REWARDED_AD_SDK_ENABLED: 'true',
-      VITE_REWARDED_AD_MODE: 'official_test',
-      VITE_REWARDED_AD_BUILD_TARGET: 'debug',
-      ...mutation,
-    });
-    assert.equal(config.configurationValid, expected);
-    assert.equal(Boolean(config.adId), expected);
+for (const [name, env, isTesting] of approvedConfigMatrix) {
+  test(`approved configuration matrix: ${name}`, () => {
+    const config = getRewardedAdSdkConfig(env);
+    assert.equal(config.configurationValid, true);
+    assert.equal(config.mockAllowed, false);
+    assert.equal(config.isTesting, isTesting);
+    assert.equal(isApprovedRewardedAdSdkConfig(config), true);
+  });
+}
+
+const invalidConfigMatrix = [
+  ['production missing ID', {
+    VITE_REWARDED_AD_PROVIDER: 'sdk',
+    VITE_REWARDED_AD_SDK_ENABLED: 'true',
+    VITE_REWARDED_AD_MODE: 'production',
+    VITE_REWARDED_AD_BUILD_TARGET: 'release',
+  }],
+  ['production malformed ID', {
+    VITE_REWARDED_AD_PROVIDER: 'sdk',
+    VITE_REWARDED_AD_SDK_ENABLED: 'true',
+    VITE_REWARDED_AD_MODE: 'production',
+    VITE_REWARDED_AD_BUILD_TARGET: 'release',
+    VITE_REWARDED_AD_UNIT_ID: 'malformed',
+  }],
+  ['production App ID tilde form', {
+    VITE_REWARDED_AD_PROVIDER: 'sdk',
+    VITE_REWARDED_AD_SDK_ENABLED: 'true',
+    VITE_REWARDED_AD_MODE: 'production',
+    VITE_REWARDED_AD_BUILD_TARGET: 'release',
+    VITE_REWARDED_AD_UNIT_ID: createSyntheticAppId(),
+  }],
+  ['official test ID in production', {
+    VITE_REWARDED_AD_PROVIDER: 'sdk',
+    VITE_REWARDED_AD_SDK_ENABLED: 'true',
+    VITE_REWARDED_AD_MODE: 'production',
+    VITE_REWARDED_AD_BUILD_TARGET: 'release',
+    VITE_REWARDED_AD_UNIT_ID: GOOGLE_OFFICIAL_ANDROID_REWARDED_TEST_AD_UNIT_ID,
+  }],
+  ['production ID in official test', {
+    VITE_REWARDED_AD_PROVIDER: 'sdk',
+    VITE_REWARDED_AD_SDK_ENABLED: 'true',
+    VITE_REWARDED_AD_MODE: 'official_test',
+    VITE_REWARDED_AD_BUILD_TARGET: 'debug',
+    VITE_REWARDED_AD_UNIT_ID: createSyntheticProductionAdUnitId(),
+  }],
+  ['production debug target', {
+    VITE_REWARDED_AD_PROVIDER: 'sdk',
+    VITE_REWARDED_AD_SDK_ENABLED: 'true',
+    VITE_REWARDED_AD_MODE: 'production',
+    VITE_REWARDED_AD_BUILD_TARGET: 'debug',
+    VITE_REWARDED_AD_UNIT_ID: createSyntheticProductionAdUnitId(),
+  }],
+  ['official test release target', {
+    VITE_REWARDED_AD_PROVIDER: 'sdk',
+    VITE_REWARDED_AD_SDK_ENABLED: 'true',
+    VITE_REWARDED_AD_MODE: 'official_test',
+    VITE_REWARDED_AD_BUILD_TARGET: 'release',
+  }],
+  ['unknown provider', {
+    VITE_REWARDED_AD_PROVIDER: 'unknown',
+  }],
+  ['mock production release', {
+    VITE_REWARDED_AD_PROVIDER: 'mock',
+    VITE_REWARDED_AD_MODE: 'production',
+    VITE_REWARDED_AD_BUILD_TARGET: 'release',
+    VITE_REWARDED_AD_UNIT_ID: createSyntheticProductionAdUnitId(),
+  }],
+  ['SDK disabled', {
+    VITE_REWARDED_AD_PROVIDER: 'sdk',
+    VITE_REWARDED_AD_SDK_ENABLED: 'false',
+    VITE_REWARDED_AD_MODE: 'production',
+    VITE_REWARDED_AD_BUILD_TARGET: 'release',
+    VITE_REWARDED_AD_UNIT_ID: createSyntheticProductionAdUnitId(),
+  }],
+  ['partial mode', {
+    VITE_REWARDED_AD_PROVIDER: 'sdk',
+    VITE_REWARDED_AD_SDK_ENABLED: 'true',
+    VITE_REWARDED_AD_MODE: 'production',
+    VITE_REWARDED_AD_UNIT_ID: createSyntheticProductionAdUnitId(),
+  }],
+  ['partial target', {
+    VITE_REWARDED_AD_PROVIDER: 'sdk',
+    VITE_REWARDED_AD_SDK_ENABLED: 'true',
+    VITE_REWARDED_AD_BUILD_TARGET: 'release',
+    VITE_REWARDED_AD_UNIT_ID: createSyntheticProductionAdUnitId(),
+  }],
+];
+for (const [name, env] of invalidConfigMatrix) {
+  test(`invalid configuration matrix: ${name}`, () => {
+    const config = getRewardedAdSdkConfig(env);
+    assert.equal(config.configurationValid, false);
+    assert.equal(config.adId, '');
+    assert.equal(config.mockAllowed, false);
+    assert.equal(isApprovedRewardedAdSdkConfig(config), false);
   });
 }
 
@@ -1121,6 +1354,14 @@ for (const [key, expected] of [
 
 const targetedNegativeMutations = [
   {
+    name: 'mock build target allowlist weakened to release denylist',
+    file: 'src/config/rewardedAdSdkConfig.js',
+    mutate: (source) => source.replace(
+      /const mockBuildTargetApproved\s*=\s*buildTarget === ''\s*\|\|\s*buildTarget === REWARDED_AD_BUILD_TARGET\.DEBUG;/u,
+      'const mockBuildTargetApproved =\n    buildTarget !== REWARDED_AD_BUILD_TARGET.RELEASE;',
+    ),
+  },
+  {
     name: 'unvalidated local read reintroduced before prepare',
     file: 'src/services/rewardedAdProvider.sdk.js',
     mutate: (source) => source.replace(
@@ -1163,7 +1404,7 @@ const targetedNegativeMutations = [
     name: 'modal rewardRequestId generation removed',
     file: 'src/components/RewardAdModal.jsx',
     mutate: (source) => source.replace(
-      '    const rewardRequestId = createRewardedRequestId();\n',
+      /    const rewardRequestId = createRewardedRequestId\(\);\r?\n/u,
       '',
     ),
   },
@@ -1171,7 +1412,7 @@ const targetedNegativeMutations = [
     name: 'modal show options rewardRequestId removed',
     file: 'src/components/RewardAdModal.jsx',
     mutate: (source) => source.replace(
-      '        rewardRequestId,\n        consentPreferences,',
+      /        rewardRequestId,\r?\n        consentPreferences,/u,
       '        consentPreferences,',
     ),
   },
@@ -1179,7 +1420,7 @@ const targetedNegativeMutations = [
     name: 'SDK success result rewardRequestId removed',
     file: 'src/services/rewardedAdProvider.sdk.js',
     mutate: (source) => source.replace(
-      '          rewardRequestId: options.rewardRequestId,\n',
+      /          rewardRequestId: options\.rewardRequestId,\r?\n/u,
       '',
     ),
   },
@@ -1218,13 +1459,20 @@ const targetedNegativeMutations = [
 ];
 
 async function main() {
-  validateScope();
   const sourceErrors = validateSources();
   assert.deepEqual(sourceErrors, [], sourceErrors.join('\n'));
 
   const officialId = ['ca-app-pub-3940256099942544', '5224354917'].join('/');
-  const literalLocations = changedFiles.filter((file) => read(file).includes(officialId));
-  assert.deepEqual(literalLocations, ['src/config/rewardedAdSdkConfig.js']);
+  assert(read('src/config/rewardedAdSdkConfig.js').includes(officialId));
+  const concreteIdPattern = /\bca-app-pub-\d{16}\/\d{10}\b/gu;
+  for (const file of changedFiles) {
+    if (!existsSync(path.join(root, file))) continue;
+    const concreteIds = [...read(file).matchAll(concreteIdPattern)].map((match) => match[0]);
+    assert(
+      concreteIds.every((value) => value === officialId),
+      `${file}: changed files may not contain a concrete production ad unit ID literal`,
+    );
+  }
   assert(!read('.github/workflows/android-debug-build.yml').includes('VITE_REWARDED_AD_PROVIDER: sdk'));
 
   let behavioralAssertions = 0;

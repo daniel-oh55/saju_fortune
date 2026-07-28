@@ -67,9 +67,19 @@ const sdkEnabledPass =
 logResult('sdk_provider_enabled_returns_unavailable_until_real_sdk_added', sdkEnabledPass);
 assertCondition(sdkEnabledPass, 'sdk scaffold should return sdk_unavailable until real SDK is added');
 
-await checkMockCompleted('unknown_provider_falls_back_to_mock', {
-  VITE_REWARDED_AD_PROVIDER: 'unknown',
+const unknownProvider = await showRewardedAd({
+  placementId: 'test',
+  categoryLabel: '테스트 광고',
+  envOverride: {
+    VITE_REWARDED_AD_PROVIDER: 'unknown',
+  },
 });
+const unknownProviderPass =
+  unknownProvider.ok === false &&
+  unknownProvider.provider === REWARDED_AD_PROVIDER_TYPE.SDK &&
+  unknownProvider.reason === REWARDED_AD_OUTCOME.SDK_UNAVAILABLE;
+logResult('unknown_provider_fails_closed', unknownProviderPass);
+assertCondition(unknownProviderPass, 'unknown provider should fail closed without mock reward');
 
 const unavailableMessage = getRewardedAdOutcomeMessage(REWARDED_AD_OUTCOME.SDK_UNAVAILABLE);
 const unavailableMessagePass =

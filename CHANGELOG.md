@@ -1,5 +1,39 @@
 # CHANGELOG
 
+## PR #416 - Production Rewarded Source Connection
+
+### Changed
+
+- Added the validated `VITE_REWARDED_AD_UNIT_ID` production source without
+  embedding the owner-held identifier.
+- Added fail-closed production/release routing with `isTesting: false` while
+  preserving the Google official test debug path with `isTesting: true`.
+- Restricted rewarding mock behavior to the approved no-intent configuration
+  and prohibited SDK failure fallback to mock.
+- Updated the SDK adapter regression so an unknown provider must fail closed
+  instead of completing a mock reward.
+- Updated the rollout contract and rolling project state to distinguish the
+  implemented source capability from release injection and serving.
+
+### Safety
+
+- Invalid or partial production intent performs zero SDK or mock calls.
+- SDK configuration is revalidated before native module import.
+- Android, workflows, packages, UI, storage, routing, and fortune behavior are
+  unchanged.
+- The owner-held production Rewarded ad unit ID remains outside the repository.
+
+### Not started
+
+- Owner-held production ID release injection
+- Production request/load/show and serving
+- Production Android device QA and Play Console release upload
+
+### Pending
+
+- Privacy/Data Safety final review
+- Release signing/AAB
+
 ## PR #414 - AdMob Rollout Post-merge Lifecycle Fixture
 
 ### Fixed

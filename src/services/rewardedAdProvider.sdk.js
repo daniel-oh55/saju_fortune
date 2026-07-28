@@ -1,4 +1,5 @@
 import { Capacitor } from '@capacitor/core';
+import { isApprovedRewardedAdSdkConfig } from '../config/rewardedAdSdkConfig.js';
 import { getAdmobRuntimeConsentSnapshot } from './admobRuntimeConsentCoordinator.js';
 import { loadConsentPreferences } from '../utils/consentPreferencesStorage.js';
 import {
@@ -147,7 +148,7 @@ export function createSdkRewardedAdProvider(dependencyOverrides = {}) {
     let rewardDelivered = false;
 
     try {
-      if (options.config?.configurationValid !== true) {
+      if (!isApprovedRewardedAdSdkConfig(options.config)) {
         return failure(options, REWARDED_AD_OUTCOME.SDK_UNAVAILABLE);
       }
 
@@ -208,7 +209,7 @@ export function createSdkRewardedAdProvider(dependencyOverrides = {}) {
 
       const prepareOptions = {
         adId: options.config.adId,
-        isTesting: true,
+        isTesting: options.config.isTesting,
         ...(prePrepareGate.localConsent?.personalizedAds === true ? {} : { npa: true }),
       };
       const prepareResult = await withTimeout(

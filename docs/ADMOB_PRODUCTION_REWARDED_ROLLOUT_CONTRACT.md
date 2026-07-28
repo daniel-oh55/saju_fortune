@@ -6,11 +6,11 @@ This contract defines the prerequisites, configuration boundaries, validation
 rules, privacy review, release gates, device QA, and rollback criteria that
 must be satisfied before 하루풀이 uses a production Rewarded ad unit.
 
-This PR is docs/check-only. It records the owner's completed AdMob Console
-creation and identifier confirmation, but it does not create or connect an
-AdMob ad unit, add a production identifier to the repository, request or
-serve a production ad, change native code, or prepare a release artifact.
-Production implementation requires a separate, approved PR.
+This PR implements the source-side production Rewarded connection capability.
+It does not inject the owner-held production identifier, request or serve a
+production ad, change native code or release configuration, or prepare a
+release artifact. Production activation remains a separate, owner-approved
+release operation.
 
 ## 2. Current merged baseline
 
@@ -35,9 +35,13 @@ Not testable / Pending:
 - Actual early-dismiss device QA
 - Repeated ADB listener-accumulation diagnostics
 
+Implemented:
+
+- Production source connection capability
+
 Not started:
 
-- Production ad unit ID source connection
+- Owner-held production ID release injection
 - Production request/load/show
 - Production serving
 - Release build, signing, and AAB generation
@@ -52,7 +56,8 @@ Canonical rollout state:
 - Production ad unit ID format validation: Pass
 - Production ad unit ID format: Valid `/` form
 - Exact production ad unit ID committed to repository: No
-- Production source connection: Not started
+- Production source connection capability: Implemented
+- Owner-held production ID release injection: Not started
 - Production request/load/show: Not started
 - Production serving: Not started
 - AdMob Console creation: Completed
@@ -109,7 +114,7 @@ The owner confirmed these creation prerequisites:
 - The copied ad unit ID uses the `/` form and its publisher prefix matches the
   existing App ID.
 
-Before production connection or rollout, the owner must also confirm:
+Before production injection or rollout, the owner must also confirm:
 
 - AdMob account and app serving eligibility are in an acceptable state.
 - Privacy policy, consent, Google Play Data safety, advertising ID, and target
@@ -137,8 +142,9 @@ The owner completed this user-operated procedure:
     match, and retained the exact value outside the repository.
 
 AdMob Console creation: Completed. The Console was changed by the owner
-outside this docs/check-only PR; this PR only records the confirmed state.
-Source connection must occur only in a separate approved implementation PR.
+outside this source implementation PR. The source connection capability is
+implemented without embedding the owner-held identifier; release injection
+and activation remain separate approved operations.
 
 ## 7. Required user-supplied values
 
@@ -162,7 +168,7 @@ messages, or PR text.
 
 ## 8. Production configuration design
 
-A future implementation must:
+The implemented source connection:
 
 - Manage the production ID in exactly one configuration source.
 - Keep test and production IDs separate.
@@ -193,7 +199,7 @@ native request.
 | Standard Android Debug | Existing mock | Production request prohibited | Preserve current mock behavior |
 | Dedicated Rewarded Test Debug | Google official test ad; `isTesting: true` | Test request only | Production ID prohibited |
 | Android Release before production configuration | None | 0 requests | Fail closed |
-| Android Release after approved production implementation | Actual production Rewarded ad unit; `isTesting: false` | Production request only | Release/signing/AAB and device QA required |
+| Android Release after approved owner-held ID injection | Actual production Rewarded ad unit; `isTesting: false` | Production request only | Release/signing/AAB and device QA required |
 
 No row may silently fall back to a rewarding mock after an SDK or
 configuration failure.
@@ -254,21 +260,21 @@ or changed in this PR, and no status in this section represents approval.
 
 ## 13. Source implementation plan
 
-A separate production implementation PR may evaluate these candidates:
+This source implementation uses:
 
 - `src/config/rewardedAdSdkConfig.js`
 - `src/services/rewardedAdProvider.loader.js`
 - `src/services/rewardedAdProvider.sdk.js`
-- A production configuration checker
-- Release environment configuration
-- Related documentation and logs
+- The existing production configuration checker
+- Related rollout documentation and rolling project state
 
-That PR must add narrowly scoped configuration validation before any SDK
-request while preserving the current public APIs, provider behavior outside
-production, storage compatibility, routing, schema version, fortune
+The implementation adds narrowly scoped configuration validation before any
+SDK request while preserving the current public APIs, provider behavior
+outside production, storage compatibility, routing, schema version, fortune
 calculation, and result-generation logic.
 
-No production source or Android native file is changed by this contract PR.
+No owner-held production identifier, Android native file, release environment,
+or workflow is changed by this source implementation.
 
 ## 14. CI and release configuration plan
 
@@ -346,9 +352,9 @@ This PR explicitly excludes:
 
 - AdMob Console changes or ad unit creation performed by this PR
 - The exact real production ad unit ID
-- Production source implementation
+- Owner-held production ID release injection
 - Production request/load/show or serving
-- `src/**`, `android/**`, `ios/**`, `public/**`, or workflow changes
+- `android/**`, `ios/**`, `public/**`, or workflow changes
 - Dependency, lockfile, Capacitor, Vite, routing, or schema changes
 - Existing localStorage key or shape changes
 - Fortune calculation or result-generation changes
@@ -364,7 +370,8 @@ This PR explicitly excludes:
 - Production ad unit ID format validation: Pass
 - Production ad unit ID format: Valid `/` form
 - Exact production ad unit ID committed to repository: No
-- Production source connection: Not started
+- Production source connection capability: Implemented
+- Owner-held production ID release injection: Not started
 - Production request/load/show: Not started
 - Production serving: Not started
 - AdMob Console creation: Completed
@@ -377,21 +384,21 @@ This PR explicitly excludes:
 
 ## 20. Completion criteria
 
-This contract PR is complete only when:
+This source connection contract update is complete only when:
 
 - All 20 required sections exist in this order.
 - The identifier types, mode matrix, fail-closed rules, consent gates,
   disclosure impact, implementation boundaries, QA, and rollback requirements
   are documented.
-- The checker and all 25 negative mutations pass.
+- The checker, lifecycle self-test, and negative mutations pass.
 - Existing AdMob provider, consent, content-safety, and docs/source guardrail
   checks pass.
-- Only the five approved docs/check files are changed.
-- No source, native, workflow, lockfile, storage, schema, routing, or fortune
-  behavior changes exist.
+- Source changes remain limited to production configuration, fail-closed
+  provider routing, and SDK configuration validation.
+- No owner-held identifier, native, workflow, lockfile, storage, schema,
+  routing, UI, or fortune behavior changes exist.
 - The two pre-existing untracked review files remain untracked and unstaged.
 
 Production rollout completion is a separate milestone. It requires a
-secure connection of the owner-confirmed production ID, approved follow-up
-implementation, final privacy/disclosure review, signed release/AAB, and
-production device QA.
+secure release injection of the owner-confirmed production ID, final
+privacy/disclosure review, signed release/AAB, and production device QA.
