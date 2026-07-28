@@ -165,6 +165,14 @@ function validateSources(sourceOverrides = new Map()) {
   const serviceSource = sourceFor('src/services/rewardedAdService.js');
   const modalSource = sourceFor('src/components/RewardAdModal.jsx');
   const appSource = sourceFor('src/App.jsx');
+  const configSource = sourceFor('src/config/rewardedAdSdkConfig.js');
+  if (
+    !/const mockBuildTargetApproved\s*=\s*buildTarget === ''\s*\|\|\s*buildTarget === REWARDED_AD_BUILD_TARGET\.DEBUG;/u.test(
+      configSource,
+    )
+  ) {
+    errors.push('mock build target allowlist must contain only blank and debug');
+  }
   if (/export\s+async\s+function\s+showSdkRewardedAd/.test(sdkSource)) {
     errors.push('SDK public forwarding function must preserve Promise identity');
   }
@@ -415,12 +423,29 @@ function createLoaderHarness(options = {}) {
   };
 }
 
-test('default config remains mock and disabled', () => {
+test('default no-intent config allows exactly one mock call', async () => {
   const config = getRewardedAdSdkConfig({});
   assert.equal(config.provider, 'mock');
   assert.equal(config.configurationValid, false);
   assert.equal(config.adId, '');
   assert.equal(config.mockAllowed, true);
+
+  const harness = createLoaderHarness();
+  await harness.loader({}, {});
+  assert.deepEqual(harness.stats(), { mockCalls: 1, sdkCalls: 0 });
+});
+test('mock debug build target allows exactly one mock call', async () => {
+  const env = {
+    VITE_REWARDED_AD_PROVIDER: 'mock',
+    VITE_REWARDED_AD_BUILD_TARGET: 'debug',
+  };
+  const config = getRewardedAdSdkConfig(env);
+  assert.equal(config.configurationValid, false);
+  assert.equal(config.mockAllowed, true);
+
+  const harness = createLoaderHarness();
+  await harness.loader({}, env);
+  assert.deepEqual(harness.stats(), { mockCalls: 1, sdkCalls: 0 });
 });
 test('official test debug configuration is approved and isolated', () => {
   const valid = getRewardedAdSdkConfig({
@@ -443,11 +468,7 @@ test('production release configuration normalizes the injected ID and disables t
   assert.equal(config.mockAllowed, false);
   assert.equal(isApprovedRewardedAdSdkConfig(config), true);
 });
-test('loader routes default mock and approved SDK configurations exactly once', async () => {
-  const mockHarness = createLoaderHarness();
-  await mockHarness.loader({}, {});
-  assert.deepEqual(mockHarness.stats(), { mockCalls: 1, sdkCalls: 0 });
-
+test('loader routes approved SDK configurations exactly once', async () => {
   for (const env of [
     {
       VITE_REWARDED_AD_PROVIDER: 'sdk',
@@ -468,6 +489,30 @@ test('loader routes default mock and approved SDK configurations exactly once', 
     assert.deepEqual(sdkHarness.stats(), { mockCalls: 0, sdkCalls: 1 });
   }
 });
+for (const [name, env] of [
+  ['unset provider with malformed releas target', {
+    VITE_REWARDED_AD_BUILD_TARGET: 'releas',
+  }],
+  ['mock provider with preview target', {
+    VITE_REWARDED_AD_PROVIDER: 'mock',
+    VITE_REWARDED_AD_BUILD_TARGET: 'preview',
+  }],
+  ['mock provider with production target', {
+    VITE_REWARDED_AD_PROVIDER: 'mock',
+    VITE_REWARDED_AD_BUILD_TARGET: 'production',
+  }],
+]) {
+  test(`loader fails closed for ${name}`, async () => {
+    const config = getRewardedAdSdkConfig(env);
+    assert.equal(config.configurationValid, false);
+    assert.equal(config.mockAllowed, false);
+
+    const harness = createLoaderHarness();
+    const result = await harness.loader({}, env);
+    assert.equal(result.reason, REWARDED_AD_OUTCOME.SDK_UNAVAILABLE);
+    assert.deepEqual(harness.stats(), { mockCalls: 0, sdkCalls: 0 });
+  });
+}
 test('loader fails closed for invalid production intent without mock fallback', async () => {
   const harness = createLoaderHarness();
   const result = await harness.loader(
@@ -1308,6 +1353,14 @@ for (const [key, expected] of [
 }
 
 const targetedNegativeMutations = [
+  {
+    name: 'mock build target allowlist weakened to release denylist',
+    file: 'src/config/rewardedAdSdkConfig.js',
+    mutate: (source) => source.replace(
+      /const mockBuildTargetApproved\s*=\s*buildTarget === ''\s*\|\|\s*buildTarget === REWARDED_AD_BUILD_TARGET\.DEBUG;/u,
+      'const mockBuildTargetApproved =\n    buildTarget !== REWARDED_AD_BUILD_TARGET.RELEASE;',
+    ),
+  },
   {
     name: 'unvalidated local read reintroduced before prepare',
     file: 'src/services/rewardedAdProvider.sdk.js',

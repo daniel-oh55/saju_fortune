@@ -109,11 +109,14 @@ export function getRewardedAdSdkConfig(envOverride = {}) {
     isValidAdMobRewardedAdUnitId(productionAdUnitId) &&
     productionAdUnitId !== GOOGLE_OFFICIAL_ANDROID_REWARDED_TEST_AD_UNIT_ID;
   const configurationValid = officialTestApproved || productionApproved;
+  const mockBuildTargetApproved =
+    buildTarget === '' ||
+    buildTarget === REWARDED_AD_BUILD_TARGET.DEBUG;
   const mockAllowed =
     provider === REWARDED_AD_PROVIDER_KEY.MOCK &&
     sdkEnabled === false &&
     (mode === '' || mode === REWARDED_AD_MODE.DISABLED) &&
-    buildTarget !== REWARDED_AD_BUILD_TARGET.RELEASE &&
+    mockBuildTargetApproved &&
     productionAdUnitId === '';
 
   return {
