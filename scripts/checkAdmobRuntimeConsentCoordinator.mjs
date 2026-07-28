@@ -27,6 +27,44 @@ const lines = (...args) =>
 const requireText = (content, text, label) => {
   if (!content.includes(text)) errors.push(`${label}: missing required text: ${text}`)
 }
+const proxySafetyStaticInvariants = [
+  'export function createAdmobNativeDependencies({ loadAdMobModule })',
+  'let modulePromise = null',
+  'modulePromise = loadAdMobModule()',
+  'const { AdMob } = await getAdMobModule()',
+  'return AdMob.showPrivacyOptionsForm()',
+  'let adMobModulePromise = null',
+  "adMobModulePromise = import('@capacitor-community/admob')",
+  'const productionNativeDependencies = createAdmobNativeDependencies({',
+  '...productionNativeDependencies',
+]
+const validateProxyPromiseSafety = (source) => {
+  const validationErrors = []
+  for (const token of proxySafetyStaticInvariants) {
+    if (!source.includes(token)) {
+      validationErrors.push(`proxy Promise safety: missing required text: ${token}`)
+    }
+  }
+  if ((source.match(/import\('@capacitor-community\/admob'\)/gu) ?? []).length !== 1) {
+    validationErrors.push('proxy Promise safety: dynamic import must occur exactly once')
+  }
+  for (const pattern of [
+    /import\('@capacitor-community\/admob'\)\s*\.then/u,
+    /\.then\s*\(\s*\(\s*\{\s*AdMob\s*\}\s*\)\s*=>\s*AdMob/u,
+    /Promise\.resolve\s*\(\s*AdMob\s*\)/u,
+    /return\s+AdMob\s*;/u,
+    /\bAdMob\.then\b/u,
+    /['"]then['"]\s+in\s+AdMob/u,
+  ]) {
+    if (pattern.test(source)) {
+      validationErrors.push(`proxy Promise safety: forbidden pattern matched ${pattern}`)
+    }
+  }
+  if (!source.includes('isNativePlatform: () => Capacitor.isNativePlatform(),')) {
+    validationErrors.push('proxy Promise safety: Web platform check must not load the AdMob module')
+  }
+  return validationErrors
+}
 const isPlainObject = (value) =>
   value !== null && typeof value === 'object' && !Array.isArray(value)
 const hasValidPackageMap = (value) =>
@@ -100,6 +138,7 @@ if (creationMode) {
 
 const coordinatorSource = read(coordinatorPath)
 const mainSource = read('src/main.jsx')
+errors.push(...validateProxyPromiseSafety(coordinatorSource))
 for (const text of [
   'ADMOB_RUNTIME_CONSENT_STATE',
   'createAdmobRuntimeConsentCoordinator',
@@ -169,7 +208,6 @@ for (const pattern of [
   /\bdocument\.cookie\b/u,
   /\bdebugGeography\b/u,
   /\btestDeviceIdentifiers?\b/u,
-  /\bshowPrivacyOptionsForm\s*\(/u,
   /\bresetConsentInfo\s*\(/u,
   /\.(?:showBanner|hideBanner|resumeBanner|removeBanner|prepareInterstitial|showInterstitial|prepareRewardVideoAd|showRewardVideoAd|showRewardedAd|loadAd|showAd)\s*\(/u,
 ]) {
@@ -224,6 +262,7 @@ async function runBehavioralChecks() {
   const moduleUrl = pathToFileURL(resolve(root, coordinatorPath)).href
   const {
     ADMOB_RUNTIME_CONSENT_STATE,
+    createAdmobNativeDependencies,
     createAdmobRuntimeConsentCoordinator,
   } = await import(`${moduleUrl}?checker=${Date.now()}`)
 
@@ -299,6 +338,91 @@ async function runBehavioralChecks() {
   assert.equal(readyResult.initializeResolved, true)
   assert.strictEqual(ready.coordinator.bootstrap(), firstPromise)
   assert.equal(ready.calls.filter((call) => call === 'initialize').length, 1)
+
+  let moduleLoads = 0
+  let thenAccessCount = 0
+  let thenCallCount = 0
+  const proxyCalls = []
+  const fakeAdMobProxy = new Proxy({
+    async requestConsentInfo() {
+      proxyCalls.push('requestConsentInfo')
+      return info({ canRequestAds: true })
+    },
+    async showConsentForm() {
+      proxyCalls.push('showConsentForm')
+      return info({ status: 'OBTAINED', canRequestAds: true })
+    },
+    async showPrivacyOptionsForm() {
+      proxyCalls.push('showPrivacyOptionsForm')
+    },
+    async initialize() {
+      proxyCalls.push('initialize')
+    },
+  }, {
+    get(target, property, receiver) {
+      if (property === 'then') {
+        thenAccessCount += 1
+        return () => {
+          thenCallCount += 1
+          throw new Error('AdMob.then() must never be called')
+        }
+      }
+      return Reflect.get(target, property, receiver)
+    },
+  })
+  const nativeDependencies = createAdmobNativeDependencies({
+    loadAdMobModule: () => {
+      moduleLoads += 1
+      return Promise.resolve({ AdMob: fakeAdMobProxy })
+    },
+  })
+  const proxyCoordinator = createAdmobRuntimeConsentCoordinator({
+    isNativePlatform: () => true,
+    getPlatform: () => 'android',
+    ...nativeDependencies,
+  })
+  const proxyResult = await proxyCoordinator.bootstrap()
+  assert.deepEqual(
+    proxyCalls,
+    ['requestConsentInfo', 'showConsentForm', 'initialize'],
+  )
+  assert.equal(proxyResult.state, ADMOB_RUNTIME_CONSENT_STATE.READY)
+  assert.equal(proxyResult.initializeResolved, true)
+  assert.equal(proxyResult.adGateOpen, true)
+  assert.equal(moduleLoads, 1)
+  assert.equal(thenAccessCount, 0)
+  assert.equal(thenCallCount, 0)
+
+  const privacyResult = await proxyCoordinator.openPrivacyOptions()
+  assert.deepEqual(proxyCalls, [
+    'requestConsentInfo',
+    'showConsentForm',
+    'initialize',
+    'showPrivacyOptionsForm',
+    'requestConsentInfo',
+  ])
+  assert.equal(privacyResult.state, ADMOB_RUNTIME_CONSENT_STATE.READY)
+  assert.equal(moduleLoads, 1)
+  assert.equal(thenAccessCount, 0)
+  assert.equal(thenCallCount, 0)
+
+  let webModuleLoads = 0
+  const webDependencies = createAdmobNativeDependencies({
+    loadAdMobModule: () => {
+      webModuleLoads += 1
+      return Promise.resolve({ AdMob: fakeAdMobProxy })
+    },
+  })
+  const webCoordinator = createAdmobRuntimeConsentCoordinator({
+    isNativePlatform: () => false,
+    getPlatform: () => 'web',
+    ...webDependencies,
+  })
+  const webProxyResult = await webCoordinator.bootstrap()
+  assert.equal(webProxyResult.state, ADMOB_RUNTIME_CONSENT_STATE.WEB_NOOP)
+  assert.equal(webModuleLoads, 0)
+  assert.equal(thenAccessCount, 0)
+  assert.equal(thenCallCount, 0)
 
   const reentrant = createScenario()
   let reentrantPromise
@@ -424,6 +548,76 @@ async function runBehavioralChecks() {
   ])
 }
 
+const proxySafetyNegativeMutations = [
+  {
+    name: 'module Promise resolves the AdMob Proxy',
+    mutate: (source) => source.replace(
+      "adMobModulePromise = import('@capacitor-community/admob')",
+      "adMobModulePromise = import('@capacitor-community/admob').then((module) => module.AdMob)",
+    ),
+  },
+  {
+    name: 'destructuring then callback returns the AdMob Proxy',
+    mutate: (source) => source.replace(
+      "adMobModulePromise = import('@capacitor-community/admob')",
+      "adMobModulePromise = import('@capacitor-community/admob').then(({ AdMob }) => AdMob)",
+    ),
+  },
+  {
+    name: 'Promise.resolve receives the AdMob Proxy',
+    mutate: (source) => source.replace(
+      'return AdMob.requestConsentInfo();',
+      'return Promise.resolve(AdMob);',
+    ),
+  },
+  {
+    name: 'async dependency returns the AdMob Proxy',
+    mutate: (source) => source.replace(
+      'return AdMob.requestConsentInfo();',
+      'return AdMob;',
+    ),
+  },
+  {
+    name: 'AdMob.then access is introduced',
+    mutate: (source) => source.replace(
+      'return AdMob.requestConsentInfo();',
+      'void AdMob.then;\n      return AdMob.requestConsentInfo();',
+    ),
+  },
+  {
+    name: 'then probe occurs before requestConsentInfo',
+    mutate: (source) => source.replace(
+      'return AdMob.requestConsentInfo();',
+      'void ("then" in AdMob);\n      return AdMob.requestConsentInfo();',
+    ),
+  },
+  {
+    name: 'dynamic module import is duplicated',
+    mutate: (source) => source.replace(
+      "adMobModulePromise = import('@capacitor-community/admob');",
+      "adMobModulePromise = import('@capacitor-community/admob');\n    void import('@capacitor-community/admob');",
+    ),
+  },
+  {
+    name: 'Web platform check starts module loading',
+    mutate: (source) => source.replace(
+      'isNativePlatform: () => Capacitor.isNativePlatform(),',
+      'isNativePlatform: () => { void loadAdMobModule(); return Capacitor.isNativePlatform(); },',
+    ),
+  },
+]
+
+for (const mutation of proxySafetyNegativeMutations) {
+  const mutated = mutation.mutate(coordinatorSource)
+  if (mutated === coordinatorSource) {
+    errors.push(`negative mutation did not apply: ${mutation.name}`)
+    continue
+  }
+  if (validateProxyPromiseSafety(mutated).length === 0) {
+    errors.push(`negative mutation escaped: ${mutation.name}`)
+  }
+}
+
 try {
   await runBehavioralChecks()
 } catch (error) {
@@ -436,5 +630,5 @@ if (errors.length) {
   process.exit(1)
 }
 console.log(
-  `AdMob runtime consent coordinator check passed (${creationMode ? 'creation' : 'post-merge'} mode)`,
+  `AdMob runtime consent coordinator check passed (${creationMode ? 'creation' : 'post-merge'} mode): 1 Proxy behavioral scenario, ${proxySafetyStaticInvariants.length} Proxy static invariants, ${proxySafetyNegativeMutations.length} negative mutations`,
 )

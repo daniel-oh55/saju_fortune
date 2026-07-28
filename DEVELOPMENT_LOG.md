@@ -1,5 +1,38 @@
 # DEVELOPMENT_LOG
 
+## 2026-07-28 Galaxy S23 Ultra AdMob Proxy Thenable Finding
+
+- Tested device: Galaxy S23 Ultra
+- Installed artifact: `8652530894`
+- Tested HEAD: `6d685d4f444e5441508cac77403adad4f0c1f1ce`
+- APK install/basic smoke: Pass
+- Local app consent: Pass
+- Privacy message publication: Completed
+- Native test ad: Blocked
+- Logcat finding: `"AdMob.then()" is not implemented on android`
+- Root cause: Promise thenable assimilation of the Capacitor `AdMob` Proxy
+- `requestConsentInfo()` native call: Not reached
+- Actual test-ad load/show/reward: Not performed
+- Artifact `8652530894`: Superseded for advertising QA
+- New artifact/device retest: Required
+- Production advertising: Not started
+
+Implementation follow-up:
+
+- Replaced the unsafe Promise of the `AdMob` Proxy with a cached dynamic-import
+  module namespace Promise.
+- Added injectable native dependencies that destructure `AdMob` only inside
+  request, form, privacy-options, and initialize calls.
+- Added a fake Capacitor Proxy regression proving zero `then` access/calls,
+  one module load, `requestConsentInfo -> showConsentForm -> initialize`
+  bootstrap order, privacy-options module reuse, READY/ad-gate state, and zero
+  Web module loads.
+- Added 9 Proxy static invariants and 8 immediately detected negative
+  mutations. The rewarded-provider checker remains at 85 behavioral
+  scenarios, 82 static invariants, and 94 detected negative mutations.
+- Actual official test-ad device QA remains Pending. No Test Ad QA pass is
+  claimed by this change.
+
 ## PR #410 - AdMob Rewarded Ad Provider Contract
 
 - Work date: 2026-07-27

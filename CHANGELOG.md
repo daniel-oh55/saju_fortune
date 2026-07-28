@@ -16,6 +16,19 @@
 - Added a dedicated rewarded-test Android Debug APK workflow and production/
   behavioral checker with negative mutation coverage.
 
+### Fixed
+
+- Fixed native Android startup failing before `requestConsentInfo()` because
+  Promise resolution treated the Capacitor `AdMob` Proxy as a thenable and
+  attempted the unavailable native `AdMob.then()` method.
+- The dynamic import now caches only the module namespace Promise. Native
+  dependencies retrieve `AdMob` from that namespace immediately before each
+  request, form, privacy-options, or initialize call without resolving or
+  returning the Proxy itself.
+- Added a Proxy-based behavioral regression plus static and negative mutation
+  coverage for zero `then` access/calls, one module load, native call order,
+  privacy-options reuse, and zero Web module loads.
+
 ### Unchanged
 
 - The default Web, Vercel, and standard Android Debug provider remains mock.

@@ -26,6 +26,8 @@ const negativeSelfTest = process.argv.includes('--negative-self-test');
 const changedFiles = [
   '.github/workflows/android-rewarded-test-build.yml',
   'scripts/checkAdmobRewardedAdProvider.mjs',
+  'scripts/checkAdmobRuntimeConsentCoordinator.mjs',
+  'src/services/admobRuntimeConsentCoordinator.js',
   'src/services/rewardedAdProvider.sdk.js',
   'src/services/rewardedAdProvider.loader.js',
   'src/services/rewardedAdProvider.types.js',
@@ -47,7 +49,6 @@ const changedFiles = [
 const protectedFiles = [
   'docs/ADMOB_REWARDED_AD_PROVIDER_CONTRACT.md',
   'scripts/checkAdmobRewardedAdProviderContract.mjs',
-  'src/services/admobRuntimeConsentCoordinator.js',
   'src/services/rewardedAdProvider.mock.js',
   'src/components/AdRewardBox.jsx',
   'src/config/rewardedAdPlacements.js',
@@ -274,7 +275,11 @@ function validateScope() {
     const file = line.slice(3).replaceAll('\\', '/');
     if (!['pr405-review.json', 'pr405.diff'].includes(file)) diffFiles.add(file);
   }
-  assert.deepEqual([...diffFiles].sort(), changedFiles, 'PR must contain exactly the approved 18 files');
+  assert.deepEqual(
+    [...diffFiles].sort(),
+    changedFiles,
+    `PR must contain exactly the approved ${changedFiles.length} files`,
+  );
   for (const file of protectedFiles) {
     assert(!diffFiles.has(file), `protected file changed: ${file}`);
   }
