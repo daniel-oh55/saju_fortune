@@ -1,5 +1,23 @@
 # TODO
 
+## PR #412 - AdMob Production Rewarded Rollout Contract TODO
+
+- [x] Verify merged PR #411 baseline at
+  `af7f15f5234ea7d4d16874f4e65f79eaad875bbe`
+- [x] Add the 20-section production Rewarded rollout contract
+- [x] Distinguish App ID, ad unit ID, official test ID, and pending production
+  ID
+- [x] Define build modes, fail-closed rules, reward authority, consent gates,
+  privacy review, release configuration, device QA, and rollback
+- [x] Add scope protection and 18-case negative self-test
+- [ ] Perform actual early-dismiss device QA
+- [ ] Perform repeated ADB listener-accumulation diagnostics
+- [ ] Create the production Rewarded ad unit in AdMob Console
+- [ ] Supply and confirm the production Rewarded ad unit ID
+- [ ] Implement production configuration in a separate approved PR
+- [ ] Complete Privacy/Data Safety final review
+- [ ] Complete release signing, AAB, production device QA, and Play upload
+
 ## PR #411 - AdMob Official Test Rewarded Provider TODO
 
 - [x] Verify merged PR #410 baseline at `73be1eb50406f1de1987d0164cc29506f228e584`

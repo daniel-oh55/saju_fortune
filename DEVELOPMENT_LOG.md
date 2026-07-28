@@ -1,5 +1,39 @@
 # DEVELOPMENT_LOG
 
+## 2026-07-28 AdMob Production Rewarded Rollout Contract
+
+Status: Docs/check-only
+
+Work completed:
+
+- Added a 20-section contract for the production Rewarded ad unit creation
+  prerequisites, identifier boundaries, configuration, build modes,
+  fail-closed behavior, consent/privacy review, release gates, device QA, and
+  rollback.
+- Added a checker for required sections and order, precise pending states,
+  App ID/ad unit ID separation, protected implementation paths, and the two
+  pre-existing untracked review files.
+- Added an 18-case negative self-test covering false completion claims,
+  identifier misuse, forbidden fallback/unlock/storage behavior, native and
+  workflow changes, and section deletion/reordering.
+
+Current state:
+
+- Production rewarded ad unit: Pending
+- Production ad unit ID: None
+- Production request/load/show: Not started
+- Production serving: Not started
+- AdMob Console creation: Not performed
+- Privacy/Data Safety final review: Pending
+- Release signing/AAB: Pending
+
+Unchanged:
+
+- Production source, Android/iOS native files, public assets, workflows,
+  dependencies, lockfile, Capacitor/Vite configuration, routing, schema,
+  localStorage keys and shape, fortune calculations, and result generation
+- Existing mock provider behavior and UMP/local consent dual gate
+
 ## 2026-07-28 Galaxy S23 Ultra Rewarded Test Final Device QA
 
 Test basis:
