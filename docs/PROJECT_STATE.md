@@ -5,12 +5,12 @@
 ## 기준
 
 - 기준일: 2026-07-28
-- State baseline main HEAD: `7974d002db0d397e6ff348a3346d7bd48b280a26`
+- State baseline main HEAD: `00ca6b94568f735678ebf6faf7314f20d7cc29ea`
 - 작업 시작 전 Open PR: 없음
 - 현재 앱: Google Play 공개 상태
 - 현재 플랫폼: React + Vite + Capacitor Android
 - 데이터: 주로 `localStorage`에 저장하며 별도 사용자 계정 서버는 없음
-- AI workflow harness: 이 PR을 통해 도입되는 현재 운영 기반
+- AI workflow harness: merged / active
 
 ## 현재 AdMob 상태
 
@@ -20,17 +20,19 @@
 - Google 공식 Rewarded Test Ad 구현 및 Galaxy S23 Ultra 기능 QA 완료
 - production Rewarded ad unit은 Owner가 AdMob Console에서 생성 완료
 - 실제 production ad unit ID 값은 저장소 밖에서 관리
-- production source connection은 아직 구현하지 않음
+- production source connection capability 구현 완료
+- owner-held production ID release injection은 시작하지 않음
 - production request/load/show와 serving은 시작하지 않음
 
 ## 현재 남은 단계
 
-1. 별도 HIGH-risk PR에서 production Rewarded source connection
-2. production Android device QA
-3. Privacy / Data Safety 최종 검토
-4. release signing 및 AAB
-5. Play 테스트 트랙과 staged rollout
-6. rollback 기준 검증
+1. owner-held production ID release injection
+2. production request/load/show 및 serving
+3. production Android device QA
+4. Privacy / Data Safety 최종 검토
+5. release signing 및 AAB
+6. Play 테스트 트랙과 staged rollout
+7. rollback 기준 검증
 
 ## 미완료 또는 deferred QA
 
