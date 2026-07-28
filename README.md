@@ -109,12 +109,13 @@ docs/
   PR_TEMPLATE.md
 ```
 
-## ChatGPT / Codex와 함께 사용하는 방법
+## AI-assisted development workflow
 
-1. 사용자가 ChatGPT 프로젝트에 요구사항을 설명합니다.
-2. ChatGPT가 구현 방향, 검토 포인트, Codex 프롬프트를 정리합니다.
-3. Codex는 기능별 브랜치에서 실제 파일 수정과 테스트를 진행합니다.
-4. GitHub PR에서 변경사항을 검토합니다.
-5. `main` merge 후 Vercel 배포 상태를 확인합니다.
+ChatGPT는 제품 우선순위·정책·acceptance criteria와 PR 검토를 담당하고, Codex 또는 Claude Code 중 한 명이 primary implementer로 작업합니다. Claude는 운세·UX 콘텐츠 작업에 활용하며, 위험도에 따라 구현자와 다른 모델이 독립 검토합니다.
 
-브랜드 문구 기준은 [docs/BRAND_GUIDE.md](docs/BRAND_GUIDE.md)를, 운세 콘텐츠 작성 기준은 [docs/CONTENT_STYLE_GUIDE.md](docs/CONTENT_STYLE_GUIDE.md)를 참고합니다. 자세한 운영 흐름은 [docs/WORKFLOW.md](docs/WORKFLOW.md)를 참고합니다.
+- AI 작업 canonical 규칙: [AGENTS.md](AGENTS.md)
+- 사람용 운영 설명: [docs/AI_WORKFLOW.md](docs/AI_WORKFLOW.md)
+- 현재 프로젝트 상태: [docs/PROJECT_STATE.md](docs/PROJECT_STATE.md)
+- 브랜치·검토·배포 흐름: [docs/WORKFLOW.md](docs/WORKFLOW.md)
+
+브랜드 문구 기준은 [docs/BRAND_GUIDE.md](docs/BRAND_GUIDE.md)를, 운세 콘텐츠 작성 기준은 [docs/CONTENT_STYLE_GUIDE.md](docs/CONTENT_STYLE_GUIDE.md)를 참고합니다.
