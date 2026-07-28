@@ -1,5 +1,33 @@
 # CHANGELOG
 
+## PR #412 - AdMob Production Rewarded Rollout Contract
+
+### Added
+
+- Added a 20-section production Rewarded rollout contract covering identifier
+  types, AdMob Console prerequisites and user-operated procedure, required
+  user values, configuration boundaries, build modes, fail-closed behavior,
+  consent/privacy, Google Play disclosures, source/CI plans, device QA,
+  rollback, blockers, exclusions, pending work, and completion criteria.
+- Added a docs/check-only validator with required-section ordering, exact
+  pending-state checks, protected-path enforcement, mojibake detection, and
+  18 negative mutations.
+
+### Unchanged
+
+- Production ad unit ID, source, native, workflow, and lockfile
+- Existing mock and official-test behavior, consent gates, storage keys and
+  shape, schema, routing, fortune calculations, and result generation
+- AdMob Console, Google Play Console, privacy policy, and Data safety forms
+
+### Pending
+
+- Production Rewarded ad unit creation and user-confirmed production ID
+- Production request/load/show and serving
+- Privacy/Data Safety final review
+- Release signing, AAB, production device QA, and Play upload
+- Actual early-dismiss QA and repeated ADB listener diagnostics
+
 ## PR #411 - AdMob Official Test Rewarded Provider
 
 ### Added
