@@ -5,7 +5,7 @@
 ## 기준
 
 - 기준일: 2026-07-28
-- State baseline main HEAD: `2ea0e017abf7ac6df1ba3d4132671194a078b826`
+- State baseline main HEAD: `993a187b69c7646d9cced9bedbed64da25c543d4`
 - 작업 시작 전 Open PR: #417 (Draft/Open, 보류)
 - 현재 앱: Google Play 공개 상태
 - 현재 플랫폼: React + Vite + Capacitor Android
@@ -20,26 +20,38 @@
 - Google 공식 Rewarded Test Ad 구현 및 Galaxy S23 Ultra 기능 QA 완료
 - production Rewarded ad unit은 Owner가 AdMob Console에서 생성 완료
 - 실제 production ad unit ID 값은 저장소 밖에서 관리
-- production source connection capability 구현 완료
-- production Rewarded mode-aware UI copy 구현 완료
-- 인앱 개인정보/동의 문구를 현재 capability에 맞게 정합화 완료
-- owner-held production ID release injection path는 PR #417에서 Draft/Open 상태로 보류
-- GitHub Secret 실제 설정과 production-configured workflow 실행은 시작하지 않음
-- production request/load/show 검증과 serving은 시작하지 않음
+- production source connection capability: Implemented
+- production Rewarded mode-aware UI copy: Implemented
+- 인앱 개인정보/동의 문구 capability 정합화: Implemented
+- production Rewarded release workflow injection support는 PR #417에서 구현 중
+- release environment preflight support는 PR #417에서 구현 중
+- App ID/ad-unit publisher prefix verification은 PR #417에서 구현 중
+- full Rewarded provider checker before release build는 PR #417에서 구현 중
+- PR #417: Draft/Open
+- GitHub Secret actual value configuration: Not started
+- production-configured release workflow run: Not started
+- production Rewarded-configured signed AAB: Not started
+- production request/load/show verification: Not started
+- production serving: Not started
+- production device QA: Not started
+- Privacy/Data Safety final review: Pending
+- external privacy policy final review: Pending
+- advertising disclosure final review: Pending
 
 ## 현재 남은 단계
 
-1. GitHub Secret 실제 설정
-2. production-configured workflow 실행
-3. production AAB 생성
-4. production request/load/show 검증
-5. production serving
-6. production Android device QA
-7. Play upload
-8. Privacy / Data Safety 최종 검토
-9. 외부 공개 개인정보처리방침 최종 검토
-10. 광고 관련 disclosure 최종 검토
-11. staged rollout 및 rollback 기준 검증
+1. PR #417 독립 검토와 Owner merge 승인
+2. GitHub Secret 실제 설정
+3. production-configured workflow 실행
+4. production AAB 생성
+5. production request/load/show 검증
+6. production serving
+7. production Android device QA
+8. Play upload
+9. Privacy / Data Safety 최종 검토
+10. 외부 공개 개인정보처리방침 최종 검토
+11. 광고 관련 disclosure 최종 검토
+12. staged rollout 및 rollback 기준 검증
 
 ## 미완료 또는 deferred QA
 

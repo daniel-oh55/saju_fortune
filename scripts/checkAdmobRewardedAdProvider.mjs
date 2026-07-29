@@ -1,8 +1,9 @@
 import assert from 'node:assert/strict';
-import { execFileSync } from 'node:child_process';
+import { execFileSync, spawnSync } from 'node:child_process';
 import { existsSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
+import { TextDecoder } from 'node:util';
 import {
   getRewardedAdSdkConfig,
   GOOGLE_OFFICIAL_ANDROID_REWARDED_TEST_AD_UNIT_ID,
@@ -25,7 +26,21 @@ import {
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const negativeSelfTest = process.argv.includes('--negative-self-test');
+const releaseEnvPreflight = process.argv.includes('--release-env-preflight');
+const releaseEnvPreflightTestFixture = process.argv.includes(
+  '--release-env-preflight-test-app-id-fixture',
+);
+const androidAdMobAppIdResourcePath = 'android/app/src/main/res/values/strings.xml';
 const preservedUntrackedFiles = new Set(['pr405-review.json', 'pr405.diff']);
+const utf8Decoder = new TextDecoder('utf-8', { fatal: true });
+const concreteAdUnitIdPattern = /\bca-app-pub-\d{16}\/\d{10}\b/gu;
+const releaseEnvKeys = [
+  'VITE_REWARDED_AD_PROVIDER',
+  'VITE_REWARDED_AD_SDK_ENABLED',
+  'VITE_REWARDED_AD_MODE',
+  'VITE_REWARDED_AD_BUILD_TARGET',
+  'VITE_REWARDED_AD_UNIT_ID',
+];
 
 function read(relativePath) {
   return readFileSync(path.join(root, relativePath), 'utf8');
@@ -55,9 +70,55 @@ function getChangedFiles() {
   return [...new Set([...committed, ...committedFallback, ...staged, ...working, ...untracked])];
 }
 
-const changedFiles = getChangedFiles();
+let changedFiles = [];
+let trackedFiles = [];
+
+function getTrackedFiles() {
+  return execFileSync('git', ['ls-files', '-z'], { cwd: root, encoding: 'utf8' })
+    .split('\0')
+    .filter(Boolean)
+    .map((file) => file.replaceAll('\\', '/'));
+}
+
+function readTrackedUtf8Text(relativePath, bufferOverride) {
+  const buffer = bufferOverride ?? readFileSync(path.join(root, relativePath));
+  if (buffer.includes(0)) return null;
+  try {
+    return utf8Decoder.decode(buffer);
+  } catch {
+    return null;
+  }
+}
+
+function validateConcreteAdUnitIdLiterals(files, sourceOverrides = new Map()) {
+  const errors = [];
+  for (const file of files) {
+    const source = sourceOverrides.has(file)
+      ? sourceOverrides.get(file)
+      : readTrackedUtf8Text(file);
+    if (source === null || source === undefined) continue;
+    const concreteIds = source.match(concreteAdUnitIdPattern) ?? [];
+    if (concreteIds.some(
+      (value) => value !== GOOGLE_OFFICIAL_ANDROID_REWARDED_TEST_AD_UNIT_ID,
+    )) {
+      errors.push(`${file}: concrete production ad unit ID literal is prohibited`);
+    }
+  }
+  return errors;
+}
+
+function assertNoConcreteProductionAdUnitIds(files, sourceOverrides = new Map()) {
+  const errors = validateConcreteAdUnitIdLiterals(files, sourceOverrides);
+  assert.deepEqual(errors, [], errors.join('\n'));
+}
 
 const requiredTokens = [
+  ['scripts/checkAdmobRewardedAdProvider.mjs', 'function getTrackedFiles()'],
+  ['scripts/checkAdmobRewardedAdProvider.mjs', "execFileSync('git', ['ls-files', '-z']"],
+  ['scripts/checkAdmobRewardedAdProvider.mjs', 'function validateConcreteAdUnitIdLiterals('],
+  ['scripts/checkAdmobRewardedAdProvider.mjs', 'function assertNoConcreteProductionAdUnitIds('],
+  ['scripts/checkAdmobRewardedAdProvider.mjs', 'trackedFiles = getTrackedFiles();'],
+  ['scripts/checkAdmobRewardedAdProvider.mjs', 'assertNoConcreteProductionAdUnitIds(trackedFiles);'],
   ['src/config/rewardedAdSdkConfig.js', 'GOOGLE_OFFICIAL_ANDROID_REWARDED_TEST_AD_UNIT_ID'],
   ['src/config/rewardedAdSdkConfig.js', "REWARDED_AD_UNIT_ID_ENV_KEY = 'VITE_REWARDED_AD_UNIT_ID'"],
   ['src/config/rewardedAdSdkConfig.js', "OFFICIAL_TEST: 'official_test'"],
@@ -189,6 +250,89 @@ function validateSources(sourceOverrides = new Map()) {
   const consentSettingsSource = sourceFor('src/components/ConsentSettingsPanel.jsx');
   const appSource = sourceFor('src/App.jsx');
   const configSource = sourceFor('src/config/rewardedAdSdkConfig.js');
+  const checkerSource = sourceFor('scripts/checkAdmobRewardedAdProvider.mjs');
+  const trackedFileScanBlock = checkerSource.slice(
+    checkerSource.indexOf('\nfunction getTrackedFiles'),
+    checkerSource.indexOf('\nfunction readTrackedUtf8Text'),
+  );
+  const trackedTextReadBlock = checkerSource.slice(
+    checkerSource.indexOf('\nfunction readTrackedUtf8Text'),
+    checkerSource.indexOf('\nfunction validateConcreteAdUnitIdLiterals'),
+  );
+  const concreteIdValidationBlock = checkerSource.slice(
+    checkerSource.indexOf('\nfunction validateConcreteAdUnitIdLiterals'),
+    checkerSource.indexOf('\nfunction assertNoConcreteProductionAdUnitIds'),
+  );
+  const mainBlock = checkerSource.slice(checkerSource.indexOf('\nasync function main()'));
+  if (!trackedFileScanBlock.includes("execFileSync('git', ['ls-files', '-z']")) {
+    errors.push('concrete ad unit ID scan must enumerate all tracked files');
+  }
+  const trackedFileFilters = trackedFileScanBlock.match(/\.filter\(/gu) ?? [];
+  if (
+    trackedFileFilters.length !== 1 ||
+    !trackedFileScanBlock.includes('.filter(Boolean)') ||
+    trackedFileScanBlock.includes('trackedTextExtensions') ||
+    trackedFileScanBlock.includes('path.extname') ||
+    trackedFileScanBlock.includes('.endsWith(')
+  ) {
+    errors.push('tracked file enumeration must not use filename or extension filters');
+  }
+  if (
+    !trackedTextReadBlock.includes('readFileSync(path.join(root, relativePath))') ||
+    !trackedTextReadBlock.includes('buffer.includes(0)') ||
+    !trackedTextReadBlock.includes('utf8Decoder.decode(buffer)') ||
+    !trackedTextReadBlock.includes('return null')
+  ) {
+    errors.push('tracked file text detection must use NUL and strict UTF-8 content checks');
+  }
+  if (
+    !mainBlock.includes('trackedFiles = getTrackedFiles();') ||
+    !mainBlock.includes('assertNoConcreteProductionAdUnitIds(trackedFiles);')
+  ) {
+    errors.push('concrete ad unit ID scan must use the repository-wide tracked file list');
+  }
+  if (concreteIdValidationBlock.includes('changedFiles')) {
+    errors.push('concrete ad unit ID scan must not depend on changedFiles');
+  }
+  if (!concreteIdValidationBlock.includes(
+    'value !== GOOGLE_OFFICIAL_ANDROID_REWARDED_TEST_AD_UNIT_ID',
+  )) {
+    errors.push('only the Google official Rewarded Test ID may be allowed');
+  }
+  if (
+    !concreteIdValidationBlock.includes(
+      '`${file}: concrete production ad unit ID literal is prohibited`',
+    ) ||
+    concreteIdValidationBlock.includes('${value}')
+  ) {
+    errors.push('concrete ad unit ID errors must be generic and must not expose ID values');
+  }
+  const releaseValidationBlock = checkerSource.slice(
+    checkerSource.indexOf('\nfunction validateProductionReleaseEnvironment'),
+    checkerSource.indexOf('\nfunction runReleaseEnvironmentPreflight'),
+  );
+  const releaseSubprocessBlock = checkerSource.slice(
+    checkerSource.indexOf('\nfunction runReleaseEnvironmentPreflightSubprocessTests'),
+    checkerSource.indexOf('\nfunction makeProductionConfig'),
+  );
+  if (!checkerSource.includes(
+    "const androidAdMobAppIdResourcePath = 'android/app/src/main/res/values/strings.xml'",
+  )) {
+    errors.push('release preflight must read the approved Android AdMob App ID resource');
+  }
+  if (!releaseValidationBlock.includes(
+    'appPublisherPrefix === adUnitPublisherPrefix',
+  )) {
+    errors.push('release preflight must verify matching publisher prefixes');
+  }
+  if (!releaseSubprocessBlock.includes("'mismatched publisher prefix'")) {
+    errors.push('release preflight subprocess tests must cover mismatched publisher prefixes');
+  }
+  if (!releaseSubprocessBlock.includes(
+    'const mismatchedPublisherPrefixShouldPass = false',
+  )) {
+    errors.push('mismatched publisher prefix fixture must fail');
+  }
   const officialTestCopyBlock = modalSource.slice(
     modalSource.indexOf('const OFFICIAL_TEST_SDK_COPY'),
     modalSource.indexOf('const PRODUCTION_SDK_COPY'),
@@ -378,6 +522,149 @@ function createSyntheticAppId() {
   return ['ca-app-pub-', publisher, '~', app].join('');
 }
 
+function readApprovedAndroidAdMobAppId() {
+  const source = read(androidAdMobAppIdResourcePath).replace(/<!--[\s\S]*?-->/gu, '');
+  const matches = [...source.matchAll(
+    /<string\b[^>]*\bname=["']admob_app_id["'][^>]*>([^<]+)<\/string>/gu,
+  )];
+  return matches.length === 1 ? matches[0][1].trim() : '';
+}
+
+function publisherPrefixFromAppId(appId) {
+  return /^(ca-app-pub-\d{16})~\d{10}$/u.exec(appId)?.[1] ?? '';
+}
+
+function publisherPrefixFromAdUnitId(adUnitId) {
+  return /^(ca-app-pub-\d{16})\/\d{10}$/u.exec(adUnitId)?.[1] ?? '';
+}
+
+function createAdUnitIdForPublisher(publisherPrefix) {
+  return [publisherPrefix, '/', ['12345', '67890'].join('')].join('');
+}
+
+function createDifferentPublisherPrefix(publisherPrefix) {
+  const lastDigit = Number(publisherPrefix.at(-1));
+  return `${publisherPrefix.slice(0, -1)}${(lastDigit + 1) % 10}`;
+}
+
+function validateProductionReleaseEnvironment(env, appId) {
+  const config = getRewardedAdSdkConfig(env);
+  const normalizedAdUnitId = String(env.VITE_REWARDED_AD_UNIT_ID ?? '').trim();
+  const appPublisherPrefix = publisherPrefixFromAppId(appId);
+  const adUnitPublisherPrefix = publisherPrefixFromAdUnitId(normalizedAdUnitId);
+  const valid =
+    String(env.VITE_REWARDED_AD_PROVIDER ?? '').trim().toLowerCase() === 'sdk' &&
+    String(env.VITE_REWARDED_AD_SDK_ENABLED ?? '').trim().toLowerCase() === 'true' &&
+    String(env.VITE_REWARDED_AD_MODE ?? '').trim().toLowerCase() === 'production' &&
+    String(env.VITE_REWARDED_AD_BUILD_TARGET ?? '').trim().toLowerCase() === 'release' &&
+    appPublisherPrefix.length > 0 &&
+    adUnitPublisherPrefix.length > 0 &&
+    appPublisherPrefix === adUnitPublisherPrefix &&
+    normalizedAdUnitId !== GOOGLE_OFFICIAL_ANDROID_REWARDED_TEST_AD_UNIT_ID &&
+    config.configurationValid === true &&
+    config.mockAllowed === false &&
+    config.isTesting === false &&
+    isApprovedRewardedAdSdkConfig(config) === true;
+
+  if (!valid) {
+    throw new Error('Production Rewarded release environment preflight failed');
+  }
+}
+
+function runReleaseEnvironmentPreflight() {
+  let appId = '';
+  try {
+    appId = releaseEnvPreflightTestFixture
+      ? String(process.env.ADMOB_APP_ID_PREFLIGHT_TEST_FIXTURE ?? '')
+      : readApprovedAndroidAdMobAppId();
+  } catch {
+    appId = '';
+  }
+  validateProductionReleaseEnvironment(process.env, appId);
+  process.stdout.write('Production Rewarded release environment preflight passed\n');
+}
+
+function runReleaseEnvironmentPreflightSubprocessTests() {
+  const checker = fileURLToPath(import.meta.url);
+  const approvedAppId = readApprovedAndroidAdMobAppId();
+  const approvedPublisherPrefix = publisherPrefixFromAppId(approvedAppId);
+  assert(approvedPublisherPrefix, 'approved Android AdMob App ID must have the expected format');
+  const matchingAdUnitId = createAdUnitIdForPublisher(approvedPublisherPrefix);
+  const mismatchedAdUnitId = createAdUnitIdForPublisher(
+    createDifferentPublisherPrefix(approvedPublisherPrefix),
+  );
+  const syntheticAppId = createSyntheticAppId();
+  const baseEnv = Object.fromEntries(releaseEnvKeys.map((key) => [key, '']));
+  const validEnv = {
+    ...baseEnv,
+    VITE_REWARDED_AD_PROVIDER: 'sdk',
+    VITE_REWARDED_AD_SDK_ENABLED: 'true',
+    VITE_REWARDED_AD_MODE: 'production',
+    VITE_REWARDED_AD_BUILD_TARGET: 'release',
+    VITE_REWARDED_AD_UNIT_ID: matchingAdUnitId,
+  };
+  const mismatchedPublisherPrefixShouldPass = false;
+  const cases = [
+    ['matching publisher prefix', validEnv, true],
+    ['mismatched publisher prefix', {
+      ...validEnv,
+      VITE_REWARDED_AD_UNIT_ID: mismatchedAdUnitId,
+    }, mismatchedPublisherPrefixShouldPass],
+    ['missing App ID', validEnv, false, ''],
+    ['malformed App ID', validEnv, false, 'invalid'],
+    ['missing ID', { ...validEnv, VITE_REWARDED_AD_UNIT_ID: '' }, false],
+    ['malformed ad unit', { ...validEnv, VITE_REWARDED_AD_UNIT_ID: 'invalid' }, false],
+    ['App ID used as ad unit', {
+      ...validEnv,
+      VITE_REWARDED_AD_UNIT_ID: syntheticAppId,
+    }, false],
+    ['official test ID', {
+      ...validEnv,
+      VITE_REWARDED_AD_UNIT_ID: GOOGLE_OFFICIAL_ANDROID_REWARDED_TEST_AD_UNIT_ID,
+    }, false],
+    ['debug target', { ...validEnv, VITE_REWARDED_AD_BUILD_TARGET: 'debug' }, false],
+    ['official test mode', { ...validEnv, VITE_REWARDED_AD_MODE: 'official_test' }, false],
+    ['mock provider', { ...validEnv, VITE_REWARDED_AD_PROVIDER: 'mock' }, false],
+    ['SDK disabled', { ...validEnv, VITE_REWARDED_AD_SDK_ENABLED: 'false' }, false],
+    ['unknown target', { ...validEnv, VITE_REWARDED_AD_BUILD_TARGET: 'unknown' }, false],
+  ];
+
+  for (const [name, env, shouldPass, appIdFixture] of cases) {
+    const args = [checker, '--release-env-preflight'];
+    if (appIdFixture !== undefined) {
+      args.push('--release-env-preflight-test-app-id-fixture');
+    }
+    const result = spawnSync(process.execPath, args, {
+      cwd: root,
+      encoding: 'utf8',
+      env: {
+        ...process.env,
+        ...env,
+        ADMOB_APP_ID_PREFLIGHT_TEST_FIXTURE: appIdFixture ?? '',
+      },
+    });
+    const output = `${result.stdout ?? ''}${result.stderr ?? ''}`;
+    assert.equal(result.status === 0, shouldPass, `${name}: unexpected preflight result`);
+    assert(!output.includes(approvedAppId), `${name}: approved App ID leaked`);
+    assert(!output.includes(matchingAdUnitId), `${name}: matching ad unit ID leaked`);
+    assert(!output.includes(mismatchedAdUnitId), `${name}: mismatched ad unit ID leaked`);
+    assert(!output.includes(syntheticAppId), `${name}: synthetic App ID leaked`);
+    if (shouldPass) {
+      assert.equal(
+        result.stdout,
+        'Production Rewarded release environment preflight passed\n',
+        `${name}: unexpected success output`,
+      );
+      assert.equal(result.stderr, '', `${name}: unexpected success error output`);
+    } else {
+      assert(
+        output.includes('Production Rewarded release environment preflight failed'),
+        `${name}: missing generic failure output`,
+      );
+    }
+  }
+}
+
 function makeProductionConfig() {
   const productionAdUnitId = createSyntheticProductionAdUnitId();
   return getRewardedAdSdkConfig({
@@ -520,6 +807,66 @@ function createLoaderHarness(options = {}) {
     stats: () => ({ mockCalls, sdkCalls }),
   };
 }
+
+test('repository-wide concrete ad unit scan passes every current tracked UTF-8 source', () => {
+  assertNoConcreteProductionAdUnitIds(trackedFiles);
+});
+test('repository-wide concrete ad unit scan includes tracked CSS outside the current diff', () => {
+  const fixture = 'src/styles.css';
+  assert(trackedFiles.includes(fixture), 'tracked CSS fixture must be enumerated');
+  assert(!changedFiles.includes(fixture), 'tracked CSS fixture must be outside the current diff');
+  const syntheticId = createSyntheticProductionAdUnitId();
+  const errors = validateConcreteAdUnitIdLiterals(
+    trackedFiles,
+    new Map([[fixture, `--injected-id: '${syntheticId}';`]]),
+  );
+  assert.deepEqual(
+    errors,
+    [`${fixture}: concrete production ad unit ID literal is prohibited`],
+  );
+  assert(!errors.join('\n').includes(syntheticId));
+  assert(!errors.join('\n').includes(syntheticId.split('/')[0]));
+});
+test('repository-wide concrete ad unit scan allows the official Rewarded Test ID in CSS', () => {
+  const fixture = 'src/styles.css';
+  assert(trackedFiles.includes(fixture), 'tracked CSS fixture must be enumerated');
+  assertNoConcreteProductionAdUnitIds(
+    [fixture],
+    new Map([[
+      fixture,
+      `--official-test-id: '${GOOGLE_OFFICIAL_ANDROID_REWARDED_TEST_AD_UNIT_ID}';`,
+    ]]),
+  );
+});
+test('repository-wide concrete ad unit scan includes extensionless tracked UTF-8 sources', () => {
+  const fixture = trackedFiles.find(
+    (file) => path.extname(file) === '' && readTrackedUtf8Text(file) !== null,
+  );
+  assert(fixture, 'extensionless tracked UTF-8 fixture is required');
+  const syntheticId = createSyntheticProductionAdUnitId();
+  const errors = validateConcreteAdUnitIdLiterals(
+    trackedFiles,
+    new Map([[fixture, `injected_id='${syntheticId}'`]]),
+  );
+  assert.deepEqual(
+    errors,
+    [`${fixture}: concrete production ad unit ID literal is prohibited`],
+  );
+  assert(!errors.join('\n').includes(syntheticId));
+  assert(!errors.join('\n').includes(syntheticId.split('/')[0]));
+});
+test('repository-wide ad-unit scan does not confuse an App ID tilde form in CSS', () => {
+  const fixture = 'src/styles.css';
+  assert(trackedFiles.includes(fixture), 'tracked CSS fixture must be enumerated');
+  assertNoConcreteProductionAdUnitIds(
+    [fixture],
+    new Map([[fixture, `--app-id: '${createSyntheticAppId()}';`]]),
+  );
+});
+test('tracked file text detection skips NUL and invalid UTF-8 content', () => {
+  assert.equal(readTrackedUtf8Text('synthetic-binary', Buffer.from([0x61, 0x00, 0x62])), null);
+  assert.equal(readTrackedUtf8Text('synthetic-non-utf8', Buffer.from([0xc3, 0x28])), null);
+});
 
 test('default no-intent config allows exactly one mock call', async () => {
   const config = getRewardedAdSdkConfig({});
@@ -1452,6 +1799,98 @@ for (const [key, expected] of [
 
 const targetedNegativeMutations = [
   {
+    name: 'publisher prefix comparison weakened to always true',
+    file: 'scripts/checkAdmobRewardedAdProvider.mjs',
+    mutate: (source) => source.replace(
+      '    appPublisherPrefix === adUnitPublisherPrefix &&',
+      '    true &&',
+    ),
+  },
+  {
+    name: 'mismatched publisher prefix fixture changed to pass',
+    file: 'scripts/checkAdmobRewardedAdProvider.mjs',
+    mutate: (source) => source.replace(
+      '  const mismatchedPublisherPrefixShouldPass = false;',
+      '  const mismatchedPublisherPrefixShouldPass = true;',
+    ),
+  },
+  {
+    name: 'repository-wide tracked file scan weakened to changedFiles',
+    file: 'scripts/checkAdmobRewardedAdProvider.mjs',
+    mutate: (source) => source.replace(
+      '\n  trackedFiles = getTrackedFiles();\n  const sourceErrors',
+      '\n  trackedFiles = changedFiles;\n  const sourceErrors',
+    ),
+  },
+  {
+    name: 'tracked file extension allowlist reintroduced',
+    file: 'scripts/checkAdmobRewardedAdProvider.mjs',
+    mutate: (source) => source
+      .replace(
+        "const utf8Decoder = new TextDecoder('utf-8', { fatal: true });",
+        [
+          "const trackedTextExtensions = new Set(['.js']);",
+          "const utf8Decoder = new TextDecoder('utf-8', { fatal: true });",
+        ].join('\n'),
+      )
+      .replace(
+        "    .map((file) => file.replaceAll('\\\\', '/'));",
+        [
+          "    .map((file) => file.replaceAll('\\\\', '/'))",
+          '    .filter((file) => trackedTextExtensions.has(path.extname(file)));',
+        ].join('\n'),
+      ),
+  },
+  {
+    name: 'tracked file enumeration filtered by path.extname',
+    file: 'scripts/checkAdmobRewardedAdProvider.mjs',
+    mutate: (source) => source.replace(
+      "    .map((file) => file.replaceAll('\\\\', '/'));",
+      [
+        "    .map((file) => file.replaceAll('\\\\', '/'))",
+        "    .filter((file) => path.extname(file) !== '');",
+      ].join('\n'),
+    ),
+  },
+  {
+    name: 'tracked CSS sources excluded',
+    file: 'scripts/checkAdmobRewardedAdProvider.mjs',
+    mutate: (source) => source.replace(
+      "    .map((file) => file.replaceAll('\\\\', '/'));",
+      [
+        "    .map((file) => file.replaceAll('\\\\', '/'))",
+        "    .filter((file) => !file.endsWith('.css'));",
+      ].join('\n'),
+    ),
+  },
+  {
+    name: 'tracked file enumeration shrunk to selected extensions',
+    file: 'scripts/checkAdmobRewardedAdProvider.mjs',
+    mutate: (source) => source.replace(
+      "    .map((file) => file.replaceAll('\\\\', '/'));",
+      [
+        "    .map((file) => file.replaceAll('\\\\', '/'))",
+        "    .filter((file) => ['.js', '.mjs'].includes(path.extname(file)));",
+      ].join('\n'),
+    ),
+  },
+  {
+    name: 'concrete ad unit ID scan receives an empty file list',
+    file: 'scripts/checkAdmobRewardedAdProvider.mjs',
+    mutate: (source) => source.replace(
+      '\n  assertNoConcreteProductionAdUnitIds(trackedFiles);\n  assert(!read',
+      '\n  assertNoConcreteProductionAdUnitIds([]);\n  assert(!read',
+    ),
+  },
+  {
+    name: 'non-official concrete ad unit IDs are allowed',
+    file: 'scripts/checkAdmobRewardedAdProvider.mjs',
+    mutate: (source) => source.replace(
+      'value !== GOOGLE_OFFICIAL_ANDROID_REWARDED_TEST_AD_UNIT_ID',
+      'false',
+    ),
+  },
+  {
     name: 'mock build target allowlist weakened to release denylist',
     file: 'src/config/rewardedAdSdkConfig.js',
     mutate: (source) => source.replace(
@@ -1590,21 +2029,21 @@ const targetedNegativeMutations = [
 ];
 
 async function main() {
+  if (releaseEnvPreflight) {
+    runReleaseEnvironmentPreflight();
+    return;
+  }
+
+  changedFiles = getChangedFiles();
+  trackedFiles = getTrackedFiles();
   const sourceErrors = validateSources();
   assert.deepEqual(sourceErrors, [], sourceErrors.join('\n'));
 
   const officialId = ['ca-app-pub-3940256099942544', '5224354917'].join('/');
   assert(read('src/config/rewardedAdSdkConfig.js').includes(officialId));
-  const concreteIdPattern = /\bca-app-pub-\d{16}\/\d{10}\b/gu;
-  for (const file of changedFiles) {
-    if (!existsSync(path.join(root, file))) continue;
-    const concreteIds = [...read(file).matchAll(concreteIdPattern)].map((match) => match[0]);
-    assert(
-      concreteIds.every((value) => value === officialId),
-      `${file}: changed files may not contain a concrete production ad unit ID literal`,
-    );
-  }
+  assertNoConcreteProductionAdUnitIds(trackedFiles);
   assert(!read('.github/workflows/android-debug-build.yml').includes('VITE_REWARDED_AD_PROVIDER: sdk'));
+  runReleaseEnvironmentPreflightSubprocessTests();
 
   let behavioralAssertions = 0;
   for (const { name, run } of tests) {

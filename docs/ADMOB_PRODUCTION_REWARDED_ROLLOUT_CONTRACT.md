@@ -6,11 +6,13 @@ This contract defines the prerequisites, configuration boundaries, validation
 rules, privacy review, release gates, device QA, and rollback criteria that
 must be satisfied before 하루풀이 uses a production Rewarded ad unit.
 
-This PR implements the source-side production Rewarded connection capability.
-It does not inject the owner-held production identifier, request or serve a
-production ad, change native code or release configuration, or prepare a
-release artifact. Production activation remains a separate, owner-approved
-release operation.
+The source-side production Rewarded connection capability and the release
+workflow injection path are implemented. The release path maps an
+owner-managed repository Secret into the preflight and web build only after a
+manual main-branch confirmation guard. This PR does not configure the actual
+Secret value, run the release workflow, request or serve a production ad,
+change native code, or prepare a release artifact. Production activation
+remains a separate, owner-approved release operation.
 
 ## 2. Current merged baseline
 
@@ -38,13 +40,21 @@ Not testable / Pending:
 Implemented:
 
 - Production source connection capability
+- Production Rewarded release workflow injection support
+- Release environment preflight support
+- App ID/ad-unit publisher prefix verification
+- Full Rewarded provider checker before release build
+- Existing release signing infrastructure
+- Existing signed AAB workflow
 
 Not started:
 
-- Owner-held production ID release injection
+- GitHub Secret actual value configuration
+- Production-configured release workflow run
+- Production Rewarded-configured signed AAB generation
 - Production request/load/show
 - Production serving
-- Release build, signing, and AAB generation
+- Production Android device QA
 - Google Play Console new-release upload
 
 Canonical rollout state:
@@ -57,12 +67,21 @@ Canonical rollout state:
 - Production ad unit ID format: Valid `/` form
 - Exact production ad unit ID committed to repository: No
 - Production source connection capability: Implemented
-- Owner-held production ID release injection: Not started
+- Production Rewarded release workflow injection support: Implemented
+- Release environment preflight support: Implemented
+- App ID/ad-unit publisher prefix verification: Implemented
+- Full Rewarded provider checker before release build: Implemented
+- GitHub Secret actual value configuration: Not started
+- Production-configured release workflow run: Not started
 - Production request/load/show: Not started
 - Production serving: Not started
 - AdMob Console creation: Completed
 - Privacy/Data Safety final review: Pending
-- Release signing/AAB: Pending
+- External public privacy policy final review: Pending
+- Advertising disclosure final review: Pending
+- Existing release signing infrastructure: Confirmed
+- Existing signed AAB workflow: Confirmed
+- Production Rewarded-configured signed AAB: Not started
 - Production device QA: Not started
 - Play Console release upload: Not started
 
@@ -114,7 +133,8 @@ The owner confirmed these creation prerequisites:
 - The copied ad unit ID uses the `/` form and its publisher prefix matches the
   existing App ID.
 
-Before production injection or rollout, the owner must also confirm:
+Before a production-configured workflow run or rollout, the owner must also
+confirm:
 
 - AdMob account and app serving eligibility are in an acceptable state.
 - Privacy policy, consent, Google Play Data safety, advertising ID, and target
@@ -122,8 +142,10 @@ Before production injection or rollout, the owner must also confirm:
 - Production configuration and secrets have a single controlled source.
 - Release signing, AAB, device QA, monitoring, and rollback owners are known.
 
-The creation facts above are complete. The connection and rollout items remain
-gates, not claims that release work has occurred.
+The creation facts, source connection, release injection path, and preflight
+support are complete. Secret configuration, workflow execution, artifact
+generation, device QA, and rollout remain gates, not claims that release work
+has occurred.
 
 ## 6. AdMob Console creation procedure
 
@@ -143,8 +165,9 @@ The owner completed this user-operated procedure:
 
 AdMob Console creation: Completed. The Console was changed by the owner
 outside this source implementation PR. The source connection capability is
-implemented without embedding the owner-held identifier; release injection
-and activation remain separate approved operations.
+implemented without embedding the owner-held identifier. The release workflow
+injection path is also implemented, while actual Secret configuration,
+workflow execution, and activation remain separate approved operations.
 
 ## 7. Required user-supplied values
 
@@ -158,9 +181,12 @@ Supplied and confirmed by the owner:
 
 Still required before production rollout:
 
+- Configuration of the actual owner-held value in the repository Secret
+  `ADMOB_REWARDED_PRODUCTION_AD_UNIT_ID`
+- An owner-confirmed production-configured workflow run from `main`
 - The intended release environment and rollout owner
 - Privacy/Data Safety review decisions and any required disclosure updates
-- Release signing and Play Console ownership
+- Production device QA and Play Console ownership
 
 The exact production ID must not be inferred from the App ID, synthesized
 from examples, or committed to documentation, logs, checker fixtures, commit
@@ -260,37 +286,51 @@ or changed in this PR, and no status in this section represents approval.
 
 ## 13. Source implementation plan
 
-This source implementation uses:
+The current source and release implementation uses:
 
 - `src/config/rewardedAdSdkConfig.js`
 - `src/services/rewardedAdProvider.loader.js`
 - `src/services/rewardedAdProvider.sdk.js`
-- The existing production configuration checker
+- `.github/workflows/android-release-aab.yml`
+- The existing production configuration and release workflow checkers
 - Related rollout documentation and rolling project state
 
-The implementation adds narrowly scoped configuration validation before any
-SDK request while preserving the current public APIs, provider behavior
-outside production, storage compatibility, routing, schema version, fortune
-calculation, and result-generation logic.
+The source implementation adds narrowly scoped configuration validation before
+any SDK request. The release workflow passes the same production provider,
+SDK, mode, build-target, and Secret-backed ad-unit environment to a fail-closed
+preflight and the web build. It preserves the current public APIs, provider
+behavior outside production, storage compatibility, routing, schema version,
+fortune calculation, and result-generation logic.
 
-No owner-held production identifier, Android native file, release environment,
-or workflow is changed by this source implementation.
+No owner-held production identifier or Android native file is changed. The
+actual Secret value remains outside the repository and is not configured by
+this PR.
 
 ## 14. CI and release configuration plan
 
-A future release change must:
+The implemented release workflow:
 
-- Source the production identifier from one approved environment-specific
-  location without committing secrets or guessed values.
+- Remains `workflow_dispatch`-only and requires an explicit boolean
+  confirmation from `main`.
+- Uses `permissions: contents: read`.
+- Runs the full Rewarded provider checker before the release preflight and web
+  build without passing the production Rewarded environment or Secret.
+- Maps `ADMOB_REWARDED_PRODUCTION_AD_UNIT_ID` to
+  `VITE_REWARDED_AD_UNIT_ID` only for the preflight and web build.
 - Validate the identifier format and mode pairing during CI.
+- Reads the approved Android `admob_app_id` resource and fails closed unless
+  its publisher prefix matches the production Rewarded ad unit publisher
+  prefix.
 - Reject a release containing the Google official test ID.
-- Reject debug or official-test output containing a production ID.
-- Verify zero native requests when production configuration is absent.
+- Reject missing, malformed, App ID, debug-target, official-test, mock, or
+  SDK-disabled production release configuration before the web build.
 - Keep default Web/Vercel and standard Android Debug behavior unchanged.
-- Document signing inputs without committing keystores or credentials.
-- Build and verify the signed release/AAB only after configuration approval.
+- Preserve the existing signing validation, runner-temp keystore restore,
+  signed release build, `jarsigner` verification, and artifact ordering.
 
-No workflow or release environment configuration is changed in this PR.
+The workflow has not been run with production Rewarded configuration in this
+PR. The actual repository Secret value is not configured, and no AAB or
+artifact is generated.
 
 ## 15. Production device QA plan
 
@@ -333,8 +373,7 @@ localStorage key migration.
 
 Production implementation or rollout is blocked by any of the following:
 
-- Missing approved configuration source for the owner-held production
-  Rewarded ad unit ID
+- Missing actual owner-held value in the approved repository Secret
 - Identifier type, format, or ownership ambiguity
 - Unapproved build/provider mode pairing
 - Missing fail-closed configuration validation
@@ -352,13 +391,14 @@ This PR explicitly excludes:
 
 - AdMob Console changes or ad unit creation performed by this PR
 - The exact real production ad unit ID
-- Owner-held production ID release injection
+- GitHub Secret actual value configuration
+- Release workflow execution
 - Production request/load/show or serving
-- `android/**`, `ios/**`, `public/**`, or workflow changes
+- `android/**`, `ios/**`, or `public/**` changes
 - Dependency, lockfile, Capacitor, Vite, routing, or schema changes
 - Existing localStorage key or shape changes
 - Fortune calculation or result-generation changes
-- Release build, signing, AAB generation, or Play Console upload
+- Production-configured AAB generation or Play Console upload
 - Privacy policy, Data safety, or advertising ID Console submission
 
 ## 19. Pending work
@@ -371,12 +411,21 @@ This PR explicitly excludes:
 - Production ad unit ID format: Valid `/` form
 - Exact production ad unit ID committed to repository: No
 - Production source connection capability: Implemented
-- Owner-held production ID release injection: Not started
+- Production Rewarded release workflow injection support: Implemented
+- Release environment preflight support: Implemented
+- App ID/ad-unit publisher prefix verification: Implemented
+- Full Rewarded provider checker before release build: Implemented
+- GitHub Secret actual value configuration: Not started
+- Production-configured release workflow run: Not started
 - Production request/load/show: Not started
 - Production serving: Not started
 - AdMob Console creation: Completed
 - Privacy/Data Safety final review: Pending
-- Release signing/AAB: Pending
+- External public privacy policy final review: Pending
+- Advertising disclosure final review: Pending
+- Existing release signing infrastructure: Confirmed
+- Existing signed AAB workflow: Confirmed
+- Production Rewarded-configured signed AAB: Not started
 - Production device QA: Not started
 - Play Console release upload: Not started
 - Actual early-dismiss device QA: Pending
@@ -384,7 +433,7 @@ This PR explicitly excludes:
 
 ## 20. Completion criteria
 
-This source connection contract update is complete only when:
+This release injection contract update is complete only when:
 
 - All 20 required sections exist in this order.
 - The identifier types, mode matrix, fail-closed rules, consent gates,
@@ -393,12 +442,14 @@ This source connection contract update is complete only when:
 - The checker, lifecycle self-test, and negative mutations pass.
 - Existing AdMob provider, consent, content-safety, and docs/source guardrail
   checks pass.
-- Source changes remain limited to production configuration, fail-closed
-  provider routing, and SDK configuration validation.
-- No owner-held identifier, native, workflow, lockfile, storage, schema,
+- Workflow changes remain limited to manual authorization, Secret-backed
+  production environment injection, the full provider gate, fail-closed
+  publisher-prefix preflight, and durable verification.
+- No owner-held identifier, native, runtime source, lockfile, storage, schema,
   routing, UI, or fortune behavior changes exist.
 - The two pre-existing untracked review files remain untracked and unstaged.
 
-Production rollout completion is a separate milestone. It requires a
-secure release injection of the owner-confirmed production ID, final
-privacy/disclosure review, signed release/AAB, and production device QA.
+Production rollout completion is a separate milestone. It requires actual
+Secret configuration, an owner-confirmed workflow run, final
+privacy/disclosure review, a production Rewarded-configured signed AAB, and
+production device QA.

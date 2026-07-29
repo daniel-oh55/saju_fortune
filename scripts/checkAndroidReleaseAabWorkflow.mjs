@@ -1,156 +1,485 @@
+import assert from 'node:assert/strict';
+import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
-import { execSync } from 'node:child_process';
 
 const workflowPath = '.github/workflows/android-release-aab.yml';
+const providerCheckerPath = 'scripts/checkAdmobRewardedAdProvider.mjs';
 const gradlePath = 'android/app/build.gradle';
 const docPath = 'docs/ANDROID_RELEASE_AAB_WORKFLOW.md';
 const roadmapPath = 'docs/SAJU_ENGINE_ACCURACY_ROADMAP.md';
+const negativeSelfTest = process.argv.includes('--negative-self-test');
 
-const requiredPaths = [workflowPath, gradlePath, docPath, roadmapPath];
+const requiredPaths = [workflowPath, providerCheckerPath, gradlePath, docPath, roadmapPath];
+const normalizedRead = (path) => fs.readFileSync(path, 'utf8').replace(/\r\n/g, '\n');
 
-const requiredWorkflowSnippets = [
-  'name: Android Release AAB',
-  'workflow_dispatch',
-  'node-version: 22',
-  'Validate release signing secrets',
-  'Restore release keystore',
-  'Build signed release AAB',
-  'Verify signed release AAB',
-  'jarsigner -verify',
-  'jar verified.',
-  'Upload release AAB',
-  'harupuli-release-aab',
-];
+function stepBlock(workflow, name) {
+  const marker = `      - name: ${name}`;
+  const start = workflow.indexOf(marker);
+  if (start === -1) return '';
+  const next = workflow.indexOf('\n      - name:', start + marker.length);
+  return workflow.slice(start, next === -1 ? workflow.length : next);
+}
 
-const requiredGradleSnippets = [
+function validateWorkflow(workflow) {
+  const errors = [];
+  const requireMatch = (pattern, message) => {
+    if (!pattern.test(workflow)) errors.push(message);
+  };
+  const requireText = (text, message) => {
+    if (!workflow.includes(text)) errors.push(message);
+  };
+
+  const triggerBlock = workflow.slice(workflow.indexOf('on:\n'), workflow.indexOf('\njobs:'));
+  if (!/^on:\n  workflow_dispatch:\n/m.test(triggerBlock)) {
+    errors.push('workflow must use workflow_dispatch');
+  }
+  if (/^  (?:push|pull_request|schedule|repository_dispatch):/m.test(triggerBlock)) {
+    errors.push('workflow must remain workflow_dispatch only');
+  }
+  requireMatch(
+    /^      confirm_production_rewarded_release:\n        description: [^\n]*production Rewarded release[^\n]*\n        required: true\n        type: boolean\n        default: false$/m,
+    'production confirmation boolean input is required',
+  );
+  requireMatch(
+    /^permissions:\n  contents: read$/m,
+    'workflow permissions must be contents read',
+  );
+
+  const authorization = stepBlock(workflow, 'Validate manual production release authorization');
+  if (!authorization.includes('RELEASE_REF: ${{ github.ref }}') ||
+      !authorization.includes('if [ "$RELEASE_REF" != "refs/heads/main" ]; then')) {
+    errors.push('main branch guard is required');
+  }
+  if (!authorization.includes(
+    'OWNER_CONFIRMED: ${{ inputs.confirm_production_rewarded_release }}',
+  ) || !authorization.includes('if [ "$OWNER_CONFIRMED" != "true" ]; then')) {
+    errors.push('owner confirmation guard is required');
+  }
+
+  const productionEnv = [
+    'VITE_REWARDED_AD_PROVIDER: sdk',
+    'VITE_REWARDED_AD_SDK_ENABLED: "true"',
+    'VITE_REWARDED_AD_MODE: production',
+    'VITE_REWARDED_AD_BUILD_TARGET: release',
+    'VITE_REWARDED_AD_UNIT_ID: ${{ secrets.ADMOB_REWARDED_PRODUCTION_AD_UNIT_ID }}',
+  ];
+  const fullProvider = stepBlock(workflow, 'Validate Rewarded provider invariants');
+  const preflight = stepBlock(workflow, 'Validate production Rewarded release configuration');
+  const build = stepBlock(workflow, 'Build web app');
+  if (fullProvider.trimEnd() !== [
+    '      - name: Validate Rewarded provider invariants',
+    '        run: npm run check:admob-rewarded-provider',
+  ].join('\n')) {
+    errors.push('full Rewarded provider checker step must use the exact command without env');
+  }
+  requireText(
+    'node scripts/checkAdmobRewardedAdProvider.mjs --release-env-preflight',
+    'production Rewarded release preflight command is required',
+  );
+  if (!preflight.includes(
+    'run: node scripts/checkAdmobRewardedAdProvider.mjs --release-env-preflight\n',
+  )) {
+    errors.push('production Rewarded release preflight command must remain exact');
+  }
+  for (const forbidden of [
+    'VITE_REWARDED_AD_UNIT_ID',
+    'ADMOB_REWARDED_PRODUCTION_AD_UNIT_ID',
+    'VITE_REWARDED_AD_PROVIDER',
+    'VITE_REWARDED_AD_SDK_ENABLED',
+    'VITE_REWARDED_AD_MODE',
+    'VITE_REWARDED_AD_BUILD_TARGET',
+    'env:',
+  ]) {
+    if (fullProvider.includes(forbidden)) {
+      errors.push(`full Rewarded provider checker must not receive production env: ${forbidden}`);
+    }
+  }
+  for (const entry of productionEnv) {
+    if (!preflight.includes(entry)) errors.push(`preflight missing production env: ${entry}`);
+    if (!build.includes(entry)) errors.push(`build missing production env: ${entry}`);
+    if (workflow.split(entry).length - 1 !== 2) {
+      errors.push(`production env must be limited to preflight and build: ${entry}`);
+    }
+  }
+  if (preflight.includes('VITE_REWARDED_AD_MODE: official_test') ||
+      preflight.includes('VITE_REWARDED_AD_BUILD_TARGET: debug')) {
+    errors.push('preflight may not enable an isTesting configuration');
+  }
+
+  const stepOrder = [
+    'Checkout repository',
+    'Set up Node.js',
+    'Install dependencies',
+    'Validate manual production release authorization',
+    'Validate release signing secrets',
+    'Validate Rewarded provider invariants',
+    'Validate production Rewarded release configuration',
+    'Build web app',
+    'Set up JDK',
+    'Sync Android project',
+    'Make Gradle wrapper executable',
+    'Restore release keystore',
+    'Build signed release AAB',
+    'Verify signed release AAB',
+    'Upload release AAB',
+  ];
+  let previousIndex = -1;
+  for (const name of stepOrder) {
+    const index = workflow.indexOf(`      - name: ${name}`);
+    if (index === -1) {
+      errors.push(`required workflow step missing: ${name}`);
+    } else if (index <= previousIndex) {
+      errors.push(`workflow step order invalid at: ${name}`);
+    }
+    previousIndex = index;
+  }
+
+  for (const required of [
+    'node-version: 22',
+    'jarsigner -verify',
+    'jar verified.',
+    'actions/upload-artifact@v4',
+    'harupuli-release-aab',
+    'ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}',
+    'ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}',
+    'ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}',
+    'ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}',
+  ]) {
+    requireText(required, `existing release invariant missing: ${required}`);
+  }
+
+  if (/\bca-app-pub-\d{16}[~/]\d{10}\b/u.test(workflow)) {
+    errors.push('workflow may not contain a concrete AdMob identifier');
+  }
+  if (workflow.includes(['ca-app-pub-3940256099942544', '5224354917'].join('/'))) {
+    errors.push('workflow may not contain the Google official Rewarded Test ID');
+  }
+  for (const pattern of [
+    /\bset -x\b/u,
+    /\bprintenv\b/u,
+    /^\s*env\s*$/mu,
+    /\$\{\{\s*toJSON\(secrets\)\s*\}\}/u,
+    /\.env(?:\s|$)/u,
+    /\bcontinue-on-error\s*:\s*true\b/u,
+    /\bif\s*:\s*\$\{\{\s*always\(\)\s*\}\}/u,
+    /(?:echo|printf)[^\n]*(?:VITE_REWARDED_AD_UNIT_ID|ADMOB_REWARDED_PRODUCTION_AD_UNIT_ID)/u,
+    /(?:echo|printf)[^\n]*(?:ANDROID_KEYSTORE_PASSWORD|ANDROID_KEY_ALIAS|ANDROID_KEY_PASSWORD)(?![^\n]*>)/u,
+    /(?:^|\s)(?:supply|fastlane)(?:\s|$)/u,
+    /(?:uses:|run:)[^\n]*(?:deploy|deployment|rollout|google-play|play-store|publishBundle|publishReleaseBundle)/iu,
+  ]) {
+    if (pattern.test(workflow)) errors.push(`forbidden workflow pattern: ${pattern}`);
+  }
+
+  return errors;
+}
+
+function validateProviderChecker(providerChecker) {
+  const errors = [];
+  const trackedFileScanBlock = providerChecker.slice(
+    providerChecker.indexOf('\nfunction getTrackedFiles'),
+    providerChecker.indexOf('\nfunction readTrackedUtf8Text'),
+  );
+  const trackedTextReadBlock = providerChecker.slice(
+    providerChecker.indexOf('\nfunction readTrackedUtf8Text'),
+    providerChecker.indexOf('\nfunction validateConcreteAdUnitIdLiterals'),
+  );
+  const concreteIdValidationBlock = providerChecker.slice(
+    providerChecker.indexOf('\nfunction validateConcreteAdUnitIdLiterals'),
+    providerChecker.indexOf('\nfunction assertNoConcreteProductionAdUnitIds'),
+  );
+  const providerMainBlock = providerChecker.slice(
+    providerChecker.indexOf('\nasync function main()'),
+  );
+  const releaseValidationBlock = providerChecker.slice(
+    providerChecker.indexOf('\nfunction validateProductionReleaseEnvironment'),
+    providerChecker.indexOf('\nfunction runReleaseEnvironmentPreflight'),
+  );
+  const releaseSubprocessBlock = providerChecker.slice(
+    providerChecker.indexOf('\nfunction runReleaseEnvironmentPreflightSubprocessTests'),
+    providerChecker.indexOf('\nfunction makeProductionConfig'),
+  );
+  if (!trackedFileScanBlock.includes("execFileSync('git', ['ls-files', '-z']")) {
+    errors.push('provider checker concrete ID scan must enumerate all tracked files');
+  }
+  const trackedFileFilters = trackedFileScanBlock.match(/\.filter\(/gu) ?? [];
+  if (
+    trackedFileFilters.length !== 1 ||
+    !trackedFileScanBlock.includes('.filter(Boolean)') ||
+    trackedFileScanBlock.includes('trackedTextExtensions') ||
+    trackedFileScanBlock.includes('path.extname') ||
+    trackedFileScanBlock.includes('.endsWith(')
+  ) {
+    errors.push('provider checker tracked enumeration must not filter by filename or extension');
+  }
+  if (
+    !trackedTextReadBlock.includes('readFileSync(path.join(root, relativePath))') ||
+    !trackedTextReadBlock.includes('buffer.includes(0)') ||
+    !trackedTextReadBlock.includes('utf8Decoder.decode(buffer)') ||
+    !trackedTextReadBlock.includes('return null')
+  ) {
+    errors.push('provider checker must classify text by NUL and strict UTF-8 content checks');
+  }
+  if (
+    !providerMainBlock.includes('trackedFiles = getTrackedFiles();') ||
+    !providerMainBlock.includes('assertNoConcreteProductionAdUnitIds(trackedFiles);')
+  ) {
+    errors.push('provider checker concrete ID scan must use the repository-wide tracked list');
+  }
+  if (concreteIdValidationBlock.includes('changedFiles')) {
+    errors.push('provider checker concrete ID scan must not depend on changedFiles');
+  }
+  if (!concreteIdValidationBlock.includes(
+    'value !== GOOGLE_OFFICIAL_ANDROID_REWARDED_TEST_AD_UNIT_ID',
+  )) {
+    errors.push('provider checker must allow only the Google official Rewarded Test ID');
+  }
+  if (
+    !concreteIdValidationBlock.includes(
+      '`${file}: concrete production ad unit ID literal is prohibited`',
+    ) ||
+    concreteIdValidationBlock.includes('${value}')
+  ) {
+    errors.push('provider checker concrete ID errors must not expose ID values');
+  }
+  for (const required of [
+    "const androidAdMobAppIdResourcePath = 'android/app/src/main/res/values/strings.xml'",
+    'readApprovedAndroidAdMobAppId()',
+    'publisherPrefixFromAppId(appId)',
+    'publisherPrefixFromAdUnitId(normalizedAdUnitId)',
+  ]) {
+    if (!providerChecker.includes(required)) {
+      errors.push(`provider checker publisher-prefix invariant missing: ${required}`);
+    }
+  }
+  if (!releaseValidationBlock.includes('appPublisherPrefix === adUnitPublisherPrefix')) {
+    errors.push('provider checker publisher-prefix comparison missing');
+  }
+  if (!releaseSubprocessBlock.includes('const mismatchedPublisherPrefixShouldPass = false')) {
+    errors.push('provider checker mismatched publisher fixture must fail');
+  }
+  return errors;
+}
+
+function runNegativeMutationSelfTest(workflow, providerChecker) {
+  const officialTestId = ['ca-app-pub-3940256099942544', '5224354917'].join('/');
+  const replaceRequired = (source, from, to, name) => {
+    assert(source.includes(from), `negative mutation source missing: ${name}`);
+    return source.replace(from, to);
+  };
+  const moveStepBefore = (source, movingName, destinationName) => {
+    const moving = stepBlock(source, movingName);
+    assert(moving, `negative mutation source missing: ${movingName}`);
+    const without = source.replace(`${moving}\n`, '');
+    const destination = stepBlock(without, destinationName);
+    assert(destination, `negative mutation destination missing: ${destinationName}`);
+    return without.replace(destination, `${moving}\n${destination}`);
+  };
+  const mutations = [
+    ['pull_request trigger added', (source) =>
+      source.replace('  workflow_dispatch:\n', '  pull_request:\n  workflow_dispatch:\n')],
+    ['confirmation guard removed', (source) => replaceRequired(
+      source,
+      'if [ "$OWNER_CONFIRMED" != "true" ]; then',
+      'if false; then',
+      'confirmation guard',
+    )],
+    ['main guard removed', (source) => replaceRequired(
+      source,
+      'if [ "$RELEASE_REF" != "refs/heads/main" ]; then',
+      'if false; then',
+      'main guard',
+    )],
+    ['production secret mapping removed', (source) =>
+      source.replaceAll(
+        '${{ secrets.ADMOB_REWARDED_PRODUCTION_AD_UNIT_ID }}',
+        '${{ secrets.WRONG_REWARDED_SECRET }}',
+      )],
+    ['official test ID used', (source) =>
+      source.replaceAll('${{ secrets.ADMOB_REWARDED_PRODUCTION_AD_UNIT_ID }}', officialTestId)],
+    ['mode changed to official_test', (source) =>
+      source.replaceAll('VITE_REWARDED_AD_MODE: production', 'VITE_REWARDED_AD_MODE: official_test')],
+    ['target changed to debug', (source) =>
+      source.replaceAll('VITE_REWARDED_AD_BUILD_TARGET: release', 'VITE_REWARDED_AD_BUILD_TARGET: debug')],
+    ['isTesting path enabled', (source) => source
+      .replaceAll('VITE_REWARDED_AD_MODE: production', 'VITE_REWARDED_AD_MODE: official_test')
+      .replaceAll('VITE_REWARDED_AD_BUILD_TARGET: release', 'VITE_REWARDED_AD_BUILD_TARGET: debug')
+      .replaceAll('${{ secrets.ADMOB_REWARDED_PRODUCTION_AD_UNIT_ID }}', officialTestId)],
+    ['preflight moved after build', (source) =>
+      moveStepBefore(source, 'Build web app', 'Validate production Rewarded release configuration')],
+    ['full provider checker removed', (source) =>
+      source.replace(`${stepBlock(source, 'Validate Rewarded provider invariants')}\n`, '')],
+    ['full provider checker moved after build', (source) =>
+      moveStepBefore(source, 'Build web app', 'Validate Rewarded provider invariants')],
+    ['full provider checker receives production Secret env', (source) =>
+      replaceRequired(
+        source,
+        '        run: npm run check:admob-rewarded-provider',
+        [
+          '        run: npm run check:admob-rewarded-provider',
+          '        env:',
+          '          VITE_REWARDED_AD_UNIT_ID: ${{ secrets.ADMOB_REWARDED_PRODUCTION_AD_UNIT_ID }}',
+        ].join('\n'),
+        'full provider checker production env',
+      )],
+    ['publisher prefix verification removed', 'provider', (source) =>
+      replaceRequired(
+        source,
+        '    appPublisherPrefix === adUnitPublisherPrefix &&',
+        '    true &&',
+        'publisher prefix comparison',
+      )],
+    ['mismatched publisher fixture changed to pass', 'provider', (source) =>
+      replaceRequired(
+        source,
+        '  const mismatchedPublisherPrefixShouldPass = false;',
+        '  const mismatchedPublisherPrefixShouldPass = true;',
+        'mismatched publisher fixture',
+      )],
+    ['repository-wide concrete ID scan changed to changedFiles', 'provider', (source) =>
+      replaceRequired(
+        source,
+        '\n  trackedFiles = getTrackedFiles();\n  const sourceErrors',
+        '\n  trackedFiles = changedFiles;\n  const sourceErrors',
+        'repository-wide concrete ID scan',
+      )],
+    ['tracked file extension allowlist reintroduced', 'provider', (source) => {
+      const withAllowlist = replaceRequired(
+        source,
+        "const utf8Decoder = new TextDecoder('utf-8', { fatal: true });",
+        [
+          "const trackedTextExtensions = new Set(['.js']);",
+          "const utf8Decoder = new TextDecoder('utf-8', { fatal: true });",
+        ].join('\n'),
+        'tracked file extension allowlist declaration',
+      );
+      return replaceRequired(
+        withAllowlist,
+        "    .map((file) => file.replaceAll('\\\\', '/'));",
+        [
+          "    .map((file) => file.replaceAll('\\\\', '/'))",
+          '    .filter((file) => trackedTextExtensions.has(path.extname(file)));',
+        ].join('\n'),
+        'tracked file extension allowlist filter',
+      );
+    }],
+    ['tracked file path.extname filter added', 'provider', (source) =>
+      replaceRequired(
+        source,
+        "    .map((file) => file.replaceAll('\\\\', '/'));",
+        [
+          "    .map((file) => file.replaceAll('\\\\', '/'))",
+          "    .filter((file) => path.extname(file) !== '');",
+        ].join('\n'),
+        'tracked file path.extname filter',
+      )],
+    ['tracked CSS sources explicitly excluded', 'provider', (source) =>
+      replaceRequired(
+        source,
+        "    .map((file) => file.replaceAll('\\\\', '/'));",
+        [
+          "    .map((file) => file.replaceAll('\\\\', '/'))",
+          "    .filter((file) => !file.endsWith('.css'));",
+        ].join('\n'),
+        'tracked CSS exclusion',
+      )],
+    ['tracked concrete ID scan result changed to empty', 'provider', (source) =>
+      replaceRequired(
+        source,
+        '\n  assertNoConcreteProductionAdUnitIds(trackedFiles);\n  assert(!read',
+        '\n  assertNoConcreteProductionAdUnitIds([]);\n  assert(!read',
+        'tracked concrete ID scan result',
+      )],
+    ['secret output added', (source) => replaceRequired(
+      source,
+      'run: npm run build',
+      'run: echo "$VITE_REWARDED_AD_UNIT_ID"\n        # npm run build',
+      'secret output',
+    )],
+    ['jarsigner verification removed', (source) =>
+      replaceRequired(source, 'jarsigner -verify', '# verification removed', 'jarsigner')],
+    ['upload moved before verify', (source) =>
+      moveStepBefore(source, 'Upload release AAB', 'Verify signed release AAB')],
+  ];
+
+  let detected = 0;
+  for (const [name, targetOrMutate, providerMutate] of mutations) {
+    const target = providerMutate ? 'provider' : 'workflow';
+    const mutate = providerMutate ?? targetOrMutate;
+    const original = target === 'provider' ? providerChecker : workflow;
+    const mutated = mutate(original);
+    assert.notEqual(mutated, original, `negative mutation did not apply: ${name}`);
+    const errors = target === 'provider'
+      ? validateProviderChecker(mutated)
+      : validateWorkflow(mutated);
+    assert(errors.length > 0, `negative mutation escaped: ${name}`);
+    detected += 1;
+  }
+  console.log(`Android release AAB workflow negative verification passed (${detected}/${mutations.length})`);
+}
+
+let hasFailure = false;
+for (const path of requiredPaths) {
+  if (!fs.existsSync(path)) {
+    console.error(`missing required path: ${path}`);
+    hasFailure = true;
+  }
+}
+if (hasFailure) process.exit(1);
+
+const workflow = normalizedRead(workflowPath);
+const workflowErrors = validateWorkflow(workflow);
+if (workflowErrors.length) {
+  console.error('Android release AAB workflow check failed');
+  for (const error of workflowErrors) console.error(`- ${error}`);
+  process.exit(1);
+}
+const providerChecker = normalizedRead(providerCheckerPath);
+const providerCheckerErrors = validateProviderChecker(providerChecker);
+if (providerCheckerErrors.length) {
+  console.error('AdMob Rewarded provider release invariant check failed');
+  for (const error of providerCheckerErrors) console.error(`- ${error}`);
+  process.exit(1);
+}
+
+const gradle = normalizedRead(gradlePath);
+for (const snippet of [
   'isReleaseBuildTask',
   'gradle.startParameter.taskNames',
   'throw new GradleException("Release signing environment variables are required for release builds.")',
   'signingConfig signingConfigs.release',
-];
+]) {
+  assert(gradle.includes(snippet), `Gradle release signing invariant missing: ${snippet}`);
+}
 
-const requiredDocSnippets = [
-  'ANDROID_KEYSTORE_BASE64 configuration: Confirmed',
-  'Android Release AAB run number 6: completed / success',
-  'Run id: 28310971077',
-  'Validate release signing secrets: Confirmed',
-  'Restore release keystore: Confirmed',
-  'Build signed release AAB: Confirmed',
-  'Verify signed release AAB: Confirmed',
-  'Upload release AAB: Confirmed',
-  'signed AAB regeneration: Confirmed',
-  'signed AAB re-verification: Confirmed',
-  'Artifact count: Confirmed 1',
-  'Artifact name: harupuli-release-aab',
-  'signed AAB artifact download/extract: Confirmed',
-  '`.aab` file existence: Confirmed',
-  '`.aab` filename: app-release.aab',
-  '`.aab` file size: 6,046,282 bytes',
+const combinedDocs = `${normalizedRead(docPath)}\n${normalizedRead(roadmapPath)}`;
+for (const snippet of [
+  'Existing release signing infrastructure: Confirmed',
+  'Existing signed AAB workflow: Confirmed',
+  'Production Rewarded-configured signed AAB: Not started',
+  'ADMOB_REWARDED_PRODUCTION_AD_UNIT_ID',
+  'Secret actual values: Not recorded',
   'Play Console internal test upload: Pending',
   'real device QA: Pending',
-  'Secret actual values: Not recorded',
-];
-
-const forbiddenSnippets = [
-  'node-version: 20',
-  'supply',
-  'fastlane',
-  'google-play',
-  'Play Console internal test upload | Confirmed',
-  'real device QA | Confirmed',
-  'Play Console upload: Completed',
-  '실제 기기 QA: Completed',
-  '실제 스토어 스크린샷 이미지 시작',
-  '서양식 보정 적용 여부',
-  '양력/음력 샘플 추가 검증',
-];
-
-const protectedFiles = [
-  '.github/workflows/android-release-aab.yml',
-  'android/app/build.gradle',
-  'android/app/src/main/AndroidManifest.xml',
-  'android/app/src/main/res',
-  'src',
-];
-
-function logResult(label, passed, detail = '') {
-  const suffix = detail ? ` - ${detail}` : '';
-  console.log(`${label}: ${passed ? 'pass' : 'fail'}${suffix}`);
+]) {
+  assert(combinedDocs.includes(snippet), `release documentation invariant missing: ${snippet}`);
 }
 
-function labelFromSnippet(snippet) {
-  return snippet
-    .replaceAll(/\s+/g, '_')
-    .replaceAll(/[^\p{L}\p{N}_/-]/gu, '')
-    .slice(0, 80);
-}
-
-function checkIncludes(content, snippets, prefix) {
-  let failed = false;
-  for (const snippet of snippets) {
-    const found = content.includes(snippet);
-    logResult(`${prefix}_includes_${labelFromSnippet(snippet)}`, found);
-    if (!found) failed = true;
-  }
-  return failed;
-}
-
-let hasFailure = false;
-
-for (const path of requiredPaths) {
-  const exists = fs.existsSync(path);
-  logResult(`${path}_exists`, exists);
-  if (!exists) hasFailure = true;
-}
-
-if (hasFailure) process.exit(1);
-
-const workflow = fs.readFileSync(workflowPath, 'utf8');
-const gradle = fs.readFileSync(gradlePath, 'utf8');
-const doc = fs.readFileSync(docPath, 'utf8');
-const roadmap = fs.readFileSync(roadmapPath, 'utf8');
-const combinedDocs = `${doc}\n${roadmap}`;
-
-hasFailure = checkIncludes(workflow, requiredWorkflowSnippets, 'workflow') || hasFailure;
-hasFailure = checkIncludes(gradle, requiredGradleSnippets, 'gradle') || hasFailure;
-hasFailure = checkIncludes(combinedDocs, requiredDocSnippets, 'docs') || hasFailure;
-
-const verifyIndex = workflow.indexOf('Verify signed release AAB');
-const uploadIndex = workflow.indexOf('Upload release AAB');
-const uploadAfterVerify = verifyIndex !== -1 && uploadIndex !== -1 && uploadIndex > verifyIndex;
-logResult('upload_release_aab_step_after_verify_signed_release_aab_step', uploadAfterVerify);
-if (!uploadAfterVerify) hasFailure = true;
-
-for (const snippet of forbiddenSnippets) {
-  const absent = !combinedDocs.includes(snippet);
-  logResult(`forbidden_doc_snippet_absent_${labelFromSnippet(snippet)}`, absent);
-  if (!absent) hasFailure = true;
-}
-
-const protectedDiff = execSync(`git diff --name-only -- ${protectedFiles.join(' ')}`, {
-  encoding: 'utf8',
-}).trim();
-const protectedFilesUnchanged = protectedDiff.length === 0;
-logResult('workflow_android_gradle_native_src_files_unchanged_in_working_diff', protectedFilesUnchanged);
-if (!protectedFilesUnchanged) hasFailure = true;
-
-const trackedFiles = execSync('git ls-files', { encoding: 'utf8' })
+const trackedFiles = execFileSync('git', ['ls-files'], { encoding: 'utf8' })
   .split(/\r?\n/)
   .filter(Boolean);
-const statusFiles = execSync('git status --short --untracked-files=all', { encoding: 'utf8' })
+const statusFiles = execFileSync(
+  'git',
+  ['status', '--short', '--untracked-files=all'],
+  { encoding: 'utf8' },
+)
   .split(/\r?\n/)
   .filter(Boolean)
   .map((line) => line.slice(3).trim().replace(/^"|"$/g, ''));
 const sensitiveFiles = [...trackedFiles, ...statusFiles].filter((path) =>
   ['.aab', '.zip', '.jks', '.keystore'].some((extension) => path.endsWith(extension))
 );
-const sensitiveFilesAbsent = sensitiveFiles.length === 0;
-logResult('artifact_and_keystore_files_not_added_to_repository', sensitiveFilesAbsent);
-if (!sensitiveFilesAbsent) hasFailure = true;
+assert.equal(sensitiveFiles.length, 0, 'artifact and keystore files must not be added');
 
-if (hasFailure) {
-  console.error('Android release AAB workflow check failed');
-  process.exit(1);
-}
+if (negativeSelfTest) runNegativeMutationSelfTest(workflow, providerChecker);
 
 console.log('Android release AAB workflow check passed');

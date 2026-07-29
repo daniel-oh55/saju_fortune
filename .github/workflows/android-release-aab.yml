@@ -2,6 +2,15 @@ name: Android Release AAB
 
 on:
   workflow_dispatch:
+    inputs:
+      confirm_production_rewarded_release:
+        description: Confirm the approved production Rewarded release configuration
+        required: true
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
 
 jobs:
   android-release-aab:
@@ -20,20 +29,20 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build web app
-        run: npm run build
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: 21
-
-      - name: Sync Android project
-        run: npx cap sync android
-
-      - name: Make Gradle wrapper executable
-        run: chmod +x android/gradlew
+      - name: Validate manual production release authorization
+        shell: bash
+        env:
+          RELEASE_REF: ${{ github.ref }}
+          OWNER_CONFIRMED: ${{ inputs.confirm_production_rewarded_release }}
+        run: |
+          if [ "$RELEASE_REF" != "refs/heads/main" ]; then
+            echo "::error::Android production release must run from main"
+            exit 1
+          fi
+          if [ "$OWNER_CONFIRMED" != "true" ]; then
+            echo "::error::Owner confirmation is required for the production Rewarded release"
+            exit 1
+          fi
 
       - name: Validate release signing secrets
         shell: bash
@@ -49,6 +58,39 @@ jobs:
               exit 1
             fi
           done
+
+      - name: Validate Rewarded provider invariants
+        run: npm run check:admob-rewarded-provider
+
+      - name: Validate production Rewarded release configuration
+        run: node scripts/checkAdmobRewardedAdProvider.mjs --release-env-preflight
+        env:
+          VITE_REWARDED_AD_PROVIDER: sdk
+          VITE_REWARDED_AD_SDK_ENABLED: "true"
+          VITE_REWARDED_AD_MODE: production
+          VITE_REWARDED_AD_BUILD_TARGET: release
+          VITE_REWARDED_AD_UNIT_ID: ${{ secrets.ADMOB_REWARDED_PRODUCTION_AD_UNIT_ID }}
+
+      - name: Build web app
+        run: npm run build
+        env:
+          VITE_REWARDED_AD_PROVIDER: sdk
+          VITE_REWARDED_AD_SDK_ENABLED: "true"
+          VITE_REWARDED_AD_MODE: production
+          VITE_REWARDED_AD_BUILD_TARGET: release
+          VITE_REWARDED_AD_UNIT_ID: ${{ secrets.ADMOB_REWARDED_PRODUCTION_AD_UNIT_ID }}
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Sync Android project
+        run: npx cap sync android
+
+      - name: Make Gradle wrapper executable
+        run: chmod +x android/gradlew
 
       - name: Restore release keystore
         shell: bash

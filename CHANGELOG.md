@@ -1,5 +1,56 @@
 # CHANGELOG
 
+## PR #417 - Production Rewarded Release Injection Path
+
+### Changed
+
+- Added a `workflow_dispatch` boolean confirmation and fail-closed `main`
+  branch guard to the existing Android release AAB workflow.
+- Mapped the repository Secret name
+  `ADMOB_REWARDED_PRODUCTION_AD_UNIT_ID` to
+  `VITE_REWARDED_AD_UNIT_ID` only for the production preflight and web build.
+- Added `--release-env-preflight` to the existing Rewarded provider checker
+  and validated production/release mode with runtime-composed synthetic IDs.
+- Added fail-closed publisher-prefix verification between the approved Android
+  AdMob App ID resource and the injected production Rewarded ad unit ID.
+- Added the full Rewarded provider checker as a release gate before the
+  production preflight and web build, without passing production configuration
+  or Secret values to the full checker.
+- Replaced the release workflow checker's working-diff transition guard with
+  durable workflow invariants and negative mutation coverage.
+
+### Current state
+
+- Production Rewarded release workflow injection support: Implemented
+- Release environment preflight support: Implemented
+- App ID/ad-unit publisher-prefix verification: Implemented
+- Full Rewarded provider checker before release build: Implemented
+- Existing release signing infrastructure: Confirmed
+- Existing signed AAB workflow: Confirmed
+- GitHub Secret actual value configuration: Not started
+- Production-configured release workflow run: Not started
+- Production Rewarded-configured signed AAB: Not started
+- Production request/load/show verification: Not started
+- Production serving: Not started
+- Production device QA: Not started
+- Play Console upload: Not started
+
+### Safety
+
+- No actual production Rewarded ad unit ID or Secret value is recorded.
+- No Android native, package/lockfile, runtime source, UI, storage, routing,
+  or fortune behavior is changed.
+- The release workflow was not executed, and no AAB, deployment, Console
+  change, or rollout was performed.
+
+### Pending
+
+- Privacy/Data Safety, external privacy policy, and advertising disclosure final
+  review
+- Production Android device QA, including actual early-dismiss and repeated
+  ADB listener diagnostics
+- Play Console upload and rollout
+
 ## Unreleased - Production-aware Rewarded Advertising Copy
 
 ### Changed
