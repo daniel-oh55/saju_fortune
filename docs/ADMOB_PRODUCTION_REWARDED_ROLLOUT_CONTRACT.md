@@ -48,8 +48,8 @@ Completed:
 - Signed release AAB generation and `jarsigner` verification
 - Google Play internal-testing AAB upload and release activation
 - Registered-test-device request/load/show with a Test Ad
-- Exactly-once reward, rapid-tap duplicate-ad prevention, offline recovery,
-  restart persistence, and no duplicate reward after restart
+- Exactly-once reward, rapid-tap duplicate-ad prevention, restart persistence,
+  and no duplicate reward after restart
 - Google Play Data Safety, Advertising ID, and advertising disclosures
 - External public privacy policy update and successful Vercel deployment
 
@@ -96,7 +96,7 @@ Canonical rollout state:
 - Production-configured internal-test device QA: Pass
 - Exactly-once reward: Pass
 - Rapid-tap duplicate ad prevention: Pass
-- Offline failure/recovery: Pass
+- Production-configured internal-test offline failure/recovery: Not performed / Pending
 - Restart reward persistence: Pass
 - Duplicate reward after restart: Not observed
 - Actual general-user production serving: Not started
@@ -296,7 +296,6 @@ The owner-confirmed Google Play review covers:
 - Google Play Data safety form
 - Advertising ID use for analytics, advertising or marketing, and fraud
   prevention, security, and compliance
-- Personalization where applicable to the configured advertising behavior
 - User data collection and sharing declarations
 - Final disclosure review for production advertising
 
@@ -387,7 +386,7 @@ Completed internal-test evidence on a registered test device:
 - One selected detail unlock after the reward callback: Pass
 - Exactly-once reward: Pass
 - Rapid-tap duplicate ad prevention: Pass
-- Offline failure/recovery: Pass
+- Production-configured internal-test offline failure/recovery: Not performed / Pending
 - Restart reward persistence: Pass
 - Duplicate reward after restart: Not observed
 - Actual early-dismiss device QA: N/A for the observed creative because it did
@@ -491,7 +490,7 @@ This PR explicitly excludes:
 - Production-configured internal-test device QA: Pass
 - Exactly-once reward: Pass
 - Rapid-tap duplicate ad prevention: Pass
-- Offline failure/recovery: Pass
+- Production-configured internal-test offline failure/recovery: Not performed / Pending
 - Restart reward persistence: Pass
 - Duplicate reward after restart: Not observed
 - Actual general-user production serving: Not started

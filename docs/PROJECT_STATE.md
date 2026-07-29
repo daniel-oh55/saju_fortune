@@ -38,12 +38,12 @@
 - Play Console internal-testing AAB upload: Completed (Owner-confirmed)
 - Play Console internal-testing release activation: Completed (Owner-confirmed)
 - internal-testing release name: `1.0.1 Internal Rewarded QA`
-- Google Play 제출 자동 상태: 출시됨 (Owner-confirmed)
+- Google Play 제출 활동 상태: 출시됨 (Owner-confirmed)
 - Production-configured registered-test-device request/load/show: Pass - Test Ad
 - Production-configured internal-test device QA: Pass
 - Exactly-once reward: Pass
 - Rapid-tap duplicate ad prevention: Pass
-- Offline failure/recovery: Pass
+- Production-configured internal-test offline failure/recovery: Not performed / Pending
 - Restart reward persistence: Pass
 - Duplicate reward after restart: Not observed
 - Privacy/Data Safety final review: Completed (Owner-confirmed)

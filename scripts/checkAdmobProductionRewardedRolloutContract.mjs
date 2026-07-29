@@ -33,6 +33,7 @@ const canonicalInternalTestRolloutState = [
   'Production-configured registered-test-device request/load/show: Pass - Test Ad',
   'Production-configured internal-test device QA: Pass',
   'Exactly-once reward: Pass',
+  'Production-configured internal-test offline failure/recovery: Not performed / Pending',
   'Privacy/Data Safety final review: Completed',
   'External public privacy policy final review: Completed',
   'Advertising disclosure final review: Completed',
@@ -114,8 +115,11 @@ const createSyntheticInternalTestRolloutFixture = () => {
   const fixtureRoot = resolve(temporaryRoot, 'repository')
 
   try {
-    const baselineCommit = git('rev-parse', 'HEAD').trim()
-    const currentDocument = read(documentPath)
+    const sourceCommit = git('rev-parse', 'HEAD').trim()
+    const canonicalFiles = new Map(
+      [...fixtureFiles].map((path) => [path, Buffer.from(read(path), 'utf8')]),
+    )
+    const currentDocument = canonicalFiles.get(documentPath).toString('utf8')
     if (!canonicalInternalTestRolloutState.every((state) => currentDocument.includes(state))) {
       throw new Error('current rollout contract does not contain the canonical internal-test rollout state')
     }
@@ -141,21 +145,41 @@ const createSyntheticInternalTestRolloutFixture = () => {
     execFileSync('git', ['config', 'core.autocrlf', 'false'], { cwd: fixtureRoot })
     execFileSync(
       'git',
-      ['checkout', '--quiet', '-b', 'internal-test-rollout-lifecycle', baselineCommit],
+      ['checkout', '--quiet', '-b', 'internal-test-rollout-lifecycle', sourceCommit],
       { cwd: fixtureRoot },
     )
-    execFileSync(
-      'git',
-      ['update-ref', 'refs/remotes/origin/main', baselineCommit],
-      { cwd: fixtureRoot },
-    )
-    for (const path of fixtureFiles) {
-      writeFixture(fixtureRoot, path, readFileSync(resolve(root, path)))
-    }
     execFileSync('git', ['config', 'user.name', 'Rollout Contract Self-Test'], { cwd: fixtureRoot })
     execFileSync('git', ['config', 'user.email', 'rollout-self-test@example.invalid'], {
       cwd: fixtureRoot,
     })
+
+    for (const [path, content] of canonicalFiles) writeFixture(fixtureRoot, path, content)
+    const staleDocument = currentDocument
+      .replace(
+        'GitHub Secret actual value configuration: Completed',
+        'GitHub Secret actual value configuration: Not started',
+      )
+      .replace(
+        'Production-configured release workflow run: Completed',
+        'Production-configured release workflow run: Not started',
+      )
+    if (staleDocument === currentDocument) {
+      throw new Error('synthetic stale baseline did not change the canonical rollout state')
+    }
+    writeFixture(fixtureRoot, documentPath, staleDocument)
+    execFileSync('git', ['add', '--', ...fixtureFiles], { cwd: fixtureRoot })
+    execFileSync('git', ['commit', '--quiet', '-m', 'fixture: synthetic stale rollout baseline'], {
+      cwd: fixtureRoot,
+    })
+    const baselineCommit = execFileSync('git', ['rev-parse', 'HEAD'], {
+      cwd: fixtureRoot,
+      encoding: 'utf8',
+    }).trim()
+    execFileSync('git', ['update-ref', 'refs/remotes/origin/main', baselineCommit], {
+      cwd: fixtureRoot,
+    })
+
+    for (const [path, content] of canonicalFiles) writeFixture(fixtureRoot, path, content)
     execFileSync('git', ['add', '--', ...fixtureFiles], { cwd: fixtureRoot })
     execFileSync('git', ['commit', '--quiet', '-m', 'fixture: synthetic internal-test rollout'], {
       cwd: fixtureRoot,
@@ -166,6 +190,42 @@ const createSyntheticInternalTestRolloutFixture = () => {
     }).trim()
     if (syntheticTransitionHead === baselineCommit) {
       throw new Error('internal-test rollout baseline and synthetic HEAD must differ')
+    }
+    const transitionPaths = execFileSync(
+      'git',
+      ['diff', '--name-only', `${baselineCommit}..${syntheticTransitionHead}`],
+      { cwd: fixtureRoot, encoding: 'utf8' },
+    ).replace(/\r\n/g, '\n').trim().split('\n').filter(Boolean)
+    if (![documentPath, projectStatePath].some((path) => transitionPaths.includes(path))) {
+      throw new Error(
+        `synthetic transition does not include a rollout state file\n${transitionPaths.join('\n')}`,
+      )
+    }
+    const substantiveTransition = run(
+      'git',
+      [
+        'diff',
+        '--quiet',
+        '--ignore-space-at-eol',
+        baselineCommit,
+        syntheticTransitionHead,
+        '--',
+        documentPath,
+        projectStatePath,
+      ],
+      fixtureRoot,
+    )
+    if (substantiveTransition.status !== 1) {
+      throw new Error(
+        `synthetic transition must contain a non-line-ending state change (git status ${substantiveTransition.status})`,
+      )
+    }
+    const fixtureStatus = execFileSync('git', ['status', '--porcelain'], {
+      cwd: fixtureRoot,
+      encoding: 'utf8',
+    }).trim()
+    if (fixtureStatus) {
+      throw new Error(`synthetic transition checkout is not clean\n${fixtureStatus}`)
     }
     return {
       fixtureRoot,
@@ -445,6 +505,15 @@ const runNegativeMutationSelfTest = (fixtureRoot) => {
       'forbidden state regression',
     ],
     [
+      'production-configured internal-test offline QA false completion',
+      () => replace(
+        documentPath,
+        'Production-configured internal-test offline failure/recovery: Not performed / Pending',
+        'Production-configured internal-test offline failure/recovery: Pass',
+      ),
+      'forbidden completion claim',
+    ],
+    [
       'actual general-user serving false completion',
       () => replace(
         documentPath,
@@ -680,7 +749,7 @@ for (const text of [
   'Production-configured internal-test device QA: Pass',
   'Exactly-once reward: Pass',
   'Rapid-tap duplicate ad prevention: Pass',
-  'Offline failure/recovery: Pass',
+  'Production-configured internal-test offline failure/recovery: Not performed / Pending',
   'Restart reward persistence: Pass',
   'Duplicate reward after restart: Not observed',
   'Actual general-user production serving: Not started',
@@ -747,6 +816,7 @@ for (const claim of [
   'Play Console release upload: Completed',
   'Production serving enabled',
   'Ready for unrestricted production',
+  'Production-configured internal-test offline failure/recovery: Pass',
 ]) {
   if (document.includes(claim)) errors.push(`forbidden completion claim: ${claim}`)
 }
@@ -837,8 +907,9 @@ for (const [path, snippets] of [
     'Production-configured release workflow run: Completed',
     'Production Rewarded-configured signed AAB: Completed',
     'Play Console internal-testing AAB upload: Completed',
-    'Google Play 제출 자동 상태: 출시됨',
+    'Google Play 제출 활동 상태: 출시됨',
     'Production-configured registered-test-device request/load/show: Pass - Test Ad',
+    'Production-configured internal-test offline failure/recovery: Not performed / Pending',
     'Privacy/Data Safety final review: Completed',
     '외부 개인정보처리방침 PR #4: Merged',
     '외부 개인정보처리방침 Vercel status: success',
