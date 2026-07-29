@@ -42,6 +42,8 @@ Implemented:
 - Production source connection capability
 - Production Rewarded release workflow injection support
 - Release environment preflight support
+- App ID/ad-unit publisher prefix verification
+- Full Rewarded provider checker before release build
 - Existing release signing infrastructure
 - Existing signed AAB workflow
 
@@ -67,12 +69,15 @@ Canonical rollout state:
 - Production source connection capability: Implemented
 - Production Rewarded release workflow injection support: Implemented
 - Release environment preflight support: Implemented
+- App ID/ad-unit publisher prefix verification: Implemented
+- Full Rewarded provider checker before release build: Implemented
 - GitHub Secret actual value configuration: Not started
 - Production-configured release workflow run: Not started
 - Production request/load/show: Not started
 - Production serving: Not started
 - AdMob Console creation: Completed
 - Privacy/Data Safety final review: Pending
+- External public privacy policy final review: Pending
 - Advertising disclosure final review: Pending
 - Existing release signing infrastructure: Confirmed
 - Existing signed AAB workflow: Confirmed
@@ -308,9 +313,14 @@ The implemented release workflow:
 - Remains `workflow_dispatch`-only and requires an explicit boolean
   confirmation from `main`.
 - Uses `permissions: contents: read`.
+- Runs the full Rewarded provider checker before the release preflight and web
+  build without passing the production Rewarded environment or Secret.
 - Maps `ADMOB_REWARDED_PRODUCTION_AD_UNIT_ID` to
   `VITE_REWARDED_AD_UNIT_ID` only for the preflight and web build.
 - Validate the identifier format and mode pairing during CI.
+- Reads the approved Android `admob_app_id` resource and fails closed unless
+  its publisher prefix matches the production Rewarded ad unit publisher
+  prefix.
 - Reject a release containing the Google official test ID.
 - Reject missing, malformed, App ID, debug-target, official-test, mock, or
   SDK-disabled production release configuration before the web build.
@@ -403,12 +413,15 @@ This PR explicitly excludes:
 - Production source connection capability: Implemented
 - Production Rewarded release workflow injection support: Implemented
 - Release environment preflight support: Implemented
+- App ID/ad-unit publisher prefix verification: Implemented
+- Full Rewarded provider checker before release build: Implemented
 - GitHub Secret actual value configuration: Not started
 - Production-configured release workflow run: Not started
 - Production request/load/show: Not started
 - Production serving: Not started
 - AdMob Console creation: Completed
 - Privacy/Data Safety final review: Pending
+- External public privacy policy final review: Pending
 - Advertising disclosure final review: Pending
 - Existing release signing infrastructure: Confirmed
 - Existing signed AAB workflow: Confirmed
@@ -430,8 +443,8 @@ This release injection contract update is complete only when:
 - Existing AdMob provider, consent, content-safety, and docs/source guardrail
   checks pass.
 - Workflow changes remain limited to manual authorization, Secret-backed
-  production environment injection, fail-closed preflight, and durable
-  verification.
+  production environment injection, the full provider gate, fail-closed
+  publisher-prefix preflight, and durable verification.
 - No owner-held identifier, native, runtime source, lockfile, storage, schema,
   routing, UI, or fortune behavior changes exist.
 - The two pre-existing untracked review files remain untracked and unstaged.

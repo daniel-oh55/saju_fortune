@@ -26,6 +26,10 @@ import {
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const negativeSelfTest = process.argv.includes('--negative-self-test');
 const releaseEnvPreflight = process.argv.includes('--release-env-preflight');
+const releaseEnvPreflightTestFixture = process.argv.includes(
+  '--release-env-preflight-test-app-id-fixture',
+);
+const androidAdMobAppIdResourcePath = 'android/app/src/main/res/values/strings.xml';
 const preservedUntrackedFiles = new Set(['pr405-review.json', 'pr405.diff']);
 const releaseEnvKeys = [
   'VITE_REWARDED_AD_PROVIDER',
@@ -197,6 +201,33 @@ function validateSources(sourceOverrides = new Map()) {
   const consentSettingsSource = sourceFor('src/components/ConsentSettingsPanel.jsx');
   const appSource = sourceFor('src/App.jsx');
   const configSource = sourceFor('src/config/rewardedAdSdkConfig.js');
+  const checkerSource = sourceFor('scripts/checkAdmobRewardedAdProvider.mjs');
+  const releaseValidationBlock = checkerSource.slice(
+    checkerSource.indexOf('\nfunction validateProductionReleaseEnvironment'),
+    checkerSource.indexOf('\nfunction runReleaseEnvironmentPreflight'),
+  );
+  const releaseSubprocessBlock = checkerSource.slice(
+    checkerSource.indexOf('\nfunction runReleaseEnvironmentPreflightSubprocessTests'),
+    checkerSource.indexOf('\nfunction makeProductionConfig'),
+  );
+  if (!checkerSource.includes(
+    "const androidAdMobAppIdResourcePath = 'android/app/src/main/res/values/strings.xml'",
+  )) {
+    errors.push('release preflight must read the approved Android AdMob App ID resource');
+  }
+  if (!releaseValidationBlock.includes(
+    'appPublisherPrefix === adUnitPublisherPrefix',
+  )) {
+    errors.push('release preflight must verify matching publisher prefixes');
+  }
+  if (!releaseSubprocessBlock.includes("'mismatched publisher prefix'")) {
+    errors.push('release preflight subprocess tests must cover mismatched publisher prefixes');
+  }
+  if (!releaseSubprocessBlock.includes(
+    'const mismatchedPublisherPrefixShouldPass = false',
+  )) {
+    errors.push('mismatched publisher prefix fixture must fail');
+  }
   const officialTestCopyBlock = modalSource.slice(
     modalSource.indexOf('const OFFICIAL_TEST_SDK_COPY'),
     modalSource.indexOf('const PRODUCTION_SDK_COPY'),
@@ -386,17 +417,45 @@ function createSyntheticAppId() {
   return ['ca-app-pub-', publisher, '~', app].join('');
 }
 
-function validateProductionReleaseEnvironment(env) {
+function readApprovedAndroidAdMobAppId() {
+  const source = read(androidAdMobAppIdResourcePath).replace(/<!--[\s\S]*?-->/gu, '');
+  const matches = [...source.matchAll(
+    /<string\b[^>]*\bname=["']admob_app_id["'][^>]*>([^<]+)<\/string>/gu,
+  )];
+  return matches.length === 1 ? matches[0][1].trim() : '';
+}
+
+function publisherPrefixFromAppId(appId) {
+  return /^(ca-app-pub-\d{16})~\d{10}$/u.exec(appId)?.[1] ?? '';
+}
+
+function publisherPrefixFromAdUnitId(adUnitId) {
+  return /^(ca-app-pub-\d{16})\/\d{10}$/u.exec(adUnitId)?.[1] ?? '';
+}
+
+function createAdUnitIdForPublisher(publisherPrefix) {
+  return [publisherPrefix, '/', ['12345', '67890'].join('')].join('');
+}
+
+function createDifferentPublisherPrefix(publisherPrefix) {
+  const lastDigit = Number(publisherPrefix.at(-1));
+  return `${publisherPrefix.slice(0, -1)}${(lastDigit + 1) % 10}`;
+}
+
+function validateProductionReleaseEnvironment(env, appId) {
   const config = getRewardedAdSdkConfig(env);
+  const normalizedAdUnitId = String(env.VITE_REWARDED_AD_UNIT_ID ?? '').trim();
+  const appPublisherPrefix = publisherPrefixFromAppId(appId);
+  const adUnitPublisherPrefix = publisherPrefixFromAdUnitId(normalizedAdUnitId);
   const valid =
     String(env.VITE_REWARDED_AD_PROVIDER ?? '').trim().toLowerCase() === 'sdk' &&
     String(env.VITE_REWARDED_AD_SDK_ENABLED ?? '').trim().toLowerCase() === 'true' &&
     String(env.VITE_REWARDED_AD_MODE ?? '').trim().toLowerCase() === 'production' &&
     String(env.VITE_REWARDED_AD_BUILD_TARGET ?? '').trim().toLowerCase() === 'release' &&
-    typeof env.VITE_REWARDED_AD_UNIT_ID === 'string' &&
-    env.VITE_REWARDED_AD_UNIT_ID.trim().includes('/') &&
-    !env.VITE_REWARDED_AD_UNIT_ID.trim().includes('~') &&
-    env.VITE_REWARDED_AD_UNIT_ID.trim() !== GOOGLE_OFFICIAL_ANDROID_REWARDED_TEST_AD_UNIT_ID &&
+    appPublisherPrefix.length > 0 &&
+    adUnitPublisherPrefix.length > 0 &&
+    appPublisherPrefix === adUnitPublisherPrefix &&
+    normalizedAdUnitId !== GOOGLE_OFFICIAL_ANDROID_REWARDED_TEST_AD_UNIT_ID &&
     config.configurationValid === true &&
     config.mockAllowed === false &&
     config.isTesting === false &&
@@ -408,13 +467,27 @@ function validateProductionReleaseEnvironment(env) {
 }
 
 function runReleaseEnvironmentPreflight() {
-  validateProductionReleaseEnvironment(process.env);
+  let appId = '';
+  try {
+    appId = releaseEnvPreflightTestFixture
+      ? String(process.env.ADMOB_APP_ID_PREFLIGHT_TEST_FIXTURE ?? '')
+      : readApprovedAndroidAdMobAppId();
+  } catch {
+    appId = '';
+  }
+  validateProductionReleaseEnvironment(process.env, appId);
   process.stdout.write('Production Rewarded release environment preflight passed\n');
 }
 
 function runReleaseEnvironmentPreflightSubprocessTests() {
   const checker = fileURLToPath(import.meta.url);
-  const syntheticAdUnitId = createSyntheticProductionAdUnitId();
+  const approvedAppId = readApprovedAndroidAdMobAppId();
+  const approvedPublisherPrefix = publisherPrefixFromAppId(approvedAppId);
+  assert(approvedPublisherPrefix, 'approved Android AdMob App ID must have the expected format');
+  const matchingAdUnitId = createAdUnitIdForPublisher(approvedPublisherPrefix);
+  const mismatchedAdUnitId = createAdUnitIdForPublisher(
+    createDifferentPublisherPrefix(approvedPublisherPrefix),
+  );
   const syntheticAppId = createSyntheticAppId();
   const baseEnv = Object.fromEntries(releaseEnvKeys.map((key) => [key, '']));
   const validEnv = {
@@ -423,13 +496,23 @@ function runReleaseEnvironmentPreflightSubprocessTests() {
     VITE_REWARDED_AD_SDK_ENABLED: 'true',
     VITE_REWARDED_AD_MODE: 'production',
     VITE_REWARDED_AD_BUILD_TARGET: 'release',
-    VITE_REWARDED_AD_UNIT_ID: syntheticAdUnitId,
+    VITE_REWARDED_AD_UNIT_ID: matchingAdUnitId,
   };
+  const mismatchedPublisherPrefixShouldPass = false;
   const cases = [
-    ['valid production release', validEnv, true],
+    ['matching publisher prefix', validEnv, true],
+    ['mismatched publisher prefix', {
+      ...validEnv,
+      VITE_REWARDED_AD_UNIT_ID: mismatchedAdUnitId,
+    }, mismatchedPublisherPrefixShouldPass],
+    ['missing App ID', validEnv, false, ''],
+    ['malformed App ID', validEnv, false, 'invalid'],
     ['missing ID', { ...validEnv, VITE_REWARDED_AD_UNIT_ID: '' }, false],
-    ['malformed ID', { ...validEnv, VITE_REWARDED_AD_UNIT_ID: 'invalid' }, false],
-    ['App ID', { ...validEnv, VITE_REWARDED_AD_UNIT_ID: syntheticAppId }, false],
+    ['malformed ad unit', { ...validEnv, VITE_REWARDED_AD_UNIT_ID: 'invalid' }, false],
+    ['App ID used as ad unit', {
+      ...validEnv,
+      VITE_REWARDED_AD_UNIT_ID: syntheticAppId,
+    }, false],
     ['official test ID', {
       ...validEnv,
       VITE_REWARDED_AD_UNIT_ID: GOOGLE_OFFICIAL_ANDROID_REWARDED_TEST_AD_UNIT_ID,
@@ -441,15 +524,25 @@ function runReleaseEnvironmentPreflightSubprocessTests() {
     ['unknown target', { ...validEnv, VITE_REWARDED_AD_BUILD_TARGET: 'unknown' }, false],
   ];
 
-  for (const [name, env, shouldPass] of cases) {
-    const result = spawnSync(process.execPath, [checker, '--release-env-preflight'], {
+  for (const [name, env, shouldPass, appIdFixture] of cases) {
+    const args = [checker, '--release-env-preflight'];
+    if (appIdFixture !== undefined) {
+      args.push('--release-env-preflight-test-app-id-fixture');
+    }
+    const result = spawnSync(process.execPath, args, {
       cwd: root,
       encoding: 'utf8',
-      env: { ...process.env, ...env },
+      env: {
+        ...process.env,
+        ...env,
+        ADMOB_APP_ID_PREFLIGHT_TEST_FIXTURE: appIdFixture ?? '',
+      },
     });
     const output = `${result.stdout ?? ''}${result.stderr ?? ''}`;
     assert.equal(result.status === 0, shouldPass, `${name}: unexpected preflight result`);
-    assert(!output.includes(syntheticAdUnitId), `${name}: synthetic ID leaked`);
+    assert(!output.includes(approvedAppId), `${name}: approved App ID leaked`);
+    assert(!output.includes(matchingAdUnitId), `${name}: matching ad unit ID leaked`);
+    assert(!output.includes(mismatchedAdUnitId), `${name}: mismatched ad unit ID leaked`);
     assert(!output.includes(syntheticAppId), `${name}: synthetic App ID leaked`);
     if (shouldPass) {
       assert.equal(
@@ -1540,6 +1633,22 @@ for (const [key, expected] of [
 }
 
 const targetedNegativeMutations = [
+  {
+    name: 'publisher prefix comparison weakened to always true',
+    file: 'scripts/checkAdmobRewardedAdProvider.mjs',
+    mutate: (source) => source.replace(
+      '    appPublisherPrefix === adUnitPublisherPrefix &&',
+      '    true &&',
+    ),
+  },
+  {
+    name: 'mismatched publisher prefix fixture changed to pass',
+    file: 'scripts/checkAdmobRewardedAdProvider.mjs',
+    mutate: (source) => source.replace(
+      '  const mismatchedPublisherPrefixShouldPass = false;',
+      '  const mismatchedPublisherPrefixShouldPass = true;',
+    ),
+  },
   {
     name: 'mock build target allowlist weakened to release denylist',
     file: 'src/config/rewardedAdSdkConfig.js',

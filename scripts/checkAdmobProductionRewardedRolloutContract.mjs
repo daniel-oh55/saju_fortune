@@ -343,6 +343,24 @@ const runNegativeMutationSelfTest = (fixtureRoot) => {
       'forbidden state regression',
     ],
     [
+      'publisher prefix verification regression',
+      () => replace(
+        documentPath,
+        'App ID/ad-unit publisher prefix verification: Implemented',
+        'App ID/ad-unit publisher prefix verification: Not started',
+      ),
+      'forbidden state regression',
+    ],
+    [
+      'full provider release gate regression',
+      () => replace(
+        documentPath,
+        'Full Rewarded provider checker before release build: Implemented',
+        'Full Rewarded provider checker before release build: Not started',
+      ),
+      'forbidden state regression',
+    ],
+    [
       'GitHub Secret false completion',
       () => replace(
         documentPath,
@@ -373,6 +391,15 @@ const runNegativeMutationSelfTest = (fixtureRoot) => {
     [
       'Privacy Data Safety false completion',
       () => replace(documentPath, 'Privacy/Data Safety final review: Pending', 'Privacy/Data Safety final review: Completed'),
+      'forbidden completion claim',
+    ],
+    [
+      'external privacy policy false completion',
+      () => replace(
+        documentPath,
+        'External public privacy policy final review: Pending',
+        'External public privacy policy final review: Completed',
+      ),
       'forbidden completion claim',
     ],
     [
@@ -550,11 +577,14 @@ for (const text of [
   'Production source connection capability: Implemented',
   'Production Rewarded release workflow injection support: Implemented',
   'Release environment preflight support: Implemented',
+  'App ID/ad-unit publisher prefix verification: Implemented',
+  'Full Rewarded provider checker before release build: Implemented',
   'GitHub Secret actual value configuration: Not started',
   'Production-configured release workflow run: Not started',
   'Production request/load/show: Not started',
   'Production serving: Not started',
   'Privacy/Data Safety final review: Pending',
+  'External public privacy policy final review: Pending',
   'Advertising disclosure final review: Pending',
   'Existing release signing infrastructure: Confirmed',
   'Existing signed AAB workflow: Confirmed',
@@ -610,6 +640,7 @@ for (const claim of [
   'Production request/load/show: Completed',
   'Production serving: Completed',
   'Privacy/Data Safety final review: Completed',
+  'External public privacy policy final review: Completed',
   'Advertising disclosure final review: Completed',
   'Production device QA: Completed',
   'Play Console release upload: Completed',
@@ -624,6 +655,8 @@ for (const regression of [
   'Production source connection capability: Not started',
   'Production Rewarded release workflow injection support: Not started',
   'Release environment preflight support: Not started',
+  'App ID/ad-unit publisher prefix verification: Not started',
+  'Full Rewarded provider checker before release build: Not started',
   'Existing release signing infrastructure: Pending',
   'Existing signed AAB workflow: Pending',
   'AdMob Console creation: Not performed',
@@ -675,11 +708,11 @@ for (const [path, snippets] of [
     'Owner-held production ID release injection',
   ]],
   [projectStatePath, [
-    'State baseline main HEAD: `2ea0e017abf7ac6df1ba3d4132671194a078b826`',
+    'State baseline main HEAD: `993a187b69c7646d9cced9bedbed64da25c543d4`',
     'AI workflow harness: merged / active',
-    'production source connection capability 구현 완료',
-    'production Rewarded release workflow injection support 구현 완료',
-    'GitHub Secret actual value configuration은 시작하지 않음',
+    'production source connection capability: Implemented',
+    'production Rewarded release workflow injection support는 PR #417에서 구현 중',
+    'GitHub Secret actual value configuration: Not started',
   ]],
 ]) {
   const content = read(path)

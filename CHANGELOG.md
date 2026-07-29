@@ -11,6 +11,11 @@
   `VITE_REWARDED_AD_UNIT_ID` only for the production preflight and web build.
 - Added `--release-env-preflight` to the existing Rewarded provider checker
   and validated production/release mode with runtime-composed synthetic IDs.
+- Added fail-closed publisher-prefix verification between the approved Android
+  AdMob App ID resource and the injected production Rewarded ad unit ID.
+- Added the full Rewarded provider checker as a release gate before the
+  production preflight and web build, without passing production configuration
+  or Secret values to the full checker.
 - Replaced the release workflow checker's working-diff transition guard with
   durable workflow invariants and negative mutation coverage.
 
@@ -18,11 +23,17 @@
 
 - Production Rewarded release workflow injection support: Implemented
 - Release environment preflight support: Implemented
+- App ID/ad-unit publisher-prefix verification: Implemented
+- Full Rewarded provider checker before release build: Implemented
 - Existing release signing infrastructure: Confirmed
 - Existing signed AAB workflow: Confirmed
 - GitHub Secret actual value configuration: Not started
 - Production-configured release workflow run: Not started
 - Production Rewarded-configured signed AAB: Not started
+- Production request/load/show verification: Not started
+- Production serving: Not started
+- Production device QA: Not started
+- Play Console upload: Not started
 
 ### Safety
 
@@ -34,8 +45,8 @@
 
 ### Pending
 
-- Privacy/Data Safety final review and advertising disclosure final review
-- Production request/load/show and serving verification
+- Privacy/Data Safety, external privacy policy, and advertising disclosure final
+  review
 - Production Android device QA, including actual early-dismiss and repeated
   ADB listener diagnostics
 - Play Console upload and rollout

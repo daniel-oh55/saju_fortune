@@ -3,12 +3,13 @@ import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 
 const workflowPath = '.github/workflows/android-release-aab.yml';
+const providerCheckerPath = 'scripts/checkAdmobRewardedAdProvider.mjs';
 const gradlePath = 'android/app/build.gradle';
 const docPath = 'docs/ANDROID_RELEASE_AAB_WORKFLOW.md';
 const roadmapPath = 'docs/SAJU_ENGINE_ACCURACY_ROADMAP.md';
 const negativeSelfTest = process.argv.includes('--negative-self-test');
 
-const requiredPaths = [workflowPath, gradlePath, docPath, roadmapPath];
+const requiredPaths = [workflowPath, providerCheckerPath, gradlePath, docPath, roadmapPath];
 const normalizedRead = (path) => fs.readFileSync(path, 'utf8').replace(/\r\n/g, '\n');
 
 function stepBlock(workflow, name) {
@@ -62,12 +63,37 @@ function validateWorkflow(workflow) {
     'VITE_REWARDED_AD_BUILD_TARGET: release',
     'VITE_REWARDED_AD_UNIT_ID: ${{ secrets.ADMOB_REWARDED_PRODUCTION_AD_UNIT_ID }}',
   ];
+  const fullProvider = stepBlock(workflow, 'Validate Rewarded provider invariants');
   const preflight = stepBlock(workflow, 'Validate production Rewarded release configuration');
   const build = stepBlock(workflow, 'Build web app');
+  if (fullProvider.trimEnd() !== [
+    '      - name: Validate Rewarded provider invariants',
+    '        run: npm run check:admob-rewarded-provider',
+  ].join('\n')) {
+    errors.push('full Rewarded provider checker step must use the exact command without env');
+  }
   requireText(
     'node scripts/checkAdmobRewardedAdProvider.mjs --release-env-preflight',
     'production Rewarded release preflight command is required',
   );
+  if (!preflight.includes(
+    'run: node scripts/checkAdmobRewardedAdProvider.mjs --release-env-preflight\n',
+  )) {
+    errors.push('production Rewarded release preflight command must remain exact');
+  }
+  for (const forbidden of [
+    'VITE_REWARDED_AD_UNIT_ID',
+    'ADMOB_REWARDED_PRODUCTION_AD_UNIT_ID',
+    'VITE_REWARDED_AD_PROVIDER',
+    'VITE_REWARDED_AD_SDK_ENABLED',
+    'VITE_REWARDED_AD_MODE',
+    'VITE_REWARDED_AD_BUILD_TARGET',
+    'env:',
+  ]) {
+    if (fullProvider.includes(forbidden)) {
+      errors.push(`full Rewarded provider checker must not receive production env: ${forbidden}`);
+    }
+  }
   for (const entry of productionEnv) {
     if (!preflight.includes(entry)) errors.push(`preflight missing production env: ${entry}`);
     if (!build.includes(entry)) errors.push(`build missing production env: ${entry}`);
@@ -86,10 +112,12 @@ function validateWorkflow(workflow) {
     'Install dependencies',
     'Validate manual production release authorization',
     'Validate release signing secrets',
+    'Validate Rewarded provider invariants',
     'Validate production Rewarded release configuration',
     'Build web app',
     'Set up JDK',
     'Sync Android project',
+    'Make Gradle wrapper executable',
     'Restore release keystore',
     'Build signed release AAB',
     'Verify signed release AAB',
@@ -145,7 +173,36 @@ function validateWorkflow(workflow) {
   return errors;
 }
 
-function runNegativeMutationSelfTest(workflow) {
+function validateProviderChecker(providerChecker) {
+  const errors = [];
+  const releaseValidationBlock = providerChecker.slice(
+    providerChecker.indexOf('\nfunction validateProductionReleaseEnvironment'),
+    providerChecker.indexOf('\nfunction runReleaseEnvironmentPreflight'),
+  );
+  const releaseSubprocessBlock = providerChecker.slice(
+    providerChecker.indexOf('\nfunction runReleaseEnvironmentPreflightSubprocessTests'),
+    providerChecker.indexOf('\nfunction makeProductionConfig'),
+  );
+  for (const required of [
+    "const androidAdMobAppIdResourcePath = 'android/app/src/main/res/values/strings.xml'",
+    'readApprovedAndroidAdMobAppId()',
+    'publisherPrefixFromAppId(appId)',
+    'publisherPrefixFromAdUnitId(normalizedAdUnitId)',
+  ]) {
+    if (!providerChecker.includes(required)) {
+      errors.push(`provider checker publisher-prefix invariant missing: ${required}`);
+    }
+  }
+  if (!releaseValidationBlock.includes('appPublisherPrefix === adUnitPublisherPrefix')) {
+    errors.push('provider checker publisher-prefix comparison missing');
+  }
+  if (!releaseSubprocessBlock.includes('const mismatchedPublisherPrefixShouldPass = false')) {
+    errors.push('provider checker mismatched publisher fixture must fail');
+  }
+  return errors;
+}
+
+function runNegativeMutationSelfTest(workflow, providerChecker) {
   const officialTestId = ['ca-app-pub-3940256099942544', '5224354917'].join('/');
   const replaceRequired = (source, from, to, name) => {
     assert(source.includes(from), `negative mutation source missing: ${name}`);
@@ -191,6 +248,35 @@ function runNegativeMutationSelfTest(workflow) {
       .replaceAll('${{ secrets.ADMOB_REWARDED_PRODUCTION_AD_UNIT_ID }}', officialTestId)],
     ['preflight moved after build', (source) =>
       moveStepBefore(source, 'Build web app', 'Validate production Rewarded release configuration')],
+    ['full provider checker removed', (source) =>
+      source.replace(`${stepBlock(source, 'Validate Rewarded provider invariants')}\n`, '')],
+    ['full provider checker moved after build', (source) =>
+      moveStepBefore(source, 'Build web app', 'Validate Rewarded provider invariants')],
+    ['full provider checker receives production Secret env', (source) =>
+      replaceRequired(
+        source,
+        '        run: npm run check:admob-rewarded-provider',
+        [
+          '        run: npm run check:admob-rewarded-provider',
+          '        env:',
+          '          VITE_REWARDED_AD_UNIT_ID: ${{ secrets.ADMOB_REWARDED_PRODUCTION_AD_UNIT_ID }}',
+        ].join('\n'),
+        'full provider checker production env',
+      )],
+    ['publisher prefix verification removed', 'provider', (source) =>
+      replaceRequired(
+        source,
+        '    appPublisherPrefix === adUnitPublisherPrefix &&',
+        '    true &&',
+        'publisher prefix comparison',
+      )],
+    ['mismatched publisher fixture changed to pass', 'provider', (source) =>
+      replaceRequired(
+        source,
+        '  const mismatchedPublisherPrefixShouldPass = false;',
+        '  const mismatchedPublisherPrefixShouldPass = true;',
+        'mismatched publisher fixture',
+      )],
     ['secret output added', (source) => replaceRequired(
       source,
       'run: npm run build',
@@ -204,10 +290,15 @@ function runNegativeMutationSelfTest(workflow) {
   ];
 
   let detected = 0;
-  for (const [name, mutate] of mutations) {
-    const mutated = mutate(workflow);
-    assert.notEqual(mutated, workflow, `negative mutation did not apply: ${name}`);
-    const errors = validateWorkflow(mutated);
+  for (const [name, targetOrMutate, providerMutate] of mutations) {
+    const target = providerMutate ? 'provider' : 'workflow';
+    const mutate = providerMutate ?? targetOrMutate;
+    const original = target === 'provider' ? providerChecker : workflow;
+    const mutated = mutate(original);
+    assert.notEqual(mutated, original, `negative mutation did not apply: ${name}`);
+    const errors = target === 'provider'
+      ? validateProviderChecker(mutated)
+      : validateWorkflow(mutated);
     assert(errors.length > 0, `negative mutation escaped: ${name}`);
     detected += 1;
   }
@@ -228,6 +319,13 @@ const workflowErrors = validateWorkflow(workflow);
 if (workflowErrors.length) {
   console.error('Android release AAB workflow check failed');
   for (const error of workflowErrors) console.error(`- ${error}`);
+  process.exit(1);
+}
+const providerChecker = normalizedRead(providerCheckerPath);
+const providerCheckerErrors = validateProviderChecker(providerChecker);
+if (providerCheckerErrors.length) {
+  console.error('AdMob Rewarded provider release invariant check failed');
+  for (const error of providerCheckerErrors) console.error(`- ${error}`);
   process.exit(1);
 }
 
@@ -270,6 +368,6 @@ const sensitiveFiles = [...trackedFiles, ...statusFiles].filter((path) =>
 );
 assert.equal(sensitiveFiles.length, 0, 'artifact and keystore files must not be added');
 
-if (negativeSelfTest) runNegativeMutationSelfTest(workflow);
+if (negativeSelfTest) runNegativeMutationSelfTest(workflow, providerChecker);
 
 console.log('Android release AAB workflow check passed');

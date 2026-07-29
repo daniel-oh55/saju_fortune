@@ -59,6 +59,9 @@ jobs:
             fi
           done
 
+      - name: Validate Rewarded provider invariants
+        run: npm run check:admob-rewarded-provider
+
       - name: Validate production Rewarded release configuration
         run: node scripts/checkAdmobRewardedAdProvider.mjs --release-env-preflight
         env:

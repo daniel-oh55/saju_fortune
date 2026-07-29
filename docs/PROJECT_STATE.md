@@ -25,6 +25,8 @@
 - 인앱 개인정보/동의 문구 capability 정합화: Implemented
 - production Rewarded release workflow injection support는 PR #417에서 구현 중
 - release environment preflight support는 PR #417에서 구현 중
+- App ID/ad-unit publisher prefix verification은 PR #417에서 구현 중
+- full Rewarded provider checker before release build는 PR #417에서 구현 중
 - PR #417: Draft/Open
 - GitHub Secret actual value configuration: Not started
 - production-configured release workflow run: Not started
