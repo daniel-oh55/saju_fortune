@@ -175,6 +175,17 @@ function validateWorkflow(workflow) {
 
 function validateProviderChecker(providerChecker) {
   const errors = [];
+  const trackedFileScanBlock = providerChecker.slice(
+    providerChecker.indexOf('\nfunction getTrackedTextFiles'),
+    providerChecker.indexOf('\nfunction readTrackedUtf8Text'),
+  );
+  const concreteIdValidationBlock = providerChecker.slice(
+    providerChecker.indexOf('\nfunction validateConcreteAdUnitIdLiterals'),
+    providerChecker.indexOf('\nfunction assertNoConcreteProductionAdUnitIds'),
+  );
+  const providerMainBlock = providerChecker.slice(
+    providerChecker.indexOf('\nasync function main()'),
+  );
   const releaseValidationBlock = providerChecker.slice(
     providerChecker.indexOf('\nfunction validateProductionReleaseEnvironment'),
     providerChecker.indexOf('\nfunction runReleaseEnvironmentPreflight'),
@@ -183,6 +194,31 @@ function validateProviderChecker(providerChecker) {
     providerChecker.indexOf('\nfunction runReleaseEnvironmentPreflightSubprocessTests'),
     providerChecker.indexOf('\nfunction makeProductionConfig'),
   );
+  if (!trackedFileScanBlock.includes("execFileSync('git', ['ls-files', '-z']")) {
+    errors.push('provider checker concrete ID scan must enumerate all tracked files');
+  }
+  if (
+    !providerMainBlock.includes('trackedTextFiles = getTrackedTextFiles();') ||
+    !providerMainBlock.includes('assertNoConcreteProductionAdUnitIds(trackedTextFiles);')
+  ) {
+    errors.push('provider checker concrete ID scan must use the repository-wide tracked list');
+  }
+  if (concreteIdValidationBlock.includes('changedFiles')) {
+    errors.push('provider checker concrete ID scan must not depend on changedFiles');
+  }
+  if (!concreteIdValidationBlock.includes(
+    'value !== GOOGLE_OFFICIAL_ANDROID_REWARDED_TEST_AD_UNIT_ID',
+  )) {
+    errors.push('provider checker must allow only the Google official Rewarded Test ID');
+  }
+  if (
+    !concreteIdValidationBlock.includes(
+      '`${file}: concrete production ad unit ID literal is prohibited`',
+    ) ||
+    concreteIdValidationBlock.includes('${value}')
+  ) {
+    errors.push('provider checker concrete ID errors must not expose ID values');
+  }
   for (const required of [
     "const androidAdMobAppIdResourcePath = 'android/app/src/main/res/values/strings.xml'",
     'readApprovedAndroidAdMobAppId()',
@@ -276,6 +312,20 @@ function runNegativeMutationSelfTest(workflow, providerChecker) {
         '  const mismatchedPublisherPrefixShouldPass = false;',
         '  const mismatchedPublisherPrefixShouldPass = true;',
         'mismatched publisher fixture',
+      )],
+    ['repository-wide concrete ID scan changed to changedFiles', 'provider', (source) =>
+      replaceRequired(
+        source,
+        '\n  trackedTextFiles = getTrackedTextFiles();\n  const sourceErrors',
+        '\n  trackedTextFiles = changedFiles;\n  const sourceErrors',
+        'repository-wide concrete ID scan',
+      )],
+    ['tracked concrete ID scan result changed to empty', 'provider', (source) =>
+      replaceRequired(
+        source,
+        '\n  assertNoConcreteProductionAdUnitIds(trackedTextFiles);\n  assert(!read',
+        '\n  assertNoConcreteProductionAdUnitIds([]);\n  assert(!read',
+        'tracked concrete ID scan result',
       )],
     ['secret output added', (source) => replaceRequired(
       source,

@@ -54,9 +54,14 @@ const untrackedFiles = lines('ls-files', '--others', '--exclude-standard')
 const unexpectedUntrackedFiles = untrackedFiles.filter(
   (path) => !preservedUntrackedFiles.has(path),
 )
+const creationSelfTestMode =
+  process.env.ADMOB_PRIVACY_OPTIONS_CHECK_CREATION_SELF_TEST === '1'
 const creationMode =
-  process.env.ADMOB_PRIVACY_OPTIONS_CHECK_POST_MERGE !== '1' &&
-  !gitObjectExists(`origin/main:${checkerPath}`)
+  creationSelfTestMode ||
+  (
+    process.env.ADMOB_PRIVACY_OPTIONS_CHECK_POST_MERGE !== '1' &&
+    !gitObjectExists(`origin/main:${checkerPath}`)
+  )
 const committedChanges = lines('diff', '--name-only', 'origin/main...HEAD')
 const stagedChanges = lines('diff', '--name-only', '--cached')
 const workingChanges = lines('diff', '--name-only')
@@ -163,9 +168,14 @@ for (const text of [
   requireText(settingsSource, text, 'src/pages/SettingsPage.jsx')
 }
 for (const text of [
-  'AdMob SDK와 Google UMP',
-  'request/load/show',
-  '실제 광고 송출',
+  '기본 Web/Vercel/일반 Android Debug Build의 provider는 mock',
+  '공식 테스트 전용 Debug Build에서는 Google 공식 Rewarded Test Ad',
+  '승인된 production/release 구성에서는 AdMob production Rewarded 광고',
+  'release workflow 실행, AAB 생성, 기기 QA, serving은 아직 수행하지 않았습니다',
+  '앱 내부 광고 데이터 사용 선택과 Google UMP runtime gate가 모두 필요',
+  'production 활성화 전 개인정보/Data Safety',
+  '외부 공개 개인정보처리방침',
+  '광고 관련 disclosure',
   'Google 서비스와 통신할 수 있음',
   '하루풀이 자체 서버/DB로 프로필을 전송하지 않음',
   '외부 분석 SDK는 아직 연결되지 않음',
@@ -178,7 +188,12 @@ for (const text of [
   'app-level 선택 설정',
   'Google UMP 개인정보 선택과',
   'UMP 선택을 대신하지 않습니다',
-  '광고 request/load/show 기능은 아직 구현되지 않았습니다',
+  '공식 테스트 및 승인된 production Rewarded 경로 모두',
+  '앱 내부 광고 데이터 사용',
+  'Google UMP runtime gate',
+  '공식 테스트 및 승인된 production Rewarded 광고 요청 경로',
+  '이 선택이 true가',
+  'non-personalized 광고 요청으로 제한',
   '외부 분석 SDK는 아직 연결되지 않았으며',
 ]) {
   requireText(consentPanelSource, text, 'src/components/ConsentSettingsPanel.jsx')
@@ -235,6 +250,11 @@ if (/consentPreferences/u.test(coordinatorSource)) {
 }
 forbidPattern(privacySource, /실제 광고 SDK(?:가 연결되어 있지 않| 없음)/u, 'privacy copy')
 forbidPattern(privacySource, /외부 SDK로 개인정보를 전송하지 않습니다/u, 'privacy copy')
+forbidPattern(
+  consentPanelSource,
+  /production 광고 (?:request\/load\/show )?기능은 아직 구현되지 않았습니다/u,
+  'consent copy',
+)
 
 const runtimePayload = `${coordinatorSource}\n${appSource}\n${settingsSource}`
 const guardedPayload = `${runtimePayload}\n${privacySource}\n${consentPanelSource}\n${documentationSource}`
@@ -617,6 +637,12 @@ if (process.argv.includes('--negative-self-test')) {
   }
   const unexpectedSrcPath = 'src/admobPrivacyOptionsUnexpectedProbe.js'
   const unexpectedRootPath = 'admob-privacy-options-unexpected.tmp'
+  const syntheticProductionAdUnitId = [
+    'ca-app-pub-',
+    ['1234', '5678', '9012', '3456'].join(''),
+    '/',
+    ['12345', '67890'].join(''),
+  ].join('')
   const mutationCases = [
     ['unexpected src file', () => writeFileSync(resolve(root, unexpectedSrcPath), 'export default true\n', 'utf8')],
     ['src/main.jsx', () => append('src/main.jsx', '\n// privacy-options negative probe\n')],
@@ -628,7 +654,7 @@ if (process.argv.includes('--negative-self-test')) {
     ['package-lock', () => append('package-lock.json', '\n')],
     ['dependency', () => mutatePackage((value) => { value.dependencies['negative-probe'] = '1.0.0' })],
     ['existing package script', () => mutatePackage((value) => { value.scripts.build = 'vite build --negative-probe' })],
-    ['ad unit ID', () => append(coordinatorPath, '\n// ca-app-pub-1234567890123456/1234567890\n')],
+    ['ad unit ID', () => append(coordinatorPath, `\n// ${syntheticProductionAdUnitId}\n`)],
     ['Google sample ID', () => append(coordinatorPath, '\n// ca-app-pub-3940256099942544~3347511713\n')],
     ['placeholder', () => append(coordinatorPath, '\n// YOUR_ADMOB_APP_ID\n')],
     ['test-device marker', () => append(coordinatorPath, '\n// testDeviceIdentifiers\n')],
@@ -660,7 +686,7 @@ if (process.argv.includes('--negative-self-test')) {
     ['refresh failure gate', () => replace(coordinatorPath, "lastErrorStage: 'privacy-options-refresh',\n        privacyOptionsActionState:", "lastErrorStage: 'privacy-options-refresh',\n        adGateOpen: true,\n        privacyOptionsActionState:")],
     ['duplicate initialize', () => replace(coordinatorPath, 'if (initializePromise) return initializePromise;', '// initialize guard removed')],
     ['stale bootstrap gate', () => replace(coordinatorPath, 'snapshot.canRequestAds !== true ||\n        privacyRefreshGateBlocked', 'false ||\n        false')],
-    ['stale SDK copy', () => replace('src/pages/PrivacyInfoPage.jsx', 'AdMob SDK와 Google UMP 동의 확인 절차가 연결되어 있지만', '실제 광고 SDK가 연결되어 있지 않으며')],
+    ['stale SDK copy', () => append('src/pages/PrivacyInfoPage.jsx', '\n실제 광고 SDK가 연결되어 있지 않음\n')],
     ['ad request completion claim', () => append('CHANGELOG.md', '\nActual ad request: Completed\n')],
     ['ad serving completion claim', () => append('CHANGELOG.md', '\nActual ad serving: Completed\n')],
     ['U+FFFD', () => append('CHANGELOG.md', '\n\uFFFD\n')],
@@ -668,6 +694,7 @@ if (process.argv.includes('--negative-self-test')) {
     ['unexpected untracked', () => writeFileSync(resolve(root, unexpectedRootPath), 'negative probe\n', 'utf8')],
   ]
   assert.equal(mutationCases.length, 48)
+  const totalChecks = mutationCases.length + 1
   const restorePaths = [
     'src/main.jsx',
     'src/components/ConsentBanner.jsx',
@@ -693,12 +720,17 @@ if (process.argv.includes('--negative-self-test')) {
       const result = spawnSync(process.execPath, [resolve(root, checkerPath)], {
         cwd: root,
         encoding: 'utf8',
+        env: {
+          ...process.env,
+          ADMOB_PRIVACY_OPTIONS_CHECK_CREATION_SELF_TEST: '1',
+          ADMOB_PRIVACY_OPTIONS_CHECK_POST_MERGE: '0',
+        },
       })
       if (result.status === 0) {
         throw new Error(`${name}: checker unexpectedly accepted the mutation`)
       }
       passed += 1
-      console.log(`PASS ${passed}/49: ${name}`)
+      console.log(`PASS ${passed}/${totalChecks}: ${name}`)
     } finally {
       for (const [path, content] of originals) {
         writeFileSync(resolve(root, path), content, 'utf8')
@@ -711,14 +743,18 @@ if (process.argv.includes('--negative-self-test')) {
   const postMergeResult = spawnSync(process.execPath, [resolve(root, checkerPath)], {
     cwd: root,
     encoding: 'utf8',
-    env: { ...process.env, ADMOB_PRIVACY_OPTIONS_CHECK_POST_MERGE: '1' },
+    env: {
+      ...process.env,
+      ADMOB_PRIVACY_OPTIONS_CHECK_CREATION_SELF_TEST: '0',
+      ADMOB_PRIVACY_OPTIONS_CHECK_POST_MERGE: '1',
+    },
   })
   if (postMergeResult.status !== 0) {
     throw new Error(`post-merge mode failed:\n${postMergeResult.stdout}\n${postMergeResult.stderr}`)
   }
   passed += 1
-  console.log(`PASS ${passed}/49: post-merge mode`)
-  console.log(`AdMob privacy options UI negative verification passed (${passed}/49)`)
+  console.log(`PASS ${passed}/${totalChecks}: post-merge mode`)
+  console.log(`AdMob privacy options UI negative verification passed (${passed}/${totalChecks})`)
   process.exit(0)
 }
 
