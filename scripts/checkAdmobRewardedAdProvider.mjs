@@ -128,8 +128,16 @@ const requiredTokens = [
   ['src/components/RewardAdModal.jsx', 'const rewardRequestId = createRewardedRequestId()'],
   ['src/components/RewardAdModal.jsx', 'rewardRequestId,'],
   ['src/components/RewardAdModal.jsx', 'mountedRef'],
-  ['src/components/RewardAdModal.jsx', 'Google 공식 테스트 광고'],
-  ['src/components/RewardAdModal.jsx', '테스트 광고 보고 상세 풀이 열기'],
+  ['src/components/RewardAdModal.jsx', 'const OFFICIAL_TEST_SDK_COPY = Object.freeze({'],
+  ['src/components/RewardAdModal.jsx', 'const PRODUCTION_SDK_COPY = Object.freeze({'],
+  ['src/components/RewardAdModal.jsx', 'if (isOfficialTestSdk) return OFFICIAL_TEST_SDK_COPY'],
+  ['src/components/RewardAdModal.jsx', 'if (isProductionSdk) return PRODUCTION_SDK_COPY'],
+  ['src/components/RewardAdModal.jsx', "title: 'Google 공식 테스트 광고'"],
+  ['src/components/RewardAdModal.jsx', "cta: '테스트 광고 보고 상세 풀이 열기'"],
+  ['src/components/RewardAdModal.jsx', "title: '보상형 광고'"],
+  ['src/components/RewardAdModal.jsx', "preparing: '광고를 준비하고 있어요.'"],
+  ['src/components/RewardAdModal.jsx', "cta: '광고 보고 상세 풀이 열기'"],
+  ['src/components/RewardAdModal.jsx', '현재 상세 풀이의 광고를 시작해 주세요'],
   ['src/components/RewardAdModal.jsx', 'isRewardedResultForRequest(result, {'],
   ['src/components/RewardAdModal.jsx', 'const wasPersisted = await onRewardComplete(result)'],
   ['src/components/RewardAdModal.jsx', 'if (wasPersisted === false)'],
@@ -146,9 +154,22 @@ const requiredTokens = [
   ['src/utils/storage.js', "rewardType = 'mock_rewarded_ad'"],
   ['src/utils/storage.js', "rewardType === 'sdk_rewarded_ad'"],
   ['src/utils/storage.js', 'rewardType: safeRewardType'],
-  ['src/pages/PrivacyInfoPage.jsx', '공식 테스트 전용 빌드'],
-  ['src/pages/PrivacyInfoPage.jsx', '광고 송출은 없습니다'],
-  ['src/components/ConsentSettingsPanel.jsx', '별도 Android 공식 테스트 전용 빌드'],
+  ['src/pages/PrivacyInfoPage.jsx', '기본 Web/Vercel/일반 Android Debug Build의 provider는 mock'],
+  ['src/pages/PrivacyInfoPage.jsx', '공식 테스트 전용 Debug Build에서는 Google 공식 Rewarded Test Ad'],
+  ['src/pages/PrivacyInfoPage.jsx', '승인된 production/release 구성에서는 AdMob production Rewarded 광고'],
+  ['src/pages/PrivacyInfoPage.jsx', 'release workflow 실행, AAB 생성, 기기 QA, serving은 아직 수행하지 않았습니다'],
+  ['src/pages/PrivacyInfoPage.jsx', '앱 내부 광고 데이터 사용 선택과 Google UMP runtime gate가 모두 필요'],
+  ['src/pages/PrivacyInfoPage.jsx', '이 페이지는 하루풀이 앱의 현재 개인정보 처리 안내입니다'],
+  ['src/pages/PrivacyInfoPage.jsx', '최신 개인정보처리방침 전문은'],
+  ['src/pages/PrivacyInfoPage.jsx', '아래 외부 페이지에서 확인할 수 있으며'],
+  ['src/pages/PrivacyInfoPage.jsx', 'production 광고 활성화 전 개인정보/Data Safety'],
+  ['src/pages/PrivacyInfoPage.jsx', '외부 공개 개인정보처리방침 최종 검토'],
+  ['src/pages/PrivacyInfoPage.jsx', '광고 관련 disclosure 최종 검토'],
+  ['src/pages/PrivacyInfoPage.jsx', 'https://hymlounge.com/harupuli/privacy/'],
+  ['src/components/ConsentSettingsPanel.jsx', '공식 테스트 및 승인된 production Rewarded 경로 모두'],
+  ['src/components/ConsentSettingsPanel.jsx', '공식 테스트 및 승인된 production Rewarded 광고 요청 경로'],
+  ['src/components/ConsentSettingsPanel.jsx', '이 선택이 true가'],
+  ['src/components/ConsentSettingsPanel.jsx', 'non-personalized 광고 요청으로 제한'],
   ['.github/workflows/android-rewarded-test-build.yml', 'Android Rewarded Test Build'],
   ['.github/workflows/android-rewarded-test-build.yml', 'VITE_REWARDED_AD_PROVIDER: sdk'],
   ['.github/workflows/android-rewarded-test-build.yml', 'VITE_REWARDED_AD_SDK_ENABLED: "true"'],
@@ -172,8 +193,85 @@ function validateSources(sourceOverrides = new Map()) {
   const loaderSource = sourceFor('src/services/rewardedAdProvider.loader.js');
   const serviceSource = sourceFor('src/services/rewardedAdService.js');
   const modalSource = sourceFor('src/components/RewardAdModal.jsx');
+  const privacySource = sourceFor('src/pages/PrivacyInfoPage.jsx');
+  const consentSettingsSource = sourceFor('src/components/ConsentSettingsPanel.jsx');
   const appSource = sourceFor('src/App.jsx');
   const configSource = sourceFor('src/config/rewardedAdSdkConfig.js');
+  const officialTestCopyBlock = modalSource.slice(
+    modalSource.indexOf('const OFFICIAL_TEST_SDK_COPY'),
+    modalSource.indexOf('const PRODUCTION_SDK_COPY'),
+  );
+  const productionCopyBlock = modalSource.slice(
+    modalSource.indexOf('const PRODUCTION_SDK_COPY'),
+    modalSource.indexOf('function getRewardedAdSdkCopy'),
+  );
+  const officialTestCopyTokens = [
+    'Google 공식 테스트 광고',
+    'Google 공식 Rewarded Test Ad',
+    '테스트 광고 시청은 선택 사항',
+    '테스트 광고 보고 상세 풀이 열기',
+  ];
+  for (const token of officialTestCopyTokens) {
+    if (!officialTestCopyBlock.includes(token)) {
+      errors.push(`official-test SDK copy is missing: ${token}`);
+    }
+  }
+  const productionCopyTokens = [
+    "title: '보상형 광고'",
+    '광고를 끝까지 시청하고 보상을 받으면 상세 풀이가 열립니다',
+    "preparing: '광고를 준비하고 있어요.'",
+    '광고 시청은 선택 사항이며, 버튼을 눌러 시작할 수 있어요',
+    "cta: '광고 보고 상세 풀이 열기'",
+  ];
+  for (const token of productionCopyTokens) {
+    if (!productionCopyBlock.includes(token)) {
+      errors.push(`production SDK copy is missing: ${token}`);
+    }
+  }
+  for (const prohibited of [
+    'Google 공식 테스트 광고',
+    'Rewarded Test Ad',
+    '테스트 광고 보고',
+    '공식 테스트 전용',
+  ]) {
+    if (productionCopyBlock.includes(prohibited)) {
+      errors.push(`production SDK copy must not use test-ad language: ${prohibited}`);
+    }
+  }
+  if (
+    !modalSource.includes('if (isOfficialTestSdk) return OFFICIAL_TEST_SDK_COPY') ||
+    !modalSource.includes('if (isProductionSdk) return PRODUCTION_SDK_COPY')
+  ) {
+    errors.push('official-test and production SDK copy branches must remain separate');
+  }
+  if (modalSource.includes('현재 상세 풀이의 테스트 광고')) {
+    errors.push('request ownership error copy must remain mode-neutral');
+  }
+  for (const staleClaim of [
+    'production 광고 단위 ID와 production 광고 request/load/show는 구현되지 않았습니다',
+    'production 환경의 실제 광고 송출은 없습니다',
+    '공식 테스트 전용 빌드에서만',
+    '실제 서비스 공개 전',
+  ]) {
+    if (privacySource.includes(staleClaim)) {
+      errors.push(`privacy copy contains a stale production capability claim: ${staleClaim}`);
+    }
+  }
+  if (
+    /(?:개인정보|Privacy)\/Data Safety.{0,80}(?:Completed|완료)|(?:Completed|완료).{0,80}(?:개인정보|Privacy)\/Data Safety/su.test(
+      privacySource,
+    )
+  ) {
+    errors.push('Privacy/Data Safety review must not be represented as completed');
+  }
+  for (const staleClaim of [
+    'production 광고 request/load/show 기능은 아직 구현되지 않았습니다',
+    'production 광고 기능은 아직 구현되지 않았습니다',
+  ]) {
+    if (consentSettingsSource.includes(staleClaim)) {
+      errors.push(`consent copy contains a stale production capability claim: ${staleClaim}`);
+    }
+  }
   if (
     !/const mockBuildTargetApproved\s*=\s*buildTarget === ''\s*\|\|\s*buildTarget === REWARDED_AD_BUILD_TARGET\.DEBUG;/u.test(
       configSource,
@@ -1464,6 +1562,39 @@ const targetedNegativeMutations = [
     mutate: (source) => source.replace(
       'isRewardedResultForRequest(result, {',
       'Boolean(result?.ok) && ignoreRequestOwnership({',
+    ),
+  },
+  {
+    name: 'production modal copy reverted to test-ad language',
+    file: 'src/components/RewardAdModal.jsx',
+    mutate: (source) => source.replace(
+      "title: '보상형 광고'",
+      "title: 'Google 공식 테스트 광고'",
+    ),
+  },
+  {
+    name: 'privacy copy restores no-production-serving claim',
+    file: 'src/pages/PrivacyInfoPage.jsx',
+    mutate: (source) =>
+      `${source}\nproduction 환경의 실제 광고 송출은 없습니다.\n`,
+  },
+  {
+    name: 'privacy copy restores unpublished-app claim',
+    file: 'src/pages/PrivacyInfoPage.jsx',
+    mutate: (source) => `${source}\n실제 서비스 공개 전\n`,
+  },
+  {
+    name: 'consent copy restores production-not-implemented claim',
+    file: 'src/components/ConsentSettingsPanel.jsx',
+    mutate: (source) =>
+      `${source}\nproduction 광고 기능은 아직 구현되지 않았습니다.\n`,
+  },
+  {
+    name: 'official-test and production copy branch separation removed',
+    file: 'src/components/RewardAdModal.jsx',
+    mutate: (source) => source.replace(
+      'if (isProductionSdk) return PRODUCTION_SDK_COPY;',
+      'if (isProductionSdk) return OFFICIAL_TEST_SDK_COPY;',
     ),
   },
   {

@@ -5,8 +5,8 @@
 ## 기준
 
 - 기준일: 2026-07-28
-- State baseline main HEAD: `2ea0e017abf7ac6df1ba3d4132671194a078b826`
-- 작업 시작 전 Open PR: 없음
+- State baseline main HEAD: `993a187b69c7646d9cced9bedbed64da25c543d4`
+- 작업 시작 전 Open PR: #417 (Draft/Open, 보류)
 - 현재 앱: Google Play 공개 상태
 - 현재 플랫폼: React + Vite + Capacitor Android
 - 데이터: 주로 `localStorage`에 저장하며 별도 사용자 계정 서버는 없음
@@ -20,26 +20,36 @@
 - Google 공식 Rewarded Test Ad 구현 및 Galaxy S23 Ultra 기능 QA 완료
 - production Rewarded ad unit은 Owner가 AdMob Console에서 생성 완료
 - 실제 production ad unit ID 값은 저장소 밖에서 관리
-- production source connection capability 구현 완료
-- production Rewarded release workflow injection support 구현 완료
-- release environment preflight support 구현 완료
-- GitHub Secret actual value configuration은 시작하지 않음
-- production-configured release workflow run은 시작하지 않음
-- production request/load/show와 serving은 시작하지 않음
-- existing release signing infrastructure: Confirmed
-- existing signed AAB workflow: Confirmed
+- production source connection capability: Implemented
+- production Rewarded mode-aware UI copy: Implemented
+- 인앱 개인정보/동의 문구 capability 정합화: Implemented
+- production Rewarded release workflow injection support는 PR #417에서 구현 중
+- release environment preflight support는 PR #417에서 구현 중
+- PR #417: Draft/Open
+- GitHub Secret actual value configuration: Not started
+- production-configured release workflow run: Not started
 - production Rewarded-configured signed AAB: Not started
+- production request/load/show verification: Not started
+- production serving: Not started
+- production device QA: Not started
+- Privacy/Data Safety final review: Pending
+- external privacy policy final review: Pending
+- advertising disclosure final review: Pending
 
 ## 현재 남은 단계
 
-1. GitHub Secret actual value configuration
-2. owner-confirmed production-configured release workflow run
-3. production Rewarded-configured signed AAB generation
-4. production request/load/show 및 serving
-5. production Android device QA
-6. Privacy / Data Safety 및 advertising disclosure 최종 검토
-7. Play 테스트 트랙과 staged rollout
-8. rollback 기준 검증
+1. PR #417 독립 검토와 Owner merge 승인
+2. GitHub Secret 실제 설정
+3. production-configured workflow 실행
+4. production AAB 생성
+5. production request/load/show 검증
+6. production serving
+7. production Android device QA
+8. Play upload
+9. Privacy / Data Safety 최종 검토
+10. 외부 공개 개인정보처리방침 최종 검토
+11. 광고 관련 disclosure 최종 검토
+12. staged rollout 및 rollback 기준 검증
 
 ## 미완료 또는 deferred QA
 
