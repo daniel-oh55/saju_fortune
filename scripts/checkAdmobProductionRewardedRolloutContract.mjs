@@ -24,21 +24,28 @@ const fixtureFiles = new Set([
   projectStatePath,
   checkerPath,
 ])
-const canonicalSourceCapabilityState = [
+const canonicalInternalTestRolloutState = [
   'Production source connection capability: Implemented',
   'Production Rewarded release workflow injection support: Implemented',
   'Release environment preflight support: Implemented',
-  'GitHub Secret actual value configuration: Not started',
-  'Production-configured release workflow run: Not started',
-  'Production request/load/show: Not started',
-  'Production serving: Not started',
-  'Production device QA: Not started',
-  'Privacy/Data Safety final review: Pending',
-  'Advertising disclosure final review: Pending',
+  'GitHub Secret actual value configuration: Completed',
+  'Production-configured release workflow run: Completed',
+  'Production-configured registered-test-device request/load/show: Pass - Test Ad',
+  'Production-configured internal-test device QA: Pass',
+  'Exactly-once reward: Pass',
+  'Privacy/Data Safety final review: Completed',
+  'External public privacy policy final review: Completed',
+  'Advertising disclosure final review: Completed',
   'Existing release signing infrastructure: Confirmed',
   'Existing signed AAB workflow: Confirmed',
-  'Production Rewarded-configured signed AAB: Not started',
-  'Play Console release upload: Not started',
+  'Production Rewarded-configured signed AAB: Completed',
+  'Play Console internal-testing AAB upload: Completed',
+  'Actual general-user production serving: Not started',
+  'General-user Production update: Not started',
+  'Play Console Production-track upload: Not started',
+  'Actual production-serving device QA: Not started',
+  'Actual advertisement revenue: Not verified',
+  'Rollout monitoring and rollback operational verification: Pending',
 ]
 const requiredHeadings = [
   '## 1. Purpose and scope',
@@ -102,15 +109,15 @@ const writeFixture = (fixtureRoot, path, content) => {
   mkdirSync(dirname(target), { recursive: true })
   writeFileSync(target, content)
 }
-const createSyntheticSourceCapabilityFixture = () => {
+const createSyntheticInternalTestRolloutFixture = () => {
   const temporaryRoot = mkdtempSync(join(tmpdir(), 'admob-rollout-lifecycle-'))
   const fixtureRoot = resolve(temporaryRoot, 'repository')
 
   try {
     const baselineCommit = git('rev-parse', 'HEAD').trim()
     const currentDocument = read(documentPath)
-    if (!canonicalSourceCapabilityState.every((state) => currentDocument.includes(state))) {
-      throw new Error('current rollout contract does not contain the canonical source-capability state')
+    if (!canonicalInternalTestRolloutState.every((state) => currentDocument.includes(state))) {
+      throw new Error('current rollout contract does not contain the canonical internal-test rollout state')
     }
 
     const clone = run(
@@ -134,7 +141,7 @@ const createSyntheticSourceCapabilityFixture = () => {
     execFileSync('git', ['config', 'core.autocrlf', 'false'], { cwd: fixtureRoot })
     execFileSync(
       'git',
-      ['checkout', '--quiet', '-b', 'source-capability-lifecycle', baselineCommit],
+      ['checkout', '--quiet', '-b', 'internal-test-rollout-lifecycle', baselineCommit],
       { cwd: fixtureRoot },
     )
     execFileSync(
@@ -150,7 +157,7 @@ const createSyntheticSourceCapabilityFixture = () => {
       cwd: fixtureRoot,
     })
     execFileSync('git', ['add', '--', ...fixtureFiles], { cwd: fixtureRoot })
-    execFileSync('git', ['commit', '--quiet', '-m', 'fixture: synthetic source capability'], {
+    execFileSync('git', ['commit', '--quiet', '-m', 'fixture: synthetic internal-test rollout'], {
       cwd: fixtureRoot,
     })
     const syntheticTransitionHead = execFileSync('git', ['rev-parse', 'HEAD'], {
@@ -158,7 +165,7 @@ const createSyntheticSourceCapabilityFixture = () => {
       encoding: 'utf8',
     }).trim()
     if (syntheticTransitionHead === baselineCommit) {
-      throw new Error('source-capability baseline and synthetic HEAD must differ')
+      throw new Error('internal-test rollout baseline and synthetic HEAD must differ')
     }
     return {
       fixtureRoot,
@@ -177,14 +184,14 @@ const runLifecycleSelfTest = () => {
     baselineCommit,
     syntheticTransitionHead,
     temporaryRoot,
-  } = createSyntheticSourceCapabilityFixture()
+  } = createSyntheticInternalTestRolloutFixture()
 
   try {
-    console.log(`Source capability fixture baseline commit: ${baselineCommit}`)
+    console.log(`Internal-test rollout fixture baseline commit: ${baselineCommit}`)
     const check = () => run(process.execPath, [resolve(fixtureRoot, checkerPath)], fixtureRoot)
     assertSuccessfulCheck(
       check(),
-      'A. synthetic canonical source-capability state (mode canonical)',
+      'A. current canonical internal-test rollout state (mode canonical)',
       'canonical',
     )
 
@@ -361,54 +368,145 @@ const runNegativeMutationSelfTest = (fixtureRoot) => {
       'forbidden state regression',
     ],
     [
-      'GitHub Secret false completion',
+      'GitHub Secret state regression',
       () => replace(
         documentPath,
-        'GitHub Secret actual value configuration: Not started',
         'GitHub Secret actual value configuration: Completed',
+        'GitHub Secret actual value configuration: Not started',
       ),
-      'forbidden completion claim',
+      'forbidden state regression',
     ],
     [
-      'production workflow run false completion',
+      'production workflow run state regression',
       () => replace(
         documentPath,
-        'Production-configured release workflow run: Not started',
         'Production-configured release workflow run: Completed',
+        'Production-configured release workflow run: Not started',
       ),
-      'forbidden completion claim',
+      'forbidden state regression',
     ],
     [
-      'production request load show false completion',
-      () => replace(documentPath, 'Production request/load/show: Not started', 'Production request/load/show: Completed'),
-      'forbidden completion claim',
-    ],
-    [
-      'production serving false completion',
-      () => replace(documentPath, 'Production serving: Not started', 'Production serving: Completed'),
-      'forbidden completion claim',
-    ],
-    [
-      'Privacy Data Safety false completion',
-      () => replace(documentPath, 'Privacy/Data Safety final review: Pending', 'Privacy/Data Safety final review: Completed'),
-      'forbidden completion claim',
-    ],
-    [
-      'external privacy policy false completion',
+      'production Rewarded AAB state regression',
       () => replace(
         documentPath,
-        'External public privacy policy final review: Pending',
-        'External public privacy policy final review: Completed',
-      ),
-      'forbidden completion claim',
-    ],
-    [
-      'production Rewarded AAB false completion',
-      () => replace(
-        documentPath,
-        'Production Rewarded-configured signed AAB: Not started',
         'Production Rewarded-configured signed AAB: Completed',
+        'Production Rewarded-configured signed AAB: Not started',
       ),
+      'forbidden state regression',
+    ],
+    [
+      'internal-testing upload state regression',
+      () => replace(
+        documentPath,
+        'Play Console internal-testing AAB upload: Completed',
+        'Play Console internal-testing AAB upload: Not started',
+      ),
+      'forbidden state regression',
+    ],
+    [
+      'Privacy Data Safety state regression',
+      () => replace(
+        documentPath,
+        'Privacy/Data Safety final review: Completed',
+        'Privacy/Data Safety final review: Pending',
+      ),
+      'forbidden state regression',
+    ],
+    [
+      'external privacy policy state regression',
+      () => replace(
+        documentPath,
+        'External public privacy policy final review: Completed',
+        'External public privacy policy final review: Pending',
+      ),
+      'forbidden state regression',
+    ],
+    [
+      'advertising disclosure state regression',
+      () => replace(
+        documentPath,
+        'Advertising disclosure final review: Completed',
+        'Advertising disclosure final review: Pending',
+      ),
+      'forbidden state regression',
+    ],
+    [
+      'registered test-device QA state regression',
+      () => replace(
+        documentPath,
+        'Production-configured registered-test-device request/load/show: Pass - Test Ad',
+        'Production-configured registered-test-device request/load/show: Not started',
+      ),
+      'forbidden state regression',
+    ],
+    [
+      'exactly-once reward state regression',
+      () => replace(documentPath, 'Exactly-once reward: Pass', 'Exactly-once reward: Not started'),
+      'forbidden state regression',
+    ],
+    [
+      'actual general-user serving false completion',
+      () => replace(
+        documentPath,
+        'Actual general-user production serving: Not started',
+        'Actual general-user production serving: Completed',
+      ),
+      'forbidden completion claim',
+    ],
+    [
+      'general-user Production update false completion',
+      () => replace(
+        documentPath,
+        'General-user Production update: Not started',
+        'General-user Production update: Completed',
+      ),
+      'forbidden completion claim',
+    ],
+    [
+      'Production-track upload false completion',
+      () => replace(
+        documentPath,
+        'Play Console Production-track upload: Not started',
+        'Play Console Production-track upload: Completed',
+      ),
+      'forbidden completion claim',
+    ],
+    [
+      'actual production-serving device QA false completion',
+      () => replace(
+        documentPath,
+        'Actual production-serving device QA: Not started',
+        'Actual production-serving device QA: Completed',
+      ),
+      'forbidden completion claim',
+    ],
+    [
+      'actual advertisement revenue false confirmation',
+      () => replace(
+        documentPath,
+        'Actual advertisement revenue: Not verified',
+        'Actual advertisement revenue: Confirmed',
+      ),
+      'forbidden completion claim',
+    ],
+    [
+      'ambiguous production request load show completion',
+      () => append(documentPath, '\nProduction request/load/show: Completed\n'),
+      'forbidden completion claim',
+    ],
+    [
+      'ambiguous production device QA completion',
+      () => append(documentPath, '\nProduction device QA: Completed\n'),
+      'forbidden completion claim',
+    ],
+    [
+      'ambiguous Play Console upload completion',
+      () => append(documentPath, '\nPlay Console release upload: Completed\n'),
+      'forbidden completion claim',
+    ],
+    [
+      'unrestricted production readiness claim',
+      () => append(documentPath, '\nReady for unrestricted production\n'),
       'forbidden completion claim',
     ],
     [
@@ -428,16 +526,6 @@ const runNegativeMutationSelfTest = (fixtureRoot) => {
         'Existing signed AAB workflow: Pending',
       ),
       'forbidden state regression',
-    ],
-    [
-      'production device QA false completion',
-      () => replace(documentPath, 'Production device QA: Not started', 'Production device QA: Completed'),
-      'forbidden completion claim',
-    ],
-    [
-      'Play Console upload false completion',
-      () => replace(documentPath, 'Play Console release upload: Not started', 'Play Console release upload: Completed'),
-      'forbidden completion claim',
     ],
     [
       'official test ID used in production',
@@ -520,7 +608,7 @@ const runNegativeMutationSelfTest = (fixtureRoot) => {
 }
 
 if (negativeSelfTestRequested) {
-  const { fixtureRoot, temporaryRoot } = createSyntheticSourceCapabilityFixture()
+  const { fixtureRoot, temporaryRoot } = createSyntheticInternalTestRolloutFixture()
   try {
     runNegativeMutationSelfTest(fixtureRoot)
   } finally {
@@ -579,18 +667,30 @@ for (const text of [
   'Release environment preflight support: Implemented',
   'App ID/ad-unit publisher prefix verification: Implemented',
   'Full Rewarded provider checker before release build: Implemented',
-  'GitHub Secret actual value configuration: Not started',
-  'Production-configured release workflow run: Not started',
-  'Production request/load/show: Not started',
-  'Production serving: Not started',
-  'Privacy/Data Safety final review: Pending',
-  'External public privacy policy final review: Pending',
-  'Advertising disclosure final review: Pending',
+  'GitHub Secret actual value configuration: Completed',
+  'Production-configured release workflow run: Completed',
+  'Privacy/Data Safety final review: Completed',
+  'External public privacy policy final review: Completed',
+  'Advertising disclosure final review: Completed',
   'Existing release signing infrastructure: Confirmed',
   'Existing signed AAB workflow: Confirmed',
-  'Production Rewarded-configured signed AAB: Not started',
-  'Production device QA: Not started',
-  'Play Console release upload: Not started',
+  'Production Rewarded-configured signed AAB: Completed',
+  'Play Console internal-testing AAB upload: Completed',
+  'Production-configured registered-test-device request/load/show: Pass - Test Ad',
+  'Production-configured internal-test device QA: Pass',
+  'Exactly-once reward: Pass',
+  'Rapid-tap duplicate ad prevention: Pass',
+  'Offline failure/recovery: Pass',
+  'Restart reward persistence: Pass',
+  'Duplicate reward after restart: Not observed',
+  'Actual general-user production serving: Not started',
+  'General-user Production update: Not started',
+  'Play Console Production-track upload: Not started',
+  'Actual production-serving device QA: Not started',
+  'Actual advertisement revenue: Not verified',
+  'Actual early-dismiss device QA: N/A for observed creative / Pending for future early-dismiss-capable creative',
+  'Repeated ADB listener-accumulation diagnostics: Pending',
+  'Rollout monitoring and rollback operational verification: Pending',
   'Manage the production ID in exactly one configuration source.',
   'Fail closed if release mode receives a test ID.',
   'Fail closed if debug mode receives a production ID.',
@@ -609,6 +709,8 @@ for (const text of [
   'Actual production Rewarded ad unit; `isTesting: false`',
   'Privacy policy wording related to the advertising SDK',
   'Google Play Data safety form',
+  'approximate location, app interactions, diagnostics, and device or other identifiers',
+  'Its last-updated date is 2026-07-29',
   'EEA/UK/Switzerland UMP messaging',
   '`src/config/rewardedAdSdkConfig.js`',
   '`src/services/rewardedAdProvider.loader.js`',
@@ -616,7 +718,7 @@ for (const text of [
   '`.github/workflows/android-release-aab.yml`',
   'No owner-held production identifier or Android native file is changed',
   '`ADMOB_REWARDED_PRODUCTION_AD_UNIT_ID`',
-  'The workflow has not been run with production Rewarded configuration',
+  'The workflow was run successfully with production Rewarded configuration',
 ]) {
   requireText(compactDocument, text)
 }
@@ -634,19 +736,17 @@ for (const [meaning, label] of [
 }
 
 for (const claim of [
-  'GitHub Secret actual value configuration: Completed',
-  'Production-configured release workflow run: Completed',
-  'Production Rewarded-configured signed AAB: Completed',
+  'Actual general-user production serving: Completed',
+  'General-user Production update: Completed',
+  'Play Console Production-track upload: Completed',
+  'Actual production-serving device QA: Completed',
+  'Actual advertisement revenue: Confirmed',
   'Production request/load/show: Completed',
   'Production serving: Completed',
-  'Privacy/Data Safety final review: Completed',
-  'External public privacy policy final review: Completed',
-  'Advertising disclosure final review: Completed',
   'Production device QA: Completed',
   'Play Console release upload: Completed',
-  'Google Play disclosure: Completed',
   'Production serving enabled',
-  'Ready for production',
+  'Ready for unrestricted production',
 ]) {
   if (document.includes(claim)) errors.push(`forbidden completion claim: ${claim}`)
 }
@@ -657,6 +757,15 @@ for (const regression of [
   'Release environment preflight support: Not started',
   'App ID/ad-unit publisher prefix verification: Not started',
   'Full Rewarded provider checker before release build: Not started',
+  'GitHub Secret actual value configuration: Not started',
+  'Production-configured release workflow run: Not started',
+  'Production Rewarded-configured signed AAB: Not started',
+  'Play Console internal-testing AAB upload: Not started',
+  'Privacy/Data Safety final review: Pending',
+  'External public privacy policy final review: Pending',
+  'Advertising disclosure final review: Pending',
+  'Production-configured registered-test-device request/load/show: Not started',
+  'Exactly-once reward: Not started',
   'Existing release signing infrastructure: Pending',
   'Existing signed AAB workflow: Pending',
   'AdMob Console creation: Not performed',
@@ -667,9 +776,14 @@ for (const regression of [
   if (document.includes(regression)) errors.push(`forbidden state regression: ${regression}`)
 }
 
+const projectState = read(projectStatePath)
+if (!/State baseline main HEAD: `[0-9a-f]{40}`/u.test(projectState)) {
+  errors.push(`${projectStatePath}: invalid State baseline main HEAD`)
+}
+
 const checkedContent = [
   document,
-  read(projectStatePath),
+  projectState,
   read('DEVELOPMENT_LOG.md'),
   read('TODO.md'),
   read('CHANGELOG.md'),
@@ -703,16 +817,35 @@ for (const [path, snippets] of [
     'Implement production source connection in a separate approved PR',
   ]],
   ['CHANGELOG.md', [
+    'PR #420 - AdMob Internal Test and Policy State Reconciliation',
+    'Explicitly separated completed internal testing from unstarted general-user',
     'PR #416 - Production Rewarded Source Connection',
     'VITE_REWARDED_AD_UNIT_ID',
     'Owner-held production ID release injection',
   ]],
   [projectStatePath, [
-    'State baseline main HEAD: `993a187b69c7646d9cced9bedbed64da25c543d4`',
+    '기준일: 2026-07-29',
+    '작업 시작 전 Open PR: 없음',
     'AI workflow harness: merged / active',
+    'PR #417: Merged',
+    'PR #419: Merged',
+    'Android versionCode: 2',
+    'Android versionName: 1.0.1',
     'production source connection capability: Implemented',
-    'production Rewarded release workflow injection support는 PR #417에서 구현 중',
-    'GitHub Secret actual value configuration: Not started',
+    'production Rewarded release workflow injection support: Implemented',
+    'GitHub Secret actual value configuration: Completed',
+    'Production-configured release workflow run: Completed',
+    'Production Rewarded-configured signed AAB: Completed',
+    'Play Console internal-testing AAB upload: Completed',
+    'Google Play 제출 자동 상태: 출시됨',
+    'Production-configured registered-test-device request/load/show: Pass - Test Ad',
+    'Privacy/Data Safety final review: Completed',
+    '외부 개인정보처리방침 PR #4: Merged',
+    '외부 개인정보처리방침 Vercel status: success',
+    'Actual general-user production serving: Not started',
+    'General-user Production update: Not started',
+    'Play Console Production-track upload: Not started',
+    'Actual production-serving device QA: Not started',
   ]],
 ]) {
   const content = read(path)

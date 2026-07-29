@@ -6,13 +6,18 @@ This contract defines the prerequisites, configuration boundaries, validation
 rules, privacy review, release gates, device QA, and rollback criteria that
 must be satisfied before 하루풀이 uses a production Rewarded ad unit.
 
-The source-side production Rewarded connection capability and the release
-workflow injection path are implemented. The release path maps an
-owner-managed repository Secret into the preflight and web build only after a
-manual main-branch confirmation guard. This PR does not configure the actual
-Secret value, run the release workflow, request or serve a production ad,
-change native code, or prepare a release artifact. Production activation
-remains a separate, owner-approved release operation.
+The source-side production Rewarded connection capability and release
+workflow injection path are implemented. The owner has configured the actual
+repository Secret outside the repository, and a production-configured release
+workflow has produced and verified a signed AAB. That AAB is active in Google
+Play internal testing, where a registered test device completed Test Ad QA.
+The Play disclosures and external public privacy policy have also been
+updated.
+
+These completed internal-test milestones do not mean that general-user
+production serving has started. This docs/check-only PR records prior
+owner-operated work; it does not configure a Secret, execute a workflow,
+generate an AAB, mutate Play Console, deploy a policy, or start a rollout.
 
 ## 2. Current merged baseline
 
@@ -31,14 +36,6 @@ Completed:
   label, reward callback, one selected detail unlock, rapid-tap single-ad
   behavior, offline fail-closed and recovery, restart persistence, and the
   AdMob Proxy Promise-assimilation fix.
-
-Not testable / Pending:
-
-- Actual early-dismiss device QA
-- Repeated ADB listener-accumulation diagnostics
-
-Implemented:
-
 - Production source connection capability
 - Production Rewarded release workflow injection support
 - Release environment preflight support
@@ -46,16 +43,30 @@ Implemented:
 - Full Rewarded provider checker before release build
 - Existing release signing infrastructure
 - Existing signed AAB workflow
-
-Not started:
-
-- GitHub Secret actual value configuration
+- Owner-confirmed repository Secret configuration
 - Production-configured release workflow run
-- Production Rewarded-configured signed AAB generation
-- Production request/load/show
-- Production serving
-- Production Android device QA
-- Google Play Console new-release upload
+- Signed release AAB generation and `jarsigner` verification
+- Google Play internal-testing AAB upload and release activation
+- Registered-test-device request/load/show with a Test Ad
+- Exactly-once reward, rapid-tap duplicate-ad prevention, offline recovery,
+  restart persistence, and no duplicate reward after restart
+- Google Play Data Safety, Advertising ID, and advertising disclosures
+- External public privacy policy update and successful Vercel deployment
+
+Not started / Not verified:
+
+- Play Console Production-track upload
+- General-user Production update
+- Actual general-user production serving
+- Actual production-serving device QA
+- Actual advertisement revenue
+- Rollout monitoring and rollback operational verification
+
+Pending or not applicable to the observed creative:
+
+- Actual early-dismiss device QA: the observed creative did not permit early
+  dismissal; repeat when an early-dismiss-capable creative is available
+- Repeated ADB listener-accumulation diagnostics
 
 Canonical rollout state:
 
@@ -71,19 +82,31 @@ Canonical rollout state:
 - Release environment preflight support: Implemented
 - App ID/ad-unit publisher prefix verification: Implemented
 - Full Rewarded provider checker before release build: Implemented
-- GitHub Secret actual value configuration: Not started
-- Production-configured release workflow run: Not started
-- Production request/load/show: Not started
-- Production serving: Not started
+- GitHub Secret actual value configuration: Completed
+- Production-configured release workflow run: Completed
 - AdMob Console creation: Completed
-- Privacy/Data Safety final review: Pending
-- External public privacy policy final review: Pending
-- Advertising disclosure final review: Pending
+- Privacy/Data Safety final review: Completed
+- External public privacy policy final review: Completed
+- Advertising disclosure final review: Completed
 - Existing release signing infrastructure: Confirmed
 - Existing signed AAB workflow: Confirmed
-- Production Rewarded-configured signed AAB: Not started
-- Production device QA: Not started
-- Play Console release upload: Not started
+- Production Rewarded-configured signed AAB: Completed
+- Play Console internal-testing AAB upload: Completed
+- Production-configured registered-test-device request/load/show: Pass - Test Ad
+- Production-configured internal-test device QA: Pass
+- Exactly-once reward: Pass
+- Rapid-tap duplicate ad prevention: Pass
+- Offline failure/recovery: Pass
+- Restart reward persistence: Pass
+- Duplicate reward after restart: Not observed
+- Actual general-user production serving: Not started
+- General-user Production update: Not started
+- Play Console Production-track upload: Not started
+- Actual production-serving device QA: Not started
+- Actual advertisement revenue: Not verified
+- Actual early-dismiss device QA: N/A for observed creative / Pending for future early-dismiss-capable creative
+- Repeated ADB listener-accumulation diagnostics: Pending
+- Rollout monitoring and rollback operational verification: Pending
 
 ## 3. Test and production separation
 
@@ -142,10 +165,11 @@ confirm:
 - Production configuration and secrets have a single controlled source.
 - Release signing, AAB, device QA, monitoring, and rollback owners are known.
 
-The creation facts, source connection, release injection path, and preflight
-support are complete. Secret configuration, workflow execution, artifact
-generation, device QA, and rollout remain gates, not claims that release work
-has occurred.
+The creation facts, source connection, release injection path, preflight,
+Secret configuration, workflow execution, signed artifact generation, and
+internal-test QA are complete. General-user Production-track release,
+production-serving device QA, monitoring, and rollback operations remain
+separate gates.
 
 ## 6. AdMob Console creation procedure
 
@@ -166,8 +190,9 @@ The owner completed this user-operated procedure:
 AdMob Console creation: Completed. The Console was changed by the owner
 outside this source implementation PR. The source connection capability is
 implemented without embedding the owner-held identifier. The release workflow
-injection path is also implemented, while actual Secret configuration,
-workflow execution, and activation remain separate approved operations.
+injection path is also implemented. The later Secret configuration, workflow
+execution, and internal-test activation were separate owner-approved
+operations completed before this reconciliation PR.
 
 ## 7. Required user-supplied values
 
@@ -179,14 +204,22 @@ Supplied and confirmed by the owner:
 - Valid `/` form and matching App ID publisher prefix
 - Reward amount 1 and reward item `상세 풀이 해금`
 
-Still required before production rollout:
+Completed outside this docs/check-only PR:
 
 - Configuration of the actual owner-held value in the repository Secret
   `ADMOB_REWARDED_PRODUCTION_AD_UNIT_ID`
 - An owner-confirmed production-configured workflow run from `main`
-- The intended release environment and rollout owner
-- Privacy/Data Safety review decisions and any required disclosure updates
-- Production device QA and Play Console ownership
+- Signed AAB generation, signature verification, and internal-testing upload
+- Privacy/Data Safety, Advertising ID, advertising disclosure, and external
+  public privacy policy review
+
+Still required before general-user production rollout:
+
+- Owner approval for the intended Production-track release
+- Play Console Production-track upload and general-user update
+- Actual production-serving device QA without a Test Ad label
+- Serving, revenue, monitoring, and rollback operational verification
+- Repeated ADB diagnostics and future early-dismiss-capable creative QA
 
 The exact production ID must not be inferred from the App ID, synthesized
 from examples, or committed to documentation, logs, checker fixtures, commit
@@ -257,17 +290,23 @@ implementation must continue fresh gate reads at the established action,
 pre-prepare, and pre-show boundaries. EEA/UK/Switzerland UMP messaging and the
 privacy-options entry point must remain available.
 
-The following remain Pending or require follow-up review before production
-activation:
+The owner-confirmed Google Play review covers:
 
 - Privacy policy wording related to the advertising SDK
 - Google Play Data safety form
-- Whether and how the advertising ID is used
+- Advertising ID use for analytics, advertising or marketing, and fraud
+  prevention, security, and compliance
+- Personalization where applicable to the configured advertising behavior
 - User data collection and sharing declarations
 - Final disclosure review for production advertising
 
-This contract is not professional legal advice and does not mark any Console
-privacy submission as complete.
+The external public privacy policy records the relevant data categories,
+processing purposes, TLS in transit, the in-app 개인정보 및 쿠키 설정 menu, and
+that the general-user Production update has not yet occurred. Its last-updated
+date is 2026-07-29, the corresponding website PR is merged, and the Vercel
+status is success. The app-internal `PrivacyInfoPage` alignment remains a
+separate follow-up production UI PR. This contract is not professional legal
+advice.
 
 ## 12. Google Play disclosure impact
 
@@ -281,8 +320,12 @@ actual SDK behavior and configured mediation with:
 - Consent messaging regions and privacy-options availability
 - Store listing or in-app disclosure requirements
 
-Google Play disclosure review is Pending. No Play Console form was submitted
-or changed in this PR, and no status in this section represents approval.
+Google Play Data Safety, Advertising ID, and advertising disclosures are
+Owner-confirmed Completed. The disclosed data categories include approximate
+location, app interactions, diagnostics, and device or other identifiers; the
+disclosure states that applicable data may be collected or shared and is
+encrypted in transit. These facts record prior owner-operated Console work.
+No Play Console form is submitted or changed in this docs/check-only PR.
 
 ## 13. Source implementation plan
 
@@ -303,7 +346,7 @@ behavior outside production, storage compatibility, routing, schema version,
 fortune calculation, and result-generation logic.
 
 No owner-held production identifier or Android native file is changed. The
-actual Secret value remains outside the repository and is not configured by
+actual Secret value remains outside the repository and was not configured by
 this PR.
 
 ## 14. CI and release configuration plan
@@ -328,19 +371,37 @@ The implemented release workflow:
 - Preserve the existing signing validation, runner-temp keystore restore,
   signed release build, `jarsigner` verification, and artifact ordering.
 
-The workflow has not been run with production Rewarded configuration in this
-PR. The actual repository Secret value is not configured, and no AAB or
-artifact is generated.
+The workflow was run successfully with production Rewarded configuration
+before this PR. Its release authorization, configuration preflight, provider
+gate, web build, signed AAB build, `jarsigner` verification, and artifact
+upload completed successfully. The actual repository Secret value remains
+outside the repository. This docs/check-only PR does not run the workflow or
+generate an AAB or artifact.
 
 ## 15. Production device QA plan
 
-On a designated Android device and an approved release candidate, record:
+Completed internal-test evidence on a registered test device:
+
+- Production-configured internal-test device QA: Pass
+- Production-configured registered-test-device request/load/show: Pass - Test Ad
+- One selected detail unlock after the reward callback: Pass
+- Exactly-once reward: Pass
+- Rapid-tap duplicate ad prevention: Pass
+- Offline failure/recovery: Pass
+- Restart reward persistence: Pass
+- Duplicate reward after restart: Not observed
+- Actual early-dismiss device QA: N/A for the observed creative because it did
+  not permit early dismissal
+
+Still required on an actual production-serving release:
 
 - Clean install, cold start, background/resume, and restart
 - Consent allowed, denied, unavailable, changed pre-prepare, and changed
   pre-show
-- Production request, load, fullscreen show, reward, and one-detail unlock
-- Early dismiss and repeated dismiss without reward or unlock
+- Actual general-user request, load, fullscreen show, reward, and one-detail
+  unlock without a Test Ad label
+- Early dismiss and repeated dismiss without reward or unlock when a capable
+  creative is available
 - Rapid taps yielding one owned in-flight ad
 - Offline failure, no unlock, and deliberate recovery retry
 - Timeout and app lifecycle transitions
@@ -371,17 +432,17 @@ localStorage key migration.
 
 ## 17. Blocking conditions
 
-Production implementation or rollout is blocked by any of the following:
+General-user production rollout is blocked by any of the following:
 
-- Missing actual owner-held value in the approved repository Secret
 - Identifier type, format, or ownership ambiguity
 - Unapproved build/provider mode pairing
 - Missing fail-closed configuration validation
 - Any path that unlocks without a valid authoritative reward
 - Weakened consent, exactly-once, ownership, or session epoch protections
-- Unresolved Privacy/Data Safety disclosure decisions
-- Missing release signing/AAB plan or production device QA
+- Missing Owner approval for the Production-track update
+- Missing actual production-serving device QA
 - Production-serving eligibility or policy uncertainty
+- Missing serving, monitoring, or rollback operational evidence
 - Source, native, workflow, storage, schema, or fortune changes outside the
   approved follow-up scope
 
@@ -391,15 +452,16 @@ This PR explicitly excludes:
 
 - AdMob Console changes or ad unit creation performed by this PR
 - The exact real production ad unit ID
-- GitHub Secret actual value configuration
+- GitHub Secret actual value configuration performed by this PR
 - Release workflow execution
-- Production request/load/show or serving
+- AAB generation or signature verification
+- Play Console changes or release upload
+- General-user production request/load/show or serving
 - `android/**`, `ios/**`, or `public/**` changes
 - Dependency, lockfile, Capacitor, Vite, routing, or schema changes
 - Existing localStorage key or shape changes
 - Fortune calculation or result-generation changes
-- Production-configured AAB generation or Play Console upload
-- Privacy policy, Data safety, or advertising ID Console submission
+- Privacy policy deployment, Data Safety, or Advertising ID Console submission
 
 ## 19. Pending work
 
@@ -415,25 +477,35 @@ This PR explicitly excludes:
 - Release environment preflight support: Implemented
 - App ID/ad-unit publisher prefix verification: Implemented
 - Full Rewarded provider checker before release build: Implemented
-- GitHub Secret actual value configuration: Not started
-- Production-configured release workflow run: Not started
-- Production request/load/show: Not started
-- Production serving: Not started
+- GitHub Secret actual value configuration: Completed
+- Production-configured release workflow run: Completed
 - AdMob Console creation: Completed
-- Privacy/Data Safety final review: Pending
-- External public privacy policy final review: Pending
-- Advertising disclosure final review: Pending
+- Privacy/Data Safety final review: Completed
+- External public privacy policy final review: Completed
+- Advertising disclosure final review: Completed
 - Existing release signing infrastructure: Confirmed
 - Existing signed AAB workflow: Confirmed
-- Production Rewarded-configured signed AAB: Not started
-- Production device QA: Not started
-- Play Console release upload: Not started
-- Actual early-dismiss device QA: Pending
+- Production Rewarded-configured signed AAB: Completed
+- Play Console internal-testing AAB upload: Completed
+- Production-configured registered-test-device request/load/show: Pass - Test Ad
+- Production-configured internal-test device QA: Pass
+- Exactly-once reward: Pass
+- Rapid-tap duplicate ad prevention: Pass
+- Offline failure/recovery: Pass
+- Restart reward persistence: Pass
+- Duplicate reward after restart: Not observed
+- Actual general-user production serving: Not started
+- General-user Production update: Not started
+- Play Console Production-track upload: Not started
+- Actual production-serving device QA: Not started
+- Actual advertisement revenue: Not verified
+- Actual early-dismiss device QA: N/A for observed creative / Pending for future early-dismiss-capable creative
 - Repeated ADB listener-accumulation diagnostics: Pending
+- Rollout monitoring and rollback operational verification: Pending
 
 ## 20. Completion criteria
 
-This release injection contract update is complete only when:
+This internal-test and policy-state reconciliation is complete only when:
 
 - All 20 required sections exist in this order.
 - The identifier types, mode matrix, fail-closed rules, consent gates,
@@ -442,14 +514,13 @@ This release injection contract update is complete only when:
 - The checker, lifecycle self-test, and negative mutations pass.
 - Existing AdMob provider, consent, content-safety, and docs/source guardrail
   checks pass.
-- Workflow changes remain limited to manual authorization, Secret-backed
-  production environment injection, the full provider gate, fail-closed
-  publisher-prefix preflight, and durable verification.
+- Completed production-configured release and internal-test facts are clearly
+  separated from unstarted general-user production serving.
 - No owner-held identifier, native, runtime source, lockfile, storage, schema,
   routing, UI, or fortune behavior changes exist.
 - The two pre-existing untracked review files remain untracked and unstaged.
 
-Production rollout completion is a separate milestone. It requires actual
-Secret configuration, an owner-confirmed workflow run, final
-privacy/disclosure review, a production Rewarded-configured signed AAB, and
-production device QA.
+General-user production rollout completion is a separate milestone. It
+requires an Owner-approved Production-track update, actual production-serving
+device QA, serving and revenue verification, monitoring, and rollback
+operational validation.

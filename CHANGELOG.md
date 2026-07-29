@@ -1,5 +1,36 @@
 # CHANGELOG
 
+## PR #420 - AdMob Internal Test and Policy State Reconciliation
+
+### Changed
+
+- Reconciled the rollout contract and rolling project state with the completed
+  production-configured release workflow and signed AAB.
+- Recorded the internal-test registered-device Test Ad QA milestone.
+- Recorded the Owner-confirmed Data Safety, Advertising ID, advertising
+  disclosure, and external public privacy policy state.
+- Explicitly separated completed internal testing from unstarted general-user
+  production serving.
+- Updated the existing rollout checker lifecycle and negative-state coverage
+  for the current milestone.
+
+### Safety
+
+- This is a docs/check-only change.
+- No source, UI, runtime, native, workflow, package, lockfile, storage, schema,
+  routing, or fortune behavior is changed.
+- No actual production Rewarded ad unit ID or Secret value is recorded.
+- No workflow execution, AAB generation, Console mutation, deployment, or
+  general-user rollout is performed by this PR.
+
+### Remaining
+
+- App-internal `PrivacyInfoPage` alignment
+- Production-track update and actual general-user serving verification
+- Monitoring and rollback operational validation
+- Repeated ADB listener-accumulation diagnostics
+- Future early-dismiss-capable creative QA
+
 ## PR #417 - Production Rewarded Release Injection Path
 
 ### Changed

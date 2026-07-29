@@ -4,13 +4,17 @@
 
 ## 기준
 
-- 기준일: 2026-07-28
-- State baseline main HEAD: `993a187b69c7646d9cced9bedbed64da25c543d4`
-- 작업 시작 전 Open PR: #417 (Draft/Open, 보류)
+- 기준일: 2026-07-29
+- State baseline main HEAD: `c8b27e34d6b63021b72b39b18d4093a37d20fa3d`
+- 작업 시작 전 Open PR: 없음
 - 현재 앱: Google Play 공개 상태
 - 현재 플랫폼: React + Vite + Capacitor Android
+- Android versionCode: 2
+- Android versionName: 1.0.1
 - 데이터: 주로 `localStorage`에 저장하며 별도 사용자 계정 서버는 없음
 - AI workflow harness: merged / active
+- PR #417: Merged
+- PR #419: Merged
 
 ## 현재 AdMob 상태
 
@@ -23,39 +27,50 @@
 - production source connection capability: Implemented
 - production Rewarded mode-aware UI copy: Implemented
 - 인앱 개인정보/동의 문구 capability 정합화: Implemented
-- production Rewarded release workflow injection support는 PR #417에서 구현 중
-- release environment preflight support는 PR #417에서 구현 중
-- App ID/ad-unit publisher prefix verification은 PR #417에서 구현 중
-- full Rewarded provider checker before release build는 PR #417에서 구현 중
-- PR #417: Draft/Open
-- GitHub Secret actual value configuration: Not started
-- production-configured release workflow run: Not started
-- production Rewarded-configured signed AAB: Not started
-- production request/load/show verification: Not started
-- production serving: Not started
-- production device QA: Not started
-- Privacy/Data Safety final review: Pending
-- external privacy policy final review: Pending
-- advertising disclosure final review: Pending
+- production Rewarded release workflow injection support: Implemented
+- release environment preflight support: Implemented
+- App ID/ad-unit publisher prefix verification: Implemented
+- full Rewarded provider checker before release build: Implemented
+- GitHub Secret actual value configuration: Completed (Owner-confirmed)
+- Production-configured release workflow run: Completed
+- Production Rewarded-configured signed AAB: Completed
+- signed AAB verification: Completed
+- Play Console internal-testing AAB upload: Completed (Owner-confirmed)
+- Play Console internal-testing release activation: Completed (Owner-confirmed)
+- internal-testing release name: `1.0.1 Internal Rewarded QA`
+- Google Play 제출 자동 상태: 출시됨 (Owner-confirmed)
+- Production-configured registered-test-device request/load/show: Pass - Test Ad
+- Production-configured internal-test device QA: Pass
+- Exactly-once reward: Pass
+- Rapid-tap duplicate ad prevention: Pass
+- Offline failure/recovery: Pass
+- Restart reward persistence: Pass
+- Duplicate reward after restart: Not observed
+- Privacy/Data Safety final review: Completed (Owner-confirmed)
+- Advertising ID and advertising disclosure final review: Completed (Owner-confirmed)
+- 외부 개인정보처리방침 PR #4: Merged
+- 외부 개인정보처리방침 merge SHA: `c2aa156c8036476ae95b9df070b27771f834dd41`
+- 외부 개인정보처리방침 Vercel status: success
+- Actual general-user production serving: Not started
+- General-user Production update: Not started
+- Play Console Production-track upload: Not started
+- Actual production-serving device QA: Not started
+- Actual advertisement revenue: Not verified
+- Rollout monitoring and rollback operational verification: Pending
 
 ## 현재 남은 단계
 
-1. PR #417 독립 검토와 Owner merge 승인
-2. GitHub Secret 실제 설정
-3. production-configured workflow 실행
-4. production AAB 생성
-5. production request/load/show 검증
-6. production serving
-7. production Android device QA
-8. Play upload
-9. Privacy / Data Safety 최종 검토
-10. 외부 공개 개인정보처리방침 최종 검토
-11. 광고 관련 disclosure 최종 검토
-12. staged rollout 및 rollback 기준 검증
+1. 앱 내부 `PrivacyInfoPage` 정합화 보정 후 후속 production UI PR
+2. 후속 PR 독립 검토와 Owner merge 승인
+3. Production-track 업데이트 전 최종 release 검토
+4. Play Console Production-track 업로드 및 일반 사용자 업데이트
+5. 실제 일반 사용자 production serving 모니터링과 device QA
+6. rollback 기준 및 초기 운영 검증
 
 ## 미완료 또는 deferred QA
 
-- 실제 early-dismiss device QA: Pending
+- 실제 early-dismiss device QA: 관찰된 광고가 중도 종료를 허용하지 않아
+  N/A / 향후 중도 종료 가능한 광고가 제공되면 재검증 Pending
 - repeated ADB listener-accumulation diagnostics: Pending
 - TalkBack announcement QA: Not performed / Pending
 
