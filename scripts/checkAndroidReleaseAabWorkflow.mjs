@@ -176,8 +176,12 @@ function validateWorkflow(workflow) {
 function validateProviderChecker(providerChecker) {
   const errors = [];
   const trackedFileScanBlock = providerChecker.slice(
-    providerChecker.indexOf('\nfunction getTrackedTextFiles'),
+    providerChecker.indexOf('\nfunction getTrackedFiles'),
     providerChecker.indexOf('\nfunction readTrackedUtf8Text'),
+  );
+  const trackedTextReadBlock = providerChecker.slice(
+    providerChecker.indexOf('\nfunction readTrackedUtf8Text'),
+    providerChecker.indexOf('\nfunction validateConcreteAdUnitIdLiterals'),
   );
   const concreteIdValidationBlock = providerChecker.slice(
     providerChecker.indexOf('\nfunction validateConcreteAdUnitIdLiterals'),
@@ -197,9 +201,27 @@ function validateProviderChecker(providerChecker) {
   if (!trackedFileScanBlock.includes("execFileSync('git', ['ls-files', '-z']")) {
     errors.push('provider checker concrete ID scan must enumerate all tracked files');
   }
+  const trackedFileFilters = trackedFileScanBlock.match(/\.filter\(/gu) ?? [];
   if (
-    !providerMainBlock.includes('trackedTextFiles = getTrackedTextFiles();') ||
-    !providerMainBlock.includes('assertNoConcreteProductionAdUnitIds(trackedTextFiles);')
+    trackedFileFilters.length !== 1 ||
+    !trackedFileScanBlock.includes('.filter(Boolean)') ||
+    trackedFileScanBlock.includes('trackedTextExtensions') ||
+    trackedFileScanBlock.includes('path.extname') ||
+    trackedFileScanBlock.includes('.endsWith(')
+  ) {
+    errors.push('provider checker tracked enumeration must not filter by filename or extension');
+  }
+  if (
+    !trackedTextReadBlock.includes('readFileSync(path.join(root, relativePath))') ||
+    !trackedTextReadBlock.includes('buffer.includes(0)') ||
+    !trackedTextReadBlock.includes('utf8Decoder.decode(buffer)') ||
+    !trackedTextReadBlock.includes('return null')
+  ) {
+    errors.push('provider checker must classify text by NUL and strict UTF-8 content checks');
+  }
+  if (
+    !providerMainBlock.includes('trackedFiles = getTrackedFiles();') ||
+    !providerMainBlock.includes('assertNoConcreteProductionAdUnitIds(trackedFiles);')
   ) {
     errors.push('provider checker concrete ID scan must use the repository-wide tracked list');
   }
@@ -316,14 +338,54 @@ function runNegativeMutationSelfTest(workflow, providerChecker) {
     ['repository-wide concrete ID scan changed to changedFiles', 'provider', (source) =>
       replaceRequired(
         source,
-        '\n  trackedTextFiles = getTrackedTextFiles();\n  const sourceErrors',
-        '\n  trackedTextFiles = changedFiles;\n  const sourceErrors',
+        '\n  trackedFiles = getTrackedFiles();\n  const sourceErrors',
+        '\n  trackedFiles = changedFiles;\n  const sourceErrors',
         'repository-wide concrete ID scan',
+      )],
+    ['tracked file extension allowlist reintroduced', 'provider', (source) => {
+      const withAllowlist = replaceRequired(
+        source,
+        "const utf8Decoder = new TextDecoder('utf-8', { fatal: true });",
+        [
+          "const trackedTextExtensions = new Set(['.js']);",
+          "const utf8Decoder = new TextDecoder('utf-8', { fatal: true });",
+        ].join('\n'),
+        'tracked file extension allowlist declaration',
+      );
+      return replaceRequired(
+        withAllowlist,
+        "    .map((file) => file.replaceAll('\\\\', '/'));",
+        [
+          "    .map((file) => file.replaceAll('\\\\', '/'))",
+          '    .filter((file) => trackedTextExtensions.has(path.extname(file)));',
+        ].join('\n'),
+        'tracked file extension allowlist filter',
+      );
+    }],
+    ['tracked file path.extname filter added', 'provider', (source) =>
+      replaceRequired(
+        source,
+        "    .map((file) => file.replaceAll('\\\\', '/'));",
+        [
+          "    .map((file) => file.replaceAll('\\\\', '/'))",
+          "    .filter((file) => path.extname(file) !== '');",
+        ].join('\n'),
+        'tracked file path.extname filter',
+      )],
+    ['tracked CSS sources explicitly excluded', 'provider', (source) =>
+      replaceRequired(
+        source,
+        "    .map((file) => file.replaceAll('\\\\', '/'));",
+        [
+          "    .map((file) => file.replaceAll('\\\\', '/'))",
+          "    .filter((file) => !file.endsWith('.css'));",
+        ].join('\n'),
+        'tracked CSS exclusion',
       )],
     ['tracked concrete ID scan result changed to empty', 'provider', (source) =>
       replaceRequired(
         source,
-        '\n  assertNoConcreteProductionAdUnitIds(trackedTextFiles);\n  assert(!read',
+        '\n  assertNoConcreteProductionAdUnitIds(trackedFiles);\n  assert(!read',
         '\n  assertNoConcreteProductionAdUnitIds([]);\n  assert(!read',
         'tracked concrete ID scan result',
       )],
