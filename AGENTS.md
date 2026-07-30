@@ -109,6 +109,79 @@
 - 문서가 실제 코드보다 강한 보장을 주장하지 않도록 관련 파일과 현재 상태를 확인합니다.
 - 모바일 카드·버튼·하단 내비게이션은 가독성과 터치 편의성을 우선하며, 불필요한 라이브러리를 추가하지 않습니다.
 
+## 토큰 효율형 멀티에이전트 운영
+
+토큰 효율은 운영 요구사항이지만 보안, 정확성, 필수 검증,
+독립 검토 또는 Owner gate보다 우선하지 않습니다.
+
+### 에이전트 배치
+
+- 하나의 task에는 정확히 한 명의 primary implementer만 지정합니다.
+- 같은 변경을 여러 에이전트에게 독립적으로 중복 구현시키지 않습니다.
+- 독립 reviewer는 HIGH-risk 또는 해결되지 않은 실질적 finding이 있을 때 사용합니다.
+- 추가 advisory 모델은 architecture 판단이 충돌하거나 implementer와
+  reviewer가 실질적으로 의견이 다를 때만 사용합니다.
+
+### 모델과 reasoning 선택
+
+- 외부 에이전트 지시문에는 권장 model class와 reasoning level을 포함합니다.
+- 안전하게 수행할 수 있는 가장 저렴한 모델과 reasoning을 우선합니다.
+- 저장소 정책에는 변동 가능한 구체적 모델 버전명을 영구 고정하지 않습니다.
+- 보안 경계, 데이터 무결성, 파괴적 작업, 반복 실패 또는 복잡한 설계 충돌이
+  있을 때만 더 강한 모델이나 reasoning으로 상향합니다.
+- LOW-risk 문서 작업은 최고가 모델이나 최대 reasoning을 기본값으로 사용하지 않습니다.
+
+### 초기 context 제한
+
+에이전트는 최초에 다음만 읽습니다.
+
+1. `AGENTS.md`
+2. `docs/PROJECT_STATE.md`
+3. task가 명시한 파일
+4. 직접 관련된 contract, runbook, test
+
+저장소 근거가 있을 때만 검색 범위를 확장하며 전체 저장소나 전체 프로젝트
+이력을 기본적으로 다시 읽지 않습니다.
+
+### 구현과 검토 흐름
+
+기본 흐름은 다음과 같습니다.
+
+1. primary implementer의 구현 1회
+2. coordinator의 repository·CI 근거 확인
+3. 필요한 경우 independent review 1회
+4. 유효 finding에 대한 focused correction 1회
+5. prior HEAD에서 current HEAD까지 delta 재검토
+6. Owner 결정
+
+수정 cycle이 2회를 넘으면 남은 문제가 실제 blocker인지, scope expansion인지,
+별도 PR 대상인지 재평가합니다. 작은 회귀 checker를 무제한 정적분석 작업으로
+확장하지 않습니다.
+
+corrective review는 이전 finding, previous-to-current HEAD diff와 직접 영향받는
+contract만 확인합니다. 인증·권한·runtime·보호 파일·데이터 schema·production
+data·계산 로직·PR base 또는 architecture가 변경된 경우에만 전체 PR을 다시 검토합니다.
+
+### 검증 경제성
+
+- 변경 동작의 targeted check를 먼저 실행합니다.
+- 필요한 전체 로컬 suite는 최종 HEAD에서 한 번만 실행하고 GitHub CI를
+  authoritative confirmation으로 사용합니다.
+- 새 commit이나 구체적 실패 조사가 없으면 이미 성공한 장시간 suite를 반복하지 않습니다.
+- 환경성 실패는 한 번만 재시도한 뒤 코드 실패와 분리하여 보고합니다.
+- 토큰이나 시간을 절약하기 위해 필수 테스트를 skip·삭제·약화하지 않습니다.
+
+### 프롬프트와 보고 경제성
+
+- 지시문은 복사 가능한 단일 블록으로 작성합니다.
+- repository, branch, exact SHA, 미해결 목표, 허용·금지 파일, 필수 검증,
+  금지 remote action, 간결한 완료 보고만 포함합니다.
+- 해결된 finding이나 전체 프로젝트 배경을 반복하지 않습니다.
+- 구현 보고는 새 HEAD, commit, 변경 파일, 핵심 변경, 관련 checks·CI,
+  보호 영역·의존성·remote action 상태, PR 상태와 남은 blocker만 포함합니다.
+- review 보고는 verdict, exact HEAD, severity finding, 이전 finding 해결 여부,
+  최소 재현 근거, 핵심 checks와 필요 조치만 포함합니다.
+
 ## checker 생성 기준
 
 새 checker는 다음 조건을 모두 충족할 때만 허용합니다.
