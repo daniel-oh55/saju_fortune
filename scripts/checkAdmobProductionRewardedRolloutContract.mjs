@@ -16,6 +16,12 @@ const documentPath = 'docs/ADMOB_PRODUCTION_REWARDED_ROLLOUT_CONTRACT.md'
 const projectStatePath = 'docs/PROJECT_STATE.md'
 const checkerPath = 'scripts/checkAdmobProductionRewardedRolloutContract.mjs'
 const scriptName = 'check:admob-production-rewarded-rollout-contract'
+const rollingMetadataPatterns = {
+  date: /^- 기준일: \d{4}-\d{2}-\d{2}$/mu,
+  versionCode: /^- Android versionCode: ([1-9]\d*)$/mu,
+  versionName: /^- Android versionName: (\d+)\.(\d+)\.(\d+)$/mu,
+  openPr: /^- 작업 시작 전 Open PR: \S.*$/mu,
+}
 const fixtureFiles = new Set([
   'CHANGELOG.md',
   'DEVELOPMENT_LOG.md',
@@ -102,6 +108,28 @@ const writeFixture = (fixtureRoot, path, content) => {
   const target = resolve(fixtureRoot, path)
   mkdirSync(dirname(target), { recursive: true })
   writeFileSync(target, content)
+}
+const replaceExactlyOneMatchingLine = (content, pattern, replacement, label) => {
+  const globalPattern = new RegExp(
+    pattern.source,
+    pattern.flags.includes('g') ? pattern.flags : `${pattern.flags}g`,
+  )
+  const matches = [...content.matchAll(globalPattern)]
+  if (matches.length !== 1) {
+    throw new Error(`${label}: expected exactly one valid line, found ${matches.length}`)
+  }
+
+  const match = matches[0]
+  const originalLine = match[0]
+  const replacementLine =
+    typeof replacement === 'function' ? replacement(match) : replacement
+  if (replacementLine === originalLine) {
+    throw new Error(`${label}: replacement must differ from the current line`)
+  }
+
+  return `${content.slice(0, match.index)}${replacementLine}${content.slice(
+    match.index + originalLine.length,
+  )}`
 }
 const createSyntheticInternalTestRolloutFixture = () => {
   const temporaryRoot = mkdtempSync(join(tmpdir(), 'admob-rollout-lifecycle-'))
@@ -314,16 +342,37 @@ const runLifecycleSelfTest = () => {
     })
     const projectStateFixturePath = resolve(fixtureRoot, projectStatePath)
     const currentProjectState = readFileSync(projectStateFixturePath, 'utf8')
-    const rollingMetadataUpdates = [
-      ['- 기준일: 2026-07-29', '- 기준일: 2026-07-30'],
-      ['- Android versionCode: 2', '- Android versionCode: 3'],
-      ['- Android versionName: 1.0.1', '- Android versionName: 1.0.2'],
-      ['- 작업 시작 전 Open PR: 없음', '- 작업 시작 전 Open PR: #421 (Draft/Open)'],
-    ]
-    const futureProjectState = rollingMetadataUpdates.reduce((content, [from, to]) => {
-      if (!content.includes(from)) throw new Error(`rolling-state fixture missing: ${from}`)
-      return content.replace(from, to)
-    }, currentProjectState)
+    let futureProjectState = replaceExactlyOneMatchingLine(
+      currentProjectState,
+      rollingMetadataPatterns.date,
+      (match) =>
+        match[0] === '- 기준일: 2099-12-31'
+          ? '- 기준일: 2099-12-30'
+          : '- 기준일: 2099-12-31',
+      'rolling-state 기준일 fixture',
+    )
+    futureProjectState = replaceExactlyOneMatchingLine(
+      futureProjectState,
+      rollingMetadataPatterns.versionCode,
+      (match) => `- Android versionCode: ${BigInt(match[1]) + 1n}`,
+      'rolling-state Android versionCode fixture',
+    )
+    futureProjectState = replaceExactlyOneMatchingLine(
+      futureProjectState,
+      rollingMetadataPatterns.versionName,
+      (match) =>
+        `- Android versionName: ${match[1]}.${match[2]}.${BigInt(match[3]) + 1n}`,
+      'rolling-state Android versionName fixture',
+    )
+    futureProjectState = replaceExactlyOneMatchingLine(
+      futureProjectState,
+      rollingMetadataPatterns.openPr,
+      (match) =>
+        match[0] === '- 작업 시작 전 Open PR: #421 (Draft/Open)'
+          ? '- 작업 시작 전 Open PR: 없음'
+          : '- 작업 시작 전 Open PR: #421 (Draft/Open)',
+      'rolling-state 작업 시작 전 Open PR fixture',
+    )
     writeFileSync(projectStateFixturePath, futureProjectState)
     execFileSync('git', ['add', '--', projectStatePath], { cwd: fixtureRoot })
     execFileSync('git', ['commit', '--quiet', '-m', 'fixture: synthetic future rolling state'], {
@@ -359,6 +408,14 @@ const runNegativeMutationSelfTest = (fixtureRoot) => {
     const content = readFixture(path)
     if (!content.includes(from)) throw new Error(`self-test fixture missing: ${from}`)
     writeFileSync(resolve(fixtureRoot, path), content.replace(from, to), 'utf8')
+  }
+  const replaceMatchingLine = (path, pattern, replacement, label) => {
+    const content = readFixture(path)
+    writeFileSync(
+      resolve(fixtureRoot, path),
+      replaceExactlyOneMatchingLine(content, pattern, replacement, label),
+      'utf8',
+    )
   }
   const syntheticConcreteId = [
     'ca-app-pub-',
@@ -659,14 +716,30 @@ const runNegativeMutationSelfTest = (fixtureRoot) => {
           '## 8. Production configuration design',
           '## 10. Fail-closed requirements (moved)\n\n## 8. Production configuration design',
         )
-        replace(projectStatePath, '- 기준일: 2026-07-29', '- 기준일: 2026/07/30')
-        replace(
+        replaceMatchingLine(
           projectStatePath,
-          '- Android versionCode: 2',
-          '- Android versionCode: 0\n- Android versionCode: -1\n- Android versionCode: three',
+          rollingMetadataPatterns.date,
+          '- 기준일: 2026/07/30',
+          'negative 기준일 fixture',
         )
-        replace(projectStatePath, '- Android versionName: 1.0.1', '- Android versionName: 1.0')
-        replace(projectStatePath, '- 작업 시작 전 Open PR: 없음', '- 작업 시작 전 Open PR: ')
+        replaceMatchingLine(
+          projectStatePath,
+          rollingMetadataPatterns.versionCode,
+          '- Android versionCode: 0',
+          'negative Android versionCode fixture',
+        )
+        replaceMatchingLine(
+          projectStatePath,
+          rollingMetadataPatterns.versionName,
+          '- Android versionName: 1.0',
+          'negative Android versionName fixture',
+        )
+        replaceMatchingLine(
+          projectStatePath,
+          rollingMetadataPatterns.openPr,
+          '- 작업 시작 전 Open PR: ',
+          'negative 작업 시작 전 Open PR fixture',
+        )
       },
       [
         'required section order',
@@ -891,10 +964,10 @@ if (!/State baseline main HEAD: `[0-9a-f]{40}`/u.test(projectState)) {
   errors.push(`${projectStatePath}: invalid State baseline main HEAD`)
 }
 for (const [label, pattern] of [
-  ['기준일', /^- 기준일: \d{4}-\d{2}-\d{2}$/mu],
-  ['Android versionCode', /^- Android versionCode: [1-9]\d*$/mu],
-  ['Android versionName', /^- Android versionName: \d+\.\d+\.\d+$/mu],
-  ['작업 시작 전 Open PR', /^- 작업 시작 전 Open PR: \S.*$/mu],
+  ['기준일', rollingMetadataPatterns.date],
+  ['Android versionCode', rollingMetadataPatterns.versionCode],
+  ['Android versionName', rollingMetadataPatterns.versionName],
+  ['작업 시작 전 Open PR', rollingMetadataPatterns.openPr],
 ]) {
   if (!pattern.test(projectState)) errors.push(`${projectStatePath}: invalid ${label}`)
 }
