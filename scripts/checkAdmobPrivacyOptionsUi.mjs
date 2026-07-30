@@ -261,6 +261,11 @@ forbidPattern(privacySource, /실제 광고 SDK(?:가 연결되어 있지 않| �
 forbidPattern(privacySource, /외부 SDK로 개인정보를 전송하지 않습니다/u, 'privacy copy')
 forbidPattern(
   privacySource,
+  /https:\/\/hymlounge\.com\/harupuli\/privacy\//u,
+  'privacy noncanonical policy URL',
+)
+forbidPattern(
+  privacySource,
   /release workflow 실행, AAB 생성, 기기 QA, serving은 아직 수행하지 않았습니다/u,
   'privacy stale release-status copy',
 )
@@ -782,13 +787,21 @@ if (process.argv.includes('--negative-self-test')) {
       ),
       'missing required text: https://www.hymlounge.com/harupuli/privacy/',
     ],
+    [
+      'privacy noncanonical URL',
+      () => append(
+        'src/pages/PrivacyInfoPage.jsx',
+        '\nhttps://hymlounge.com/harupuli/privacy/\n',
+      ),
+      'privacy noncanonical policy URL',
+    ],
     ['ad request completion claim', () => append('CHANGELOG.md', '\nActual ad request: Completed\n')],
     ['ad serving completion claim', () => append('CHANGELOG.md', '\nActual ad serving: Completed\n')],
     ['U+FFFD', () => append('CHANGELOG.md', '\n\uFFFD\n')],
     ['known mojibake', () => append('CHANGELOG.md', `\n${['媛쒖씤', '?뺣낫'].join('')}\n`)],
     ['unexpected untracked', () => writeFileSync(resolve(root, unexpectedRootPath), 'negative probe\n', 'utf8')],
   ]
-  assert.equal(mutationCases.length, 54)
+  assert.equal(mutationCases.length, 55)
   const totalChecks = mutationCases.length + 1
   const restorePaths = [
     'src/main.jsx',

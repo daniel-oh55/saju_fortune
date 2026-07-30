@@ -2137,7 +2137,7 @@ async function main() {
       detected += 1;
     }
     for (const mutation of targetedNegativeMutations) {
-      const source = read(mutation.file);
+      const source = read(mutation.file).replaceAll('\r\n', '\n');
       const mutated = mutation.mutate(source);
       assert.notEqual(mutated, source, `negative mutation did not apply: ${mutation.name}`);
       const errors = validateSources(new Map([[mutation.file, mutated]]));
