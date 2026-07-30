@@ -16,6 +16,12 @@ const documentPath = 'docs/ADMOB_PRODUCTION_REWARDED_ROLLOUT_CONTRACT.md'
 const projectStatePath = 'docs/PROJECT_STATE.md'
 const checkerPath = 'scripts/checkAdmobProductionRewardedRolloutContract.mjs'
 const scriptName = 'check:admob-production-rewarded-rollout-contract'
+const rollingMetadataPatterns = {
+  date: /^- 기준일: \d{4}-\d{2}-\d{2}$/mu,
+  versionCode: /^- Android versionCode: ([1-9]\d*)$/mu,
+  versionName: /^- Android versionName: (\d+)\.(\d+)\.(\d+)$/mu,
+  openPr: /^- 작업 시작 전 Open PR: \S.*$/mu,
+}
 const fixtureFiles = new Set([
   'CHANGELOG.md',
   'DEVELOPMENT_LOG.md',
@@ -24,21 +30,29 @@ const fixtureFiles = new Set([
   projectStatePath,
   checkerPath,
 ])
-const canonicalSourceCapabilityState = [
+const canonicalInternalTestRolloutState = [
   'Production source connection capability: Implemented',
   'Production Rewarded release workflow injection support: Implemented',
   'Release environment preflight support: Implemented',
-  'GitHub Secret actual value configuration: Not started',
-  'Production-configured release workflow run: Not started',
-  'Production request/load/show: Not started',
-  'Production serving: Not started',
-  'Production device QA: Not started',
-  'Privacy/Data Safety final review: Pending',
-  'Advertising disclosure final review: Pending',
+  'GitHub Secret actual value configuration: Completed',
+  'Production-configured release workflow run: Completed',
+  'Production-configured registered-test-device request/load/show: Pass - Test Ad',
+  'Production-configured internal-test device QA: Pass',
+  'Exactly-once reward: Pass',
+  'Production-configured internal-test offline failure/recovery: Not performed / Pending',
+  'Privacy/Data Safety final review: Completed',
+  'External public privacy policy final review: Completed',
+  'Advertising disclosure final review: Completed',
   'Existing release signing infrastructure: Confirmed',
   'Existing signed AAB workflow: Confirmed',
-  'Production Rewarded-configured signed AAB: Not started',
-  'Play Console release upload: Not started',
+  'Production Rewarded-configured signed AAB: Completed',
+  'Play Console internal-testing AAB upload: Completed',
+  'Actual general-user production serving: Not started',
+  'General-user Production update: Not started',
+  'Play Console Production-track upload: Not started',
+  'Actual production-serving device QA: Not started',
+  'Actual advertisement revenue: Not verified',
+  'Rollout monitoring and rollback operational verification: Pending',
 ]
 const requiredHeadings = [
   '## 1. Purpose and scope',
@@ -90,27 +104,45 @@ const assertSuccessfulCheck = (result, label, expectedMode) => {
   console.log(output.trim())
   console.log(`PASS lifecycle: ${label}`)
 }
-const assertRejectedCheck = (result, label, expected) => {
-  const output = `${result.stdout ?? ''}\n${result.stderr ?? ''}`
-  if (result.status === 0 || !output.includes(expected)) {
-    throw new Error(`${label}: expected rejection containing "${expected}"\n${output}`)
-  }
-  console.log(`PASS lifecycle: ${label}`)
-}
 const writeFixture = (fixtureRoot, path, content) => {
   const target = resolve(fixtureRoot, path)
   mkdirSync(dirname(target), { recursive: true })
   writeFileSync(target, content)
 }
-const createSyntheticSourceCapabilityFixture = () => {
+const replaceExactlyOneMatchingLine = (content, pattern, replacement, label) => {
+  const globalPattern = new RegExp(
+    pattern.source,
+    pattern.flags.includes('g') ? pattern.flags : `${pattern.flags}g`,
+  )
+  const matches = [...content.matchAll(globalPattern)]
+  if (matches.length !== 1) {
+    throw new Error(`${label}: expected exactly one valid line, found ${matches.length}`)
+  }
+
+  const match = matches[0]
+  const originalLine = match[0]
+  const replacementLine =
+    typeof replacement === 'function' ? replacement(match) : replacement
+  if (replacementLine === originalLine) {
+    throw new Error(`${label}: replacement must differ from the current line`)
+  }
+
+  return `${content.slice(0, match.index)}${replacementLine}${content.slice(
+    match.index + originalLine.length,
+  )}`
+}
+const createSyntheticInternalTestRolloutFixture = () => {
   const temporaryRoot = mkdtempSync(join(tmpdir(), 'admob-rollout-lifecycle-'))
   const fixtureRoot = resolve(temporaryRoot, 'repository')
 
   try {
-    const baselineCommit = git('rev-parse', 'HEAD').trim()
-    const currentDocument = read(documentPath)
-    if (!canonicalSourceCapabilityState.every((state) => currentDocument.includes(state))) {
-      throw new Error('current rollout contract does not contain the canonical source-capability state')
+    const sourceCommit = git('rev-parse', 'HEAD').trim()
+    const canonicalFiles = new Map(
+      [...fixtureFiles].map((path) => [path, Buffer.from(read(path), 'utf8')]),
+    )
+    const currentDocument = canonicalFiles.get(documentPath).toString('utf8')
+    if (!canonicalInternalTestRolloutState.every((state) => currentDocument.includes(state))) {
+      throw new Error('current rollout contract does not contain the canonical internal-test rollout state')
     }
 
     const clone = run(
@@ -134,23 +166,43 @@ const createSyntheticSourceCapabilityFixture = () => {
     execFileSync('git', ['config', 'core.autocrlf', 'false'], { cwd: fixtureRoot })
     execFileSync(
       'git',
-      ['checkout', '--quiet', '-b', 'source-capability-lifecycle', baselineCommit],
+      ['checkout', '--quiet', '-b', 'internal-test-rollout-lifecycle', sourceCommit],
       { cwd: fixtureRoot },
     )
-    execFileSync(
-      'git',
-      ['update-ref', 'refs/remotes/origin/main', baselineCommit],
-      { cwd: fixtureRoot },
-    )
-    for (const path of fixtureFiles) {
-      writeFixture(fixtureRoot, path, readFileSync(resolve(root, path)))
-    }
     execFileSync('git', ['config', 'user.name', 'Rollout Contract Self-Test'], { cwd: fixtureRoot })
     execFileSync('git', ['config', 'user.email', 'rollout-self-test@example.invalid'], {
       cwd: fixtureRoot,
     })
+
+    for (const [path, content] of canonicalFiles) writeFixture(fixtureRoot, path, content)
+    const staleDocument = currentDocument
+      .replace(
+        'GitHub Secret actual value configuration: Completed',
+        'GitHub Secret actual value configuration: Not started',
+      )
+      .replace(
+        'Production-configured release workflow run: Completed',
+        'Production-configured release workflow run: Not started',
+      )
+    if (staleDocument === currentDocument) {
+      throw new Error('synthetic stale baseline did not change the canonical rollout state')
+    }
+    writeFixture(fixtureRoot, documentPath, staleDocument)
     execFileSync('git', ['add', '--', ...fixtureFiles], { cwd: fixtureRoot })
-    execFileSync('git', ['commit', '--quiet', '-m', 'fixture: synthetic source capability'], {
+    execFileSync('git', ['commit', '--quiet', '-m', 'fixture: synthetic stale rollout baseline'], {
+      cwd: fixtureRoot,
+    })
+    const baselineCommit = execFileSync('git', ['rev-parse', 'HEAD'], {
+      cwd: fixtureRoot,
+      encoding: 'utf8',
+    }).trim()
+    execFileSync('git', ['update-ref', 'refs/remotes/origin/main', baselineCommit], {
+      cwd: fixtureRoot,
+    })
+
+    for (const [path, content] of canonicalFiles) writeFixture(fixtureRoot, path, content)
+    execFileSync('git', ['add', '--', ...fixtureFiles], { cwd: fixtureRoot })
+    execFileSync('git', ['commit', '--quiet', '-m', 'fixture: synthetic internal-test rollout'], {
       cwd: fixtureRoot,
     })
     const syntheticTransitionHead = execFileSync('git', ['rev-parse', 'HEAD'], {
@@ -158,7 +210,43 @@ const createSyntheticSourceCapabilityFixture = () => {
       encoding: 'utf8',
     }).trim()
     if (syntheticTransitionHead === baselineCommit) {
-      throw new Error('source-capability baseline and synthetic HEAD must differ')
+      throw new Error('internal-test rollout baseline and synthetic HEAD must differ')
+    }
+    const transitionPaths = execFileSync(
+      'git',
+      ['diff', '--name-only', `${baselineCommit}..${syntheticTransitionHead}`],
+      { cwd: fixtureRoot, encoding: 'utf8' },
+    ).replace(/\r\n/g, '\n').trim().split('\n').filter(Boolean)
+    if (![documentPath, projectStatePath].some((path) => transitionPaths.includes(path))) {
+      throw new Error(
+        `synthetic transition does not include a rollout state file\n${transitionPaths.join('\n')}`,
+      )
+    }
+    const substantiveTransition = run(
+      'git',
+      [
+        'diff',
+        '--quiet',
+        '--ignore-space-at-eol',
+        baselineCommit,
+        syntheticTransitionHead,
+        '--',
+        documentPath,
+        projectStatePath,
+      ],
+      fixtureRoot,
+    )
+    if (substantiveTransition.status !== 1) {
+      throw new Error(
+        `synthetic transition must contain a non-line-ending state change (git status ${substantiveTransition.status})`,
+      )
+    }
+    const fixtureStatus = execFileSync('git', ['status', '--porcelain'], {
+      cwd: fixtureRoot,
+      encoding: 'utf8',
+    }).trim()
+    if (fixtureStatus) {
+      throw new Error(`synthetic transition checkout is not clean\n${fixtureStatus}`)
     }
     return {
       fixtureRoot,
@@ -177,14 +265,14 @@ const runLifecycleSelfTest = () => {
     baselineCommit,
     syntheticTransitionHead,
     temporaryRoot,
-  } = createSyntheticSourceCapabilityFixture()
+  } = createSyntheticInternalTestRolloutFixture()
 
   try {
-    console.log(`Source capability fixture baseline commit: ${baselineCommit}`)
+    console.log(`Internal-test rollout fixture baseline commit: ${baselineCommit}`)
     const check = () => run(process.execPath, [resolve(fixtureRoot, checkerPath)], fixtureRoot)
     assertSuccessfulCheck(
       check(),
-      'A. synthetic canonical source-capability state (mode canonical)',
+      'A. current canonical internal-test rollout state (mode canonical)',
       'canonical',
     )
 
@@ -248,7 +336,55 @@ const runLifecycleSelfTest = () => {
       'canonical',
     )
 
-    console.log('AdMob rollout lifecycle verification passed (scenarios 4/4)')
+    execFileSync('git', ['checkout', '--quiet', '--detach', 'origin/main'], { cwd: fixtureRoot })
+    execFileSync('git', ['checkout', '--quiet', '-b', 'future-rolling-state'], {
+      cwd: fixtureRoot,
+    })
+    const projectStateFixturePath = resolve(fixtureRoot, projectStatePath)
+    const currentProjectState = readFileSync(projectStateFixturePath, 'utf8')
+    let futureProjectState = replaceExactlyOneMatchingLine(
+      currentProjectState,
+      rollingMetadataPatterns.date,
+      (match) =>
+        match[0] === '- 기준일: 2099-12-31'
+          ? '- 기준일: 2099-12-30'
+          : '- 기준일: 2099-12-31',
+      'rolling-state 기준일 fixture',
+    )
+    futureProjectState = replaceExactlyOneMatchingLine(
+      futureProjectState,
+      rollingMetadataPatterns.versionCode,
+      (match) => `- Android versionCode: ${BigInt(match[1]) + 1n}`,
+      'rolling-state Android versionCode fixture',
+    )
+    futureProjectState = replaceExactlyOneMatchingLine(
+      futureProjectState,
+      rollingMetadataPatterns.versionName,
+      (match) =>
+        `- Android versionName: ${match[1]}.${match[2]}.${BigInt(match[3]) + 1n}`,
+      'rolling-state Android versionName fixture',
+    )
+    futureProjectState = replaceExactlyOneMatchingLine(
+      futureProjectState,
+      rollingMetadataPatterns.openPr,
+      (match) =>
+        match[0] === '- 작업 시작 전 Open PR: #421 (Draft/Open)'
+          ? '- 작업 시작 전 Open PR: 없음'
+          : '- 작업 시작 전 Open PR: #421 (Draft/Open)',
+      'rolling-state 작업 시작 전 Open PR fixture',
+    )
+    writeFileSync(projectStateFixturePath, futureProjectState)
+    execFileSync('git', ['add', '--', projectStatePath], { cwd: fixtureRoot })
+    execFileSync('git', ['commit', '--quiet', '-m', 'fixture: synthetic future rolling state'], {
+      cwd: fixtureRoot,
+    })
+    assertSuccessfulCheck(
+      check(),
+      'E. synthetic future rolling project metadata simulation (mode canonical)',
+      'canonical',
+    )
+
+    console.log('AdMob rollout lifecycle verification passed (scenarios 5/5)')
   } finally {
     rmSync(temporaryRoot, { recursive: true, force: true })
   }
@@ -272,6 +408,14 @@ const runNegativeMutationSelfTest = (fixtureRoot) => {
     const content = readFixture(path)
     if (!content.includes(from)) throw new Error(`self-test fixture missing: ${from}`)
     writeFileSync(resolve(fixtureRoot, path), content.replace(from, to), 'utf8')
+  }
+  const replaceMatchingLine = (path, pattern, replacement, label) => {
+    const content = readFixture(path)
+    writeFileSync(
+      resolve(fixtureRoot, path),
+      replaceExactlyOneMatchingLine(content, pattern, replacement, label),
+      'utf8',
+    )
   }
   const syntheticConcreteId = [
     'ca-app-pub-',
@@ -361,54 +505,154 @@ const runNegativeMutationSelfTest = (fixtureRoot) => {
       'forbidden state regression',
     ],
     [
-      'GitHub Secret false completion',
+      'GitHub Secret state regression',
       () => replace(
         documentPath,
-        'GitHub Secret actual value configuration: Not started',
         'GitHub Secret actual value configuration: Completed',
+        'GitHub Secret actual value configuration: Not started',
       ),
-      'forbidden completion claim',
+      'forbidden state regression',
     ],
     [
-      'production workflow run false completion',
+      'production workflow run state regression',
       () => replace(
         documentPath,
-        'Production-configured release workflow run: Not started',
         'Production-configured release workflow run: Completed',
+        'Production-configured release workflow run: Not started',
       ),
-      'forbidden completion claim',
+      'forbidden state regression',
     ],
     [
-      'production request load show false completion',
-      () => replace(documentPath, 'Production request/load/show: Not started', 'Production request/load/show: Completed'),
-      'forbidden completion claim',
-    ],
-    [
-      'production serving false completion',
-      () => replace(documentPath, 'Production serving: Not started', 'Production serving: Completed'),
-      'forbidden completion claim',
-    ],
-    [
-      'Privacy Data Safety false completion',
-      () => replace(documentPath, 'Privacy/Data Safety final review: Pending', 'Privacy/Data Safety final review: Completed'),
-      'forbidden completion claim',
-    ],
-    [
-      'external privacy policy false completion',
+      'production Rewarded AAB state regression',
       () => replace(
         documentPath,
-        'External public privacy policy final review: Pending',
-        'External public privacy policy final review: Completed',
-      ),
-      'forbidden completion claim',
-    ],
-    [
-      'production Rewarded AAB false completion',
-      () => replace(
-        documentPath,
-        'Production Rewarded-configured signed AAB: Not started',
         'Production Rewarded-configured signed AAB: Completed',
+        'Production Rewarded-configured signed AAB: Not started',
       ),
+      'forbidden state regression',
+    ],
+    [
+      'internal-testing upload state regression',
+      () => replace(
+        documentPath,
+        'Play Console internal-testing AAB upload: Completed',
+        'Play Console internal-testing AAB upload: Not started',
+      ),
+      'forbidden state regression',
+    ],
+    [
+      'Privacy Data Safety state regression',
+      () => replace(
+        documentPath,
+        'Privacy/Data Safety final review: Completed',
+        'Privacy/Data Safety final review: Pending',
+      ),
+      'forbidden state regression',
+    ],
+    [
+      'external privacy policy state regression',
+      () => replace(
+        documentPath,
+        'External public privacy policy final review: Completed',
+        'External public privacy policy final review: Pending',
+      ),
+      'forbidden state regression',
+    ],
+    [
+      'advertising disclosure state regression',
+      () => replace(
+        documentPath,
+        'Advertising disclosure final review: Completed',
+        'Advertising disclosure final review: Pending',
+      ),
+      'forbidden state regression',
+    ],
+    [
+      'registered test-device QA state regression',
+      () => replace(
+        documentPath,
+        'Production-configured registered-test-device request/load/show: Pass - Test Ad',
+        'Production-configured registered-test-device request/load/show: Not started',
+      ),
+      'forbidden state regression',
+    ],
+    [
+      'exactly-once reward state regression',
+      () => replace(documentPath, 'Exactly-once reward: Pass', 'Exactly-once reward: Not started'),
+      'forbidden state regression',
+    ],
+    [
+      'production-configured internal-test offline QA false completion',
+      () => replace(
+        documentPath,
+        'Production-configured internal-test offline failure/recovery: Not performed / Pending',
+        'Production-configured internal-test offline failure/recovery: Pass',
+      ),
+      'forbidden completion claim',
+    ],
+    [
+      'actual general-user serving false completion',
+      () => replace(
+        documentPath,
+        'Actual general-user production serving: Not started',
+        'Actual general-user production serving: Completed',
+      ),
+      'forbidden completion claim',
+    ],
+    [
+      'general-user Production update false completion',
+      () => replace(
+        documentPath,
+        'General-user Production update: Not started',
+        'General-user Production update: Completed',
+      ),
+      'forbidden completion claim',
+    ],
+    [
+      'Production-track upload false completion',
+      () => replace(
+        documentPath,
+        'Play Console Production-track upload: Not started',
+        'Play Console Production-track upload: Completed',
+      ),
+      'forbidden completion claim',
+    ],
+    [
+      'actual production-serving device QA false completion',
+      () => replace(
+        documentPath,
+        'Actual production-serving device QA: Not started',
+        'Actual production-serving device QA: Completed',
+      ),
+      'forbidden completion claim',
+    ],
+    [
+      'actual advertisement revenue false confirmation',
+      () => replace(
+        documentPath,
+        'Actual advertisement revenue: Not verified',
+        'Actual advertisement revenue: Confirmed',
+      ),
+      'forbidden completion claim',
+    ],
+    [
+      'ambiguous production request load show completion',
+      () => append(documentPath, '\nProduction request/load/show: Completed\n'),
+      'forbidden completion claim',
+    ],
+    [
+      'ambiguous production device QA completion',
+      () => append(documentPath, '\nProduction device QA: Completed\n'),
+      'forbidden completion claim',
+    ],
+    [
+      'ambiguous Play Console upload completion',
+      () => append(documentPath, '\nPlay Console release upload: Completed\n'),
+      'forbidden completion claim',
+    ],
+    [
+      'unrestricted production readiness claim',
+      () => append(documentPath, '\nReady for unrestricted production\n'),
       'forbidden completion claim',
     ],
     [
@@ -428,16 +672,6 @@ const runNegativeMutationSelfTest = (fixtureRoot) => {
         'Existing signed AAB workflow: Pending',
       ),
       'forbidden state regression',
-    ],
-    [
-      'production device QA false completion',
-      () => replace(documentPath, 'Production device QA: Not started', 'Production device QA: Completed'),
-      'forbidden completion claim',
-    ],
-    [
-      'Play Console upload false completion',
-      () => replace(documentPath, 'Play Console release upload: Not started', 'Play Console release upload: Completed'),
-      'forbidden completion claim',
     ],
     [
       'official test ID used in production',
@@ -475,16 +709,48 @@ const runNegativeMutationSelfTest = (fixtureRoot) => {
       'required section missing',
     ],
     [
-      'required section order change',
-      () => replace(
-        documentPath,
-        '## 8. Production configuration design',
-        '## 10. Fail-closed requirements (moved)\n\n## 8. Production configuration design',
-      ),
-      'required section order',
+      'required section order and rolling project metadata format regressions',
+      () => {
+        replace(
+          documentPath,
+          '## 8. Production configuration design',
+          '## 10. Fail-closed requirements (moved)\n\n## 8. Production configuration design',
+        )
+        replaceMatchingLine(
+          projectStatePath,
+          rollingMetadataPatterns.date,
+          '- 기준일: 2026/07/30',
+          'negative 기준일 fixture',
+        )
+        replaceMatchingLine(
+          projectStatePath,
+          rollingMetadataPatterns.versionCode,
+          '- Android versionCode: 0',
+          'negative Android versionCode fixture',
+        )
+        replaceMatchingLine(
+          projectStatePath,
+          rollingMetadataPatterns.versionName,
+          '- Android versionName: 1.0',
+          'negative Android versionName fixture',
+        )
+        replaceMatchingLine(
+          projectStatePath,
+          rollingMetadataPatterns.openPr,
+          '- 작업 시작 전 Open PR: ',
+          'negative 작업 시작 전 Open PR fixture',
+        )
+      },
+      [
+        'required section order',
+        'invalid 기준일',
+        'invalid Android versionCode',
+        'invalid Android versionName',
+        'invalid 작업 시작 전 Open PR',
+      ],
     ],
   ]
-  const pathsToRestore = [documentPath]
+  const pathsToRestore = [documentPath, projectStatePath]
   const originalContents = new Map(
     pathsToRestore.map((path) => [path, readFileSync(resolve(fixtureRoot, path))]),
   )
@@ -497,8 +763,12 @@ const runNegativeMutationSelfTest = (fixtureRoot) => {
         encoding: 'utf8',
       })
       const output = `${result.stdout ?? ''}\n${result.stderr ?? ''}`
-      if (result.status === 0 || !output.includes(expected)) {
-        throw new Error(`${name}: expected rejection containing "${expected}"\n${output}`)
+      const expectedMessages = Array.isArray(expected) ? expected : [expected]
+      const missingMessages = expectedMessages.filter((message) => !output.includes(message))
+      if (result.status === 0 || missingMessages.length > 0) {
+        throw new Error(
+          `${name}: expected rejection containing "${expectedMessages.join('", "')}"\n${output}`,
+        )
       }
       mutationPasses += 1
       console.log(`PASS mutation ${mutationPasses}/${cases.length}: ${name}`)
@@ -520,7 +790,7 @@ const runNegativeMutationSelfTest = (fixtureRoot) => {
 }
 
 if (negativeSelfTestRequested) {
-  const { fixtureRoot, temporaryRoot } = createSyntheticSourceCapabilityFixture()
+  const { fixtureRoot, temporaryRoot } = createSyntheticInternalTestRolloutFixture()
   try {
     runNegativeMutationSelfTest(fixtureRoot)
   } finally {
@@ -579,18 +849,30 @@ for (const text of [
   'Release environment preflight support: Implemented',
   'App ID/ad-unit publisher prefix verification: Implemented',
   'Full Rewarded provider checker before release build: Implemented',
-  'GitHub Secret actual value configuration: Not started',
-  'Production-configured release workflow run: Not started',
-  'Production request/load/show: Not started',
-  'Production serving: Not started',
-  'Privacy/Data Safety final review: Pending',
-  'External public privacy policy final review: Pending',
-  'Advertising disclosure final review: Pending',
+  'GitHub Secret actual value configuration: Completed',
+  'Production-configured release workflow run: Completed',
+  'Privacy/Data Safety final review: Completed',
+  'External public privacy policy final review: Completed',
+  'Advertising disclosure final review: Completed',
   'Existing release signing infrastructure: Confirmed',
   'Existing signed AAB workflow: Confirmed',
-  'Production Rewarded-configured signed AAB: Not started',
-  'Production device QA: Not started',
-  'Play Console release upload: Not started',
+  'Production Rewarded-configured signed AAB: Completed',
+  'Play Console internal-testing AAB upload: Completed',
+  'Production-configured registered-test-device request/load/show: Pass - Test Ad',
+  'Production-configured internal-test device QA: Pass',
+  'Exactly-once reward: Pass',
+  'Rapid-tap duplicate ad prevention: Pass',
+  'Production-configured internal-test offline failure/recovery: Not performed / Pending',
+  'Restart reward persistence: Pass',
+  'Duplicate reward after restart: Not observed',
+  'Actual general-user production serving: Not started',
+  'General-user Production update: Not started',
+  'Play Console Production-track upload: Not started',
+  'Actual production-serving device QA: Not started',
+  'Actual advertisement revenue: Not verified',
+  'Actual early-dismiss device QA: N/A for observed creative / Pending for future early-dismiss-capable creative',
+  'Repeated ADB listener-accumulation diagnostics: Pending',
+  'Rollout monitoring and rollback operational verification: Pending',
   'Manage the production ID in exactly one configuration source.',
   'Fail closed if release mode receives a test ID.',
   'Fail closed if debug mode receives a production ID.',
@@ -609,6 +891,8 @@ for (const text of [
   'Actual production Rewarded ad unit; `isTesting: false`',
   'Privacy policy wording related to the advertising SDK',
   'Google Play Data safety form',
+  'approximate location, app interactions, diagnostics, and device or other identifiers',
+  'Its last-updated date is 2026-07-29',
   'EEA/UK/Switzerland UMP messaging',
   '`src/config/rewardedAdSdkConfig.js`',
   '`src/services/rewardedAdProvider.loader.js`',
@@ -616,7 +900,7 @@ for (const text of [
   '`.github/workflows/android-release-aab.yml`',
   'No owner-held production identifier or Android native file is changed',
   '`ADMOB_REWARDED_PRODUCTION_AD_UNIT_ID`',
-  'The workflow has not been run with production Rewarded configuration',
+  'The workflow was run successfully with production Rewarded configuration',
 ]) {
   requireText(compactDocument, text)
 }
@@ -634,19 +918,18 @@ for (const [meaning, label] of [
 }
 
 for (const claim of [
-  'GitHub Secret actual value configuration: Completed',
-  'Production-configured release workflow run: Completed',
-  'Production Rewarded-configured signed AAB: Completed',
+  'Actual general-user production serving: Completed',
+  'General-user Production update: Completed',
+  'Play Console Production-track upload: Completed',
+  'Actual production-serving device QA: Completed',
+  'Actual advertisement revenue: Confirmed',
   'Production request/load/show: Completed',
   'Production serving: Completed',
-  'Privacy/Data Safety final review: Completed',
-  'External public privacy policy final review: Completed',
-  'Advertising disclosure final review: Completed',
   'Production device QA: Completed',
   'Play Console release upload: Completed',
-  'Google Play disclosure: Completed',
   'Production serving enabled',
-  'Ready for production',
+  'Ready for unrestricted production',
+  'Production-configured internal-test offline failure/recovery: Pass',
 ]) {
   if (document.includes(claim)) errors.push(`forbidden completion claim: ${claim}`)
 }
@@ -657,6 +940,15 @@ for (const regression of [
   'Release environment preflight support: Not started',
   'App ID/ad-unit publisher prefix verification: Not started',
   'Full Rewarded provider checker before release build: Not started',
+  'GitHub Secret actual value configuration: Not started',
+  'Production-configured release workflow run: Not started',
+  'Production Rewarded-configured signed AAB: Not started',
+  'Play Console internal-testing AAB upload: Not started',
+  'Privacy/Data Safety final review: Pending',
+  'External public privacy policy final review: Pending',
+  'Advertising disclosure final review: Pending',
+  'Production-configured registered-test-device request/load/show: Not started',
+  'Exactly-once reward: Not started',
   'Existing release signing infrastructure: Pending',
   'Existing signed AAB workflow: Pending',
   'AdMob Console creation: Not performed',
@@ -667,9 +959,22 @@ for (const regression of [
   if (document.includes(regression)) errors.push(`forbidden state regression: ${regression}`)
 }
 
+const projectState = read(projectStatePath)
+if (!/State baseline main HEAD: `[0-9a-f]{40}`/u.test(projectState)) {
+  errors.push(`${projectStatePath}: invalid State baseline main HEAD`)
+}
+for (const [label, pattern] of [
+  ['기준일', rollingMetadataPatterns.date],
+  ['Android versionCode', rollingMetadataPatterns.versionCode],
+  ['Android versionName', rollingMetadataPatterns.versionName],
+  ['작업 시작 전 Open PR', rollingMetadataPatterns.openPr],
+]) {
+  if (!pattern.test(projectState)) errors.push(`${projectStatePath}: invalid ${label}`)
+}
+
 const checkedContent = [
   document,
-  read(projectStatePath),
+  projectState,
   read('DEVELOPMENT_LOG.md'),
   read('TODO.md'),
   read('CHANGELOG.md'),
@@ -703,16 +1008,30 @@ for (const [path, snippets] of [
     'Implement production source connection in a separate approved PR',
   ]],
   ['CHANGELOG.md', [
+    'PR #420 - AdMob Internal Test and Policy State Reconciliation',
+    'Explicitly separated completed internal testing from unstarted general-user',
     'PR #416 - Production Rewarded Source Connection',
     'VITE_REWARDED_AD_UNIT_ID',
     'Owner-held production ID release injection',
   ]],
   [projectStatePath, [
-    'State baseline main HEAD: `993a187b69c7646d9cced9bedbed64da25c543d4`',
     'AI workflow harness: merged / active',
     'production source connection capability: Implemented',
-    'production Rewarded release workflow injection support는 PR #417에서 구현 중',
-    'GitHub Secret actual value configuration: Not started',
+    'production Rewarded release workflow injection support: Implemented',
+    'GitHub Secret actual value configuration: Completed',
+    'Production-configured release workflow run: Completed',
+    'Production Rewarded-configured signed AAB: Completed',
+    'Play Console internal-testing AAB upload: Completed',
+    'Google Play 제출 활동 상태: 출시됨',
+    'Production-configured registered-test-device request/load/show: Pass - Test Ad',
+    'Production-configured internal-test offline failure/recovery: Not performed / Pending',
+    'Privacy/Data Safety final review: Completed',
+    '외부 개인정보처리방침 PR #4: Merged',
+    '외부 개인정보처리방침 Vercel status: success',
+    'Actual general-user production serving: Not started',
+    'General-user Production update: Not started',
+    'Play Console Production-track upload: Not started',
+    'Actual production-serving device QA: Not started',
   ]],
 ]) {
   const content = read(path)
