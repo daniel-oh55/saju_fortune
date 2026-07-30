@@ -98,13 +98,6 @@ const assertSuccessfulCheck = (result, label, expectedMode) => {
   console.log(output.trim())
   console.log(`PASS lifecycle: ${label}`)
 }
-const assertRejectedCheck = (result, label, expected) => {
-  const output = `${result.stdout ?? ''}\n${result.stderr ?? ''}`
-  if (result.status === 0 || !output.includes(expected)) {
-    throw new Error(`${label}: expected rejection containing "${expected}"\n${output}`)
-  }
-  console.log(`PASS lifecycle: ${label}`)
-}
 const writeFixture = (fixtureRoot, path, content) => {
   const target = resolve(fixtureRoot, path)
   mkdirSync(dirname(target), { recursive: true })
@@ -315,7 +308,34 @@ const runLifecycleSelfTest = () => {
       'canonical',
     )
 
-    console.log('AdMob rollout lifecycle verification passed (scenarios 4/4)')
+    execFileSync('git', ['checkout', '--quiet', '--detach', 'origin/main'], { cwd: fixtureRoot })
+    execFileSync('git', ['checkout', '--quiet', '-b', 'future-rolling-state'], {
+      cwd: fixtureRoot,
+    })
+    const projectStateFixturePath = resolve(fixtureRoot, projectStatePath)
+    const currentProjectState = readFileSync(projectStateFixturePath, 'utf8')
+    const rollingMetadataUpdates = [
+      ['- 기준일: 2026-07-29', '- 기준일: 2026-07-30'],
+      ['- Android versionCode: 2', '- Android versionCode: 3'],
+      ['- Android versionName: 1.0.1', '- Android versionName: 1.0.2'],
+      ['- 작업 시작 전 Open PR: 없음', '- 작업 시작 전 Open PR: #421 (Draft/Open)'],
+    ]
+    const futureProjectState = rollingMetadataUpdates.reduce((content, [from, to]) => {
+      if (!content.includes(from)) throw new Error(`rolling-state fixture missing: ${from}`)
+      return content.replace(from, to)
+    }, currentProjectState)
+    writeFileSync(projectStateFixturePath, futureProjectState)
+    execFileSync('git', ['add', '--', projectStatePath], { cwd: fixtureRoot })
+    execFileSync('git', ['commit', '--quiet', '-m', 'fixture: synthetic future rolling state'], {
+      cwd: fixtureRoot,
+    })
+    assertSuccessfulCheck(
+      check(),
+      'E. synthetic future rolling project metadata simulation (mode canonical)',
+      'canonical',
+    )
+
+    console.log('AdMob rollout lifecycle verification passed (scenarios 5/5)')
   } finally {
     rmSync(temporaryRoot, { recursive: true, force: true })
   }
@@ -632,16 +652,32 @@ const runNegativeMutationSelfTest = (fixtureRoot) => {
       'required section missing',
     ],
     [
-      'required section order change',
-      () => replace(
-        documentPath,
-        '## 8. Production configuration design',
-        '## 10. Fail-closed requirements (moved)\n\n## 8. Production configuration design',
-      ),
-      'required section order',
+      'required section order and rolling project metadata format regressions',
+      () => {
+        replace(
+          documentPath,
+          '## 8. Production configuration design',
+          '## 10. Fail-closed requirements (moved)\n\n## 8. Production configuration design',
+        )
+        replace(projectStatePath, '- 기준일: 2026-07-29', '- 기준일: 2026/07/30')
+        replace(
+          projectStatePath,
+          '- Android versionCode: 2',
+          '- Android versionCode: 0\n- Android versionCode: -1\n- Android versionCode: three',
+        )
+        replace(projectStatePath, '- Android versionName: 1.0.1', '- Android versionName: 1.0')
+        replace(projectStatePath, '- 작업 시작 전 Open PR: 없음', '- 작업 시작 전 Open PR: ')
+      },
+      [
+        'required section order',
+        'invalid 기준일',
+        'invalid Android versionCode',
+        'invalid Android versionName',
+        'invalid 작업 시작 전 Open PR',
+      ],
     ],
   ]
-  const pathsToRestore = [documentPath]
+  const pathsToRestore = [documentPath, projectStatePath]
   const originalContents = new Map(
     pathsToRestore.map((path) => [path, readFileSync(resolve(fixtureRoot, path))]),
   )
@@ -654,8 +690,12 @@ const runNegativeMutationSelfTest = (fixtureRoot) => {
         encoding: 'utf8',
       })
       const output = `${result.stdout ?? ''}\n${result.stderr ?? ''}`
-      if (result.status === 0 || !output.includes(expected)) {
-        throw new Error(`${name}: expected rejection containing "${expected}"\n${output}`)
+      const expectedMessages = Array.isArray(expected) ? expected : [expected]
+      const missingMessages = expectedMessages.filter((message) => !output.includes(message))
+      if (result.status === 0 || missingMessages.length > 0) {
+        throw new Error(
+          `${name}: expected rejection containing "${expectedMessages.join('", "')}"\n${output}`,
+        )
       }
       mutationPasses += 1
       console.log(`PASS mutation ${mutationPasses}/${cases.length}: ${name}`)
@@ -850,6 +890,14 @@ const projectState = read(projectStatePath)
 if (!/State baseline main HEAD: `[0-9a-f]{40}`/u.test(projectState)) {
   errors.push(`${projectStatePath}: invalid State baseline main HEAD`)
 }
+for (const [label, pattern] of [
+  ['기준일', /^- 기준일: \d{4}-\d{2}-\d{2}$/mu],
+  ['Android versionCode', /^- Android versionCode: [1-9]\d*$/mu],
+  ['Android versionName', /^- Android versionName: \d+\.\d+\.\d+$/mu],
+  ['작업 시작 전 Open PR', /^- 작업 시작 전 Open PR: \S.*$/mu],
+]) {
+  if (!pattern.test(projectState)) errors.push(`${projectStatePath}: invalid ${label}`)
+}
 
 const checkedContent = [
   document,
@@ -894,13 +942,7 @@ for (const [path, snippets] of [
     'Owner-held production ID release injection',
   ]],
   [projectStatePath, [
-    '기준일: 2026-07-29',
-    '작업 시작 전 Open PR: 없음',
     'AI workflow harness: merged / active',
-    'PR #417: Merged',
-    'PR #419: Merged',
-    'Android versionCode: 2',
-    'Android versionName: 1.0.1',
     'production source connection capability: Implemented',
     'production Rewarded release workflow injection support: Implemented',
     'GitHub Secret actual value configuration: Completed',
