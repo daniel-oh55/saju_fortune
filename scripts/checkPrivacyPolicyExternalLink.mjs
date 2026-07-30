@@ -8,7 +8,8 @@ const componentPath = 'src/pages/PrivacyInfoPage.jsx';
 const stylePath = 'src/styles.css';
 const packagePath = 'package.json';
 const lockfilePath = 'package-lock.json';
-const expectedUrl = 'https://hymlounge.com/harupuli/privacy/';
+const checkerPath = 'scripts/checkPrivacyPolicyExternalLink.mjs';
+const expectedUrl = 'https://www.hymlounge.com/harupuli/privacy/';
 const expectedLabel = '전체 개인정보처리방침 보기';
 const expectedScriptName = 'check:privacy-policy-external-link';
 const expectedScriptCommand = 'node scripts/checkPrivacyPolicyExternalLink.mjs';
@@ -22,6 +23,18 @@ const gitOutput = (...args) =>
     encoding: 'utf8',
     stdio: ['ignore', 'pipe', 'pipe'],
   }).replace(/\r\n/g, '\n');
+
+const gitObjectExists = (name) => {
+  try {
+    execFileSync('git', ['cat-file', '-e', name], {
+      cwd: projectRoot,
+      stdio: 'ignore',
+    });
+    return true;
+  } catch {
+    return false;
+  }
+};
 
 const errors = [];
 const requireCondition = (condition, message) => {
@@ -78,7 +91,7 @@ const component = readProjectFile(componentPath);
 const styles = readProjectFile(stylePath);
 const packageJsonText = readProjectFile(packagePath);
 const packageJson = JSON.parse(packageJsonText);
-const basePackageJson = JSON.parse(gitOutput('show', `origin/main:${packagePath}`));
+const creationMode = !gitObjectExists(`origin/main:${checkerPath}`);
 
 const externalLinkAnchors = extractClassAnchors(component, 'privacy-policy-external-link');
 const externalLinkAnchor = externalLinkAnchors[0];
@@ -157,94 +170,98 @@ requireCondition(
   'external-link focus-visible CSS block must declare outline-offset',
 );
 
-for (const sectionName of [
-  'dependencies',
-  'devDependencies',
-  'optionalDependencies',
-  'peerDependencies',
-]) {
+if (creationMode) {
+  const basePackageJson = JSON.parse(gitOutput('show', `origin/main:${packagePath}`));
+
+  for (const sectionName of [
+    'dependencies',
+    'devDependencies',
+    'optionalDependencies',
+    'peerDependencies',
+  ]) {
+    requireCondition(
+      JSON.stringify(packageJson[sectionName]) === JSON.stringify(basePackageJson[sectionName]),
+      `package.json ${sectionName} changed`,
+    );
+  }
+
+  const baseScripts = basePackageJson.scripts ?? {};
+  const currentScripts = packageJson.scripts ?? {};
+
+  for (const [scriptName, baseCommand] of Object.entries(baseScripts)) {
+    requireCondition(
+      Object.hasOwn(currentScripts, scriptName),
+      `existing package script was deleted: ${scriptName}`,
+    );
+    requireCondition(
+      currentScripts[scriptName] === baseCommand,
+      `existing package script command changed: ${scriptName}`,
+    );
+  }
+
+  for (const scriptName of Object.keys(currentScripts)) {
+    requireCondition(
+      Object.hasOwn(baseScripts, scriptName) || scriptName === expectedScriptName,
+      `unauthorized new package script: ${scriptName}`,
+    );
+  }
+
   requireCondition(
-    JSON.stringify(packageJson[sectionName]) === JSON.stringify(basePackageJson[sectionName]),
-    `package.json ${sectionName} changed`,
+    currentScripts[expectedScriptName] === expectedScriptCommand,
+    'targeted package script is missing or incorrect',
   );
-}
 
-const baseScripts = basePackageJson.scripts ?? {};
-const currentScripts = packageJson.scripts ?? {};
+  const changedFiles = [
+    ...gitOutput('diff', '--name-only', 'origin/main...HEAD').split('\n'),
+    ...gitOutput('diff', '--name-only', '--cached').split('\n'),
+    ...gitOutput('diff', '--name-only').split('\n'),
+    ...gitOutput('ls-files', '--others', '--exclude-standard').split('\n'),
+  ]
+    .map((filePath) => filePath.trim().replaceAll('\\', '/'))
+    .filter(Boolean);
 
-for (const [scriptName, baseCommand] of Object.entries(baseScripts)) {
+  const allowedChangedFiles = new Set([
+    'CHANGELOG.md',
+    'DEVELOPMENT_LOG.md',
+    'TODO.md',
+    packagePath,
+    checkerPath,
+    componentPath,
+    stylePath,
+  ]);
+
+  for (const filePath of changedFiles) {
+    requireCondition(allowedChangedFiles.has(filePath), `unexpected changed file: ${filePath}`);
+  }
+
+  requireCondition(!changedFiles.includes(lockfilePath), 'package-lock.json must remain unchanged');
   requireCondition(
-    Object.hasOwn(currentScripts, scriptName),
-    `existing package script was deleted: ${scriptName}`,
+    !changedFiles.some((filePath) => filePath.startsWith('android/')),
+    'Android native files must remain unchanged',
   );
-  requireCondition(
-    currentScripts[scriptName] === baseCommand,
-    `existing package script command changed: ${scriptName}`,
-  );
-}
 
-for (const scriptName of Object.keys(currentScripts)) {
-  requireCondition(
-    Object.hasOwn(baseScripts, scriptName) || scriptName === expectedScriptName,
-    `unauthorized new package script: ${scriptName}`,
-  );
-}
+  const productionDiff = [
+    gitOutput('diff', 'origin/main...HEAD', '--', 'src', packagePath),
+    gitOutput('diff', '--cached', '--', 'src', packagePath),
+    gitOutput('diff', '--', 'src', packagePath),
+  ].join('\n');
+  const addedProductionLines = productionDiff
+    .split('\n')
+    .filter((line) => line.startsWith('+') && !line.startsWith('+++'))
+    .join('\n');
+  const forbiddenAddedPatterns = [
+    /window\.location/,
+    /\biframe\b/i,
+    /@capacitor\/browser/i,
+    /ca-app-pub-/i,
+  ];
 
-requireCondition(
-  currentScripts[expectedScriptName] === expectedScriptCommand,
-  'targeted package script is missing or incorrect',
-);
-
-const changedFiles = [
-  ...gitOutput('diff', '--name-only', 'origin/main...HEAD').split('\n'),
-  ...gitOutput('diff', '--name-only', '--cached').split('\n'),
-  ...gitOutput('diff', '--name-only').split('\n'),
-  ...gitOutput('ls-files', '--others', '--exclude-standard').split('\n'),
-]
-  .map((filePath) => filePath.trim().replaceAll('\\', '/'))
-  .filter(Boolean);
-
-const allowedChangedFiles = new Set([
-  'CHANGELOG.md',
-  'DEVELOPMENT_LOG.md',
-  'TODO.md',
-  packagePath,
-  'scripts/checkPrivacyPolicyExternalLink.mjs',
-  componentPath,
-  stylePath,
-]);
-
-for (const filePath of changedFiles) {
-  requireCondition(allowedChangedFiles.has(filePath), `unexpected changed file: ${filePath}`);
-}
-
-requireCondition(!changedFiles.includes(lockfilePath), 'package-lock.json must remain unchanged');
-requireCondition(
-  !changedFiles.some((filePath) => filePath.startsWith('android/')),
-  'Android native files must remain unchanged',
-);
-
-const productionDiff = [
-  gitOutput('diff', 'origin/main...HEAD', '--', 'src', packagePath),
-  gitOutput('diff', '--cached', '--', 'src', packagePath),
-  gitOutput('diff', '--', 'src', packagePath),
-].join('\n');
-const addedProductionLines = productionDiff
-  .split('\n')
-  .filter((line) => line.startsWith('+') && !line.startsWith('+++'))
-  .join('\n');
-const forbiddenAddedPatterns = [
-  /window\.location/,
-  /\biframe\b/i,
-  /@capacitor\/browser/i,
-  /ca-app-pub-/i,
-  /advertising[_ -]?id/i,
-  /google mobile ads sdk/i,
-  /ump sdk/i,
-];
-
-for (const pattern of forbiddenAddedPatterns) {
-  requireCondition(!pattern.test(addedProductionLines), `forbidden production addition: ${pattern}`);
+  for (const pattern of forbiddenAddedPatterns) {
+    requireCondition(
+      !pattern.test(addedProductionLines),
+      `forbidden production addition: ${pattern}`,
+    );
+  }
 }
 
 if (errors.length > 0) {
@@ -253,4 +270,6 @@ if (errors.length > 0) {
   process.exit(1);
 }
 
-console.log('Privacy policy external-link check passed.');
+console.log(
+  `Privacy policy external-link check passed (${creationMode ? 'creation' : 'post-merge'} mode).`,
+);

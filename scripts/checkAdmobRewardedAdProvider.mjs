@@ -207,18 +207,16 @@ const requiredTokens = [
   ['src/utils/storage.js', "rewardType = 'mock_rewarded_ad'"],
   ['src/utils/storage.js', "rewardType === 'sdk_rewarded_ad'"],
   ['src/utils/storage.js', 'rewardType: safeRewardType'],
-  ['src/pages/PrivacyInfoPage.jsx', '기본 Web/Vercel/일반 Android Debug Build의 provider는 mock'],
-  ['src/pages/PrivacyInfoPage.jsx', '공식 테스트 전용 Debug Build에서는 Google 공식 Rewarded Test Ad'],
-  ['src/pages/PrivacyInfoPage.jsx', '승인된 production/release 구성에서는 AdMob production Rewarded 광고'],
-  ['src/pages/PrivacyInfoPage.jsx', 'release workflow 실행, AAB 생성, 기기 QA, serving은 아직 수행하지 않았습니다'],
-  ['src/pages/PrivacyInfoPage.jsx', '앱 내부 광고 데이터 사용 선택과 Google UMP runtime gate가 모두 필요'],
   ['src/pages/PrivacyInfoPage.jsx', '이 페이지는 하루풀이 앱의 현재 개인정보 처리 안내입니다'],
   ['src/pages/PrivacyInfoPage.jsx', '최신 개인정보처리방침 전문은'],
-  ['src/pages/PrivacyInfoPage.jsx', '아래 외부 페이지에서 확인할 수 있으며'],
-  ['src/pages/PrivacyInfoPage.jsx', 'production 광고 활성화 전 개인정보/Data Safety'],
-  ['src/pages/PrivacyInfoPage.jsx', '외부 공개 개인정보처리방침 최종 검토'],
-  ['src/pages/PrivacyInfoPage.jsx', '광고 관련 disclosure 최종 검토'],
-  ['src/pages/PrivacyInfoPage.jsx', 'https://hymlounge.com/harupuli/privacy/'],
+  ['src/pages/PrivacyInfoPage.jsx', '광고 기능이 활성화된 Android 앱 버전에서는 Google AdMob 보상형 광고'],
+  ['src/pages/PrivacyInfoPage.jsx', '일반 사용자 대상 Production 업데이트는 아직 수행되지 않았으므로'],
+  ['src/pages/PrivacyInfoPage.jsx', '광고가 제공되고 있다고 단정하지 않습니다'],
+  ['src/pages/PrivacyInfoPage.jsx', '앱 내부 선택은 Google UMP 선택을 대신하지 않습니다'],
+  ['src/pages/PrivacyInfoPage.jsx', 'Google Mobile Ads SDK는 아래 데이터를 자동 수집하거나'],
+  ['src/pages/PrivacyInfoPage.jsx', '운세 입력 정보를 Google에 광고 목적으로 제공하거나'],
+  ['src/pages/PrivacyInfoPage.jsx', '광고 식별자와 결합하지 않습니다'],
+  ['src/pages/PrivacyInfoPage.jsx', 'https://www.hymlounge.com/harupuli/privacy/'],
   ['src/components/ConsentSettingsPanel.jsx', '공식 테스트 및 승인된 production Rewarded 경로 모두'],
   ['src/components/ConsentSettingsPanel.jsx', '공식 테스트 및 승인된 production Rewarded 광고 요청 경로'],
   ['src/components/ConsentSettingsPanel.jsx', '이 선택이 true가'],
@@ -393,12 +391,39 @@ function validateSources(sourceOverrides = new Map()) {
       errors.push(`privacy copy contains a stale production capability claim: ${staleClaim}`);
     }
   }
-  if (
-    /(?:개인정보|Privacy)\/Data Safety.{0,80}(?:Completed|완료)|(?:Completed|완료).{0,80}(?:개인정보|Privacy)\/Data Safety/su.test(
-      privacySource,
-    )
-  ) {
-    errors.push('Privacy/Data Safety review must not be represented as completed');
+  for (const [pattern, label] of [
+    [
+      /일반 사용자(?: 대상)? Production 업데이트(?:는|가)?\s*(?:완료|수행 완료)/u,
+      'general-user Production update completion',
+    ],
+    [
+      /Actual general-user production serving:\s*Completed/u,
+      'general-user production serving completion',
+    ],
+    [
+      /모든 (?:사용자|이용자)에게 (?:production )?광고가 제공되고 (?:있습니다|있음|있는 상태입니다)/u,
+      'universal production ad serving',
+    ],
+    [
+      /실제 (?:수익 )?광고 serving (?:검증 )?(?:완료|Completed)/u,
+      'actual revenue ad serving verification',
+    ],
+    [
+      /광고 동의 없이(?:도)? 광고 (?:요청|request)(?:이|가)? 가능/u,
+      'ad requests without consent',
+    ],
+    [
+      /앱 내부 (?:선택|광고 데이터 사용 선택)(?:이|은|가)? Google UMP (?:선택|동의)(?:을|를)? 대신(?:합니다|할 수 있습니다)/u,
+      'app choice replacing Google UMP',
+    ],
+    [
+      /운세 입력 정보를[^.]*광고 식별자와 결합(?:합니다|할 수 있습니다)/u,
+      'fortune input and ad identifier linkage',
+    ],
+  ]) {
+    if (pattern.test(privacySource)) {
+      errors.push(`privacy copy overstates the current production or consent state: ${label}`);
+    }
   }
   for (const staleClaim of [
     'production 광고 request/load/show 기능은 아직 구현되지 않았습니다',
@@ -1934,6 +1959,56 @@ const targetedNegativeMutations = [
     mutate: (source) => `${source}\n실제 서비스 공개 전\n`,
   },
   {
+    name: 'privacy copy claims general-user Production update completion',
+    file: 'src/pages/PrivacyInfoPage.jsx',
+    mutate: (source) => source.replace(
+      '일반 사용자 대상 Production 업데이트는 아직 수행되지 않았으므로',
+      '일반 사용자 대상 Production 업데이트는 완료되었으므로',
+    ),
+  },
+  {
+    name: 'privacy copy claims universal ad serving',
+    file: 'src/pages/PrivacyInfoPage.jsx',
+    mutate: (source) => source.replace(
+      '광고가 제공되고 있다고 단정하지 않습니다',
+      '광고가 제공되고 있습니다',
+    ),
+  },
+  {
+    name: 'privacy copy changes canonical policy URL',
+    file: 'src/pages/PrivacyInfoPage.jsx',
+    mutate: (source) => source.replace(
+      'https://www.hymlounge.com/harupuli/privacy/',
+      'https://hymlounge.com/harupuli/privacy/',
+    ),
+  },
+  {
+    name: 'privacy copy replaces Google UMP with app choice',
+    file: 'src/pages/PrivacyInfoPage.jsx',
+    mutate: (source) => source.replace(
+      '앱 내부 선택은 Google UMP 선택을 대신하지 않습니다',
+      '앱 내부 선택은 Google UMP 선택을 대신합니다',
+    ),
+  },
+  {
+    name: 'privacy copy links fortune input to ad identifier',
+    file: 'src/pages/PrivacyInfoPage.jsx',
+    mutate: (source) => source.replace(
+      '광고 식별자와 결합하지 않습니다',
+      '광고 식별자와 결합합니다',
+    ),
+  },
+  {
+    name: 'privacy copy claims production serving completion',
+    file: 'src/pages/PrivacyInfoPage.jsx',
+    mutate: (source) => `${source}\nActual general-user production serving: Completed\n`,
+  },
+  {
+    name: 'privacy copy allows ad requests without consent',
+    file: 'src/pages/PrivacyInfoPage.jsx',
+    mutate: (source) => `${source}\n광고 동의 없이도 광고 요청이 가능합니다.\n`,
+  },
+  {
     name: 'consent copy restores production-not-implemented claim',
     file: 'src/components/ConsentSettingsPanel.jsx',
     mutate: (source) =>
@@ -2062,7 +2137,7 @@ async function main() {
       detected += 1;
     }
     for (const mutation of targetedNegativeMutations) {
-      const source = read(mutation.file);
+      const source = read(mutation.file).replaceAll('\r\n', '\n');
       const mutated = mutation.mutate(source);
       assert.notEqual(mutated, source, `negative mutation did not apply: ${mutation.name}`);
       const errors = validateSources(new Map([[mutation.file, mutated]]));

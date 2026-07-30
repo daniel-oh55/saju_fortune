@@ -168,19 +168,28 @@ for (const text of [
   requireText(settingsSource, text, 'src/pages/SettingsPage.jsx')
 }
 for (const text of [
-  '기본 Web/Vercel/일반 Android Debug Build의 provider는 mock',
-  '공식 테스트 전용 Debug Build에서는 Google 공식 Rewarded Test Ad',
-  '승인된 production/release 구성에서는 AdMob production Rewarded 광고',
-  'release workflow 실행, AAB 생성, 기기 QA, serving은 아직 수행하지 않았습니다',
-  '앱 내부 광고 데이터 사용 선택과 Google UMP runtime gate가 모두 필요',
-  'production 활성화 전 개인정보/Data Safety',
-  '외부 공개 개인정보처리방침',
-  '광고 관련 disclosure',
-  'Google 서비스와 통신할 수 있음',
-  '하루풀이 자체 서버/DB로 프로필을 전송하지 않음',
-  '외부 분석 SDK는 아직 연결되지 않음',
+  'Google AdMob 보상형 광고',
+  '일반 사용자 대상 Production 업데이트는 아직 수행되지 않았으므로',
+  '현재 모든 이용자에게',
+  '광고가 제공되고 있다고 단정하지 않습니다',
+  'IP 주소를 통해 추정될 수 있는 대략적인 위치',
+  '앱 상호작용',
+  '진단 정보',
+  'Android 광고 ID',
+  '앱 세트 ID',
+  'TLS를 이용하여 전송 중 암호화',
+  'GPS를 이용한 정확한 위치 수집을 의미하지 않습니다',
+  '운세 입력 정보를 Google에 광고 목적으로 제공하거나',
+  '광고 식별자와 결합하지 않습니다',
+  '앱 내부 선택은 Google UMP 선택을 대신하지 않습니다',
+  '개인정보 및 쿠키 설정',
+  '핵심 운세 기능은 계속 이용할 수 있습니다',
+  '별도의 외부 분석 전용 SDK는 아직 연결되지 않음',
   '실제 결제 SDK는 아직 연결되지 않음',
-  'mock이며 실제 광고를 요청하지 않음',
+  '하루풀이 자체 서버/DB로 프로필을 전송하지 않음',
+  'AdMob과 UMP는 광고·동의 처리를 위해 Google 서비스와 통신할 수 있음',
+  'https://www.hymlounge.com/harupuli/privacy/',
+  'mailto:hym.lounge@gmail.com',
 ]) {
   requireText(privacySource, text, 'src/pages/PrivacyInfoPage.jsx')
 }
@@ -250,6 +259,51 @@ if (/consentPreferences/u.test(coordinatorSource)) {
 }
 forbidPattern(privacySource, /실제 광고 SDK(?:가 연결되어 있지 않| 없음)/u, 'privacy copy')
 forbidPattern(privacySource, /외부 SDK로 개인정보를 전송하지 않습니다/u, 'privacy copy')
+forbidPattern(
+  privacySource,
+  /https:\/\/hymlounge\.com\/harupuli\/privacy\//u,
+  'privacy noncanonical policy URL',
+)
+forbidPattern(
+  privacySource,
+  /release workflow 실행, AAB 생성, 기기 QA, serving은 아직 수행하지 않았습니다/u,
+  'privacy stale release-status copy',
+)
+forbidPattern(
+  privacySource,
+  /production(?: 광고)? 활성화 전 개인정보\/Data Safety(?: 최종 검토)?/u,
+  'privacy stale pre-production review copy',
+)
+forbidPattern(
+  privacySource,
+  /외부 공개 개인정보처리방침[^.]*최종 검토/u,
+  'privacy stale external-policy review copy',
+)
+forbidPattern(
+  privacySource,
+  /광고 관련 disclosure[^.]*최종 검토/u,
+  'privacy stale advertising-disclosure review copy',
+)
+forbidPattern(
+  privacySource,
+  /일반 사용자(?: 대상)? Production 업데이트(?:는|가)? (?:완료|수행 완료)/u,
+  'privacy production-update completion claim',
+)
+forbidPattern(
+  privacySource,
+  /Actual general-user production serving:\s*Completed/u,
+  'privacy production-serving completion claim',
+)
+forbidPattern(
+  privacySource,
+  /모든 (?:사용자|이용자)에게 (?:production )?광고가 제공되고 (?:있습니다|있음|있는 상태입니다)/u,
+  'privacy universal-ad-serving claim',
+)
+forbidPattern(
+  privacySource,
+  /운세 입력 정보를[^.]*광고 식별자와 결합할 수 있습니다/u,
+  'privacy fortune-ad-identifier linkage claim',
+)
 forbidPattern(
   consentPanelSource,
   /production 광고 (?:request\/load\/show )?기능은 아직 구현되지 않았습니다/u,
@@ -687,13 +741,67 @@ if (process.argv.includes('--negative-self-test')) {
     ['duplicate initialize', () => replace(coordinatorPath, 'if (initializePromise) return initializePromise;', '// initialize guard removed')],
     ['stale bootstrap gate', () => replace(coordinatorPath, 'snapshot.canRequestAds !== true ||\n        privacyRefreshGateBlocked', 'false ||\n        false')],
     ['stale SDK copy', () => append('src/pages/PrivacyInfoPage.jsx', '\n실제 광고 SDK가 연결되어 있지 않음\n')],
+    [
+      'privacy TLS copy',
+      () => replace('src/pages/PrivacyInfoPage.jsx', 'TLS를 이용하여 전송 중 암호화됩니다', '안전하게 전송됩니다'),
+      'missing required text: TLS를 이용하여 전송 중 암호화',
+    ],
+    [
+      'privacy data category',
+      () => replace(
+        'src/pages/PrivacyInfoPage.jsx',
+        "  'IP 주소를 통해 추정될 수 있는 대략적인 위치',\n",
+        '',
+      ),
+      'missing required text: IP 주소를 통해 추정될 수 있는 대략적인 위치',
+    ],
+    [
+      'stale pre-production review copy',
+      () => append('src/pages/PrivacyInfoPage.jsx', '\nproduction 활성화 전 개인정보/Data Safety 최종 검토\n'),
+      'privacy stale pre-production review copy',
+    ],
+    [
+      'production update completion claim',
+      () => replace(
+        'src/pages/PrivacyInfoPage.jsx',
+        '일반 사용자 대상 Production 업데이트는 아직 수행되지 않았으므로',
+        '일반 사용자 대상 Production 업데이트는 완료되었으므로',
+      ),
+      'privacy production-update completion claim',
+    ],
+    [
+      'fortune input identifier linkage',
+      () => replace(
+        'src/pages/PrivacyInfoPage.jsx',
+        '광고 식별자와 결합하지 않습니다',
+        '광고 식별자와 결합할 수 있습니다',
+      ),
+      'privacy fortune-ad-identifier linkage claim',
+    ],
+    [
+      'privacy canonical URL',
+      () => replace(
+        'src/pages/PrivacyInfoPage.jsx',
+        'https://www.hymlounge.com/harupuli/privacy/',
+        'https://hymlounge.example/harupuli/privacy/',
+      ),
+      'missing required text: https://www.hymlounge.com/harupuli/privacy/',
+    ],
+    [
+      'privacy noncanonical URL',
+      () => append(
+        'src/pages/PrivacyInfoPage.jsx',
+        '\nhttps://hymlounge.com/harupuli/privacy/\n',
+      ),
+      'privacy noncanonical policy URL',
+    ],
     ['ad request completion claim', () => append('CHANGELOG.md', '\nActual ad request: Completed\n')],
     ['ad serving completion claim', () => append('CHANGELOG.md', '\nActual ad serving: Completed\n')],
     ['U+FFFD', () => append('CHANGELOG.md', '\n\uFFFD\n')],
     ['known mojibake', () => append('CHANGELOG.md', `\n${['媛쒖씤', '?뺣낫'].join('')}\n`)],
     ['unexpected untracked', () => writeFileSync(resolve(root, unexpectedRootPath), 'negative probe\n', 'utf8')],
   ]
-  assert.equal(mutationCases.length, 48)
+  assert.equal(mutationCases.length, 55)
   const totalChecks = mutationCases.length + 1
   const restorePaths = [
     'src/main.jsx',
@@ -711,7 +819,7 @@ if (process.argv.includes('--negative-self-test')) {
     'CHANGELOG.md',
   ]
   let passed = 0
-  for (const [name, mutate] of mutationCases) {
+  for (const [name, mutate, expectedError] of mutationCases) {
     const originals = new Map(
       restorePaths.map((path) => [path, readFileSync(resolve(root, path), 'utf8')]),
     )
@@ -728,6 +836,12 @@ if (process.argv.includes('--negative-self-test')) {
       })
       if (result.status === 0) {
         throw new Error(`${name}: checker unexpectedly accepted the mutation`)
+      }
+      if (
+        expectedError &&
+        !`${result.stdout ?? ''}\n${result.stderr ?? ''}`.includes(expectedError)
+      ) {
+        throw new Error(`${name}: checker output is missing expected error: ${expectedError}`)
       }
       passed += 1
       console.log(`PASS ${passed}/${totalChecks}: ${name}`)
