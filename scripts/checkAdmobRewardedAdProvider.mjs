@@ -495,6 +495,22 @@ function validateSources(sourceOverrides = new Map()) {
   if (!modalSource.includes('if (completionInFlightRef.current) return')) {
     errors.push('modal synchronous completion single-flight guard is required');
   }
+  const consentSettingsHandoffBlock = modalSource.slice(
+    modalSource.indexOf('const handleOpenConsentSettings'),
+    modalSource.indexOf('const handleDialogKeyDown'),
+  );
+  if (
+    !modalSource.includes('const shouldRestoreTriggerFocusRef = useRef(true)') ||
+    !modalSource.includes('const consentSettingsHandoffRef = useRef(false)') ||
+    !modalSource.includes('onClick={handleOpenConsentSettings}') ||
+    !consentSettingsHandoffBlock.includes('shouldRestoreTriggerFocusRef.current = false') ||
+    !consentSettingsHandoffBlock.includes('consentSettingsHandoffRef.current = true') ||
+    !consentSettingsHandoffBlock.includes('onClose()') ||
+    !modalSource.includes('consentSettingsHandoffRef.current = false') ||
+    !modalSource.includes('onOpenConsentSettings?.()')
+  ) {
+    errors.push('consent settings must hand off after modal cleanup without restoring trigger focus');
+  }
   if (!serviceSource.includes('consumedSdkRewardActionIds.has(rewardActionId)')) {
     errors.push('SDK rewardActionId consumption guard is required');
   }
@@ -1937,6 +1953,14 @@ const targetedNegativeMutations = [
     mutate: (source) => source.replace(
       'isRewardedResultForRequest(result, {',
       'Boolean(result?.ok) && ignoreRequestOwnership({',
+    ),
+  },
+  {
+    name: 'consent settings button directly opens settings without closing the modal',
+    file: 'src/components/RewardAdModal.jsx',
+    mutate: (source) => source.replace(
+      'onClick={handleOpenConsentSettings}',
+      'onClick={onOpenConsentSettings}',
     ),
   },
   {

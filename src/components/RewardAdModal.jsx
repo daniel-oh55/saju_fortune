@@ -86,6 +86,8 @@ function RewardAdModal({
   const closeButtonRef = useRef(null);
   const portalRootRef = useRef(null);
   const triggerElementRef = useRef(null);
+  const shouldRestoreTriggerFocusRef = useRef(true);
+  const consentSettingsHandoffRef = useRef(false);
   const dialogTitleId = useId();
   const dialogDescriptionId = useId();
   const providerConfig = getRewardedAdSdkConfig();
@@ -150,7 +152,13 @@ function RewardAdModal({
       });
       portalRoot.remove();
 
-      if (triggerElementRef.current?.isConnected) {
+      if (consentSettingsHandoffRef.current) {
+        consentSettingsHandoffRef.current = false;
+        onOpenConsentSettings?.();
+        return;
+      }
+
+      if (shouldRestoreTriggerFocusRef.current && triggerElementRef.current?.isConnected) {
         try {
           triggerElementRef.current.focus({ preventScroll: true });
         } catch {
@@ -240,6 +248,14 @@ function RewardAdModal({
     }
   };
 
+  const handleOpenConsentSettings = () => {
+    if (consentSettingsHandoffRef.current) return;
+
+    shouldRestoreTriggerFocusRef.current = false;
+    consentSettingsHandoffRef.current = true;
+    onClose();
+  };
+
   const handleDialogKeyDown = (event) => {
     if (event.key !== 'Tab') return;
 
@@ -312,7 +328,7 @@ function RewardAdModal({
           </p>
           {errorMessage && <p className="ad-error-message">{errorMessage}</p>}
           {errorReason === 'ads_consent_required' && onOpenConsentSettings && (
-            <button className="ghost-button full-width" type="button" onClick={onOpenConsentSettings}>
+            <button className="ghost-button full-width" type="button" onClick={handleOpenConsentSettings}>
               데이터 사용 설정 열기
             </button>
           )}
