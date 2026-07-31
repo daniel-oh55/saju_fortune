@@ -79,9 +79,9 @@
 
 ## 현재 남은 단계
 
-1. 재등록한 테스트 기기 설정 반영 후 앱을 재설치하고 Rewarded를 다시 요청
+1. 재등록한 테스트 기기 설정 반영 후 앱을 완전히 종료·재실행하고 Rewarded를 다시 요청
 2. 광고 표시, Test Ad 표시, 보상 exactly-once 및 Ad Inspector 실행 여부 확인
-3. 반복 `NO_FILL` 발생 시 식별 정보는 제거한 ADB 로그와 AdMob serving 상태를 비교
+3. 반복 `NO_FILL` 발생 시 식별정보를 제거한 ADB 로그와 AdMob serving 상태를 비교
 4. 코드 변경 근거가 확인된 경우에만 별도 HIGH-risk 진단 PR 계획
 5. Owner 승인 후 Play Console Production-track 단계 업데이트
 6. 실제 일반 사용자 production serving, crash/ANR, 동의, 보상, 매출 및 rollback 모니터링
