@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import {
   getRewardedAdSdkConfig,
   REWARDED_AD_BUILD_TARGET,
@@ -14,6 +15,23 @@ import {
 } from '../services/rewardedAdService.js';
 
 const AD_SECONDS = getMockRewardedAdDurationSeconds();
+
+const FOCUSABLE_SELECTOR = [
+  'a[href]',
+  'area[href]',
+  'button:not([disabled])',
+  'input:not([disabled]):not([type="hidden"])',
+  'select:not([disabled])',
+  'textarea:not([disabled])',
+  '[contenteditable="true"]',
+  '[tabindex]:not([tabindex="-1"])',
+].join(',');
+
+function getFocusableElements(container) {
+  return Array.from(container.querySelectorAll(FOCUSABLE_SELECTOR)).filter(
+    (element) => element.getAttribute('aria-hidden') !== 'true',
+  );
+}
 
 const OFFICIAL_TEST_SDK_COPY = Object.freeze({
   title: 'Google 공식 테스트 광고',
@@ -64,15 +82,81 @@ function RewardAdModal({
   const completionDeliveredRef = useRef(false);
   const completionInFlightRef = useRef(false);
   const mountedRef = useRef(true);
+  const dialogRef = useRef(null);
+  const closeButtonRef = useRef(null);
+  const portalRootRef = useRef(null);
+  const triggerElementRef = useRef(null);
+  const dialogTitleId = useId();
+  const dialogDescriptionId = useId();
   const providerConfig = getRewardedAdSdkConfig();
   const isSdkProvider = providerConfig.provider === REWARDED_AD_PROVIDER_KEY.SDK;
   const sdkCopy = getRewardedAdSdkCopy(providerConfig);
   const isCompleted = !isSdkProvider && secondsLeft === 0;
 
+  if (!portalRootRef.current && typeof document !== 'undefined') {
+    const portalRoot = document.createElement('div');
+    portalRoot.className = 'reward-modal-portal';
+    portalRootRef.current = portalRoot;
+  }
+
   useEffect(() => {
     mountedRef.current = true;
     return () => {
       mountedRef.current = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    const portalRoot = portalRootRef.current;
+    if (!portalRoot) return undefined;
+
+    const activeElement = document.activeElement;
+    triggerElementRef.current = activeElement instanceof HTMLElement && activeElement.isConnected
+      ? activeElement
+      : null;
+
+    document.body.appendChild(portalRoot);
+    const backgroundElements = Array.from(document.body.children).filter(
+      (element) => element !== portalRoot,
+    );
+    const previousBackgroundStates = backgroundElements.map((element) => ({
+      element,
+      ariaHidden: element.getAttribute('aria-hidden'),
+      inert: element.inert,
+    }));
+    const previousBodyOverflow = document.body.style.overflow;
+
+    backgroundElements.forEach((element) => {
+      element.setAttribute('aria-hidden', 'true');
+      element.inert = true;
+    });
+    document.body.style.overflow = 'hidden';
+
+    try {
+      closeButtonRef.current?.focus({ preventScroll: true });
+    } catch {
+      closeButtonRef.current?.focus();
+    }
+
+    return () => {
+      document.body.style.overflow = previousBodyOverflow;
+      previousBackgroundStates.forEach(({ element, ariaHidden, inert }) => {
+        if (ariaHidden === null) {
+          element.removeAttribute('aria-hidden');
+        } else {
+          element.setAttribute('aria-hidden', ariaHidden);
+        }
+        element.inert = inert;
+      });
+      portalRoot.remove();
+
+      if (triggerElementRef.current?.isConnected) {
+        try {
+          triggerElementRef.current.focus({ preventScroll: true });
+        } catch {
+          triggerElementRef.current.focus();
+        }
+      }
     };
   }, []);
 
@@ -156,17 +240,55 @@ function RewardAdModal({
     }
   };
 
-  return (
+  const handleDialogKeyDown = (event) => {
+    if (event.key !== 'Tab') return;
+
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+
+    const focusableElements = getFocusableElements(dialog);
+    if (focusableElements.length === 0) {
+      event.preventDefault();
+      dialog.focus();
+      return;
+    }
+
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+    const activeElement = document.activeElement;
+
+    if (!dialog.contains(activeElement)) {
+      event.preventDefault();
+      (event.shiftKey ? lastElement : firstElement).focus();
+    } else if (event.shiftKey && activeElement === firstElement) {
+      event.preventDefault();
+      lastElement.focus();
+    } else if (!event.shiftKey && activeElement === lastElement) {
+      event.preventDefault();
+      firstElement.focus();
+    }
+  };
+
+  return createPortal(
     <div className="modal-backdrop" role="presentation">
-      <section className="reward-modal" role="dialog" aria-modal="true" aria-label="광고 시청">
+      <section
+        ref={dialogRef}
+        className="reward-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={dialogTitleId}
+        aria-describedby={dialogDescriptionId}
+        tabIndex="-1"
+        onKeyDown={handleDialogKeyDown}
+      >
         <div className="mock-ad-screen">
           <span>광고 영역</span>
-          <strong>
+          <strong id={dialogTitleId} role="heading" aria-level="2">
             {isSdkProvider
               ? sdkCopy.title
               : `${categoryLabel} 상세 풀이 보상 광고`}
           </strong>
-          <p>
+          <p id={dialogDescriptionId}>
             {isSdkProvider
               ? sdkCopy.description
               : '테스트용 광고 화면이며, 2초 후 상세 풀이를 열 수 있습니다.'}
@@ -197,7 +319,13 @@ function RewardAdModal({
         </div>
 
         <div className="modal-actions">
-          <button className="ghost-button" type="button" onClick={onClose} disabled={isCompleting}>
+          <button
+            ref={closeButtonRef}
+            className="ghost-button"
+            type="button"
+            onClick={onClose}
+            disabled={isCompleting}
+          >
             닫기
           </button>
           <button
@@ -212,7 +340,8 @@ function RewardAdModal({
           </button>
         </div>
       </section>
-    </div>
+    </div>,
+    portalRootRef.current,
   );
 }
 
