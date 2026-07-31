@@ -71,8 +71,8 @@
 - Production-configured Rewarded 요청 실행 및 AdMob SDK 도달: Confirmed
 - 최근 Rewarded 요청 결과: HTTP 403 / load error code 3 (`NO_FILL`)
 - 등록 테스트 기기 광고 ID 재설정 및 재등록: Completed by Owner
-- Test device configuration application: Pending verification
-- Ad Inspector: Not verified
+- 테스트 기기 설정 반영: Pending verification
+- Ad Inspector 제스처 실행: Not verified
 - 현재 광고 표시 및 보상 재검증: Pending
 - Privacy/Data Safety final review: Completed (Owner-confirmed)
 - Advertising ID and advertising disclosure final review: Completed (Owner-confirmed)
