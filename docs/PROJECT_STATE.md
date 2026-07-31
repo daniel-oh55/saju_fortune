@@ -5,7 +5,7 @@
 ## 기준
 
 - 기준일: 2026-07-31
-- State baseline main HEAD: `31897237ae23cf1a8b2c52016f25adb4206e3a67`
+- State baseline main HEAD: `7f00595e41d5b1dd15f88f4781cd15baff2eb646`
 - 작업 시작 전 Open PR: 없음
 - 현재 앱: Google Play 공개 상태
 - 현재 플랫폼: React + Vite + Capacitor Android
@@ -16,6 +16,15 @@
 - PR #420: Merged
 - PR #421: Merged
 - PR #422: Merged
+- PR #424: Merged
+
+## PR #424 Owner QA
+
+- Rewarded modal accessibility capability: body portal/background isolation/focus containment implemented
+- Desktop keyboard Preview QA: Pass (Owner-confirmed)
+- Galaxy Chrome TalkBack Preview QA: Pass (Owner-confirmed)
+- Consent settings handoff QA: Pass (Owner-confirmed)
+- Capacitor Android WebView final TalkBack QA: Pending
 
 ## 현재 AdMob 상태
 
@@ -62,8 +71,8 @@
 - Production-configured Rewarded 요청 실행 및 AdMob SDK 도달: Confirmed
 - 최근 Rewarded 요청 결과: HTTP 403 / load error code 3 (`NO_FILL`)
 - 등록 테스트 기기 광고 ID 재설정 및 재등록: Completed by Owner
-- 테스트 기기 설정 반영: Pending verification
-- Ad Inspector 제스처 실행: Not verified
+- Test device configuration application: Pending verification
+- Ad Inspector: Not verified
 - 현재 광고 표시 및 보상 재검증: Pending
 - Privacy/Data Safety final review: Completed (Owner-confirmed)
 - Advertising ID and advertising disclosure final review: Completed (Owner-confirmed)
@@ -75,6 +84,8 @@
 - Play Console Production-track upload: Not started
 - Actual production-serving device QA: Not started
 - Actual advertisement revenue: Not verified
+- Google Play internal-testing 1.0.2 general-function regression QA: Pass (Owner-confirmed)
+- Profile/settings save and app restart QA: Pass (Owner-confirmed)
 - Rollout monitoring and rollback operational verification: Pending
 
 ## 현재 남은 단계
@@ -92,7 +103,8 @@
 - 실제 early-dismiss device QA: 관찰된 광고가 중도 종료를 허용하지 않아
   N/A / 향후 중도 종료 가능한 광고가 제공되면 재검증 Pending
 - repeated ADB listener-accumulation diagnostics: Pending
-- TalkBack announcement QA: Not performed / Pending
+- Browser/Preview TalkBack QA: Pass
+- Capacitor Android WebView final QA: Pending
 
 ## 문서 갱신 규칙
 
