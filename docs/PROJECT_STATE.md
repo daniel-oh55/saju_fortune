@@ -4,17 +4,18 @@
 
 ## 기준
 
-- 기준일: 2026-07-29
-- State baseline main HEAD: `c8b27e34d6b63021b72b39b18d4093a37d20fa3d`
+- 기준일: 2026-07-31
+- State baseline main HEAD: `31897237ae23cf1a8b2c52016f25adb4206e3a67`
 - 작업 시작 전 Open PR: 없음
 - 현재 앱: Google Play 공개 상태
 - 현재 플랫폼: React + Vite + Capacitor Android
-- Android versionCode: 2
-- Android versionName: 1.0.1
+- Android versionCode: 3
+- Android versionName: 1.0.2
 - 데이터: 주로 `localStorage`에 저장하며 별도 사용자 계정 서버는 없음
 - AI workflow harness: merged / active
-- PR #417: Merged
-- PR #419: Merged
+- PR #420: Merged
+- PR #421: Merged
+- PR #422: Merged
 
 ## 현재 AdMob 상태
 
@@ -37,8 +38,11 @@
 - signed AAB verification: Completed
 - Play Console internal-testing AAB upload: Completed (Owner-confirmed)
 - Play Console internal-testing release activation: Completed (Owner-confirmed)
-- internal-testing release name: `1.0.1 Internal Rewarded QA`
-- Google Play 제출 활동 상태: 출시됨 (Owner-confirmed)
+
+과거 production-configured 내부 테스트 baseline은 등록된 테스트 기기에서
+검증되었으며, 아래 Pass는 현재 Android 1.0.2 후속 재시험의 결과를 뜻하지 않습니다.
+
+- Google Play 제출 활동 상태: 출시됨
 - Production-configured registered-test-device request/load/show: Pass - Test Ad
 - Production-configured internal-test device QA: Pass
 - Exactly-once reward: Pass
@@ -46,6 +50,21 @@
 - Production-configured internal-test offline failure/recovery: Not performed / Pending
 - Restart reward persistence: Pass
 - Duplicate reward after restart: Not observed
+
+`Google Play 제출 활동 상태: 출시됨`은 내부 테스트 제출 활동 상태이며, 일반 사용자
+대상 Production 트랙 출시 완료를 뜻하지 않습니다.
+
+현재 Android 1.0.2 후속 재시험에서는 요청이 AdMob SDK와 서버까지 도달했지만 광고
+표시와 보상 재검증은 아직 Pending입니다.
+
+- Google Play 내부 테스트 1.0.2 설치 및 실행: Pass
+- 내부 테스트 설치 출처 `com.android.vending`: Confirmed by ADB
+- Production-configured Rewarded 요청 실행 및 AdMob SDK 도달: Confirmed
+- 최근 Rewarded 요청 결과: HTTP 403 / load error code 3 (`NO_FILL`)
+- 등록 테스트 기기 광고 ID 재설정 및 재등록: Completed by Owner
+- 테스트 기기 설정 반영: Pending verification
+- Ad Inspector 제스처 실행: Not verified
+- 현재 광고 표시 및 보상 재검증: Pending
 - Privacy/Data Safety final review: Completed (Owner-confirmed)
 - Advertising ID and advertising disclosure final review: Completed (Owner-confirmed)
 - 외부 개인정보처리방침 PR #4: Merged
@@ -60,12 +79,13 @@
 
 ## 현재 남은 단계
 
-1. 앱 내부 `PrivacyInfoPage` 정합화 보정 후 후속 production UI PR
-2. 후속 PR 독립 검토와 Owner merge 승인
-3. Production-track 업데이트 전 최종 release 검토
-4. Play Console Production-track 업로드 및 일반 사용자 업데이트
-5. 실제 일반 사용자 production serving 모니터링과 device QA
-6. rollback 기준 및 초기 운영 검증
+1. 재등록한 테스트 기기 설정 반영 후 앱을 재설치하고 Rewarded를 다시 요청
+2. 광고 표시, Test Ad 표시, 보상 exactly-once 및 Ad Inspector 실행 여부 확인
+3. 반복 `NO_FILL` 발생 시 식별 정보는 제거한 ADB 로그와 AdMob serving 상태를 비교
+4. 코드 변경 근거가 확인된 경우에만 별도 HIGH-risk 진단 PR 계획
+5. Owner 승인 후 Play Console Production-track 단계 업데이트
+6. 실제 일반 사용자 production serving, crash/ANR, 동의, 보상, 매출 및 rollback 모니터링
+7. 증거가 확인된 항목만 Completed 또는 Pass로 전환
 
 ## 미완료 또는 deferred QA
 

@@ -1,28 +1,26 @@
 # 하루풀이 - AI 오늘운세 MVP
 
-하루풀이는 매일 무료로 확인하는 따뜻한 사주·운세 풀이 앱입니다. 오늘의 흐름부터 궁금한 고민까지, 현실적인 조언으로 차근차근 풀어드립니다.
-
-React + Vite 기반의 사주/운세 모바일 웹앱 MVP이며, 사용자가 프로필을 입력하면 KST 기준 오늘운세와 2026년 운세 화면을 확인할 수 있습니다. 현재 단계에서는 100% 무료 사용을 전제로 하며, 상세 풀이와 확장 콘텐츠는 광고 시청 후 열람하는 구조를 우선 검토합니다. 유료 결제/구독은 추후 사용자 규모가 커진 뒤 검토합니다.
+하루풀이는 React + Vite + Capacitor Android 기반으로 운영되는 사주·운세 라이프스타일 앱입니다. Google Play 공개 상태와 내부 테스트 릴리스를 구분하여 관리하며, 사용자 프로필과 설정은 주로 `localStorage`에 저장합니다. 별도의 사용자 계정 서버와 로그 분석 시스템은 현재 사용하지 않습니다.
 
 ## 프로젝트 목적
 
-- 웹앱 MVP를 먼저 만들고 이후 Capacitor를 통해 Android/iOS 앱 패키징 가능성을 열어둡니다.
-- 실제 만세력/사주 계산 엔진, AI 상담 API, 광고 SDK, 결제 SDK는 추후 단계로 분리합니다.
-- 현재 버전은 seed 기반 mock 운세 생성과 localStorage 임시 저장으로 제품 흐름을 검증합니다.
+- 출시된 Android 앱의 기존 운세 기능과 사용자 데이터 호환성을 유지하면서 단계적으로 개선합니다.
+- 사주·운세 production 계산, AdMob Rewarded, UMP 동의 및 Android release 기반은 구현되어 있으며, 일반 사용자 대상 production serving·확인·운영 검증은 별도 단계로 관리합니다.
+- 결제, 로그용 사용자 계정 서버, 외부 분석 전용 SDK는 명시적인 별도 작업 승인 전까지 추가하지 않습니다.
 
 ## 주요 기능
 
 - 온보딩/프로필 입력
 - KST 기준 오늘운세 생성
 - 총운, 재물운, 연애운, 직장운, 건강운 요약 및 상세
-- 광고 시청 시뮬레이션 후 상세 운세 해금
-- 2026운세 mock 리포트
+- Rewarded 광고 시청 후 상세 운세 해금
+- 2026년 운세 리포트
 - AI 상담 화면 구조
 - 궁합 입력 화면
 - 더 깊은 풀이 기능 준비 중 화면
 - 마이/설정 화면
 - localStorage 기반 임시 저장
-- 추후 만세력 엔진 연결을 위한 `src/domain/saju` 구조
+- 만세력·사주 풀이 production 계산을 위한 `src/domain/saju` 구조
 
 ## 사용 기술
 
@@ -79,13 +77,9 @@ Output Directory: dist
 
 ## 환경변수 안내
 
-현재 코드에서 실제로 사용하는 환경변수는 확인되지 않았습니다.
+Android release와 AdMob production 구성은 Owner가 저장소 밖에서 관리하는 환경변수 또는 GitHub Secret을 사용할 수 있습니다. 실제 production Rewarded 광고 단위 ID, signing material, private key, token 또는 비밀번호는 코드·문서·로그에 기록하지 않습니다.
 
-추후 AI API, DB, 광고 SDK, 결제 SDK를 연결할 경우 `.env.example`에 변수명을 먼저 추가하고, 실제 값은 로컬 `.env` 또는 Vercel Environment Variables에서 관리합니다.
-
-주의:
-- 실제 API Key, DB URL, Secret Key는 Git에 커밋하지 않습니다.
-- `.env` 파일은 `.gitignore`에 포함되어 있습니다.
+`.env.example`에는 실제 값이 아닌 변수명과 안전한 설명만 작성합니다.
 
 ## 기본 폴더 구조
 
