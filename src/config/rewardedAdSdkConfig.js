@@ -8,6 +8,10 @@ export const REWARDED_AD_SDK_ENABLED_ENV_KEY = 'VITE_REWARDED_AD_SDK_ENABLED';
 export const REWARDED_AD_MODE_ENV_KEY = 'VITE_REWARDED_AD_MODE';
 export const REWARDED_AD_BUILD_TARGET_ENV_KEY = 'VITE_REWARDED_AD_BUILD_TARGET';
 export const REWARDED_AD_UNIT_ID_ENV_KEY = 'VITE_REWARDED_AD_UNIT_ID';
+export const ADMOB_DIAGNOSTIC_TEST_DEVICE_REGISTRATION_ENV_KEY =
+  'VITE_ADMOB_DIAGNOSTIC_TEST_DEVICE_REGISTRATION';
+export const ADMOB_DIAGNOSTIC_TEST_DEVICE_ID_ENV_KEY =
+  'VITE_ADMOB_DIAGNOSTIC_TEST_DEVICE_ID';
 
 export const REWARDED_AD_MODE = Object.freeze({
   DISABLED: 'disabled',
@@ -35,12 +39,42 @@ function readViteEnvValue(envKey, envOverride = {}) {
   }
 }
 
+function hasViteEnvValue(envKey, envOverride = {}) {
+  if (Object.prototype.hasOwnProperty.call(envOverride, envKey)) {
+    return true;
+  }
+
+  try {
+    return Object.prototype.hasOwnProperty.call(import.meta.env ?? {}, envKey);
+  } catch {
+    return false;
+  }
+}
+
 export function normalizeRewardedAdUnitId(value) {
   return String(value ?? '').trim();
 }
 
 export function isValidAdMobRewardedAdUnitId(value) {
   return /^ca-app-pub-\d{16}\/\d{10}$/.test(normalizeRewardedAdUnitId(value));
+}
+
+export function normalizeAdmobDiagnosticTestDeviceId(value) {
+  return String(value ?? '').trim();
+}
+
+export function isUuidAdvertisingId(value) {
+  return /^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/iu.test(
+    normalizeAdmobDiagnosticTestDeviceId(value),
+  );
+}
+
+export function isValidAdmobDiagnosticTestDeviceId(value) {
+  const normalizedValue = normalizeAdmobDiagnosticTestDeviceId(value);
+  return (
+    /^[A-F0-9]{32}$/.test(normalizedValue) &&
+    !isUuidAdvertisingId(normalizedValue)
+  );
 }
 
 export function getRewardedAdProviderKey(envOverride = {}) {
@@ -81,6 +115,57 @@ export function isApprovedRewardedAdSdkConfig(config) {
     config.isTesting === false;
 
   return officialTestApproved || productionApproved;
+}
+
+export function getAdmobDiagnosticTestDeviceRegistration(
+  rewardedAdConfig,
+  envOverride = {},
+) {
+  const registrationConfigured = hasViteEnvValue(
+    ADMOB_DIAGNOSTIC_TEST_DEVICE_REGISTRATION_ENV_KEY,
+    envOverride,
+  );
+  const deviceIdConfigured = hasViteEnvValue(
+    ADMOB_DIAGNOSTIC_TEST_DEVICE_ID_ENV_KEY,
+    envOverride,
+  );
+
+  if (!registrationConfigured && !deviceIdConfigured) {
+    return Object.freeze({
+      isConfigured: false,
+      isValid: true,
+      initializeOptions: null,
+    });
+  }
+
+  const registration = readViteEnvValue(
+    ADMOB_DIAGNOSTIC_TEST_DEVICE_REGISTRATION_ENV_KEY,
+    envOverride,
+  );
+  const deviceId = normalizeAdmobDiagnosticTestDeviceId(
+    readViteEnvValue(ADMOB_DIAGNOSTIC_TEST_DEVICE_ID_ENV_KEY, envOverride),
+  );
+  const validProductionReleaseSdkConfig =
+    rewardedAdConfig?.provider === REWARDED_AD_PROVIDER_KEY.SDK &&
+    rewardedAdConfig?.mode === REWARDED_AD_MODE.PRODUCTION &&
+    rewardedAdConfig?.buildTarget === REWARDED_AD_BUILD_TARGET.RELEASE &&
+    rewardedAdConfig?.configurationValid === true &&
+    rewardedAdConfig?.isTesting === false;
+  const isValid =
+    registration === 'enabled' &&
+    isValidAdmobDiagnosticTestDeviceId(deviceId) &&
+    validProductionReleaseSdkConfig;
+
+  return Object.freeze({
+    isConfigured: true,
+    isValid,
+    initializeOptions: isValid
+      ? Object.freeze({
+          initializeForTesting: true,
+          testingDevices: Object.freeze([deviceId]),
+        })
+      : null,
+  });
 }
 
 export function getRewardedAdSdkConfig(envOverride = {}) {
