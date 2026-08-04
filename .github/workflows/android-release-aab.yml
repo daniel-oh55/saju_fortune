@@ -356,17 +356,25 @@ jobs:
           AAB_PATH="app/build/outputs/bundle/release/app-release.aab"
           MANIFEST_ENTRY="base/manifest/AndroidManifest.xml"
           EXTRACTED_MANIFEST_PATH="$RUNNER_TEMP/android-signing/built-aab-manifest.bin"
+          STRINGS_PATH="$RUNNER_TEMP/android-signing/built-aab-manifest-strings.txt"
           if ! unzip -p "$AAB_PATH" "$MANIFEST_ENTRY" > "$EXTRACTED_MANIFEST_PATH" 2>/dev/null; then
             echo "::error::Diagnostic AAB manifest verification failed"
-            rm -f "$EXTRACTED_MANIFEST_PATH"
+            rm -f "$EXTRACTED_MANIFEST_PATH" "$STRINGS_PATH"
             exit 1
           fi
-          if ! strings "$EXTRACTED_MANIFEST_PATH" | grep -q '^com\.google\.android\.gms\.permission\.AD_ID$'; then
+          if ! strings "$EXTRACTED_MANIFEST_PATH" > "$STRINGS_PATH"; then
             echo "::error::Diagnostic AAB manifest verification failed"
-            rm -f "$EXTRACTED_MANIFEST_PATH"
+            rm -f "$EXTRACTED_MANIFEST_PATH" "$STRINGS_PATH"
             exit 1
           fi
-          rm -f "$EXTRACTED_MANIFEST_PATH"
+          if ! grep -Fxq \
+            'com.google.android.gms.permission.AD_ID' \
+            "$STRINGS_PATH"; then
+            echo "::error::Diagnostic AAB manifest verification failed"
+            rm -f "$EXTRACTED_MANIFEST_PATH" "$STRINGS_PATH"
+            exit 1
+          fi
+          rm -f "$EXTRACTED_MANIFEST_PATH" "$STRINGS_PATH"
 
       - name: Upload internal diagnostic AAB
         uses: actions/upload-artifact@v4
