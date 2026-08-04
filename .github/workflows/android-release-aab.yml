@@ -8,12 +8,26 @@ on:
         required: true
         type: boolean
         default: false
+      release_mode:
+        description: Select the approved production release or internal diagnostic AAB mode
+        required: true
+        type: choice
+        options:
+          - production
+          - internal_diagnostic
+        default: production
+      confirm_internal_diagnostic_aab:
+        description: Confirm the approved internal diagnostic AAB configuration
+        required: true
+        type: boolean
+        default: false
 
 permissions:
   contents: read
 
 jobs:
   android-release-aab:
+    if: ${{ inputs.release_mode == 'production' }}
     runs-on: ubuntu-latest
 
     steps:
@@ -124,5 +138,151 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: harupuli-release-aab
+          path: android/app/build/outputs/bundle/release/*.aab
+          if-no-files-found: error
+
+  android-internal-diagnostic-aab:
+    if: ${{ inputs.release_mode == 'internal_diagnostic' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate internal diagnostic build authorization
+        shell: bash
+        env:
+          DIAGNOSTIC_REF: ${{ github.ref }}
+          OWNER_CONFIRMED: ${{ inputs.confirm_internal_diagnostic_aab }}
+        run: |
+          if [ "$DIAGNOSTIC_REF" != "refs/heads/build/admob-diagnostic-signed-aab-workflow" ]; then
+            echo "::error::Internal diagnostic AAB must run from the approved diagnostic branch"
+            exit 1
+          fi
+          if [ "$OWNER_CONFIRMED" != "true" ]; then
+            echo "::error::Owner confirmation is required for the internal diagnostic AAB"
+            exit 1
+          fi
+
+      - name: Validate internal diagnostic test device secret
+        shell: bash
+        env:
+          ADMOB_DIAGNOSTIC_TEST_DEVICE_ID: ${{ secrets.ADMOB_DIAGNOSTIC_TEST_DEVICE_ID }}
+        run: |
+          if [ -z "$ADMOB_DIAGNOSTIC_TEST_DEVICE_ID" ]; then
+            echo "::error::ADMOB_DIAGNOSTIC_TEST_DEVICE_ID is not configured"
+            exit 1
+          fi
+          if ! [[ "$ADMOB_DIAGNOSTIC_TEST_DEVICE_ID" =~ ^[A-F0-9]{32}$ ]]; then
+            echo "::error::ADMOB_DIAGNOSTIC_TEST_DEVICE_ID must be an uppercase 32-character SDK test-device hash"
+            exit 1
+          fi
+
+      - name: Validate diagnostic Android version
+        shell: bash
+        run: |
+          VERSION_CODE_MATCHES="$(grep -Ec '^[[:space:]]*versionCode[[:space:]]+4[[:space:]]*$' android/app/build.gradle)"
+          VERSION_NAME_MATCHES="$(grep -Ec '^[[:space:]]*versionName[[:space:]]+"1\.0\.3"[[:space:]]*$' android/app/build.gradle)"
+          if [ "$VERSION_CODE_MATCHES" -ne 1 ] || [ "$VERSION_NAME_MATCHES" -ne 1 ]; then
+            echo "::error::Internal diagnostic AAB requires Android versionCode 4 and versionName 1.0.3"
+            exit 1
+          fi
+
+      - name: Validate diagnostic signing secrets
+        shell: bash
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          for name in ANDROID_KEYSTORE_BASE64 ANDROID_KEYSTORE_PASSWORD ANDROID_KEY_ALIAS ANDROID_KEY_PASSWORD; do
+            if [ -z "${!name}" ]; then
+              echo "::error::$name is not configured"
+              exit 1
+            fi
+          done
+
+      - name: Validate Rewarded provider invariants for diagnostic AAB
+        run: npm run check:admob-rewarded-provider
+
+      - name: Validate AdMob runtime consent coordinator for diagnostic AAB
+        run: npm run check:admob-runtime-consent-coordinator
+
+      - name: Validate diagnostic production Rewarded configuration
+        run: node scripts/checkAdmobRewardedAdProvider.mjs --release-env-preflight
+        env:
+          VITE_REWARDED_AD_PROVIDER: "sdk"
+          VITE_REWARDED_AD_SDK_ENABLED: 'true'
+          VITE_REWARDED_AD_MODE: "production"
+          VITE_REWARDED_AD_BUILD_TARGET: "release"
+          VITE_REWARDED_AD_UNIT_ID: "${{ secrets.ADMOB_REWARDED_PRODUCTION_AD_UNIT_ID }}"
+          VITE_ADMOB_DIAGNOSTIC_TEST_DEVICE_REGISTRATION: enabled
+          VITE_ADMOB_DIAGNOSTIC_TEST_DEVICE_ID: ${{ secrets.ADMOB_DIAGNOSTIC_TEST_DEVICE_ID }}
+
+      - name: Build diagnostic web app
+        run: npm run build
+        env:
+          VITE_REWARDED_AD_PROVIDER: "sdk"
+          VITE_REWARDED_AD_SDK_ENABLED: 'true'
+          VITE_REWARDED_AD_MODE: "production"
+          VITE_REWARDED_AD_BUILD_TARGET: "release"
+          VITE_REWARDED_AD_UNIT_ID: "${{ secrets.ADMOB_REWARDED_PRODUCTION_AD_UNIT_ID }}"
+          VITE_ADMOB_DIAGNOSTIC_TEST_DEVICE_REGISTRATION: enabled
+          VITE_ADMOB_DIAGNOSTIC_TEST_DEVICE_ID: ${{ secrets.ADMOB_DIAGNOSTIC_TEST_DEVICE_ID }}
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Sync Android project
+        run: npx cap sync android
+
+      - name: Make Gradle wrapper executable
+        run: chmod +x android/gradlew
+
+      - name: Restore diagnostic release keystore
+        shell: bash
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/android-signing"
+          printf '%s' "$ANDROID_KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/android-signing/release-keystore.jks"
+          test -s "$RUNNER_TEMP/android-signing/release-keystore.jks"
+
+      - name: Build signed internal diagnostic AAB
+        working-directory: android
+        run: ./gradlew bundleRelease
+        env:
+          ANDROID_KEYSTORE_FILE: ${{ runner.temp }}/android-signing/release-keystore.jks
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+
+      - name: Verify signed internal diagnostic AAB
+        working-directory: android
+        shell: bash
+        run: |
+          AAB_PATH="app/build/outputs/bundle/release/app-release.aab"
+          test -f "$AAB_PATH"
+          jarsigner -verify "$AAB_PATH" > "$RUNNER_TEMP/android-signing/jarsigner-result.txt"
+          cat "$RUNNER_TEMP/android-signing/jarsigner-result.txt"
+          grep -q "jar verified." "$RUNNER_TEMP/android-signing/jarsigner-result.txt"
+
+      - name: Upload internal diagnostic AAB
+        uses: actions/upload-artifact@v4
+        with:
+          name: harupuli-internal-diagnostic-aab-vc4
           path: android/app/build/outputs/bundle/release/*.aab
           if-no-files-found: error
