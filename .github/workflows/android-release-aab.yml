@@ -354,27 +354,41 @@ jobs:
         shell: bash
         run: |
           AAB_PATH="app/build/outputs/bundle/release/app-release.aab"
-          MANIFEST_ENTRY="base/manifest/AndroidManifest.xml"
-          EXTRACTED_MANIFEST_PATH="$RUNNER_TEMP/android-signing/built-aab-manifest.bin"
-          STRINGS_PATH="$RUNNER_TEMP/android-signing/built-aab-manifest-strings.txt"
-          if ! unzip -p "$AAB_PATH" "$MANIFEST_ENTRY" > "$EXTRACTED_MANIFEST_PATH" 2>/dev/null; then
+          PERMISSIONS_PATH="$RUNNER_TEMP/android-signing/built-aab-permissions.txt"
+          APKANALYZER_BIN=""
+          for candidate in \
+            "$ANDROID_HOME/cmdline-tools/latest/bin/apkanalyzer" \
+            "$ANDROID_SDK_ROOT/cmdline-tools/latest/bin/apkanalyzer" \
+            "$ANDROID_HOME/tools/bin/apkanalyzer" \
+            "$ANDROID_SDK_ROOT/tools/bin/apkanalyzer"; do
+            if [ -x "$candidate" ]; then
+              APKANALYZER_BIN="$candidate"
+              break
+            fi
+          done
+          if [ -z "$APKANALYZER_BIN" ]; then
             echo "::error::Diagnostic AAB manifest verification failed"
-            rm -f "$EXTRACTED_MANIFEST_PATH" "$STRINGS_PATH"
+            rm -f "$PERMISSIONS_PATH"
             exit 1
           fi
-          if ! strings "$EXTRACTED_MANIFEST_PATH" > "$STRINGS_PATH"; then
+          if ! "$APKANALYZER_BIN" manifest permissions "$AAB_PATH" \
+            > "$PERMISSIONS_PATH" 2>/dev/null; then
             echo "::error::Diagnostic AAB manifest verification failed"
-            rm -f "$EXTRACTED_MANIFEST_PATH" "$STRINGS_PATH"
+            rm -f "$PERMISSIONS_PATH"
             exit 1
           fi
-          if ! grep -Fxq \
+          AD_ID_MATCHES="$(grep -Fxc \
             'com.google.android.gms.permission.AD_ID' \
-            "$STRINGS_PATH"; then
+            "$PERMISSIONS_PATH" || true)"
+          INTERNET_MATCHES="$(grep -Fxc \
+            'android.permission.INTERNET' \
+            "$PERMISSIONS_PATH" || true)"
+          if [ "$AD_ID_MATCHES" -ne 1 ] || [ "$INTERNET_MATCHES" -lt 1 ]; then
             echo "::error::Diagnostic AAB manifest verification failed"
-            rm -f "$EXTRACTED_MANIFEST_PATH" "$STRINGS_PATH"
+            rm -f "$PERMISSIONS_PATH"
             exit 1
           fi
-          rm -f "$EXTRACTED_MANIFEST_PATH" "$STRINGS_PATH"
+          rm -f "$PERMISSIONS_PATH"
 
       - name: Upload internal diagnostic AAB
         uses: actions/upload-artifact@v4
