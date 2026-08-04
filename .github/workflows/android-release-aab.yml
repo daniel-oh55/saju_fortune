@@ -310,7 +310,7 @@ jobs:
 
       - name: Build signed internal diagnostic AAB
         working-directory: android
-        run: ./gradlew bundleRelease
+        run: ./gradlew bundleRelease assembleRelease
         env:
           ANDROID_KEYSTORE_FILE: ${{ runner.temp }}/android-signing/release-keystore.jks
           ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
@@ -349,12 +349,17 @@ jobs:
           fi
           unset CALCULATED_SHA1
 
-      - name: Verify diagnostic AAB contains AD_ID permission
+      - name: Verify diagnostic release manifest permissions via generated APK
         working-directory: android
         shell: bash
         run: |
-          AAB_PATH="app/build/outputs/bundle/release/app-release.aab"
-          PERMISSIONS_PATH="$RUNNER_TEMP/android-signing/built-aab-permissions.txt"
+          APK_PATH="app/build/outputs/apk/release/app-release.apk"
+          PERMISSIONS_PATH="$RUNNER_TEMP/android-signing/diagnostic-release-apk-permissions.txt"
+          if [ ! -f "$APK_PATH" ]; then
+            echo "::error::Diagnostic release manifest verification failed"
+            rm -f "$PERMISSIONS_PATH" "$APK_PATH"
+            exit 1
+          fi
           APKANALYZER_BIN=""
           for candidate in \
             "$ANDROID_HOME/cmdline-tools/latest/bin/apkanalyzer" \
@@ -367,14 +372,14 @@ jobs:
             fi
           done
           if [ -z "$APKANALYZER_BIN" ]; then
-            echo "::error::Diagnostic AAB manifest verification failed"
-            rm -f "$PERMISSIONS_PATH"
+            echo "::error::Diagnostic release manifest verification failed"
+            rm -f "$PERMISSIONS_PATH" "$APK_PATH"
             exit 1
           fi
-          if ! "$APKANALYZER_BIN" manifest permissions "$AAB_PATH" \
+          if ! "$APKANALYZER_BIN" manifest permissions "$APK_PATH" \
             > "$PERMISSIONS_PATH" 2>/dev/null; then
-            echo "::error::Diagnostic AAB manifest verification failed"
-            rm -f "$PERMISSIONS_PATH"
+            echo "::error::Diagnostic release manifest verification failed"
+            rm -f "$PERMISSIONS_PATH" "$APK_PATH"
             exit 1
           fi
           AD_ID_MATCHES="$(grep -Fxc \
@@ -384,11 +389,11 @@ jobs:
             'android.permission.INTERNET' \
             "$PERMISSIONS_PATH" || true)"
           if [ "$AD_ID_MATCHES" -ne 1 ] || [ "$INTERNET_MATCHES" -lt 1 ]; then
-            echo "::error::Diagnostic AAB manifest verification failed"
-            rm -f "$PERMISSIONS_PATH"
+            echo "::error::Diagnostic release manifest verification failed"
+            rm -f "$PERMISSIONS_PATH" "$APK_PATH"
             exit 1
           fi
-          rm -f "$PERMISSIONS_PATH"
+          rm -f "$PERMISSIONS_PATH" "$APK_PATH"
 
       - name: Upload internal diagnostic AAB
         uses: actions/upload-artifact@v4
