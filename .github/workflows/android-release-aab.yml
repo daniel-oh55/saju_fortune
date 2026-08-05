@@ -51,13 +51,13 @@ jobs:
         run: |
           GRADLE_PATH="android/app/build.gradle"
           if [ ! -f "$GRADLE_PATH" ]; then
-            echo "::error::Production AAB requires Android versionCode 6 and versionName 1.0.5"
+            echo "::error::Production AAB requires Android versionCode 7 and versionName 1.0.6"
             exit 1
           fi
-          VERSION_CODE_MATCHES="$(grep -Ec '^[[:space:]]*versionCode[[:space:]]+6[[:space:]]*$' "$GRADLE_PATH" || true)"
-          VERSION_NAME_MATCHES="$(grep -Ec '^[[:space:]]*versionName[[:space:]]+"1\.0\.5"[[:space:]]*$' "$GRADLE_PATH" || true)"
+          VERSION_CODE_MATCHES="$(grep -Ec '^[[:space:]]*versionCode[[:space:]]+7[[:space:]]*$' "$GRADLE_PATH" || true)"
+          VERSION_NAME_MATCHES="$(grep -Ec '^[[:space:]]*versionName[[:space:]]+"1\.0\.6"[[:space:]]*$' "$GRADLE_PATH" || true)"
           if [ "$VERSION_CODE_MATCHES" -ne 1 ] || [ "$VERSION_NAME_MATCHES" -ne 1 ]; then
-            echo "::error::Production AAB requires Android versionCode 6 and versionName 1.0.5"
+            echo "::error::Production AAB requires Android versionCode 7 and versionName 1.0.6"
             exit 1
           fi
 
