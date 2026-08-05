@@ -15,6 +15,8 @@ permissions:
 jobs:
   android-release-aab:
     runs-on: ubuntu-latest
+    env:
+      EXPECTED_ANDROID_SIGNING_CERT_SHA1: "DD25442AA42051B9191DD695B932A319A750A876"
 
     steps:
       - name: Checkout repository
@@ -44,6 +46,21 @@ jobs:
             exit 1
           fi
 
+      - name: Validate production Android version
+        shell: bash
+        run: |
+          GRADLE_PATH="android/app/build.gradle"
+          if [ ! -f "$GRADLE_PATH" ]; then
+            echo "::error::Production AAB requires Android versionCode 6 and versionName 1.0.5"
+            exit 1
+          fi
+          VERSION_CODE_MATCHES="$(grep -Ec '^[[:space:]]*versionCode[[:space:]]+6[[:space:]]*$' "$GRADLE_PATH" || true)"
+          VERSION_NAME_MATCHES="$(grep -Ec '^[[:space:]]*versionName[[:space:]]+"1\.0\.5"[[:space:]]*$' "$GRADLE_PATH" || true)"
+          if [ "$VERSION_CODE_MATCHES" -ne 1 ] || [ "$VERSION_NAME_MATCHES" -ne 1 ]; then
+            echo "::error::Production AAB requires Android versionCode 6 and versionName 1.0.5"
+            exit 1
+          fi
+
       - name: Validate release signing secrets
         shell: bash
         env:
@@ -61,6 +78,9 @@ jobs:
 
       - name: Validate Rewarded provider invariants
         run: npm run check:admob-rewarded-provider
+
+      - name: Validate AdMob runtime consent coordinator
+        run: npm run check:admob-runtime-consent-coordinator
 
       - name: Validate production Rewarded release configuration
         run: node scripts/checkAdmobRewardedAdProvider.mjs --release-env-preflight
@@ -89,6 +109,43 @@ jobs:
       - name: Sync Android project
         run: npx cap sync android
 
+      - name: Verify production Android manifest permissions
+        shell: bash
+        run: |
+          MANIFEST_PATH="android/app/src/main/AndroidManifest.xml"
+          if [ ! -f "$MANIFEST_PATH" ]; then
+            echo "::error::Production Android manifest permission verification failed"
+            exit 1
+          fi
+          if ! awk '
+            BEGIN { ad_id_total = 0; internet_total = 0; app_close = 0; manifest_close = 0 }
+            /^    <\/application>$/ { app_close = NR }
+            /^<\/manifest>$/ { manifest_close = NR }
+            /^    <uses-permission android:name="com\.google\.android\.gms\.permission\.AD_ID" \/>$/ {
+              ad_id_total++
+              ad_id_lines[ad_id_total] = NR
+            }
+            /^    <uses-permission android:name="android\.permission\.INTERNET" \/>$/ {
+              internet_total++
+              internet_lines[internet_total] = NR
+            }
+            END {
+              if (ad_id_total != 1) exit 1
+              if (internet_total < 1) exit 1
+              if (app_close == 0 || manifest_close == 0) exit 1
+              for (i = 1; i <= ad_id_total; i++) {
+                if (ad_id_lines[i] <= app_close || ad_id_lines[i] >= manifest_close) exit 1
+              }
+              for (i = 1; i <= internet_total; i++) {
+                if (internet_lines[i] <= app_close || internet_lines[i] >= manifest_close) exit 1
+              }
+              exit 0
+            }
+          ' "$MANIFEST_PATH"; then
+            echo "::error::Production Android manifest permission verification failed"
+            exit 1
+          fi
+
       - name: Make Gradle wrapper executable
         run: chmod +x android/gradlew
 
@@ -101,9 +158,38 @@ jobs:
           printf '%s' "$ANDROID_KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/android-signing/release-keystore.jks"
           test -s "$RUNNER_TEMP/android-signing/release-keystore.jks"
 
+      - name: Verify restored release keystore certificate
+        shell: bash
+        env:
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+        run: |
+          KEYSTORE_PATH="$RUNNER_TEMP/android-signing/release-keystore.jks"
+          CALCULATED_SHA1="$(keytool -list -v \
+            -keystore "$KEYSTORE_PATH" \
+            -alias "$ANDROID_KEY_ALIAS" \
+            -storepass:env ANDROID_KEYSTORE_PASSWORD \
+            2>/dev/null \
+            | grep -E '^[[:space:]]*SHA1:' \
+            | head -n1 \
+            | sed -E 's/^[[:space:]]*SHA1:[[:space:]]*//' \
+            | tr -d ':' \
+            | tr '[:lower:]' '[:upper:]')"
+          if [ -z "$CALCULATED_SHA1" ]; then
+            echo "::error::Restored release keystore certificate verification failed"
+            unset CALCULATED_SHA1
+            exit 1
+          fi
+          if [ "$CALCULATED_SHA1" != "$EXPECTED_ANDROID_SIGNING_CERT_SHA1" ]; then
+            echo "::error::Restored release keystore certificate verification failed"
+            unset CALCULATED_SHA1
+            exit 1
+          fi
+          unset CALCULATED_SHA1
+
       - name: Build signed release AAB
         working-directory: android
-        run: ./gradlew bundleRelease
+        run: ./gradlew bundleRelease assembleRelease
         env:
           ANDROID_KEYSTORE_FILE: ${{ runner.temp }}/android-signing/release-keystore.jks
           ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
@@ -119,6 +205,76 @@ jobs:
           jarsigner -verify "$AAB_PATH" > "$RUNNER_TEMP/android-signing/jarsigner-result.txt"
           cat "$RUNNER_TEMP/android-signing/jarsigner-result.txt"
           grep -q "jar verified." "$RUNNER_TEMP/android-signing/jarsigner-result.txt"
+          rm -f "$RUNNER_TEMP/android-signing/jarsigner-result.txt"
+
+      - name: Verify generated release AAB certificate
+        working-directory: android
+        shell: bash
+        run: |
+          AAB_PATH="app/build/outputs/bundle/release/app-release.aab"
+          CALCULATED_SHA1="$(keytool -printcert -jarfile "$AAB_PATH" \
+            2>/dev/null \
+            | grep -E '^[[:space:]]*SHA1:' \
+            | head -n1 \
+            | sed -E 's/^[[:space:]]*SHA1:[[:space:]]*//' \
+            | tr -d ':' \
+            | tr '[:lower:]' '[:upper:]')"
+          if [ -z "$CALCULATED_SHA1" ]; then
+            echo "::error::Generated release AAB certificate verification failed"
+            unset CALCULATED_SHA1
+            exit 1
+          fi
+          if [ "$CALCULATED_SHA1" != "$EXPECTED_ANDROID_SIGNING_CERT_SHA1" ]; then
+            echo "::error::Generated release AAB certificate verification failed"
+            unset CALCULATED_SHA1
+            exit 1
+          fi
+          unset CALCULATED_SHA1
+
+      - name: Verify release manifest permissions via generated APK
+        working-directory: android
+        shell: bash
+        run: |
+          APK_PATH="app/build/outputs/apk/release/app-release.apk"
+          PERMISSIONS_PATH="$RUNNER_TEMP/android-signing/release-apk-permissions.txt"
+          cleanup() {
+            rm -f "$APK_PATH" "$PERMISSIONS_PATH"
+          }
+          trap cleanup EXIT
+
+          if [ ! -f "$APK_PATH" ]; then
+            echo "::error::Release manifest permission verification failed"
+            exit 1
+          fi
+
+          APKANALYZER_BIN=""
+          for candidate in \
+            "$ANDROID_HOME/cmdline-tools/latest/bin/apkanalyzer" \
+            "$ANDROID_SDK_ROOT/cmdline-tools/latest/bin/apkanalyzer" \
+            "$ANDROID_HOME/tools/bin/apkanalyzer" \
+            "$ANDROID_SDK_ROOT/tools/bin/apkanalyzer"; do
+            if [ -x "$candidate" ]; then
+              APKANALYZER_BIN="$candidate"
+              break
+            fi
+          done
+          if [ -z "$APKANALYZER_BIN" ]; then
+            echo "::error::Release manifest permission verification failed"
+            exit 1
+          fi
+
+          if ! "$APKANALYZER_BIN" manifest permissions "$APK_PATH" \
+            > "$PERMISSIONS_PATH" 2>/dev/null; then
+            echo "::error::Release manifest permission verification failed"
+            exit 1
+          fi
+
+          AD_ID_MATCHES="$(grep -Fxc 'com.google.android.gms.permission.AD_ID' "$PERMISSIONS_PATH" || true)"
+          INTERNET_MATCHES="$(grep -Fxc 'android.permission.INTERNET' "$PERMISSIONS_PATH" || true)"
+          if [ "$AD_ID_MATCHES" -ne 1 ] || [ "$INTERNET_MATCHES" -lt 1 ]; then
+            echo "::error::Release manifest permission verification failed"
+            exit 1
+          fi
 
       - name: Upload release AAB
         uses: actions/upload-artifact@v4
