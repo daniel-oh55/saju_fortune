@@ -168,9 +168,8 @@ for (const text of [
   requireText(settingsSource, text, 'src/pages/SettingsPage.jsx')
 }
 for (const text of [
-  'Google AdMob 보상형 광고',
-  '일반 사용자 대상 Production 업데이트는 아직 수행되지 않았으므로',
-  '현재 모든 이용자에게',
+  'Google AdMob 광고',
+  '지역, 동의 상태, 광고 재고, 기기 및 광고 설정',
   '광고가 제공되고 있다고 단정하지 않습니다',
   'IP 주소를 통해 추정될 수 있는 대략적인 위치',
   '앱 상호작용',
@@ -288,6 +287,11 @@ forbidPattern(
   privacySource,
   /일반 사용자(?: 대상)? Production 업데이트(?:는|가)? (?:완료|수행 완료)/u,
   'privacy production-update completion claim',
+)
+forbidPattern(
+  privacySource,
+  /일반 사용자(?: 대상)? Production 업데이트(?:는|가)? 아직 수행되지 않았으므로/u,
+  'privacy stale pending-production-update copy',
 )
 forbidPattern(
   privacySource,
@@ -762,12 +766,19 @@ if (process.argv.includes('--negative-self-test')) {
     ],
     [
       'production update completion claim',
-      () => replace(
+      () => append(
         'src/pages/PrivacyInfoPage.jsx',
-        '일반 사용자 대상 Production 업데이트는 아직 수행되지 않았으므로',
-        '일반 사용자 대상 Production 업데이트는 완료되었으므로',
+        '\n일반 사용자 대상 Production 업데이트는 완료되었으므로\n',
       ),
       'privacy production-update completion claim',
+    ],
+    [
+      'stale pending production update copy',
+      () => append(
+        'src/pages/PrivacyInfoPage.jsx',
+        '\n일반 사용자 대상 Production 업데이트는 아직 수행되지 않았으므로\n',
+      ),
+      'privacy stale pending-production-update copy',
     ],
     [
       'fortune input identifier linkage',
@@ -801,7 +812,7 @@ if (process.argv.includes('--negative-self-test')) {
     ['known mojibake', () => append('CHANGELOG.md', `\n${['媛쒖씤', '?뺣낫'].join('')}\n`)],
     ['unexpected untracked', () => writeFileSync(resolve(root, unexpectedRootPath), 'negative probe\n', 'utf8')],
   ]
-  assert.equal(mutationCases.length, 55)
+  assert.equal(mutationCases.length, 56)
   const totalChecks = mutationCases.length + 1
   const restorePaths = [
     'src/main.jsx',

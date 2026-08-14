@@ -209,8 +209,8 @@ const requiredTokens = [
   ['src/utils/storage.js', 'rewardType: safeRewardType'],
   ['src/pages/PrivacyInfoPage.jsx', '이 페이지는 하루풀이 앱의 현재 개인정보 처리 안내입니다'],
   ['src/pages/PrivacyInfoPage.jsx', '최신 개인정보처리방침 전문은'],
-  ['src/pages/PrivacyInfoPage.jsx', '광고 기능이 활성화된 Android 앱 버전에서는 Google AdMob 보상형 광고'],
-  ['src/pages/PrivacyInfoPage.jsx', '일반 사용자 대상 Production 업데이트는 아직 수행되지 않았으므로'],
+  ['src/pages/PrivacyInfoPage.jsx', '광고 기능이 활성화된 Android 앱에서는 Google AdMob 광고'],
+  ['src/pages/PrivacyInfoPage.jsx', '지역, 동의 상태, 광고 재고, 기기 및 광고 설정'],
   ['src/pages/PrivacyInfoPage.jsx', '광고가 제공되고 있다고 단정하지 않습니다'],
   ['src/pages/PrivacyInfoPage.jsx', '앱 내부 선택은 Google UMP 선택을 대신하지 않습니다'],
   ['src/pages/PrivacyInfoPage.jsx', 'Google Mobile Ads SDK는 아래 데이터를 자동 수집하거나'],
@@ -386,6 +386,7 @@ function validateSources(sourceOverrides = new Map()) {
     'production 환경의 실제 광고 송출은 없습니다',
     '공식 테스트 전용 빌드에서만',
     '실제 서비스 공개 전',
+    '일반 사용자 대상 Production 업데이트는 아직 수행되지 않았으므로',
   ]) {
     if (privacySource.includes(staleClaim)) {
       errors.push(`privacy copy contains a stale production capability claim: ${staleClaim}`);
@@ -1985,10 +1986,14 @@ const targetedNegativeMutations = [
   {
     name: 'privacy copy claims general-user Production update completion',
     file: 'src/pages/PrivacyInfoPage.jsx',
-    mutate: (source) => source.replace(
-      '일반 사용자 대상 Production 업데이트는 아직 수행되지 않았으므로',
-      '일반 사용자 대상 Production 업데이트는 완료되었으므로',
-    ),
+    mutate: (source) =>
+      `${source}\n일반 사용자 대상 Production 업데이트는 완료되었으므로\n`,
+  },
+  {
+    name: 'privacy copy restores stale pending-production-update claim',
+    file: 'src/pages/PrivacyInfoPage.jsx',
+    mutate: (source) =>
+      `${source}\n일반 사용자 대상 Production 업데이트는 아직 수행되지 않았으므로\n`,
   },
   {
     name: 'privacy copy claims universal ad serving',

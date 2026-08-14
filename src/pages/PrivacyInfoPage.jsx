@@ -70,9 +70,9 @@ function PrivacyInfoPage({ onNavigate, consentPreferences }) {
       <section className="privacy-info-note">
         <strong>현재 광고 제공 상태</strong>
         <p>
-          광고 기능이 활성화된 Android 앱 버전에서는 Google AdMob 보상형 광고를 제공합니다.
-          일반 사용자 대상 Production 업데이트는 아직 수행되지 않았으므로, 현재 모든 이용자에게
-          광고가 제공되고 있다고 단정하지 않습니다.
+          광고 기능이 활성화된 Android 앱에서는 Google AdMob 광고를 사용합니다. 광고 노출
+          여부는 지역, 동의 상태, 광고 재고, 기기 및 광고 설정 등에 따라 달라질 수 있으므로,
+          모든 이용자에게 항상 광고가 제공되고 있다고 단정하지 않습니다.
         </p>
       </section>
 
