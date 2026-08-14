@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { App as CapacitorApp } from '@capacitor/app';
 import { Capacitor } from '@capacitor/core';
+import AdaptiveBannerHost from './components/AdaptiveBannerHost.jsx';
 import AppLoadingScreen from './components/AppLoadingScreen.jsx';
 import BottomNav from './components/BottomNav.jsx';
 import ConsentBanner from './components/ConsentBanner.jsx';
@@ -686,6 +687,12 @@ function App() {
         )}
       </main>
       <BottomNav activePage={activePage} onNavigate={handleNavigate} />
+      <AdaptiveBannerHost
+        activePage={activePage}
+        consentPreferences={consentPreferences}
+        isConsentSettingsOpen={isConsentSettingsOpen}
+        isReminderSettingsOpen={isReminderSettingsOpen}
+      />
       {isReminderSettingsOpen && (
         <DailyReminderSettingsPanel
           draft={dailyReminderDraft}
