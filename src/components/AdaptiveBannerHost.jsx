@@ -45,6 +45,14 @@ function AdaptiveBannerHost({
     isRewardModalActive: false,
     runtimeSnapshot: getAdmobRuntimeConsentSnapshot(),
     isEligible: false,
+    // Identity (adId/isTesting/npa) of the native Banner the host believes is
+    // currently created (shown or hidden). Null means none is known to exist.
+    nativeBannerSignature: null,
+    // Full request identity (config identity + margin) used to invalidate
+    // stale queued show operations once a newer desired request supersedes them.
+    desiredRequestSignature: null,
+    generation: 0,
+    lastKnownHeightPx: 0,
   });
 
   useEffect(() => {
@@ -78,17 +86,76 @@ function AdaptiveBannerHost({
 
     if (!eligibility.allowed) {
       setReserveHeight(0);
-      bannerAdService.hide();
+      // 'suppressed' (route/consent overlay/reminder overlay/reward modal) and
+      // 'route_not_allowlisted' are temporary visual states: keep the native
+      // Banner alive (hidden) so it can be cheaply resumed. Every other
+      // reason is a hard eligibility/gate loss: the Banner must not survive it.
+      const isTemporaryReason =
+        eligibility.reason === 'suppressed' || eligibility.reason === 'route_not_allowlisted';
+      if (isTemporaryReason) {
+        bannerAdService.hide();
+      } else {
+        current.nativeBannerSignature = null;
+        bannerAdService.remove();
+      }
       return;
     }
 
-    bannerAdService.show({
-      adId: config.adId,
-      isTesting: config.isTesting,
-      npa: resolveBannerNpa(current.consentPreferences),
-      marginPx: computeMarginPx(),
-      isStillValid: () => stateRef.current.isEligible === true,
-    });
+    const npa = resolveBannerNpa(current.consentPreferences);
+    const marginPx = computeMarginPx();
+    const desiredConfigSignature = JSON.stringify([config.adId, config.isTesting, npa]);
+    const desiredRequestSignature = JSON.stringify([config.adId, config.isTesting, npa, marginPx]);
+
+    if (desiredRequestSignature !== current.desiredRequestSignature) {
+      current.desiredRequestSignature = desiredRequestSignature;
+      current.generation += 1;
+    }
+    const generation = current.generation;
+
+    // adId/isTesting/npa changed while a Banner exists: the old Banner must be
+    // removed before a replacement is created/shown under the new identity.
+    if (
+      current.nativeBannerSignature !== null &&
+      current.nativeBannerSignature !== desiredConfigSignature
+    ) {
+      current.nativeBannerSignature = null;
+      bannerAdService.remove();
+    }
+
+    if (
+      current.nativeBannerSignature === desiredConfigSignature &&
+      bannerAdService.getNativeState() === 'hidden'
+    ) {
+      bannerAdService.resume().then(() => {
+        if (stateRef.current.generation !== generation) return;
+        if (bannerAdService.getNativeState() === 'shown') {
+          if (stateRef.current.lastKnownHeightPx > 0) {
+            setReserveHeight(stateRef.current.lastKnownHeightPx);
+          }
+        } else {
+          // resumeBanner failed; forget the identity so a future reconcile falls
+          // back to show() instead of retrying a no-op resume indefinitely.
+          stateRef.current.nativeBannerSignature = null;
+        }
+      });
+      return;
+    }
+
+    bannerAdService
+      .show({
+        adId: config.adId,
+        isTesting: config.isTesting,
+        npa,
+        marginPx,
+        isStillValid: () =>
+          stateRef.current.isEligible === true && stateRef.current.generation === generation,
+      })
+      .then(() => {
+        if (stateRef.current.generation !== generation) return;
+        if (bannerAdService.getNativeState() === 'shown') {
+          stateRef.current.nativeBannerSignature = desiredConfigSignature;
+        }
+      });
   }
 
   useEffect(() => {
@@ -132,7 +199,9 @@ function AdaptiveBannerHost({
     if (!isConfigApproved) return undefined;
 
     const unsubscribeSize = bannerAdService.subscribeSize((info) => {
-      if (stateRef.current.isEligible && Number.isFinite(info?.height) && info.height > 0) {
+      if (!Number.isFinite(info?.height) || info.height <= 0) return;
+      stateRef.current.lastKnownHeightPx = info.height;
+      if (stateRef.current.isEligible) {
         setReserveHeight(info.height);
       }
     });

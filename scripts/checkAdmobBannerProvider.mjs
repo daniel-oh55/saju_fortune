@@ -337,6 +337,184 @@ test('hide is a no-op unless the banner is currently shown', async () => {
   assert.equal(hideBannerCalls, 0);
 });
 
+function createTrackingAdMobModule() {
+  const calls = [];
+  return {
+    calls,
+    module: {
+      BannerAdPluginEvents: { SizeChanged: 'sizeChanged', FailedToLoad: 'failedToLoad' },
+      BannerAdSize: { ADAPTIVE_BANNER: 'ADAPTIVE_BANNER' },
+      BannerAdPosition: { BOTTOM_CENTER: 'BOTTOM_CENTER' },
+      AdMob: {
+        async addListener() {
+          return { remove: async () => {} };
+        },
+        async showBanner() {
+          calls.push('show');
+        },
+        async hideBanner() {
+          calls.push('hide');
+        },
+        async resumeBanner() {
+          calls.push('resume');
+        },
+        async removeBanner() {
+          calls.push('remove');
+        },
+      },
+    },
+  };
+}
+
+test('shown -> temporary suppression calls hideBanner exactly once', async () => {
+  const { module, calls } = createTrackingAdMobModule();
+  const service = createBannerAdService({
+    isNativePlatform: () => true,
+    getPlatform: () => 'android',
+    loadAdMobModule: async () => module,
+  });
+
+  const options = { adId: 'ca-app-pub-3940256099942544/9214589741', isTesting: true, npa: true, marginPx: 10 };
+  await service.show(options);
+  await service.hide();
+  await service.hide();
+  assert.deepEqual(calls, ['show', 'hide']);
+  assert.equal(service.getNativeState(), 'hidden');
+});
+
+test('hidden -> same configuration eligible again resumes exactly once, without a second showBanner', async () => {
+  const { module, calls } = createTrackingAdMobModule();
+  const service = createBannerAdService({
+    isNativePlatform: () => true,
+    getPlatform: () => 'android',
+    loadAdMobModule: async () => module,
+  });
+
+  const options = { adId: 'ca-app-pub-3940256099942544/9214589741', isTesting: true, npa: true, marginPx: 10 };
+  await service.show(options);
+  await service.hide();
+  await service.resume();
+  assert.deepEqual(calls, ['show', 'hide', 'resume']);
+  assert.equal(service.getNativeState(), 'shown');
+});
+
+test('ads consent true -> false removes the Banner (hard gate loss, not a hide)', async () => {
+  const { module, calls } = createTrackingAdMobModule();
+  const service = createBannerAdService({
+    isNativePlatform: () => true,
+    getPlatform: () => 'android',
+    loadAdMobModule: async () => module,
+  });
+  const approvedConfig = getBannerAdSdkConfig({
+    VITE_BANNER_AD_PROVIDER: 'sdk',
+    VITE_BANNER_AD_SDK_ENABLED: 'true',
+    VITE_BANNER_AD_MODE: 'official_test',
+    VITE_BANNER_AD_BUILD_TARGET: 'debug',
+  });
+  const openRuntime = {
+    isNativeAndroid: true,
+    consentInfoCompleted: true,
+    canRequestAds: true,
+    initializeResolved: true,
+    adGateOpen: true,
+  };
+
+  await service.show({ adId: approvedConfig.adId, isTesting: approvedConfig.isTesting, npa: true, marginPx: 10 });
+
+  const revoked = getBannerEligibility({
+    activePage: 'home',
+    consentPreferences: { ads: false },
+    runtimeSnapshot: openRuntime,
+    config: approvedConfig,
+    isSuppressed: false,
+  });
+  assert.equal(revoked.allowed, false);
+  assert.equal(revoked.reason, 'ads_consent_required');
+
+  await service.remove();
+  assert.deepEqual(calls, ['show', 'remove']);
+  assert.equal(service.getNativeState(), 'removed');
+});
+
+test('runtime canRequestAds/adGateOpen closing removes the Banner (hard gate loss, not a hide)', async () => {
+  const { module, calls } = createTrackingAdMobModule();
+  const service = createBannerAdService({
+    isNativePlatform: () => true,
+    getPlatform: () => 'android',
+    loadAdMobModule: async () => module,
+  });
+  const approvedConfig = getBannerAdSdkConfig({
+    VITE_BANNER_AD_PROVIDER: 'sdk',
+    VITE_BANNER_AD_SDK_ENABLED: 'true',
+    VITE_BANNER_AD_MODE: 'official_test',
+    VITE_BANNER_AD_BUILD_TARGET: 'debug',
+  });
+
+  await service.show({ adId: approvedConfig.adId, isTesting: approvedConfig.isTesting, npa: true, marginPx: 10 });
+
+  const closedGate = getBannerEligibility({
+    activePage: 'home',
+    consentPreferences: { ads: true },
+    runtimeSnapshot: {
+      isNativeAndroid: true,
+      consentInfoCompleted: true,
+      canRequestAds: false,
+      initializeResolved: true,
+      adGateOpen: true,
+    },
+    config: approvedConfig,
+    isSuppressed: false,
+  });
+  assert.equal(closedGate.allowed, false);
+  assert.equal(closedGate.reason, 'ad_gate_closed');
+
+  await service.remove();
+  assert.deepEqual(calls, ['show', 'remove']);
+  assert.equal(service.getNativeState(), 'removed');
+});
+
+test('a stale queued show made invalid by a personalization/generation change never reaches showBanner', async () => {
+  const { module, calls } = createTrackingAdMobModule();
+  const service = createBannerAdService({
+    isNativePlatform: () => true,
+    getPlatform: () => 'android',
+    loadAdMobModule: async () => module,
+  });
+
+  let generation = 1;
+  const staleGeneration = generation;
+  const isStillValid = () => generation === staleGeneration;
+
+  const stalePromise = service.show({
+    adId: 'ca-app-pub-3940256099942544/9214589741',
+    isTesting: true,
+    npa: false,
+    marginPx: 10,
+    isStillValid,
+  });
+  generation += 1;
+  await stalePromise;
+
+  assert.deepEqual(calls, []);
+  assert.equal(service.getNativeState(), 'none');
+});
+
+test('a Banner identity (adId/isTesting/npa) change removes the old Banner before the replacement is shown', async () => {
+  const { module, calls } = createTrackingAdMobModule();
+  const service = createBannerAdService({
+    isNativePlatform: () => true,
+    getPlatform: () => 'android',
+    loadAdMobModule: async () => module,
+  });
+
+  await service.show({ adId: 'ca-app-pub-3940256099942544/9214589741', isTesting: true, npa: false, marginPx: 10 });
+  await service.remove();
+  await service.show({ adId: 'ca-app-pub-3940256099942544/9214589741', isTesting: true, npa: true, marginPx: 10 });
+
+  assert.deepEqual(calls, ['show', 'remove', 'show']);
+  assert.equal(service.getNativeState(), 'shown');
+});
+
 function validateSources() {
   const errors = [];
   const hostSource = read('src/components/AdaptiveBannerHost.jsx');
@@ -367,6 +545,30 @@ function validateSources() {
   }
   if (!hostSource.includes("document.querySelector('.bottom-nav')")) {
     errors.push('AdaptiveBannerHost.jsx must derive banner margin from .bottom-nav geometry');
+  }
+  if (!hostSource.includes('bannerAdService.resume()')) {
+    errors.push('AdaptiveBannerHost.jsx must call bannerAdService.resume() to restore a temporarily hidden Banner instead of calling show() again');
+  }
+  if (
+    !hostSource.includes("eligibility.reason === 'suppressed' || eligibility.reason === 'route_not_allowlisted'")
+  ) {
+    errors.push('AdaptiveBannerHost.jsx must classify suppressed/route_not_allowlisted as temporary suppression, distinct from hard eligibility/gate loss');
+  }
+  if (!/current\.nativeBannerSignature\s*=\s*null;\s*bannerAdService\.remove\(\)/u.test(hostSource)) {
+    errors.push('AdaptiveBannerHost.jsx must removeBanner (not just hide) and forget the Banner identity on hard eligibility/gate loss');
+  }
+  if (!hostSource.includes('current.generation')) {
+    errors.push('AdaptiveBannerHost.jsx must track a desired-generation to invalidate stale queued show operations');
+  }
+  if (!/stateRef\.current\.generation\s*===\s*generation/u.test(hostSource)) {
+    errors.push('AdaptiveBannerHost.jsx isStillValid must verify the queued operation still matches the current desired generation');
+  }
+  if (
+    !/current\.nativeBannerSignature\s*!==\s*null\s*&&\s*current\.nativeBannerSignature\s*!==\s*desiredConfigSignature/u.test(
+      hostSource,
+    )
+  ) {
+    errors.push('AdaptiveBannerHost.jsx must detect adId/isTesting/npa identity changes and remove the old Banner before creating/showing the replacement');
   }
   if (/\b\d{2,4}\s*;?\s*\/\/\s*(nav|bottom-?nav)\s*height/iu.test(hostSource)) {
     errors.push('AdaptiveBannerHost.jsx must not hardcode a fixed nav height');
