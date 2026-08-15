@@ -48,6 +48,10 @@ function AdaptiveBannerHost({
     // Identity (adId/isTesting/npa) of the native Banner the host believes is
     // currently created (shown or hidden). Null means none is known to exist.
     nativeBannerSignature: null,
+    // Full request signature (identity + margin) the native Banner was last
+    // created/shown with. Used so a hidden Banner is only ever resumed when
+    // its on-screen position still matches the desired margin.
+    nativeBannerRequestSignature: null,
     // Full request identity (config identity + margin) used to invalidate
     // stale queued show operations once a newer desired request supersedes them.
     desiredRequestSignature: null,
@@ -95,6 +99,7 @@ function AdaptiveBannerHost({
       if (isTemporaryReason) {
         bannerAdService.hide();
       } else {
+        current.nativeBannerRequestSignature = null;
         current.nativeBannerSignature = null;
         bannerAdService.remove();
       }
@@ -118,12 +123,27 @@ function AdaptiveBannerHost({
       current.nativeBannerSignature !== null &&
       current.nativeBannerSignature !== desiredConfigSignature
     ) {
+      current.nativeBannerRequestSignature = null;
+      current.nativeBannerSignature = null;
+      bannerAdService.remove();
+    }
+
+    // Same identity but the margin changed while the Banner still exists
+    // (shown or hidden): resuming would restore the stale position and
+    // showing over an existing Banner would stack a second one, so remove
+    // it here and let the replacement below re-create it at the new margin.
+    if (
+      current.nativeBannerRequestSignature !== null &&
+      current.nativeBannerRequestSignature !== desiredRequestSignature
+    ) {
+      current.nativeBannerRequestSignature = null;
       current.nativeBannerSignature = null;
       bannerAdService.remove();
     }
 
     if (
       current.nativeBannerSignature === desiredConfigSignature &&
+      current.nativeBannerRequestSignature === desiredRequestSignature &&
       bannerAdService.getNativeState() === 'hidden'
     ) {
       bannerAdService.resume().then(() => {
@@ -135,6 +155,7 @@ function AdaptiveBannerHost({
         } else {
           // resumeBanner failed; forget the identity so a future reconcile falls
           // back to show() instead of retrying a no-op resume indefinitely.
+          stateRef.current.nativeBannerRequestSignature = null;
           stateRef.current.nativeBannerSignature = null;
         }
       });
@@ -154,6 +175,7 @@ function AdaptiveBannerHost({
         if (stateRef.current.generation !== generation) return;
         if (bannerAdService.getNativeState() === 'shown') {
           stateRef.current.nativeBannerSignature = desiredConfigSignature;
+          stateRef.current.nativeBannerRequestSignature = desiredRequestSignature;
         }
       });
   }

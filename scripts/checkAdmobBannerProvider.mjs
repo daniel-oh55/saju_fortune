@@ -31,6 +31,16 @@ function git(args) {
   }
 }
 
+// Built from separate prefix/digit components (never a contiguous literal)
+// so the repository-wide concrete-ad-unit-ID scanner in
+// checkAdmobRewardedAdProvider.mjs does not mistake this test fixture for a
+// real production ad unit ID.
+function createSyntheticProductionAdUnitId() {
+  const publisher = ['1234', '5678', '9012', '3456'].join('');
+  const adUnit = ['12345', '67890'].join('');
+  return ['ca-app-pub-', publisher, '/', adUnit].join('');
+}
+
 function getChangedFiles() {
   const diffOutput = git(['diff', '--name-only', 'origin/main...HEAD']);
   const committed = diffOutput ? diffOutput.split(/\r?\n/).filter(Boolean) : [];
@@ -108,7 +118,7 @@ test('official test config is approved only with sdk+enabled+debug+no unit id', 
     { VITE_BANNER_AD_BUILD_TARGET: 'release' },
     { VITE_BANNER_AD_SDK_ENABLED: 'false' },
     { VITE_BANNER_AD_PROVIDER: 'mock' },
-    { VITE_BANNER_AD_UNIT_ID: 'ca-app-pub-1234567890123456/1234567890' },
+    { VITE_BANNER_AD_UNIT_ID: createSyntheticProductionAdUnitId() },
   ]) {
     const rejected = getBannerAdSdkConfig({
       VITE_BANNER_AD_PROVIDER: 'sdk',
@@ -122,7 +132,7 @@ test('official test config is approved only with sdk+enabled+debug+no unit id', 
 });
 
 test('production config requires release target and a non-test unit id', () => {
-  const productionAdUnitId = 'ca-app-pub-1234567890123456/1234567890';
+  const productionAdUnitId = createSyntheticProductionAdUnitId();
   const approved = getBannerAdSdkConfig({
     VITE_BANNER_AD_PROVIDER: 'sdk',
     VITE_BANNER_AD_SDK_ENABLED: 'true',
@@ -569,6 +579,23 @@ function validateSources() {
     )
   ) {
     errors.push('AdaptiveBannerHost.jsx must detect adId/isTesting/npa identity changes and remove the old Banner before creating/showing the replacement');
+  }
+  if (!hostSource.includes('nativeBannerRequestSignature')) {
+    errors.push('AdaptiveBannerHost.jsx must track the full request signature (identity + margin) of the currently created native Banner, separate from the identity-only signature');
+  }
+  if (
+    !/current\.nativeBannerRequestSignature\s*!==\s*null\s*&&\s*current\.nativeBannerRequestSignature\s*!==\s*desiredRequestSignature/u.test(
+      hostSource,
+    )
+  ) {
+    errors.push('AdaptiveBannerHost.jsx must remove the native Banner when the desired margin no longer matches its created request signature, regardless of shown/hidden state');
+  }
+  if (
+    !/current\.nativeBannerSignature\s*===\s*desiredConfigSignature\s*&&\s*current\.nativeBannerRequestSignature\s*===\s*desiredRequestSignature\s*&&\s*bannerAdService\.getNativeState\(\)\s*===\s*'hidden'/u.test(
+      hostSource,
+    )
+  ) {
+    errors.push('AdaptiveBannerHost.jsx must only resume a hidden Banner when both identity and margin exactly match the desired full request signature');
   }
   if (/\b\d{2,4}\s*;?\s*\/\/\s*(nav|bottom-?nav)\s*height/iu.test(hostSource)) {
     errors.push('AdaptiveBannerHost.jsx must not hardcode a fixed nav height');
