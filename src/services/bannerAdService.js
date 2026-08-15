@@ -29,11 +29,16 @@ export function getBannerEligibility({
   config,
   isSuppressed,
 }) {
-  if (isSuppressed) return { allowed: false, reason: 'suppressed' };
-  if (!isBannerAllowedRoute(activePage)) return { allowed: false, reason: 'route_not_allowlisted' };
+  // Hard advertising-permission gates (config approval, local ads consent,
+  // native/UMP runtime gate) must be evaluated before temporary visual
+  // reasons (suppression overlays, route allowlist) so that a hard gate
+  // closing while a temporary state is also active is classified as a hard
+  // gate loss, not a temporary one.
   if (!isApprovedBannerAdSdkConfig(config)) return { allowed: false, reason: 'config_not_approved' };
   if (consentPreferences?.ads !== true) return { allowed: false, reason: 'ads_consent_required' };
   if (!runtimeGateOpen(runtimeSnapshot)) return { allowed: false, reason: 'ad_gate_closed' };
+  if (isSuppressed) return { allowed: false, reason: 'suppressed' };
+  if (!isBannerAllowedRoute(activePage)) return { allowed: false, reason: 'route_not_allowlisted' };
   return { allowed: true, reason: null };
 }
 

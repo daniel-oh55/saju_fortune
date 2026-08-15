@@ -246,6 +246,96 @@ test('eligibility requires native gate, local ads consent, route, and approved c
   );
 });
 
+test('hard eligibility gates take precedence over temporary suppression/route reasons', () => {
+  const approvedConfig = getBannerAdSdkConfig({
+    VITE_BANNER_AD_PROVIDER: 'sdk',
+    VITE_BANNER_AD_SDK_ENABLED: 'true',
+    VITE_BANNER_AD_MODE: 'official_test',
+    VITE_BANNER_AD_BUILD_TARGET: 'debug',
+  });
+  const openRuntime = {
+    isNativeAndroid: true,
+    consentInfoCompleted: true,
+    canRequestAds: true,
+    initializeResolved: true,
+    adGateOpen: true,
+  };
+  const closedCanRequestAdsRuntime = { ...openRuntime, canRequestAds: false };
+  const closedAdGateRuntime = { ...openRuntime, adGateOpen: false };
+
+  // 1. revoked ads consent outranks temporary suppression.
+  assert.deepEqual(
+    getBannerEligibility({
+      activePage: 'home',
+      consentPreferences: { ads: false },
+      runtimeSnapshot: openRuntime,
+      config: approvedConfig,
+      isSuppressed: true,
+    }),
+    { allowed: false, reason: 'ads_consent_required' },
+  );
+
+  // 2. revoked ads consent outranks a non-allowlisted route.
+  assert.deepEqual(
+    getBannerEligibility({
+      activePage: 'settings',
+      consentPreferences: { ads: false },
+      runtimeSnapshot: openRuntime,
+      config: approvedConfig,
+      isSuppressed: false,
+    }),
+    { allowed: false, reason: 'ads_consent_required' },
+  );
+
+  // 3. a closed runtime gate outranks temporary suppression.
+  assert.deepEqual(
+    getBannerEligibility({
+      activePage: 'home',
+      consentPreferences: { ads: true },
+      runtimeSnapshot: closedCanRequestAdsRuntime,
+      config: approvedConfig,
+      isSuppressed: true,
+    }),
+    { allowed: false, reason: 'ad_gate_closed' },
+  );
+
+  // 4. a closed runtime gate outranks a non-allowlisted route.
+  assert.deepEqual(
+    getBannerEligibility({
+      activePage: 'settings',
+      consentPreferences: { ads: true },
+      runtimeSnapshot: closedAdGateRuntime,
+      config: approvedConfig,
+      isSuppressed: false,
+    }),
+    { allowed: false, reason: 'ad_gate_closed' },
+  );
+
+  // 5. with all hard gates valid, a temporary overlay still reports 'suppressed'.
+  assert.deepEqual(
+    getBannerEligibility({
+      activePage: 'home',
+      consentPreferences: { ads: true },
+      runtimeSnapshot: openRuntime,
+      config: approvedConfig,
+      isSuppressed: true,
+    }),
+    { allowed: false, reason: 'suppressed' },
+  );
+
+  // 6. with all hard gates valid, an excluded route still reports 'route_not_allowlisted'.
+  assert.deepEqual(
+    getBannerEligibility({
+      activePage: 'settings',
+      consentPreferences: { ads: true },
+      runtimeSnapshot: openRuntime,
+      config: approvedConfig,
+      isSuppressed: false,
+    }),
+    { allowed: false, reason: 'route_not_allowlisted' },
+  );
+});
+
 test('npa mirrors Rewarded personalization behavior', () => {
   assert.equal(resolveBannerNpa({ personalizedAds: true }), false);
   assert.equal(resolveBannerNpa({ personalizedAds: false }), true);
