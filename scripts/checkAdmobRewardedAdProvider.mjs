@@ -9,6 +9,7 @@ import {
   GOOGLE_OFFICIAL_ANDROID_REWARDED_TEST_AD_UNIT_ID,
   isApprovedRewardedAdSdkConfig,
 } from '../src/config/rewardedAdSdkConfig.js';
+import { GOOGLE_OFFICIAL_ANDROID_ADAPTIVE_BANNER_TEST_AD_UNIT_ID } from '../src/config/bannerAdSdkConfig.js';
 import { createRewardedAdProviderLoader } from '../src/services/rewardedAdProvider.loader.js';
 import {
   createSdkRewardedAdProvider,
@@ -99,7 +100,9 @@ function validateConcreteAdUnitIdLiterals(files, sourceOverrides = new Map()) {
     if (source === null || source === undefined) continue;
     const concreteIds = source.match(concreteAdUnitIdPattern) ?? [];
     if (concreteIds.some(
-      (value) => value !== GOOGLE_OFFICIAL_ANDROID_REWARDED_TEST_AD_UNIT_ID,
+      (value) =>
+        value !== GOOGLE_OFFICIAL_ANDROID_REWARDED_TEST_AD_UNIT_ID &&
+        value !== GOOGLE_OFFICIAL_ANDROID_ADAPTIVE_BANNER_TEST_AD_UNIT_ID,
     )) {
       errors.push(`${file}: concrete production ad unit ID literal is prohibited`);
     }
@@ -117,6 +120,7 @@ const requiredTokens = [
   ['scripts/checkAdmobRewardedAdProvider.mjs', "execFileSync('git', ['ls-files', '-z']"],
   ['scripts/checkAdmobRewardedAdProvider.mjs', 'function validateConcreteAdUnitIdLiterals('],
   ['scripts/checkAdmobRewardedAdProvider.mjs', 'function assertNoConcreteProductionAdUnitIds('],
+  ['scripts/checkAdmobRewardedAdProvider.mjs', "from '../src/config/bannerAdSdkConfig.js'"],
   ['scripts/checkAdmobRewardedAdProvider.mjs', 'trackedFiles = getTrackedFiles();'],
   ['scripts/checkAdmobRewardedAdProvider.mjs', 'assertNoConcreteProductionAdUnitIds(trackedFiles);'],
   ['src/config/rewardedAdSdkConfig.js', 'GOOGLE_OFFICIAL_ANDROID_REWARDED_TEST_AD_UNIT_ID'],
@@ -296,6 +300,11 @@ function validateSources(sourceOverrides = new Map()) {
     'value !== GOOGLE_OFFICIAL_ANDROID_REWARDED_TEST_AD_UNIT_ID',
   )) {
     errors.push('only the Google official Rewarded Test ID may be allowed');
+  }
+  if (!concreteIdValidationBlock.includes(
+    'value !== GOOGLE_OFFICIAL_ANDROID_ADAPTIVE_BANNER_TEST_AD_UNIT_ID',
+  )) {
+    errors.push('only the Google official Banner Test ID may be additionally allowed');
   }
   if (
     !concreteIdValidationBlock.includes(
@@ -878,6 +887,42 @@ test('repository-wide concrete ad unit scan allows the official Rewarded Test ID
       fixture,
       `--official-test-id: '${GOOGLE_OFFICIAL_ANDROID_REWARDED_TEST_AD_UNIT_ID}';`,
     ]]),
+  );
+});
+test('repository-wide concrete ad unit scan allows the official Banner Test ID in CSS', () => {
+  const fixture = 'src/styles.css';
+  assert(trackedFiles.includes(fixture), 'tracked CSS fixture must be enumerated');
+  assert.notEqual(
+    GOOGLE_OFFICIAL_ANDROID_ADAPTIVE_BANNER_TEST_AD_UNIT_ID,
+    GOOGLE_OFFICIAL_ANDROID_REWARDED_TEST_AD_UNIT_ID,
+    'Banner and Rewarded official test IDs must be distinct fixtures',
+  );
+  assertNoConcreteProductionAdUnitIds(
+    [fixture],
+    new Map([[
+      fixture,
+      `--official-banner-test-id: '${GOOGLE_OFFICIAL_ANDROID_ADAPTIVE_BANNER_TEST_AD_UNIT_ID}';`,
+    ]]),
+  );
+});
+test('repository-wide concrete ad unit scan still rejects an arbitrary valid-format ID alongside the two official test IDs', () => {
+  const fixture = 'src/styles.css';
+  assert(trackedFiles.includes(fixture), 'tracked CSS fixture must be enumerated');
+  const syntheticId = createSyntheticProductionAdUnitId();
+  const errors = validateConcreteAdUnitIdLiterals(
+    [fixture],
+    new Map([[
+      fixture,
+      [
+        `--official-rewarded-test-id: '${GOOGLE_OFFICIAL_ANDROID_REWARDED_TEST_AD_UNIT_ID}';`,
+        `--official-banner-test-id: '${GOOGLE_OFFICIAL_ANDROID_ADAPTIVE_BANNER_TEST_AD_UNIT_ID}';`,
+        `--arbitrary-id: '${syntheticId}';`,
+      ].join('\n'),
+    ]]),
+  );
+  assert.deepEqual(
+    errors,
+    [`${fixture}: concrete production ad unit ID literal is prohibited`],
   );
 });
 test('repository-wide concrete ad unit scan includes extensionless tracked UTF-8 sources', () => {
@@ -1929,6 +1974,14 @@ const targetedNegativeMutations = [
     file: 'scripts/checkAdmobRewardedAdProvider.mjs',
     mutate: (source) => source.replace(
       'value !== GOOGLE_OFFICIAL_ANDROID_REWARDED_TEST_AD_UNIT_ID',
+      'false',
+    ),
+  },
+  {
+    name: 'Banner official test ID exemption generalized to allow any ID',
+    file: 'scripts/checkAdmobRewardedAdProvider.mjs',
+    mutate: (source) => source.replace(
+      'value !== GOOGLE_OFFICIAL_ANDROID_ADAPTIVE_BANNER_TEST_AD_UNIT_ID',
       'false',
     ),
   },
