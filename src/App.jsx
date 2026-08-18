@@ -685,14 +685,14 @@ function App() {
             onReset={handleReset}
           />
         )}
+        <AdaptiveBannerHost
+          activePage={activePage}
+          consentPreferences={consentPreferences}
+          isConsentSettingsOpen={isConsentSettingsOpen}
+          isReminderSettingsOpen={isReminderSettingsOpen}
+        />
       </main>
       <BottomNav activePage={activePage} onNavigate={handleNavigate} />
-      <AdaptiveBannerHost
-        activePage={activePage}
-        consentPreferences={consentPreferences}
-        isConsentSettingsOpen={isConsentSettingsOpen}
-        isReminderSettingsOpen={isReminderSettingsOpen}
-      />
       {isReminderSettingsOpen && (
         <DailyReminderSettingsPanel
           draft={dailyReminderDraft}

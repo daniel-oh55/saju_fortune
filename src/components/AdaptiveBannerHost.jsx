@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { createPortal } from 'react-dom';
 import {
   getBannerAdSdkConfig,
   isApprovedBannerAdSdkConfig,
@@ -13,7 +12,7 @@ import {
   subscribeAdmobRuntimeConsent,
 } from '../services/admobRuntimeConsentCoordinator.js';
 
-const BANNER_VISUAL_GAP_PX = 8;
+const BANNER_VISUAL_GAP_PX = 14;
 const VIEWPORT_CHANGE_DEBOUNCE_MS = 150;
 
 function computeMarginPx() {
@@ -23,7 +22,7 @@ function computeMarginPx() {
 
   const rect = nav.getBoundingClientRect();
   const distanceFromViewportBottom = Math.max(0, window.innerHeight - rect.top);
-  return Math.round(distanceFromViewportBottom + BANNER_VISUAL_GAP_PX);
+  return Math.ceil(distanceFromViewportBottom + BANNER_VISUAL_GAP_PX);
 }
 
 function AdaptiveBannerHost({
@@ -251,10 +250,21 @@ function AdaptiveBannerHost({
 
     window.addEventListener('resize', handleViewportChange);
     window.addEventListener('orientationchange', handleViewportChange);
+
+    let resizeObserver = null;
+    if (typeof ResizeObserver !== 'undefined' && typeof document !== 'undefined') {
+      const navNode = document.querySelector('.bottom-nav');
+      if (navNode) {
+        resizeObserver = new ResizeObserver(handleViewportChange);
+        resizeObserver.observe(navNode);
+      }
+    }
+
     return () => {
       window.removeEventListener('resize', handleViewportChange);
       window.removeEventListener('orientationchange', handleViewportChange);
       if (debounceTimerId) window.clearTimeout(debounceTimerId);
+      resizeObserver?.disconnect();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isConfigApproved]);
@@ -269,14 +279,14 @@ function AdaptiveBannerHost({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isConfigApproved]);
 
-  if (!isConfigApproved || typeof document === 'undefined') return null;
+  if (!isConfigApproved) return null;
 
-  const appMainNode = document.querySelector('.app-main');
-  if (!appMainNode) return null;
-
-  return createPortal(
-    <div className="banner-ad-reserve-spacer" aria-hidden="true" style={{ height: `${reserveHeightPx}px` }} />,
-    appMainNode,
+  return (
+    <div
+      className="banner-ad-reserve-spacer"
+      aria-hidden="true"
+      style={{ height: `${reserveHeightPx}px` }}
+    />
   );
 }
 
