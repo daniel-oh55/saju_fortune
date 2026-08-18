@@ -15,6 +15,10 @@ jobs:
       VITE_REWARDED_AD_SDK_ENABLED: "true"
       VITE_REWARDED_AD_MODE: official_test
       VITE_REWARDED_AD_BUILD_TARGET: debug
+      VITE_BANNER_AD_PROVIDER: sdk
+      VITE_BANNER_AD_SDK_ENABLED: "true"
+      VITE_BANNER_AD_MODE: official_test
+      VITE_BANNER_AD_BUILD_TARGET: debug
 
     steps:
       - name: Checkout repository
@@ -31,6 +35,9 @@ jobs:
 
       - name: Check rewarded test provider
         run: npm run check:admob-rewarded-provider
+
+      - name: Check Banner test provider
+        run: node scripts/checkAdmobBannerProvider.mjs
 
       - name: Build rewarded test web app
         run: npm run build

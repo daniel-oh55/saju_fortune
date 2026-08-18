@@ -38,6 +38,10 @@ android {
         }
     }
     buildTypes {
+        debug {
+            applicationIdSuffix ".qa"
+        }
+
         release {
             if (hasReleaseSigning) {
                 signingConfig signingConfigs.release
