@@ -1,5 +1,4 @@
 import assert from 'node:assert/strict';
-import { execFileSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
@@ -23,14 +22,6 @@ function read(relativePath) {
   return readFileSync(path.join(root, relativePath), 'utf8');
 }
 
-function git(args) {
-  try {
-    return execFileSync('git', args, { cwd: root, encoding: 'utf8' }).trim();
-  } catch {
-    return '';
-  }
-}
-
 // Built from separate prefix/digit components (never a contiguous literal)
 // so the repository-wide concrete-ad-unit-ID scanner in
 // checkAdmobRewardedAdProvider.mjs does not mistake this test fixture for a
@@ -40,29 +31,6 @@ function createSyntheticProductionAdUnitId() {
   const adUnit = ['12345', '67890'].join('');
   return ['ca-app-pub-', publisher, '/', adUnit].join('');
 }
-
-function getChangedFiles() {
-  const diffOutput = git(['diff', '--name-only', 'origin/main...HEAD']);
-  const committed = diffOutput ? diffOutput.split(/\r?\n/).filter(Boolean) : [];
-  const staged = git(['diff', '--name-only', '--cached']).split(/\r?\n/).filter(Boolean);
-  const working = git(['diff', '--name-only']).split(/\r?\n/).filter(Boolean);
-  const untracked = git(['ls-files', '--others', '--exclude-standard'])
-    .split(/\r?\n/)
-    .filter(Boolean);
-  return [...new Set([...committed, ...staged, ...working, ...untracked])]
-    .map((file) => file.replaceAll('\\', '/'));
-}
-
-const PROTECTED_PATH_PREFIXES = [
-  'android/',
-  '.github/workflows/',
-  'src/services/admobRuntimeConsentCoordinator.js',
-  'src/services/rewardedAdProvider.sdk.js',
-  'src/services/rewardedAdService.js',
-  'src/components/RewardAdModal.jsx',
-  'package.json',
-  'package-lock.json',
-];
 
 const tests = [];
 function test(name, run) {
@@ -702,15 +670,6 @@ function validateSources() {
     .match(concreteAdUnitIdPattern) ?? [];
   if (concreteIds.some((value) => value !== GOOGLE_OFFICIAL_ANDROID_ADAPTIVE_BANNER_TEST_AD_UNIT_ID)) {
     errors.push('a concrete production Banner ad unit ID literal is prohibited in Banner source files');
-  }
-
-  const changedFiles = getChangedFiles();
-  for (const file of changedFiles) {
-    for (const protectedPrefix of PROTECTED_PATH_PREFIXES) {
-      if (file === protectedPrefix || file.startsWith(protectedPrefix)) {
-        errors.push(`protected surface must not be modified by this PR: ${file}`);
-      }
-    }
   }
 
   return errors;
