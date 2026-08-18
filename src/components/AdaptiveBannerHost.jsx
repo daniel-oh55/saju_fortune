@@ -13,12 +13,7 @@ import {
   subscribeAdmobRuntimeConsent,
 } from '../services/admobRuntimeConsentCoordinator.js';
 
-// Native margin is applied on Android as `(int) (marginPx * density)` (see
-// @capacitor-community/admob BannerExecutor.java), truncating any fractional
-// device pixel. Rounding the DP value up here, plus a slightly larger visual
-// gap than the bare minimum, keeps that truncation and any sub-pixel/safe-area
-// rounding from ever letting the Banner's bottom edge reach the nav.
-const BANNER_VISUAL_GAP_PX = 14;
+const BANNER_VISUAL_GAP_PX = 8;
 const VIEWPORT_CHANGE_DEBOUNCE_MS = 150;
 
 function computeMarginPx() {
@@ -28,7 +23,7 @@ function computeMarginPx() {
 
   const rect = nav.getBoundingClientRect();
   const distanceFromViewportBottom = Math.max(0, window.innerHeight - rect.top);
-  return Math.ceil(distanceFromViewportBottom + BANNER_VISUAL_GAP_PX);
+  return Math.round(distanceFromViewportBottom + BANNER_VISUAL_GAP_PX);
 }
 
 function AdaptiveBannerHost({
@@ -256,24 +251,10 @@ function AdaptiveBannerHost({
 
     window.addEventListener('resize', handleViewportChange);
     window.addEventListener('orientationchange', handleViewportChange);
-
-    // The bottom nav's own geometry (e.g. safe-area-inset-bottom resolving
-    // after first paint) can change without a window resize/orientation
-    // event; observe it directly so a stale margin isn't left in place.
-    let navObserver = null;
-    if (typeof document !== 'undefined' && typeof ResizeObserver !== 'undefined') {
-      const nav = document.querySelector('.bottom-nav');
-      if (nav) {
-        navObserver = new ResizeObserver(handleViewportChange);
-        navObserver.observe(nav);
-      }
-    }
-
     return () => {
       window.removeEventListener('resize', handleViewportChange);
       window.removeEventListener('orientationchange', handleViewportChange);
       if (debounceTimerId) window.clearTimeout(debounceTimerId);
-      navObserver?.disconnect();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isConfigApproved]);
