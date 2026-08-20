@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
+    "postinstall": "node scripts/applyAdmobAndroid15BannerMarginPatch.mjs",
     "dev": "vite",
     "apply:android-resources": "node scripts/applyAndroidResourceAssets.mjs",
     "generate:android-adaptive-icons": "node scripts/generateAndroidAdaptiveIcons.mjs",
