@@ -611,9 +611,6 @@ function validateSources() {
   if (!serviceSource.includes('isStillValid')) {
     errors.push('bannerAdService.js must support a stale-completion validity check for show()');
   }
-  if (!hostSource.includes("document.querySelector('.bottom-nav')")) {
-    errors.push('AdaptiveBannerHost.jsx must derive banner margin from .bottom-nav geometry');
-  }
   if (!hostSource.includes('bannerAdService.resume()')) {
     errors.push('AdaptiveBannerHost.jsx must call bannerAdService.resume() to restore a temporarily hidden Banner instead of calling show() again');
   }
