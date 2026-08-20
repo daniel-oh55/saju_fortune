@@ -6,24 +6,9 @@ const navItems = [
   { id: 'settings', label: '내정보', icon: '☻' },
 ];
 
-function normalizeBannerOffsetPx(px) {
-  const numeric = Number(px);
-  if (!Number.isFinite(numeric)) return 0;
-  return Math.max(0, Math.round(numeric));
-}
-
-function BottomNav({ activePage, bannerOffsetPx = 0, onNavigate }) {
-  // A native Banner sits below the nav at the bottom of the screen, so the nav
-  // is lifted by the plugin-reported Banner height on top of its CSS baseline.
-  // With no Banner the baseline CSS position is used unchanged.
-  const offsetPx = normalizeBannerOffsetPx(bannerOffsetPx);
-  const navStyle =
-    offsetPx > 0
-      ? { bottom: `calc(10px + env(safe-area-inset-bottom) + ${offsetPx}px)` }
-      : undefined;
-
+function BottomNav({ activePage, onNavigate }) {
   return (
-    <nav className="bottom-nav" aria-label="주요 메뉴" style={navStyle}>
+    <nav className="bottom-nav" aria-label="주요 메뉴">
       {navItems.map((item) => (
         <button
           className={`nav-button ${activePage === item.id ? 'is-active' : ''}`}
