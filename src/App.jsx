@@ -138,6 +138,7 @@ function App() {
   const [isReminderSettingsOpen, setIsReminderSettingsOpen] = useState(false);
   const [reminderSettingsMessage, setReminderSettingsMessage] = useState('');
   const [isAppLoading, setIsAppLoading] = useState(true);
+  const [bannerReserveHeightPx, setBannerReserveHeightPx] = useState(0);
   const [admobSnapshot, setAdmobSnapshot] = useState(
     () => getAdmobRuntimeConsentSnapshot(),
   );
@@ -690,9 +691,14 @@ function App() {
           consentPreferences={consentPreferences}
           isConsentSettingsOpen={isConsentSettingsOpen}
           isReminderSettingsOpen={isReminderSettingsOpen}
+          onReserveHeightChange={setBannerReserveHeightPx}
         />
       </main>
-      <BottomNav activePage={activePage} onNavigate={handleNavigate} />
+      <BottomNav
+        activePage={activePage}
+        bannerOffsetPx={bannerReserveHeightPx}
+        onNavigate={handleNavigate}
+      />
       {isReminderSettingsOpen && (
         <DailyReminderSettingsPanel
           draft={dailyReminderDraft}

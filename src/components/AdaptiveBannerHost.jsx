@@ -12,17 +12,18 @@ import {
   subscribeAdmobRuntimeConsent,
 } from '../services/admobRuntimeConsentCoordinator.js';
 
-const BANNER_VISUAL_GAP_PX = 14;
+// The native Banner is anchored at BOTTOM_CENTER with no extra margin. On
+// Android 15+ the plugin's WindowInsets handling can overwrite a JS-derived
+// bottom margin with the system bottom inset, so nav-derived positioning is
+// not durable. The Banner stays at the bottom and its plugin-reported height
+// is published upward so BottomNav can sit above it instead.
+const BANNER_PLUGIN_MARGIN_PX = 0;
 const VIEWPORT_CHANGE_DEBOUNCE_MS = 150;
 
-function computeMarginPx() {
-  if (typeof document === 'undefined' || typeof window === 'undefined') return 0;
-  const nav = document.querySelector('.bottom-nav');
-  if (!nav) return 0;
-
-  const rect = nav.getBoundingClientRect();
-  const distanceFromViewportBottom = Math.max(0, window.innerHeight - rect.top);
-  return Math.ceil(distanceFromViewportBottom + BANNER_VISUAL_GAP_PX);
+function normalizeReserveHeightPx(px) {
+  const numeric = Number(px);
+  if (!Number.isFinite(numeric)) return 0;
+  return Math.max(0, Math.round(numeric));
 }
 
 function AdaptiveBannerHost({
@@ -30,6 +31,7 @@ function AdaptiveBannerHost({
   consentPreferences,
   isConsentSettingsOpen,
   isReminderSettingsOpen,
+  onReserveHeightChange,
 }) {
   const config = useMemo(() => getBannerAdSdkConfig(), []);
   const isConfigApproved = isApprovedBannerAdSdkConfig(config);
@@ -56,7 +58,12 @@ function AdaptiveBannerHost({
     desiredRequestSignature: null,
     generation: 0,
     lastKnownHeightPx: 0,
+    // Last value handed to onReserveHeightChange. Null means nothing has been
+    // published yet, so the first update always notifies (including 0).
+    lastNotifiedHeightPx: null,
   });
+
+  const onReserveHeightChangeRef = useRef(onReserveHeightChange);
 
   useEffect(() => {
     mountedRef.current = true;
@@ -65,9 +72,20 @@ function AdaptiveBannerHost({
     };
   }, []);
 
+  useEffect(() => {
+    onReserveHeightChangeRef.current = onReserveHeightChange;
+  }, [onReserveHeightChange]);
+
   function setReserveHeight(px) {
     if (!mountedRef.current) return;
-    setReserveHeightPx(Math.max(0, Math.round(px)));
+
+    const normalizedPx = normalizeReserveHeightPx(px);
+    setReserveHeightPx(normalizedPx);
+
+    if (stateRef.current.lastNotifiedHeightPx === normalizedPx) return;
+    stateRef.current.lastNotifiedHeightPx = normalizedPx;
+    const notify = onReserveHeightChangeRef.current;
+    if (typeof notify === 'function') notify(normalizedPx);
   }
 
   function reconcile() {
@@ -106,7 +124,7 @@ function AdaptiveBannerHost({
     }
 
     const npa = resolveBannerNpa(current.consentPreferences);
-    const marginPx = computeMarginPx();
+    const marginPx = BANNER_PLUGIN_MARGIN_PX;
     const desiredConfigSignature = JSON.stringify([config.adId, config.isTesting, npa]);
     const desiredRequestSignature = JSON.stringify([config.adId, config.isTesting, npa, marginPx]);
 
@@ -251,20 +269,10 @@ function AdaptiveBannerHost({
     window.addEventListener('resize', handleViewportChange);
     window.addEventListener('orientationchange', handleViewportChange);
 
-    let resizeObserver = null;
-    if (typeof ResizeObserver !== 'undefined' && typeof document !== 'undefined') {
-      const navNode = document.querySelector('.bottom-nav');
-      if (navNode) {
-        resizeObserver = new ResizeObserver(handleViewportChange);
-        resizeObserver.observe(navNode);
-      }
-    }
-
     return () => {
       window.removeEventListener('resize', handleViewportChange);
       window.removeEventListener('orientationchange', handleViewportChange);
       if (debounceTimerId) window.clearTimeout(debounceTimerId);
-      resizeObserver?.disconnect();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isConfigApproved]);
