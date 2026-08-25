@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import {
@@ -583,6 +583,164 @@ test('a Banner identity (adId/isTesting/npa) change removes the old Banner befor
   assert.equal(service.getNativeState(), 'shown');
 });
 
+// ---------------------------------------------------------------------------
+// Durable production Banner inset-ownership contract.
+//
+// scripts/applyAdmobAndroid15BannerMarginPatch.mjs removes the plugin's Android
+// 15+ system-inset handling from the installed BannerExecutor outright, because
+// this app owns its full bottom clearance and only ever reaches
+// BannerAdPosition.BOTTOM_CENTER. That native patch is only safe while the
+// BOTTOM_CENTER-only assumption actually holds, so it is asserted here against
+// the whole production source tree instead of being trusted as a convention: a
+// second native Banner show call, a show call moved out of the Banner adapter,
+// or a reachable TOP_CENTER/CENTER position must fail this checker closed.
+// ---------------------------------------------------------------------------
+
+const PRODUCTION_SOURCE_ROOT = 'src';
+const PRODUCTION_SOURCE_EXTENSIONS = new Set(['.js', '.jsx', '.ts', '.tsx']);
+const PRODUCTION_BANNER_ADAPTER = 'src/services/bannerAdService.js';
+const NATIVE_BANNER_SHOW_CALL_PATTERN = /\.\s*showBanner\s*\(/gu;
+const BOTTOM_CENTER_POSITION_ARGUMENT_PATTERN =
+  /\bposition\s*:\s*BannerAdPosition\s*\.\s*BOTTOM_CENTER\b/u;
+const PROHIBITED_BANNER_POSITION_PATTERNS = [
+  ['BannerAdPosition.TOP_CENTER', /BannerAdPosition\s*\.\s*TOP_CENTER\b/u],
+  ['BannerAdPosition.CENTER', /BannerAdPosition\s*\.\s*CENTER\b/u],
+];
+
+/**
+ * Deterministic (name-sorted, depth-first) enumeration of production source
+ * files under src/**. scripts/** is deliberately not scanned: this checker and
+ * its scratch probes are not production source.
+ */
+function listProductionSourceFiles(relativeDir) {
+  const entries = readdirSync(path.join(root, relativeDir), { withFileTypes: true })
+    .slice()
+    .sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));
+
+  const files = [];
+  for (const entry of entries) {
+    const relativePath = `${relativeDir}/${entry.name}`;
+    if (entry.isDirectory()) {
+      files.push(...listProductionSourceFiles(relativePath));
+      continue;
+    }
+    if (!entry.isFile()) continue;
+    if (!PRODUCTION_SOURCE_EXTENSIONS.has(path.extname(entry.name).toLowerCase())) continue;
+    files.push(relativePath);
+  }
+  return files;
+}
+
+/**
+ * Returns the literal argument text of the call whose opening parenthesis sits
+ * at `openParenIndex`, or null when the call is unbalanced/unreadable. String
+ * and template literals are skipped so parentheses inside them cannot shift the
+ * nesting depth.
+ */
+function readCallArgumentText(source, openParenIndex) {
+  let depth = 0;
+  let quote = null;
+
+  for (let index = openParenIndex; index < source.length; index += 1) {
+    const char = source[index];
+
+    if (quote !== null) {
+      if (char === '\\') {
+        index += 1;
+        continue;
+      }
+      if (char === quote) quote = null;
+      continue;
+    }
+
+    if (char === "'" || char === '"' || char === '`') {
+      quote = char;
+      continue;
+    }
+    if (char === '(') {
+      depth += 1;
+      continue;
+    }
+    if (char === ')') {
+      depth -= 1;
+      if (depth === 0) return source.slice(openParenIndex + 1, index);
+    }
+  }
+
+  return null;
+}
+
+function validateProductionBannerPositionContract() {
+  const errors = [];
+  const sources = listProductionSourceFiles(PRODUCTION_SOURCE_ROOT).map((file) => ({
+    file,
+    source: read(file),
+  }));
+
+  const callSites = [];
+  for (const { file, source } of sources) {
+    NATIVE_BANNER_SHOW_CALL_PATTERN.lastIndex = 0;
+    let match = NATIVE_BANNER_SHOW_CALL_PATTERN.exec(source);
+    while (match !== null) {
+      const openParenIndex = match.index + match[0].length - 1;
+      callSites.push({
+        file,
+        line: source.slice(0, match.index).split('\n').length,
+        argumentText: readCallArgumentText(source, openParenIndex),
+      });
+      match = NATIVE_BANNER_SHOW_CALL_PATTERN.exec(source);
+    }
+  }
+
+  if (callSites.length !== 1) {
+    const where =
+      callSites.length === 0
+        ? 'none found'
+        : callSites.map((site) => `${site.file}:${site.line}`).join(', ');
+    errors.push(
+      `production ${PRODUCTION_SOURCE_ROOT}/** must contain exactly 1 native Banner show call but found ` +
+        `${callSites.length} (${where}); the app-specific Android 15+ Banner inset correction in ` +
+        'scripts/applyAdmobAndroid15BannerMarginPatch.mjs strips the plugin system-inset handling and stays ' +
+        'valid only while a single BOTTOM_CENTER call site owns the entire bottom clearance',
+    );
+  }
+
+  const [callSite] = callSites;
+  if (callSite) {
+    if (callSite.file !== PRODUCTION_BANNER_ADAPTER) {
+      errors.push(
+        `the single native Banner show call must stay in the ${PRODUCTION_BANNER_ADAPTER} adapter contract but ` +
+          `was found in ${callSite.file}:${callSite.line}`,
+      );
+    }
+    if (callSite.argumentText === null) {
+      errors.push(
+        `${callSite.file}:${callSite.line}: the native Banner show call arguments could not be read, so the ` +
+          'BOTTOM_CENTER-only position contract cannot be verified; refusing to pass',
+      );
+    } else if (!BOTTOM_CENTER_POSITION_ARGUMENT_PATTERN.test(callSite.argumentText)) {
+      errors.push(
+        `${callSite.file}:${callSite.line}: the native Banner show call must pass ` +
+          'position: BannerAdPosition.BOTTOM_CENTER in its own call arguments (a BOTTOM_CENTER token elsewhere ' +
+          'in the file does not satisfy this contract)',
+      );
+    }
+  }
+
+  for (const { file, source } of sources) {
+    for (const [token, pattern] of PROHIBITED_BANNER_POSITION_PATTERNS) {
+      if (pattern.test(source)) {
+        errors.push(
+          `${file}: production source must not make ${token} reachable; the app-specific Android 15+ Banner ` +
+            'inset correction only preserves correct clearance for BOTTOM_CENTER',
+        );
+      }
+    }
+  }
+
+  return errors;
+}
+
 function validateSources() {
   const errors = [];
   const hostSource = read('src/components/AdaptiveBannerHost.jsx');
@@ -674,6 +832,7 @@ function validateSources() {
 
 async function main() {
   const errors = validateSources();
+  errors.push(...validateProductionBannerPositionContract());
   for (const { name, run } of tests) {
     try {
       await run();
@@ -688,7 +847,7 @@ async function main() {
     return;
   }
 
-  process.stdout.write(`AdMob Banner provider checks passed (${tests.length} tests)\n`);
+  process.stdout.write(`AdMob Banner provider checks passed (${tests.length} tests, 1 production BOTTOM_CENTER Banner show call)\n`);
 }
 
 main();

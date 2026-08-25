@@ -12,15 +12,23 @@
  *   listener then overwrites those margins with the bare system inset. Upstream
  *   PR #431 (merge commit 86a3347594f41af5b3ec14b18fb7df2b76bc023c) reordered
  *   the two so the configured margin is preserved and the system inset is added
- *   on top of it; no npm release carries that change yet.
+ *   on top of it. That change is published: the known historical release v8.1.0
+ *   (2026-08-14) does contain PR #431, and its BannerExecutor still computes the
+ *   configured density margin and then adds the Android system inset on top of
+ *   it from an Activity DecorView OnApplyWindowInsetsListener. Harupuli stays
+ *   pinned to 8.0.0, so this correction is derived against 8.0.0 only.
  *
  * Why this repository no longer backports PR #431 as-is:
  *   Round-4 Android 16 / API 36 real-device QA (Galaxy S23 Ultra) of the
  *   PR #431 backport showed the Banner clearing the BottomNav but leaving an
  *   excessive Banner-to-BottomNav gap, consistent with the native bottom system
  *   inset being *additional* to clearance this app already owns. Harupuli only
- *   ever shows a BOTTOM_CENTER Banner (src/services/bannerAdService.js is the
- *   single showBanner call site and hard-codes BannerAdPosition.BOTTOM_CENTER),
+ *   ever shows a BOTTOM_CENTER Banner -- src/services/bannerAdService.js holds
+ *   the single native showBanner call site and hard-codes
+ *   BannerAdPosition.BOTTOM_CENTER, and scripts/checkAdmobBannerProvider.mjs
+ *   enforces that as a durable invariant across all production src sources,
+ *   failing closed on a second native show call, a show call outside the Banner
+ *   adapter, or a reachable TOP_CENTER/CENTER position --
  *   and it already passes its full bottom clearance -- live BottomNav height +
  *   BottomNav base offset + visual gap -- through the `margin` option. Adding
  *   the Android system bottom inset to that double-counts the navigation-bar
@@ -41,9 +49,28 @@
  * configured density-adjusted margin and the horizontal centering margin are
  * left exactly as released 8.0.0 computes them. Nothing else is changed.
  *
- * Remove this patcher and the package.json postinstall hook as soon as
- * @capacitor-community/admob is upgraded; the version gate below fails closed
- * until the patch is re-derived against the new source.
+ * Upgrade / removal policy:
+ *   This patch targets exactly 8.0.0 and the version gate below fails closed on
+ *   every other installed version. A dependency upgrade must therefore force an
+ *   explicit reassessment against the exact target release, not a silent
+ *   carry-over.
+ *
+ *   Do NOT remove this patcher and the package.json postinstall hook merely
+ *   because a newer release contains upstream PR #431. v8.1.0 is the concrete
+ *   counter-example: it carries PR #431 and is exactly the additive
+ *   system-inset behavior this app-specific correction exists to avoid, so
+ *   upgrading to it would restore the duplicate bottom clearance rather than
+ *   fix it.
+ *
+ *   Removal is allowed only after the target plugin release is independently
+ *   verified to satisfy Harupuli's Banner inset-ownership contract, at minimum:
+ *     - configured BOTTOM_CENTER margin ownership behaves correctly for this app
+ *     - no extra native bottom system inset produces duplicate clearance
+ *     - the relevant Android 15/16 inset and DecorView listener behavior is
+ *       acceptable for this app
+ *     - real-device Round QA regression evidence supports the removal
+ *   Until that verification exists, re-derive this correction against the new
+ *   source instead of deleting it.
  *
  * Usage:
  *   node scripts/applyAdmobAndroid15BannerMarginPatch.mjs           # apply, idempotent
@@ -271,9 +298,15 @@ function readPluginVersion() {
   if (version !== REQUIRED_PLUGIN_VERSION) {
     fail(
       `installed @capacitor-community/admob version is "${version || 'unknown'}" but this patch targets exactly ` +
-        `${REQUIRED_PLUGIN_VERSION}. Reassess it against the new plugin release: re-derive the Android 15+ Banner ` +
-        'inset correction against the new source, or delete this script and the package.json postinstall hook if ' +
-        'the release no longer adds a system bottom inset to a configured BOTTOM_CENTER Banner margin.'
+        `${REQUIRED_PLUGIN_VERSION}. Inspect the target plugin release's BannerExecutor and re-derive this ` +
+        'app-specific Android 15+ Banner inset correction against that exact source. Do NOT delete this script ' +
+        'and the package.json postinstall hook merely because the target release contains upstream PR #431: the ' +
+        'known historical release 8.1.0 does contain it and still adds the Android system bottom inset on top of ' +
+        'the configured margin via a DecorView inset listener. Remove them only once the target release is ' +
+        "independently verified to satisfy Harupuli's Banner inset-ownership contract -- configured BOTTOM_CENTER " +
+        'margin ownership correct for this app, no extra native bottom system inset producing duplicate ' +
+        'clearance, acceptable Android 15/16 inset and listener behavior, and real-device Round QA regression ' +
+        'evidence supporting the removal.'
     );
   }
 
