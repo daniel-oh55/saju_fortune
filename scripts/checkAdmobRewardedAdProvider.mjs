@@ -862,14 +862,20 @@ function createLoaderHarness(options = {}) {
 test('repository-wide concrete ad unit scan passes every current tracked UTF-8 source', () => {
   assertNoConcreteProductionAdUnitIds(trackedFiles);
 });
-test('repository-wide concrete ad unit scan includes tracked CSS outside the current diff', () => {
-  const fixture = 'src/styles.css';
-  assert(trackedFiles.includes(fixture), 'tracked CSS fixture must be enumerated');
-  assert(!changedFiles.includes(fixture), 'tracked CSS fixture must be outside the current diff');
+test('repository-wide concrete ad unit scan includes tracked UTF-8 source outside the current diff', () => {
+  const fixture = trackedFiles.find(
+    (file) => !changedFiles.includes(file) && readTrackedUtf8Text(file) !== null,
+  );
+  assert(
+    fixture,
+    'repository-wide scan fixture requires at least one tracked UTF-8 file outside the current diff',
+  );
+  assert(trackedFiles.includes(fixture), 'selected fixture must be tracked');
+  assert(!changedFiles.includes(fixture), 'selected fixture must be outside the current diff');
   const syntheticId = createSyntheticProductionAdUnitId();
   const errors = validateConcreteAdUnitIdLiterals(
     trackedFiles,
-    new Map([[fixture, `--injected-id: '${syntheticId}';`]]),
+    new Map([[fixture, `injected_id='${syntheticId}'`]]),
   );
   assert.deepEqual(
     errors,
