@@ -15,14 +15,24 @@ import {
 const BANNER_VISUAL_GAP_PX = 14;
 const VIEWPORT_CHANGE_DEBOUNCE_MS = 150;
 
+// The configured margin covers only what the web UI owns: the live BottomNav
+// height, its non-system base offset, and the visual gap. The Android system
+// bottom inset is deliberately excluded because the Android 15+ margin
+// backport adds that inset on top of this configured margin natively; a
+// viewport-bottom measurement would include it here and count it twice.
 function computeMarginPx() {
   if (typeof document === 'undefined' || typeof window === 'undefined') return 0;
   const nav = document.querySelector('.bottom-nav');
   if (!nav) return 0;
 
   const rect = nav.getBoundingClientRect();
-  const distanceFromViewportBottom = Math.max(0, window.innerHeight - rect.top);
-  return Math.ceil(distanceFromViewportBottom + BANNER_VISUAL_GAP_PX);
+  const parsedBaseOffset = Number.parseFloat(
+    window.getComputedStyle(nav).getPropertyValue('--bottom-nav-base-offset'),
+  );
+  const baseOffsetPx =
+    Number.isFinite(parsedBaseOffset) && parsedBaseOffset >= 0 ? parsedBaseOffset : 0;
+
+  return Math.ceil(Math.max(0, rect.height) + baseOffsetPx + BANNER_VISUAL_GAP_PX);
 }
 
 function AdaptiveBannerHost({

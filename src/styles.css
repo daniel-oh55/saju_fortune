@@ -1462,9 +1462,13 @@ textarea:focus {
 }
 
 .bottom-nav {
+  /* Single source of truth for the BottomNav non-system bottom offset. The
+     native Banner margin reads this value so the Android system bottom inset
+     stays owned by the native side alone. */
+  --bottom-nav-base-offset: 10px;
   position: fixed;
   right: max(10px, calc((100vw - 480px) / 2 + 10px));
-  bottom: calc(10px + env(safe-area-inset-bottom));
+  bottom: calc(var(--bottom-nav-base-offset) + env(safe-area-inset-bottom));
   left: max(10px, calc((100vw - 480px) / 2 + 10px));
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -4006,7 +4010,7 @@ input:disabled {
 
   .bottom-nav {
     right: 10px;
-    bottom: calc(10px + env(safe-area-inset-bottom));
+    bottom: calc(var(--bottom-nav-base-offset) + env(safe-area-inset-bottom));
     left: 10px;
     padding: 7px;
   }
