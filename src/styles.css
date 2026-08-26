@@ -105,8 +105,8 @@ button {
    top = .app-main padding-top + (PageTopBar band height - button height) / 2. */
 .app-back-button.is-topbar-aligned {
   position: absolute;
-  top: 23px;
-  left: 18px;
+  top: 19px;
+  left: 16px;
   z-index: 31;
   margin: 0;
 }
@@ -4188,6 +4188,10 @@ input:disabled {
   .app-main {
     padding-right: 12px;
     padding-left: 12px;
+  }
+
+  .app-back-button.is-topbar-aligned {
+    left: 12px;
   }
 
   .home-menu-grid button {
