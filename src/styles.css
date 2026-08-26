@@ -1462,9 +1462,11 @@ textarea:focus {
 }
 
 .bottom-nav {
-  /* Single source of truth for the BottomNav non-system bottom offset. The
-     native Banner margin reads this value so the Android system bottom inset
-     stays owned by the native side alone. */
+  /* Single source of truth for the Web BottomNav's non-system base offset.
+     AdaptiveBannerHost reads this value when it calculates the configured
+     Banner clearance. env(safe-area-inset-bottom) below stays part of the Web
+     BottomNav's own CSS placement only: the merged #443 native Banner path
+     does not add that system inset again. */
   --bottom-nav-base-offset: 10px;
   position: fixed;
   right: max(10px, calc((100vw - 480px) / 2 + 10px));

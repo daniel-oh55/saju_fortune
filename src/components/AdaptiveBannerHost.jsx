@@ -16,10 +16,11 @@ const BANNER_VISUAL_GAP_PX = 14;
 const VIEWPORT_CHANGE_DEBOUNCE_MS = 150;
 
 // The configured margin covers only what the web UI owns: the live BottomNav
-// height, its non-system base offset, and the visual gap. The Android system
-// bottom inset is deliberately excluded because the Android 15+ margin
-// backport adds that inset on top of this configured margin natively; a
-// viewport-bottom measurement would include it here and count it twice.
+// height, its non-system base offset, and the visual gap. The safe-area /
+// system bottom inset is deliberately not folded into this Banner margin:
+// after merged #443 the native BOTTOM_CENTER path positions the Banner using
+// this configured margin directly (density-adjusted) and no longer adds an
+// Android system bottom inset of its own.
 function computeMarginPx() {
   if (typeof document === 'undefined' || typeof window === 'undefined') return 0;
   const nav = document.querySelector('.bottom-nav');
