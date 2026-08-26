@@ -5,9 +5,12 @@ import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { TextDecoder } from 'node:util';
 import {
+  getAdmobDiagnosticTestDeviceRegistration,
   getRewardedAdSdkConfig,
   GOOGLE_OFFICIAL_ANDROID_REWARDED_TEST_AD_UNIT_ID,
+  isUuidAdvertisingId,
   isApprovedRewardedAdSdkConfig,
+  isValidAdmobDiagnosticTestDeviceId,
 } from '../src/config/rewardedAdSdkConfig.js';
 import { GOOGLE_OFFICIAL_ANDROID_ADAPTIVE_BANNER_TEST_AD_UNIT_ID } from '../src/config/bannerAdSdkConfig.js';
 import { createRewardedAdProviderLoader } from '../src/services/rewardedAdProvider.loader.js';
@@ -35,6 +38,8 @@ const androidAdMobAppIdResourcePath = 'android/app/src/main/res/values/strings.x
 const preservedUntrackedFiles = new Set(['pr405-review.json', 'pr405.diff']);
 const utf8Decoder = new TextDecoder('utf-8', { fatal: true });
 const concreteAdUnitIdPattern = /\bca-app-pub-\d{16}\/\d{10}\b/gu;
+const concreteDiagnosticTestDeviceIdPattern =
+  /\b(?:[A-F0-9]{32}|[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12})\b/giu;
 const releaseEnvKeys = [
   'VITE_REWARDED_AD_PROVIDER',
   'VITE_REWARDED_AD_SDK_ENABLED',
@@ -115,6 +120,35 @@ function assertNoConcreteProductionAdUnitIds(files, sourceOverrides = new Map())
   assert.deepEqual(errors, [], errors.join('\n'));
 }
 
+function validateConcreteDiagnosticTestDeviceIdLiterals(
+  files,
+  sourceOverrides = new Map(),
+) {
+  const errors = [];
+  for (const file of files) {
+    const source = sourceOverrides.has(file)
+      ? sourceOverrides.get(file)
+      : readTrackedUtf8Text(file);
+    if (source === null || source === undefined) continue;
+    if (concreteDiagnosticTestDeviceIdPattern.test(source)) {
+      errors.push(`${file}: concrete diagnostic test device ID literal is prohibited`);
+    }
+    concreteDiagnosticTestDeviceIdPattern.lastIndex = 0;
+  }
+  return errors;
+}
+
+function assertNoConcreteDiagnosticTestDeviceIdLiterals(
+  files,
+  sourceOverrides = new Map(),
+) {
+  const errors = validateConcreteDiagnosticTestDeviceIdLiterals(
+    files,
+    sourceOverrides,
+  );
+  assert.deepEqual(errors, [], errors.join('\n'));
+}
+
 const requiredTokens = [
   ['scripts/checkAdmobRewardedAdProvider.mjs', 'function getTrackedFiles()'],
   ['scripts/checkAdmobRewardedAdProvider.mjs', "execFileSync('git', ['ls-files', '-z']"],
@@ -132,6 +166,11 @@ const requiredTokens = [
   ['src/config/rewardedAdSdkConfig.js', 'normalizeRewardedAdUnitId'],
   ['src/config/rewardedAdSdkConfig.js', 'isValidAdMobRewardedAdUnitId'],
   ['src/config/rewardedAdSdkConfig.js', 'isApprovedRewardedAdSdkConfig'],
+  ['src/config/rewardedAdSdkConfig.js', 'getAdmobDiagnosticTestDeviceRegistration'],
+  ['src/config/rewardedAdSdkConfig.js', 'isValidAdmobDiagnosticTestDeviceId'],
+  ['src/config/rewardedAdSdkConfig.js', 'isUuidAdvertisingId'],
+  ['src/config/rewardedAdSdkConfig.js', 'VITE_ADMOB_DIAGNOSTIC_TEST_DEVICE_REGISTRATION'],
+  ['src/config/rewardedAdSdkConfig.js', 'VITE_ADMOB_DIAGNOSTIC_TEST_DEVICE_ID'],
   ['src/config/rewardedAdSdkConfig.js', 'configurationValid'],
   ['src/config/rewardedAdSdkConfig.js', 'isTesting: officialTestApproved'],
   ['src/config/rewardedAdSdkConfig.js', 'mockAllowed'],
@@ -265,6 +304,10 @@ function validateSources(sourceOverrides = new Map()) {
     checkerSource.indexOf('\nfunction validateConcreteAdUnitIdLiterals'),
     checkerSource.indexOf('\nfunction assertNoConcreteProductionAdUnitIds'),
   );
+  const concreteDiagnosticIdValidationBlock = checkerSource.slice(
+    checkerSource.indexOf('\nfunction validateConcreteDiagnosticTestDeviceIdLiterals'),
+    checkerSource.indexOf('\nconst requiredTokens'),
+  );
   const mainBlock = checkerSource.slice(checkerSource.indexOf('\nasync function main()'));
   if (!trackedFileScanBlock.includes("execFileSync('git', ['ls-files', '-z']")) {
     errors.push('concrete ad unit ID scan must enumerate all tracked files');
@@ -289,9 +332,10 @@ function validateSources(sourceOverrides = new Map()) {
   }
   if (
     !mainBlock.includes('trackedFiles = getTrackedFiles();') ||
-    !mainBlock.includes('assertNoConcreteProductionAdUnitIds(trackedFiles);')
+    !mainBlock.includes('assertNoConcreteProductionAdUnitIds(trackedFiles);') ||
+    !mainBlock.includes('assertNoConcreteDiagnosticTestDeviceIdLiterals(trackedFiles);')
   ) {
-    errors.push('concrete ad unit ID scan must use the repository-wide tracked file list');
+    errors.push('concrete identifier scans must use the repository-wide tracked file list');
   }
   if (concreteIdValidationBlock.includes('changedFiles')) {
     errors.push('concrete ad unit ID scan must not depend on changedFiles');
@@ -313,6 +357,17 @@ function validateSources(sourceOverrides = new Map()) {
     concreteIdValidationBlock.includes('${value}')
   ) {
     errors.push('concrete ad unit ID errors must be generic and must not expose ID values');
+  }
+  if (
+    !concreteDiagnosticIdValidationBlock.includes(
+      'concrete diagnostic test device ID literal is prohibited',
+    ) ||
+    !concreteDiagnosticIdValidationBlock.includes(
+      'concreteDiagnosticTestDeviceIdPattern.test(source)',
+    ) ||
+    concreteDiagnosticIdValidationBlock.includes('${source}')
+  ) {
+    errors.push('diagnostic test device ID errors must be generic and must not expose ID values');
   }
   const releaseValidationBlock = checkerSource.slice(
     checkerSource.indexOf('\nfunction validateProductionReleaseEnvironment'),
@@ -727,6 +782,31 @@ function makeProductionConfig() {
   });
 }
 
+function createSyntheticSdkLogcatTestDeviceHash() {
+  return 'A'.repeat(32);
+}
+
+function createSyntheticAdvertisingId() {
+  return [
+    'A'.repeat(8),
+    'B'.repeat(4),
+    'C'.repeat(4),
+    'D'.repeat(4),
+    'E'.repeat(12),
+  ].join('-');
+}
+
+function makeProductionDiagnosticEnvironment(overrides = {}) {
+  return {
+    VITE_REWARDED_AD_PROVIDER: 'sdk',
+    VITE_REWARDED_AD_SDK_ENABLED: 'true',
+    VITE_REWARDED_AD_MODE: 'production',
+    VITE_REWARDED_AD_BUILD_TARGET: 'release',
+    VITE_REWARDED_AD_UNIT_ID: createSyntheticProductionAdUnitId(),
+    ...overrides,
+  };
+}
+
 function createHarness(options = {}) {
   const listeners = new Map();
   const removed = [];
@@ -861,6 +941,21 @@ function createLoaderHarness(options = {}) {
 
 test('repository-wide concrete ad unit scan passes every current tracked UTF-8 source', () => {
   assertNoConcreteProductionAdUnitIds(trackedFiles);
+  assertNoConcreteDiagnosticTestDeviceIdLiterals(trackedFiles);
+});
+test('diagnostic test device ID scan rejects hash and UUID literals without exposing them', () => {
+  const hash = createSyntheticSdkLogcatTestDeviceHash();
+  const advertisingId = createSyntheticAdvertisingId();
+  const errors = validateConcreteDiagnosticTestDeviceIdLiterals(
+    ['fixture.js'],
+    new Map([['fixture.js', `const values = ['${hash}', '${advertisingId}'];`]]),
+  );
+  assert.deepEqual(
+    errors,
+    ['fixture.js: concrete diagnostic test device ID literal is prohibited'],
+  );
+  assert.equal(errors.join('\n').includes(hash), false);
+  assert.equal(errors.join('\n').includes(advertisingId), false);
 });
 test('repository-wide concrete ad unit scan includes tracked UTF-8 source outside the current diff', () => {
   const fixture = trackedFiles.find(
@@ -1005,6 +1100,99 @@ test('production release configuration normalizes the injected ID and disables t
   assert.equal(config.isTesting, false);
   assert.equal(config.mockAllowed, false);
   assert.equal(isApprovedRewardedAdSdkConfig(config), true);
+});
+test('absent diagnostic environment preserves argumentless production initialization', () => {
+  const environment = makeProductionDiagnosticEnvironment();
+  const registration = getAdmobDiagnosticTestDeviceRegistration(
+    getRewardedAdSdkConfig(environment),
+    environment,
+  );
+  assert.deepEqual(registration, {
+    isConfigured: false,
+    isValid: true,
+    initializeOptions: null,
+  });
+});
+test('valid diagnostic environment registers one trimmed SDK Logcat test device hash', () => {
+  const environment = makeProductionDiagnosticEnvironment({
+    VITE_ADMOB_DIAGNOSTIC_TEST_DEVICE_REGISTRATION: 'enabled',
+    VITE_ADMOB_DIAGNOSTIC_TEST_DEVICE_ID:
+      `  ${createSyntheticSdkLogcatTestDeviceHash()}  `,
+  });
+  const registration = getAdmobDiagnosticTestDeviceRegistration(
+    getRewardedAdSdkConfig(environment),
+    environment,
+  );
+  assert.equal(isValidAdmobDiagnosticTestDeviceId(
+    createSyntheticSdkLogcatTestDeviceHash(),
+  ), true);
+  assert.equal(isUuidAdvertisingId(createSyntheticSdkLogcatTestDeviceHash()), false);
+  assert.equal(registration.isConfigured, true);
+  assert.equal(registration.isValid, true);
+  assert.deepEqual(registration.initializeOptions, {
+    initializeForTesting: true,
+    testingDevices: [createSyntheticSdkLogcatTestDeviceHash()],
+  });
+});
+for (const [name, environment] of [
+  ['flag only', makeProductionDiagnosticEnvironment({
+    VITE_ADMOB_DIAGNOSTIC_TEST_DEVICE_REGISTRATION: 'enabled',
+  })],
+  ['ID only', makeProductionDiagnosticEnvironment({
+    VITE_ADMOB_DIAGNOSTIC_TEST_DEVICE_ID: createSyntheticSdkLogcatTestDeviceHash(),
+  })],
+  ['non-exact flag', makeProductionDiagnosticEnvironment({
+    VITE_ADMOB_DIAGNOSTIC_TEST_DEVICE_REGISTRATION: ' enabled ',
+    VITE_ADMOB_DIAGNOSTIC_TEST_DEVICE_ID: createSyntheticSdkLogcatTestDeviceHash(),
+  })],
+  ['malformed hash', makeProductionDiagnosticEnvironment({
+    VITE_ADMOB_DIAGNOSTIC_TEST_DEVICE_REGISTRATION: 'enabled',
+    VITE_ADMOB_DIAGNOSTIC_TEST_DEVICE_ID: 'A'.repeat(31),
+  })],
+  ['UUID advertising ID', makeProductionDiagnosticEnvironment({
+    VITE_ADMOB_DIAGNOSTIC_TEST_DEVICE_REGISTRATION: 'enabled',
+    VITE_ADMOB_DIAGNOSTIC_TEST_DEVICE_ID: createSyntheticAdvertisingId(),
+  })],
+  ['multiple hashes', makeProductionDiagnosticEnvironment({
+    VITE_ADMOB_DIAGNOSTIC_TEST_DEVICE_REGISTRATION: 'enabled',
+    VITE_ADMOB_DIAGNOSTIC_TEST_DEVICE_ID: [
+      createSyntheticSdkLogcatTestDeviceHash(),
+      createSyntheticSdkLogcatTestDeviceHash(),
+    ].join(','),
+  })],
+  ['official-test config', {
+    VITE_REWARDED_AD_PROVIDER: 'sdk',
+    VITE_REWARDED_AD_SDK_ENABLED: 'true',
+    VITE_REWARDED_AD_MODE: 'official_test',
+    VITE_REWARDED_AD_BUILD_TARGET: 'debug',
+    VITE_ADMOB_DIAGNOSTIC_TEST_DEVICE_REGISTRATION: 'enabled',
+    VITE_ADMOB_DIAGNOSTIC_TEST_DEVICE_ID: createSyntheticSdkLogcatTestDeviceHash(),
+  }],
+  ['mock config', {
+    VITE_REWARDED_AD_PROVIDER: 'mock',
+    VITE_ADMOB_DIAGNOSTIC_TEST_DEVICE_REGISTRATION: 'enabled',
+    VITE_ADMOB_DIAGNOSTIC_TEST_DEVICE_ID: createSyntheticSdkLogcatTestDeviceHash(),
+  }],
+  ['production debug config', makeProductionDiagnosticEnvironment({
+    VITE_REWARDED_AD_BUILD_TARGET: 'debug',
+    VITE_ADMOB_DIAGNOSTIC_TEST_DEVICE_REGISTRATION: 'enabled',
+    VITE_ADMOB_DIAGNOSTIC_TEST_DEVICE_ID: createSyntheticSdkLogcatTestDeviceHash(),
+  })],
+]) {
+  test(`diagnostic configuration fails closed: ${name}`, () => {
+    const registration = getAdmobDiagnosticTestDeviceRegistration(
+      getRewardedAdSdkConfig(environment),
+      environment,
+    );
+    assert.equal(registration.isConfigured, true);
+    assert.equal(registration.isValid, false);
+    assert.equal(registration.initializeOptions, null);
+  });
+}
+test('hyphenated advertising ID cannot be used as an SDK Logcat test device hash', () => {
+  const advertisingId = createSyntheticAdvertisingId();
+  assert.equal(isUuidAdvertisingId(advertisingId), true);
+  assert.equal(isValidAdmobDiagnosticTestDeviceId(advertisingId), false);
 });
 test('loader routes approved SDK configurations exactly once', async () => {
   for (const env of [
@@ -1971,8 +2159,16 @@ const targetedNegativeMutations = [
     name: 'concrete ad unit ID scan receives an empty file list',
     file: 'scripts/checkAdmobRewardedAdProvider.mjs',
     mutate: (source) => source.replace(
-      '\n  assertNoConcreteProductionAdUnitIds(trackedFiles);\n  assert(!read',
-      '\n  assertNoConcreteProductionAdUnitIds([]);\n  assert(!read',
+      "  assert(read('src/config/rewardedAdSdkConfig.js').includes(officialId));\n  assertNoConcreteProductionAdUnitIds(trackedFiles);\n  assertNoConcreteDiagnosticTestDeviceIdLiterals(trackedFiles);",
+      "  assert(read('src/config/rewardedAdSdkConfig.js').includes(officialId));\n  assertNoConcreteProductionAdUnitIds([]);\n  assertNoConcreteDiagnosticTestDeviceIdLiterals(trackedFiles);",
+    ),
+  },
+  {
+    name: 'diagnostic test device ID scan receives an empty file list',
+    file: 'scripts/checkAdmobRewardedAdProvider.mjs',
+    mutate: (source) => source.replace(
+      '\n  assertNoConcreteDiagnosticTestDeviceIdLiterals(trackedFiles);\n  assert(!read',
+      '\n  assertNoConcreteDiagnosticTestDeviceIdLiterals([]);\n  assert(!read',
     ),
   },
   {
@@ -2205,6 +2401,7 @@ async function main() {
   const officialId = ['ca-app-pub-3940256099942544', '5224354917'].join('/');
   assert(read('src/config/rewardedAdSdkConfig.js').includes(officialId));
   assertNoConcreteProductionAdUnitIds(trackedFiles);
+  assertNoConcreteDiagnosticTestDeviceIdLiterals(trackedFiles);
   assert(!read('.github/workflows/android-debug-build.yml').includes('VITE_REWARDED_AD_PROVIDER: sdk'));
   runReleaseEnvironmentPreflightSubprocessTests();
 

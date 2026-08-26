@@ -1,4 +1,8 @@
 import { Capacitor } from '@capacitor/core';
+import {
+  getAdmobDiagnosticTestDeviceRegistration,
+  getRewardedAdSdkConfig,
+} from '../config/rewardedAdSdkConfig.js';
 
 export const ADMOB_RUNTIME_CONSENT_STATE = Object.freeze({
   IDLE: 'idle',
@@ -112,6 +116,18 @@ export function createAdmobRuntimeConsentCoordinator(dependencies) {
     return initializePromise;
   }
 
+  function isDiagnosticConfigurationValid() {
+    if (typeof dependencies.isDiagnosticConfigurationValid !== 'function') {
+      return true;
+    }
+
+    try {
+      return dependencies.isDiagnosticConfigurationValid() === true;
+    } catch {
+      return false;
+    }
+  }
+
   async function runBootstrap() {
     try {
       const isNativeAndroid =
@@ -170,6 +186,10 @@ export function createAdmobRuntimeConsentCoordinator(dependencies) {
       canRequestAds: true,
       adGateOpen: false,
     });
+
+    if (!isDiagnosticConfigurationValid()) {
+      return fail('diagnostic-config');
+    }
 
     try {
       await initializeOnce();
@@ -304,6 +324,21 @@ export function createAdmobRuntimeConsentCoordinator(dependencies) {
       adGateOpen: false,
     });
 
+    if (!isDiagnosticConfigurationValid()) {
+      return publish({
+        state: ADMOB_RUNTIME_CONSENT_STATE.FAILED,
+        canRequestAds: false,
+        adGateOpen: false,
+        lastErrorStage: 'diagnostic-config',
+        privacyOptionsActionState:
+          ADMOB_PRIVACY_OPTIONS_ACTION_STATE.FAILED,
+        isPrivacyOptionsActionPending: false,
+        privacyOptionsActionMessage:
+          '광고 설정을 준비하지 못했어요. 잠시 후 다시 시도해 주세요.',
+        lastPrivacyOptionsErrorStage: 'diagnostic-config',
+      });
+    }
+
     try {
       await initializeOnce();
 
@@ -389,7 +424,10 @@ export function createAdmobRuntimeConsentCoordinator(dependencies) {
   });
 }
 
-export function createAdmobNativeDependencies({ loadAdMobModule }) {
+export function createAdmobNativeDependencies({
+  loadAdMobModule,
+  initializeOptions = null,
+}) {
   let modulePromise = null;
 
   function getAdMobModule() {
@@ -415,7 +453,9 @@ export function createAdmobNativeDependencies({ loadAdMobModule }) {
     },
     initialize: async () => {
       const { AdMob } = await getAdMobModule();
-      return AdMob.initialize();
+      return initializeOptions
+        ? AdMob.initialize(initializeOptions)
+        : AdMob.initialize();
     },
   });
 }
@@ -430,13 +470,21 @@ function loadAdMobModule() {
   return adMobModulePromise;
 }
 
+const productionRewardedAdConfig = getRewardedAdSdkConfig();
+const productionDiagnosticTestDeviceRegistration =
+  getAdmobDiagnosticTestDeviceRegistration(productionRewardedAdConfig);
+
 const productionNativeDependencies = createAdmobNativeDependencies({
   loadAdMobModule,
+  initializeOptions:
+    productionDiagnosticTestDeviceRegistration.initializeOptions,
 });
 
 const productionCoordinator = createAdmobRuntimeConsentCoordinator({
   isNativePlatform: () => Capacitor.isNativePlatform(),
   getPlatform: () => Capacitor.getPlatform(),
+  isDiagnosticConfigurationValid: () =>
+    productionDiagnosticTestDeviceRegistration.isValid,
   ...productionNativeDependencies,
 });
 

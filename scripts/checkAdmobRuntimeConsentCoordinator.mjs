@@ -28,11 +28,14 @@ const requireText = (content, text, label) => {
   if (!content.includes(text)) errors.push(`${label}: missing required text: ${text}`)
 }
 const proxySafetyStaticInvariants = [
-  'export function createAdmobNativeDependencies({ loadAdMobModule })',
+  'export function createAdmobNativeDependencies({',
+  'initializeOptions = null',
   'let modulePromise = null',
   'modulePromise = loadAdMobModule()',
   'const { AdMob } = await getAdMobModule()',
   'return AdMob.showPrivacyOptionsForm()',
+  'AdMob.initialize(initializeOptions)',
+  'AdMob.initialize()',
   'let adMobModulePromise = null',
   "adMobModulePromise = import('@capacitor-community/admob')",
   'const productionNativeDependencies = createAdmobNativeDependencies({',
@@ -153,6 +156,10 @@ for (const text of [
   'ready-to-initialize',
   'lastErrorStage',
   'adGateOpen',
+  'isDiagnosticConfigurationValid',
+  "fail('diagnostic-config')",
+  'getAdmobDiagnosticTestDeviceRegistration',
+  'getRewardedAdSdkConfig',
   "import('@capacitor-community/admob')",
 ]) {
   requireText(coordinatorSource, text, coordinatorPath)
@@ -261,6 +268,7 @@ if (creationMode) {
 async function runBehavioralChecks() {
   const moduleUrl = pathToFileURL(resolve(root, coordinatorPath)).href
   const {
+    ADMOB_PRIVACY_OPTIONS_ACTION_STATE,
     ADMOB_RUNTIME_CONSENT_STATE,
     createAdmobNativeDependencies,
     createAdmobRuntimeConsentCoordinator,
@@ -282,6 +290,8 @@ async function runBehavioralChecks() {
     formError,
     initializeError,
     platformError,
+    diagnosticConfigurationValid = true,
+    includeDiagnosticConfigurationDependency = true,
   } = {}) => {
     const calls = []
     const coordinator = createAdmobRuntimeConsentCoordinator({
@@ -290,6 +300,12 @@ async function runBehavioralChecks() {
         return native
       },
       getPlatform: () => platform,
+      ...(includeDiagnosticConfigurationDependency
+        ? {
+            isDiagnosticConfigurationValid: () =>
+              diagnosticConfigurationValid,
+          }
+        : {}),
       requestConsentInfo: async () => {
         calls.push('requestConsentInfo')
         if (requestError) throw requestError
@@ -299,6 +315,9 @@ async function runBehavioralChecks() {
         calls.push('showConsentForm')
         if (formError) throw formError
         return formResult
+      },
+      showPrivacyOptionsForm: async () => {
+        calls.push('showPrivacyOptionsForm')
       },
       initialize: async () => {
         calls.push('initialize')
@@ -339,10 +358,25 @@ async function runBehavioralChecks() {
   assert.strictEqual(ready.coordinator.bootstrap(), firstPromise)
   assert.equal(ready.calls.filter((call) => call === 'initialize').length, 1)
 
+  const legacyNoDiagnosticDependency = createScenario({
+    includeDiagnosticConfigurationDependency: false,
+  })
+  const legacyNoDiagnosticDependencyResult =
+    await legacyNoDiagnosticDependency.coordinator.bootstrap()
+  assert.equal(
+    legacyNoDiagnosticDependencyResult.state,
+    ADMOB_RUNTIME_CONSENT_STATE.READY,
+  )
+  assert.deepEqual(
+    legacyNoDiagnosticDependency.calls,
+    ['requestConsentInfo', 'showConsentForm', 'initialize'],
+  )
+
   let moduleLoads = 0
   let thenAccessCount = 0
   let thenCallCount = 0
   const proxyCalls = []
+  const initializeArguments = []
   const fakeAdMobProxy = new Proxy({
     async requestConsentInfo() {
       proxyCalls.push('requestConsentInfo')
@@ -355,8 +389,9 @@ async function runBehavioralChecks() {
     async showPrivacyOptionsForm() {
       proxyCalls.push('showPrivacyOptionsForm')
     },
-    async initialize() {
+    async initialize(...args) {
       proxyCalls.push('initialize')
+      initializeArguments.push(args)
     },
   }, {
     get(target, property, receiver) {
@@ -379,6 +414,7 @@ async function runBehavioralChecks() {
   const proxyCoordinator = createAdmobRuntimeConsentCoordinator({
     isNativePlatform: () => true,
     getPlatform: () => 'android',
+    isDiagnosticConfigurationValid: () => true,
     ...nativeDependencies,
   })
   const proxyResult = await proxyCoordinator.bootstrap()
@@ -390,6 +426,7 @@ async function runBehavioralChecks() {
   assert.equal(proxyResult.initializeResolved, true)
   assert.equal(proxyResult.adGateOpen, true)
   assert.equal(moduleLoads, 1)
+  assert.deepEqual(initializeArguments, [[]])
   assert.equal(thenAccessCount, 0)
   assert.equal(thenCallCount, 0)
 
@@ -406,6 +443,41 @@ async function runBehavioralChecks() {
   assert.equal(thenAccessCount, 0)
   assert.equal(thenCallCount, 0)
 
+  const diagnosticInitializeArguments = []
+  const diagnosticTestDeviceHash = 'A'.repeat(32)
+  const diagnosticDependencies = createAdmobNativeDependencies({
+    loadAdMobModule: () => Promise.resolve({
+      AdMob: {
+        async requestConsentInfo() {
+          return info({ canRequestAds: true })
+        },
+        async showConsentForm() {
+          return info({ status: 'OBTAINED', canRequestAds: true })
+        },
+        async showPrivacyOptionsForm() {},
+        async initialize(...args) {
+          diagnosticInitializeArguments.push(args)
+        },
+      },
+    }),
+    initializeOptions: {
+      initializeForTesting: true,
+      testingDevices: [diagnosticTestDeviceHash],
+    },
+  })
+  const diagnosticCoordinator = createAdmobRuntimeConsentCoordinator({
+    isNativePlatform: () => true,
+    getPlatform: () => 'android',
+    isDiagnosticConfigurationValid: () => true,
+    ...diagnosticDependencies,
+  })
+  const diagnosticResult = await diagnosticCoordinator.bootstrap()
+  assert.equal(diagnosticResult.state, ADMOB_RUNTIME_CONSENT_STATE.READY)
+  assert.deepEqual(diagnosticInitializeArguments, [[{
+    initializeForTesting: true,
+    testingDevices: [diagnosticTestDeviceHash],
+  }]])
+
   let webModuleLoads = 0
   const webDependencies = createAdmobNativeDependencies({
     loadAdMobModule: () => {
@@ -416,6 +488,7 @@ async function runBehavioralChecks() {
   const webCoordinator = createAdmobRuntimeConsentCoordinator({
     isNativePlatform: () => false,
     getPlatform: () => 'web',
+    isDiagnosticConfigurationValid: () => true,
     ...webDependencies,
   })
   const webProxyResult = await webCoordinator.bootstrap()
@@ -476,6 +549,46 @@ async function runBehavioralChecks() {
   const allowedResult = await allowedByForm.coordinator.bootstrap()
   assert.equal(allowedResult.state, ADMOB_RUNTIME_CONSENT_STATE.READY)
   assert.deepEqual(allowedByForm.calls, ['requestConsentInfo', 'showConsentForm', 'initialize'])
+
+  const diagnosticRejected = createScenario({
+    diagnosticConfigurationValid: false,
+    requestResult: info({ canRequestAds: true }),
+  })
+  const diagnosticRejectedResult = await diagnosticRejected.coordinator.bootstrap()
+  assert.equal(diagnosticRejectedResult.state, ADMOB_RUNTIME_CONSENT_STATE.FAILED)
+  assert.equal(diagnosticRejectedResult.lastErrorStage, 'diagnostic-config')
+  assert.equal(diagnosticRejectedResult.canRequestAds, false)
+  assert.equal(diagnosticRejectedResult.adGateOpen, false)
+  assert.equal(diagnosticRejectedResult.initializeStarted, false)
+  assert.equal(diagnosticRejectedResult.initializeResolved, false)
+  assert.deepEqual(
+    diagnosticRejected.calls,
+    ['requestConsentInfo', 'showConsentForm'],
+  )
+  const diagnosticPrivacyResult =
+    await diagnosticRejected.coordinator.openPrivacyOptions()
+  assert.equal(diagnosticPrivacyResult.state, ADMOB_RUNTIME_CONSENT_STATE.FAILED)
+  assert.equal(diagnosticPrivacyResult.lastErrorStage, 'diagnostic-config')
+  assert.equal(
+    diagnosticPrivacyResult.privacyOptionsActionState,
+    ADMOB_PRIVACY_OPTIONS_ACTION_STATE.FAILED,
+  )
+  assert.equal(diagnosticPrivacyResult.isPrivacyOptionsActionPending, false)
+  assert.equal(
+    diagnosticPrivacyResult.lastPrivacyOptionsErrorStage,
+    'diagnostic-config',
+  )
+  assert.equal(diagnosticPrivacyResult.canRequestAds, false)
+  assert.equal(diagnosticPrivacyResult.adGateOpen, false)
+  assert.deepEqual(
+    diagnosticRejected.calls,
+    [
+      'requestConsentInfo',
+      'showConsentForm',
+      'showPrivacyOptionsForm',
+      'requestConsentInfo',
+    ],
+  )
 
   for (const expected of [
     {
