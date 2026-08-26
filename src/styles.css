@@ -54,6 +54,7 @@ button {
 }
 
 .app-shell {
+  position: relative;
   max-width: 480px;
   min-height: 100vh;
   margin: 0 auto;
@@ -95,6 +96,19 @@ button {
 .app-back-button:focus-visible {
   outline: 3px solid rgba(184, 150, 78, 0.38);
   outline-offset: 2px;
+}
+
+/* year / zodiac / sajuInsight open with PageTopBar as their first block. The
+   back button keeps its single App-owned implementation and behaviour but is
+   taken out of normal flow so it occupies PageTopBar's left slot instead of a
+   separate vertical band, removing the unnecessary top whitespace.
+   top = .app-main padding-top + (PageTopBar band height - button height) / 2. */
+.app-back-button.is-topbar-aligned {
+  position: absolute;
+  top: 19px;
+  left: 16px;
+  z-index: 31;
+  margin: 0;
 }
 
 .page-stack,
@@ -1462,9 +1476,15 @@ textarea:focus {
 }
 
 .bottom-nav {
+  /* Single source of truth for the Web BottomNav's non-system base offset.
+     AdaptiveBannerHost reads this value when it calculates the configured
+     Banner clearance. env(safe-area-inset-bottom) below stays part of the Web
+     BottomNav's own CSS placement only: the merged #443 native Banner path
+     does not add that system inset again. */
+  --bottom-nav-base-offset: 4px;
   position: fixed;
   right: max(10px, calc((100vw - 480px) / 2 + 10px));
-  bottom: calc(10px + env(safe-area-inset-bottom));
+  bottom: calc(var(--bottom-nav-base-offset) + env(safe-area-inset-bottom));
   left: max(10px, calc((100vw - 480px) / 2 + 10px));
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -1487,7 +1507,7 @@ textarea:focus {
   border-radius: 20px;
   color: #7b898d;
   background: transparent;
-  font-size: 0.68rem;
+  font-size: 0.76rem;
   font-weight: 800;
   line-height: 1.15;
   word-break: keep-all;
@@ -1979,7 +1999,7 @@ input:disabled {
 
 .nav-button {
   min-height: 58px;
-  font-size: 0.66rem;
+  font-size: 0.76rem;
 }
 
 .nav-icon {
@@ -4004,9 +4024,14 @@ input:disabled {
     padding: 16px 14px calc(112px + env(safe-area-inset-bottom));
   }
 
+  .app-back-button.is-topbar-aligned {
+    top: 17px;
+    left: 14px;
+  }
+
   .bottom-nav {
     right: 10px;
-    bottom: calc(10px + env(safe-area-inset-bottom));
+    bottom: calc(var(--bottom-nav-base-offset) + env(safe-area-inset-bottom));
     left: 10px;
     padding: 7px;
   }
@@ -4015,7 +4040,7 @@ input:disabled {
     min-width: 0;
     min-height: 56px;
     padding: 4px 2px;
-    font-size: 0.62rem;
+    font-size: 0.76rem;
     line-height: 1.12;
   }
 
@@ -4165,6 +4190,10 @@ input:disabled {
     padding-left: 12px;
   }
 
+  .app-back-button.is-topbar-aligned {
+    left: 12px;
+  }
+
   .home-menu-grid button {
     min-height: 76px;
   }
@@ -4240,7 +4269,7 @@ input:disabled {
 .page-topbar {
   position: relative;
   display: grid;
-  grid-template-columns: 44px minmax(0, 1fr) 44px;
+  grid-template-columns: 72px minmax(0, 1fr) 72px;
   align-items: center;
   min-height: 44px;
   padding: 2px 0 4px;
@@ -4257,6 +4286,7 @@ input:disabled {
 }
 
 .page-topbar-right {
+  gap: 4px;
   justify-content: flex-end;
 }
 
