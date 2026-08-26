@@ -12,7 +12,7 @@ import {
   subscribeAdmobRuntimeConsent,
 } from '../services/admobRuntimeConsentCoordinator.js';
 
-const BANNER_VISUAL_GAP_PX = 14;
+const BANNER_VISUAL_GAP_PX = 2;
 const VIEWPORT_CHANGE_DEBOUNCE_MS = 150;
 
 // The configured margin covers only what the web UI owns: the live BottomNav

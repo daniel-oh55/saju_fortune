@@ -572,6 +572,10 @@ function App() {
   }
 
   const shouldShowAppBackButton = activePage !== 'home' && activePage !== 'onboarding';
+  // These pages render PageTopBar first, so the single App-owned back button is
+  // aligned into that header row rather than sitting in its own band above it.
+  const isTopBarAlignedBackPage =
+    activePage === 'year' || activePage === 'zodiac' || activePage === 'sajuInsight';
 
   if (!profile || activePage === 'onboarding' || activePage === 'profileEdit') {
     return (
@@ -586,7 +590,7 @@ function App() {
     <div className="app-shell">
       {shouldShowAppBackButton && (
         <button
-          className="app-back-button"
+          className={`app-back-button ${isTopBarAlignedBackPage ? 'is-topbar-aligned' : ''}`}
           type="button"
           aria-label="이전 화면으로 돌아가기"
           onClick={() => handleAppBack()}
