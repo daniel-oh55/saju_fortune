@@ -51,13 +51,13 @@ jobs:
         run: |
           GRADLE_PATH="android/app/build.gradle"
           if [ ! -f "$GRADLE_PATH" ]; then
-            echo "::error::Production AAB requires Android versionCode 8 and versionName 1.0.6"
+            echo "::error::Production AAB requires Android versionCode 9 and versionName 1.0.7"
             exit 1
           fi
-          VERSION_CODE_MATCHES="$(grep -Ec '^[[:space:]]*versionCode[[:space:]]+8[[:space:]]*$' "$GRADLE_PATH" || true)"
-          VERSION_NAME_MATCHES="$(grep -Ec '^[[:space:]]*versionName[[:space:]]+"1\.0\.6"[[:space:]]*$' "$GRADLE_PATH" || true)"
+          VERSION_CODE_MATCHES="$(grep -Ec '^[[:space:]]*versionCode[[:space:]]+9[[:space:]]*$' "$GRADLE_PATH" || true)"
+          VERSION_NAME_MATCHES="$(grep -Ec '^[[:space:]]*versionName[[:space:]]+"1\.0\.7"[[:space:]]*$' "$GRADLE_PATH" || true)"
           if [ "$VERSION_CODE_MATCHES" -ne 1 ] || [ "$VERSION_NAME_MATCHES" -ne 1 ]; then
-            echo "::error::Production AAB requires Android versionCode 8 and versionName 1.0.6"
+            echo "::error::Production AAB requires Android versionCode 9 and versionName 1.0.7"
             exit 1
           fi
 
@@ -91,6 +91,105 @@ jobs:
           VITE_REWARDED_AD_BUILD_TARGET: release
           VITE_REWARDED_AD_UNIT_ID: ${{ secrets.ADMOB_REWARDED_PRODUCTION_AD_UNIT_ID }}
 
+      - name: Validate Banner provider invariants
+        run: node scripts/checkAdmobBannerProvider.mjs
+
+      - name: Validate production Banner release configuration
+        shell: bash
+        env:
+          VITE_BANNER_AD_PROVIDER: sdk
+          VITE_BANNER_AD_SDK_ENABLED: "true"
+          VITE_BANNER_AD_MODE: production
+          VITE_BANNER_AD_BUILD_TARGET: release
+          VITE_BANNER_AD_UNIT_ID: ${{ secrets.ADMOB_BANNER_PRODUCTION_AD_UNIT_ID }}
+        run: |
+          PREFLIGHT_SCRIPT="$RUNNER_TEMP/verify-production-banner-release-config.mjs"
+          cleanup() {
+            rm -f "$PREFLIGHT_SCRIPT"
+          }
+          trap cleanup EXIT
+
+          cat > "$PREFLIGHT_SCRIPT" <<'BANNER_RELEASE_PREFLIGHT'
+          import { readFileSync } from 'node:fs';
+          import path from 'node:path';
+          import { pathToFileURL } from 'node:url';
+
+          const androidAdMobAppIdResourcePath = 'android/app/src/main/res/values/strings.xml';
+          const bannerAdSdkConfigPath = 'src/config/bannerAdSdkConfig.js';
+
+          function readApprovedAndroidAdMobAppId() {
+            const source = readFileSync(androidAdMobAppIdResourcePath, 'utf8')
+              .replace(/<!--[\s\S]*?-->/gu, '');
+            const matches = [...source.matchAll(
+              /<string\b[^>]*\bname=["']admob_app_id["'][^>]*>([^<]+)<\/string>/gu,
+            )];
+            return matches.length === 1 ? matches[0][1].trim() : '';
+          }
+
+          function publisherPrefixFromAppId(appId) {
+            return /^(ca-app-pub-\d{16})~\d{10}$/u.exec(appId)?.[1] ?? '';
+          }
+
+          function publisherPrefixFromAdUnitId(adUnitId) {
+            return /^(ca-app-pub-\d{16})\/\d{10}$/u.exec(adUnitId)?.[1] ?? '';
+          }
+
+          let bannerAdSdkConfig = null;
+          let approvedAppId = '';
+          try {
+            bannerAdSdkConfig = await import(
+              pathToFileURL(path.resolve(process.cwd(), bannerAdSdkConfigPath)).href
+            );
+            approvedAppId = readApprovedAndroidAdMobAppId();
+          } catch {
+            process.exit(1);
+          }
+
+          const {
+            BANNER_AD_BUILD_TARGET,
+            BANNER_AD_MODE,
+            BANNER_AD_PROVIDER_KEY,
+            getBannerAdSdkConfig,
+            isApprovedBannerAdSdkConfig,
+          } = bannerAdSdkConfig;
+
+          const releaseEnv = {
+            VITE_BANNER_AD_PROVIDER: String(process.env.VITE_BANNER_AD_PROVIDER ?? ''),
+            VITE_BANNER_AD_SDK_ENABLED: String(process.env.VITE_BANNER_AD_SDK_ENABLED ?? ''),
+            VITE_BANNER_AD_MODE: String(process.env.VITE_BANNER_AD_MODE ?? ''),
+            VITE_BANNER_AD_BUILD_TARGET: String(process.env.VITE_BANNER_AD_BUILD_TARGET ?? ''),
+            VITE_BANNER_AD_UNIT_ID: String(process.env.VITE_BANNER_AD_UNIT_ID ?? ''),
+          };
+          const normalizedAdUnitId = releaseEnv.VITE_BANNER_AD_UNIT_ID.trim();
+          const config = getBannerAdSdkConfig(releaseEnv);
+          const appPublisherPrefix = publisherPrefixFromAppId(approvedAppId);
+          const adUnitPublisherPrefix = publisherPrefixFromAdUnitId(normalizedAdUnitId);
+          const valid =
+            releaseEnv.VITE_BANNER_AD_PROVIDER.trim().toLowerCase() ===
+              BANNER_AD_PROVIDER_KEY.SDK &&
+            releaseEnv.VITE_BANNER_AD_SDK_ENABLED.trim().toLowerCase() === 'true' &&
+            releaseEnv.VITE_BANNER_AD_MODE.trim().toLowerCase() === BANNER_AD_MODE.PRODUCTION &&
+            releaseEnv.VITE_BANNER_AD_BUILD_TARGET.trim().toLowerCase() ===
+              BANNER_AD_BUILD_TARGET.RELEASE &&
+            appPublisherPrefix.length > 0 &&
+            adUnitPublisherPrefix.length > 0 &&
+            appPublisherPrefix === adUnitPublisherPrefix &&
+            config.configurationValid === true &&
+            config.isTesting === false &&
+            isApprovedBannerAdSdkConfig(config) === true;
+
+          if (!valid) {
+            process.exit(1);
+          }
+
+          process.stdout.write('Production Banner release environment preflight passed\n');
+          BANNER_RELEASE_PREFLIGHT
+
+          if ! node "$PREFLIGHT_SCRIPT"; then
+            echo "::error::Production Banner release configuration verification failed"
+            exit 1
+          fi
+
       - name: Build web app
         run: npm run build
         env:
@@ -99,6 +198,11 @@ jobs:
           VITE_REWARDED_AD_MODE: production
           VITE_REWARDED_AD_BUILD_TARGET: release
           VITE_REWARDED_AD_UNIT_ID: ${{ secrets.ADMOB_REWARDED_PRODUCTION_AD_UNIT_ID }}
+          VITE_BANNER_AD_PROVIDER: sdk
+          VITE_BANNER_AD_SDK_ENABLED: "true"
+          VITE_BANNER_AD_MODE: production
+          VITE_BANNER_AD_BUILD_TARGET: release
+          VITE_BANNER_AD_UNIT_ID: ${{ secrets.ADMOB_BANNER_PRODUCTION_AD_UNIT_ID }}
 
       - name: Set up JDK
         uses: actions/setup-java@v4
